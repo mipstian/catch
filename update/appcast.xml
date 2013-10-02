@@ -16,7 +16,7 @@
 </ul>
 ]]></description>
       <enclosure 
-	 url="" 
+	 url="https://raw.github.com/showrss/catch/releases/1.5/Catch-1.5.xml" 
 	 sparkle:version="1.5"
 	 type="application/octet-stream"/> 
       <sparkle:minimumSystemVersion>10.8.0</sparkle:minimumSystemVersion> 
