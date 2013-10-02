@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/3/trunk/Sparkle.framework/Versions/A/Resources
+END
+fr_CA.lproj
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/3/trunk/Sparkle.framework/Versions/A/Resources/fr_CA.lproj
+END
+License.txt
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/2/trunk/Sparkle.framework/Versions/A/Resources/License.txt
+END
+relaunch
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/2/trunk/Sparkle.framework/Versions/A/Resources/relaunch
+END
+SUModelTranslation.plist
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/2/trunk/Sparkle.framework/Versions/A/Resources/SUModelTranslation.plist
+END
+Info.plist
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/2/trunk/Sparkle.framework/Versions/A/Resources/Info.plist
+END
