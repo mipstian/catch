@@ -139,10 +139,9 @@ NSString* const SERVICE_FEED_URL_PREFIX = @"http://showrss.info/rss.php?";
 		// Remove Catch from the login items
 		UInt32 seedValue;
 		NSArray  *loginItemsArray = (NSArray *)LSSharedFileListCopySnapshot(loginItems, &seedValue);
-		int i = 0;
-		for(i ; i< [loginItemsArray count]; i++){
-			LSSharedFileListItemRef itemRef = (LSSharedFileListItemRef)[loginItemsArray
-																		objectAtIndex:i];
+
+		for(NSUInteger i ; i < loginItemsArray.count; i++){
+			LSSharedFileListItemRef itemRef = (LSSharedFileListItemRef)loginItemsArray[i];
 			// Resolve the item with URL
 			if (LSSharedFileListItemResolve(itemRef, 0, (CFURLRef*) &url, NULL) == noErr) {
 				NSString * urlPath = [(NSURL*)url path];

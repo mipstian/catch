@@ -95,7 +95,7 @@ int const FEED_UPDATE_INTERVAL = 60*10; // 10 minutes
 	NSRange range = [feedURL rangeOfString:SERVICE_FEED_URL_PREFIX];
 	if (range.location != 0) {
 		// The URL should start with the prefix!
-		NSLog(@"1: %d %d", range.location, range.length);
+		NSLog(@"1: %lu %lu", (unsigned long)range.location, (unsigned long)range.length);
 		return NO;
 	}
 	range = [feedURL rangeOfString:@"namespaces"];
