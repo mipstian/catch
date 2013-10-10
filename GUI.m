@@ -22,9 +22,7 @@ static NSString* const GROWL_NEW_TORRENT = @"New torrent";
 
 @implementation GUI
 
-- (void) awakeFromNib{
-	NSLog(@"GUI: UI loaded, placing in menubar...");
-	
+- (void)awakeFromNib {
 	// Load the (hidden) menu
 	[NSBundle loadNibNamed:@"MainMenu" owner:[NSApp delegate]];
 	 
@@ -33,8 +31,7 @@ static NSString* const GROWL_NEW_TORRENT = @"New torrent";
 	
 	// Get reference to the main bundle, used to detect where our files are
 	NSBundle* bundle = [NSBundle mainBundle];
-	
-	NSLog(@"GUI: loading images");
+
 	// Load images
 	iconIdle = [[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:MENUBAR_IDLE ofType:@"png"]];
 	iconIdleInv = [[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:MENUBAR_IDLE_INV ofType:@"png"]];
@@ -57,8 +54,7 @@ static NSString* const GROWL_NEW_TORRENT = @"New torrent";
 	// Update status UI
 	[self setStatus:1 running:0];
 	[self setLastUpdateStatus:1 time:nil];
-	
-	NSLog(@"GUI: setting menubar menu");
+
 	// Tell the NSStatusItem what menu to load
 	[item setMenu:menu];
 	// Set the tooptip for our item
@@ -67,8 +63,7 @@ static NSString* const GROWL_NEW_TORRENT = @"New torrent";
 	[item setHighlightMode:YES];
 	// Set current name and version
 	[menuVersion setTitle:[NSString stringWithFormat:@"%@ %@", APPLICATION_NAME, APPLICATION_VERSION] ];
-	
-	NSLog(@"GUI: final touches");
+
 	// Enable Growl
 	[GrowlApplicationBridge setGrowlDelegate:self];
 	
@@ -77,8 +72,6 @@ static NSString* const GROWL_NEW_TORRENT = @"New torrent";
 	
 	// Disable the recent torrents menu unitl there's something to show
 	[menuRecentTorrents setEnabled:NO];
-	
-	NSLog(@"GUI: all done!");
 }
 
 - (IBAction) browseService:(id)sender {

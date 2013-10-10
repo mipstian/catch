@@ -28,8 +28,7 @@
 	
 	// We don't want these preferences to change while we're working
 	BOOL organize = [[NSUserDefaults standardUserDefaults] boolForKey:PREFERENCE_KEY_ORGANIZE_TORRENTS];
-	NSURL* feedURL = [NSURL URLWithString:
-					  [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCE_KEY_FEED_URL]];
+	NSURL* feedURL = [NSURL URLWithString:preferences.feedURL];
 	
 	// Flush the cache, we want fresh results
 	[[NSURLCache sharedURLCache] removeAllCachedResponses];
