@@ -73,21 +73,9 @@ NSString* const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info/
 	NSArray* recent = [downloaded subarrayWithRange:recentRange];
 	NSArray* cleanRecent = [NSArray array];
 	int count = [recent count];
+    
 	for (int i = 1; i <= count; i++) {
-        NSString* clean;
-        
-        if ([[recent objectAtIndex:count-i] rangeOfString:@"magnet:"].location == 0) {
-            // Magnets can get the name from the url
-            NSString *pattern = @"dn=([^&]+)";
-            NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:NULL];
-            NSTextCheckingResult *match = [regex firstMatchInString:[recent objectAtIndex:count-i] options:0 range:NSMakeRange(0, [[recent objectAtIndex:count-i] length])];
-
-            clean = [[[recent objectAtIndex:count-i] substringWithRange:[match rangeAtIndex:1]] stringByReplacingOccurrencesOfString:@"+" withString:@" "];
-        } else {
-            // Torrents can get use the file name
-            clean = [FeedChecker computeFilenameFromURL:[NSURL URLWithString:[recent objectAtIndex:count-i]]];
-        }
-        
+        NSString* clean = [[recent objectAtIndex:count-i] objectForKey:@"title"];
 		clean = [[NSString stringWithFormat:@"%d ",i] stringByAppendingString:clean];
 		cleanRecent = [cleanRecent arrayByAddingObject:clean];
 	}
