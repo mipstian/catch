@@ -162,33 +162,47 @@
 			if (old) continue;
 		}
 		
-		// The file is new, download!
-		
-		// First get the folder, if available
-		NSString* folder = [fileFolders objectAtIndex:[fileURLs indexOfObject:url]];
-		
-		if (![self downloadFile:[NSURL URLWithString:url] inFolder:folder]) {
-			downloadingFailed = YES;
-			NSLog(@"FeedChecker: download of %@ failed",url);
-		} else {
-			// Download successful, add file to downloaded files list
-			NSArray* newDownloadedFiles = nil;
-			if (downloadedFiles) {
-				// Other old downloads are there. Add the new one
-				newDownloadedFiles = [downloadedFiles arrayByAddingObject:url];
-			} else {
-				// First download ever. Initialize the preference
-				newDownloadedFiles = [NSArray arrayWithObject:url];
-			}
-			[[NSUserDefaults standardUserDefaults]
-			 setObject:newDownloadedFiles
-			 forKey:PREFERENCE_KEY_DOWNLOADED_FILES];
-		}
+		// The file is new, open magnet or download torrent
+        if ([url rangeOfString:@"magnet:"].location == 0) {
+                downloadingFailed = ![self openMagnet:[NSURL URLWithString:url]];
+        } else {
+            // First get the folder, if available
+            NSString* folder = [fileFolders objectAtIndex:[fileURLs indexOfObject:url]];
+            downloadingFailed = (![self downloadFile:[NSURL URLWithString:url] inFolder:folder]);
+        }
+    
+        if (downloadingFailed) {
+            NSLog(@"FeedChecker: download of %@ failed",url);
+        } else {
+            // Add url to history
+            NSArray* newDownloadedFiles = nil;
+            
+            if (downloadedFiles) {
+                // Other old downloads are there. Add the new one
+                newDownloadedFiles = [downloadedFiles arrayByAddingObject:url];
+            } else {
+                // First download ever. Initialize the preference
+                newDownloadedFiles = [NSArray arrayWithObject:url];
+            }
+            [[NSUserDefaults standardUserDefaults]
+             setObject:newDownloadedFiles
+             forKey:PREFERENCE_KEY_DOWNLOADED_FILES];
+        }
 	}
 	
 	if (downloadingFailed) return NO;
 	
 	return YES;
+}
+
+- (BOOL) openMagnet:(NSURL*)magnetURL {
+    BOOL opennedURL = [[NSWorkspace sharedWorkspace] openURL:magnetURL];
+    
+	if ([[NSUserDefaults standardUserDefaults] boolForKey:PREFERENCE_KEY_GROWL_NOTIFICATIONS]) {
+		[[NSApp delegate] torrentNotificationWithDescription:
+		 [NSString stringWithFormat:NSLocalizedString(@"newtorrentdesc", @"New torrent notification"),magnetURL]];
+	}
+	return opennedURL;
 }
 
 - (BOOL) downloadFile:(NSURL*)fileURL inFolder:(NSString*)folder {
