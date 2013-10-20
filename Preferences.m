@@ -94,6 +94,23 @@ int const FEED_UPDATE_INTERVAL = 60*10; // 10 minutes
 	} else {
 		return NO;
 	}
+    
+	// Migrate the downloads history format. Change old array of strings to new dictionary format
+    NSArray* downloadedFiles = [[NSUserDefaults standardUserDefaults] arrayForKey:PREFERENCE_KEY_DOWNLOADED_FILES];
+    
+    if (downloadedFiles && [[downloadedFiles objectAtIndex:1]isKindOfClass:[NSString class]]) {
+		NSLog(@"Preferences: Migrating download history to new format.");
+        
+        NSMutableArray* newDownloadedFiles = [[NSMutableArray alloc] init];
+        
+        for (NSString* url in downloadedFiles) {
+            [newDownloadedFiles addObject:[NSDictionary dictionaryWithObjectsAndKeys:
+                                 url, @"title", url, @"url", nil]];
+            
+        }
+        
+        [[NSUserDefaults standardUserDefaults] setObject:newDownloadedFiles forKey:PREFERENCE_KEY_DOWNLOADED_FILES];
+    }
 
 	// Most importantly, validate feed URL
 	NSString* feedURL = self.feedURL;

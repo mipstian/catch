@@ -73,8 +73,9 @@ NSString* const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info/
 	NSArray* recent = [downloaded subarrayWithRange:recentRange];
 	NSArray* cleanRecent = [NSArray array];
 	int count = [recent count];
+    
 	for (int i = 1; i <= count; i++) {
-		NSString* clean = [FeedChecker computeFilenameFromURL:[NSURL URLWithString:[recent objectAtIndex:count-i]]];
+        NSString* clean = [[recent objectAtIndex:count-i] objectForKey:@"title"];
 		clean = [[NSString stringWithFormat:@"%d ",i] stringByAppendingString:clean];
 		cleanRecent = [cleanRecent arrayByAddingObject:clean];
 	}
