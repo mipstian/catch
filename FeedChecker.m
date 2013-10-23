@@ -169,7 +169,7 @@
 		// The file is new, open magnet or download torrent
         if ([url rangeOfString:@"magnet:"].location == 0) {
                 NSLog(@"FeedChecker: it's a magnet %@ at %@", [file objectForKey:@"title"], url);
-                downloadingFailed = ![self openMagnet:[NSURL URLWithString:url]];
+                downloadingFailed = ![[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:url]];
         } else {
             NSLog(@"FeedChecker: it's a file %@ at %@", [file objectForKey:@"title"], url);
             // First get the folder, if available
@@ -180,6 +180,12 @@
         if (downloadingFailed) {
             NSLog(@"FeedChecker: download of %@ failed",url);
         } else {
+            // Notify of addition
+            if ([[NSUserDefaults standardUserDefaults] boolForKey:PREFERENCE_KEY_GROWL_NOTIFICATIONS]) {
+                [[NSApp delegate] torrentNotificationWithDescription:
+                 [NSString stringWithFormat:NSLocalizedString(@"newtorrentdesc", @"New torrent notification"), [file objectForKey:@"title"]]];
+            }
+            
             // Add url to history
             NSArray* newDownloadedFiles = nil;
             
@@ -199,16 +205,6 @@
 	if (downloadingFailed) return NO;
 	
 	return YES;
-}
-
-- (BOOL) openMagnet:(NSURL*)magnetURL {
-    BOOL openedURL = [[NSWorkspace sharedWorkspace] openURL:magnetURL];
-    
-	if ([[NSUserDefaults standardUserDefaults] boolForKey:PREFERENCE_KEY_GROWL_NOTIFICATIONS]) {
-		[[NSApp delegate] torrentNotificationWithDescription:
-		 [NSString stringWithFormat:NSLocalizedString(@"newtorrentdesc", @"New torrent notification"),magnetURL]];
-	}
-	return openedURL;
 }
 
 - (BOOL) downloadFile:(NSURL*)fileURL inFolder:(NSString*)folder {
@@ -268,11 +264,6 @@
 	if (![downloadedFile writeToFile:pathAndFilename atomically:YES]) {
 		NSLog(@"FeedChecker: couldn't save file %@ to disk", pathAndFilename);
 		return NO;
-	}
-	
-	if ([[NSUserDefaults standardUserDefaults] boolForKey:PREFERENCE_KEY_GROWL_NOTIFICATIONS]) {
-		[[NSApp delegate] torrentNotificationWithDescription:
-		 [NSString stringWithFormat:NSLocalizedString(@"newtorrentdesc", @"New torrent notification"),filename]];
 	}
 	
 	// open in default torrent client if the preferences say so
