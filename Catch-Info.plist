@@ -33,6 +33,6 @@
 	<key>SUEnableAutomaticChecks</key>
 	<string>1</string>
 	<key>SUFeedURL</key>
-	<string>https://raw.github.com/showrss/catch/master/update/appcast.xml</string>
+	<string>https://raw.github.com/mipstian/catch/master/update/appcast.xml</string>
 </dict>
 </plist>
