@@ -7,17 +7,20 @@
     <pubDate>Sun, 08 Aug 2010 22:51:00 +0100</pubDate> 
 
 	 <item> 
-      <title>Catch 1.5</title>
-      <pubDate>Thu, 3 Oct 2013 18:00:00 +0200</pubDate> 
+      <title>Catch 1.6</title>
+      <pubDate>Wed, 23 Oct 2013 23:35:27 -0700</pubDate>
 <description><![CDATA[
 <h2>Changes:</h2>
 <ul>
 <li>Compatible with showRSS 3</li>
+<li>Magnet link support</li>
+<li>Notification Center Support</li>
+<li>Bug fixes</li>
 </ul>
 ]]></description>
       <enclosure 
-	 url="https://raw.github.com/showrss/catch/releases/1.5/Catch-1.5.zip" 
-	 sparkle:version="1.5"
+	 url="https://github.com/mipstian/catch/releases/download/1.6/Catch-1.6.zip"
+	 sparkle:version="1.6"
 	 type="application/octet-stream"/> 
       <sparkle:minimumSystemVersion>10.7.0</sparkle:minimumSystemVersion> 
     </item>
