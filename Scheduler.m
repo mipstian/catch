@@ -12,12 +12,11 @@
 
 @implementation Scheduler
 
-- (id) initWithFeedChecker:(FeedChecker*)theFeedChecker preferences:(Preferences*)thePreferences {
+- (id) initWithFeedChecker:(FeedChecker*)theFeedChecker {
 	active = 1;
 	running = 0;
 	
 	feedChecker = [theFeedChecker retain];
-	preferences = [thePreferences retain];
 	
 	// run a runloop in another thread
 	[self performSelectorInBackground:@selector(loopRun) withObject:nil];
@@ -78,7 +77,7 @@
 	}
 	
 	// Only work with valid preferences
-	if (![preferences validate]) {
+	if (![Preferences validate]) {
 		NSLog(@"Scheduler: tick skipped, invalid preferences");
 		return;
 	}

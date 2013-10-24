@@ -29,7 +29,7 @@ int const FEED_UPDATE_INTERVAL = 60*10; // 10 minutes
 
 @implementation Preferences
 
-- (void) setDefaults {
++ (void) setDefaults {
 	NSLog(@"Preferences: Setting defaults");
 	// Create two dummy times (dates actually), just to have some value set
 	NSDateComponents* comps = [[NSDateComponents alloc] init];
@@ -72,18 +72,18 @@ int const FEED_UPDATE_INTERVAL = 60*10; // 10 minutes
 	[defaults registerDefaults:appDefaults];
 }
 
-- (NSString *)feedURL {
++ (NSString *)feedURL {
 	NSString* rawFeedURL = [NSUserDefaults.standardUserDefaults stringForKey:PREFERENCE_KEY_FEED_URL];
 	return [rawFeedURL stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
 }
 
-- (void) save {
++ (void) save {
 	NSLog(@"Preferences: Synchronizing");
 	// Write preferences to disk
 	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (BOOL) validate {
++ (BOOL) validate {
 	// Validate torrent folder. This should never fail!
 	NSString* torrentFolder = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCE_KEY_SAVE_PATH];
 	torrentFolder = [torrentFolder stringByStandardizingPath];
@@ -104,7 +104,7 @@ int const FEED_UPDATE_INTERVAL = 60*10; // 10 minutes
 	if (downloadedFiles && !history) {
 		NSLog(@"Preferences: Migrating download history to new format.");
 		
-		NSMutableArray* newDownloadedFiles = [[NSMutableArray alloc] init];
+		NSMutableArray* newDownloadedFiles = [[[NSMutableArray alloc] init] autorelease];
 		
 		for (NSString* url in downloadedFiles) {
 			[newDownloadedFiles addObject:[NSDictionary dictionaryWithObjectsAndKeys:

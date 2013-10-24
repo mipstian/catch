@@ -26,9 +26,9 @@ extern int const FEED_UPDATE_INTERVAL;
 
 @interface Preferences : NSObject
 
-- (void)setDefaults;
-- (void)save;
-- (BOOL)validate;
-- (NSString *)feedURL;
++ (void)setDefaults;
++ (void)save;
++ (BOOL)validate;
++ (NSString *)feedURL;
 
 @end

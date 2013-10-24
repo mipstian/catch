@@ -10,11 +10,7 @@
 #import "Preferences.h"
 
 
-@interface FeedChecker : NSObject {
-	Preferences* preferences;
-}
-
-- (id) initWithPreferences:(Preferences*)preferences;
+@interface FeedChecker : NSObject
 
 - (BOOL) checkFeed;
 

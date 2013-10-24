@@ -25,7 +25,6 @@ extern NSString* const SERVICE_FEED_LEGACY_URL_PREFIX;
 
 @interface Catch : NSObject {
 	IBOutlet GUI* gui;
-	Preferences* preferences;
 	Scheduler* scheduler;
 	FeedChecker* feedChecker;
 }
