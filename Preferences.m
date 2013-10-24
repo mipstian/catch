@@ -1,9 +1,9 @@
 //
-//  Preferences.m
-//  Catch
+//	Preferences.m
+//	Catch
 //
-//  Created by Giorgio Calderolla on 6/12/10.
-//  Copyright 2010 n\a. All rights reserved.
+//	Created by Giorgio Calderolla on 6/12/10.
+//	Copyright 2010 n\a. All rights reserved.
 //
 
 #import "Preferences.h"
@@ -44,7 +44,7 @@ int const FEED_UPDATE_INTERVAL = 60*10; // 10 minutes
 	// Search for user's Downloads directory (by the book)
 	NSString *downloadsDirectory;
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDownloadsDirectory, NSUserDomainMask, YES);
-	if ([paths count] > 0)  {
+	if ([paths count] > 0)	 {
 		downloadsDirectory = [paths objectAtIndex:0];
 		NSLog(@"Preferences: Default save path is %@",downloadsDirectory);
 	} else {
@@ -73,8 +73,8 @@ int const FEED_UPDATE_INTERVAL = 60*10; // 10 minutes
 }
 
 - (NSString *)feedURL {
-    NSString* rawFeedURL = [NSUserDefaults.standardUserDefaults stringForKey:PREFERENCE_KEY_FEED_URL];
-    return [rawFeedURL stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
+	NSString* rawFeedURL = [NSUserDefaults.standardUserDefaults stringForKey:PREFERENCE_KEY_FEED_URL];
+	return [rawFeedURL stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
 }
 
 - (void) save {
@@ -96,34 +96,34 @@ int const FEED_UPDATE_INTERVAL = 60*10; // 10 minutes
 	} else {
 		return NO;
 	}
-    
+	
 	// Migrate the downloads history format. Change old array of strings to new dictionary format
-    NSArray* downloadedFiles = [[NSUserDefaults standardUserDefaults] arrayForKey:PREFERENCE_KEY_DOWNLOADED_FILES];
-    NSArray* history = [[NSUserDefaults standardUserDefaults] arrayForKey:PREFERENCE_KEY_HISTORY];
-    
-    if (downloadedFiles && !history) {
+	NSArray* downloadedFiles = [[NSUserDefaults standardUserDefaults] arrayForKey:PREFERENCE_KEY_DOWNLOADED_FILES];
+	NSArray* history = [[NSUserDefaults standardUserDefaults] arrayForKey:PREFERENCE_KEY_HISTORY];
+	
+	if (downloadedFiles && !history) {
 		NSLog(@"Preferences: Migrating download history to new format.");
-        
-        NSMutableArray* newDownloadedFiles = [[NSMutableArray alloc] init];
-        
-        for (NSString* url in downloadedFiles) {
-            [newDownloadedFiles addObject:[NSDictionary dictionaryWithObjectsAndKeys:
-                [FeedChecker computeFilenameFromURL:[NSURL URLWithString:url]], @"title",
-                url, @"url",
-                nil]];
-        }
-        
-        [[NSUserDefaults standardUserDefaults] setObject:newDownloadedFiles forKey:PREFERENCE_KEY_HISTORY];
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:PREFERENCE_KEY_DOWNLOADED_FILES];
-    }
+		
+		NSMutableArray* newDownloadedFiles = [[NSMutableArray alloc] init];
+		
+		for (NSString* url in downloadedFiles) {
+			[newDownloadedFiles addObject:[NSDictionary dictionaryWithObjectsAndKeys:
+				[FeedChecker computeFilenameFromURL:[NSURL URLWithString:url]], @"title",
+				url, @"url",
+				nil]];
+		}
+		
+		[[NSUserDefaults standardUserDefaults] setObject:newDownloadedFiles forKey:PREFERENCE_KEY_HISTORY];
+		[[NSUserDefaults standardUserDefaults] removeObjectForKey:PREFERENCE_KEY_DOWNLOADED_FILES];
+	}
 
 	// Most importantly, validate feed URL
 	NSString* feedURL = self.feedURL;
 	NSRange range = [feedURL rangeOfString:SERVICE_FEED_URL_PREFIX];
-    if (range.location != 0) {
-        // Try the legacy URL prefix and consider that valid
-        range = [feedURL rangeOfString:SERVICE_FEED_LEGACY_URL_PREFIX];
-    }
+	if (range.location != 0) {
+		// Try the legacy URL prefix and consider that valid
+		range = [feedURL rangeOfString:SERVICE_FEED_LEGACY_URL_PREFIX];
+	}
 	if (range.location != 0) {
 		// The URL should start with the prefix!
 		NSLog(@"1: %lu %lu", (unsigned long)range.location, (unsigned long)range.length);
