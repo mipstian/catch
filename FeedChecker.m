@@ -17,46 +17,44 @@
 	
 	// This autorelease pool is here because the containing one,
 	// being in an infinite loop, never gets released. So this
-	// avoids leaks in this class. God I miss Java.
-	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-	
-	// We don't want these preferences to change while we're working
-	BOOL organize = [[NSUserDefaults standardUserDefaults] boolForKey:PREFERENCE_KEY_ORGANIZE_TORRENTS];
-	NSURL* feedURL = [NSURL URLWithString:Preferences.feedURL];
-	
-	// Flush the cache, we want fresh results
-	[[NSURLCache sharedURLCache] removeAllCachedResponses];
-	
-	// Download the feed
-	NSXMLDocument* feed = [self downloadFeed:feedURL];
-	
-	if (!feed) return NO;
-	
-	// Parse the feed
-	NSArray* fileURLs = [self parseURLs:feed];
-	NSArray* fileFolders = nil;
-	if (organize) fileFolders = [self parseFolders:feed];
-	
-	if (!fileURLs) return NO;
-	
-	if (!fileFolders || [fileURLs count] != [fileFolders count]) {
-		// Make sure we have good folders
-		fileFolders = nil;
-		if (organize) {
-			NSLog(@"FeedChecker: bad folders!");
-		} else {
-			NSLog(@"FeedChecker: user doesn't want folders");
+	// keeps the memory usage down.
+	@autoreleasepool {
+		// We don't want these preferences to change while we're working
+		BOOL organize = [[NSUserDefaults standardUserDefaults] boolForKey:PREFERENCE_KEY_ORGANIZE_TORRENTS];
+		NSURL* feedURL = [NSURL URLWithString:Preferences.feedURL];
+
+		// Flush the cache, we want fresh results
+		[[NSURLCache sharedURLCache] removeAllCachedResponses];
+
+		// Download the feed
+		NSXMLDocument* feed = [self downloadFeed:feedURL];
+
+		if (!feed) return NO;
+
+		// Parse the feed
+		NSArray* fileURLs = [self parseURLs:feed];
+		NSArray* fileFolders = nil;
+		if (organize) fileFolders = [self parseFolders:feed];
+
+		if (!fileURLs) return NO;
+
+		if (!fileFolders || [fileURLs count] != [fileFolders count]) {
+			// Make sure we have good folders
+			fileFolders = nil;
+			if (organize) {
+				NSLog(@"FeedChecker: bad folders!");
+			} else {
+				NSLog(@"FeedChecker: user doesn't want folders");
+			}
 		}
+
+		// Download the files
+		if (![self downloadFiles:fileURLs inFolders:fileFolders]) {
+			return NO;
+		}
+		
+		NSLog(@"FeedChecker: done!");
 	}
-	
-	// Download the files
-	if (![self downloadFiles:fileURLs inFolders:fileFolders]) {
-		return NO;
-	}
-	 
-	NSLog(@"FeedChecker: done!");
-	
-	[pool drain];
 	
 	return YES;
 }
