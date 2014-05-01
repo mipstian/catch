@@ -28,28 +28,14 @@ static NSString* const GROWL_NEW_TORRENT = @"New torrent";
 	 
 	// Create the NSStatusBar and set its length
 	item = [[[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength] retain];
-	
-	// Get reference to the main bundle, used to detect where our files are
-	NSBundle* bundle = [NSBundle mainBundle];
 
 	// Load images
-	iconIdle = [[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:MENUBAR_IDLE ofType:@"png"]];
-	iconIdleInv = [[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:MENUBAR_IDLE_INV ofType:@"png"]];
-	iconRefreshing = [[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:MENUBAR_REFRESHING ofType:@"png"]];
-	iconRefreshingInv = [[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:MENUBAR_REFRESHING_INV ofType:@"png"]];
-	iconDisabled = [[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:MENUBAR_DISABLED ofType:@"png"]];
-	iconDisabledInv = [[NSImage alloc] initWithContentsOfFile:[bundle pathForResource:MENUBAR_DISABLED_INV ofType:@"png"]];
-	
-	// Scale images to an appropriate "menubar" size
-	NSSize iconSize;
-	iconSize.height = 19;
-	iconSize.width = 18;
-	[iconIdle setSize:iconSize];
-	[iconIdleInv setSize:iconSize];
-	[iconRefreshing setSize:iconSize];
-	[iconRefreshingInv setSize:iconSize];
-	[iconDisabled setSize:iconSize];
-	[iconDisabledInv setSize:iconSize];
+	iconIdle = [NSImage imageNamed:MENUBAR_IDLE];
+	iconIdleInv = [NSImage imageNamed:MENUBAR_IDLE_INV];
+	iconRefreshing = [NSImage imageNamed:MENUBAR_REFRESHING];
+	iconRefreshingInv = [NSImage imageNamed:MENUBAR_REFRESHING_INV];
+	iconDisabled = [NSImage imageNamed:MENUBAR_DISABLED];
+	iconDisabledInv = [NSImage imageNamed:MENUBAR_DISABLED_INV];
 	
 	// Update status UI
 	[self setStatus:1 running:0];
@@ -79,32 +65,32 @@ static NSString* const GROWL_NEW_TORRENT = @"New torrent";
 	[menuRecentTorrents setEnabled:NO];
 }
 
-- (IBAction) browseService:(id)sender {
+- (IBAction)browseService:(id)sender {
 	// Launch the system browser, open the service (ShowRSS)
 	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:SERVICE_URL]];
 }
 
-- (IBAction) browseWebsite:(id)sender {
+- (IBAction)browseWebsite:(id)sender {
 	// Launch the system browser, open the applications's website
 	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:APPLICATION_WEBSITE_URL]];
 }
 
-- (IBAction) browseHelp:(id)sender {
+- (IBAction)browseHelp:(id)sender {
 	// Launch the system browser, open the applications's on-line help
 	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:APPLICATION_HELP_URL]];
 }
 
-- (IBAction) browseFeatureRequest:(id)sender {
+- (IBAction)browseFeatureRequest:(id)sender {
 	// Launch the system browser, open the applications's feature request page
 	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:APPLICATION_FEATURE_REQUEST_URL]];
 }
 
-- (IBAction) browseBugReport:(id)sender {
+- (IBAction)browseBugReport:(id)sender {
 	// Launch the system browser, open the applications's bug report page
 	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:APPLICATION_BUG_REPORT_URL]];
 }
 
-- (IBAction) openTorrentFolder:(id)sender {
+- (IBAction)openTorrentFolder:(id)sender {
 	// Launch finder with the torrent folder open
 	if ([[NSApp delegate] isConfigurationValid]) {
 		NSString* torrentFolder = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCE_KEY_SAVE_PATH];
@@ -113,13 +99,13 @@ static NSString* const GROWL_NEW_TORRENT = @"New torrent";
 	}
 }
 
-- (IBAction) showPreferences:(id)sender {
+- (IBAction)showPreferences:(id)sender {
 	// Show the Preferences window
 	[NSApp activateIgnoringOtherApps:YES];
 	[preferencesWindow makeKeyAndOrderFront:self];
 }
 
-- (IBAction) savePreferences:(id)sender {
+- (IBAction)savePreferences:(id)sender {
 	// Save preferences
 	[[NSApp delegate] savePreferences];
 	
@@ -132,31 +118,31 @@ static NSString* const GROWL_NEW_TORRENT = @"New torrent";
 	}
 }
 
-- (IBAction) showFeeds:(id)sender {
+- (IBAction)showFeeds:(id)sender {
 	// Select the Feeds tab
 	[[preferencesWindow toolbar] setSelectedItemIdentifier:@"Feeds"];
 	[preferencesTabs selectFirstTabViewItem:self];
 }
 
-- (IBAction) showTweaks:(id)sender {
+- (IBAction)showTweaks:(id)sender {
 	// Select the Tweaks tab
 	[[preferencesWindow toolbar] setSelectedItemIdentifier:@"Tweaks"];
 	[preferencesTabs selectLastTabViewItem:self];
 }
 
-- (IBAction) checkNow:(id)sender {
+- (IBAction)checkNow:(id)sender {
 	[[NSApp delegate] checkNow];
 }
 
-- (IBAction) togglePause:(id)sender {
+- (IBAction)togglePause:(id)sender {
 	[[NSApp delegate] togglePause];
 }
 
-- (IBAction) quit:(id)sender {
+- (IBAction)quit:(id)sender {
 	[[NSApp delegate] quit];
 }
 
-- (void) setStatus:(int)status running:(int)running {
+- (void)setStatus:(int)status running:(int)running {
 	SEL action = nil;
 	
 	if (running) {
@@ -172,7 +158,7 @@ static NSString* const GROWL_NEW_TORRENT = @"New torrent";
 	[self performSelectorOnMainThread:action withObject:nil waitUntilDone:YES];
 }
 
-- (void) setLastUpdateStatus:(int)status time:(NSDate *)time {
+- (void)setLastUpdateStatus:(int)status time:(NSDate *)time {
 	// Create something like "Last update: 3:45 AM" and place it in the menu
 	NSString* baseLastUpdateString = nil;
 	NSString* lastUpdateString = nil;
@@ -196,11 +182,11 @@ static NSString* const GROWL_NEW_TORRENT = @"New torrent";
 	[self performSelectorOnMainThread:@selector(setMenuLastUpdateStatus:) withObject:lastUpdateString waitUntilDone:YES];
 }
 
-- (void) setMenuLastUpdateStatus:(NSString*)title {
+- (void)setMenuLastUpdateStatus:(NSString*)title {
 	[menuLastUpdate setTitle:title];
 }
 
-- (void) setIdle {
+- (void)setIdle {
 	// Sets the images (status: idle)
 	[item setImage:iconIdle];
 	[item setAlternateImage:iconIdleInv];
@@ -212,7 +198,7 @@ static NSString* const GROWL_NEW_TORRENT = @"New torrent";
 	[menuPauseResume setTitle:NSLocalizedString(@"pause", @"Description of pause action")];
 }
 
-- (void) setRefreshing {
+- (void)setRefreshing {
 	// Sets the images (status: refreshing)
 	[item setImage:iconRefreshing];
 	[item setAlternateImage:iconRefreshingInv];
@@ -227,7 +213,7 @@ static NSString* const GROWL_NEW_TORRENT = @"New torrent";
 	[menuLastUpdate setTitle:NSLocalizedString(@"updatingnow", @"An update is in progress")];
 }
 
-- (void) setDisabled {
+- (void)setDisabled {
 	// Sets the images (status: disabled)
 	[item setImage:iconDisabled];
 	[item setAlternateImage:iconDisabledInv];
@@ -239,11 +225,11 @@ static NSString* const GROWL_NEW_TORRENT = @"New torrent";
 	[menuPauseResume setTitle:NSLocalizedString(@"resume", @"Description of resume action")];
 }
 
-- (void) refreshRecent:(NSArray*)recentTorrents {
+- (void)refreshRecent:(NSArray*)recentTorrents {
 	[self performSelectorOnMainThread:@selector(refreshMenuWithRecent:) withObject:recentTorrents waitUntilDone:YES];
 }
 
-- (void) refreshMenuWithRecent:(NSArray *)recentTorrents {
+- (void)refreshMenuWithRecent:(NSArray *)recentTorrents {
 	[menuShowInFinder retain];
 	
 	// Clear menu
@@ -268,7 +254,7 @@ static NSString* const GROWL_NEW_TORRENT = @"New torrent";
 	[menuRecentTorrents setEnabled:YES];
 }
 
-- (void) showBadURLSheet {
+- (void)showBadURLSheet {
 	[self showFeeds:self];
 	
 	// Show a sheet warning the user: the feed URL is invalid
@@ -280,7 +266,7 @@ static NSString* const GROWL_NEW_TORRENT = @"New torrent";
 					  nil,@"");
 }
 
-- (NSDictionary*) registrationDictionaryForGrowl {
+- (NSDictionary*)registrationDictionaryForGrowl {
 	// Let Growl know about our notifications
 	NSArray* notifications = [NSArray arrayWithObjects:GROWL_NEW_TORRENT,nil];
 	NSDictionary* dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -291,11 +277,11 @@ static NSString* const GROWL_NEW_TORRENT = @"New torrent";
 	return dictionary;
 }
 
-- (NSString*) applicationNameForGrowl {
+- (NSString*)applicationNameForGrowl {
 	return APPLICATION_NAME;
 }
 
-- (void) torrentNotificationWithDescription:(NSString*)description {
+- (void)torrentNotificationWithDescription:(NSString*)description {
 	if (notificationCenterIsAvailable) {
 		NSUserNotification *notification = [[NSUserNotification alloc] init];
 		notification.title = NSLocalizedString(@"newtorrent", @"New torrent notification");
