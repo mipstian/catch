@@ -10,8 +10,6 @@
 #import "GUI.h"
 
 // Constant, non-localized, non-UI-related strings
-NSString* const APPLICATION_NAME = @"Catch";
-NSString* const APPLICATION_VERSION = @"1.6";
 NSString* const APPLICATION_WEBSITE_URL = @"http://github.com/mipstian/catch";
 NSString* const APPLICATION_BUG_REPORT_URL = @"https://github.com/mipstian/catch/issues/new";
 NSString* const APPLICATION_FEATURE_REQUEST_URL = @"https://github.com/mipstian/catch/issues/new";
