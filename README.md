@@ -13,11 +13,12 @@ Features:
 ---------
 
   * ShowRSS client
+  * Magnet support
   * Very low Processor/Memory usage
   * Only check your feed by night or in whatever period you decide
   * Organize torrents in folders based on show name
   * Automatically start downloading in your favorite !BitTorrent client
-  * Growl notifications
+  * Notification Center notifications (Growl notifications on older systems)
   * Automatic updates
   * Speaks English (US and UK), Deutsch, Français, Español, Català, Finnish (suomi), 中文 (简体), 中文 (繁體) and Italiano
 
