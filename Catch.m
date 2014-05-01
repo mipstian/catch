@@ -153,6 +153,7 @@ NSString* const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info/
 					// Here I am. Remove me please.
 					LSSharedFileListItemRemove(loginItems,itemRef);
 				}
+                CFRelease(url);
 			}
 		}
 		[loginItemsArray release];
