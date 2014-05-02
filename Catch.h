@@ -9,7 +9,6 @@
 #import <Cocoa/Cocoa.h>
 #import "Preferences.h"
 #import "Scheduler.h"
-#import "FeedChecker.h"
 @class GUI;
 
 extern NSString* const APPLICATION_WEBSITE_URL;
@@ -24,7 +23,6 @@ extern NSString* const SERVICE_FEED_LEGACY_URL_PREFIX;
 @interface Catch : NSObject {
 	IBOutlet GUI* gui;
 	Scheduler* scheduler;
-	FeedChecker* feedChecker;
 }
 
 - (void)schedulerStatusActive:(BOOL)isActive running:(BOOL)isRunning;

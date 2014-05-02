@@ -19,18 +19,18 @@
     NSLog(@"CTCFeedParser: parsed %lu files", (unsigned long)fileNodes.count);
 	
 	// Extract URLs from NSXMLNodes
-	NSMutableArray* fileURLs = [NSMutableArray arrayWithCapacity:fileNodes.count];
+	NSMutableArray* feedFiles = [NSMutableArray arrayWithCapacity:fileNodes.count];
 	
 	for(NSXMLNode* file in fileNodes) {
 		NSString* url = [[[file nodesForXPath:@"enclosure/@url" error:&error] lastObject] stringValue];
 		NSString* title = [[[file nodesForXPath:@"title" error:&error] lastObject] stringValue];
-		[fileURLs addObject:[NSDictionary dictionaryWithObjectsAndKeys:
+		[feedFiles addObject:[NSDictionary dictionaryWithObjectsAndKeys:
 							 title, @"title", url, @"url", nil]];
 	}
     
-    NSLog(@"CTCFeedParser: parsed files: %@", fileURLs);
+    NSLog(@"CTCFeedParser: parsed files: %@", feedFiles);
 	
-	return fileURLs;
+	return feedFiles;
 }
 
 + (NSArray*)parseFolders:(NSXMLDocument*)feed {
