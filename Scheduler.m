@@ -15,6 +15,7 @@
 
 @property (strong, nonatomic) NSTimer* repeatingTimer;
 @property (strong, nonatomic) FeedChecker* feedChecker;
+@property (strong, nonatomic) NSXPCConnection *feedCheckerConnection;
 @property (assign, nonatomic, getter = isActive) BOOL active;
 @property (assign, nonatomic, getter = isRunning) BOOL running;
 
@@ -28,6 +29,12 @@
 	self.running = NO;
 	
 	self.feedChecker = feedChecker;
+    
+    // Create a single connection to the feed helper
+    // Messages will be delivered serially
+    self.feedCheckerConnection = [[NSXPCConnection alloc] initWithServiceName:@"com.giorgiocalderolla.Catch.CatchFeedHelper"];
+    self.feedCheckerConnection.remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(CTCFeedCheck)];
+    [self.feedCheckerConnection resume];
 	
 	// run a runloop in another thread
 	[self performSelectorInBackground:@selector(loopRun) withObject:nil];
@@ -38,17 +45,12 @@
 }
 
 - (void)callFeedChecker {
-    NSXPCConnection *connection = [[NSXPCConnection alloc] initWithServiceName:@"com.giorgiocalderolla.Catch.CatchFeedHelper"];
-    connection.remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(CTCFeedCheck)];
-    [connection resume];
-    
-    CTCFeedChecker *feedChecker = [connection remoteObjectProxy];
+    CTCFeedChecker *feedChecker = [self.feedCheckerConnection remoteObjectProxy];
     [feedChecker checkShowRSSFeed:nil
                 downloadingToPath:nil
                organizingByFolder:NO
                      skippingURLs:@[]
                         withReply:^(NSError *error) {
-                            [connection invalidate];
                         }];
 }
 
