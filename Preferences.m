@@ -112,10 +112,10 @@ NSString * const PREFERENCE_KEY_OPEN_AT_LOGIN = @"openAtLogin";
 
 	// Most importantly, validate feed URL
 	NSString *feedURL = self.feedURL;
-	NSRange range = [feedURL rangeOfString:SERVICE_FEED_URL_PREFIX];
+	NSRange range = [feedURL rangeOfString:kCTCDefaultsServiceFeedURLPrefix];
 	if (range.location != 0) {
 		// Try the legacy URL prefix and consider that valid
-		range = [feedURL rangeOfString:SERVICE_FEED_LEGACY_URL_PREFIX];
+		range = [feedURL rangeOfString:kCTCDefaultsLegacyServiceFeedURLPrefix];
 	}
 	if (range.location != 0) {
 		// The URL should start with the prefix!
