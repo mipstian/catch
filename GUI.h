@@ -31,7 +31,7 @@
 - (IBAction)showPreferences:(id)sender;
 
 /* Set GUI widgets to reflect status */
-- (void)setStatus:(int)status running:(int)running;
+- (void)setStatusActive:(BOOL)isActive running:(BOOL)isRunning;
 - (void)setLastUpdateStatus:(int)status time:(NSDate*)time;
 - (void)refreshRecent:(NSArray*)recentTorrents;
 

@@ -10,13 +10,23 @@
 #import "Catch.h"
 
 
+@interface Scheduler ()
+
+@property (strong, nonatomic) NSTimer* repeatingTimer;
+@property (strong, nonatomic) FeedChecker* feedChecker;
+@property (assign, nonatomic, getter = isActive) BOOL active;
+@property (assign, nonatomic, getter = isRunning) BOOL running;
+
+@end
+
+
 @implementation Scheduler
 
-- (id)initWithFeedChecker:(FeedChecker*)theFeedChecker {
-	active = 1;
-	running = 0;
+- (id)initWithFeedChecker:(FeedChecker*)feedChecker {
+	self.active = YES;
+	self.running = NO;
 	
-	feedChecker = theFeedChecker;
+	self.feedChecker = feedChecker;
 	
 	// run a runloop in another thread
 	[self performSelectorInBackground:@selector(loopRun) withObject:nil];
@@ -30,12 +40,12 @@
 	@autoreleasepool {
 		NSRunLoop *currentRunLoop = NSRunLoop.currentRunLoop;
 
-		repeatingTimer = [NSTimer scheduledTimerWithTimeInterval:FEED_UPDATE_INTERVAL
+		self.repeatingTimer = [NSTimer scheduledTimerWithTimeInterval:FEED_UPDATE_INTERVAL
 														   target:self
 														 selector:@selector(tick:)
 														 userInfo:nil
 														  repeats:YES];
-		[currentRunLoop addTimer:repeatingTimer forMode:NSDefaultRunLoopMode];
+		[currentRunLoop addTimer:self.repeatingTimer forMode:NSDefaultRunLoopMode];
 		[currentRunLoop run];
 	}
 }
@@ -43,24 +53,30 @@
 - (void)reportStatus {
 	// Call to this method are performed on the main thread to get them out
 	// in the right order
-	NSLog(@"Scheduler: reporting status: active = %d, running = %d",active,running);
+	NSLog(@"Scheduler: reporting status: active = %d, running = %d", self.isActive, self.isRunning);
 	
 	// Report status to application controller
-	[[NSApp delegate] schedulerStatus:active running:running];
+	[[NSApp delegate] schedulerStatusActive:self.isActive running:self.isRunning];
 }
 
 - (BOOL)pauseResume {
-	active = !active;
+	self.active = !self.isActive;
 	
 	[self performSelectorOnMainThread:@selector(reportStatus) withObject:nil waitUntilDone:NO];
 	
-	return (BOOL) active;
+	return self.active;
 }
 
 - (void)forceCheck {
 	NSLog(@"Scheduler: forcing check");
+    
+    if (!self.repeatingTimer) {
+        NSLog(@"Scheduler: failed to force check, race condition with init");
+        return;
+    }
+    
 	// Set the next timer fire date to be ASAP
-	[repeatingTimer setFireDate:[NSDate distantPast]];
+	[self.repeatingTimer setFireDate:NSDate.distantPast];
 }
 
 - (void)tick:(NSTimer*)timer {
@@ -68,7 +84,7 @@
 	
 	BOOL status = NO;
 	
-	if (!active) {
+	if (!self.isActive) {
 		NSLog(@"Scheduler: tick skipped, paused");
 		return;
 	}
@@ -87,13 +103,13 @@
 		}
 	}
 	
-	running = 1;
+	self.running = YES;
 	
 	[self performSelectorOnMainThread:@selector(reportStatus) withObject:nil waitUntilDone:NO];
 	
-	status = [feedChecker checkFeed];
+	status = [self.feedChecker checkFeed];
 	
-	running = 0;
+	self.running = NO;
 	
 	[self performSelectorOnMainThread:@selector(reportStatus) withObject:nil waitUntilDone:NO];
 	

@@ -27,7 +27,7 @@ extern NSString* const SERVICE_FEED_LEGACY_URL_PREFIX;
 	FeedChecker* feedChecker;
 }
 
-- (void)schedulerStatus:(int)status running:(int)running;
+- (void)schedulerStatusActive:(BOOL)isActive running:(BOOL)isRunning;
 
 - (void)lastUpdateStatus:(int)status time:(NSDate*)time;
 

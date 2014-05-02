@@ -11,14 +11,9 @@
 #import "FeedChecker.h"
 
 
-@interface Scheduler : NSObject {
-	NSTimer* repeatingTimer;
-	FeedChecker* feedChecker;
-	int active;
-	int running;
-}
+@interface Scheduler : NSObject
 
-- (id)initWithFeedChecker:(FeedChecker*)theFeedChecker;
+- (id)initWithFeedChecker:(FeedChecker*)feedChecker;
 
 - (BOOL)pauseResume;
 
