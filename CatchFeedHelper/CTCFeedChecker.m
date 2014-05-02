@@ -26,7 +26,7 @@
       organizingByFolder:(BOOL)shouldOrganizeByFolder
             skippingURLs:(NSArray *)previouslyDownloadedURLs
                withReply:(void (^)(NSError *))reply {
-    NSLog(@"Checker running");
+    NSLog(@"Checking feed: %@", feedURL);
     reply(nil);
 }
 
