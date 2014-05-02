@@ -43,36 +43,35 @@
 
 - (IBAction)browseService:(id)sender {
 	// Launch the system browser, open the service (ShowRSS)
-	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:SERVICE_URL]];
+	[NSWorkspace.sharedWorkspace openURL:[NSURL URLWithString:SERVICE_URL]];
 }
 
 - (IBAction)browseWebsite:(id)sender {
 	// Launch the system browser, open the applications's website
-	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:APPLICATION_WEBSITE_URL]];
+	[NSWorkspace.sharedWorkspace openURL:[NSURL URLWithString:APPLICATION_WEBSITE_URL]];
 }
 
 - (IBAction)browseHelp:(id)sender {
 	// Launch the system browser, open the applications's on-line help
-	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:APPLICATION_HELP_URL]];
+	[NSWorkspace.sharedWorkspace openURL:[NSURL URLWithString:APPLICATION_HELP_URL]];
 }
 
 - (IBAction)browseFeatureRequest:(id)sender {
 	// Launch the system browser, open the applications's feature request page
-	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:APPLICATION_FEATURE_REQUEST_URL]];
+	[NSWorkspace.sharedWorkspace openURL:[NSURL URLWithString:APPLICATION_FEATURE_REQUEST_URL]];
 }
 
 - (IBAction)browseBugReport:(id)sender {
 	// Launch the system browser, open the applications's bug report page
-	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:APPLICATION_BUG_REPORT_URL]];
+	[NSWorkspace.sharedWorkspace openURL:[NSURL URLWithString:APPLICATION_BUG_REPORT_URL]];
 }
 
 - (IBAction)openTorrentFolder:(id)sender {
 	// Launch finder with the torrent folder open
 	if (![[NSApp delegate] isConfigurationValid]) return;
     
-    NSString* torrentFolder = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCE_KEY_SAVE_PATH];
-    torrentFolder = [torrentFolder stringByStandardizingPath];
-    [[NSWorkspace sharedWorkspace] openFile:[torrentFolder stringByStandardizingPath]];
+    NSString* torrentFolder = [NSUserDefaults.standardUserDefaults stringForKey:PREFERENCE_KEY_SAVE_PATH];
+    [NSWorkspace.sharedWorkspace openFile:[torrentFolder stringByStandardizingPath]];
 }
 
 - (IBAction)showPreferences:(id)sender {
