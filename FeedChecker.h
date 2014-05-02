@@ -12,20 +12,6 @@
 
 @interface FeedChecker : NSObject
 
-- (BOOL) checkFeed;
-
-- (NSXMLDocument*) downloadFeed:(NSURL*)feedURL;
-
-- (BOOL) downloadFiles:(NSArray*)fileURLs inFolders:(NSArray*)fileFolders;
-
-- (BOOL) downloadFile:(NSURL*)fileURL inFolder:(NSString*)folder;
-
-+ (NSString*) computeFilenameFromURL:(NSURL*)fileURL;
-
-+ (NSString*) addTorrentExtensionTo:(NSString*)filename;
-
-- (NSArray*) parseURLs:(NSXMLDocument*)feed;
-
-- (NSArray*) parseFolders:(NSXMLDocument*)feed;
+- (BOOL)checkFeed;
 
 @end

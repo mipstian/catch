@@ -9,6 +9,8 @@
 #import "Preferences.h"
 #import "Catch.h"
 #import "FeedChecker.h"
+#import "CTCFileUtils.h"
+
 
 NSString* const PREFERENCE_KEY_FEED_URL = @"feedURL";
 NSString* const PREFERENCE_KEY_ONLY_UPDATE_BETWEEN = @"onlyUpdateBetween";
@@ -108,7 +110,7 @@ int const FEED_UPDATE_INTERVAL = 60*10; // 10 minutes
 		
 		for (NSString* url in downloadedFiles) {
 			[newDownloadedFiles addObject:[NSDictionary dictionaryWithObjectsAndKeys:
-				[FeedChecker computeFilenameFromURL:[NSURL URLWithString:url]], @"title",
+				[CTCFileUtils computeFilenameFromURL:[NSURL URLWithString:url]], @"title",
 				url, @"url",
 				nil]];
 		}

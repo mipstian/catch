@@ -8,11 +8,12 @@
 
 #import "FeedChecker.h"
 #import "Catch.h"
+#import "CTCFileUtils.h"
 
 
 @implementation FeedChecker
 
-- (BOOL) checkFeed {
+- (BOOL)checkFeed {
 	NSLog(@"FeedChecker: checking");
 	
 	// This autorelease pool is here because the containing one,
@@ -59,7 +60,7 @@
 	return YES;
 }
 
-- (NSArray*) parseURLs:(NSXMLDocument*)feed {
+- (NSArray*)parseURLs:(NSXMLDocument*)feed {
 	NSLog(@"FeedChecker: parsing feed for URLs");
 	
 	NSError* error = nil;
@@ -89,7 +90,7 @@
 	return fileURLs;
 }
 
-- (NSArray*) parseFolders:(NSXMLDocument*)feed {
+- (NSArray*)parseFolders:(NSXMLDocument*)feed {
 	NSLog(@"FeedChecker: parsing feed for folders");
 	
 	NSError* error = nil;
@@ -136,7 +137,7 @@
 	return [document autorelease];
 }
 
-- (BOOL) downloadFiles:(NSArray*)files inFolders:(NSArray*)fileFolders {
+- (BOOL)downloadFiles:(NSArray*)files inFolders:(NSArray*)fileFolders {
 	NSLog(@"FeedChecker: downloading files (if needed)");
 	
 	BOOL downloadingFailed = NO;
@@ -199,7 +200,7 @@
 	return YES;
 }
 
-- (BOOL) downloadFile:(NSURL*)fileURL inFolder:(NSString*)folder {
+- (BOOL)downloadFile:(NSURL*)fileURL inFolder:(NSString*)folder {
 	if (folder) NSLog(@"FeedChecker: downloading file %@ in folder %@",fileURL,folder);
 	else NSLog(@"FeedChecker: downloading file %@",fileURL);
 	
@@ -218,7 +219,7 @@
 	
 	// Get the suggested filename, append extension if needed
 	NSString* filename = [urlResponse suggestedFilename];
-	filename = [FeedChecker addTorrentExtensionTo:filename];
+	filename = [CTCFileUtils addTorrentExtensionTo:filename];
 
 	// Compute destination path
 	NSString* path = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCE_KEY_SAVE_PATH];
@@ -264,22 +265,6 @@
 	}
 	
 	return YES;
-}
-
-+ (NSString*) computeFilenameFromURL:(NSURL*)fileURL {
-	// Compute destination filename
-	NSString* filename = [[[fileURL path] pathComponents] lastObject];
-	filename = [filename stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]; // Reverse urlencode
-	
-	return filename;
-}
-
-+ (NSString*) addTorrentExtensionTo:(NSString*)filename {
-	// Add .torrent extension if needed
-	NSRange range = [filename rangeOfString:@".torrent"];
-	if (range.location == NSNotFound || range.location + range.length != [filename length]) {
-		return [filename stringByAppendingString:@".torrent"];
-	} else return filename;
 }
 
 @end
