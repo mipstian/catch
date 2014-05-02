@@ -154,8 +154,13 @@
         
         // Post to Notification Center if requested
         if (shouldSendNotifications) {
-            [[NSApp delegate] torrentNotificationWithDescription:
-             [NSString stringWithFormat:NSLocalizedString(@"newtorrentdesc", @"New torrent notification"), feedFile[@"title"]]];
+            NSString *description = [NSString stringWithFormat:NSLocalizedString(@"newtorrentdesc", @"New torrent notification"), feedFile[@"title"]];
+            
+            NSUserNotification *notification = NSUserNotification.new;
+            notification.title = NSLocalizedString(@"newtorrent", @"New torrent notification");
+            notification.informativeText = description;
+            notification.soundName = NSUserNotificationDefaultSoundName;
+            [NSUserNotificationCenter.defaultUserNotificationCenter deliverNotification:notification];
         }
         
         // Add url to history

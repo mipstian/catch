@@ -250,14 +250,6 @@
                       @"");
 }
 
-- (void)torrentNotificationWithDescription:(NSString*)description {
-    NSUserNotification *notification = NSUserNotification.new;
-    notification.title = NSLocalizedString(@"newtorrent", @"New torrent notification");
-    notification.informativeText = description;
-    notification.soundName = NSUserNotificationDefaultSoundName;
-    [NSUserNotificationCenter.defaultUserNotificationCenter deliverNotification:notification];
-}
-
 - (BOOL)userNotificationCenter:(NSUserNotificationCenter *)center
 	 shouldPresentNotification:(NSUserNotification *)notification {
 	return YES;
