@@ -41,7 +41,6 @@ int const FEED_UPDATE_INTERVAL = 60*10; // 10 minutes
 	NSDate* dateFrom = [calendar dateFromComponents:comps];
 	[comps setHour:8];
 	NSDate* dateTo = [calendar dateFromComponents:comps];
-	[comps release];
 	
 	// Search for user's Downloads directory (by the book)
 	NSString *downloadsDirectory;
@@ -106,7 +105,7 @@ int const FEED_UPDATE_INTERVAL = 60*10; // 10 minutes
 	if (downloadedFiles && !history) {
 		NSLog(@"Preferences: Migrating download history to new format.");
 		
-		NSMutableArray* newDownloadedFiles = [[[NSMutableArray alloc] init] autorelease];
+		NSMutableArray* newDownloadedFiles = [[NSMutableArray alloc] init];
 		
 		for (NSString* url in downloadedFiles) {
 			[newDownloadedFiles addObject:[NSDictionary dictionaryWithObjectsAndKeys:

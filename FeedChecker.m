@@ -74,7 +74,7 @@
 		NSLog(@"FeedChecker: feed download failed: %@", error);
 	}
 	
-	return [document autorelease];
+	return document;
 }
 
 - (BOOL)downloadFiles:(NSArray*)files inFolders:(NSArray*)fileFolders {
@@ -148,9 +148,9 @@
 	
 	// Download!
 	NSData* downloadedFile = nil;
-	NSURLRequest* urlRequest = [[[NSURLRequest alloc] initWithURL:fileURL] autorelease];
-	NSURLResponse* urlResponse = [[[NSURLResponse alloc] init] autorelease];
-	NSError* downloadError = [[[NSError alloc] init] autorelease];
+	NSURLRequest* urlRequest = [[NSURLRequest alloc] initWithURL:fileURL];
+	NSURLResponse* urlResponse = [[NSURLResponse alloc] init];
+	NSError* downloadError = [[NSError alloc] init];
 	downloadedFile = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&urlResponse error:&downloadError];
 	
 	if (!downloadedFile) return NO;

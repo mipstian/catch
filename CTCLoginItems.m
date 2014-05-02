@@ -11,7 +11,7 @@
 	// http://cocoatutorial.grapewave.com/2010/02/creating-andor-removing-a-login-item/
 	
 	NSString * appPath = [[NSBundle mainBundle] bundlePath];
-	CFURLRef url = (CFURLRef)[NSURL fileURLWithPath:appPath];
+	CFURLRef url = (__bridge CFURLRef)[NSURL fileURLWithPath:appPath];
 	LSSharedFileListRef loginItems = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
 	
 	if (!loginItems) {
@@ -28,13 +28,13 @@
 	} else {
 		// Remove Catch from the login items
 		UInt32 seedValue;
-		NSArray *loginItemsArray = (NSArray *)LSSharedFileListCopySnapshot(loginItems, &seedValue);
+		NSArray *loginItemsArray = (NSArray *)CFBridgingRelease(LSSharedFileListCopySnapshot(loginItems, &seedValue));
         
 		for(NSUInteger i = 0; i < loginItemsArray.count; i++){
-			LSSharedFileListItemRef itemRef = (LSSharedFileListItemRef)[loginItemsArray objectAtIndex:i];
+			LSSharedFileListItemRef itemRef = (__bridge LSSharedFileListItemRef)[loginItemsArray objectAtIndex:i];
 			// Resolve the item with URL
 			if (LSSharedFileListItemResolve(itemRef, 0, (CFURLRef*) &url, NULL) == noErr) {
-				NSString * urlPath = [(NSURL*)url path];
+				NSString * urlPath = [(__bridge NSURL*)url path];
 				if ([urlPath compare:appPath] == NSOrderedSame){
 					// Here I am. Remove me please.
 					LSSharedFileListItemRemove(loginItems,itemRef);
@@ -42,7 +42,6 @@
                 CFRelease(url);
 			}
 		}
-		[loginItemsArray release];
 	}
     
 	CFRelease(loginItems);
