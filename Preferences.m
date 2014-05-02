@@ -29,7 +29,7 @@ int const FEED_UPDATE_INTERVAL = 60 * 10; // 10 minutes
 
 @implementation Preferences
 
-+ (void) setDefaults {
++ (void)setDefaults {
 	NSLog(@"Preferences: Setting defaults");
 	// Create two dummy times (dates actually), just to have some value set
 	NSDateComponents* comps = NSDateComponents.new;
