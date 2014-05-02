@@ -15,7 +15,7 @@ NSString * const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info
 
 @interface CTCAppDelegate ()
 @property (strong, nonatomic) CTCScheduler *scheduler;
-@property (strong, nonatomic) IBOutlet CTCMainController *gui;
+@property (strong, nonatomic) IBOutlet CTCMainController *mainController;
 @end
 
 
@@ -47,7 +47,7 @@ NSString * const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info
 	
 	// show Preferences folder if the config is not valid
 	if (![Preferences validate]) {
-		[self.gui showPreferences:self];
+		[self.mainController showPreferences:self];
 	}
 	
 	// Also check now
@@ -55,11 +55,11 @@ NSString * const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info
 }
 
 - (void)schedulerStatusActive:(BOOL)isActive running:(BOOL)isRunning {
-	[self.gui setStatusActive:isActive running:isRunning];
+	[self.mainController setStatusActive:isActive running:isRunning];
 }
 
 - (void)lastUpdateStatus:(BOOL)lastUpdateWasSuccessful time:(NSDate*)time {
-	[self.gui setLastUpdateStatus:lastUpdateWasSuccessful time:time];
+	[self.mainController setLastUpdateStatus:lastUpdateWasSuccessful time:time];
 	
 	// Also refresh the list of recently downloaded torrents
 	// Get the full list
@@ -76,7 +76,7 @@ NSString * const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info
         [recentNames addObject:recentItem[@"title"]];
     }
 	
-	[self.gui refreshRecent:recentNames];
+	[self.mainController refreshRecent:recentNames];
 }
 
 - (void)checkNow {
@@ -105,7 +105,7 @@ NSString * const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info
 }
 
 - (void)torrentNotificationWithDescription:(NSString *)description {
-	[self.gui torrentNotificationWithDescription:description];
+	[self.mainController torrentNotificationWithDescription:description];
 }
 
 - (void)orderFrontStandardAboutPanel:(id)sender {
