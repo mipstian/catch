@@ -47,9 +47,9 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 - (void)callFeedCheckerWithReplyHandler:(CTCFeedCheckCompletionHandler)replyHandler {
     // Read configuration
     NSURL *feedURL = [NSURL URLWithString:CTCDefaults.feedURL];
-    NSString *downloadPath = [NSUserDefaults.standardUserDefaults stringForKey:PREFERENCE_KEY_SAVE_PATH];
+    NSString *downloadPath = CTCDefaults.torrentsSavePath;
     BOOL organizeByFolder = CTCDefaults.shouldOrganizeTorrentsInFolders;
-    NSArray *history = [NSUserDefaults.standardUserDefaults arrayForKey:PREFERENCE_KEY_HISTORY];
+    NSArray *history = CTCDefaults.downloadHistory;
     
     // Extract URLs from history
     NSMutableArray *previouslyDownloadedURLs = NSMutableArray.array;
@@ -141,8 +141,7 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 }
 
 - (void)handleDownloadedFeedFiles:(NSArray *)downloadedFeedFiles {
-    BOOL shouldOpenTorrentsAutomatically = [NSUserDefaults.standardUserDefaults
-                                            boolForKey:PREFERENCE_KEY_OPEN_AUTOMATICALLY];
+    BOOL shouldOpenTorrentsAutomatically = CTCDefaults.shouldOpenTorrentsAutomatically;
     BOOL shouldSendNotifications = CTCDefaults.shouldSendNotifications;
     
     for (NSDictionary *feedFile in downloadedFeedFiles) {
@@ -170,12 +169,10 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
         }
         
         // Add url to history
-        NSArray *history = [NSUserDefaults.standardUserDefaults arrayForKey:PREFERENCE_KEY_HISTORY];
+        NSArray *history = CTCDefaults.downloadHistory;
         NSArray *newHistory = [history arrayByAddingObject:@{@"title": feedFile[@"title"],
                                                              @"url": feedFile[@"url"]}];
-        [NSUserDefaults.standardUserDefaults setObject:newHistory
-                                                forKey:PREFERENCE_KEY_HISTORY];
-
+        CTCDefaults.downloadHistory = newHistory;
     }
 }
 
