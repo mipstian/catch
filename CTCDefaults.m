@@ -20,12 +20,12 @@ NSString * const kCTCDefaultsOnlyUpdateBetweenKey = @"onlyUpdateBetween";
 NSString * const kCTCDefaultsUpdateFromKey = @"updateFrom";
 NSString * const kCTCDefaultsUpdateToKey = @"updateTo";
 NSString * const PREFERENCE_KEY_SAVE_PATH = @"savePath";
-NSString * const PREFERENCE_KEY_ORGANIZE_TORRENTS = @"organizeTorrents";
+NSString * const kCTCDefaultsShouldOrganizeTorrents = @"organizeTorrents";
 NSString * const PREFERENCE_KEY_OPEN_AUTOMATICALLY = @"openAutomatically";
-NSString * const PREFERENCE_KEY_SEND_NOTIFICATIONS = @"growlNotifications";
-NSString * const PREFERENCE_KEY_DOWNLOADED_FILES = @"downloadedFiles";
+NSString * const kCTCDefaultsShouldSendNotificationsKey = @"growlNotifications";
+NSString * const kCTCDefaultsDownloadedFilesKey = @"downloadedFiles"; // Deprecated
 NSString * const PREFERENCE_KEY_HISTORY = @"history";
-NSString * const PREFERENCE_KEY_OPEN_AT_LOGIN = @"openAtLogin";
+NSString * const kCTCDefaultsOpenAtLoginKey = @"openAtLogin";
 
 
 @implementation CTCDefaults
@@ -58,14 +58,14 @@ NSString * const PREFERENCE_KEY_OPEN_AT_LOGIN = @"openAtLogin";
                                   kCTCDefaultsUpdateFromKey: dateFrom,
                                   kCTCDefaultsUpdateToKey: dateTo,
                                   PREFERENCE_KEY_SAVE_PATH: downloadsDirectory,
-                                  PREFERENCE_KEY_ORGANIZE_TORRENTS: @NO,
+                                  kCTCDefaultsShouldOrganizeTorrents: @NO,
                                   PREFERENCE_KEY_OPEN_AUTOMATICALLY: @YES,
-                                  PREFERENCE_KEY_SEND_NOTIFICATIONS: @YES,
-                                  PREFERENCE_KEY_OPEN_AT_LOGIN: @YES};
+                                  kCTCDefaultsShouldSendNotificationsKey: @YES,
+                                  kCTCDefaultsOpenAtLoginKey: @YES};
 	[NSUserDefaults.standardUserDefaults registerDefaults:appDefaults];
     
 	// Migrate the downloads history format. Change old array of strings to new dictionary format
-	NSArray *downloadedFiles = [NSUserDefaults.standardUserDefaults arrayForKey:PREFERENCE_KEY_DOWNLOADED_FILES];
+	NSArray *downloadedFiles = [NSUserDefaults.standardUserDefaults arrayForKey:kCTCDefaultsDownloadedFilesKey];
 	NSArray *history = [NSUserDefaults.standardUserDefaults arrayForKey:PREFERENCE_KEY_HISTORY];
 	if (downloadedFiles && !history) {
 		NSLog(@"Migrating download history to new format.");
@@ -81,7 +81,7 @@ NSString * const PREFERENCE_KEY_OPEN_AT_LOGIN = @"openAtLogin";
 		
 		[NSUserDefaults.standardUserDefaults setObject:newDownloadedFiles
                                                 forKey:PREFERENCE_KEY_HISTORY];
-		[NSUserDefaults.standardUserDefaults removeObjectForKey:PREFERENCE_KEY_DOWNLOADED_FILES];
+		[NSUserDefaults.standardUserDefaults removeObjectForKey:kCTCDefaultsDownloadedFilesKey];
 	}
     
     // If history was never set or migrated, init it to empty array
@@ -103,7 +103,7 @@ NSString * const PREFERENCE_KEY_OPEN_AT_LOGIN = @"openAtLogin";
 }
 
 + (void)refreshLoginItemStatus {
-    [CTCLoginItems toggleRegisteredAsLoginItem:[NSUserDefaults.standardUserDefaults boolForKey:PREFERENCE_KEY_OPEN_AT_LOGIN]];
+    [CTCLoginItems toggleRegisteredAsLoginItem:[NSUserDefaults.standardUserDefaults boolForKey:kCTCDefaultsOpenAtLoginKey]];
 }
 
 + (BOOL)isConfigurationValid {
@@ -170,6 +170,14 @@ NSString * const PREFERENCE_KEY_OPEN_AT_LOGIN = @"openAtLogin";
 
 + (NSDate *)toDateForTimeRestrictions {
     return (NSDate *)[NSUserDefaults.standardUserDefaults objectForKey:kCTCDefaultsUpdateToKey];
+}
+
++ (BOOL)shouldSendNotifications {
+    return [NSUserDefaults.standardUserDefaults boolForKey:kCTCDefaultsShouldSendNotificationsKey];
+}
+
++ (BOOL)shouldOrganizeTorrentsInFolders {
+    return [NSUserDefaults.standardUserDefaults boolForKey:kCTCDefaultsShouldOrganizeTorrents];
 }
 
 @end

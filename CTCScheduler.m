@@ -48,7 +48,7 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
     // Read configuration
     NSURL *feedURL = [NSURL URLWithString:CTCDefaults.feedURL];
     NSString *downloadPath = [NSUserDefaults.standardUserDefaults stringForKey:PREFERENCE_KEY_SAVE_PATH];
-    BOOL organizeByFolder = [NSUserDefaults.standardUserDefaults boolForKey:PREFERENCE_KEY_ORGANIZE_TORRENTS];
+    BOOL organizeByFolder = CTCDefaults.shouldOrganizeTorrentsInFolders;
     NSArray *history = [NSUserDefaults.standardUserDefaults arrayForKey:PREFERENCE_KEY_HISTORY];
     
     // Extract URLs from history
@@ -143,7 +143,7 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 - (void)handleDownloadedFeedFiles:(NSArray *)downloadedFeedFiles {
     BOOL shouldOpenTorrentsAutomatically = [NSUserDefaults.standardUserDefaults
                                             boolForKey:PREFERENCE_KEY_OPEN_AUTOMATICALLY];
-    BOOL shouldSendNotifications = [NSUserDefaults.standardUserDefaults boolForKey:PREFERENCE_KEY_SEND_NOTIFICATIONS];
+    BOOL shouldSendNotifications = CTCDefaults.shouldSendNotifications;
     
     for (NSDictionary *feedFile in downloadedFeedFiles) {
         BOOL isMagnetLink = [feedFile[@"isMagnetLink"] boolValue];
