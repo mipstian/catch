@@ -94,7 +94,7 @@
 }
 
 - (void)reportStatus {
-	NSLog(@"Scheduler: reporting status: active = %d, running = %d", self.isActive, self.isRunning);
+	NSLog(@"Scheduler status: active = %d, running = %d", self.isActive, self.isRunning);
 	
 	// Report status to application delegate
 	[[NSApp delegate] schedulerStatusActive:self.isActive running:self.isRunning];
@@ -109,24 +109,24 @@
 }
 
 - (void)forceCheck {
-	NSLog(@"Scheduler: forcing check");
+	NSLog(@"Forcing feed check");
     
 	// Set the next timer fire date to be ASAP
 	[self checkFeed];
 }
 
 - (void)tick:(NSTimer*)timer {
-	NSLog(@"Scheduler: tick");
+	NSLog(@"Scheduler tick");
 	
 	if (!self.isActive) {
-		NSLog(@"Scheduler: tick skipped, paused");
+		NSLog(@"Scheduler tick skipped (paused)");
 		return;
 	}
 	
 	// Don't check if current time is outside user-defined range
 	if ([NSUserDefaults.standardUserDefaults boolForKey:PREFERENCE_KEY_ONLY_UPDATE_BETWEEN]) {
 		if (![self checkTime]) {
-			NSLog(@"Scheduler: tick skipped, outside of user-defined time range");
+			NSLog(@"Scheduler tick skipped (outside of user-defined time range)");
 			return;
 		}
 	}

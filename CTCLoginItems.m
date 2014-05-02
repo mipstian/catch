@@ -4,8 +4,8 @@
 @implementation CTCLoginItems
 
 + (void)toggleRegisteredAsLoginItem:(BOOL)shouldRegister {
-    if (shouldRegister) NSLog(@"CTCLoginItems: adding app to login items");
-	else NSLog(@"CTCLoginItems: removing app from login items");
+    if (shouldRegister) NSLog(@"Adding app to login items");
+	else NSLog(@"Removing app from login items");
 	
 	// Code totally ripped off from:
 	// http://cocoatutorial.grapewave.com/2010/02/creating-andor-removing-a-login-item/
@@ -15,7 +15,7 @@
 	LSSharedFileListRef loginItems = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
 	
 	if (!loginItems) {
-		NSLog(@"CTCLoginItems: couldn't add/remove app to the login items :(");
+		NSLog(@"Couldn't add/remove app to the login items :(");
 		return;
 	}
 	
