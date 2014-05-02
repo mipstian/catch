@@ -11,7 +11,6 @@
 		3803C7AE11C3DA9300FC08DB /* CTCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3803C7AD11C3DA9300FC08DB /* CTCAppDelegate.m */; };
 		3803C7E711C3E72900FC08DB /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 3803C7E611C3E72900FC08DB /* Preferences.m */; };
 		3803C7EC11C3E7AD00FC08DB /* CTCScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 3803C7EB11C3E7AD00FC08DB /* CTCScheduler.m */; };
-		381066FB11CF3F8300FDED93 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 381066FA11CF3F8300FDED93 /* MainMenu.xib */; };
 		38A3FD0D11CA01DD00157AEF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38A3FD0C11CA01DD00157AEF /* Localizable.strings */; };
 		38D39B6011C3A6E100C17C80 /* CTCMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D39B5F11C3A6E100C17C80 /* CTCMainController.m */; };
 		38D39B6711C3A70000C17C80 /* menubar_idle-inv.png in Resources */ = {isa = PBXBuildFile; fileRef = 38D39B6111C3A70000C17C80 /* menubar_idle-inv.png */; };
@@ -90,7 +89,6 @@
 		3803C7E611C3E72900FC08DB /* Preferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Preferences.m; sourceTree = "<group>"; };
 		3803C7EA11C3E7AD00FC08DB /* CTCScheduler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCScheduler.h; sourceTree = "<group>"; };
 		3803C7EB11C3E7AD00FC08DB /* CTCScheduler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCScheduler.m; sourceTree = "<group>"; };
-		381066FA11CF3F8300FDED93 /* MainMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 		382AD67812DCCA9300E1FA73 /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/Localizable.strings; sourceTree = "<group>"; };
 		382AD67912DCCAB300E1FA73 /* ca */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ca; path = ca.lproj/UI.xib; sourceTree = "<group>"; };
 		38704B0911DB1EC900D28A39 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/UI.xib"; sourceTree = "<group>"; };
@@ -240,7 +238,6 @@
 				44717A9C1912F8D800580054 /* menubar_refreshing@2x.png */,
 				2F7446970DB6B7EA00F9684A /* UI.xib */,
 				38A3FD0C11CA01DD00157AEF /* Localizable.strings */,
-				381066FA11CF3F8300FDED93 /* MainMenu.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -399,7 +396,6 @@
 				44717A971912F24700580054 /* menubar_idle-inv@2x.png in Resources */,
 				44717A951912EEF800580054 /* menubar_idle@2x.png in Resources */,
 				38A3FD0D11CA01DD00157AEF /* Localizable.strings in Resources */,
-				381066FB11CF3F8300FDED93 /* MainMenu.xib in Resources */,
 				44717A991912F7BF00580054 /* menubar_disabled@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
