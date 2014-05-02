@@ -1,6 +1,7 @@
 #import "CTCAppDelegate.h"
 #import "CTCMainController.h"
 #import "CTCLoginItems.h"
+#import "Preferences.h"
 
 
 // Constant, non-localized, non-UI-related strings
@@ -14,7 +15,6 @@ NSString * const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info
 
 
 @interface CTCAppDelegate ()
-@property (strong, nonatomic) CTCScheduler *scheduler;
 @property (strong, nonatomic) IBOutlet CTCMainController *mainController;
 @end
 
@@ -26,8 +26,6 @@ NSString * const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info
 	if (!self) {
 		return nil;
 	}
-    
-    self.scheduler = CTCScheduler.new;
 
 	NSLog(@"Loading preferences");
 	
@@ -51,7 +49,7 @@ NSString * const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info
 	}
 	
 	// Also check now
-	[self.scheduler forceCheck];
+    [self.mainController forceCheck];
 }
 
 - (void)schedulerStatusActive:(BOOL)isActive running:(BOOL)isRunning {
@@ -79,17 +77,6 @@ NSString * const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info
 	[self.mainController refreshRecent:recentNames];
 }
 
-- (void)checkNow {
-	[self.scheduler forceCheck];
-}
-
-- (void)togglePause {
-	if ([self.scheduler pauseResume]) {
-		// If the scheduler is now active, also force a check right away
-		[self.scheduler forceCheck];
-	}
-}
-
 - (void)savePreferences {
 	[Preferences save];
 	
@@ -97,7 +84,7 @@ NSString * const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info
 	[self refreshLoginItemStatus];
 	
 	// Also force check
-	[self checkNow];
+	[self.mainController forceCheck];
 }
 
 - (BOOL)isConfigurationValid {
