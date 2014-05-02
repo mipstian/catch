@@ -24,7 +24,7 @@ NSString* const PREFERENCE_KEY_HISTORY = @"history";
 NSString* const PREFERENCE_KEY_OPEN_AT_LOGIN = @"openAtLogin";
 
 // Defaults
-int const FEED_UPDATE_INTERVAL = 60*10; // 10 minutes
+int const FEED_UPDATE_INTERVAL = 60 * 10; // 10 minutes
 
 
 @implementation Preferences
@@ -32,10 +32,10 @@ int const FEED_UPDATE_INTERVAL = 60*10; // 10 minutes
 + (void) setDefaults {
 	NSLog(@"Preferences: Setting defaults");
 	// Create two dummy times (dates actually), just to have some value set
-	NSDateComponents* comps = [[NSDateComponents alloc] init];
+	NSDateComponents* comps = NSDateComponents.new;
 	[comps setHour:24];
 	[comps setMinute:0];
-	NSCalendar* calendar = [NSCalendar currentCalendar];
+	NSCalendar* calendar = NSCalendar.currentCalendar;
 	NSDate* dateFrom = [calendar dateFromComponents:comps];
 	[comps setHour:8];
 	NSDate* dateTo = [calendar dateFromComponents:comps];
@@ -43,9 +43,9 @@ int const FEED_UPDATE_INTERVAL = 60*10; // 10 minutes
 	// Search for user's Downloads directory (by the book)
 	NSString *downloadsDirectory;
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDownloadsDirectory, NSUserDomainMask, YES);
-	if ([paths count] > 0)	 {
-		downloadsDirectory = [paths objectAtIndex:0];
-		NSLog(@"Preferences: Default save path is %@",downloadsDirectory);
+	if (paths.count > 0)	 {
+		downloadsDirectory = paths.firstObject;
+		NSLog(@"Preferences: Default save path is %@", downloadsDirectory);
 	} else {
 		// Default to ~/Downloads/ (at this point it probably won't work though)
 		NSLog(@"Preferences: Defaulting to ~/Downloads/ for save path");
