@@ -79,7 +79,7 @@
 
 - (IBAction)openTorrentFolder:(id)sender {
 	// Launch finder with the torrent folder open
-	if (![[NSApp delegate] isConfigurationValid]) return;
+	if (!Preferences.isConfigurationValid) return;
     
     NSString *torrentFolder = [NSUserDefaults.standardUserDefaults stringForKey:PREFERENCE_KEY_SAVE_PATH];
     [NSWorkspace.sharedWorkspace openFile:[torrentFolder stringByStandardizingPath]];
@@ -98,7 +98,7 @@
 	// Also force check
 	[self forceCheck];
 	
-	if ([[NSApp delegate] isConfigurationValid]) {
+	if (Preferences.isConfigurationValid) {
 		// Hide the Preferences window
 		[self.preferencesWindow close];
 	} else {

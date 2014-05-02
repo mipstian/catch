@@ -93,7 +93,7 @@ NSString * const PREFERENCE_KEY_OPEN_AT_LOGIN = @"openAtLogin";
     [CTCDefaults refreshLoginItemStatus];
 }
 
-+ (BOOL)validate {
++ (BOOL)isConfigurationValid {
 	// Validate torrent folder. This should never fail!
 	NSString *torrentFolder = [NSUserDefaults.standardUserDefaults stringForKey:PREFERENCE_KEY_SAVE_PATH];
 	torrentFolder = [torrentFolder stringByStandardizingPath];
