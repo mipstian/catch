@@ -3,7 +3,7 @@
 #import "CTCFileUtils.h"
 
 
-NSString * kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHelper";
+NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHelper";
 
 
 @implementation CTCFeedChecker
@@ -37,7 +37,7 @@ NSString * kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedH
     [NSURLCache.sharedURLCache removeAllCachedResponses];
     
     // Download the feed
-    NSXMLDocument* feed = [self downloadFeed:feedURL];
+    NSXMLDocument *feed = [self downloadFeed:feedURL];
     if (!feed) {
         reply(@[], [NSError errorWithDomain:kCTCFeedCheckerErrorDomain
                                        code:-1
@@ -46,7 +46,7 @@ NSString * kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedH
     }
     
     // Parse the feed for files
-    NSArray* feedFiles = [CTCFeedParser parseURLs:feed];
+    NSArray *feedFiles = [CTCFeedParser parseURLs:feed];
     if (!feedFiles) {
         reply(@[], [NSError errorWithDomain:kCTCFeedCheckerErrorDomain
                                        code:-2
@@ -55,7 +55,7 @@ NSString * kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedH
     }
     
     // Parse the feed for show folders
-    NSArray* feedShowFolders = shouldOrganizeByFolder ? [CTCFeedParser parseFolders:feed] : nil;
+    NSArray *feedShowFolders = shouldOrganizeByFolder ? [CTCFeedParser parseFolders:feed] : nil;
     if (!feedShowFolders) {
         NSLog(@"Error parsing show folders, folders will not be used");
     }
@@ -80,10 +80,10 @@ NSString * kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedH
 - (NSXMLDocument*)downloadFeed:(NSURL*)feedURL {
 	NSLog(@"Downloading feed %@", feedURL);
 	
-	NSError* error = nil;
+	NSError *error = nil;
 	
 	// Create a NSXMLDocument by downloading feed
-	NSXMLDocument* document = [[NSXMLDocument alloc] initWithContentsOfURL:feedURL options:NSXMLNodeOptionsNone error:&error];
+	NSXMLDocument *document = [[NSXMLDocument alloc] initWithContentsOfURL:feedURL options:NSXMLNodeOptionsNone error:&error];
 	
 	if (document) {
 		NSLog(@"Feed downloaded");
@@ -103,8 +103,8 @@ NSString * kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedH
 	
     NSMutableArray *successfullyDownloadedFeedFiles = NSMutableArray.array;
     
-	for (NSDictionary* file in feedFiles) {
-		NSString* url = file[@"url"];
+	for (NSDictionary *file in feedFiles) {
+		NSString *url = file[@"url"];
 		
         // Skip old files
         if ([previouslyDownloadedURLs containsObject:url]) continue;
@@ -150,13 +150,13 @@ NSString * kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedH
 	if (folder) NSLog(@"Downloading file %@ in folder %@",fileURL,folder);
 	else NSLog(@"Downloading file %@",fileURL);
 	
-	NSError* error = nil;
+	NSError *error = nil;
 	
 	// Download!
-	NSData* downloadedFile = nil;
-	NSURLRequest* urlRequest = [[NSURLRequest alloc] initWithURL:fileURL];
-	NSURLResponse* urlResponse = [[NSURLResponse alloc] init];
-	NSError* downloadError = [[NSError alloc] init];
+	NSData *downloadedFile = nil;
+	NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:fileURL];
+	NSURLResponse *urlResponse = [[NSURLResponse alloc] init];
+	NSError *downloadError = [[NSError alloc] init];
 	downloadedFile = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&urlResponse error:&downloadError];
 	
 	if (!downloadedFile) return nil;
@@ -164,15 +164,15 @@ NSString * kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedH
 	NSLog(@"Download complete, filesize: %lu", (unsigned long)downloadedFile.length);
 	
 	// Get the suggested filename, append extension if needed
-	NSString* filename = [urlResponse suggestedFilename];
+	NSString *filename = [urlResponse suggestedFilename];
 	filename = [CTCFileUtils addTorrentExtensionTo:filename];
     
 	// Compute destination path
-	NSArray* pathComponents = [downloadPath pathComponents];
+	NSArray *pathComponents = [downloadPath pathComponents];
 	if (folder) pathComponents = [pathComponents arrayByAddingObject:folder];
-	NSString* pathAndFolder = [[NSString pathWithComponents:pathComponents] stringByStandardizingPath];
+	NSString *pathAndFolder = [[NSString pathWithComponents:pathComponents] stringByStandardizingPath];
 	pathComponents = [pathComponents arrayByAddingObject:filename];
-	NSString* pathAndFilename = [[NSString pathWithComponents:pathComponents] stringByStandardizingPath];
+	NSString *pathAndFilename = [[NSString pathWithComponents:pathComponents] stringByStandardizingPath];
 	
 	NSLog(@"Computed file destination %@", pathAndFilename);
 	

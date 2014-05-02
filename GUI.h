@@ -13,16 +13,16 @@
 
 @interface GUI : NSObject <NSUserNotificationCenterDelegate> {
 	// Outlets and UI components
-	IBOutlet NSMenu* menu;
-	IBOutlet NSMenuItem* menuVersion;
-	IBOutlet NSMenuItem* menuCheckNow;
-	IBOutlet NSMenuItem* menuPauseResume;
-	IBOutlet NSMenuItem* menuLastUpdate;
-	IBOutlet NSMenuItem* menuRecentTorrents;
-	IBOutlet NSMenuItem* menuShowInFinder;
-	IBOutlet NSWindow* preferencesWindow;
-	IBOutlet NSTabView* preferencesTabs;
-	NSStatusItem* item;
+	IBOutlet NSMenu *menu;
+	IBOutlet NSMenuItem *menuVersion;
+	IBOutlet NSMenuItem *menuCheckNow;
+	IBOutlet NSMenuItem *menuPauseResume;
+	IBOutlet NSMenuItem *menuLastUpdate;
+	IBOutlet NSMenuItem *menuRecentTorrents;
+	IBOutlet NSMenuItem *menuShowInFinder;
+	IBOutlet NSWindow *preferencesWindow;
+	IBOutlet NSTabView *preferencesTabs;
+	NSStatusItem *item;
 }
 
 /* Show the Preferences window */
@@ -30,10 +30,10 @@
 
 /* Set GUI widgets to reflect status */
 - (void)setStatusActive:(BOOL)isActive running:(BOOL)isRunning;
-- (void)setLastUpdateStatus:(int)status time:(NSDate*)time;
-- (void)refreshRecent:(NSArray*)recentTorrents;
+- (void)setLastUpdateStatus:(int)status time:(NSDate *)time;
+- (void)refreshRecent:(NSArray *)recentTorrents;
 
 /* Notifications */
-- (void)torrentNotificationWithDescription:(NSString*)description;
+- (void)torrentNotificationWithDescription:(NSString *)description;
 
 @end

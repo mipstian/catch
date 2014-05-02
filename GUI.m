@@ -70,7 +70,7 @@
 	// Launch finder with the torrent folder open
 	if (![[NSApp delegate] isConfigurationValid]) return;
     
-    NSString* torrentFolder = [NSUserDefaults.standardUserDefaults stringForKey:PREFERENCE_KEY_SAVE_PATH];
+    NSString *torrentFolder = [NSUserDefaults.standardUserDefaults stringForKey:PREFERENCE_KEY_SAVE_PATH];
     [NSWorkspace.sharedWorkspace openFile:[torrentFolder stringByStandardizingPath]];
 }
 
@@ -131,8 +131,8 @@
 
 - (void)setLastUpdateStatus:(int)status time:(NSDate *)time {
 	// Create something like "Last update: 3:45 AM" and place it in the menu
-	NSString* baseLastUpdateString = nil;
-	NSString* lastUpdateString = nil;
+	NSString *baseLastUpdateString = nil;
+	NSString *lastUpdateString = nil;
 	
 	if (status) {
 		baseLastUpdateString = NSLocalizedString(@"lastupdate", @"Title for the last update time");
@@ -143,7 +143,7 @@
 	if (time) {
 		NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 		[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-		NSString* lastUpdateTime = [dateFormatter stringFromDate:time];
+		NSString *lastUpdateTime = [dateFormatter stringFromDate:time];
 		lastUpdateString = [NSString stringWithFormat:baseLastUpdateString,lastUpdateTime];
 	} else {
 		lastUpdateString = [NSString stringWithFormat:baseLastUpdateString,NSLocalizedString(@"never", @"Never happened")];
@@ -197,14 +197,14 @@
 
 - (void)refreshRecent:(NSArray*)recentTorrents {
     // Clear menu
-	NSArray* items = menuRecentTorrents.submenu.itemArray;
-	for (NSMenuItem* menuItem in items) {
+	NSArray *items = menuRecentTorrents.submenu.itemArray;
+	for (NSMenuItem *menuItem in items) {
 		[menuRecentTorrents.submenu removeItem:menuItem];
 	}
 	
 	// Add new items
-	for (NSString* title in recentTorrents) {
-		NSMenuItem* newItem = [[NSMenuItem alloc] initWithTitle:title action:NULL keyEquivalent:@""];
+	for (NSString *title in recentTorrents) {
+		NSMenuItem *newItem = [[NSMenuItem alloc] initWithTitle:title action:NULL keyEquivalent:@""];
         newItem.enabled = NO;
 		[menuRecentTorrents.submenu addItem:newItem];
 	}

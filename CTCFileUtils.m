@@ -6,15 +6,15 @@ static NSString * const kCTCFileUtilsTorrentExtension = @".torrent";
 
 @implementation CTCFileUtils
 
-+ (NSString*)computeFilenameFromURL:(NSURL*)fileURL {
++ (NSString *)computeFilenameFromURL:(NSURL*)fileURL {
 	// Compute destination filename
-	NSString* filename = fileURL.path.pathComponents.lastObject;
+	NSString *filename = fileURL.path.pathComponents.lastObject;
     
     // Reverse urlencode
 	return [filename stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
-+ (NSString*)addTorrentExtensionTo:(NSString*)filename {
++ (NSString *)addTorrentExtensionTo:(NSString*)filename {
 	NSRange range = [filename rangeOfString:kCTCFileUtilsTorrentExtension];
     
     // Extension is missing if not found or if found but not at the end of the filename
