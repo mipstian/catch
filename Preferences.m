@@ -30,10 +30,11 @@ NSString * const PREFERENCE_KEY_OPEN_AT_LOGIN = @"openAtLogin";
 	NSLog(@"Preferences: Setting defaults");
 	// Create two dummy times (dates actually), just to have some value set
 	NSDateComponents *comps = NSDateComponents.new;
-    comps.hour = 8;
+    comps.hour = 24;
     comps.minute = 0;
 	NSCalendar *calendar = NSCalendar.currentCalendar;
 	NSDate *dateFrom = [calendar dateFromComponents:comps];
+    comps.hour = 8;
 	NSDate *dateTo = [calendar dateFromComponents:comps];
 	
 	// Search for user's Downloads directory (by the book)

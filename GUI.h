@@ -15,7 +15,6 @@
 	// Outlets and UI components
 	IBOutlet NSMenu *menu;
 	IBOutlet NSMenuItem *menuVersion;
-	IBOutlet NSMenuItem *menuCheckNow;
 	IBOutlet NSMenuItem *menuPauseResume;
 	IBOutlet NSMenuItem *menuLastUpdate;
 	IBOutlet NSMenuItem *menuRecentTorrents;
