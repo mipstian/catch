@@ -1,14 +1,7 @@
-//
-//	Catch.m
-//	Catch
-//
-//	Created by Giorgio Calderolla on 6/12/10.
-//	Copyright 2010 n\a. All rights reserved.
-//
-
 #import "CTCAppDelegate.h"
 #import "GUI.h"
 #import "CTCLoginItems.h"
+
 
 // Constant, non-localized, non-UI-related strings
 NSString * const APPLICATION_WEBSITE_URL = @"http://github.com/mipstian/catch";
