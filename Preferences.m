@@ -7,7 +7,7 @@
 //
 
 #import "Preferences.h"
-#import "Catch.h"
+#import "CTCAppDelegate.h"
 #import "CTCFileUtils.h"
 
 

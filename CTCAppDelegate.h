@@ -20,10 +20,7 @@ extern NSString* const SERVICE_FEED_URL_PREFIX;
 extern NSString* const SERVICE_FEED_LEGACY_URL_PREFIX;
 
 
-@interface Catch : NSObject {
-	IBOutlet GUI* gui;
-	CTCScheduler* scheduler;
-}
+@interface CTCAppDelegate : NSObject
 
 - (void)schedulerStatusActive:(BOOL)isActive running:(BOOL)isRunning;
 

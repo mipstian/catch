@@ -17,7 +17,7 @@
                 <outlet property="delegate" destination="205" id="801"/>
             </connections>
         </customObject>
-        <customObject id="205" userLabel="Catch" customClass="Catch">
+        <customObject id="205" userLabel="Catch" customClass="CTCAppDelegate">
             <connections>
                 <outlet property="gui" destination="528" id="810"/>
             </connections>
@@ -301,7 +301,7 @@ DQ
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <amVariablePopUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="794">
                                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                            <font key="font" metaFont="system"/>
+                                                            <font key="font" metaFont="menu"/>
                                                             <menu key="menu" title="OtherViews" id="795"/>
                                                         </amVariablePopUpButtonCell>
                                                         <connections>

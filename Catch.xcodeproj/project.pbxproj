@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2F7446990DB6B7EA00F9684A /* UI.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F7446970DB6B7EA00F9684A /* UI.xib */; };
-		3803C7AE11C3DA9300FC08DB /* Catch.m in Sources */ = {isa = PBXBuildFile; fileRef = 3803C7AD11C3DA9300FC08DB /* Catch.m */; };
+		3803C7AE11C3DA9300FC08DB /* CTCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3803C7AD11C3DA9300FC08DB /* CTCAppDelegate.m */; };
 		3803C7E711C3E72900FC08DB /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 3803C7E611C3E72900FC08DB /* Preferences.m */; };
 		3803C7EC11C3E7AD00FC08DB /* CTCScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 3803C7EB11C3E7AD00FC08DB /* CTCScheduler.m */; };
 		381066FB11CF3F8300FDED93 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 381066FA11CF3F8300FDED93 /* MainMenu.xib */; };
@@ -84,8 +84,8 @@
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		2F7446980DB6B7EA00F9684A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/UI.xib; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Catch_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Catch_Prefix.pch; sourceTree = "<group>"; };
-		3803C7AC11C3DA9300FC08DB /* Catch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Catch.h; sourceTree = "<group>"; };
-		3803C7AD11C3DA9300FC08DB /* Catch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Catch.m; sourceTree = "<group>"; };
+		3803C7AC11C3DA9300FC08DB /* CTCAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCAppDelegate.h; sourceTree = "<group>"; };
+		3803C7AD11C3DA9300FC08DB /* CTCAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCAppDelegate.m; sourceTree = "<group>"; };
 		3803C7E511C3E72900FC08DB /* Preferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Preferences.h; sourceTree = "<group>"; };
 		3803C7E611C3E72900FC08DB /* Preferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Preferences.m; sourceTree = "<group>"; };
 		3803C7EA11C3E7AD00FC08DB /* CTCScheduler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCScheduler.h; sourceTree = "<group>"; };
@@ -173,10 +173,10 @@
 		080E96DDFE201D6D7F000001 /* Catch */ = {
 			isa = PBXGroup;
 			children = (
+				3803C7AC11C3DA9300FC08DB /* CTCAppDelegate.h */,
+				3803C7AD11C3DA9300FC08DB /* CTCAppDelegate.m */,
 				38D39B5E11C3A6E100C17C80 /* GUI.h */,
 				38D39B5F11C3A6E100C17C80 /* GUI.m */,
-				3803C7AC11C3DA9300FC08DB /* Catch.h */,
-				3803C7AD11C3DA9300FC08DB /* Catch.m */,
 				3803C7E511C3E72900FC08DB /* Preferences.h */,
 				3803C7E611C3E72900FC08DB /* Preferences.m */,
 				3803C7EA11C3E7AD00FC08DB /* CTCScheduler.h */,
@@ -425,7 +425,7 @@
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
 				44717AA4191300B300580054 /* CTCDefaults.m in Sources */,
 				38D39B6011C3A6E100C17C80 /* GUI.m in Sources */,
-				3803C7AE11C3DA9300FC08DB /* Catch.m in Sources */,
+				3803C7AE11C3DA9300FC08DB /* CTCAppDelegate.m in Sources */,
 				3803C7E711C3E72900FC08DB /* Preferences.m in Sources */,
 				44717AA71913072200580054 /* CTCLoginItems.m in Sources */,
 				3803C7EC11C3E7AD00FC08DB /* CTCScheduler.m in Sources */,

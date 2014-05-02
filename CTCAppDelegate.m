@@ -6,7 +6,7 @@
 //	Copyright 2010 n\a. All rights reserved.
 //
 
-#import "Catch.h"
+#import "CTCAppDelegate.h"
 #import "GUI.h"
 #import "CTCLoginItems.h"
 
@@ -20,19 +20,28 @@ NSString* const SERVICE_FEED_URL_PREFIX = @"http://showrss.info/rss.php?";
 NSString* const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info/rss.php?";
 
 
-@implementation Catch
+@interface CTCAppDelegate ()
+@property (strong, nonatomic) CTCScheduler* scheduler;
+@property (strong, nonatomic) IBOutlet GUI* gui;
+@end
+
+
+@implementation CTCAppDelegate
 
 - (id)init {
 	self = [super init];
 	if (!self) {
 		return nil;
 	}
+    
+    self.scheduler = CTCScheduler.new;
 
-	NSLog(@"Catch: init, loading preferences");
+	NSLog(@"Loading preferences");
 	
 	// Create preferences and set default values
 	[Preferences setDefaults];
-	[Preferences save]; //This ensures we have the latest values from the user
+    // This ensures we have the latest values from the user
+	[Preferences save];
 	
 	// Register as a login item if needed
 	[self refreshLoginItemStatus];
@@ -45,34 +54,31 @@ NSString* const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info/
 	
 	// show Preferences folder if the config is not valid
 	if (![Preferences validate]) {
-		[gui showPreferences:self];
+		[self.gui showPreferences:self];
 	}
 	
-	NSLog(@"Catch: creating scheduler for feed checker");
-	scheduler = CTCScheduler.new;
-	
 	// Also check now
-	[scheduler forceCheck];
+	[self.scheduler forceCheck];
 }
 
 - (void)schedulerStatusActive:(BOOL)isActive running:(BOOL)isRunning {
-	[gui setStatusActive:isActive running:isRunning];
+	[self.gui setStatusActive:isActive running:isRunning];
 }
 
 - (void)lastUpdateStatus:(int)status time:(NSDate*)time {
-	[gui setLastUpdateStatus:status time:time];
+	[self.gui setLastUpdateStatus:status time:time];
 	
 	// Also refresh the list of recently downloaded torrents
 	// Get the full list
-	NSArray* downloaded = [[NSUserDefaults standardUserDefaults] arrayForKey:PREFERENCE_KEY_HISTORY];
+	NSArray* downloaded = [NSUserDefaults.standardUserDefaults arrayForKey:PREFERENCE_KEY_HISTORY];
 	// Get last 10 elements
 	NSRange recentRange;
-	recentRange.length = ([downloaded count] > 10) ? 10 : [downloaded count];
-	recentRange.location = [downloaded count] - recentRange.length;
+	recentRange.length = (downloaded.count > 10) ? 10 : downloaded.count;
+	recentRange.location = downloaded.count - recentRange.length;
 	
 	NSArray* recent = [downloaded subarrayWithRange:recentRange];
-	NSArray* cleanRecent = [NSArray array];
-	int count = [recent count];
+	NSArray* cleanRecent = NSArray.array;
+	int count = recent.count;
 	
 	for (int i = 1; i <= count; i++) {
 		NSString* clean = [[recent objectAtIndex:count-i] objectForKey:@"title"];
@@ -80,17 +86,17 @@ NSString* const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info/
 		cleanRecent = [cleanRecent arrayByAddingObject:clean];
 	}
 	
-	[gui refreshRecent:cleanRecent];
+	[self.gui refreshRecent:cleanRecent];
 }
 
 - (void)checkNow {
-	[scheduler forceCheck];
+	[self.scheduler forceCheck];
 }
 
 - (void)togglePause {
-	if ([scheduler pauseResume]) {
+	if ([self.scheduler pauseResume]) {
 		// If the scheduler is now active, also force a check right away
-		[scheduler forceCheck];
+		[self.scheduler forceCheck];
 	}
 }
 
@@ -109,7 +115,7 @@ NSString* const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info/
 }
 
 - (void)torrentNotificationWithDescription:(NSString *)description {
-	[gui torrentNotificationWithDescription:description];
+	[self.gui torrentNotificationWithDescription:description];
 }
 
 - (void)orderFrontStandardAboutPanel:(id)sender {
