@@ -33,10 +33,8 @@ NSString * kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedH
                withReply:(CTCFeedCheckCompletionHandler)reply {
     NSLog(@"Checking feed");
     
-    if (!previouslyDownloadedURLs) previouslyDownloadedURLs = @[];
-    
     // Flush the cache, we want fresh results
-    [[NSURLCache sharedURLCache] removeAllCachedResponses];
+    [NSURLCache.sharedURLCache removeAllCachedResponses];
     
     // Download the feed
     NSXMLDocument* feed = [self downloadFeed:feedURL];
@@ -116,11 +114,13 @@ NSString * kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedH
 		// The file is new, open magnet or download torrent
 		if (isMagnetLink) {
             NSLog(@"Found magnet %@ at %@", file[@"title"], url);
+            
             [successfullyDownloadedFeedFiles addObject:@{@"url": file[@"url"],
                                                          @"title": file[@"title"],
                                                          @"isMagnetLink": @YES}];
 		} else {
 			NSLog(@"Found file %@ at %@", file[@"title"], url);
+            
 			// First get the folder, if available
 			NSString *folder = fileFolders[[feedFiles indexOfObject:file]];
             NSString *downloadedTorrentFile = [self downloadFile:[NSURL URLWithString:url]

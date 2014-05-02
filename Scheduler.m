@@ -24,6 +24,11 @@
 @implementation Scheduler
 
 - (id)init {
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+    
 	self.active = YES;
 	self.running = NO;
     
