@@ -12,7 +12,7 @@
 
 @implementation Scheduler
 
-- (id) initWithFeedChecker:(FeedChecker*)theFeedChecker {
+- (id)initWithFeedChecker:(FeedChecker*)theFeedChecker {
 	active = 1;
 	running = 0;
 	
@@ -24,7 +24,7 @@
 	return self;
 }
 
-- (void) loopRun {
+- (void)loopRun {
 	NSLog(@"Scheduler: running RunLoop");
 	
 	@autoreleasepool {
@@ -41,7 +41,7 @@
 	}
 }
 
-- (void) reportStatus {
+- (void)reportStatus {
 	// Call to this method are performed on the main thread to get them out
 	// in the right order
 	NSLog(@"Scheduler: reporting status: active = %d, running = %d",active,running);
@@ -50,7 +50,7 @@
 	[[NSApp delegate] schedulerStatus:active running:running];
 }
 
-- (BOOL) pauseResume {
+- (BOOL)pauseResume {
 	active = !active;
 	
 	[self performSelectorOnMainThread:@selector(reportStatus) withObject:nil waitUntilDone:NO];
@@ -58,13 +58,13 @@
 	return (BOOL) active;
 }
 
-- (void) forceCheck {
+- (void)forceCheck {
 	NSLog(@"Scheduler: forcing check");
 	// Set the next timer fire date to be ASAP
 	[repeatingTimer setFireDate:[NSDate distantPast]];
 }
 
-- (void) tick:(NSTimer*)timer {
+- (void)tick:(NSTimer*)timer {
 	NSLog(@"Scheduler: tick");
 	
 	BOOL status = NO;
@@ -101,9 +101,7 @@
 	[[NSApp delegate] lastUpdateStatus:status time:[NSDate date]];
 }
 			
-- (BOOL) checkTime {
-	BOOL timeInRange = YES;
-	
+- (BOOL)checkTime {
 	NSDate* now = [NSDate date];
 	NSDate* from = (NSDate*) [[NSUserDefaults standardUserDefaults] objectForKey:PREFERENCE_KEY_UPDATE_FROM];
 	NSDate* to = (NSDate*) [[NSUserDefaults standardUserDefaults] objectForKey:PREFERENCE_KEY_UPDATE_TO];
@@ -125,7 +123,7 @@
 			([nowComp hour] == [toComp hour] && [nowComp minute] > [toComp minute]) ||
 			([nowComp hour] == [fromComp hour] && [nowComp minute] < [fromComp minute])) {
 			// We are outside of allowed time range
-			timeInRange = NO;
+			return NO;
 		}
 	} else {
 		// Time range doesn't cross midnight (e.g. 4 AM to 5 PM)
@@ -133,11 +131,11 @@
 			([nowComp hour] == [toComp hour] && [nowComp minute] > [toComp minute]) ||
 			([nowComp hour] == [fromComp hour] && [nowComp minute] < [fromComp minute])) {
 			// We are outside of allowed time range
-			timeInRange = NO;
+			return NO;
 		}
 	}
 	
-	return timeInRange;
+	return YES;
 }
 
 @end

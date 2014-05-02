@@ -18,14 +18,10 @@
 	int running;
 }
 
-- (id) initWithFeedChecker:(FeedChecker*)theFeedChecker;
+- (id)initWithFeedChecker:(FeedChecker*)theFeedChecker;
 
-- (BOOL) pauseResume;
+- (BOOL)pauseResume;
 
-- (void) forceCheck;
-
-- (void) tick:(NSTimer*)timer;
-
-- (BOOL) checkTime;
+- (void)forceCheck;
 
 @end
