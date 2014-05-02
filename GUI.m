@@ -95,13 +95,13 @@
 
 - (IBAction)showFeeds:(id)sender {
 	// Select the Feeds tab
-	[[preferencesWindow toolbar] setSelectedItemIdentifier:@"Feeds"];
+	[preferencesWindow.toolbar setSelectedItemIdentifier:@"Feeds"];
 	[preferencesTabs selectFirstTabViewItem:self];
 }
 
 - (IBAction)showTweaks:(id)sender {
 	// Select the Tweaks tab
-	[[preferencesWindow toolbar] setSelectedItemIdentifier:@"Tweaks"];
+	[preferencesWindow.toolbar setSelectedItemIdentifier:@"Tweaks"];
 	[preferencesTabs selectLastTabViewItem:self];
 }
 
@@ -118,19 +118,15 @@
 }
 
 - (void)setStatusActive:(BOOL)isActive running:(BOOL)isRunning {
-	SEL action = nil;
-	
 	if (isRunning) {
-		action = @selector(setRefreshing);
+        [self setRefreshing];
 	} else {
 		if (isActive) {
-			action = @selector(setIdle);
+            [self setIdle];
 		} else {
-			action = @selector(setDisabled);
+            [self setDisabled];
 		}
 	}
-
-	[self performSelectorOnMainThread:action withObject:nil waitUntilDone:YES];
 }
 
 - (void)setLastUpdateStatus:(int)status time:(NSDate *)time {

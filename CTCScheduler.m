@@ -120,11 +120,13 @@
 	
     [self callFeedCheckerWithReplyHandler:^(NSArray *downloadedFeedFiles,
                                             NSError *error){
-        self.running = NO;
-        [self reportStatus];
-        [[NSApp delegate] lastUpdateStatus:error == nil
-                                      time:NSDate.date];
-        [self handleDownloadedFeedFiles:downloadedFeedFiles];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.running = NO;
+            [self reportStatus];
+            [[NSApp delegate] lastUpdateStatus:error == nil
+                                          time:NSDate.date];
+            [self handleDownloadedFeedFiles:downloadedFeedFiles];
+        });
     }];
 }
 
