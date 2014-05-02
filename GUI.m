@@ -68,11 +68,11 @@
 
 - (IBAction)openTorrentFolder:(id)sender {
 	// Launch finder with the torrent folder open
-	if ([[NSApp delegate] isConfigurationValid]) {
-		NSString* torrentFolder = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCE_KEY_SAVE_PATH];
-		torrentFolder = [torrentFolder stringByStandardizingPath];
-		[[NSWorkspace sharedWorkspace] openFile:[torrentFolder stringByStandardizingPath]];
-	}
+	if (![[NSApp delegate] isConfigurationValid]) return;
+    
+    NSString* torrentFolder = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCE_KEY_SAVE_PATH];
+    torrentFolder = [torrentFolder stringByStandardizingPath];
+    [[NSWorkspace sharedWorkspace] openFile:[torrentFolder stringByStandardizingPath]];
 }
 
 - (IBAction)showPreferences:(id)sender {
