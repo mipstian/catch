@@ -69,17 +69,14 @@ NSString * const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info
 	recentRange.length = (downloaded.count > 10) ? 10 : downloaded.count;
 	recentRange.location = downloaded.count - recentRange.length;
 	
-	NSArray *recent = [downloaded subarrayWithRange:recentRange];
-	NSArray *cleanRecent = NSArray.array;
-	int count = recent.count;
+	NSArray *recents = [downloaded subarrayWithRange:recentRange];
+    
+    NSMutableArray *recentNames = NSMutableArray.array;
+    for (NSDictionary *recentItem in recents) {
+        [recentNames addObject:recentItem[@"title"]];
+    }
 	
-	for (int i = 1; i <= count; i++) {
-		NSString *clean = [[recent objectAtIndex:count-i] objectForKey:@"title"];
-		clean = [NSString stringWithFormat:@"%d %@", i, clean];
-		cleanRecent = [cleanRecent arrayByAddingObject:clean];
-	}
-	
-	[self.gui refreshRecent:cleanRecent];
+	[self.gui refreshRecent:recentNames];
 }
 
 - (void)checkNow {

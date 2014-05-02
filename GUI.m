@@ -178,16 +178,16 @@
 	[menuPauseResume setTitle:NSLocalizedString(@"resume", @"Description of resume action")];
 }
 
-- (void)refreshRecent:(NSArray*)recentTorrents {
+- (void)refreshRecent:(NSArray*)recentTorrentNames {
     // Clear menu
-	NSArray *items = menuRecentTorrents.submenu.itemArray;
-	for (NSMenuItem *menuItem in items) {
-		[menuRecentTorrents.submenu removeItem:menuItem];
-	}
+	[menuRecentTorrents.submenu removeAllItems];
 	
 	// Add new items
-	for (NSString *title in recentTorrents) {
-		NSMenuItem *newItem = [[NSMenuItem alloc] initWithTitle:title action:NULL keyEquivalent:@""];
+	for (NSString *title in recentTorrentNames) {
+        NSString *menuTitle = [NSString stringWithFormat:@"%lu %@", (unsigned long)[recentTorrentNames indexOfObject:title] + 1, title];
+		NSMenuItem *newItem = [[NSMenuItem alloc] initWithTitle:menuTitle
+                                                         action:NULL
+                                                  keyEquivalent:@""];
         newItem.enabled = NO;
 		[menuRecentTorrents.submenu addItem:newItem];
 	}
