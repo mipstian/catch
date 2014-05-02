@@ -1,6 +1,9 @@
 #import "CTCFileUtils.h"
 
 
+static NSString * const kCTCFileUtilsTorrentExtension = @".torrent";
+
+
 @implementation CTCFileUtils
 
 + (NSString*)computeFilenameFromURL:(NSURL*)fileURL {
@@ -12,13 +15,13 @@
 }
 
 + (NSString*)addTorrentExtensionTo:(NSString*)filename {
-	NSRange range = [filename rangeOfString:@".torrent"];
+	NSRange range = [filename rangeOfString:kCTCFileUtilsTorrentExtension];
     
     // Extension is missing if not found or if found but not at the end of the filename
     BOOL extensionMissing = range.location == NSNotFound || range.location + range.length != filename.length;
     
     // Add .torrent extension if needed
-    return extensionMissing ? [filename stringByAppendingString:@".torrent"] : filename;
+    return extensionMissing ? [filename stringByAppendingString:kCTCFileUtilsTorrentExtension] : filename;
 }
 
 @end
