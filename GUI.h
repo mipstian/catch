@@ -27,57 +27,15 @@
 	BOOL notificationCenterIsAvailable;
 }
 
-/* Launch the system browser, open the service (ShowRSS) */
-- (IBAction)browseService:(id)sender;
-
-/* Launch the system browser, open the applications's website */
-- (IBAction)browseWebsite:(id)sender;
-
-/* Launch the system browser, open the applications's on-line help */
-- (IBAction)browseHelp:(id)sender;
-
-/* Launch the system browser, open the applications's feature request page */
-- (IBAction)browseFeatureRequest:(id)sender;
-
-/* Launch the system browser, open the applications's bug report page */
-- (IBAction)browseBugReport:(id)sender;
-
-/* Open the torrents folder in Finder */
-- (IBAction)openTorrentFolder:(id)sender;
-
 /* Show the Preferences window */
 - (IBAction)showPreferences:(id)sender;
-
-/* Save the preferences and close the Preferences window */
-- (IBAction)savePreferences:(id)sender;
-
-/* Shows the Feeds view in the preferences */
-- (IBAction)showFeeds:(id)sender;
-
-/* Shows the Tweaks view in the preferences */
-- (IBAction)showTweaks:(id)sender;
-
-/* Forces a feed check */
-- (IBAction)checkNow:(id)sender;
-
-/* Pauses/Resumes feed checking */
-- (IBAction)togglePause:(id)sender;
-
-/* Cleanly quits */
-- (IBAction)quit:(id)sender;
 
 /* Set GUI widgets to reflect status */
 - (void)setStatus:(int)status running:(int)running;
 - (void)setLastUpdateStatus:(int)status time:(NSDate*)time;
-- (void)setMenuLastUpdateStatus:(NSString*)title;
 - (void)refreshRecent:(NSArray*)recentTorrents;
 
-/* Errors */
-- (void)showBadURLSheet;
-
 /* Growl stuff */
-- (NSDictionary*)registrationDictionaryForGrowl;
-- (NSString*)applicationNameForGrowl;
 - (void)torrentNotificationWithDescription:(NSString*)description;
 
 @end

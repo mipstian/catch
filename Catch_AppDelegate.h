@@ -15,6 +15,4 @@
 
 @property (nonatomic, retain) IBOutlet NSWindow *window;
 
-- (IBAction)orderFrontStandardAboutPanel:(id)sender;
-
 @end
