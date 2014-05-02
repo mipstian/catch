@@ -1,4 +1,6 @@
 #import "CTCDefaults.h"
+#import "CTCLoginItems.h"
+#import "Preferences.h"
 
 
 // Check feed every 10 minutes
@@ -17,6 +19,10 @@ NSTimeInterval const kCTCDefaultsFeedUpdateInterval = 60 * 10;
 
 + (NSString *)appVersion {
     return [self infoStringForKey:@"CFBundleShortVersionString"];
+}
+
++ (void)refreshLoginItemStatus {
+    [CTCLoginItems toggleRegisteredAsLoginItem:[NSUserDefaults.standardUserDefaults boolForKey:PREFERENCE_KEY_OPEN_AT_LOGIN]];
 }
 
 @end

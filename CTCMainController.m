@@ -93,7 +93,10 @@
 
 - (IBAction)savePreferences:(id)sender {
 	// Save preferences
-	[[NSApp delegate] savePreferences];
+	[Preferences save];
+	
+	// Also force check
+	[self forceCheck];
 	
 	if ([[NSApp delegate] isConfigurationValid]) {
 		// Hide the Preferences window

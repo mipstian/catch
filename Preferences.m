@@ -1,6 +1,7 @@
 #import "Preferences.h"
 #import "CTCAppDelegate.h"
 #import "CTCFileUtils.h"
+#import "CTCDefaults.h"
 
 
 NSString * const PREFERENCE_KEY_FEED_URL = @"feedURL";
@@ -18,8 +19,7 @@ NSString * const PREFERENCE_KEY_OPEN_AT_LOGIN = @"openAtLogin";
 
 @implementation Preferences
 
-+ (void)setDefaults {
-	NSLog(@"Preferences: Setting defaults");
++ (void)setDefaultDefaults {
 	// Create two dummy times (dates actually), just to have some value set
 	NSDateComponents *comps = NSDateComponents.new;
     comps.hour = 24;
@@ -34,33 +34,30 @@ NSString * const PREFERENCE_KEY_OPEN_AT_LOGIN = @"openAtLogin";
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDownloadsDirectory, NSUserDomainMask, YES);
 	if (paths.count > 0) {
 		downloadsDirectory = paths.firstObject;
-		NSLog(@"Preferences: Default save path is %@", downloadsDirectory);
+		NSLog(@"Default save path is %@", downloadsDirectory);
 	} else {
 		// Default to ~/Downloads/ (at this point it probably won't work though)
-		NSLog(@"Preferences: Defaulting to ~/Downloads/ for save path");
+		NSLog(@"Defaulting to ~/Downloads/ for save path");
 		downloadsDirectory = @"~/Downloads/";
 	}
 	
 	// Set smart defaults for the preferences
-	NSDictionary *appDefaults = [NSDictionary dictionaryWithObjectsAndKeys:
-								 @"", PREFERENCE_KEY_FEED_URL,
-								 @NO, PREFERENCE_KEY_ONLY_UPDATE_BETWEEN,
-								 dateFrom, PREFERENCE_KEY_UPDATE_FROM,
-								 dateTo, PREFERENCE_KEY_UPDATE_TO,
-								 downloadsDirectory, PREFERENCE_KEY_SAVE_PATH,
-								 @NO, PREFERENCE_KEY_ORGANIZE_TORRENTS,
-								 @YES, PREFERENCE_KEY_OPEN_AUTOMATICALLY,
-								 @YES, PREFERENCE_KEY_SEND_NOTIFICATIONS,
-								 @YES, PREFERENCE_KEY_OPEN_AT_LOGIN,
-								 nil];
-
+	NSDictionary *appDefaults = @{PREFERENCE_KEY_FEED_URL: @"",
+                                  PREFERENCE_KEY_ONLY_UPDATE_BETWEEN: @NO,
+                                  PREFERENCE_KEY_UPDATE_FROM: dateFrom,
+                                  PREFERENCE_KEY_UPDATE_TO: dateTo,
+                                  PREFERENCE_KEY_SAVE_PATH: downloadsDirectory,
+                                  PREFERENCE_KEY_ORGANIZE_TORRENTS: @NO,
+                                  PREFERENCE_KEY_OPEN_AUTOMATICALLY: @YES,
+                                  PREFERENCE_KEY_SEND_NOTIFICATIONS: @YES,
+                                  PREFERENCE_KEY_OPEN_AT_LOGIN: @YES};
 	[NSUserDefaults.standardUserDefaults registerDefaults:appDefaults];
     
 	// Migrate the downloads history format. Change old array of strings to new dictionary format
 	NSArray *downloadedFiles = [NSUserDefaults.standardUserDefaults arrayForKey:PREFERENCE_KEY_DOWNLOADED_FILES];
 	NSArray *history = [NSUserDefaults.standardUserDefaults arrayForKey:PREFERENCE_KEY_HISTORY];
 	if (downloadedFiles && !history) {
-		NSLog(@"Preferences: Migrating download history to new format.");
+		NSLog(@"Migrating download history to new format.");
 		
 		NSMutableArray *newDownloadedFiles = NSMutableArray.array;
 		
@@ -89,9 +86,11 @@ NSString * const PREFERENCE_KEY_OPEN_AT_LOGIN = @"openAtLogin";
 }
 
 + (void)save {
-	NSLog(@"Preferences: Synchronizing");
 	// Write preferences to disk
 	[NSUserDefaults.standardUserDefaults synchronize];
+    
+    // Register as a login item if needed
+    [CTCDefaults refreshLoginItemStatus];
 }
 
 + (BOOL)validate {
