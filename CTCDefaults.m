@@ -14,8 +14,8 @@ NSString * const kCTCDefaultsServiceURL = @"http://showrss.info/";
 NSString * const kCTCDefaultsServiceFeedURLPrefix = @"http://showrss.info/rss.php?";
 NSString * const kCTCDefaultsLegacyServiceFeedURLPrefix = @"http://showrss.karmorra.info/rss.php?";
 
-NSString * const PREFERENCE_KEY_FEED_URL = @"feedURL";
-NSString * const PREFERENCE_KEY_ONLY_UPDATE_BETWEEN = @"onlyUpdateBetween";
+NSString * const kCTCDefaultsFeedURLKey = @"feedURL";
+NSString * const kCTCDefaultsOnlyUpdateBetweenKey = @"onlyUpdateBetween";
 NSString * const PREFERENCE_KEY_UPDATE_FROM = @"updateFrom";
 NSString * const PREFERENCE_KEY_UPDATE_TO = @"updateTo";
 NSString * const PREFERENCE_KEY_SAVE_PATH = @"savePath";
@@ -52,8 +52,8 @@ NSString * const PREFERENCE_KEY_OPEN_AT_LOGIN = @"openAtLogin";
 	}
 	
 	// Set smart defaults for the preferences
-	NSDictionary *appDefaults = @{PREFERENCE_KEY_FEED_URL: @"",
-                                  PREFERENCE_KEY_ONLY_UPDATE_BETWEEN: @NO,
+	NSDictionary *appDefaults = @{kCTCDefaultsFeedURLKey: @"",
+                                  kCTCDefaultsOnlyUpdateBetweenKey: @NO,
                                   PREFERENCE_KEY_UPDATE_FROM: dateFrom,
                                   PREFERENCE_KEY_UPDATE_TO: dateTo,
                                   PREFERENCE_KEY_SAVE_PATH: downloadsDirectory,
@@ -155,8 +155,12 @@ NSString * const PREFERENCE_KEY_OPEN_AT_LOGIN = @"openAtLogin";
 }
 
 + (NSString *)feedURL {
-	NSString *rawFeedURL = [NSUserDefaults.standardUserDefaults stringForKey:PREFERENCE_KEY_FEED_URL];
+	NSString *rawFeedURL = [NSUserDefaults.standardUserDefaults stringForKey:kCTCDefaultsFeedURLKey];
 	return [rawFeedURL stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
+}
+
++ (BOOL)areTimeRestrictionsEnabled {
+    return [NSUserDefaults.standardUserDefaults boolForKey:kCTCDefaultsOnlyUpdateBetweenKey];
 }
 
 @end

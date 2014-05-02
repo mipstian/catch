@@ -132,8 +132,7 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 	}
 	
 	// Don't check if current time is outside user-defined range
-    BOOL timeRestrictionsEnabled = [NSUserDefaults.standardUserDefaults boolForKey:PREFERENCE_KEY_ONLY_UPDATE_BETWEEN];
-	if (timeRestrictionsEnabled && ![self checkTime]) {
+	if (CTCDefaults.areTimeRestrictionsEnabled && ![self checkTime]) {
         NSLog(@"Scheduler tick skipped (outside of user-defined time range)");
         return;
 	}
