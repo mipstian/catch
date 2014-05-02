@@ -10,7 +10,7 @@
 #import "Preferences.h"
 
 
-@interface Scheduler : NSObject
+@interface CTCScheduler : NSObject
 
 - (BOOL)pauseResume;
 
