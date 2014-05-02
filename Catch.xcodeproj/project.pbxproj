@@ -13,7 +13,7 @@
 		3803C7EC11C3E7AD00FC08DB /* CTCScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 3803C7EB11C3E7AD00FC08DB /* CTCScheduler.m */; };
 		381066FB11CF3F8300FDED93 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 381066FA11CF3F8300FDED93 /* MainMenu.xib */; };
 		38A3FD0D11CA01DD00157AEF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38A3FD0C11CA01DD00157AEF /* Localizable.strings */; };
-		38D39B6011C3A6E100C17C80 /* GUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D39B5F11C3A6E100C17C80 /* GUI.m */; };
+		38D39B6011C3A6E100C17C80 /* CTCMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D39B5F11C3A6E100C17C80 /* CTCMainController.m */; };
 		38D39B6711C3A70000C17C80 /* menubar_idle-inv.png in Resources */ = {isa = PBXBuildFile; fileRef = 38D39B6111C3A70000C17C80 /* menubar_idle-inv.png */; };
 		38D39B6811C3A70000C17C80 /* menubar_idle.png in Resources */ = {isa = PBXBuildFile; fileRef = 38D39B6211C3A70000C17C80 /* menubar_idle.png */; };
 		38D39B6911C3A70000C17C80 /* menubar_disabled-inv.png in Resources */ = {isa = PBXBuildFile; fileRef = 38D39B6311C3A70000C17C80 /* menubar_disabled-inv.png */; };
@@ -102,8 +102,8 @@
 		38A3FD0911CA01C100157AEF /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		38B129A612DE65EC00B4E87D /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		38B129A812DE662000B4E87D /* fi */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fi; path = fi.lproj/UI.xib; sourceTree = "<group>"; };
-		38D39B5E11C3A6E100C17C80 /* GUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUI.h; sourceTree = "<group>"; };
-		38D39B5F11C3A6E100C17C80 /* GUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUI.m; sourceTree = "<group>"; };
+		38D39B5E11C3A6E100C17C80 /* CTCMainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCMainController.h; sourceTree = "<group>"; };
+		38D39B5F11C3A6E100C17C80 /* CTCMainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCMainController.m; sourceTree = "<group>"; };
 		38D39B6111C3A70000C17C80 /* menubar_idle-inv.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menubar_idle-inv.png"; sourceTree = "<group>"; };
 		38D39B6211C3A70000C17C80 /* menubar_idle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menubar_idle.png; sourceTree = "<group>"; };
 		38D39B6311C3A70000C17C80 /* menubar_disabled-inv.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menubar_disabled-inv.png"; sourceTree = "<group>"; };
@@ -175,8 +175,8 @@
 			children = (
 				3803C7AC11C3DA9300FC08DB /* CTCAppDelegate.h */,
 				3803C7AD11C3DA9300FC08DB /* CTCAppDelegate.m */,
-				38D39B5E11C3A6E100C17C80 /* GUI.h */,
-				38D39B5F11C3A6E100C17C80 /* GUI.m */,
+				38D39B5E11C3A6E100C17C80 /* CTCMainController.h */,
+				38D39B5F11C3A6E100C17C80 /* CTCMainController.m */,
 				3803C7E511C3E72900FC08DB /* Preferences.h */,
 				3803C7E611C3E72900FC08DB /* Preferences.m */,
 				3803C7EA11C3E7AD00FC08DB /* CTCScheduler.h */,
@@ -424,7 +424,7 @@
 			files = (
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
 				44717AA4191300B300580054 /* CTCDefaults.m in Sources */,
-				38D39B6011C3A6E100C17C80 /* GUI.m in Sources */,
+				38D39B6011C3A6E100C17C80 /* CTCMainController.m in Sources */,
 				3803C7AE11C3DA9300FC08DB /* CTCAppDelegate.m in Sources */,
 				3803C7E711C3E72900FC08DB /* Preferences.m in Sources */,
 				44717AA71913072200580054 /* CTCLoginItems.m in Sources */,
@@ -671,6 +671,7 @@
 				44717AD01913A08700580054 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -1,27 +1,41 @@
-#import "GUI.h"
+#import "CTCMainController.h"
 #import "CTCDefaults.h"
 
 
-@implementation GUI
+@interface CTCMainController ()
+@property (strong, nonatomic) IBOutlet NSMenu *menu;
+@property (strong, nonatomic) IBOutlet NSMenuItem *menuVersion;
+@property (strong, nonatomic) IBOutlet NSMenuItem *menuPauseResume;
+@property (strong, nonatomic) IBOutlet NSMenuItem *menuLastUpdate;
+@property (strong, nonatomic) IBOutlet NSMenuItem *menuRecentTorrents;
+@property (strong, nonatomic) IBOutlet NSMenuItem *menuShowInFinder;
+@property (strong, nonatomic) IBOutlet NSWindow *preferencesWindow;
+@property (strong, nonatomic) IBOutlet NSTabView *preferencesTabs;
+
+@property (strong, nonatomic) NSStatusItem *menuBarItem;
+@end
+
+
+@implementation CTCMainController
 
 - (void)awakeFromNib {
 	// Create the NSStatusBar and set its length
-	item = [NSStatusBar.systemStatusBar statusItemWithLength:NSSquareStatusItemLength];
+	self.menuBarItem = [NSStatusBar.systemStatusBar statusItemWithLength:NSSquareStatusItemLength];
 	
 	// Update status UI
 	[self setStatusActive:YES running:NO];
-	[self setLastUpdateStatus:1 time:nil];
+	[self setLastUpdateStatus:YES time:nil];
     
     NSString *appNameAndVersion = [NSString stringWithFormat:@"%@ %@", CTCDefaults.appName, CTCDefaults.appVersion];
 
 	// Tell the NSStatusItem what menu to load
-	[item setMenu:menu];
+	[self.menuBarItem setMenu:self.menu];
 	// Set the tooptip for our item
-	[item setToolTip:appNameAndVersion];
+	[self.menuBarItem setToolTip:appNameAndVersion];
 	// Enable highlighting
-	[item setHighlightMode:YES];
+	[self.menuBarItem setHighlightMode:YES];
 	// Set current name and version
-	[menuVersion setTitle:appNameAndVersion];
+	[self.menuVersion setTitle:appNameAndVersion];
 
 	// Enable Notifications
     [NSUserNotificationCenter.defaultUserNotificationCenter setDelegate:self];
@@ -30,7 +44,7 @@
 	[self showFeeds:self];
 	
 	// Disable the recent torrents menu unitl there's something to show
-	[menuRecentTorrents setEnabled:NO];
+	[self.menuRecentTorrents setEnabled:NO];
 }
 
 - (IBAction)browseService:(id)sender {
@@ -69,7 +83,7 @@
 - (IBAction)showPreferences:(id)sender {
 	// Show the Preferences window
 	[NSApp activateIgnoringOtherApps:YES];
-	[preferencesWindow makeKeyAndOrderFront:self];
+	[self.preferencesWindow makeKeyAndOrderFront:self];
 }
 
 - (IBAction)savePreferences:(id)sender {
@@ -78,7 +92,7 @@
 	
 	if ([[NSApp delegate] isConfigurationValid]) {
 		// Hide the Preferences window
-		[preferencesWindow close];
+		[self.preferencesWindow close];
 	} else {
 		// The feed URL is probably invalid, warn user
 		[self showBadURLSheet];
@@ -87,14 +101,14 @@
 
 - (IBAction)showFeeds:(id)sender {
 	// Select the Feeds tab
-	[preferencesWindow.toolbar setSelectedItemIdentifier:@"Feeds"];
-	[preferencesTabs selectFirstTabViewItem:self];
+	[self.preferencesWindow.toolbar setSelectedItemIdentifier:@"Feeds"];
+	[self.preferencesTabs selectFirstTabViewItem:self];
 }
 
 - (IBAction)showTweaks:(id)sender {
 	// Select the Tweaks tab
-	[preferencesWindow.toolbar setSelectedItemIdentifier:@"Tweaks"];
-	[preferencesTabs selectLastTabViewItem:self];
+	[self.preferencesWindow.toolbar setSelectedItemIdentifier:@"Tweaks"];
+	[self.preferencesTabs selectLastTabViewItem:self];
 }
 
 - (IBAction)checkNow:(id)sender {
@@ -145,42 +159,42 @@
 }
 
 - (void)setMenuLastUpdateStatus:(NSString*)title {
-	[menuLastUpdate setTitle:title];
+	[self.menuLastUpdate setTitle:title];
 }
 
 - (void)setIdle {
 	// Sets the images (status: idle)
-	[item setImage:[NSImage imageNamed:@"menubar_idle"]];
-	[item setAlternateImage:[NSImage imageNamed:@"menubar_idle-inv"]];
+	[self.menuBarItem setImage:[NSImage imageNamed:@"menubar_idle"]];
+	[self.menuBarItem setAlternateImage:[NSImage imageNamed:@"menubar_idle-inv"]];
 	
 	// Set pause/resume to "pause"
-	[menuPauseResume setTitle:NSLocalizedString(@"pause", @"Description of pause action")];
+	[self.menuPauseResume setTitle:NSLocalizedString(@"pause", @"Description of pause action")];
 }
 
 - (void)setRefreshing {
 	// Sets the images (status: refreshing)
-	[item setImage:[NSImage imageNamed:@"menubar_refreshing"]];
-	[item setAlternateImage:[NSImage imageNamed:@"menubar_refreshing-inv"]];
+	[self.menuBarItem setImage:[NSImage imageNamed:@"menubar_refreshing"]];
+	[self.menuBarItem setAlternateImage:[NSImage imageNamed:@"menubar_refreshing-inv"]];
 	
 	// Set pause/resume to "pause"
-	[menuPauseResume setTitle:NSLocalizedString(@"pause", @"Description of pause action")];
+	[self.menuPauseResume setTitle:NSLocalizedString(@"pause", @"Description of pause action")];
 	
 	// Also overwrite the last update string with "Updating now"
-	[menuLastUpdate setTitle:NSLocalizedString(@"updatingnow", @"An update is in progress")];
+	[self.menuLastUpdate setTitle:NSLocalizedString(@"updatingnow", @"An update is in progress")];
 }
 
 - (void)setDisabled {
 	// Sets the images (status: disabled)
-	[item setImage:[NSImage imageNamed:@"menubar_disabled"]];
-	[item setAlternateImage:[NSImage imageNamed:@"menubar_disabled-inv"]];
+	[self.menuBarItem setImage:[NSImage imageNamed:@"menubar_disabled"]];
+	[self.menuBarItem setAlternateImage:[NSImage imageNamed:@"menubar_disabled-inv"]];
 	
 	// Set pause/resume to "resume"
-	[menuPauseResume setTitle:NSLocalizedString(@"resume", @"Description of resume action")];
+	[self.menuPauseResume setTitle:NSLocalizedString(@"resume", @"Description of resume action")];
 }
 
 - (void)refreshRecent:(NSArray*)recentTorrentNames {
     // Clear menu
-	[menuRecentTorrents.submenu removeAllItems];
+	[self.menuRecentTorrents.submenu removeAllItems];
 	
 	// Add new items
 	for (NSString *title in recentTorrentNames) {
@@ -189,13 +203,13 @@
                                                          action:NULL
                                                   keyEquivalent:@""];
         newItem.enabled = NO;
-		[menuRecentTorrents.submenu addItem:newItem];
+		[self.menuRecentTorrents.submenu addItem:newItem];
 	}
 	
 	// Put the Show in finder menu back
-	[menuRecentTorrents.submenu addItem:menuShowInFinder];
+	[self.menuRecentTorrents.submenu addItem:self.menuShowInFinder];
 	
-    menuRecentTorrents.enabled = YES;
+    self.menuRecentTorrents.enabled = YES;
 }
 
 - (void)showBadURLSheet {
@@ -205,9 +219,14 @@
 	NSBeginAlertSheet(
 					  NSLocalizedString(@"badurl", @"Message for bad feed URL in preferences"),
 					  NSLocalizedString(@"badurlok", @"OK Button for bad feed URL in preferences"),
-					  nil,nil,preferencesWindow,self,
-					  NULL,NULL,
-					  nil,@"");
+					  nil,
+                      nil,
+                      self.preferencesWindow,
+                      self,
+					  NULL,
+                      NULL,
+					  nil,
+                      @"");
 }
 
 - (void)torrentNotificationWithDescription:(NSString*)description {

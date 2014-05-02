@@ -3,18 +3,7 @@
 #import "Preferences.h"
 
 
-@interface GUI : NSObject <NSUserNotificationCenterDelegate> {
-	// Outlets and UI components
-	IBOutlet NSMenu *menu;
-	IBOutlet NSMenuItem *menuVersion;
-	IBOutlet NSMenuItem *menuPauseResume;
-	IBOutlet NSMenuItem *menuLastUpdate;
-	IBOutlet NSMenuItem *menuRecentTorrents;
-	IBOutlet NSMenuItem *menuShowInFinder;
-	IBOutlet NSWindow *preferencesWindow;
-	IBOutlet NSTabView *preferencesTabs;
-	NSStatusItem *item;
-}
+@interface CTCMainController : NSObject <NSUserNotificationCenterDelegate>
 
 /* Show the Preferences window */
 - (IBAction)showPreferences:(id)sender;
