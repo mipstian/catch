@@ -8,8 +8,8 @@ NSTimeInterval const kCTCDefaultsFeedUpdateInterval = 60 * 10;
 
 // Constant, non-localized, non-UI-related strings
 NSString * const APPLICATION_WEBSITE_URL = @"http://github.com/mipstian/catch";
-NSString * const APPLICATION_BUG_REPORT_URL = @"https://github.com/mipstian/catch/issues/new";
-NSString * const APPLICATION_FEATURE_REQUEST_URL = @"https://github.com/mipstian/catch/issues/new";
+NSString * const APPLICATION_BUG_REPORT_URL = @"https://github.com/mipstian/catch/issues/new?labels=bug";
+NSString * const APPLICATION_FEATURE_REQUEST_URL = @"https://github.com/mipstian/catch/issues/new?labels=enhancement";
 NSString * const APPLICATION_HELP_URL = @"https://github.com/mipstian/catch/wiki/Configuration";
 NSString * const SERVICE_URL = @"http://showrss.info/";
 NSString * const SERVICE_FEED_URL_PREFIX = @"http://showrss.info/rss.php?";
