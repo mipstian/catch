@@ -19,6 +19,6 @@
 // in preferences:
 "badurl"="L'adresse URL source entrée n'est pas valide. Utilisez le bouton aide pour apprendre comment configurer Catch.";
 "badurlok"="OK";
-// for growl:
+// for notifications:
 "newtorrent"="Nouveau torrent téléchargé";
 "newtorrentdesc"="Le fichier torrent %@ à été téléchargé!"; // %@ will be replaced by filename

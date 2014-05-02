@@ -19,6 +19,6 @@
 // in preferences:
 "badurl"="你輸入的URL不存在. 請點擊幫助查看細節.";
 "badurlok"="確定";
-// for growl:
+// for notifications:
 "newtorrent"="新種子已下載";
 "newtorrentdesc"="種子 %@ 已下載!"; // %@ will be replaced by filename

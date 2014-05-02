@@ -19,6 +19,6 @@
 // in preferences:
 "badurl"="URL-syötteesi ei toimi. Käytä Ohjeet-painiketta, niin saat lisätietoa alkuun pääsemisessä";
 "badurlok"="OK";
-// for growl:
+// for notifications:
 "newtorrent"="Uusi torrent ladattu";
 "newtorrentdesc"="Torrent-tiedosto %@ on ladattu!"; // %@ will be replaced by filename

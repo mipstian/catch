@@ -10,21 +10,14 @@
 #import "CTCDefaults.h"
 
 
-// Growl notification IDs
-static NSString* const GROWL_NEW_TORRENT = @"New torrent";
-
-
 @implementation GUI
 
 - (void)awakeFromNib {
-	// Load the (hidden) menu
-	[NSBundle loadNibNamed:@"MainMenu" owner:[NSApp delegate]];
-	 
 	// Create the NSStatusBar and set its length
 	item = [[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength];
 	
 	// Update status UI
-	[self setStatusActive:1 running:0];
+	[self setStatusActive:YES running:NO];
 	[self setLastUpdateStatus:1 time:nil];
     
     NSString *appNameAndVersion = [NSString stringWithFormat:@"%@ %@", CTCDefaults.appName, CTCDefaults.appVersion];
@@ -38,13 +31,8 @@ static NSString* const GROWL_NEW_TORRENT = @"New torrent";
 	// Set current name and version
 	[menuVersion setTitle:appNameAndVersion];
 
-	// Enable Growl
-	notificationCenterIsAvailable = (NSClassFromString(@"NSUserNotificationCenter")!=nil);
-	if (notificationCenterIsAvailable) {
-		[[NSUserNotificationCenter defaultUserNotificationCenter] setDelegate:self];
-	} else {
-		[GrowlApplicationBridge setGrowlDelegate:self];
-	}
+	// Enable Notifications
+    [[NSUserNotificationCenter defaultUserNotificationCenter] setDelegate:self];
 	
 	// Select the first tab of the Preferences
 	[self showFeeds:self];
@@ -250,34 +238,12 @@ static NSString* const GROWL_NEW_TORRENT = @"New torrent";
 					  nil,@"");
 }
 
-- (NSDictionary*)registrationDictionaryForGrowl {
-	// Let Growl know about our notifications
-	NSArray* notifications = [NSArray arrayWithObjects:GROWL_NEW_TORRENT,nil];
-	NSDictionary* dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-							[NSNumber numberWithInt:1], @"TicketVersion",
-							notifications, @"AllNotifications",
-							notifications, @"DefaultNotifications",
-							nil];
-	return dictionary;
-}
-
-- (NSString*)applicationNameForGrowl {
-	return CTCDefaults.appName;
-}
-
 - (void)torrentNotificationWithDescription:(NSString*)description {
-	if (notificationCenterIsAvailable) {
-		NSUserNotification *notification = [[NSUserNotification alloc] init];
-		notification.title = NSLocalizedString(@"newtorrent", @"New torrent notification");
-		notification.informativeText = description;
-		notification.soundName = NSUserNotificationDefaultSoundName;
-		[[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
-	} else {
-		[GrowlApplicationBridge notifyWithTitle:NSLocalizedString(@"newtorrent", @"New torrent notification")
-									 description:description notificationName:GROWL_NEW_TORRENT
-										iconData:nil priority:0 isSticky:NO
-									clickContext:nil];
-	}
+    NSUserNotification *notification = NSUserNotification.new;
+    notification.title = NSLocalizedString(@"newtorrent", @"New torrent notification");
+    notification.informativeText = description;
+    notification.soundName = NSUserNotificationDefaultSoundName;
+    [NSUserNotificationCenter.defaultUserNotificationCenter deliverNotification:notification];
 }
 
 - (BOOL)userNotificationCenter:(NSUserNotificationCenter *)center

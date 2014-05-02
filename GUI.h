@@ -7,12 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Growl.framework/Headers/GrowlApplicationBridge.h"
 #import "Catch.h"
 #import "Preferences.h"
 
 
-@interface GUI : NSObject <GrowlApplicationBridgeDelegate,	NSUserNotificationCenterDelegate> {
+@interface GUI : NSObject <NSUserNotificationCenterDelegate> {
 	// Outlets and UI components
 	IBOutlet NSMenu* menu;
 	IBOutlet NSMenuItem* menuVersion;
@@ -24,7 +23,6 @@
 	IBOutlet NSWindow* preferencesWindow;
 	IBOutlet NSTabView* preferencesTabs;
 	NSStatusItem* item;
-	BOOL notificationCenterIsAvailable;
 }
 
 /* Show the Preferences window */
@@ -35,7 +33,7 @@
 - (void)setLastUpdateStatus:(int)status time:(NSDate*)time;
 - (void)refreshRecent:(NSArray*)recentTorrents;
 
-/* Growl stuff */
+/* Notifications */
 - (void)torrentNotificationWithDescription:(NSString*)description;
 
 @end
