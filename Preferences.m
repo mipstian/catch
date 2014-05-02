@@ -1,5 +1,4 @@
 #import "Preferences.h"
-#import "CTCAppDelegate.h"
 #import "CTCFileUtils.h"
 #import "CTCDefaults.h"
 

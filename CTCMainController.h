@@ -1,6 +1,4 @@
 #import <Foundation/Foundation.h>
-#import "CTCAppDelegate.h"
-#import "Preferences.h"
 
 
 @interface CTCMainController : NSObject <NSUserNotificationCenterDelegate>
