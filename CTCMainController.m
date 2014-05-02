@@ -26,15 +26,17 @@
     
     [self setupMenuItem];
     
-	// Update status UI
-	[self setStatusActive:YES running:NO];
+	// Update UI with initial dummy values
+	[self setSchedulerStatusActive:YES running:NO];
 	[self setLastUpdateStatus:YES time:nil];
 
-	// Enable Notifications
+	// Enable Notification Center notifications
     [NSUserNotificationCenter.defaultUserNotificationCenter setDelegate:self];
 	
 	// Select the first tab of the Preferences
 	[self showFeeds:self];
+    
+    [self setupNotificationHandlers];
 }
 
 - (void)setupMenuItem {
@@ -54,6 +56,19 @@
 	
 	// Disable the recent torrents menu until there's something to show
 	[self.menuRecentTorrents setEnabled:NO];
+}
+
+- (void)setupNotificationHandlers {
+    void (^handleSchedulerStatusChange)(NSNotification *) = ^(NSNotification *notification) {
+        BOOL isSchedulerActive = [notification.userInfo[@"isActive"] boolValue];
+        BOOL isSchedulerRunning = [notification.userInfo[@"isRunning"] boolValue];
+        [self setSchedulerStatusActive:isSchedulerActive running:isSchedulerRunning];
+    };
+    
+    [NSNotificationCenter.defaultCenter addObserverForName:kCTCSchedulerStatusNotificationName
+                                                    object:self.scheduler
+                                                     queue:nil
+                                                usingBlock:handleSchedulerStatusChange];
 }
 
 - (IBAction)browseService:(id)sender {
@@ -148,7 +163,7 @@
 	[NSApp terminate:nil];
 }
 
-- (void)setStatusActive:(BOOL)isActive running:(BOOL)isRunning {
+- (void)setSchedulerStatusActive:(BOOL)isActive running:(BOOL)isRunning {
 	if (isRunning) {
         [self setRefreshing];
 	} else {
