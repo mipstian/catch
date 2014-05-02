@@ -68,7 +68,7 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 
 - (void)checkFeed {
 	// Only work with valid preferences
-	if (!Preferences.isConfigurationValid) {
+	if (!CTCDefaults.isConfigurationValid) {
 		NSLog(@"Refusing to check feed - invalid preferences");
 		return;
 	}
