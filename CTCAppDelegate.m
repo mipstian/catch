@@ -33,26 +33,4 @@ NSString * const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info
     }
 }
 
-- (void)lastUpdateStatus:(BOOL)lastUpdateWasSuccessful time:(NSDate*)time {
-	[self.mainController setLastUpdateStatus:lastUpdateWasSuccessful time:time];
-	
-	// Also refresh the list of recently downloaded torrents
-	// Get the full list
-	NSArray *downloaded = [NSUserDefaults.standardUserDefaults arrayForKey:PREFERENCE_KEY_HISTORY];
-    
-	// Get last 10 elements
-	NSRange recentRange;
-	recentRange.length = (downloaded.count > 10) ? 10 : downloaded.count;
-	recentRange.location = downloaded.count - recentRange.length;
-	NSArray *recents = [downloaded subarrayWithRange:recentRange];
-    
-    // Extract titles
-    NSMutableArray *recentNames = NSMutableArray.array;
-    for (NSDictionary *recentItem in recents) {
-        [recentNames addObject:recentItem[@"title"]];
-    }
-	
-	[self.mainController refreshRecent:recentNames];
-}
-
 @end

@@ -2,6 +2,7 @@
 #import "Preferences.h"
 
 extern NSString * const kCTCSchedulerStatusNotificationName;
+extern NSString * const kCTCSchedulerLastUpdateStatusNotificationName;
 
 
 @interface CTCScheduler : NSObject

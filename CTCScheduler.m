@@ -5,6 +5,7 @@
 
 
 NSString * const kCTCSchedulerStatusNotificationName = @"com.giorgiocalderolla.Catch.scheduler-status-update";
+NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgiocalderolla.Catch.scheduler-last-update-status-update";
 
 
 @interface CTCScheduler ()
@@ -87,8 +88,10 @@ NSString * const kCTCSchedulerStatusNotificationName = @"com.giorgiocalderolla.C
             
             // Update status
             [self reportStatus];
-            [[NSApp delegate] lastUpdateStatus:error == nil
-                                          time:NSDate.date];
+            [NSNotificationCenter.defaultCenter postNotificationName:kCTCSchedulerLastUpdateStatusNotificationName
+                                                              object:self
+                                                            userInfo:@{@"successful": @(error == nil),
+                                                                       @"time": NSDate.date}];
             
             // Deal with new files
             [self handleDownloadedFeedFiles:downloadedFeedFiles];
