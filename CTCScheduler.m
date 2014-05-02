@@ -66,9 +66,12 @@
 - (void)checkFeed {
 	// Only work with valid preferences
 	if (![Preferences validate]) {
-		NSLog(@"Scheduler: tick skipped, invalid preferences");
+		NSLog(@"Refusing to check feed - invalid preferences");
 		return;
 	}
+    
+    // Don't check twice simultaneously
+    if (self.isRunning) return;
 	
 	self.running = YES;
 	
@@ -78,9 +81,13 @@
                                             NSError *error){
         dispatch_async(dispatch_get_main_queue(), ^{
             self.running = NO;
+            
+            // Update status
             [self reportStatus];
             [[NSApp delegate] lastUpdateStatus:error == nil
                                           time:NSDate.date];
+            
+            // Deal with new files
             [self handleDownloadedFeedFiles:downloadedFeedFiles];
         });
     }];
