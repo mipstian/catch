@@ -24,13 +24,13 @@ NSString * const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info
 	// Create preferences and set default values
 	[Preferences setDefaultDefaults];
 	
-	// Show Preferences window if the config is not valid
-	if (!Preferences.isConfigurationValid) {
-		[self.mainController showPreferences:self];
+	// Valid config? Check feed, otherwise show Preferences
+	if (Preferences.isConfigurationValid) {
+        [self.mainController forceCheck];
 	}
-	
-	// Also check now
-    [self.mainController forceCheck];
+    else {
+        [self.mainController showPreferences:self];
+    }
 }
 
 - (void)schedulerStatusActive:(BOOL)isActive running:(BOOL)isRunning {
