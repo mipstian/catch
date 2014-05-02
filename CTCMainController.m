@@ -135,7 +135,13 @@
 }
 
 - (IBAction)quit:(id)sender {
-	[[NSApp delegate] quit];
+	NSLog(@"Quitting");
+    
+	// Save preferences
+	[Preferences save];
+	
+	// Quit
+	[NSApp terminate:nil];
 }
 
 - (void)setStatusActive:(BOOL)isActive running:(BOOL)isRunning {

@@ -74,14 +74,4 @@ NSString * const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info
 	// Do nothing
 }
 
-- (void)quit {
-	NSLog(@"Catch: quitting");
-	// Save preferences
-	[Preferences save];
-	
-	NSLog(@"Catch: all done, bye bye");
-	// Quit
-	[NSApp terminate:nil];
-}
-
 @end

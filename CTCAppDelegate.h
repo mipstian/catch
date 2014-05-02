@@ -20,6 +20,4 @@ extern NSString * const SERVICE_FEED_LEGACY_URL_PREFIX;
 
 - (void)torrentNotificationWithDescription:(NSString*)description;
 
-- (void)quit;
-
 @end
