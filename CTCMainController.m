@@ -198,12 +198,12 @@
 	}
 
 	if (time) {
-		NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-		[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+		NSDateFormatter *dateFormatter = NSDateFormatter.new;
+        dateFormatter.timeStyle = NSDateFormatterShortStyle;
 		NSString *lastUpdateTime = [dateFormatter stringFromDate:time];
-		lastUpdateString = [NSString stringWithFormat:baseLastUpdateString,lastUpdateTime];
+		lastUpdateString = [NSString stringWithFormat:baseLastUpdateString, lastUpdateTime];
 	} else {
-		lastUpdateString = [NSString stringWithFormat:baseLastUpdateString,NSLocalizedString(@"never", @"Never happened")];
+		lastUpdateString = [NSString stringWithFormat:baseLastUpdateString, NSLocalizedString(@"never", @"Never happened")];
 	}
 	
     [self setMenuLastUpdateStatus:lastUpdateString];
