@@ -6,7 +6,7 @@
 
 - (void)awakeFromNib {
 	// Create the NSStatusBar and set its length
-	item = [[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength];
+	item = [NSStatusBar.systemStatusBar statusItemWithLength:NSSquareStatusItemLength];
 	
 	// Update status UI
 	[self setStatusActive:YES running:NO];
@@ -24,7 +24,7 @@
 	[menuVersion setTitle:appNameAndVersion];
 
 	// Enable Notifications
-    [[NSUserNotificationCenter defaultUserNotificationCenter] setDelegate:self];
+    [NSUserNotificationCenter.defaultUserNotificationCenter setDelegate:self];
 	
 	// Select the first tab of the Preferences
 	[self showFeeds:self];
