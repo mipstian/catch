@@ -181,8 +181,8 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 
 - (BOOL)checkTime {
 	NSDate *now = NSDate.date;
-	NSDate *from = (NSDate *)[NSUserDefaults.standardUserDefaults objectForKey:PREFERENCE_KEY_UPDATE_FROM];
-	NSDate *to = (NSDate *)[NSUserDefaults.standardUserDefaults objectForKey:PREFERENCE_KEY_UPDATE_TO];
+	NSDate *from = CTCDefaults.fromDateForTimeRestrictions;
+	NSDate *to = CTCDefaults.toDateForTimeRestrictions;
 	
 	NSCalendar *calendar = NSCalendar.currentCalendar;
 	
