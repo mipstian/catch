@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
-        <deployment defaultVersion="1070" identifier="macosx"/>
+        <deployment defaultVersion="1080" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
         <plugIn identifier="com.apple.automator.AutomatorPalette" version="5056"/>
     </dependencies>
@@ -165,7 +165,7 @@ DQ
                             <tabViewItem label="Feeds" identifier="1" id="617">
                                 <view key="view" id="620">
                                     <rect key="frame" x="0.0" y="0.0" width="602" height="212"/>
-                                    <autoresizingMask key="autoresizingMask"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <box autoresizesSubviews="NO" title="Feed de ShowRSS" borderType="bezel" id="621">
                                             <rect key="frame" x="-3" y="120" width="608" height="92"/>
@@ -324,7 +324,7 @@ DQ
                                         <button id="652">
                                             <rect key="frame" x="15" y="179" width="382" height="18"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <buttonCell key="cell" type="check" title="Mostra notificacions pels nous torrents (requereix Growl)" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="653">
+                                            <buttonCell key="cell" type="check" title="Mostra notificacions pels nous torrents" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="653">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
