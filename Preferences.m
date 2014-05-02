@@ -23,9 +23,6 @@ NSString * const PREFERENCE_KEY_DOWNLOADED_FILES = @"downloadedFiles";
 NSString * const PREFERENCE_KEY_HISTORY = @"history";
 NSString * const PREFERENCE_KEY_OPEN_AT_LOGIN = @"openAtLogin";
 
-// Defaults
-int const FEED_UPDATE_INTERVAL = 60 * 10; // 10 minutes
-
 
 @implementation Preferences
 
