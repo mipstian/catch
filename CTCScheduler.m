@@ -124,11 +124,10 @@
 	}
 	
 	// Don't check if current time is outside user-defined range
-	if ([NSUserDefaults.standardUserDefaults boolForKey:PREFERENCE_KEY_ONLY_UPDATE_BETWEEN]) {
-		if (![self checkTime]) {
-			NSLog(@"Scheduler tick skipped (outside of user-defined time range)");
-			return;
-		}
+    BOOL restrictedCheckTimesEnabled = [NSUserDefaults.standardUserDefaults boolForKey:PREFERENCE_KEY_ONLY_UPDATE_BETWEEN];
+	if (restrictedCheckTimesEnabled && ![self checkTime]) {
+        NSLog(@"Scheduler tick skipped (outside of user-defined time range)");
+        return;
 	}
     
     [self checkFeed];
