@@ -115,12 +115,10 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
                                                                @"isRunning": @(self.isRunning)}];
 }
 
-- (BOOL)pauseResume {
+- (void)togglePause {
 	self.active = !self.isActive;
 	
     [self reportStatus];
-	
-	return self.active;
 }
 
 - (void)forceCheck {

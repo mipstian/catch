@@ -7,7 +7,10 @@ extern NSString * const kCTCSchedulerLastUpdateStatusNotificationName;
 
 @interface CTCScheduler : NSObject
 
-- (BOOL)pauseResume;
+@property (assign, nonatomic, readonly, getter = isActive) BOOL active;
+@property (assign, nonatomic, readonly, getter = isRunning) BOOL running;
+
+- (void)togglePause;
 
 - (void)forceCheck;
 
