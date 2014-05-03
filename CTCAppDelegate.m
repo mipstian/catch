@@ -23,4 +23,9 @@
     }
 }
 
+- (void)applicationWillTerminate:(NSNotification *)aNotification {
+	// Save preferences
+	[CTCDefaults save];
+}
+
 @end

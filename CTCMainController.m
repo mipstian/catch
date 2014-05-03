@@ -166,9 +166,6 @@
 
 - (IBAction)quit:(id)sender {
 	NSLog(@"Quitting");
-    
-	// Save preferences
-	[CTCDefaults save];
 	
 	// Quit
 	[NSApp terminate:nil];
