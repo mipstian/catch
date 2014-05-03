@@ -3,8 +3,6 @@
 
 @interface CTCFeedParser : NSObject
 
-+ (NSArray*)parseURLs:(NSXMLDocument*)feed;
-
-+ (NSArray*)parseFolders:(NSXMLDocument*)feed;
++ (NSArray*)parseFiles:(NSXMLDocument*)feed;
 
 @end

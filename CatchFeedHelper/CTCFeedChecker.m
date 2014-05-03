@@ -46,7 +46,7 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
     }
     
     // Parse the feed for files
-    NSArray *feedFiles = [CTCFeedParser parseURLs:feed];
+    NSArray *feedFiles = [CTCFeedParser parseFiles:feed];
     if (!feedFiles) {
         reply(@[], [NSError errorWithDomain:kCTCFeedCheckerErrorDomain
                                        code:-2
@@ -54,21 +54,11 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
         return;
     }
     
-    // Parse the feed for show folders
-    NSArray *feedShowFolders = shouldOrganizeByFolder ? [CTCFeedParser parseFolders:feed] : nil;
-    if (!feedShowFolders) {
-        NSLog(@"Error parsing show folders, folders will not be used");
-    }
-    else if (feedFiles.count != feedShowFolders.count) {
-        NSLog(@"Missing show folders for some feed files, folders will not be used");
-        feedShowFolders = nil;
-    }
-    
     // Download the files
     NSError *error;
     NSArray *downloadedFeedFiles = [self downloadFiles:feedFiles
                                                 toPath:downloadFolderPath
-                                             inFolders:feedShowFolders
+                                    organizingByFolder:shouldOrganizeByFolder
                                           skippingURLs:previouslyDownloadedURLs
                                                  error:&error];
     
@@ -96,7 +86,7 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
 
 - (NSArray *)downloadFiles:(NSArray *)feedFiles
                     toPath:(NSString *)downloadPath
-                 inFolders:(NSArray *)fileFolders
+        organizingByFolder:(BOOL)shouldOrganizeByFolder
               skippingURLs:(NSArray *)previouslyDownloadedURLs
                      error:(NSError * __autoreleasing *)error {
 	NSLog(@"Downloading files (if needed)");
@@ -121,11 +111,12 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
 		} else {
 			NSLog(@"Found file %@ at %@", file[@"title"], url);
             
-			// First get the folder, if available
-			NSString *folder = fileFolders[[feedFiles indexOfObject:file]];
+			// First get the folder, if we want it and it's available
+            NSString *showName = shouldOrganizeByFolder && ![file[@"showName"] isEqualTo:NSNull.null] ? file[@"showName"] : nil;
+            
             NSString *downloadedTorrentFile = [self downloadFile:[NSURL URLWithString:url]
                                                           toPath:downloadPath
-                                                    inShowFolder:folder];
+                                                    withShowName:showName];
             if (downloadedTorrentFile) {
                 [successfullyDownloadedFeedFiles addObject:@{@"url": file[@"url"],
                                                              @"title": file[@"title"],
@@ -146,7 +137,9 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
 
 - (NSString *)downloadFile:(NSURL *)fileURL
                     toPath:(NSString *)downloadPath
-              inShowFolder:(NSString *)folder {
+              withShowName:(NSString *)showName {
+    NSString *folder = [CTCFileUtils folderNameForShowWithName:showName];
+    
 	if (folder) NSLog(@"Downloading file %@ in folder %@",fileURL,folder);
 	else NSLog(@"Downloading file %@",fileURL);
 	
@@ -155,8 +148,8 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
 	// Download!
 	NSData *downloadedFile = nil;
 	NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:fileURL];
-	NSURLResponse *urlResponse = [[NSURLResponse alloc] init];
-	NSError *downloadError = [[NSError alloc] init];
+	NSURLResponse *urlResponse = NSURLResponse.new;
+	NSError *downloadError = NSError.new;
 	downloadedFile = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&urlResponse error:&downloadError];
 	
 	if (!downloadedFile) return nil;
