@@ -252,10 +252,7 @@
 	NSArray *recents = [downloaded subarrayWithRange:recentRange];
     
     // Extract titles
-    NSMutableArray *recentTorrentNames = NSMutableArray.array;
-    for (NSDictionary *recentItem in recents) {
-        [recentTorrentNames addObject:recentItem[@"title"]];
-    }
+    NSArray *recentTorrentNames = [recents valueForKey:@"title"];
     
     // Clear menu
 	[self.menuRecentTorrents.submenu removeAllItems];
