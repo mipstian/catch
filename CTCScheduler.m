@@ -28,10 +28,14 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 	self.active = YES;
 	self.running = NO;
     
-    // Create a single connection to the feed helper
+    // Create and start single connection to the feed helper
     // Messages will be delivered serially
     self.feedCheckerConnection = [[NSXPCConnection alloc] initWithServiceName:@"com.giorgiocalderolla.Catch.CatchFeedHelper"];
     self.feedCheckerConnection.remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(CTCFeedCheck)];
+    __weak typeof(self) weakSelf = self;
+    self.feedCheckerConnection.interruptionHandler = ^{
+        [weakSelf handleFeedCheckCompletion:NO];
+    };
     [self.feedCheckerConnection resume];
 	
 	// Create a timer to check periodically
@@ -83,19 +87,22 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
     [self callFeedCheckerWithReplyHandler:^(NSArray *downloadedFeedFiles,
                                             NSError *error){
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.running = NO;
-            
-            // Update status
-            [self reportStatus];
-            [NSNotificationCenter.defaultCenter postNotificationName:kCTCSchedulerLastUpdateStatusNotificationName
-                                                              object:self
-                                                            userInfo:@{@"successful": @(error == nil),
-                                                                       @"time": NSDate.date}];
+            [self handleFeedCheckCompletion:error == nil];
             
             // Deal with new files
             [self handleDownloadedFeedFiles:downloadedFeedFiles];
         });
     }];
+}
+
+- (void)handleFeedCheckCompletion:(BOOL)wasSuccessful {
+    self.running = NO;
+    
+    [self reportStatus];
+    [NSNotificationCenter.defaultCenter postNotificationName:kCTCSchedulerLastUpdateStatusNotificationName
+                                                      object:self
+                                                    userInfo:@{@"successful": @(wasSuccessful),
+                                                               @"time": NSDate.date}];
 }
 
 - (void)reportStatus {
