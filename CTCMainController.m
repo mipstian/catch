@@ -125,12 +125,12 @@
 	// Save preferences
 	[CTCDefaults save];
 	
-	// Also force check
-	[self forceCheck];
-	
 	if (CTCDefaults.isConfigurationValid) {
 		// Hide the Preferences window
 		[self.preferencesWindow close];
+        
+        // Also force check
+        [self forceCheck];
 	} else {
 		// The feed URL is probably invalid, warn user
 		[self showBadURLSheet];
