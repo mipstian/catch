@@ -112,7 +112,7 @@
 	if (!CTCDefaults.isConfigurationValid) return;
     
     NSString *torrentFolder = CTCDefaults.torrentsSavePath;
-    [NSWorkspace.sharedWorkspace openFile:[torrentFolder stringByStandardizingPath]];
+    [NSWorkspace.sharedWorkspace openFile:torrentFolder.stringByStandardizingPath];
 }
 
 - (IBAction)showPreferences:(id)sender {
@@ -139,13 +139,13 @@
 
 - (IBAction)showFeeds:(id)sender {
 	// Select the Feeds tab
-	[self.preferencesWindow.toolbar setSelectedItemIdentifier:@"Feeds"];
+    self.preferencesWindow.toolbar.selectedItemIdentifier = @"Feeds";
 	[self.preferencesTabs selectFirstTabViewItem:self];
 }
 
 - (IBAction)showTweaks:(id)sender {
 	// Select the Tweaks tab
-	[self.preferencesWindow.toolbar setSelectedItemIdentifier:@"Tweaks"];
+	self.preferencesWindow.toolbar.selectedItemIdentifier = @"Tweaks";
 	[self.preferencesTabs selectLastTabViewItem:self];
 }
 
