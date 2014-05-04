@@ -29,7 +29,7 @@
 	<key>NSMainNibFile</key>
 	<string>UI</string>
 	<key>NSPrincipalClass</key>
-	<string>NSApplication</string>
+	<string>CTCApplication</string>
 	<key>NSUIElement</key>
 	<string>1</string>
 	<key>SUEnableAutomaticChecks</key>
