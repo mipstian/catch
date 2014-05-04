@@ -29,7 +29,7 @@
 	// Enable Notification Center notifications
     [NSUserNotificationCenter.defaultUserNotificationCenter setDelegate:self];
     
-    [self setupNotificationHandlers];
+    [self setupObservers];
 }
 
 - (void)setupMenuItem {
@@ -48,7 +48,7 @@
     self.menuRecentTorrents.enabled = NO;
 }
 
-- (void)setupNotificationHandlers {
+- (void)setupObservers {
     void (^handleSchedulerStatusChange)(NSNotification *) = ^(NSNotification *notification) {
         [self refreshSchedulerStatus];
     };
