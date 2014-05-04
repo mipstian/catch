@@ -98,10 +98,10 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
     [self callFeedCheckerWithReplyHandler:^(NSArray *downloadedFeedFiles,
                                             NSError *error){
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self handleFeedCheckCompletion:error == nil];
-            
             // Deal with new files
             [self handleDownloadedFeedFiles:downloadedFeedFiles];
+            
+            [self handleFeedCheckCompletion:error == nil];
         });
     }];
 }
