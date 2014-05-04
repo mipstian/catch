@@ -11,12 +11,13 @@
 		3803C7AE11C3DA9300FC08DB /* CTCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3803C7AD11C3DA9300FC08DB /* CTCAppDelegate.m */; };
 		3803C7EC11C3E7AD00FC08DB /* CTCScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 3803C7EB11C3E7AD00FC08DB /* CTCScheduler.m */; };
 		38A3FD0D11CA01DD00157AEF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38A3FD0C11CA01DD00157AEF /* Localizable.strings */; };
-		38D39B6011C3A6E100C17C80 /* CTCMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D39B5F11C3A6E100C17C80 /* CTCMainController.m */; };
+		38D39B6011C3A6E100C17C80 /* CTCMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D39B5F11C3A6E100C17C80 /* CTCMenuController.m */; };
 		38DB9D5A11C7FEC5000DA168 /* app-icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 38DB9D5911C7FEC5000DA168 /* app-icon.icns */; };
 		38F9B09111C98E9E0021C540 /* Automator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38F9B09011C98E9E0021C540 /* Automator.framework */; };
 		4403ACF41914041C002F286C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4403ACF31914041C002F286C /* Assets.xcassets */; };
 		441297D417FE285500E9E21E /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 448CC7E617FE1F840063D3FD /* Sparkle.framework */; };
 		445D97A6191579C7006CD77C /* UI.strings in Resources */ = {isa = PBXBuildFile; fileRef = 445D97A4191579C7006CD77C /* UI.strings */; };
+		446298EB191655080045EC72 /* CTCPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 446298EA191655080045EC72 /* CTCPreferencesController.m */; };
 		44717AA4191300B300580054 /* CTCDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717AA3191300B300580054 /* CTCDefaults.m */; };
 		44717AA71913072200580054 /* CTCLoginItems.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717AA61913072200580054 /* CTCLoginItems.m */; };
 		44717AAA1913173600580054 /* CTCFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717AA91913173600580054 /* CTCFileUtils.m */; };
@@ -80,8 +81,8 @@
 		38704B0C11DB1EE900D28A39 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		38A3FD0911CA01C100157AEF /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		38B129A612DE65EC00B4E87D /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/Localizable.strings; sourceTree = "<group>"; };
-		38D39B5E11C3A6E100C17C80 /* CTCMainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCMainController.h; sourceTree = "<group>"; };
-		38D39B5F11C3A6E100C17C80 /* CTCMainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCMainController.m; sourceTree = "<group>"; };
+		38D39B5E11C3A6E100C17C80 /* CTCMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCMenuController.h; sourceTree = "<group>"; };
+		38D39B5F11C3A6E100C17C80 /* CTCMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCMenuController.m; sourceTree = "<group>"; };
 		38DB9D5911C7FEC5000DA168 /* app-icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "app-icon.icns"; sourceTree = "<group>"; };
 		38F22FAA120E358400BE8993 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		38F9B09011C98E9E0021C540 /* Automator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Automator.framework; path = /System/Library/Frameworks/Automator.framework; sourceTree = "<absolute>"; };
@@ -93,6 +94,8 @@
 		445D97A319157955006CD77C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UI.xib; sourceTree = "<group>"; };
 		445D97A5191579C7006CD77C /* ca */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/UI.strings; sourceTree = "<group>"; };
 		445D97A719157A2C006CD77C /* de */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/UI.strings; sourceTree = "<group>"; };
+		446298E9191655080045EC72 /* CTCPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCPreferencesController.h; sourceTree = "<group>"; };
+		446298EA191655080045EC72 /* CTCPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCPreferencesController.m; sourceTree = "<group>"; };
 		44717AA2191300B300580054 /* CTCDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCDefaults.h; sourceTree = "<group>"; };
 		44717AA3191300B300580054 /* CTCDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCDefaults.m; sourceTree = "<group>"; };
 		44717AA51913072200580054 /* CTCLoginItems.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCLoginItems.h; sourceTree = "<group>"; };
@@ -147,8 +150,10 @@
 			children = (
 				3803C7AC11C3DA9300FC08DB /* CTCAppDelegate.h */,
 				3803C7AD11C3DA9300FC08DB /* CTCAppDelegate.m */,
-				38D39B5E11C3A6E100C17C80 /* CTCMainController.h */,
-				38D39B5F11C3A6E100C17C80 /* CTCMainController.m */,
+				38D39B5E11C3A6E100C17C80 /* CTCMenuController.h */,
+				38D39B5F11C3A6E100C17C80 /* CTCMenuController.m */,
+				446298E9191655080045EC72 /* CTCPreferencesController.h */,
+				446298EA191655080045EC72 /* CTCPreferencesController.m */,
 				3803C7EA11C3E7AD00FC08DB /* CTCScheduler.h */,
 				3803C7EB11C3E7AD00FC08DB /* CTCScheduler.m */,
 				44717AA2191300B300580054 /* CTCDefaults.h */,
@@ -373,8 +378,9 @@
 			files = (
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
 				44717AA4191300B300580054 /* CTCDefaults.m in Sources */,
-				38D39B6011C3A6E100C17C80 /* CTCMainController.m in Sources */,
+				38D39B6011C3A6E100C17C80 /* CTCMenuController.m in Sources */,
 				3803C7AE11C3DA9300FC08DB /* CTCAppDelegate.m in Sources */,
+				446298EB191655080045EC72 /* CTCPreferencesController.m in Sources */,
 				44717AA71913072200580054 /* CTCLoginItems.m in Sources */,
 				3803C7EC11C3E7AD00FC08DB /* CTCScheduler.m in Sources */,
 				44717AAA1913173600580054 /* CTCFileUtils.m in Sources */,
