@@ -104,7 +104,8 @@ NSString * const kCTCDefaultsOpenAtLoginKey = @"openAtLogin";
 	if ([NSFileManager.defaultManager fileExistsAtPath:torrentFolder
                                            isDirectory:&isDirectory]) {
 		if (!isDirectory) return NO;
-	} else {
+	}
+    else {
 		return NO;
 	}
     

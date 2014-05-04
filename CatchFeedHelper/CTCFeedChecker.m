@@ -77,7 +77,8 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
 	
 	if (document) {
 		NSLog(@"Feed downloaded");
-	} else {
+	}
+    else {
 		NSLog(@"Feed download failed: %@", error);
 	}
 	
@@ -108,7 +109,8 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
             [successfullyDownloadedFeedFiles addObject:@{@"url": file[@"url"],
                                                          @"title": file[@"title"],
                                                          @"isMagnetLink": @YES}];
-		} else {
+		}
+        else {
 			NSLog(@"Found file %@ at %@", file[@"title"], url);
             
 			// First get the folder, if we want it and it's available
@@ -176,7 +178,8 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
 			// Exists but isn't a directory! Aaargh! Abort!
 			return nil;
 		}
-	} else {
+	}
+    else {
 		// Create folder
 		if (![NSFileManager.defaultManager createDirectoryAtPath:pathAndFolder
                                      withIntermediateDirectories:YES
@@ -185,7 +188,8 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
 			// Folder creation failed :( Abort
 			NSLog(@"Couldn't create folder %@", pathAndFolder);
 			return nil;
-		} else {
+		}
+        else {
 			NSLog(@"Folder %@ created", pathAndFolder);
 		}
 	}

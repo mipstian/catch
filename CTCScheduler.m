@@ -211,7 +211,8 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 			// We are outside of allowed time range
 			return NO;
 		}
-	} else {
+	}
+    else {
 		// Time range doesn't cross midnight (e.g. 4 AM to 5 PM)
 		if ((nowComp.hour > toComp.hour || nowComp.hour < fromComp.hour) ||
 			(nowComp.hour == toComp.hour && nowComp.minute > toComp.minute) ||
