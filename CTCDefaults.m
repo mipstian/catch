@@ -43,7 +43,7 @@ NSString * const kCTCDefaultsOpenAtLoginKey = @"openAtLogin";
 	NSString *defaultDownloadsDirectory = CTCFileUtils.userDownloadsDirectory ?: CTCFileUtils.userHomeDirectory;
     NSLog(@"Default downloads directory is %@", defaultDownloadsDirectory);
 	
-	// Set smart defaults for the preferences
+	// Set smart default defaults
 	NSDictionary *appDefaults = @{kCTCDefaultsFeedURLKey: @"",
                                   kCTCDefaultsOnlyUpdateBetweenKey: @NO,
                                   kCTCDefaultsUpdateFromKey: dateFrom,
@@ -83,7 +83,6 @@ NSString * const kCTCDefaultsOpenAtLoginKey = @"openAtLogin";
 }
 
 + (void)save {
-	// Write preferences to disk
 	[NSUserDefaults.standardUserDefaults synchronize];
     
     // Register as a login item if needed

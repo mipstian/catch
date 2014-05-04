@@ -18,7 +18,6 @@
 }
 
 - (IBAction)savePreferences:(id)sender {
-	// Save preferences
 	[CTCDefaults save];
 	
     // If the feed URL is invalid, just warn user

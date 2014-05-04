@@ -8,12 +8,12 @@
 @implementation CTCAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-	// Create preferences and set default values
+	// Set default values for defaults
 	[CTCDefaults setDefaultDefaults];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
-	// Save preferences
+	// Save defaults
 	[CTCDefaults save];
 }
 
