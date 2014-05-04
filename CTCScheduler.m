@@ -55,6 +55,9 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 														 selector:@selector(tick:)
 														 userInfo:nil
 														  repeats:YES];
+    
+    // Fire the timer ASAP
+    [self.repeatingTimer setFireDate:NSDate.distantPast];
 	
 	return self;
 }
