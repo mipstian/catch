@@ -1,5 +1,4 @@
 /* Don't remove %@ signs or you'll break the application */
-/* See UI.strings for general instructions*/
 
 // in menu:
 "pause"="Pauzeer"; // this is a verb
@@ -10,7 +9,6 @@
 "updatingnow"="Aan het updaten...";
 // in preferences:
 "badurl"="Dee ingevoerde feed URL is ongeldig. Gebruik de knop hieronder voor hulp bij het configureren van Catch.";
-"badurlok"="OK";
 // for notifications:
 "newtorrent"="Nieuwe torrent gedownload";
 "newtorrentdesc"="Torrent bestand %@ is gedownload!"; // %@ will be replaced by filename

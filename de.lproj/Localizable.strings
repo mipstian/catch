@@ -1,5 +1,4 @@
 /* Don't remove %@ signs or you'll break the application */
-/* See UI.strings for general instructions*/
 
 // in menu:
 "pause"="Pause"; // this is a verb
@@ -10,7 +9,6 @@
 "updatingnow"="Updatet jetzt...";
 // in preferences:
 "badurl"="Die Feed URL die Du eingegeben hast ist nicht richtig. Benutze die Hilfe Funktion unten, um herauszufinden wie Du Catch richtig einstellen kannst.";
-"badurlok"="OK";
 // for notifications:
 "newtorrent"="Neues torrent heruntergeladen";
 "newtorrentdesc"="Torrent %@ wurde heruntergeladen!"; // %@ will be replaced by filename

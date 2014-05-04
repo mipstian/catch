@@ -9,7 +9,6 @@
 "updatingnow"="Aggiornamento in corso...";
 // in preferences:
 "badurl"="L'URL del feed che hai inserito non è valida. Usa il bottone Aiutami per i dettagli su come configurare Catch.";
-"badurlok"="OK";
 // for notifications:
 "newtorrent"="Nuovo torrent scaricato";
 "newtorrentdesc"="Il torrent %@ è stato scaricato!"; // %@ will be replaced by filename

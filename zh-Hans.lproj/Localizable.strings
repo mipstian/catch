@@ -1,5 +1,4 @@
 /* Don't remove %@ signs or you'll break the application */
-/* See UI.strings for general instructions*/
 
 // in menu:
 "pause"="暂停"; // this is a verb
@@ -10,7 +9,6 @@
 "updatingnow"="正在更新...";
 // in preferences:
 "badurl"="你输入的URL不存在. 请点击帮助查看细节.";
-"badurlok"="确定";
 // for notifications:
 "newtorrent"="新种子已下载";
 "newtorrentdesc"="种子 %@ 已下载!"; // %@ will be replaced by filename

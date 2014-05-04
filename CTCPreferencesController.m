@@ -30,7 +30,7 @@
 	}
     else {
 		// The feed URL is probably invalid, warn user
-		[self showBadURLSheet];
+		[self showBadURLAlert];
 	}
 }
 
@@ -44,21 +44,16 @@
 	self.window.toolbar.selectedItemIdentifier = @"Tweaks";
 }
 
-- (void)showBadURLSheet {
+- (void)showBadURLAlert {
 	[self showFeeds:self];
-	
-	// Show a sheet warning the user: the feed URL is invalid
-	NSBeginAlertSheet(
-					  NSLocalizedString(@"badurl", @"Message for bad feed URL in preferences"),
-					  NSLocalizedString(@"badurlok", @"OK Button for bad feed URL in preferences"),
-					  nil,
-                      nil,
-                      self.window,
-                      self,
-					  NULL,
-                      NULL,
-					  nil,
-                      @"");
+    
+    // Show an alert warning the user: the feed URL is invalid
+    NSAlert *badURLAlert = NSAlert.new;
+    badURLAlert.messageText = NSLocalizedString(@"badurl", @"Message for bad feed URL in preferences");
+    badURLAlert.alertStyle = NSWarningAlertStyle;
+    
+    [badURLAlert beginSheetModalForWindow:self.window
+                        completionHandler:NULL];
 }
 
 @end
