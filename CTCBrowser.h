@@ -1,6 +1,4 @@
 #import <Foundation/Foundation.h>
 
 
-@interface CTCBrowser : NSObject
-
-@end
+@interface CTCBrowser : NSObject @end
