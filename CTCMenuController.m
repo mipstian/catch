@@ -102,8 +102,7 @@
 	// Launch finder with the torrent folder open
 	if (!CTCDefaults.isConfigurationValid) return;
     
-    NSString *torrentFolder = CTCDefaults.torrentsSavePath;
-    [NSWorkspace.sharedWorkspace openFile:torrentFolder.stringByStandardizingPath];
+    [NSWorkspace.sharedWorkspace openFile:CTCDefaults.torrentsSavePath];
 }
 
 - (IBAction)checkNow:(id)sender {
