@@ -136,7 +136,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
-                            <tabViewItem label="Feeds" identifier="1" id="617">
+                            <tabViewItem label="Feeds" identifier="Feeds" id="617">
                                 <view key="view" id="620">
                                     <rect key="frame" x="0.0" y="0.0" width="660" height="247"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -329,13 +329,13 @@
                                     </constraints>
                                 </view>
                             </tabViewItem>
-                            <tabViewItem label="Tweaks" identifier="2" id="618">
+                            <tabViewItem label="Tweaks" identifier="Tweaks" id="618">
                                 <view key="view" id="619">
-                                    <rect key="frame" x="0.0" y="0.0" width="660" height="235"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="660" height="247"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="652">
-                                            <rect key="frame" x="-2" y="219" width="243" height="18"/>
+                                            <rect key="frame" x="-2" y="231" width="243" height="18"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <buttonCell key="cell" type="check" title="Show notifications for new torrents" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="653">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -346,7 +346,7 @@
                                             </connections>
                                         </button>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="806">
-                                            <rect key="frame" x="-2" y="199" width="225" height="18"/>
+                                            <rect key="frame" x="-2" y="211" width="225" height="18"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <buttonCell key="cell" type="check" title="Automatically check for updates" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="807">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -357,7 +357,7 @@
                                             </connections>
                                         </button>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="980">
-                                            <rect key="frame" x="-2" y="179" width="108" height="18"/>
+                                            <rect key="frame" x="-2" y="191" width="108" height="18"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <buttonCell key="cell" type="check" title="Open at login" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="981">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>

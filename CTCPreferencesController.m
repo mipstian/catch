@@ -43,14 +43,16 @@
 
 - (IBAction)showFeeds:(id)sender {
 	// Select the Feeds tab
-    self.window.toolbar.selectedItemIdentifier = @"Feeds";
-	[self.preferencesTabs selectFirstTabViewItem:self];
+    static NSString * const FeedsTabIdentifier = @"Feeds";
+    self.window.toolbar.selectedItemIdentifier = FeedsTabIdentifier;
+	[self.preferencesTabs selectTabViewItemWithIdentifier:FeedsTabIdentifier];
 }
 
 - (IBAction)showTweaks:(id)sender {
 	// Select the Tweaks tab
-	self.window.toolbar.selectedItemIdentifier = @"Tweaks";
-	[self.preferencesTabs selectLastTabViewItem:self];
+    static NSString * const TweaksTabIdentifier = @"Tweaks";
+	self.window.toolbar.selectedItemIdentifier = TweaksTabIdentifier;
+	[self.preferencesTabs selectTabViewItemWithIdentifier:TweaksTabIdentifier];
 }
 
 - (void)showBadURLSheet {
