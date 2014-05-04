@@ -70,31 +70,6 @@
                                                 usingBlock:handleSchedulerLastUpdateStatusChange];
 }
 
-- (IBAction)browseService:(id)sender {
-	// Launch the system browser, open the service (ShowRSS)
-	[NSWorkspace.sharedWorkspace openURL:[NSURL URLWithString:kCTCDefaultsServiceURL]];
-}
-
-- (IBAction)browseWebsite:(id)sender {
-	// Launch the system browser, open the applications's website
-	[NSWorkspace.sharedWorkspace openURL:[NSURL URLWithString:kCTCDefaultsApplicationWebsiteURL]];
-}
-
-- (IBAction)browseHelp:(id)sender {
-	// Launch the system browser, open the applications's on-line help
-	[NSWorkspace.sharedWorkspace openURL:[NSURL URLWithString:kCTCDefaultsApplicationHelpURL]];
-}
-
-- (IBAction)browseFeatureRequest:(id)sender {
-	// Launch the system browser, open the applications's feature request page
-	[NSWorkspace.sharedWorkspace openURL:[NSURL URLWithString:kCTCDefaultsApplicationFeatureRequestURL]];
-}
-
-- (IBAction)browseBugReport:(id)sender {
-	// Launch the system browser, open the applications's bug report page
-	[NSWorkspace.sharedWorkspace openURL:[NSURL URLWithString:kCTCDefaultsApplicationBugReportURL]];
-}
-
 - (IBAction)openTorrentFolder:(id)sender {
 	// Launch finder with the torrent folder open
 	if (!CTCDefaults.isConfigurationValid) return;
@@ -111,13 +86,6 @@
     
     // If the scheduler is now active, also force a check right away
 	if (CTCScheduler.sharedScheduler.isActive) [CTCScheduler.sharedScheduler forceCheck];
-}
-
-- (IBAction)quit:(id)sender {
-	NSLog(@"Quitting");
-	
-	// Quit
-	[NSApp terminate:nil];
 }
 
 - (void)refreshSchedulerStatus {
