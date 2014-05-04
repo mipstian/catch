@@ -246,7 +246,7 @@
 	NSArray *downloadHistory = CTCDefaults.downloadHistory;
     
 	// Get last 10 elements
-    NSUInteger recentsCount = MIN(downloadHistory.count, 10);
+    NSUInteger recentsCount = MIN(downloadHistory.count, 10U);
     NSArray *recents = [downloadHistory subarrayWithRange:NSMakeRange(downloadHistory.count - recentsCount, recentsCount)];
     
     // Extract titles
