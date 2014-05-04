@@ -3,13 +3,6 @@
 #import "CTCScheduler.h"
 
 
-@interface CTCPreferencesController ()
-
-@property (strong, nonatomic) IBOutlet NSTabView *preferencesTabs;
-
-@end
-
-
 @implementation CTCPreferencesController
 
 - (void)awakeFromNib {
