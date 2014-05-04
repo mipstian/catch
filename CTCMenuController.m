@@ -83,9 +83,6 @@
 
 - (IBAction)togglePause:(id)sender {
     [CTCScheduler.sharedScheduler togglePause];
-    
-    // If the scheduler is now active, also force a check right away
-	if (CTCScheduler.sharedScheduler.isActive) [CTCScheduler.sharedScheduler forceCheck];
 }
 
 - (void)refreshSchedulerStatus {
