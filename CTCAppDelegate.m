@@ -5,11 +5,6 @@
 #import "CTCScheduler.h"
 
 
-@interface CTCAppDelegate ()
-@property (strong, nonatomic) IBOutlet CTCPreferencesController *preferencesController;
-@end
-
-
 @implementation CTCAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
