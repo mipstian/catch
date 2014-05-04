@@ -152,11 +152,7 @@
 		lastUpdateString = [NSString stringWithFormat:baseLastUpdateString, NSLocalizedString(@"never", @"Never happened")];
 	}
 	
-    [self setMenuLastUpdateStatus:lastUpdateString];
-}
-
-- (void)setMenuLastUpdateStatus:(NSString*)title {
-	[self.menuLastUpdate setTitle:title];
+    [self.menuLastUpdate setTitle:lastUpdateString];
 }
 
 - (void)setIdle {
