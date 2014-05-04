@@ -25,9 +25,6 @@
 	// Update UI with initial values
     [self refreshSchedulerStatus];
 	[self setLastUpdateStatus:YES time:nil];
-
-	// Enable Notification Center notifications
-    [NSUserNotificationCenter.defaultUserNotificationCenter setDelegate:self];
     
     [self setupObservers];
 }
@@ -71,9 +68,9 @@
 }
 
 - (IBAction)openTorrentFolder:(id)sender {
-	// Launch finder with the torrent folder open
 	if (!CTCDefaults.isConfigurationValid) return;
     
+    // Launch finder with the torrent folder open
     [NSWorkspace.sharedWorkspace openFile:CTCDefaults.torrentsSavePath];
 }
 
@@ -183,11 +180,6 @@
 	[self.menuRecentTorrents.submenu addItem:self.menuShowInFinder];
 	
     self.menuRecentTorrents.enabled = YES;
-}
-
-- (BOOL)userNotificationCenter:(NSUserNotificationCenter *)center
-	 shouldPresentNotification:(NSUserNotification *)notification {
-	return YES;
 }
 
 @end

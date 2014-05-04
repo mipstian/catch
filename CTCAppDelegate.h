@@ -1,4 +1,4 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface CTCAppDelegate : NSObject @end
+@interface CTCAppDelegate : NSObject<NSUserNotificationCenterDelegate> @end
