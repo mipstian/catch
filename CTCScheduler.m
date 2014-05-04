@@ -78,7 +78,11 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
                 downloadingToPath:downloadPath
                organizingByFolder:organizeByFolder
                      skippingURLs:previouslyDownloadedURLs
-                        withReply:replyHandler];
+                        withReply:^(NSArray *downloadedFeedFiles, NSError *error) {
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                replyHandler(downloadedFeedFiles, error);
+                            });
+                        }];
 }
 
 - (void)checkFeed {
@@ -97,12 +101,10 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 	
     [self callFeedCheckerWithReplyHandler:^(NSArray *downloadedFeedFiles,
                                             NSError *error){
-        dispatch_async(dispatch_get_main_queue(), ^{
-            // Deal with new files
-            [self handleDownloadedFeedFiles:downloadedFeedFiles];
-            
-            [self handleFeedCheckCompletion:error == nil];
-        });
+        // Deal with new files
+        [self handleDownloadedFeedFiles:downloadedFeedFiles];
+        
+        [self handleFeedCheckCompletion:error == nil];
     }];
 }
 
