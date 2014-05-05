@@ -46,15 +46,17 @@
 }
 
 - (void)setupObservers {
+    __weak typeof(self) weakSelf = self;
+    
     void (^handleSchedulerStatusChange)(NSNotification *) = ^(NSNotification *notification) {
-        [self refreshSchedulerStatus];
+        [weakSelf refreshSchedulerStatus];
     };
     
     void (^handleSchedulerLastUpdateStatusChange)(NSNotification *) = ^(NSNotification *notification) {
         BOOL wasSuccessful = [notification.userInfo[@"successful"] boolValue];
         NSDate *lastUpdateDate = notification.userInfo[@"time"];
-        [self setLastUpdateStatus:wasSuccessful time:lastUpdateDate];
-        [self refreshRecentsMenu];
+        [weakSelf setLastUpdateStatus:wasSuccessful time:lastUpdateDate];
+        [weakSelf refreshRecentsMenu];
     };
     
     [NSNotificationCenter.defaultCenter addObserverForName:kCTCSchedulerStatusNotificationName
