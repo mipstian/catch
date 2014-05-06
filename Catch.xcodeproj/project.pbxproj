@@ -20,6 +20,9 @@
 		4456EE651916F17F00B3FF1A /* CTCBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4456EE641916F17F00B3FF1A /* CTCBrowser.m */; };
 		445D97A6191579C7006CD77C /* UI.strings in Resources */ = {isa = PBXBuildFile; fileRef = 445D97A4191579C7006CD77C /* UI.strings */; };
 		446298EB191655080045EC72 /* CTCPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 446298EA191655080045EC72 /* CTCPreferencesController.m */; };
+		446D8B581918D146007AB22D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 446D8B571918D146007AB22D /* XCTest.framework */; };
+		446D8B5E1918D146007AB22D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 446D8B5C1918D146007AB22D /* InfoPlist.strings */; };
+		446D8B601918D146007AB22D /* TimeOfDayMathTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 446D8B5F1918D146007AB22D /* TimeOfDayMathTests.m */; };
 		44717AA4191300B300580054 /* CTCDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717AA3191300B300580054 /* CTCDefaults.m */; };
 		44717AA71913072200580054 /* CTCLoginItems.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717AA61913072200580054 /* CTCLoginItems.m */; };
 		44717AAA1913173600580054 /* CTCFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717AA91913173600580054 /* CTCFileUtils.m */; };
@@ -37,6 +40,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		446D8B621918D146007AB22D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D1107260486CEB800E47090;
+			remoteInfo = Catch;
+		};
 		44717AD21913A0F300580054 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -103,6 +113,12 @@
 		445D97A719157A2C006CD77C /* de */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/UI.strings; sourceTree = "<group>"; };
 		446298E9191655080045EC72 /* CTCPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCPreferencesController.h; sourceTree = "<group>"; };
 		446298EA191655080045EC72 /* CTCPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCPreferencesController.m; sourceTree = "<group>"; };
+		446D8B561918D146007AB22D /* Catch Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Catch Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		446D8B571918D146007AB22D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		446D8B5B1918D146007AB22D /* Catch Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Catch Tests-Info.plist"; sourceTree = "<group>"; };
+		446D8B5D1918D146007AB22D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		446D8B5F1918D146007AB22D /* TimeOfDayMathTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimeOfDayMathTests.m; sourceTree = "<group>"; };
+		446D8B611918D146007AB22D /* Catch Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Catch Tests-Prefix.pch"; sourceTree = "<group>"; };
 		44717AA2191300B300580054 /* CTCDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCDefaults.h; sourceTree = "<group>"; };
 		44717AA3191300B300580054 /* CTCDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCDefaults.m; sourceTree = "<group>"; };
 		44717AA51913072200580054 /* CTCLoginItems.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCLoginItems.h; sourceTree = "<group>"; };
@@ -133,6 +149,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		446D8B531918D146007AB22D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				446D8B581918D146007AB22D /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		44717AC11913A08700580054 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -172,6 +196,7 @@
 			children = (
 				8D1107320486CEB800E47090 /* Catch.app */,
 				44717AC41913A08700580054 /* com.giorgiocalderolla.Catch.CatchFeedHelper.xpc */,
+				446D8B561918D146007AB22D /* Catch Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -182,6 +207,7 @@
 				080E96DDFE201D6D7F000001 /* Catch */,
 				44717AC61913A08700580054 /* CatchFeedHelper */,
 				44717ADC1913AF2000580054 /* Shared Libraries */,
+				446D8B591918D146007AB22D /* Catch Tests */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
@@ -218,6 +244,7 @@
 				38F9B09011C98E9E0021C540 /* Automator.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 				448CC7E617FE1F840063D3FD /* Sparkle.framework */,
+				446D8B571918D146007AB22D /* XCTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -268,6 +295,25 @@
 			name = Application;
 			sourceTree = "<group>";
 		};
+		446D8B591918D146007AB22D /* Catch Tests */ = {
+			isa = PBXGroup;
+			children = (
+				446D8B5F1918D146007AB22D /* TimeOfDayMathTests.m */,
+				446D8B5A1918D146007AB22D /* Supporting Files */,
+			);
+			path = "Catch Tests";
+			sourceTree = "<group>";
+		};
+		446D8B5A1918D146007AB22D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				446D8B5B1918D146007AB22D /* Catch Tests-Info.plist */,
+				446D8B5C1918D146007AB22D /* InfoPlist.strings */,
+				446D8B611918D146007AB22D /* Catch Tests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		44717AC61913A08700580054 /* CatchFeedHelper */ = {
 			isa = PBXGroup;
 			children = (
@@ -303,6 +349,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		446D8B551918D146007AB22D /* Catch Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 446D8B661918D146007AB22D /* Build configuration list for PBXNativeTarget "Catch Tests" */;
+			buildPhases = (
+				446D8B521918D146007AB22D /* Sources */,
+				446D8B531918D146007AB22D /* Frameworks */,
+				446D8B541918D146007AB22D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				446D8B631918D146007AB22D /* PBXTargetDependency */,
+			);
+			name = "Catch Tests";
+			productName = "Catch Tests";
+			productReference = 446D8B561918D146007AB22D /* Catch Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		44717AC31913A08700580054 /* CatchFeedHelper */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 44717AD11913A08700580054 /* Build configuration list for PBXNativeTarget "CatchFeedHelper" */;
@@ -348,6 +412,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0500;
+				TargetAttributes = {
+					446D8B551918D146007AB22D = {
+						TestTargetID = 8D1107260486CEB800E47090;
+					};
+				};
 			};
 			buildConfigurationList = 26FC0A880875C7B200E6366F /* Build configuration list for PBXProject "Catch" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -380,11 +449,20 @@
 			targets = (
 				8D1107260486CEB800E47090 /* Catch */,
 				44717AC31913A08700580054 /* CatchFeedHelper */,
+				446D8B551918D146007AB22D /* Catch Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		446D8B541918D146007AB22D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				446D8B5E1918D146007AB22D /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		44717AC21913A08700580054 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -408,6 +486,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		446D8B521918D146007AB22D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				446D8B601918D146007AB22D /* TimeOfDayMathTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		44717AC01913A08700580054 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -440,6 +526,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		446D8B631918D146007AB22D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8D1107260486CEB800E47090 /* Catch */;
+			targetProxy = 446D8B621918D146007AB22D /* PBXContainerItemProxy */;
+		};
 		44717AD31913A0F300580054 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 44717AC31913A08700580054 /* CatchFeedHelper */;
@@ -487,6 +578,14 @@
 				448CECE219157BDF0075ADD9 /* zh-Hant */,
 			);
 			name = UI.strings;
+			sourceTree = "<group>";
+		};
+		446D8B5C1918D146007AB22D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				446D8B5D1918D146007AB22D /* en */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		44717AC91913A08700580054 /* InfoPlist.strings */ = {
@@ -602,6 +701,59 @@
 			};
 			name = Release;
 		};
+		446D8B641918D146007AB22D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Catch.app/Contents/MacOS/Catch";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Catch Tests/Catch Tests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Catch Tests/Catch Tests-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		446D8B651918D146007AB22D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Catch.app/Contents/MacOS/Catch";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Catch Tests/Catch Tests-Prefix.pch";
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "Catch Tests/Catch Tests-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
 		44717ACF1913A08700580054 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -645,6 +797,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		446D8B661918D146007AB22D /* Build configuration list for PBXNativeTarget "Catch Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				446D8B641918D146007AB22D /* Debug */,
+				446D8B651918D146007AB22D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		44717AD11913A08700580054 /* Build configuration list for PBXNativeTarget "CatchFeedHelper" */ = {
 			isa = XCConfigurationList;
