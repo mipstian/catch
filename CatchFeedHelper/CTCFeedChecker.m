@@ -75,12 +75,12 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
 	// Create a NSXMLDocument by downloading feed
 	NSXMLDocument *document = [[NSXMLDocument alloc] initWithContentsOfURL:feedURL options:NSXMLNodeOptionsNone error:&error];
 	
-	if (document) {
-		NSLog(@"Feed downloaded");
-	}
-    else {
-		NSLog(@"Feed download failed: %@", error);
-	}
+    if (!document) {
+        NSLog(@"Feed download failed: %@", error);
+        return nil;
+    }
+    
+	NSLog(@"Feed downloaded");
 	
 	return document;
 }
@@ -159,21 +159,21 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
 	NSLog(@"Download complete, filesize: %lu", (unsigned long)downloadedFile.length);
 	
 	// Get the suggested filename, append extension if needed
-	NSString *filename = [urlResponse suggestedFilename];
-	filename = [CTCFileUtils addTorrentExtensionTo:filename];
+	NSString *filename = [CTCFileUtils addTorrentExtensionTo:urlResponse.suggestedFilename];
     
 	// Compute destination path
-	NSArray *pathComponents = [downloadPath pathComponents];
+	NSArray *pathComponents = downloadPath.pathComponents;
 	if (folder) pathComponents = [pathComponents arrayByAddingObject:folder];
-	NSString *pathAndFolder = [[NSString pathWithComponents:pathComponents] stringByStandardizingPath];
+	NSString *pathAndFolder = [NSString pathWithComponents:pathComponents].stringByStandardizingPath;
 	pathComponents = [pathComponents arrayByAddingObject:filename];
-	NSString *pathAndFilename = [[NSString pathWithComponents:pathComponents] stringByStandardizingPath];
+	NSString *pathAndFilename = [NSString pathWithComponents:pathComponents].stringByStandardizingPath;
 	
 	NSLog(@"Computed file destination %@", pathAndFilename);
 	
 	// Check if the destination dir exists, if it doesn't create it
 	BOOL pathAndFolderIsDirectory = NO;
-	if ([NSFileManager.defaultManager fileExistsAtPath:pathAndFolder isDirectory:&pathAndFolderIsDirectory]) {
+	if ([NSFileManager.defaultManager fileExistsAtPath:pathAndFolder
+                                           isDirectory:&pathAndFolderIsDirectory]) {
 		if (!pathAndFolderIsDirectory) {
 			// Exists but isn't a directory! Aaargh! Abort!
 			return nil;
@@ -195,7 +195,9 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
 	}
 	
 	// Write!
-	if (![downloadedFile writeToFile:pathAndFilename atomically:YES]) {
+    BOOL wasWrittenSuccessfully = [downloadedFile writeToFile:pathAndFilename
+                                                   atomically:YES];
+	if (!wasWrittenSuccessfully) {
 		NSLog(@"Couldn't save file %@ to disk", pathAndFilename);
 		return nil;
 	}
