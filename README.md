@@ -7,7 +7,7 @@ It's *free*, and open source.
 
 Visit the **[Releases Page](https://github.com/mipstian/catch/releases)** to download!
 
-![Screenshot](http://www.giorgiocalderolla.com/img/catch_banner.png)
+![Screenshot](http://www.giorgiocalderolla.com/img/catch_banner.png?)
 
 Features:
 ---------
@@ -15,9 +15,9 @@ Features:
   * ShowRSS client
   * Magnet support
   * Very low Processor/Memory usage
-  * Only check your feed by night or in whatever period you decide
+  * Only check your feed at night or in whatever period you choose
   * Organize torrents in folders based on show name
-  * Automatically start downloading in your favorite !BitTorrent client
+  * Automatically start downloading in your favorite BitTorrent client
   * Notification Center notifications
   * Automatic updates
   * Speaks English (US and UK), Deutsch, Français, Español, Català, Finnish (suomi), 中文 (简体), 中文 (繁體) and Italiano
