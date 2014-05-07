@@ -199,12 +199,10 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
             [NSWorkspace.sharedWorkspace openFile:feedFile[@"torrentFilePath"]];
         }
         
-        // Post to Notification Center if requested
-        NSString *description = [NSString stringWithFormat:NSLocalizedString(@"newtorrentdesc", @"New torrent notification"), feedFile[@"title"]];
-        
+        // Post to Notification Center
         NSUserNotification *notification = NSUserNotification.new;
         notification.title = NSLocalizedString(@"newtorrent", @"New torrent notification");
-        notification.informativeText = description;
+        notification.informativeText = [NSString stringWithFormat:NSLocalizedString(@"newtorrentdesc", @"New torrent notification"), feedFile[@"title"]];
         notification.soundName = NSUserNotificationDefaultSoundName;
         [NSUserNotificationCenter.defaultUserNotificationCenter deliverNotification:notification];
         
