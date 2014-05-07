@@ -30,11 +30,12 @@
 }
 
 - (void)setupMenuItem {
-    // Create the NSStatusBar and set its length
+    // Create the NSStatusItem and set its length
 	self.menuBarItem = [NSStatusBar.systemStatusBar statusItemWithLength:NSSquareStatusItemLength];
     
 	// Tell the NSStatusItem what menu to load
     self.menuBarItem.menu = self.menu;
+    
 	// Enable highlighting
     self.menuBarItem.highlightMode = YES;
     
