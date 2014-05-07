@@ -21,7 +21,6 @@ NSString * const kCTCDefaultsUpdateToKey = @"updateTo";
 NSString * const kCTCDefaultsTorrentsSavePathKey = @"savePath";
 NSString * const kCTCDefaultsShouldOrganizeTorrents = @"organizeTorrents";
 NSString * const kCTCDefaultsShouldOpenTorrentsAutomatically = @"openAutomatically";
-NSString * const kCTCDefaultsShouldSendNotificationsKey = @"growlNotifications";
 NSString * const kCTCDefaultsDownloadedFilesKey = @"downloadedFiles"; // Deprecated
 NSString * const kCTCDefaultsDownloadHistoryKey = @"history";
 NSString * const kCTCDefaultsOpenAtLoginKey = @"openAtLogin";
@@ -51,7 +50,6 @@ NSString * const kCTCDefaultsOpenAtLoginKey = @"openAtLogin";
                                   kCTCDefaultsTorrentsSavePathKey: defaultDownloadsDirectory,
                                   kCTCDefaultsShouldOrganizeTorrents: @NO,
                                   kCTCDefaultsShouldOpenTorrentsAutomatically: @YES,
-                                  kCTCDefaultsShouldSendNotificationsKey: @YES,
                                   kCTCDefaultsOpenAtLoginKey: @YES};
 	[NSUserDefaults.standardUserDefaults registerDefaults:appDefaults];
     
@@ -153,10 +151,6 @@ NSString * const kCTCDefaultsOpenAtLoginKey = @"openAtLogin";
 
 + (NSDate *)toDateForTimeRestrictions {
     return (NSDate *)[NSUserDefaults.standardUserDefaults objectForKey:kCTCDefaultsUpdateToKey];
-}
-
-+ (BOOL)shouldSendNotifications {
-    return [NSUserDefaults.standardUserDefaults boolForKey:kCTCDefaultsShouldSendNotificationsKey];
 }
 
 + (BOOL)shouldOrganizeTorrentsInFolders {

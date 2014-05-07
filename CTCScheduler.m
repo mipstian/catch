@@ -185,7 +185,6 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 
 - (void)handleDownloadedFeedFiles:(NSArray *)downloadedFeedFiles {
     BOOL shouldOpenTorrentsAutomatically = CTCDefaults.shouldOpenTorrentsAutomatically;
-    BOOL shouldSendNotifications = CTCDefaults.shouldSendNotifications;
     
     for (NSDictionary *feedFile in downloadedFeedFiles) {
         BOOL isMagnetLink = [feedFile[@"isMagnetLink"] boolValue];
@@ -201,15 +200,13 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
         }
         
         // Post to Notification Center if requested
-        if (shouldSendNotifications) {
-            NSString *description = [NSString stringWithFormat:NSLocalizedString(@"newtorrentdesc", @"New torrent notification"), feedFile[@"title"]];
-            
-            NSUserNotification *notification = NSUserNotification.new;
-            notification.title = NSLocalizedString(@"newtorrent", @"New torrent notification");
-            notification.informativeText = description;
-            notification.soundName = NSUserNotificationDefaultSoundName;
-            [NSUserNotificationCenter.defaultUserNotificationCenter deliverNotification:notification];
-        }
+        NSString *description = [NSString stringWithFormat:NSLocalizedString(@"newtorrentdesc", @"New torrent notification"), feedFile[@"title"]];
+        
+        NSUserNotification *notification = NSUserNotification.new;
+        notification.title = NSLocalizedString(@"newtorrent", @"New torrent notification");
+        notification.informativeText = description;
+        notification.soundName = NSUserNotificationDefaultSoundName;
+        [NSUserNotificationCenter.defaultUserNotificationCenter deliverNotification:notification];
         
         // Add url to history
         NSArray *history = CTCDefaults.downloadHistory;
