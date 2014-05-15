@@ -4,7 +4,28 @@
     <link>https://raw.github.com/mipstian/catch/master/update/appcast.xml</link> 
     <description>Most recent version available.</description> 
     <language>en</language> 
-    <pubDate>Sun, 08 Aug 2010 22:51:00 +0100</pubDate> 
+    <pubDate>Sun, 08 Aug 2010 22:51:00 +0100</pubDate>
+    
+    <item>
+        <title>Catch 1.7</title>
+        <pubDate>Thu, 15 May 2014 13:16:05 +0200</pubDate>
+        <description><![CDATA[
+            <h2>Changes:</h2>
+            <ul>
+            <li>Retina display support</li>
+            <li>Fix for Catch not checking feed immediately on launch</li>
+            <li>Ability to use &ldquo;Check now&rdquo; to force a check even if paused or outside of restricted times</li>
+            <li>App size shrunk by a third</li>
+            <li>User Interface tweaks</li>
+            <li>Many internal improvements</li>
+            </ul>
+        ]]></description>
+        <enclosure
+        url="https://github.com/mipstian/catch/releases/download/1.7/Catch-1.7.zip"
+        sparkle:version="1.7"
+        type="application/octet-stream"/>
+        <sparkle:minimumSystemVersion>10.8.0</sparkle:minimumSystemVersion>
+    </item>
 
 	 <item> 
       <title>Catch 1.6</title>
