@@ -102,6 +102,8 @@
 		38FB6B3311DA986C0061E784 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		38FB6B3411DA986F0061E784 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		38FB6B3511DA98710061E784 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4401571C1957A3150041D148 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/UI.strings; sourceTree = "<group>"; };
+		4401571D1957A3150041D148 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4403ACF31914041C002F286C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4419CF37180627A900C77432 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4456EE5F1916D20000B3FF1A /* NSDate+TimeOfDayMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeOfDayMath.h"; sourceTree = "<group>"; };
@@ -442,6 +444,7 @@
 				fi,
 				nl,
 				Base,
+				pl,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* Catch */;
 			projectDirPath = "";
@@ -560,6 +563,7 @@
 				382AD67812DCCA9300E1FA73 /* ca */,
 				38B129A612DE65EC00B4E87D /* fi */,
 				4419CF37180627A900C77432 /* nl */,
+				4401571D1957A3150041D148 /* pl */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -576,6 +580,7 @@
 				448CECE019157B880075ADD9 /* nl */,
 				448CECE119157BB10075ADD9 /* zh-Hans */,
 				448CECE219157BDF0075ADD9 /* zh-Hant */,
+				4401571C1957A3150041D148 /* pl */,
 			);
 			name = UI.strings;
 			sourceTree = "<group>";
@@ -805,6 +810,7 @@
 				446D8B651918D146007AB22D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		44717AD11913A08700580054 /* Build configuration list for PBXNativeTarget "CatchFeedHelper" */ = {
 			isa = XCConfigurationList;
