@@ -45,9 +45,6 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
     
     NSString *downloadFolderPath = downloadFolderURL.path;
     
-    // Flush the cache, we want fresh results
-    [NSURLCache.sharedURLCache removeAllCachedResponses];
-    
     // Download the feed
     NSXMLDocument *feed = [self downloadFeed:feedURL];
     if (!feed) {
@@ -81,11 +78,16 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
 
 - (NSXMLDocument*)downloadFeed:(NSURL*)feedURL {
 	NSLog(@"Downloading feed %@", feedURL);
+    
+    // Flush the cache, we want fresh results
+    [NSURLCache.sharedURLCache removeAllCachedResponses];
 	
 	NSError *error = nil;
 	
 	// Create a NSXMLDocument by downloading feed
-	NSXMLDocument *document = [[NSXMLDocument alloc] initWithContentsOfURL:feedURL options:NSXMLNodeOptionsNone error:&error];
+	NSXMLDocument *document = [[NSXMLDocument alloc] initWithContentsOfURL:feedURL
+                                                                   options:NSXMLNodeOptionsNone
+                                                                     error:&error];
 	
     if (!document) {
         NSLog(@"Feed download failed: %@", error);
@@ -181,7 +183,9 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
 	NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:fileURL];
 	NSURLResponse *urlResponse = NSURLResponse.new;
 	NSError *downloadError = NSError.new;
-	downloadedFile = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&urlResponse error:&downloadError];
+	downloadedFile = [NSURLConnection sendSynchronousRequest:urlRequest
+                                           returningResponse:&urlResponse
+                                                       error:&downloadError];
 	
 	if (!downloadedFile) return nil;
     
