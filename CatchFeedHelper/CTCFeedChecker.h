@@ -9,7 +9,7 @@ typedef void (^CTCFeedCheckCompletionHandler)(NSArray *downloadedFeedFiles,
 @protocol CTCFeedCheck
 
 - (void)checkShowRSSFeed:(NSURL *)feedURL
-       downloadingToPath:(NSString *)downloadFolderPath
+   downloadingToBookmark:(NSData *)downloadFolderBookmark
       organizingByFolder:(BOOL)shouldOrganizeByFolder
             skippingURLs:(NSArray *)previouslyDownloadedURLs
                withReply:(CTCFeedCheckCompletionHandler)reply;
