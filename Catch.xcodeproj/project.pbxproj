@@ -105,6 +105,7 @@
 		4401571C1957A3150041D148 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/UI.strings; sourceTree = "<group>"; };
 		4401571D1957A3150041D148 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4403ACF31914041C002F286C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4412E8161957F09200701124 /* com.giorgiocalderolla.Catch.CatchFeedHelper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = com.giorgiocalderolla.Catch.CatchFeedHelper.entitlements; sourceTree = "<group>"; };
 		4419CF37180627A900C77432 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4456EE5F1916D20000B3FF1A /* NSDate+TimeOfDayMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeOfDayMath.h"; sourceTree = "<group>"; };
 		4456EE601916D20000B3FF1A /* NSDate+TimeOfDayMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeOfDayMath.m"; sourceTree = "<group>"; };
@@ -319,6 +320,7 @@
 		44717AC61913A08700580054 /* CatchFeedHelper */ = {
 			isa = PBXGroup;
 			children = (
+				4412E8161957F09200701124 /* com.giorgiocalderolla.Catch.CatchFeedHelper.entitlements */,
 				44717AD71913A1C900580054 /* CTCFeedChecker.h */,
 				44717AD81913A1C900580054 /* CTCFeedChecker.m */,
 				44717AAB19131BC700580054 /* CTCFeedParser.h */,
@@ -417,6 +419,13 @@
 				TargetAttributes = {
 					446D8B551918D146007AB22D = {
 						TestTargetID = 8D1107260486CEB800E47090;
+					};
+					44717AC31913A08700580054 = {
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -762,6 +771,8 @@
 		44717ACF1913A08700580054 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = CatchFeedHelper/com.giorgiocalderolla.Catch.CatchFeedHelper.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				GCC_PREFIX_HEADER = "CatchFeedHelper/CatchFeedHelper-Prefix.pch";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "CatchFeedHelper/CatchFeedHelper-Info.plist";
@@ -774,6 +785,8 @@
 		44717AD01913A08700580054 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = CatchFeedHelper/com.giorgiocalderolla.Catch.CatchFeedHelper.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				GCC_PREFIX_HEADER = "CatchFeedHelper/CatchFeedHelper-Prefix.pch";
 				INFOPLIST_FILE = "CatchFeedHelper/CatchFeedHelper-Info.plist";
 				MACH_O_TYPE = mh_execute;

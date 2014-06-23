@@ -27,11 +27,23 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
 }
 
 - (void)checkShowRSSFeed:(NSURL *)feedURL
-       downloadingToPath:(NSString *)downloadFolderPath
+   downloadingToBookmark:(NSData *)downloadFolderBookmark
       organizingByFolder:(BOOL)shouldOrganizeByFolder
             skippingURLs:(NSArray *)previouslyDownloadedURLs
                withReply:(CTCFeedCheckCompletionHandler)reply {
     NSLog(@"Checking feed");
+    
+    // Resolve the bookmark (that the main app gives us to transfer access to
+    // the download folder) to a URL
+    NSURL *downloadFolderURL = [self URLFromBookmark:downloadFolderBookmark];
+    if (!downloadFolderURL) {
+        reply(@[], [NSError errorWithDomain:kCTCFeedCheckerErrorDomain
+                                       code:-4
+                                   userInfo:nil]);
+        return;
+    }
+    
+    NSString *downloadFolderPath = downloadFolderURL.path;
     
     // Flush the cache, we want fresh results
     [NSURLCache.sharedURLCache removeAllCachedResponses];
@@ -83,6 +95,23 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
 	NSLog(@"Feed downloaded");
 	
 	return document;
+}
+
+- (NSURL *)URLFromBookmark:(NSData *)bookmark {
+    NSError *error = nil;
+    BOOL isStale = NO;
+    NSURL *URL = [NSURL URLByResolvingBookmarkData:bookmark
+                                           options:kNilOptions
+                                     relativeToURL:nil
+                               bookmarkDataIsStale:&isStale
+                                             error:&error];
+    
+    if (!URL || error) {
+        NSLog(@"Could not get URL from bookmark: %@", error);
+        return nil;
+    }
+    
+    return URL;
 }
 
 - (NSArray *)downloadFiles:(NSArray *)feedFiles
