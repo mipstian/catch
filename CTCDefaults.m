@@ -82,9 +82,6 @@ NSString * const kCTCDefaultsOpenAtLoginKey = @"openAtLogin";
 
 + (void)save {
 	[NSUserDefaults.standardUserDefaults synchronize];
-    
-    // Register as a login item if needed
-    [self refreshLoginItemStatus];
 }
 
 + (void)refreshLoginItemStatus {

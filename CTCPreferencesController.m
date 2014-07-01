@@ -55,6 +55,9 @@
         // Hide the Preferences window
         [self.window close];
         
+        // Apply the login item setting
+        [CTCDefaults refreshLoginItemStatus];
+        
         // Also force check
         [CTCScheduler.sharedScheduler forceCheck];
     }
