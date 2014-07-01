@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1080" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
@@ -30,6 +30,8 @@
         </customObject>
         <customObject id="vyd-92-YXh" userLabel="Preferences Controller" customClass="CTCPreferencesController">
             <connections>
+                <outlet property="feedURLWarningImageView" destination="lIi-CM-MqY" id="Q3D-hE-heP"/>
+                <outlet property="torrentsSavePathWarningImageView" destination="fwJ-Gq-K1U" id="aXv-um-IZf"/>
                 <outlet property="window" destination="552" id="Y5a-sh-KWH"/>
             </connections>
         </customObject>
@@ -158,7 +160,7 @@
                                                         </textFieldCell>
                                                     </textField>
                                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="787">
-                                                        <rect key="frame" x="87" y="60" width="560" height="22"/>
+                                                        <rect key="frame" x="87" y="60" width="536" height="22"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="http://showrss.info/rss.php?..." drawsBackground="YES" id="788">
                                                             <font key="font" metaFont="system"/>
@@ -173,6 +175,11 @@
                                                             </binding>
                                                         </connections>
                                                     </textField>
+                                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lIi-CM-MqY">
+                                                        <rect key="frame" x="638" y="67" width="9" height="9"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="warning" id="Rda-Ff-O9x"/>
+                                                    </imageView>
                                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="638">
                                                         <rect key="frame" x="15" y="20" width="180" height="18"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -230,15 +237,18 @@
                                                 </subviews>
                                             </view>
                                             <constraints>
+                                                <constraint firstItem="lIi-CM-MqY" firstAttribute="leading" secondItem="787" secondAttribute="trailing" constant="15" id="4Ny-mo-Jgz"/>
                                                 <constraint firstItem="787" firstAttribute="top" secondItem="621" secondAttribute="top" constant="29" id="Ad6-8t-hD5"/>
+                                                <constraint firstItem="787" firstAttribute="centerY" secondItem="lIi-CM-MqY" secondAttribute="centerY" id="P0P-d4-tvv"/>
                                                 <constraint firstItem="785" firstAttribute="leading" secondItem="621" secondAttribute="leading" constant="15" id="R2v-u3-XOn"/>
                                                 <constraint firstItem="636" firstAttribute="leading" secondItem="637" secondAttribute="trailing" constant="8" symbolic="YES" id="RCy-rB-Gza"/>
-                                                <constraint firstAttribute="trailing" secondItem="787" secondAttribute="trailing" constant="15" id="Yxg-tV-Yim"/>
+                                                <constraint firstAttribute="trailing" secondItem="lIi-CM-MqY" secondAttribute="trailing" constant="15" id="SWX-kw-nAX"/>
                                                 <constraint firstItem="637" firstAttribute="centerY" secondItem="635" secondAttribute="centerY" id="ghN-hZ-8hX"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="635" secondAttribute="trailing" constant="15" id="hbk-w7-FgE"/>
                                                 <constraint firstItem="787" firstAttribute="leading" secondItem="785" secondAttribute="trailing" constant="8" symbolic="YES" id="m4t-Vd-iyd"/>
                                                 <constraint firstItem="635" firstAttribute="leading" secondItem="636" secondAttribute="trailing" constant="8" symbolic="YES" id="ndS-bp-mDY"/>
                                                 <constraint firstAttribute="bottom" secondItem="637" secondAttribute="bottom" constant="15" id="o14-VB-kfP"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="787" secondAttribute="trailing" constant="15" id="pJ1-Jt-MNS"/>
                                                 <constraint firstItem="637" firstAttribute="top" secondItem="787" secondAttribute="bottom" constant="20" id="pjV-GX-gjF"/>
                                                 <constraint firstItem="637" firstAttribute="leading" secondItem="638" secondAttribute="trailing" constant="8" symbolic="YES" id="qVg-Kc-gPF"/>
                                                 <constraint firstItem="637" firstAttribute="centerY" secondItem="638" secondAttribute="centerY" id="qio-jR-gfa"/>
@@ -302,6 +312,11 @@
                                                             <binding destination="658" name="value" keyPath="values.openAutomatically" id="799"/>
                                                         </connections>
                                                     </button>
+                                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fwJ-Gq-K1U">
+                                                        <rect key="frame" x="343" y="78" width="9" height="9"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="warning" id="QCG-2j-VVy"/>
+                                                    </imageView>
                                                 </subviews>
                                             </view>
                                             <constraints>
@@ -309,9 +324,12 @@
                                                 <constraint firstItem="623" firstAttribute="top" secondItem="624" secondAttribute="bottom" constant="6" symbolic="YES" id="CeY-ND-exE"/>
                                                 <constraint firstItem="623" firstAttribute="leading" secondItem="624" secondAttribute="leading" id="Ct9-i8-dtR"/>
                                                 <constraint firstAttribute="bottom" secondItem="623" secondAttribute="bottom" constant="15" id="EQF-ys-Nj3"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fwJ-Gq-K1U" secondAttribute="trailing" constant="15" id="Itw-n8-XBv"/>
                                                 <constraint firstItem="791" firstAttribute="leading" secondItem="625" secondAttribute="trailing" constant="8" symbolic="YES" id="KJa-vv-eHg"/>
+                                                <constraint firstItem="fwJ-Gq-K1U" firstAttribute="leading" secondItem="791" secondAttribute="trailing" constant="15" id="LfG-Z2-KAQ"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="623" secondAttribute="trailing" constant="15" id="bFN-oL-PeV"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="624" secondAttribute="trailing" constant="15" id="fdl-LG-g90"/>
+                                                <constraint firstItem="791" firstAttribute="centerY" secondItem="fwJ-Gq-K1U" secondAttribute="centerY" id="j5p-tO-ZN2"/>
                                                 <constraint firstItem="625" firstAttribute="baseline" secondItem="791" secondAttribute="baseline" id="liP-df-61I"/>
                                                 <constraint firstItem="625" firstAttribute="leading" secondItem="624" secondAttribute="leading" id="oOL-hr-Tkn"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="791" secondAttribute="trailing" constant="15" id="pbz-R1-Wf5"/>
@@ -456,5 +474,6 @@ DQ
     <resources>
         <image name="NSAdvanced" width="32" height="32"/>
         <image name="NSUserAccounts" width="32" height="32"/>
+        <image name="warning" width="9" height="9"/>
     </resources>
 </document>

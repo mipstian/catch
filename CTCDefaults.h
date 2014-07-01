@@ -21,6 +21,8 @@ extern NSString * const kCTCDefaultsServiceFeedURLPrefix;
 + (void)refreshLoginItemStatus;
 
 + (BOOL)isConfigurationValid;
++ (BOOL)isFeedURLValid;
++ (BOOL)isTorrentsSavePathValid;
 
 + (NSString *)appName;
 

@@ -1,4 +1,4 @@
-﻿/* Don't remove %@ signs or you'll break the application */
+/* Don't remove %@ signs or you'll break the application */
 
 // in menu:
 "pause"="暫停"; // this is a verb
@@ -7,8 +7,6 @@
 "lastupdatefailed"="最後更新 (失敗): %@"; // %@ will be replaced by update time
 "never"="仍沒有"; // this is for the last update time, meaning "I still haven't made one"
 "updatingnow"="正在更新...";
-// in preferences:
-"badurl"="你輸入的URL不存在. 請點擊幫助查看細節.";
 // for notifications:
 "newtorrent"="新種子已下載";
 "newtorrentdesc"="種子 %@ 已下載!"; // %@ will be replaced by filename
