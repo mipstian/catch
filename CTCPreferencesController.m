@@ -42,10 +42,10 @@
 }
 
 - (void)refreshInvalidInputMarkers {
-    [self.torrentsSavePathWarningImageView setHidden:CTCDefaults.isTorrentsSavePathValid];
-    [self.feedURLWarningImageView setHidden:CTCDefaults.isFeedURLValid];
-    
-    // TODO: highlight help button somehow?
+    NSImage *validImage = [NSImage imageNamed:@"success"];
+    NSImage *invalidImage = [NSImage imageNamed:@"warning"];
+    self.torrentsSavePathWarningImageView.image = CTCDefaults.isTorrentsSavePathValid ? validImage : invalidImage;
+    self.feedURLWarningImageView.image = CTCDefaults.isFeedURLValid ? validImage : invalidImage;
 }
 
 - (IBAction)savePreferences:(id)sender {
