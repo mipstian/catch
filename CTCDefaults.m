@@ -106,10 +106,10 @@ NSString * const kCTCDefaultsOpenAtLoginKey = @"openAtLogin";
 
 + (BOOL)isTorrentsSavePathValid {
     NSString *torrentFolder = self.torrentsSavePath;
-	
-	if (!torrentFolder) return NO;
     
-	BOOL isDirectory = NO;
+    if (!torrentFolder) return NO;
+    
+    BOOL isDirectory = NO;
     BOOL fileExists = [NSFileManager.defaultManager fileExistsAtPath:torrentFolder
                                                          isDirectory:&isDirectory];
     if (!fileExists) return NO;
