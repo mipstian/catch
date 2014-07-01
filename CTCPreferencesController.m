@@ -1,6 +1,7 @@
 #import "CTCPreferencesController.h"
 #import "CTCDefaults.h"
 #import "CTCScheduler.h"
+#import "NSWindow+ShakeAnimation.h"
 
 
 @implementation CTCPreferencesController
@@ -12,7 +13,7 @@
     if (!CTCDefaults.isConfigurationValid) [self showWindow:self];
 }
 
-- (void)showWindow:(id)sender {
+- (IBAction)showWindow:(id)sender {
     [NSApp activateIgnoringOtherApps:YES];
     [super showWindow:sender];
 }
@@ -20,17 +21,22 @@
 - (IBAction)savePreferences:(id)sender {
 	[CTCDefaults save];
 	
-    // If the feed URL is invalid, just warn user
-    if (!CTCDefaults.isConfigurationValid) {
-		[self showBadURLAlert];
-        return;
+    if (CTCDefaults.isConfigurationValid) {
+        // Hide the Preferences window
+        [self.window close];
+        
+        // Also force check
+        [CTCScheduler.sharedScheduler forceCheck];
     }
-    
-    // Hide the Preferences window
-    [self.window close];
-    
-    // Also force check
-    [CTCScheduler.sharedScheduler forceCheck];
+    else {
+        // Show the Feeds tab because all possible invalid inputs are currently there
+        [self showFeeds:self];
+        
+        // Shake the window to signal invalid input
+        [self.window performShakeAnimation];
+        
+		//[self showBadURLAlert];
+    }
 }
 
 - (IBAction)showFeeds:(id)sender {
@@ -44,8 +50,6 @@
 }
 
 - (void)showBadURLAlert {
-	[self showFeeds:self];
-    
     // Show an alert warning the user: the feed URL is invalid
     NSAlert *badURLAlert = NSAlert.new;
     badURLAlert.messageText = NSLocalizedString(@"badurl", @"Message for bad feed URL in preferences");
