@@ -4,6 +4,12 @@
 #import "NSWindow+ShakeAnimation.h"
 
 
+@interface CTCPreferencesController ()
+@property (weak) IBOutlet NSImageView *feedURLWarningImageView;
+@property (weak) IBOutlet NSImageView *torrentsSavePathWarningImageView;
+@end
+
+
 @implementation CTCPreferencesController
 
 - (void)awakeFromNib {
@@ -11,11 +17,35 @@
     
     // If the configuration isn't valid, pop up immediately
     if (!CTCDefaults.isConfigurationValid) [self showWindow:self];
+    
+    [NSUserDefaults.standardUserDefaults addObserver:self
+                                          forKeyPath:@"savePath"
+                                             options:NSKeyValueObservingOptionNew
+                                             context:NULL];
+    [NSUserDefaults.standardUserDefaults addObserver:self
+                                          forKeyPath:@"feedURL"
+                                             options:NSKeyValueObservingOptionNew
+                                             context:NULL];
 }
 
 - (IBAction)showWindow:(id)sender {
+    [self refreshInvalidInputMarkers];
     [NSApp activateIgnoringOtherApps:YES];
     [super showWindow:sender];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context {
+    [self refreshInvalidInputMarkers];
+}
+
+- (void)refreshInvalidInputMarkers {
+    [self.torrentsSavePathWarningImageView setHidden:CTCDefaults.isTorrentsSavePathValid];
+    [self.feedURLWarningImageView setHidden:CTCDefaults.isFeedURLValid];
+    
+    // TODO: highlight help button somehow?
 }
 
 - (IBAction)savePreferences:(id)sender {
@@ -34,8 +64,6 @@
         
         // Shake the window to signal invalid input
         [self.window performShakeAnimation];
-        
-		//[self showBadURLAlert];
     }
 }
 
@@ -49,14 +77,9 @@
 	self.window.toolbar.selectedItemIdentifier = @"Tweaks";
 }
 
-- (void)showBadURLAlert {
-    // Show an alert warning the user: the feed URL is invalid
-    NSAlert *badURLAlert = NSAlert.new;
-    badURLAlert.messageText = NSLocalizedString(@"badurl", @"Message for bad feed URL in preferences");
-    badURLAlert.alertStyle = NSWarningAlertStyle;
-    
-    [badURLAlert beginSheetModalForWindow:self.window
-                        completionHandler:NULL];
+- (void)dealloc {
+    [NSUserDefaults.standardUserDefaults removeObserver:self forKeyPath:@"savePath"];
+    [NSUserDefaults.standardUserDefaults removeObserver:self forKeyPath:@"feedURL"];
 }
 
 @end
