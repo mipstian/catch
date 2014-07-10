@@ -29,21 +29,21 @@ NSString * const kCTCDefaultsOpenAtLoginKey = @"openAtLogin";
 @implementation CTCDefaults
 
 + (void)setDefaultDefaults {
-	// Create two dummy times (dates actually), just to have some value set
-	NSDateComponents *comps = NSDateComponents.new;
+    // Create two dummy times (dates actually), just to have some value set
+    NSDateComponents *comps = NSDateComponents.new;
     comps.hour = 24;
     comps.minute = 0;
-	NSCalendar *calendar = NSCalendar.currentCalendar;
-	NSDate *dateFrom = [calendar dateFromComponents:comps];
+    NSCalendar *calendar = NSCalendar.currentCalendar;
+    NSDate *dateFrom = [calendar dateFromComponents:comps];
     comps.hour = 8;
-	NSDate *dateTo = [calendar dateFromComponents:comps];
-	
-	// Use user's Downloads directory as a default, fallback on home
-	NSString *defaultDownloadsDirectory = CTCFileUtils.userDownloadsDirectory ?: CTCFileUtils.userHomeDirectory;
+    NSDate *dateTo = [calendar dateFromComponents:comps];
+    
+    // Use user's Downloads directory as a default, fallback on home
+    NSString *defaultDownloadsDirectory = CTCFileUtils.userDownloadsDirectory ?: CTCFileUtils.userHomeDirectory;
     NSLog(@"Default downloads directory is %@", defaultDownloadsDirectory);
-	
-	// Set smart default defaults
-	NSDictionary *appDefaults = @{kCTCDefaultsFeedURLKey: @"",
+    
+    // Set smart default defaults
+    NSDictionary *appDefaults = @{kCTCDefaultsFeedURLKey: @"",
                                   kCTCDefaultsOnlyUpdateBetweenKey: @NO,
                                   kCTCDefaultsUpdateFromKey: dateFrom,
                                   kCTCDefaultsUpdateToKey: dateTo,
@@ -51,25 +51,25 @@ NSString * const kCTCDefaultsOpenAtLoginKey = @"openAtLogin";
                                   kCTCDefaultsShouldOrganizeTorrents: @NO,
                                   kCTCDefaultsShouldOpenTorrentsAutomatically: @YES,
                                   kCTCDefaultsOpenAtLoginKey: @YES};
-	[NSUserDefaults.standardUserDefaults registerDefaults:appDefaults];
+    [NSUserDefaults.standardUserDefaults registerDefaults:appDefaults];
     
-	// Migrate the downloads history format. Change old array of strings to new dictionary format
-	NSArray *downloadedFiles = [NSUserDefaults.standardUserDefaults arrayForKey:kCTCDefaultsDownloadedFilesKey];
-	NSArray *history = self.downloadHistory;
-	if (downloadedFiles && !history) {
-		NSLog(@"Migrating download history to new format.");
-		
-		NSMutableArray *newDownloadedFiles = NSMutableArray.array;
-		
-		for (NSString *url in downloadedFiles) {
+    // Migrate the downloads history format. Change old array of strings to new dictionary format
+    NSArray *downloadedFiles = [NSUserDefaults.standardUserDefaults arrayForKey:kCTCDefaultsDownloadedFilesKey];
+    NSArray *history = self.downloadHistory;
+    if (downloadedFiles && !history) {
+        NSLog(@"Migrating download history to new format.");
+        
+        NSMutableArray *newDownloadedFiles = NSMutableArray.array;
+        
+        for (NSString *url in downloadedFiles) {
             NSString *fileName = [CTCFileUtils computeFilenameFromURL:[NSURL URLWithString:url]];
-			[newDownloadedFiles addObject:@{@"title": fileName,
+            [newDownloadedFiles addObject:@{@"title": fileName,
                                             @"url": url}];
-		}
-		
+        }
+        
         self.downloadHistory = newDownloadedFiles;
-		[NSUserDefaults.standardUserDefaults removeObjectForKey:kCTCDefaultsDownloadedFilesKey];
-	}
+        [NSUserDefaults.standardUserDefaults removeObjectForKey:kCTCDefaultsDownloadedFilesKey];
+    }
     
     // If history was never set or migrated, init it to empty array
     if (!downloadedFiles && !history) {
@@ -81,7 +81,7 @@ NSString * const kCTCDefaultsOpenAtLoginKey = @"openAtLogin";
 }
 
 + (void)save {
-	[NSUserDefaults.standardUserDefaults synchronize];
+    [NSUserDefaults.standardUserDefaults synchronize];
 }
 
 + (void)refreshLoginItemStatus {
@@ -90,18 +90,18 @@ NSString * const kCTCDefaultsOpenAtLoginKey = @"openAtLogin";
 
 + (BOOL)isFeedURLValid {
     NSString *feedURL = CTCDefaults.feedURL;
-	if (![feedURL hasPrefix:kCTCDefaultsServiceFeedURLPrefix]) {
-		// The URL should start with the prefix!
-		NSLog(@"Feed URL (%@) does not start with expected prefix (%@)", feedURL, kCTCDefaultsServiceFeedURLPrefix);
-		return NO;
-	}
-	if ([feedURL rangeOfString:@"namespaces"].location == NSNotFound) {
-		// The URL should have the namespaces parameter set
-		NSLog(@"Feed URL does not have namespaces enabled");
-		return NO;
-	}
-	
-	return YES;
+    if (![feedURL hasPrefix:kCTCDefaultsServiceFeedURLPrefix]) {
+        // The URL should start with the prefix!
+        NSLog(@"Feed URL (%@) does not start with expected prefix (%@)", feedURL, kCTCDefaultsServiceFeedURLPrefix);
+        return NO;
+    }
+    if ([feedURL rangeOfString:@"namespaces"].location == NSNotFound) {
+        // The URL should have the namespaces parameter set
+        NSLog(@"Feed URL does not have namespaces enabled");
+        return NO;
+    }
+    
+    return YES;
 }
 
 + (BOOL)isTorrentsSavePathValid {
@@ -139,8 +139,8 @@ NSString * const kCTCDefaultsOpenAtLoginKey = @"openAtLogin";
 }
 
 + (NSString *)feedURL {
-	NSString *rawFeedURL = [NSUserDefaults.standardUserDefaults stringForKey:kCTCDefaultsFeedURLKey];
-	return rawFeedURL ? [rawFeedURL stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet] : @"";
+    NSString *rawFeedURL = [NSUserDefaults.standardUserDefaults stringForKey:kCTCDefaultsFeedURLKey];
+    return rawFeedURL ? [rawFeedURL stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet] : @"";
 }
 
 + (BOOL)areTimeRestrictionsEnabled {

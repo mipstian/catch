@@ -37,8 +37,8 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
         return nil;
     }
     
-	self.polling = YES;
-	self.checking = NO;
+    self.polling = YES;
+    self.checking = NO;
     
     // Create and start single connection to the feed helper
     // Messages will be delivered serially
@@ -49,20 +49,20 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
         [weakSelf handleFeedCheckCompletion:NO];
     };
     [self.feedCheckerConnection resume];
-	
-	// Create a timer to check periodically
+    
+    // Create a timer to check periodically
     self.repeatingTimer = [NSTimer scheduledTimerWithTimeInterval:kCTCDefaultsFeedUpdateInterval
-														   target:self
-														 selector:@selector(tick:)
-														 userInfo:nil
-														  repeats:YES];
+                                                           target:self
+                                                         selector:@selector(tick:)
+                                                         userInfo:nil
+                                                          repeats:YES];
     
     // Check now as well
     [self fireTimerNow];
     
     [self preventAppNap];
-	
-	return self;
+    
+    return self;
 }
 
 - (void)preventAppNap {
@@ -88,14 +88,14 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
     // Don't check twice simultaneously
     if (self.isChecking) return;
     
-	// Only work with valid preferences
-	if (!CTCDefaults.isConfigurationValid) {
-		NSLog(@"Refusing to check feed - invalid preferences");
-		return;
-	}
-	
-	self.checking = YES;
-	
+    // Only work with valid preferences
+    if (!CTCDefaults.isConfigurationValid) {
+        NSLog(@"Refusing to check feed - invalid preferences");
+        return;
+    }
+    
+    self.checking = YES;
+    
     // Check the feed
     __weak typeof(self) weakSelf = self;
     [self callFeedCheckerWithReplyHandler:^(NSArray *downloadedFeedFiles,
@@ -155,26 +155,26 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 }
 
 - (void)reportStatus {
-	NSLog(@"Scheduler status updated (polling = %d, checking = %d)", self.isPolling, self.isChecking);
-	
-	// Report status to application delegate
+    NSLog(@"Scheduler status updated (polling = %d, checking = %d)", self.isPolling, self.isChecking);
+    
+    // Report status to application delegate
     [NSNotificationCenter.defaultCenter postNotificationName:kCTCSchedulerStatusNotificationName
                                                       object:self
                                                     userInfo:nil];
 }
 
 - (void)togglePause {
-	self.polling = !self.isPolling;
+    self.polling = !self.isPolling;
     
     // If we have just been set to polling, poll immediately
     if (self.isPolling) [self fireTimerNow];
 }
 
 - (void)forceCheck {
-	NSLog(@"Forcing feed check");
+    NSLog(@"Forcing feed check");
     
-	// Check feed right now ignoring time restrictions and "paused" mode
-	[self checkFeed];
+    // Check feed right now ignoring time restrictions and "paused" mode
+    [self checkFeed];
 }
 
 - (void)fireTimerNow {
@@ -182,18 +182,18 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 }
 
 - (void)tick:(NSTimer*)timer {
-	NSLog(@"Scheduler tick");
-	
-	if (!self.isPolling) {
-		NSLog(@"Scheduler tick skipped (paused)");
-		return;
-	}
-	
-	// Don't check if current time is outside user-defined range
-	if (![self shouldCheckNow]) {
+    NSLog(@"Scheduler tick");
+    
+    if (!self.isPolling) {
+        NSLog(@"Scheduler tick skipped (paused)");
+        return;
+    }
+    
+    // Don't check if current time is outside user-defined range
+    if (![self shouldCheckNow]) {
         NSLog(@"Scheduler tick skipped (outside of user-defined time range)");
         return;
-	}
+    }
     
     [self checkFeed];
 }

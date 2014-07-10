@@ -8,21 +8,21 @@
 @implementation CTCAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-	// Set default values for defaults
-	[CTCDefaults setDefaultDefaults];
+    // Set default values for defaults
+    [CTCDefaults setDefaultDefaults];
     
-	// Enable Notification Center notifications
+    // Enable Notification Center notifications
     [NSUserNotificationCenter.defaultUserNotificationCenter setDelegate:self];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
-	// Save defaults
-	[CTCDefaults save];
+    // Save defaults
+    [CTCDefaults save];
 }
 
 - (BOOL)userNotificationCenter:(NSUserNotificationCenter *)center
-	 shouldPresentNotification:(NSUserNotification *)notification {
-	return YES;
+     shouldPresentNotification:(NSUserNotification *)notification {
+    return YES;
 }
 
 @end
