@@ -782,7 +782,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = CatchFeedHelper/com.giorgiocalderolla.Catch.CatchFeedHelper.entitlements;
-				CODE_SIGN_IDENTITY = "-";
 				GCC_PREFIX_HEADER = "CatchFeedHelper/CatchFeedHelper-Prefix.pch";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "CatchFeedHelper/CatchFeedHelper-Info.plist";
@@ -796,7 +795,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = CatchFeedHelper/com.giorgiocalderolla.Catch.CatchFeedHelper.entitlements;
-				CODE_SIGN_IDENTITY = "-";
 				GCC_PREFIX_HEADER = "CatchFeedHelper/CatchFeedHelper-Prefix.pch";
 				INFOPLIST_FILE = "CatchFeedHelper/CatchFeedHelper-Info.plist";
 				MACH_O_TYPE = mh_execute;
