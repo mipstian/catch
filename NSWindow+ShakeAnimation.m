@@ -25,6 +25,8 @@
     
     self.animations = @{@"frameOrigin": shakeAnimation};
     [self.animator setFrameOrigin:self.frame.origin];
+    
+    CGPathRelease(shakePath);
 }
 
 @end
