@@ -159,25 +159,33 @@
     // Get the full list
     NSArray *downloadHistory = CTCDefaults.downloadHistory;
     
-    // Get last 10 elements
-    NSUInteger recentsCount = MIN(downloadHistory.count, 10U);
+    // Get last 9 elements  (changed from 10 so everything aligns nicer in the menu.. small tweak)
+    NSUInteger recentsCount = MIN(downloadHistory.count, 9U);
     NSArray *recents = [downloadHistory subarrayWithRange:NSMakeRange(0U, recentsCount)];
-    
-    // Extract titles
-    NSArray *recentTorrentNames = [recents valueForKey:@"title"];
     
     // Clear menu
     [self.menuRecentTorrents.submenu removeAllItems];
     
     // Add new items
-    [recentTorrentNames enumerateObjectsUsingBlock:^(NSString *title, NSUInteger index, BOOL *stop) {
-        NSString *menuTitle = [NSString stringWithFormat:@"%lu %@", index + 1, title];
+    NSDateFormatter *dateFormatter = NSDateFormatter.new;
+    dateFormatter.timeStyle = NSDateFormatterShortStyle;
+    dateFormatter.dateStyle = NSDateFormatterShortStyle;
+    NSUInteger index = 0;
+    for(NSDictionary *recent in recents) {
+        NSString *menuTitle = [NSString stringWithFormat:@"%lu %@", ++index, [recent valueForKey:@"title"]];
         NSMenuItem *newItem = [[NSMenuItem alloc] initWithTitle:menuTitle
                                                          action:NULL
                                                   keyEquivalent:@""];
+        NSDate *downloadDate = (NSDate *)[recent objectForKey:@"date"];
+        if(downloadDate) {
+            // it may be interesting to have a bit more structure or intelligence to showing the dates for recent
+            // items (just stuff this week based on preference?), or show the date in the list.. this solves
+            // the problem of "how recent was recent?" tho with the tooltip.
+            [newItem setToolTip:[dateFormatter stringFromDate:downloadDate]];
+        }
         newItem.enabled = NO;
         [self.menuRecentTorrents.submenu addItem:newItem];
-    }];
+    }
     
     // Put the Show in finder menu back
     [self.menuRecentTorrents.submenu addItem:self.menuShowInFinder];
