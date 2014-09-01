@@ -209,11 +209,10 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
     NSError *error = nil;
     
     // Download!
-    NSData *downloadedFile = nil;
     NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:fileURL];
     NSURLResponse *urlResponse = NSURLResponse.new;
     NSError *downloadError = NSError.new;
-    downloadedFile = [NSURLConnection sendSynchronousRequest:urlRequest
+    NSData *downloadedFile = [NSURLConnection sendSynchronousRequest:urlRequest
                                            returningResponse:&urlResponse
                                                        error:&downloadError];
     
