@@ -14,12 +14,20 @@
 
 @property (strong, nonatomic) NSStatusItem *menuBarItem;
 
+@property (strong, nonatomic) NSDateFormatter *downloadDateFormatter;
+
 @end
 
 
 @implementation CTCMenuController
 
 - (void)awakeFromNib {
+    // Create a formatter for torrent download dates
+    self.downloadDateFormatter = NSDateFormatter.new;
+    self.downloadDateFormatter.timeStyle = NSDateFormatterShortStyle;
+    self.downloadDateFormatter.dateStyle = NSDateFormatterShortStyle;
+    self.downloadDateFormatter.doesRelativeDateFormatting = YES;
+    
     [self setupMenuItem];
     
     // Update UI with initial values
@@ -184,33 +192,63 @@
     // Clear menu
     [self.menuRecentTorrents.submenu removeAllItems];
     
-    // Create a formatter for torrent download dates
-    NSDateFormatter *dateFormatter = NSDateFormatter.new;
-    dateFormatter.timeStyle = NSDateFormatterShortStyle;
-    dateFormatter.dateStyle = NSDateFormatterShortStyle;
-    dateFormatter.doesRelativeDateFormatting = YES;
-    
     // Add new items
     [recents enumerateObjectsUsingBlock:^(NSDictionary *recent, NSUInteger index, BOOL *stop) {
         NSString *menuTitle = [NSString stringWithFormat:@"%lu %@", index + 1, recent[@"title"]];
-        NSMenuItem *newItem = [[NSMenuItem alloc] initWithTitle:menuTitle
+        NSMenuItem *recentMenuItem = [[NSMenuItem alloc] initWithTitle:menuTitle
                                                          action:NULL
                                                   keyEquivalent:@""];
-        NSDate *downloadDate = (NSDate *)recent[@"date"];
-        if (downloadDate) {
-            // it may be interesting to have a bit more structure or intelligence to showing the dates for recent
-            // items (just stuff this week based on preference?), or show the date in the list.. this solves
-            // the problem of "how recent was recent?" tho with the tooltip.
-            newItem.toolTip = [dateFormatter stringFromDate:downloadDate];
-        }
-        newItem.enabled = NO;
-        [self.menuRecentTorrents.submenu addItem:newItem];
+        
+        recentMenuItem.submenu = [self submenuForRecentItem:recent atIndex:index];
+        [self.menuRecentTorrents.submenu addItem:recentMenuItem];
     }];
     
     // Put the Show in finder menu back
     [self.menuRecentTorrents.submenu addItem:self.menuShowInFinder];
     
     self.menuRecentTorrents.enabled = YES;
+}
+
+- (NSMenu *)submenuForRecentItem:(NSDictionary *)recent atIndex:(NSUInteger)index {
+    NSMenu *submenu = NSMenu.new;
+    
+    // Create a "download again" item
+    NSMenuItem *downloadAgainItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"redownload", @"Button to download a downloaded torrent file again")
+                                                               action:@selector(downloadRecentItemAgain:)
+                                                        keyEquivalent:@""];
+    downloadAgainItem.target = self;
+    downloadAgainItem.tag = index;
+    [submenu addItem:downloadAgainItem];
+    
+    // Create a disabled item with the download date, if available
+    NSDate *downloadDate = (NSDate *)recent[@"date"];
+    if (downloadDate) {
+        // it may be interesting to have a bit more structure or intelligence to showing the dates for recent
+        // items (just stuff this week based on preference?), or show the date in the list.. this solves
+        // the problem of "how recent was recent?" tho with the tooltip.
+        NSString *relativeDownloadDateDescription = [self.downloadDateFormatter stringFromDate:downloadDate];
+        NSMenuItem *downloadDateItem = [[NSMenuItem alloc] initWithTitle:relativeDownloadDateDescription
+                                                                   action:NULL
+                                                            keyEquivalent:@""];
+        downloadAgainItem.enabled = NO;
+        [submenu addItem:downloadDateItem];
+    }
+    
+    return submenu;
+}
+
+- (void)downloadRecentItemAgain:(NSMenuItem *)senderMenuItem {
+    // First, figure out which one to redownload
+    NSDictionary *recentToDownload = CTCDefaults.downloadHistory[senderMenuItem.tag];
+    if (!recentToDownload) return;
+    
+    BOOL isMagnetLink = [recentToDownload[@"isMagnetLink"] boolValue];
+    if (isMagnetLink) {
+        [NSWorkspace.sharedWorkspace openURL:[NSURL URLWithString:recentToDownload[@"url"]]];
+    }
+    else {
+        [CTCScheduler.sharedScheduler downloadFile:recentToDownload];
+    }
 }
 
 - (BOOL)shouldUseTemplateMenubarIcons {

@@ -33,13 +33,13 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
                withReply:(CTCFeedCheckCompletionHandler)reply {
     NSLog(@"Checking feed");
     
+    NSError *error;
+    
     // Resolve the bookmark (that the main app gives us to transfer access to
     // the download folder) to a URL
-    NSURL *downloadFolderURL = [self URLFromBookmark:downloadFolderBookmark];
+    NSURL *downloadFolderURL = [self URLFromBookmark:downloadFolderBookmark error:&error];
     if (!downloadFolderURL) {
-        reply(@[], [NSError errorWithDomain:kCTCFeedCheckerErrorDomain
-                                       code:-4
-                                   userInfo:nil]);
+        reply(@[], error);
         return;
     }
     
@@ -64,7 +64,6 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
     }
     
     // Download the files
-    NSError *error;
     NSArray *downloadedFeedFiles = [self downloadFiles:feedFiles
                                                 toPath:downloadFolderPath
                                     organizingByFolder:shouldOrganizeByFolder
@@ -74,6 +73,36 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
     NSLog(@"All done");
     
     reply(downloadedFeedFiles, error);
+}
+
+- (void)downloadFile:(NSDictionary *)file
+          toBookmark:(NSData *)downloadFolderBookmark
+  organizingByFolder:(BOOL)shouldOrganizeByFolder
+           withReply:(CTCFeedCheckDownloadCompletionHandler)reply {
+    NSLog(@"Downloading single file: %@", file[@"url"]);
+    
+    NSError *error;
+    
+    // Resolve the bookmark (that the main app gives us to transfer access to
+    // the download folder) to a URL
+    NSURL *downloadFolderURL = [self URLFromBookmark:downloadFolderBookmark error:&error];
+    if (!downloadFolderURL) {
+        reply(error);
+        return;
+    }
+    
+    NSString *downloadFolderPath = downloadFolderURL.path;
+    
+    // Download the file
+    [self downloadFiles:@[file]
+                 toPath:downloadFolderPath
+     organizingByFolder:shouldOrganizeByFolder
+           skippingURLs:@[]
+                  error:&error];
+    
+    NSLog(@"All done");
+    
+    reply(error);
 }
 
 - (NSXMLDocument*)downloadFeed:(NSURL*)feedURL {
@@ -99,7 +128,7 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
     return document;
 }
 
-- (NSURL *)URLFromBookmark:(NSData *)bookmark {
+- (NSURL *)URLFromBookmark:(NSData *)bookmark error:(NSError * __autoreleasing *)outError {
     NSError *error = nil;
     BOOL isStale = NO;
     NSURL *URL = [NSURL URLByResolvingBookmarkData:bookmark
@@ -110,6 +139,7 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
     
     if (!URL || error) {
         NSLog(@"Could not get URL from bookmark: %@", error);
+        *outError = error;
         return nil;
     }
     
@@ -135,14 +165,14 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
         
         // The file is new, open magnet or download torrent
         if (isMagnetLink) {
-            NSLog(@"Found magnet %@ at %@", file[@"title"], url);
+            NSLog(@"Magnet: %@ at: %@", file[@"title"], url);
             
             [successfullyDownloadedFeedFiles addObject:@{@"url": file[@"url"],
                                                          @"title": file[@"title"],
                                                          @"isMagnetLink": @YES}];
         }
         else {
-            NSLog(@"Found file %@ at %@", file[@"title"], url);
+            NSLog(@"File: %@ at: %@", file[@"title"], url);
             
             // First get the folder, if we want it and it's available
             NSString *showName = shouldOrganizeByFolder && ![file[@"showName"] isEqualTo:NSNull.null] ? file[@"showName"] : nil;
