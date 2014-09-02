@@ -33,11 +33,12 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
                withReply:(CTCFeedCheckCompletionHandler)reply {
     NSLog(@"Checking feed");
     
-    NSError *error;
+    NSError *error = nil;
     
     // Resolve the bookmark (that the main app gives us to transfer access to
     // the download folder) to a URL
-    NSURL *downloadFolderURL = [self URLFromBookmark:downloadFolderBookmark error:&error];
+    NSURL *downloadFolderURL = [CTCFileUtils URLFromBookmark:downloadFolderBookmark
+                                                       error:&error];
     if (!downloadFolderURL) {
         reply(@[], error);
         return;
@@ -46,20 +47,22 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
     NSString *downloadFolderPath = downloadFolderURL.path;
     
     // Download the feed
-    NSXMLDocument *feed = [self downloadFeed:feedURL];
+    NSXMLDocument *feed = [self downloadFeed:feedURL error:&error];
     if (!feed) {
         reply(@[], [NSError errorWithDomain:kCTCFeedCheckerErrorDomain
-                                       code:-1
-                                   userInfo:nil]);
+                                       code:-5
+                                   userInfo:@{NSLocalizedDescriptionKey: @"Could not download feed",
+                                              NSUnderlyingErrorKey: error}]);
         return;
     }
     
     // Parse the feed for files
-    NSArray *feedFiles = [CTCFeedParser parseFiles:feed];
+    NSArray *feedFiles = [CTCFeedParser parseFiles:feed error:&error];
     if (!feedFiles) {
         reply(@[], [NSError errorWithDomain:kCTCFeedCheckerErrorDomain
-                                       code:-2
-                                   userInfo:nil]);
+                                       code:-6
+                                   userInfo:@{NSLocalizedDescriptionKey: @"Could not parse feed",
+                                              NSUnderlyingErrorKey: error}]);
         return;
     }
     
@@ -81,11 +84,12 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
            withReply:(CTCFeedCheckDownloadCompletionHandler)reply {
     NSLog(@"Downloading single file: %@", file[@"url"]);
     
-    NSError *error;
+    NSError *error = nil;
     
     // Resolve the bookmark (that the main app gives us to transfer access to
     // the download folder) to a URL
-    NSURL *downloadFolderURL = [self URLFromBookmark:downloadFolderBookmark error:&error];
+    NSURL *downloadFolderURL = [CTCFileUtils URLFromBookmark:downloadFolderBookmark
+                                                       error:&error];
     if (!downloadFolderURL) {
         reply(error);
         return;
@@ -105,7 +109,8 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
     reply(error);
 }
 
-- (NSXMLDocument*)downloadFeed:(NSURL*)feedURL {
+- (NSXMLDocument*)downloadFeed:(NSURL*)feedURL
+                         error:(NSError * __autoreleasing *)outError {
     NSLog(@"Downloading feed %@", feedURL);
     
     // Flush the cache, we want fresh results
@@ -119,7 +124,7 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
                                                                      error:&error];
     
     if (!document) {
-        NSLog(@"Feed download failed: %@", error);
+        *outError = error;
         return nil;
     }
     
@@ -128,29 +133,13 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
     return document;
 }
 
-- (NSURL *)URLFromBookmark:(NSData *)bookmark error:(NSError * __autoreleasing *)outError {
-    NSError *error = nil;
-    BOOL isStale = NO;
-    NSURL *URL = [NSURL URLByResolvingBookmarkData:bookmark
-                                           options:kNilOptions
-                                     relativeToURL:nil
-                               bookmarkDataIsStale:&isStale
-                                             error:&error];
-    
-    if (!URL || error) {
-        NSLog(@"Could not get URL from bookmark: %@", error);
-        *outError = error;
-        return nil;
-    }
-    
-    return URL;
-}
-
 - (NSArray *)downloadFiles:(NSArray *)feedFiles
                     toPath:(NSString *)downloadPath
         organizingByFolder:(BOOL)shouldOrganizeByFolder
               skippingURLs:(NSArray *)previouslyDownloadedURLs
-                     error:(NSError * __autoreleasing *)error {
+                     error:(NSError * __autoreleasing *)outError {
+    NSError *error = nil;
+    
     NSLog(@"Downloading files (if needed)");
     
     NSMutableArray *successfullyDownloadedFeedFiles = NSMutableArray.array;
@@ -179,18 +168,17 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
             
             NSString *downloadedTorrentFile = [self downloadFile:[NSURL URLWithString:url]
                                                           toPath:downloadPath
-                                                    withShowName:showName];
+                                                    withShowName:showName
+                                                           error:&error];
             if (downloadedTorrentFile) {
-                [successfullyDownloadedFeedFiles addObject:@{@"url": file[@"url"],
+                [successfullyDownloadedFeedFiles addObject:@{@"url": url,
                                                              @"title": file[@"title"],
                                                              @"isMagnetLink": @NO,
                                                              @"torrentFilePath": downloadedTorrentFile}];
             }
             else {
-                NSLog(@"Could not download %@", url);
-                *error = [NSError errorWithDomain:kCTCFeedCheckerErrorDomain
-                                             code:-3
-                                         userInfo:nil];
+                NSLog(@"Could not download %@: %@", url, error);
+                *outError = error;
             }
         }
     }
@@ -200,7 +188,8 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
 
 - (NSString *)downloadFile:(NSURL *)fileURL
                     toPath:(NSString *)downloadPath
-              withShowName:(NSString *)showName {
+              withShowName:(NSString *)showName
+                     error:(NSError * __autoreleasing *)outError {
     NSString *folder = [CTCFileUtils folderNameForShowWithName:showName];
     
     if (folder) NSLog(@"Downloading file %@ in folder %@",fileURL,folder);
@@ -211,12 +200,17 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
     // Download!
     NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:fileURL];
     NSURLResponse *urlResponse = NSURLResponse.new;
-    NSError *downloadError = NSError.new;
     NSData *downloadedFile = [NSURLConnection sendSynchronousRequest:urlRequest
                                            returningResponse:&urlResponse
-                                                       error:&downloadError];
+                                                       error:&error];
     
-    if (!downloadedFile) return nil;
+    if (!downloadedFile) {
+        *outError = [NSError errorWithDomain:kCTCFeedCheckerErrorDomain
+                                        code:-1
+                                    userInfo:@{NSLocalizedDescriptionKey: @"Could not download file",
+                                               NSUnderlyingErrorKey: error}];
+        return nil;
+    }
     
     NSLog(@"Download complete, filesize: %lu", (unsigned long)downloadedFile.length);
     
@@ -238,6 +232,10 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
                                            isDirectory:&pathAndFolderIsDirectory]) {
         if (!pathAndFolderIsDirectory) {
             // Exists but isn't a directory! Aaargh! Abort!
+            NSString *errorDescription = [NSString stringWithFormat:@"Download path is not a directory: %@", pathAndFolder];
+            *outError = [NSError errorWithDomain:kCTCFeedCheckerErrorDomain
+                                            code:-2
+                                        userInfo:@{NSLocalizedDescriptionKey: errorDescription}];
             return nil;
         }
     }
@@ -248,7 +246,11 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
                                                       attributes:nil
                                                            error:&error]) {
             // Folder creation failed :( Abort
-            NSLog(@"Couldn't create folder %@", pathAndFolder);
+            NSString *errorDescription = [NSString stringWithFormat:@"Couldn't create folder: %@", pathAndFolder];
+            *outError = [NSError errorWithDomain:kCTCFeedCheckerErrorDomain
+                                            code:-3
+                                        userInfo:@{NSLocalizedDescriptionKey: errorDescription,
+                                                   NSUnderlyingErrorKey: error}];
             return nil;
         }
         else {
@@ -258,9 +260,14 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
     
     // Write!
     BOOL wasWrittenSuccessfully = [downloadedFile writeToFile:pathAndFilename
-                                                   atomically:YES];
+                                                      options:NSDataWritingAtomic
+                                                        error:&error];
     if (!wasWrittenSuccessfully) {
-        NSLog(@"Couldn't save file %@ to disk", pathAndFilename);
+        NSString *errorDescription = [NSString stringWithFormat:@"Couldn't save file to disk: %@", pathAndFolder];
+        *outError = [NSError errorWithDomain:kCTCFeedCheckerErrorDomain
+                                        code:-4
+                                    userInfo:@{NSLocalizedDescriptionKey: errorDescription,
+                                               NSUnderlyingErrorKey: error}];
         return nil;
     }
     
