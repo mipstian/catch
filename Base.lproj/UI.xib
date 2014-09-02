@@ -486,7 +486,7 @@ DQ
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="aBG-Wd-Mnw">
-                                                            <rect key="frame" x="0.0" y="0.0" width="385" height="57"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="380" height="57"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="cu4-uA-Wyj" userLabel="Torrent Name Text Field">
                                                                     <rect key="frame" x="6" y="32" width="85" height="17"/>
@@ -531,7 +531,7 @@ DQ
                                                         <constraint firstAttribute="centerY" secondItem="qnB-n2-sX0" secondAttribute="centerY" id="TDz-lx-2xc"/>
                                                         <constraint firstItem="aBG-Wd-Mnw" firstAttribute="leading" secondItem="W93-2s-nQP" secondAttribute="leading" id="UOi-Zq-YaY"/>
                                                         <constraint firstItem="aBG-Wd-Mnw" firstAttribute="top" secondItem="W93-2s-nQP" secondAttribute="top" id="mdR-52-FOa"/>
-                                                        <constraint firstItem="qnB-n2-sX0" firstAttribute="leading" secondItem="aBG-Wd-Mnw" secondAttribute="trailing" id="uBs-q4-tYG"/>
+                                                        <constraint firstItem="qnB-n2-sX0" firstAttribute="leading" secondItem="aBG-Wd-Mnw" secondAttribute="trailing" constant="5" id="uBs-q4-tYG"/>
                                                     </constraints>
                                                     <connections>
                                                         <outlet property="downloadDateTextField" destination="5JR-n0-9Xs" id="vuY-fr-LVs"/>
