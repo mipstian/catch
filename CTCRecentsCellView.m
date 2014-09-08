@@ -1,6 +1,4 @@
 #import "CTCRecentsCellView.h"
 
 
-@implementation CTCRecentsCellView
-
-@end
+@implementation CTCRecentsCellView @end
