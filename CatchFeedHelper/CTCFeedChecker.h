@@ -4,7 +4,8 @@
 extern NSString *kCTCFeedCheckerErrorDomain;
 typedef void (^CTCFeedCheckCompletionHandler)(NSArray *downloadedFeedFiles,
                                               NSError *error);
-typedef void (^CTCFeedCheckDownloadCompletionHandler)(NSError *error);
+typedef void (^CTCFeedCheckDownloadCompletionHandler)(NSDictionary *downloadedFile,
+                                                      NSError *error);
 
 
 @protocol CTCFeedCheck
