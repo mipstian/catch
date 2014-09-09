@@ -76,10 +76,6 @@
     NSDate *downloadDate = (NSDate *)recent[@"date"];
     cell.downloadDateTextField.stringValue = downloadDate ? [self.downloadDateFormatter stringFromDate:downloadDate] : @"";
     
-    BOOL isMagnetLink = [recent[@"isMagnetLink"] boolValue];
-    cell.downloadAgainButton.image = isMagnetLink ?
-        [NSImage imageNamed:@"NSRevealFreestandingTemplate"] :
-        [NSImage imageNamed:@"NSRefreshFreestandingTemplate"];
     return cell;
 }
 
