@@ -188,7 +188,9 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
                    toBookmark:[self downloadFolderBookmark]
            organizingByFolder:CTCDefaults.shouldOrganizeTorrentsInFolders
                     withReply:^(NSDictionary *downloadedFile, NSError *error) {
-                        completion(downloadedFile, error);
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            completion(downloadedFile, error);
+                        });
     }];
 }
 
