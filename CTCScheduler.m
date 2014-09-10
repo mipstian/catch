@@ -1,6 +1,7 @@
 #import "CTCScheduler.h"
 #import "CTCFeedChecker.h"
 #import "CTCDefaults.h"
+#import "CTCFileUtils.h"
 #import "NSDate+TimeOfDayMath.h"
 
 
@@ -81,6 +82,7 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 
 - (void)setPolling:(BOOL)polling {
     _polling = polling;
+    
     [self reportStatus];
 }
 
@@ -108,23 +110,17 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 }
 
 - (NSData *)downloadFolderBookmark {
-    NSString *downloadPath = CTCDefaults.torrentsSavePath;
+    NSError *error;
+    NSURL *url = [NSURL fileURLWithPath:CTCDefaults.torrentsSavePath];
+    NSData *bookmark = [CTCFileUtils bookmarkForURL:url error:&error];
     
-    // Create a bookmark so we can transfer access to the downloads path
-    // to the feed checker service
-    NSURL *downloadFolderURL = [NSURL fileURLWithPath:downloadPath];
-    NSError *error = nil;
-    NSData *downloadFolderBookmark = [downloadFolderURL bookmarkDataWithOptions:NSURLBookmarkCreationMinimalBookmark
-                                                 includingResourceValuesForKeys:@[]
-                                                                  relativeToURL:nil
-                                                                          error:&error];
-    if (!downloadFolderBookmark || error) {
-        // Not really handling this error
+    if (!bookmark) {
+        // Not really handling this at all
         [NSException raise:@"Couldn't create bookmark for downloads folder"
                     format:@"Error: %@", error];
     }
     
-    return downloadFolderBookmark;
+    return bookmark;
 }
 
 - (void)callFeedCheckerWithReplyHandler:(CTCFeedCheckCompletionHandler)replyHandler {
@@ -143,6 +139,9 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
                organizingByFolder:CTCDefaults.shouldOrganizeTorrentsInFolders
                      skippingURLs:previouslyDownloadedURLs
                         withReply:^(NSArray *downloadedFeedFiles, NSError *error) {
+                            if (error) {
+                                NSLog(@"Feed Checker error (checking feed): %@", error);
+                            }
                             dispatch_async(dispatch_get_main_queue(), ^{
                                 replyHandler(downloadedFeedFiles, error);
                             });
@@ -181,14 +180,20 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
     [self checkFeed];
 }
 
-- (void)downloadFile:(NSDictionary *)file {
+- (void)downloadFile:(NSDictionary *)file
+          completion:(void (^)(NSDictionary *downloadedFile, NSError *error))completion {
     // Call feed checker service
     CTCFeedChecker *feedChecker = [self.feedCheckerConnection remoteObjectProxy];
     [feedChecker downloadFile:file
                    toBookmark:[self downloadFolderBookmark]
            organizingByFolder:CTCDefaults.shouldOrganizeTorrentsInFolders
-                    withReply:^(NSError *error) {
-                        // TODO
+                    withReply:^(NSDictionary *downloadedFile, NSError *error) {
+                        if (error) {
+                            NSLog(@"Feed Checker error (downloading file): %@", error);
+                        }
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            completion(downloadedFile, error);
+                        });
     }];
 }
 

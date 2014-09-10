@@ -16,6 +16,7 @@
 		38F9B09111C98E9E0021C540 /* Automator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38F9B09011C98E9E0021C540 /* Automator.framework */; };
 		4403ACF41914041C002F286C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4403ACF31914041C002F286C /* Assets.xcassets */; };
 		441297D417FE285500E9E21E /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 448CC7E617FE1F840063D3FD /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		4439DFDA19B5E48100408851 /* CTCRecentsCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4439DFD919B5E48100408851 /* CTCRecentsCellView.m */; };
 		4456EE611916D20000B3FF1A /* NSDate+TimeOfDayMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 4456EE601916D20000B3FF1A /* NSDate+TimeOfDayMath.m */; };
 		4456EE651916F17F00B3FF1A /* CTCBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4456EE641916F17F00B3FF1A /* CTCBrowser.m */; };
 		445D97A6191579C7006CD77C /* UI.strings in Resources */ = {isa = PBXBuildFile; fileRef = 445D97A4191579C7006CD77C /* UI.strings */; };
@@ -110,6 +111,8 @@
 		4403ACF31914041C002F286C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4412E8161957F09200701124 /* com.giorgiocalderolla.Catch.CatchFeedHelper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = com.giorgiocalderolla.Catch.CatchFeedHelper.entitlements; sourceTree = "<group>"; };
 		4419CF37180627A900C77432 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4439DFD819B5E48100408851 /* CTCRecentsCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCRecentsCellView.h; sourceTree = "<group>"; };
+		4439DFD919B5E48100408851 /* CTCRecentsCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCRecentsCellView.m; sourceTree = "<group>"; };
 		4456EE5F1916D20000B3FF1A /* NSDate+TimeOfDayMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeOfDayMath.h"; sourceTree = "<group>"; };
 		4456EE601916D20000B3FF1A /* NSDate+TimeOfDayMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeOfDayMath.m"; sourceTree = "<group>"; };
 		4456EE631916F17F00B3FF1A /* CTCBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCBrowser.h; sourceTree = "<group>"; };
@@ -195,6 +198,7 @@
 			children = (
 				4456EE681916F1BB00B3FF1A /* Application */,
 				4456EE661916F1A600B3FF1A /* Controllers */,
+				4439DFD719B5E45700408851 /* Views */,
 				4456EE671916F1B100B3FF1A /* Libraries */,
 				4456EE621916D2E700B3FF1A /* Categories */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -260,6 +264,15 @@
 				446D8B571918D146007AB22D /* XCTest.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4439DFD719B5E45700408851 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4439DFD819B5E48100408851 /* CTCRecentsCellView.h */,
+				4439DFD919B5E48100408851 /* CTCRecentsCellView.m */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		4456EE621916D2E700B3FF1A /* Categories */ = {
@@ -547,6 +560,7 @@
 				44FBC67E196316E900434B01 /* NSWindow+ShakeAnimation.m in Sources */,
 				44717AA71913072200580054 /* CTCLoginItems.m in Sources */,
 				3803C7EC11C3E7AD00FC08DB /* CTCScheduler.m in Sources */,
+				4439DFDA19B5E48100408851 /* CTCRecentsCellView.m in Sources */,
 				44717AAA1913173600580054 /* CTCFileUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
