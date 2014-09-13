@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6206.9" systemVersion="14A343f" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6246" systemVersion="14A343f" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="1080" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6206.9"/>
-        <plugIn identifier="com.apple.automator.AutomatorPalette" version="6206.9"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6246"/>
+        <plugIn identifier="com.apple.automator.AutomatorPalette" version="6246"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -44,14 +44,14 @@
         <userDefaultsController representsSharedInstance="YES" id="658"/>
         <menu autoenablesItems="NO" id="523">
             <items>
-                <menuItem title="Launch ShowRSS website" id="524">
+                <menuItem title="Launch ShowRSS" id="524">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="browseService:" target="0bd-Z3-ggh" id="pwn-oH-6nE"/>
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="531"/>
-                <menuItem title="Recently downloaded torrents..." id="537">
+                <menuItem title="Recent episodes..." id="537">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="showWindow:" target="zvH-gu-SiD" id="woM-Jh-Pl1"/>
@@ -247,22 +247,22 @@
                                             <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                             <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </box>
-                                        <box autoresizesSubviews="NO" title="Torrents" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="622">
+                                        <box autoresizesSubviews="NO" title="Torrent Files" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="622">
                                             <rect key="frame" x="-3" y="-4" width="666" height="123"/>
                                             <view key="contentView">
                                                 <rect key="frame" x="1" y="1" width="664" height="107"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="625">
-                                                        <rect key="frame" x="15" y="75" width="107" height="17"/>
-                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Save torrents to:" id="632">
+                                                        <rect key="frame" x="15" y="75" width="55" height="17"/>
+                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Save to:" id="632">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                         </textFieldCell>
                                                     </textField>
                                                     <amPathPopUpButton verticalHuggingPriority="750" canChooseDirectories="YES" canChooseExistingPaths="YES" placeholder="No Selection" translatesAutoresizingMaskIntoConstraints="NO" id="791">
-                                                        <rect key="frame" x="126" y="69" width="205" height="26"/>
+                                                        <rect key="frame" x="74" y="69" width="205" height="26"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="lfS-iv-ge7"/>
                                                         </constraints>
@@ -276,8 +276,8 @@
                                                         </connections>
                                                     </amPathPopUpButton>
                                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="624">
-                                                        <rect key="frame" x="15" y="36" width="283" height="18"/>
-                                                        <buttonCell key="cell" type="check" title="Organize torrents in folders by show name" bezelStyle="regularSquare" imagePosition="left" alignment="left" lineBreakMode="truncatingTail" state="on" inset="2" id="633">
+                                                        <rect key="frame" x="15" y="36" width="231" height="18"/>
+                                                        <buttonCell key="cell" type="check" title="Organize in folders by show name" bezelStyle="regularSquare" imagePosition="left" alignment="left" lineBreakMode="truncatingTail" state="on" inset="2" id="633">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>
@@ -286,8 +286,8 @@
                                                         </connections>
                                                     </button>
                                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="623">
-                                                        <rect key="frame" x="15" y="16" width="193" height="18"/>
-                                                        <buttonCell key="cell" type="check" title="Open torrents automatically" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="634">
+                                                        <rect key="frame" x="15" y="16" width="142" height="18"/>
+                                                        <buttonCell key="cell" type="check" title="Open automatically" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="634">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" metaFont="system"/>
                                                         </buttonCell>
@@ -296,7 +296,7 @@
                                                         </connections>
                                                     </button>
                                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fwJ-Gq-K1U">
-                                                        <rect key="frame" x="343" y="78" width="9" height="9"/>
+                                                        <rect key="frame" x="291" y="78" width="9" height="9"/>
                                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="warning" id="QCG-2j-VVy"/>
                                                     </imageView>
                                                 </subviews>
@@ -447,7 +447,7 @@ DQ
             </toolbar>
         </window>
         <customObject id="392" customClass="NSFontManager"/>
-        <window title="Recently Downloaded Torrents" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="aQN-n7-TBr" customClass="NSPanel">
+        <window title="Recent Episodes" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="aQN-n7-TBr" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="120" y="64" width="409" height="435"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
