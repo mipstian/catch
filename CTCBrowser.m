@@ -29,4 +29,13 @@
     [NSWorkspace.sharedWorkspace openURL:[NSURL URLWithString:kCTCDefaultsApplicationBugReportURL]];
 }
 
++ (void)openInBackgroundURL:(NSURL *)url {
+    // Open a link without bringing app that handles it to the foreground
+    [NSWorkspace.sharedWorkspace openURLs:@[url]
+                  withAppBundleIdentifier:nil
+                                  options:NSWorkspaceLaunchWithoutActivation
+           additionalEventParamDescriptor:nil
+                        launchIdentifiers:nil];
+}
+
 @end

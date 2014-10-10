@@ -1,4 +1,8 @@
 #import <Foundation/Foundation.h>
 
 
-@interface CTCBrowser : NSObject @end
+@interface CTCBrowser : NSObject
+
++ (void)openInBackgroundURL:(NSURL *)url;
+
+@end
