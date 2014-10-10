@@ -70,13 +70,6 @@
                                                 usingBlock:handleSchedulerLastUpdateStatusChange];
 }
 
-- (IBAction)openTorrentFolder:(id)sender {
-    if (!CTCDefaults.isConfigurationValid) return;
-    
-    // Launch finder with the torrent folder open
-    [NSWorkspace.sharedWorkspace openFile:CTCDefaults.torrentsSavePath];
-}
-
 - (IBAction)checkNow:(id)sender {
     [CTCScheduler.sharedScheduler forceCheck];
 }
