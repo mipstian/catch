@@ -7,6 +7,33 @@
     <pubDate>Sun, 08 Aug 2010 22:51:00 +0100</pubDate>
     
     <item>
+        <title>Catch 1.9</title>
+        <pubDate>Fri, 10 Oct 2014 20:27:13 +0200</pubDate>
+        <description><![CDATA[
+            <h2>Changes:</h2>
+            <ul>
+            <li>Compatibility with OS X 10.10 Yosemite</li>
+                <ul>
+                <li>New menubar icons</li>
+                <li>Support for dark mode</li>
+                </ul>
+            <li>New Recently downloaded torrents window</li>
+                <ul>
+                <li>See when each torrent was downloaded</li>
+                <li>Re-download any item</li>
+                </ul>
+            <li>Allow system sleep when Catch is paused</li>
+            <li>Misc internal improvements</li>
+            </ul>
+        ]]></description>
+        <enclosure
+        url="https://github.com/mipstian/catch/releases/download/1.9/Catch-1.9.zip"
+        sparkle:version="1.9"
+        type="application/octet-stream"/>
+        <sparkle:minimumSystemVersion>10.8.0</sparkle:minimumSystemVersion>
+    </item>
+    
+    <item>
         <title>Catch 1.8</title>
         <pubDate>Sun, 13 Jul 2014 18:51:05 +0200</pubDate>
         <description><![CDATA[
