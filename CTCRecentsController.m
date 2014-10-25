@@ -32,7 +32,7 @@
                                                     object:CTCScheduler.sharedScheduler
                                                      queue:nil
                                                 usingBlock:^(NSNotification *notification) {
-                                                    [weakSelf.table reloadData];
+                                                    if (weakSelf) [weakSelf.table reloadData];
                                                 }];
 }
 

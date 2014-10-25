@@ -51,13 +51,13 @@
     __weak typeof(self) weakSelf = self;
     
     void (^handleSchedulerStatusChange)(NSNotification *) = ^(NSNotification *notification) {
-        [weakSelf refreshSchedulerStatus];
+        if (weakSelf) [weakSelf refreshSchedulerStatus];
     };
     
     void (^handleSchedulerLastUpdateStatusChange)(NSNotification *) = ^(NSNotification *notification) {
         BOOL wasSuccessful = [notification.userInfo[@"successful"] boolValue];
         NSDate *lastUpdateDate = notification.userInfo[@"time"];
-        [weakSelf setLastUpdateStatus:wasSuccessful time:lastUpdateDate];
+        if (weakSelf) [weakSelf setLastUpdateStatus:wasSuccessful time:lastUpdateDate];
     };
     
     [NSNotificationCenter.defaultCenter addObserverForName:kCTCSchedulerStatusNotificationName
