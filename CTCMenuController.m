@@ -20,6 +20,9 @@
 @implementation CTCMenuController
 
 - (void)awakeFromNib {
+    // Skip setup if we're running headless
+    if (CTCDefaults.shouldRunHeadless) return;
+    
     // Create a date formatter for "last update" dates
     self.lastUpdateDateFormatter = NSDateFormatter.new;
     self.lastUpdateDateFormatter.timeStyle = NSDateFormatterShortStyle;

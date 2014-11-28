@@ -24,6 +24,7 @@ NSString * const kCTCDefaultsShouldOpenTorrentsAutomatically = @"openAutomatical
 NSString * const kCTCDefaultsDownloadedFilesKey = @"downloadedFiles"; // Deprecated
 NSString * const kCTCDefaultsDownloadHistoryKey = @"history";
 NSString * const kCTCDefaultsOpenAtLoginKey = @"openAtLogin";
+NSString * const kCTCDefaultsShouldRunHeadless = @"headless";
 
 
 @implementation CTCDefaults
@@ -174,6 +175,10 @@ NSString * const kCTCDefaultsOpenAtLoginKey = @"openAtLogin";
 + (void)setDownloadHistory:(NSArray *)downloadHistory {
     [NSUserDefaults.standardUserDefaults setObject:downloadHistory
                                             forKey:kCTCDefaultsDownloadHistoryKey];
+}
+
++ (BOOL)shouldRunHeadless {
+    return [NSUserDefaults.standardUserDefaults boolForKey:kCTCDefaultsShouldRunHeadless];
 }
 
 @end

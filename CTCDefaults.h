@@ -46,4 +46,6 @@ extern NSString * const kCTCDefaultsServiceFeedURLPrefix;
 
 + (void)setDownloadHistory:(NSArray *)downloadHistory;
 
++ (BOOL)shouldRunHeadless;
+
 @end
