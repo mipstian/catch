@@ -29,7 +29,7 @@
                                @"showName": showName ?: NSNull.null}];
     }
     
-    NSLog(@"Parsed %lu files: %@", (unsigned long)fileNodes.count, feedFiles);
+    NSLog(@"Parsed %lu files", (unsigned long)fileNodes.count);
     
     return feedFiles;
 }
