@@ -82,7 +82,7 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
           toBookmark:(NSData *)downloadFolderBookmark
   organizingByFolder:(BOOL)shouldOrganizeByFolder
            withReply:(CTCFeedCheckDownloadCompletionHandler)reply {
-    NSLog(@"Downloading single file: %@", file[@"url"]);
+    NSLog(@"Downloading single file");
     
     NSError *error = nil;
     
@@ -154,15 +154,11 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
         
         // The file is new, open magnet or download torrent
         if (isMagnetLink) {
-            NSLog(@"Magnet: %@ at: %@", file[@"title"], url);
-            
             [successfullyDownloadedFeedFiles addObject:@{@"url": file[@"url"],
                                                          @"title": file[@"title"],
                                                          @"isMagnetLink": @YES}];
         }
         else {
-            NSLog(@"File: %@ at: %@", file[@"title"], url);
-            
             // First get the folder, if we want it and it's available
             NSString *showName = shouldOrganizeByFolder && ![file[@"showName"] isEqualTo:NSNull.null] ? file[@"showName"] : nil;
             
@@ -192,8 +188,8 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
                      error:(NSError * __autoreleasing *)outError {
     NSString *folder = [CTCFileUtils folderNameForShowWithName:showName];
     
-    if (folder) NSLog(@"Downloading file %@ in folder %@",fileURL,folder);
-    else NSLog(@"Downloading file %@",fileURL);
+    if (folder) NSLog(@"Downloading file to folder %@", folder);
+    else NSLog(@"Downloading file");
     
     NSError *error = nil;
     
@@ -223,8 +219,6 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
     NSString *pathAndFolder = [NSString pathWithComponents:pathComponents].stringByStandardizingPath;
     pathComponents = [pathComponents arrayByAddingObject:filename];
     NSString *pathAndFilename = [NSString pathWithComponents:pathComponents].stringByStandardizingPath;
-    
-    NSLog(@"Computed file destination %@", pathAndFilename);
     
     // Check if the destination dir exists, if it doesn't create it
     BOOL pathAndFolderIsDirectory = NO;
