@@ -1,12 +1,12 @@
 /* Don't remove %@ signs or you'll break the application */
 
 // in menu:
-"pause"="Pause"; // this is a verb
+"pause"="Pausieren"; // this is a verb
 "resume"="Fortsetzen"; // this is a verb
-"lastupdate"="Letztes update: %@"; // %@ will be replaced by update time
-"lastupdatefailed"="Letzes update (fehlgeschlagen): %@"; // %@ will be replaced by update time
+"lastupdate"="Letztes Update: %@"; // %@ will be replaced by update time
+"lastupdatefailed"="Letztes Update (fehlgeschlagen): %@"; // %@ will be replaced by update time
 "never"="Noch nie"; // this is for the last update time, meaning "I still haven't made one"
 "updatingnow"="Updatet jetzt...";
 // for notifications:
-"newtorrent"="Neues torrent heruntergeladen";
+"newtorrent"="Neuer Torrent heruntergeladen";
 "newtorrentdesc"="Torrent %@ wurde heruntergeladen!"; // %@ will be replaced by filename
