@@ -14,6 +14,7 @@ Features:
 
   * ShowRSS client
   * Magnet support
+  * HTTPS support
   * Very low Processor/Memory usage
   * Only check your feed at night or in whatever period you choose
   * Organize torrents in folders based on show name
