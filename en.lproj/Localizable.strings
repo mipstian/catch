@@ -3,10 +3,10 @@
 // in menu:
 "pause"="Pause";
 "resume"="Resume";
-"lastupdate"="Last update: %@"; // %@ will be replaced by update time
-"lastupdatefailed"="Last update (failed): %@"; // %@ will be replaced by update time
+"lastupdate"="Last Update: %@"; // %@ will be replaced by update time
+"lastupdatefailed"="Last Update (Failed): %@"; // %@ will be replaced by update time
 "never"="Never"; // this is for the last update time, meaning "I still haven't made one"
-"updatingnow"="Updating now...";
+"updatingnow"="Updating Now...";
 // for notifications:
 "newtorrent"="New episode";
 "newtorrentdesc"="Episode %@ has been added!"; // %@ will be replaced by filename

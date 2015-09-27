@@ -52,7 +52,7 @@
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="531"/>
-                <menuItem title="Recent episodes..." id="537">
+                <menuItem title="Recent Episodes..." id="537">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="showWindow:" target="zvH-gu-SiD" id="woM-Jh-Pl1"/>
@@ -62,7 +62,7 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="654"/>
-                <menuItem title="Check now" id="655">
+                <menuItem title="Check Now" id="655">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="checkNow:" target="528" id="802"/>
@@ -79,25 +79,25 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Menu" id="534">
                         <items>
-                            <menuItem title="Visit Catch's website" id="535">
+                            <menuItem title="Visit Catch's Website" id="535">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="browseWebsite:" target="0bd-Z3-ggh" id="81M-az-HxY"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Help me configure Catch" id="542">
+                            <menuItem title="Help Me Configure Catch" id="542">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="browseHelp:" target="0bd-Z3-ggh" id="xMW-QJ-68b"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Request a feature" id="543">
+                            <menuItem title="Request a Feature" id="543">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="browseFeatureRequest:" target="0bd-Z3-ggh" id="wvP-CT-Gzl"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Report a problem with Catch" id="544">
+                            <menuItem title="Report a Problem with Catch" id="544">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="browseBugReport:" target="0bd-Z3-ggh" id="BdU-90-Wwd"/>
@@ -398,12 +398,12 @@
                         </connections>
                     </tabView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="y8v-DN-YZd">
-                        <rect key="frame" x="205" y="20" width="291" height="21"/>
+                        <rect key="frame" x="204" y="20" width="293" height="21"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="555">
-                                <rect key="frame" x="-6" y="-7" width="191" height="32"/>
+                                <rect key="frame" x="-6" y="-7" width="193" height="32"/>
                                 <animations/>
-                                <buttonCell key="cell" type="push" title="Help me configure Catch" bezelStyle="rounded" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="592">
+                                <buttonCell key="cell" type="push" title="Help Me Configure Catch" bezelStyle="rounded" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="592">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -412,7 +412,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="554">
-                                <rect key="frame" x="185" y="-7" width="112" height="32"/>
+                                <rect key="frame" x="187" y="-7" width="112" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="cuA-Cg-NwE"/>
                                 </constraints>
