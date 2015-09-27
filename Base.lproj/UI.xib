@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6246" systemVersion="14A343f" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8191" systemVersion="15A282b" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6246"/>
-        <plugIn identifier="com.apple.automator.AutomatorPalette" version="6246"/>
+        <development version="6300" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
+        <plugIn identifier="com.apple.automator.AutomatorPalette" version="8191"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -132,6 +133,7 @@
                 <subviews>
                     <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="616">
                         <rect key="frame" x="20" y="61" width="660" height="236"/>
+                        <animations/>
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
                             <tabViewItem label="Feed" identifier="Feed" id="617">
@@ -146,7 +148,8 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="785">
-                                                        <rect key="frame" x="15" y="64" width="70" height="17"/>
+                                                        <rect key="frame" x="15" y="64" width="67" height="17"/>
+                                                        <animations/>
                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Feed URL:" id="786">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -154,7 +157,8 @@
                                                         </textFieldCell>
                                                     </textField>
                                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="787">
-                                                        <rect key="frame" x="91" y="61" width="532" height="22"/>
+                                                        <rect key="frame" x="88" y="61" width="535" height="22"/>
+                                                        <animations/>
                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="http://showrss.info/rss.php?..." drawsBackground="YES" id="788">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -170,10 +174,12 @@
                                                     </textField>
                                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lIi-CM-MqY">
                                                         <rect key="frame" x="638" y="68" width="9" height="9"/>
+                                                        <animations/>
                                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="warning" id="Rda-Ff-O9x"/>
                                                     </imageView>
                                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="638">
-                                                        <rect key="frame" x="15" y="20" width="179" height="18"/>
+                                                        <rect key="frame" x="15" y="20" width="176" height="18"/>
+                                                        <animations/>
                                                         <buttonCell key="cell" type="check" title="Only check feed between" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="645">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" metaFont="system"/>
@@ -183,7 +189,8 @@
                                                         </connections>
                                                     </button>
                                                     <datePicker verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="637">
-                                                        <rect key="frame" x="200" y="18" width="83" height="27"/>
+                                                        <rect key="frame" x="197" y="18" width="83" height="27"/>
+                                                        <animations/>
                                                         <datePickerCell key="cell" borderStyle="bezel" alignment="left" id="646">
                                                             <font key="font" metaFont="system"/>
                                                             <date key="date" timeIntervalSinceReferenceDate="-595911600">
@@ -199,7 +206,8 @@
                                                         </connections>
                                                     </datePicker>
                                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="636">
-                                                        <rect key="frame" x="286" y="21" width="28" height="17"/>
+                                                        <rect key="frame" x="283" y="21" width="27" height="17"/>
+                                                        <animations/>
                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="and" id="647">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -207,7 +215,8 @@
                                                         </textFieldCell>
                                                     </textField>
                                                     <datePicker verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="635">
-                                                        <rect key="frame" x="320" y="18" width="83" height="27"/>
+                                                        <rect key="frame" x="316" y="18" width="83" height="27"/>
+                                                        <animations/>
                                                         <datePickerCell key="cell" borderStyle="bezel" alignment="left" id="648">
                                                             <font key="font" metaFont="system"/>
                                                             <date key="date" timeIntervalSinceReferenceDate="-590868000">
@@ -223,6 +232,7 @@
                                                         </connections>
                                                     </datePicker>
                                                 </subviews>
+                                                <animations/>
                                             </view>
                                             <constraints>
                                                 <constraint firstItem="lIi-CM-MqY" firstAttribute="leading" secondItem="787" secondAttribute="trailing" constant="15" id="4Ny-mo-Jgz"/>
@@ -244,6 +254,7 @@
                                                 <constraint firstItem="636" firstAttribute="baseline" secondItem="638" secondAttribute="baseline" id="trN-nh-5Er"/>
                                                 <constraint firstItem="785" firstAttribute="leading" secondItem="638" secondAttribute="leading" id="vbo-cS-Ydp"/>
                                             </constraints>
+                                            <animations/>
                                             <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                             <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </box>
@@ -254,7 +265,8 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="625">
-                                                        <rect key="frame" x="15" y="75" width="55" height="17"/>
+                                                        <rect key="frame" x="15" y="75" width="53" height="17"/>
+                                                        <animations/>
                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Save to:" id="632">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -262,10 +274,11 @@
                                                         </textFieldCell>
                                                     </textField>
                                                     <amPathPopUpButton verticalHuggingPriority="750" canChooseDirectories="YES" canChooseExistingPaths="YES" placeholder="No Selection" translatesAutoresizingMaskIntoConstraints="NO" id="791">
-                                                        <rect key="frame" x="74" y="69" width="205" height="26"/>
+                                                        <rect key="frame" x="72" y="69" width="205" height="26"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="lfS-iv-ge7"/>
                                                         </constraints>
+                                                        <animations/>
                                                         <amVariablePopUpButtonCell key="cell" type="push" title="Desktop" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" tag="1004" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="794">
                                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="menu"/>
@@ -276,7 +289,8 @@
                                                         </connections>
                                                     </amPathPopUpButton>
                                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="624">
-                                                        <rect key="frame" x="15" y="36" width="231" height="18"/>
+                                                        <rect key="frame" x="15" y="36" width="227" height="18"/>
+                                                        <animations/>
                                                         <buttonCell key="cell" type="check" title="Organize in folders by show name" bezelStyle="regularSquare" imagePosition="left" alignment="left" lineBreakMode="truncatingTail" state="on" inset="2" id="633">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" metaFont="system"/>
@@ -286,7 +300,8 @@
                                                         </connections>
                                                     </button>
                                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="623">
-                                                        <rect key="frame" x="15" y="16" width="142" height="18"/>
+                                                        <rect key="frame" x="15" y="16" width="139" height="18"/>
+                                                        <animations/>
                                                         <buttonCell key="cell" type="check" title="Open automatically" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="634">
                                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" metaFont="system"/>
@@ -296,10 +311,12 @@
                                                         </connections>
                                                     </button>
                                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fwJ-Gq-K1U">
-                                                        <rect key="frame" x="291" y="78" width="9" height="9"/>
+                                                        <rect key="frame" x="289" y="78" width="9" height="9"/>
+                                                        <animations/>
                                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="warning" id="QCG-2j-VVy"/>
                                                     </imageView>
                                                 </subviews>
+                                                <animations/>
                                             </view>
                                             <constraints>
                                                 <constraint firstItem="791" firstAttribute="top" secondItem="622" secondAttribute="top" constant="29" id="6E5-8l-sGN"/>
@@ -318,6 +335,7 @@
                                                 <constraint firstItem="625" firstAttribute="leading" secondItem="622" secondAttribute="leading" constant="15" id="q4i-wH-BXf"/>
                                                 <constraint firstItem="624" firstAttribute="top" secondItem="791" secondAttribute="bottom" constant="20" id="sSw-cH-cQz"/>
                                             </constraints>
+                                            <animations/>
                                             <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                                             <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </box>
@@ -331,6 +349,7 @@
                                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="622" secondAttribute="bottom" id="onv-Fe-lIn"/>
                                         <constraint firstItem="621" firstAttribute="trailing" secondItem="622" secondAttribute="trailing" id="yGF-Mj-xrK"/>
                                     </constraints>
+                                    <animations/>
                                 </view>
                             </tabViewItem>
                             <tabViewItem label="Tweaks" identifier="Tweaks" id="618">
@@ -339,7 +358,8 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="806">
-                                            <rect key="frame" x="6" y="220" width="221" height="18"/>
+                                            <rect key="frame" x="6" y="220" width="217" height="18"/>
+                                            <animations/>
                                             <buttonCell key="cell" type="check" title="Automatically check for updates" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="807">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -349,7 +369,8 @@
                                             </connections>
                                         </button>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="980">
-                                            <rect key="frame" x="6" y="200" width="105" height="18"/>
+                                            <rect key="frame" x="6" y="200" width="103" height="18"/>
+                                            <animations/>
                                             <buttonCell key="cell" type="check" title="Open at login" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="981">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -368,6 +389,7 @@
                                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="980" secondAttribute="bottom" id="m8q-dT-lw6"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="806" secondAttribute="trailing" constant="8" id="w78-yn-iee"/>
                                     </constraints>
+                                    <animations/>
                                 </view>
                             </tabViewItem>
                         </tabViewItems>
@@ -376,10 +398,11 @@
                         </connections>
                     </tabView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="y8v-DN-YZd">
-                        <rect key="frame" x="204" y="20" width="293" height="21"/>
+                        <rect key="frame" x="205" y="20" width="291" height="21"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="555">
-                                <rect key="frame" x="-6" y="-7" width="193" height="32"/>
+                                <rect key="frame" x="-6" y="-7" width="191" height="32"/>
+                                <animations/>
                                 <buttonCell key="cell" type="push" title="Help me configure Catch" bezelStyle="rounded" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="592">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -389,10 +412,11 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="554">
-                                <rect key="frame" x="187" y="-7" width="112" height="32"/>
+                                <rect key="frame" x="185" y="-7" width="112" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="cuA-Cg-NwE"/>
                                 </constraints>
+                                <animations/>
                                 <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="593">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -414,6 +438,7 @@ DQ
                             <constraint firstItem="554" firstAttribute="top" secondItem="y8v-DN-YZd" secondAttribute="top" id="sRB-Id-Q3k"/>
                             <constraint firstItem="555" firstAttribute="leading" secondItem="y8v-DN-YZd" secondAttribute="leading" id="uOq-tS-3Wf"/>
                         </constraints>
+                        <animations/>
                     </customView>
                 </subviews>
                 <constraints>
@@ -424,6 +449,7 @@ DQ
                     <constraint firstAttribute="trailing" secondItem="616" secondAttribute="trailing" constant="20" symbolic="YES" id="hQc-BR-fbI"/>
                     <constraint firstItem="y8v-DN-YZd" firstAttribute="top" secondItem="616" secondAttribute="bottom" constant="20" id="lSe-Bn-qVW"/>
                 </constraints>
+                <animations/>
             </view>
             <toolbar key="toolbar" implicitIdentifier="CA2F34B0-7A44-4395-8E3C-8B6D18CC3ECC" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="604">
                 <allowedToolbarItems>
@@ -463,7 +489,9 @@ DQ
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" alternatingRowBackgroundColors="YES" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="55" viewBased="YES" id="oof-vB-WHt">
+                                    <rect key="frame" x="0.0" y="0.0" width="410" height="0.0"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <animations/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
@@ -490,6 +518,7 @@ DQ
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="cu4-uA-Wyj" userLabel="Torrent Name Text Field">
                                                                     <rect key="frame" x="-2" y="32" width="85" height="17"/>
+                                                                    <animations/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Torrent name" id="Cqp-ov-mrU">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -497,7 +526,8 @@ DQ
                                                                     </textFieldCell>
                                                                 </textField>
                                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5JR-n0-9Xs">
-                                                                    <rect key="frame" x="-2" y="10" width="99" height="17"/>
+                                                                    <rect key="frame" x="-2" y="10" width="96" height="17"/>
+                                                                    <animations/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Download Date" id="kKb-I3-Ahb">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -513,9 +543,11 @@ DQ
                                                                 <constraint firstItem="5JR-n0-9Xs" firstAttribute="leading" secondItem="aBG-Wd-Mnw" secondAttribute="leading" id="cBn-Yk-fhS"/>
                                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5JR-n0-9Xs" secondAttribute="trailing" id="xek-JA-Q3e"/>
                                                             </constraints>
+                                                            <animations/>
                                                         </customView>
                                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="qnB-n2-sX0">
                                                             <rect key="frame" x="383" y="20" width="17" height="18"/>
+                                                            <animations/>
                                                             <buttonCell key="cell" type="inline" bezelStyle="inline" image="NSRefreshFreestandingTemplate" imagePosition="overlaps" alignment="left" imageScaling="proportionallyDown" id="l06-6G-zCp">
                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="smallSystemBold"/>
@@ -533,6 +565,7 @@ DQ
                                                         <constraint firstItem="aBG-Wd-Mnw" firstAttribute="top" secondItem="W93-2s-nQP" secondAttribute="top" id="mdR-52-FOa"/>
                                                         <constraint firstItem="qnB-n2-sX0" firstAttribute="leading" secondItem="aBG-Wd-Mnw" secondAttribute="trailing" constant="7" id="uBs-q4-tYG"/>
                                                     </constraints>
+                                                    <animations/>
                                                     <connections>
                                                         <outlet property="downloadAgainButton" destination="qnB-n2-sX0" id="X9o-hK-60a"/>
                                                         <outlet property="downloadDateTextField" destination="5JR-n0-9Xs" id="vuY-fr-LVs"/>
@@ -548,15 +581,19 @@ DQ
                                     </connections>
                                 </tableView>
                             </subviews>
+                            <animations/>
                             <nil key="backgroundColor"/>
                         </clipView>
+                        <animations/>
                         <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="Lmq-LW-vEW">
                             <rect key="frame" x="1" y="119" width="223" height="15"/>
                             <autoresizingMask key="autoresizingMask"/>
+                            <animations/>
                         </scroller>
                         <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="FGR-XB-oB0">
                             <rect key="frame" x="224" y="17" width="15" height="102"/>
                             <autoresizingMask key="autoresizingMask"/>
+                            <animations/>
                         </scroller>
                     </scrollView>
                 </subviews>
@@ -566,6 +603,7 @@ DQ
                     <constraint firstItem="i4W-ed-17Q" firstAttribute="leading" secondItem="gSi-VU-gYd" secondAttribute="leading" id="W2f-XW-vMF"/>
                     <constraint firstAttribute="trailing" secondItem="i4W-ed-17Q" secondAttribute="trailing" id="ecD-wG-bWT"/>
                 </constraints>
+                <animations/>
             </view>
             <point key="canvasLocation" x="380.5" y="-261.5"/>
         </window>
