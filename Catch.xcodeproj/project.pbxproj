@@ -12,7 +12,6 @@
 		3803C7EC11C3E7AD00FC08DB /* CTCScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 3803C7EB11C3E7AD00FC08DB /* CTCScheduler.m */; };
 		38A3FD0D11CA01DD00157AEF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38A3FD0C11CA01DD00157AEF /* Localizable.strings */; };
 		38D39B6011C3A6E100C17C80 /* CTCMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D39B5F11C3A6E100C17C80 /* CTCMenuController.m */; };
-		38DB9D5A11C7FEC5000DA168 /* app-icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 38DB9D5911C7FEC5000DA168 /* app-icon.icns */; };
 		38F9B09111C98E9E0021C540 /* Automator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38F9B09011C98E9E0021C540 /* Automator.framework */; };
 		4403ACF41914041C002F286C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4403ACF31914041C002F286C /* Assets.xcassets */; };
 		441297D417FE285500E9E21E /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 448CC7E617FE1F840063D3FD /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -100,7 +99,6 @@
 		38B129A612DE65EC00B4E87D /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		38D39B5E11C3A6E100C17C80 /* CTCMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCMenuController.h; sourceTree = "<group>"; };
 		38D39B5F11C3A6E100C17C80 /* CTCMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCMenuController.m; sourceTree = "<group>"; };
-		38DB9D5911C7FEC5000DA168 /* app-icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "app-icon.icns"; sourceTree = "<group>"; };
 		38F22FAA120E358400BE8993 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		38F9B09011C98E9E0021C540 /* Automator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Automator.framework; path = /System/Library/Frameworks/Automator.framework; sourceTree = "<absolute>"; };
 		38FB6B3311DA986C0061E784 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -244,7 +242,6 @@
 			isa = PBXGroup;
 			children = (
 				4403ACF31914041C002F286C /* Assets.xcassets */,
-				38DB9D5911C7FEC5000DA168 /* app-icon.icns */,
 				2F7446970DB6B7EA00F9684A /* UI.xib */,
 				445D97A4191579C7006CD77C /* UI.strings */,
 				38A3FD0C11CA01DD00157AEF /* Localizable.strings */,
@@ -515,7 +512,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F7446990DB6B7EA00F9684A /* UI.xib in Resources */,
-				38DB9D5A11C7FEC5000DA168 /* app-icon.icns in Resources */,
 				38A3FD0D11CA01DD00157AEF /* Localizable.strings in Resources */,
 				4403ACF41914041C002F286C /* Assets.xcassets in Resources */,
 				445D97A6191579C7006CD77C /* UI.strings in Resources */,
@@ -646,6 +642,7 @@
 		26FC0A850875C7B200E6366F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_PREFIX_HEADER = Catch_Prefix.pch;
 				INFOPLIST_FILE = "Catch-Info.plist";
@@ -657,6 +654,7 @@
 		26FC0A860875C7B200E6366F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PREFIX_HEADER = Catch_Prefix.pch;
 				INFOPLIST_FILE = "Catch-Info.plist";
 				PRODUCT_NAME = Catch;
