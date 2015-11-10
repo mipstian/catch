@@ -11,12 +11,12 @@
 
 + (NSString *)computeFilenameFromURL:(NSURL*)fileURL;
 
-+ (NSString *)addTorrentExtensionTo:(NSString*)filename;
++ (NSString *)torrentFilenameFromString:(NSString*)name;
 
 + (NSString *)userDownloadsDirectory;
 
 + (NSString *)userHomeDirectory;
 
-+ (NSString *)folderNameForShowWithName:(NSString *)showName;
++ (NSString *)fileNameFromString:(NSString *)name;
 
 @end
