@@ -7,6 +7,25 @@
     <pubDate>Sun, 08 Aug 2010 22:51:00 +0100</pubDate>
     
     <item>
+        <title>Catch 1.9.3</title>
+        <pubDate>Wed, 11 Nov 2015 05:04:46 +0100</pubDate>
+        <description><![CDATA[
+            <h2>Changes:</h2>
+            <ul>
+            <li>Human names for .torrent files</li>
+            <li>Support for new &ldquo;generic&rdquo; broadcatching feeds</li>
+            <li>New, Yosemite-style icon</li>
+            <li>Bug fixes</li>
+            </ul>
+        ]]></description>
+        <enclosure
+        url="https://github.com/mipstian/catch/releases/download/1.9.3/Catch-1.9.3.zip"
+        sparkle:version="1.9.3"
+        type="application/octet-stream"/>
+        <sparkle:minimumSystemVersion>10.8.0</sparkle:minimumSystemVersion>
+    </item>
+    
+    <item>
         <title>Catch 1.9.2</title>
         <pubDate>Tue, 14 Apr 2015 03:55:56 +0200</pubDate>
         <description><![CDATA[
