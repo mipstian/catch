@@ -4,6 +4,7 @@
 #import "CTCFileUtils.h"
 #import "CTCBrowser.h"
 #import "NSDate+TimeOfDayMath.h"
+#import <IOKit/ps/IOPowerSources.h>
 
 
 NSString * const kCTCSchedulerStatusChangedNotificationName = @"com.giorgiocalderolla.Catch.scheduler-status-changed";
@@ -82,8 +83,11 @@ NSString * const kCTCSchedulerStatusChangedNotificationName = @"com.giorgiocalde
 }
 
 - (void)preventAppNap {
+    
     // Make sure we can keep running in the background if the system supports App Nap
-    if ([NSProcessInfo.processInfo respondsToSelector:@selector(beginActivityWithOptions:reason:)]) {
+    // and that we don't already have an activity token.
+    if ([NSProcessInfo.processInfo respondsToSelector:@selector(beginActivityWithOptions:reason:)]
+        && !self.activityToken) {
         self.activityToken = [NSProcessInfo.processInfo
                               beginActivityWithOptions:NSActivityIdleSystemSleepDisabled|NSActivitySuddenTerminationDisabled
                               reason:@"Actively polling the feed"];
@@ -91,19 +95,29 @@ NSString * const kCTCSchedulerStatusChangedNotificationName = @"com.giorgiocalde
 }
 
 - (void)allowAppNap {
+    
   // Make sure we can keep running in the background if the system supports App Nap
-  if ([NSProcessInfo.processInfo respondsToSelector:@selector(beginActivityWithOptions:reason:)] && self.activityToken) {
+  // and that we have an activity token
+  if ([NSProcessInfo.processInfo respondsToSelector:@selector(beginActivityWithOptions:reason:)]
+      && self.activityToken) {
       [NSProcessInfo.processInfo endActivity:self.activityToken];
       self.activityToken = nil;
   }
 }
 
 - (void)updateAppNapStatus {
-    self.polling ? [self preventAppNap] : [self allowAppNap];
+    [self shouldPreventAppNap] ? [self preventAppNap] : [self allowAppNap];
+}
+
+- (BOOL)shouldPreventAppNap {
+    return self.isChecking
+    || ([CTCDefaults shouldPreventFromSleeping] && [self isDeviceConnectedToOutlet]);
 }
 
 - (void)setChecking:(BOOL)checking {
     _checking = checking;
+    
+    [self updateAppNapStatus];
     [self sendStatusChangedNotification];
 }
 
@@ -274,6 +288,25 @@ NSString * const kCTCSchedulerStatusChangedNotificationName = @"com.giorgiocalde
     
     return [NSDate.date isTimeOfDayBetweenDate:CTCDefaults.fromDateForTimeRestrictions
                                        andDate:CTCDefaults.toDateForTimeRestrictions];
+}
+
+- (BOOL)isDeviceConnectedToOutlet {
+    
+    // http://stackoverflow.com/a/28993168
+    CFTimeInterval timeRemaining = IOPSGetTimeRemainingEstimate();
+    
+    if (timeRemaining == kIOPSTimeRemainingUnlimited) {
+        NSLog(@"[Power] Connected to outlet");
+        return true;
+    }
+    
+    // We wanna keep logs for debug purposes
+    if (timeRemaining == kIOPSTimeRemainingUnknown){
+        NSLog(@"[Power] Time remaining unknown (recently unplugged)");
+    } else {
+        NSLog(@"[Power] Time remaining %f.0f seconds", timeRemaining);
+    }
+    return false;
 }
 
 @end
