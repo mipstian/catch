@@ -48,4 +48,8 @@ extern NSString * const kCTCDefaultsServiceFeedURLRegex;
 
 + (BOOL)shouldRunHeadless;
 
++ (BOOL)shouldPreventFromSleeping;
+
++ (void)setShouldPreventFromSleeping:(BOOL)value;
+
 @end
