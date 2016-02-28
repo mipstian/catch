@@ -29,9 +29,8 @@
     
     [self setupMenuItem];
     
-    // Update UI with initial values
-    [self refreshSchedulerStatus];
-    [self setLastUpdateStatus:YES time:nil];
+    // Update UI
+    [self refreshMenuContents];
     
     [self setupObservers];
 }
@@ -54,23 +53,13 @@
     __weak typeof(self) weakSelf = self;
     
     void (^handleSchedulerStatusChange)(NSNotification *) = ^(NSNotification *notification) {
-        if (weakSelf) [weakSelf refreshSchedulerStatus];
+        if (weakSelf) [weakSelf refreshMenuContents];
     };
     
-    void (^handleSchedulerLastUpdateStatusChange)(NSNotification *) = ^(NSNotification *notification) {
-        BOOL wasSuccessful = [notification.userInfo[@"successful"] boolValue];
-        NSDate *lastUpdateDate = notification.userInfo[@"time"];
-        if (weakSelf) [weakSelf setLastUpdateStatus:wasSuccessful time:lastUpdateDate];
-    };
-    
-    [NSNotificationCenter.defaultCenter addObserverForName:kCTCSchedulerStatusNotificationName
+    [NSNotificationCenter.defaultCenter addObserverForName:kCTCSchedulerStatusChangedNotificationName
                                                     object:CTCScheduler.sharedScheduler
                                                      queue:nil
                                                 usingBlock:handleSchedulerStatusChange];
-    [NSNotificationCenter.defaultCenter addObserverForName:kCTCSchedulerLastUpdateStatusNotificationName
-                                                    object:CTCScheduler.sharedScheduler
-                                                     queue:nil
-                                                usingBlock:handleSchedulerLastUpdateStatusChange];
 }
 
 - (IBAction)checkNow:(id)sender {
@@ -81,7 +70,7 @@
     [CTCScheduler.sharedScheduler togglePause];
 }
 
-- (void)refreshSchedulerStatus {
+- (void)refreshMenuContents {
     if (CTCScheduler.sharedScheduler.isChecking) {
         [self setRefreshing];
     }
@@ -93,20 +82,30 @@
             [self setDisabled];
         }
     }
+  
+    [self refreshLastUpdateStatus];
 }
 
-- (void)setLastUpdateStatus:(BOOL)lastUpdateWasSuccessful time:(NSDate *)time {
+- (void)refreshLastUpdateStatus {
+    NSDate *lastUpdateDate = CTCScheduler.sharedScheduler.lastUpdateDate;
+    
     // Create something like "Last update: 3:45 AM" and place it in the menu
-    NSString *lastUpdateStatusFormat = lastUpdateWasSuccessful ?
+    NSString *lastUpdateStatusFormat = CTCScheduler.sharedScheduler.lastUpdateWasSuccessful ?
         NSLocalizedString(@"lastupdate", @"Title for the last update time") :
         NSLocalizedString(@"lastupdatefailed", @"Title for the last update time if it fails");
     
-    NSString *lastUpdateStatus = time ?
-        [NSString stringWithFormat:lastUpdateStatusFormat,
-         [self.lastUpdateDateFormatter stringFromDate:time]] :
-        [NSString stringWithFormat:lastUpdateStatusFormat, NSLocalizedString(@"never", @"Never happened")];
-    
-    [self.menuLastUpdate setTitle:lastUpdateStatus];
+    NSString *lastUpdateText = nil;
+    if (CTCScheduler.sharedScheduler.isChecking) {
+        lastUpdateText = NSLocalizedString(@"updatingnow", @"An update is in progress");
+        
+    }
+    else {
+        lastUpdateText = lastUpdateDate ?
+            [NSString stringWithFormat:lastUpdateStatusFormat,
+             [self.lastUpdateDateFormatter stringFromDate:lastUpdateDate]] :
+            [NSString stringWithFormat:lastUpdateStatusFormat, NSLocalizedString(@"never", @"Never happened")];
+    }
+    [self.menuLastUpdate setTitle:lastUpdateText];
 }
 
 - (void)setIdle {
@@ -137,9 +136,6 @@
     
     // Set pause/resume to "pause"
     [self.menuPauseResume setTitle:NSLocalizedString(@"pause", @"Description of pause action")];
-    
-    // Also overwrite the last update string with "Updating now"
-    [self.menuLastUpdate setTitle:NSLocalizedString(@"updatingnow", @"An update is in progress")];
 }
 
 - (void)setDisabled {
