@@ -188,9 +188,6 @@ NSString * const kCTCSchedulerStatusChangedNotificationName = @"com.giorgiocalde
 }
 
 - (void)sendStatusChangedNotification {
-    NSLog(@"Scheduler status updated (polling = %d, checking = %d)", self.isPolling, self.isChecking);
-    
-    // Report status to application delegate
     [NSNotificationCenter.defaultCenter postNotificationName:kCTCSchedulerStatusChangedNotificationName
                                                       object:self
                                                     userInfo:nil];
@@ -204,8 +201,6 @@ NSString * const kCTCSchedulerStatusChangedNotificationName = @"com.giorgiocalde
 }
 
 - (void)forceCheck {
-    NSLog(@"Forcing feed check");
-    
     // Check feed right now ignoring time restrictions and "paused" mode
     [self checkFeed];
 }
@@ -232,18 +227,10 @@ NSString * const kCTCSchedulerStatusChangedNotificationName = @"com.giorgiocalde
 }
 
 - (void)tick:(NSTimer*)timer {
-    NSLog(@"Scheduler tick");
-    
-    if (!self.isPolling) {
-        NSLog(@"Scheduler tick skipped (paused)");
-        return;
-    }
+    if (!self.isPolling) return;
     
     // Don't check if current time is outside user-defined range
-    if (![self shouldCheckNow]) {
-        NSLog(@"Scheduler tick skipped (outside of user-defined time range)");
-        return;
-    }
+    if (![self shouldCheckNow]) return;
     
     [self checkFeed];
 }
