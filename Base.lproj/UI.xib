@@ -361,7 +361,7 @@
                                         </button>
                                         <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aok-5l-zgZ">
                                             <rect key="frame" x="6" y="180" width="656" height="18"/>
-                                            <buttonCell key="cell" type="check" title="Prevent my Mac from sleeping when charging" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="3un-uu-FFq">
+                                            <buttonCell key="cell" type="check" title="Prevent my Mac from sleeping" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="3un-uu-FFq">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>

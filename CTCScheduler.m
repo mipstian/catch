@@ -4,7 +4,6 @@
 #import "CTCFileUtils.h"
 #import "CTCBrowser.h"
 #import "NSDate+TimeOfDayMath.h"
-#import <IOKit/ps/IOPowerSources.h>
 
 
 NSString * const kCTCSchedulerStatusChangedNotificationName = @"com.giorgiocalderolla.Catch.scheduler-status-changed";
@@ -111,7 +110,7 @@ NSString * const kCTCSchedulerStatusChangedNotificationName = @"com.giorgiocalde
 
 - (BOOL)shouldPreventAppNap {
     return self.isChecking
-    || ([CTCDefaults shouldPreventFromSleeping] && [self isDeviceConnectedToOutlet]);
+    || [CTCDefaults shouldPreventFromSleeping];
 }
 
 - (void)setChecking:(BOOL)checking {
@@ -288,25 +287,6 @@ NSString * const kCTCSchedulerStatusChangedNotificationName = @"com.giorgiocalde
     
     return [NSDate.date isTimeOfDayBetweenDate:CTCDefaults.fromDateForTimeRestrictions
                                        andDate:CTCDefaults.toDateForTimeRestrictions];
-}
-
-- (BOOL)isDeviceConnectedToOutlet {
-    
-    // http://stackoverflow.com/a/28993168
-    CFTimeInterval timeRemaining = IOPSGetTimeRemainingEstimate();
-    
-    if (timeRemaining == kIOPSTimeRemainingUnlimited) {
-        NSLog(@"[Power] Connected to outlet");
-        return true;
-    }
-    
-    // We wanna keep logs for debug purposes
-    if (timeRemaining == kIOPSTimeRemainingUnknown){
-        NSLog(@"[Power] Time remaining unknown (recently unplugged)");
-    } else {
-        NSLog(@"[Power] Time remaining %f.0f seconds", timeRemaining);
-    }
-    return false;
 }
 
 @end

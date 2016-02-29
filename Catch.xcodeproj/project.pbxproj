@@ -40,7 +40,6 @@
 		44FBC67E196316E900434B01 /* NSWindow+ShakeAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 44FBC67D196316E900434B01 /* NSWindow+ShakeAnimation.m */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
-		E3D494E91C83A4A70003479B /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3D494E81C83A4A70003479B /* IOKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -183,7 +182,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3D494E91C83A4A70003479B /* IOKit.framework in Frameworks */,
 				44FBC67B196312A400434B01 /* QuartzCore.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				38F9B09111C98E9E0021C540 /* Automator.framework in Frameworks */,
