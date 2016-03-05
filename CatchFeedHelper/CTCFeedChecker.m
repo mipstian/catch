@@ -213,7 +213,7 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
 /// Create a .webloc file that can be double-clicked to open the magnet link
 - (NSString *)saveMagnetFile:(NSDictionary *)file
                       toPath:(NSString *)downloadPath
-                withShowName:(NSString *)showName
+                withShowName:(NSString * _Nullable)showName
                        error:(NSError * __autoreleasing *)outError {
     NSError *error = nil;
     
@@ -246,11 +246,9 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
 
 - (NSString *)downloadFile:(NSDictionary *)file
                     toPath:(NSString *)downloadPath
-              withShowName:(NSString *)showName
+              withShowName:(NSString * _Nullable)showName
                      error:(NSError * __autoreleasing *)outError {
-    NSString *folder = [CTCFileUtils fileNameFromString:showName];
-    
-    if (folder) NSLog(@"Downloading file to folder %@", folder);
+    if (showName) NSLog(@"Downloading file to folder for show %@", showName);
     else NSLog(@"Downloading file");
     
     NSError *error = nil;
@@ -286,6 +284,7 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
     NSString *filename = [CTCFileUtils torrentFilenameFromString:file[@"title"] ?: urlResponse.suggestedFilename];
     
     // Compute destination path
+    NSString *folder = [CTCFileUtils fileNameFromString:showName];
     NSArray<NSString *> *pathComponents = downloadPath.pathComponents;
     if (folder) pathComponents = [pathComponents arrayByAddingObject:folder];
     pathComponents = [pathComponents arrayByAddingObject:filename];

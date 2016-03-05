@@ -9,7 +9,7 @@
 + (NSURL *)URLFromBookmark:(NSData *)bookmark
                      error:(NSError * __autoreleasing *)error;
 
-+ (NSString *)computeFilenameFromURL:(NSURL*)fileURL;
++ (NSString *)filenameFromURL:(NSURL*)fileURL;
 
 + (NSString *)torrentFilenameFromString:(NSString*)name;
 

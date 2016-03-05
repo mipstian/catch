@@ -40,7 +40,7 @@ static NSString * const kCTCFileUtilsTorrentExtension = @".torrent";
     return URL;
 }
 
-+ (NSString *)computeFilenameFromURL:(NSURL*)fileURL {
++ (NSString *)filenameFromURL:(NSURL*)fileURL {
     // Compute destination filename
     NSString *filename = fileURL.path.pathComponents.lastObject;
     

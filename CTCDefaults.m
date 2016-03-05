@@ -63,7 +63,7 @@ NSString * const kCTCDefaultsShouldRunHeadless = @"headless";
         NSMutableArray *newDownloadedFiles = NSMutableArray.array;
         
         for (NSString *url in downloadedFiles) {
-            NSString *fileName = [CTCFileUtils computeFilenameFromURL:[NSURL URLWithString:url]];
+            NSString *fileName = [CTCFileUtils filenameFromURL:[NSURL URLWithString:url]];
             [newDownloadedFiles addObject:@{@"title": fileName,
                                             @"url": url}];
         }
