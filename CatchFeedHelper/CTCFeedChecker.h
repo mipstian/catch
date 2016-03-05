@@ -13,12 +13,14 @@ typedef void (^CTCFeedCheckDownloadCompletionHandler)(NSDictionary *downloadedFi
 - (void)checkShowRSSFeed:(NSURL *)feedURL
    downloadingToBookmark:(NSData *)downloadFolderBookmark
       organizingByFolder:(BOOL)shouldOrganizeByFolder
+       savingMagnetLinks:(BOOL)shouldSaveMagnetLinks
             skippingURLs:(NSArray<NSString *> *)previouslyDownloadedURLs
                withReply:(CTCFeedCheckCompletionHandler)reply;
 
 - (void)downloadFile:(NSDictionary *)file
           toBookmark:(NSData *)downloadFolderBookmark
   organizingByFolder:(BOOL)shouldOrganizeByFolder
+   savingMagnetLinks:(BOOL)shouldSaveMagnetLinks
            withReply:(CTCFeedCheckDownloadCompletionHandler)reply;
 
 @end

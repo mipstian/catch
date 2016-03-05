@@ -29,6 +29,7 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
 - (void)checkShowRSSFeed:(NSURL *)feedURL
    downloadingToBookmark:(NSData *)downloadFolderBookmark
       organizingByFolder:(BOOL)shouldOrganizeByFolder
+       savingMagnetLinks:(BOOL)shouldSaveMagnetLinks
             skippingURLs:(NSArray<NSString *> *)previouslyDownloadedURLs
                withReply:(CTCFeedCheckCompletionHandler)reply {
     NSLog(@"Checking feed");
@@ -81,6 +82,7 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
 - (void)downloadFile:(NSDictionary *)file
           toBookmark:(NSData *)downloadFolderBookmark
   organizingByFolder:(BOOL)shouldOrganizeByFolder
+   savingMagnetLinks:(BOOL)shouldSaveMagnetLinks
            withReply:(CTCFeedCheckDownloadCompletionHandler)reply {
     NSLog(@"Downloading single file");
     
