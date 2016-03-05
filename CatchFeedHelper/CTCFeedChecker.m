@@ -145,12 +145,15 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
     NSMutableArray *successfullyDownloadedFeedFiles = NSMutableArray.array;
     
     for (NSDictionary *file in feedFiles) {
-        NSString *url = file[@"url"];
-        
         // Skip old files
-        if ([previouslyDownloadedURLs containsObject:url]) continue;
+        if ([previouslyDownloadedURLs containsObject:file[@"url"]]) continue;
         
-        BOOL isMagnetLink = [url rangeOfString:@"magnet:"].location == 0;
+        NSURL *url = [NSURL URLWithString:file[@"url"]];
+        
+        // Skip invalid URLs
+        if (url == nil) continue;
+        
+        BOOL isMagnetLink = [url.scheme isEqualToString:@"magnet"];
         
         // The file is new, open magnet or download torrent
         if (isMagnetLink) {
@@ -167,13 +170,13 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
                                                     withShowName:showName
                                                            error:&error];
             if (downloadedTorrentFile) {
-                [successfullyDownloadedFeedFiles addObject:@{@"url": url,
+                [successfullyDownloadedFeedFiles addObject:@{@"url": file[@"url"],
                                                              @"title": file[@"title"],
                                                              @"isMagnetLink": @NO,
                                                              @"torrentFilePath": downloadedTorrentFile}];
             }
             else {
-                NSLog(@"Could not download %@: %@", url, error);
+                NSLog(@"Could not download %@: %@", file[@"url"], error);
                 *outError = error;
             }
         }
