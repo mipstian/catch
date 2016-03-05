@@ -246,8 +246,8 @@ NSString * const kCTCSchedulerStatusChangedNotificationName = @"com.giorgiocalde
     for (NSDictionary *feedFile in downloadedFeedFiles.reverseObjectEnumerator) {
         BOOL isMagnetLink = [feedFile[@"isMagnetLink"] boolValue];
         
-        // Open magnet link
-        if (isMagnetLink) {
+        // Open magnet link, if requested
+        if (isMagnetLink && shouldOpenTorrentsAutomatically) {
             [CTCBrowser openInBackgroundURL:[NSURL URLWithString:feedFile[@"url"]]];
         }
         
