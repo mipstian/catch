@@ -3,7 +3,7 @@
 
 @interface CTCFeedParser : NSObject
 
-+ (NSArray*)parseFiles:(NSXMLDocument*)feed
++ (NSArray<NSDictionary *> *)parseFiles:(NSXMLDocument *)feed
                  error:(NSError * __autoreleasing *)error;
 
 @end

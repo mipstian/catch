@@ -29,7 +29,7 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
 - (void)checkShowRSSFeed:(NSURL *)feedURL
    downloadingToBookmark:(NSData *)downloadFolderBookmark
       organizingByFolder:(BOOL)shouldOrganizeByFolder
-            skippingURLs:(NSArray *)previouslyDownloadedURLs
+            skippingURLs:(NSArray<NSString *> *)previouslyDownloadedURLs
                withReply:(CTCFeedCheckCompletionHandler)reply {
     NSLog(@"Checking feed");
     
@@ -57,7 +57,7 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
     }
     
     // Parse the feed for files
-    NSArray *feedFiles = [CTCFeedParser parseFiles:feed error:&error];
+    NSArray<NSDictionary *> *feedFiles = [CTCFeedParser parseFiles:feed error:&error];
     if (!feedFiles) {
         reply(@[], [NSError errorWithDomain:kCTCFeedCheckerErrorDomain
                                        code:-6
@@ -67,7 +67,7 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
     }
     
     // Download the files
-    NSArray *downloadedFeedFiles = [self downloadFiles:feedFiles
+    NSArray<NSDictionary *> *downloadedFeedFiles = [self downloadFiles:feedFiles
                                                 toPath:downloadFolderPath
                                     organizingByFolder:shouldOrganizeByFolder
                                           skippingURLs:previouslyDownloadedURLs
@@ -133,16 +133,16 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
     return document;
 }
 
-- (NSArray *)downloadFiles:(NSArray *)feedFiles
+- (NSArray<NSDictionary *> *)downloadFiles:(NSArray<NSDictionary *> *)feedFiles
                     toPath:(NSString *)downloadPath
         organizingByFolder:(BOOL)shouldOrganizeByFolder
-              skippingURLs:(NSArray *)previouslyDownloadedURLs
+              skippingURLs:(NSArray<NSString *> *)previouslyDownloadedURLs
                      error:(NSError * __autoreleasing *)outError {
     NSError *error = nil;
     
     NSLog(@"Downloading files (if needed)");
     
-    NSMutableArray *successfullyDownloadedFeedFiles = NSMutableArray.array;
+    NSMutableArray<NSDictionary *> *successfullyDownloadedFeedFiles = NSMutableArray.array;
     
     for (NSDictionary *file in feedFiles) {
         // Skip old files
@@ -227,7 +227,7 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
     NSString *filename = [CTCFileUtils torrentFilenameFromString:file[@"title"] ?: urlResponse.suggestedFilename];
     
     // Compute destination path
-    NSArray *pathComponents = downloadPath.pathComponents;
+    NSArray<NSString *> *pathComponents = downloadPath.pathComponents;
     if (folder) pathComponents = [pathComponents arrayByAddingObject:folder];
     NSString *pathAndFolder = [NSString pathWithComponents:pathComponents].stringByStandardizingPath;
     pathComponents = [pathComponents arrayByAddingObject:filename];
