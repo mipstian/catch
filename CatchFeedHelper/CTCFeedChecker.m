@@ -102,11 +102,11 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
     
     // Download the file
     NSArray *downloadedFiles = [self downloadFiles:@[file]
-                 toPath:downloadFolderPath
-     organizingByFolder:shouldOrganizeByFolder
-      savingMagnetLinks:shouldSaveMagnetLinks
-           skippingURLs:@[]
-                  error:&error];
+                                            toPath:downloadFolderPath
+                                organizingByFolder:shouldOrganizeByFolder
+                                 savingMagnetLinks:shouldSaveMagnetLinks
+                                      skippingURLs:@[]
+                                             error:&error];
     
     NSLog(@"All done");
     
@@ -210,11 +210,38 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
     return successfullyDownloadedFeedFiles.copy;
 }
 
+/// Create a .webloc file that can be double-clicked to open the magnet link
 - (NSString *)saveMagnetFile:(NSDictionary *)file
                       toPath:(NSString *)downloadPath
                 withShowName:(NSString *)showName
                        error:(NSError * __autoreleasing *)outError {
-    return nil;
+    NSError *error = nil;
+    
+    NSDictionary *weblocPlist = @{@"URL": file[@"url"]};
+    
+    NSData *data = [NSPropertyListSerialization dataWithPropertyList:weblocPlist
+                                                              format:NSPropertyListBinaryFormat_v1_0
+                                                             options:0
+                                                               error:&error];
+    if (error) {
+        *outError = [NSError errorWithDomain:kCTCFeedCheckerErrorDomain
+                                        code:-8
+                                    userInfo:@{NSLocalizedDescriptionKey: @"Could not serialize magnet link plist"}];
+        return nil;
+    }
+    
+    NSString *pathAndFilename = [downloadPath stringByAppendingString:@"/test.webloc"];
+    
+    BOOL writtenSuccessfully = [self writeData:data
+                                        toPath:pathAndFilename
+                                         error:&error];
+    
+    if (!writtenSuccessfully) {
+        *outError = error;
+        return nil;
+    }
+    
+    return pathAndFilename;
 }
 
 - (NSString *)downloadFile:(NSDictionary *)file
@@ -234,8 +261,8 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
     NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:fileURL];
     NSHTTPURLResponse *urlResponse = NSHTTPURLResponse.new;
     NSData *downloadedFile = [NSURLConnection sendSynchronousRequest:urlRequest
-                                           returningResponse:&urlResponse
-                                                       error:&error];
+                                                   returningResponse:&urlResponse
+                                                               error:&error];
     
     if (!downloadedFile) {
         *outError = [NSError errorWithDomain:kCTCFeedCheckerErrorDomain
@@ -264,9 +291,9 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
     pathComponents = [pathComponents arrayByAddingObject:filename];
     NSString *pathAndFilename = [NSString pathWithComponents:pathComponents].stringByStandardizingPath;
     
-    BOOL writtenSuccessfully = [self saveData:downloadedFile
-                                       toPath:pathAndFilename
-                                        error:&error];
+    BOOL writtenSuccessfully = [self writeData:downloadedFile
+                                        toPath:pathAndFilename
+                                         error:&error];
     
     if (!writtenSuccessfully) {
         *outError = error;
@@ -276,9 +303,9 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
     return pathAndFilename;
 }
 
-- (BOOL)saveData:(NSData *)data
-          toPath:(NSString *)pathAndFilename
-           error:(NSError * __autoreleasing *)outError {
+- (BOOL)writeData:(NSData *)data
+           toPath:(NSString *)pathAndFilename
+            error:(NSError * __autoreleasing *)outError {
     NSError *error = nil;
     
     NSString *pathAndFolder = pathAndFilename.stringByDeletingLastPathComponent;
