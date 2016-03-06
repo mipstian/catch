@@ -75,8 +75,6 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
                                           skippingURLs:previouslyDownloadedURLs
                                                  error:&error];
     
-    NSLog(@"All done");
-    
     reply(downloadedFeedFiles, error);
 }
 
@@ -108,8 +106,6 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
                                       skippingURLs:@[]
                                              error:&error];
     
-    NSLog(@"All done");
-    
     reply(downloadedFiles.firstObject, error);
 }
 
@@ -131,8 +127,6 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
         *outError = error;
         return nil;
     }
-    
-    NSLog(@"Feed downloaded");
     
     return document;
 }
