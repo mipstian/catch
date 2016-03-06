@@ -256,12 +256,7 @@ NSString * const kCTCSchedulerStatusChangedNotificationName = @"com.giorgiocalde
             [CTCBrowser openInBackgroundFile:feedFile[@"torrentFilePath"]];
         }
         
-        // Post to Notification Center
-        NSUserNotification *notification = NSUserNotification.new;
-        notification.title = NSLocalizedString(@"newtorrent", @"New torrent notification");
-        notification.informativeText = [NSString stringWithFormat:NSLocalizedString(@"newtorrentdesc", @"New torrent notification"), feedFile[@"title"]];
-        notification.soundName = NSUserNotificationDefaultSoundName;
-        [NSUserNotificationCenter.defaultUserNotificationCenter deliverNotification:notification];
+        [self postUserNotificationForNewEpisode:feedFile[@"title"]];
         
         // Add url to history
         NSArray *history = CTCDefaults.downloadHistory;
@@ -272,6 +267,15 @@ NSString * const kCTCSchedulerStatusChangedNotificationName = @"com.giorgiocalde
         NSArray *newHistory = [@[newHistoryEntry] arrayByAddingObjectsFromArray:history];
         CTCDefaults.downloadHistory = newHistory;
     }
+}
+
+- (void)postUserNotificationForNewEpisode:(NSString *)episodeTitle {
+    // Post to Notification Center
+    NSUserNotification *notification = NSUserNotification.new;
+    notification.title = NSLocalizedString(@"newtorrent", @"New torrent notification");
+    notification.informativeText = [NSString stringWithFormat:NSLocalizedString(@"newtorrentdesc", @"New torrent notification"), episodeTitle];
+    notification.soundName = NSUserNotificationDefaultSoundName;
+    [NSUserNotificationCenter.defaultUserNotificationCenter deliverNotification:notification];
 }
 
 - (BOOL)shouldCheckNow {
