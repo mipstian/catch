@@ -24,10 +24,21 @@
         // Get the .torrent URL or magnet link
         NSString *url = [[[fileNode nodesForXPath:@"enclosure/@url" error:&error] lastObject] stringValue];
         
+        if ([NSURL URLWithString:url] == nil) {
+            NSLog(@"Invalid feed item URL: %@", url);
+            continue;
+        }
+        
         // Get the title (includes show name and season/episode numbers)
         NSString *title = [[[fileNode nodesForXPath:@"title" error:&error] lastObject] stringValue];
         
+        if (title == nil || [title isEqualToString:@""]) {
+            NSLog(@"Invalid feed item title: %@", title);
+            continue;
+        }
+        
         // Get the show name from the generic "tv:" namespace, fallback to the old "showrss:" namespace
+        // This field is optional
         NSString *showName = [[[fileNode nodesForXPath:@"tv:show_name" error:&error] lastObject] stringValue];
         if (!showName) {
             showName = [[[fileNode nodesForXPath:@"showrss:showname" error:&error] lastObject] stringValue];
