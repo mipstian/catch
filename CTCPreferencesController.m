@@ -26,6 +26,10 @@
                                           forKeyPath:@"feedURL"
                                              options:NSKeyValueObservingOptionNew
                                              context:NULL];
+    [NSUserDefaults.standardUserDefaults addObserver:self
+                                          forKeyPath:@"preventFromSleeping"
+                                             options:NSKeyValueObservingOptionNew
+                                             context:NULL];
 }
 
 - (IBAction)showWindow:(id)sender {
@@ -46,6 +50,8 @@
     NSImage *invalidImage = [NSImage imageNamed:@"warning"];
     self.torrentsSavePathWarningImageView.image = CTCDefaults.isTorrentsSavePathValid ? validImage : invalidImage;
     self.feedURLWarningImageView.image = CTCDefaults.isFeedURLValid ? validImage : invalidImage;
+    
+    [CTCScheduler.sharedScheduler updateAppNapStatus];
 }
 
 - (IBAction)savePreferences:(id)sender {

@@ -17,6 +17,8 @@ extern NSString * const kCTCSchedulerStatusChangedNotificationName;
 
 + (instancetype)sharedScheduler;
 
+- (void)updateAppNapStatus;
+
 - (void)togglePause;
 
 - (void)forceCheck;

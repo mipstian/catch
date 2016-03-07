@@ -25,6 +25,7 @@ NSString * const kCTCDefaultsDownloadedFilesKey = @"downloadedFiles"; // Depreca
 NSString * const kCTCDefaultsDownloadHistoryKey = @"history";
 NSString * const kCTCDefaultsOpenAtLoginKey = @"openAtLogin";
 NSString * const kCTCDefaultsShouldRunHeadless = @"headless";
+NSString * const kCTCDefaultsShouldPreventFromSleeping = @"preventFromSleeping";
 
 
 @implementation CTCDefaults
@@ -181,6 +182,15 @@ NSString * const kCTCDefaultsShouldRunHeadless = @"headless";
 
 + (BOOL)shouldRunHeadless {
     return [NSUserDefaults.standardUserDefaults boolForKey:kCTCDefaultsShouldRunHeadless];
+}
+
++ (BOOL)shouldPreventFromSleeping {
+    return [NSUserDefaults.standardUserDefaults boolForKey:kCTCDefaultsShouldPreventFromSleeping];
+}
+
++ (void)setShouldPreventFromSleeping:(BOOL)value {
+    [NSUserDefaults.standardUserDefaults setBool:value
+                                          forKey:kCTCDefaultsShouldPreventFromSleeping];
 }
 
 @end

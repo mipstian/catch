@@ -82,8 +82,11 @@ NSString * const kCTCSchedulerStatusChangedNotificationName = @"com.giorgiocalde
 }
 
 - (void)preventAppNap {
+    
     // Make sure we can keep running in the background if the system supports App Nap
-    if ([NSProcessInfo.processInfo respondsToSelector:@selector(beginActivityWithOptions:reason:)]) {
+    // and that we don't already have an activity token.
+    if ([NSProcessInfo.processInfo respondsToSelector:@selector(beginActivityWithOptions:reason:)]
+        && !self.activityToken) {
         self.activityToken = [NSProcessInfo.processInfo
                               beginActivityWithOptions:NSActivityIdleSystemSleepDisabled|NSActivitySuddenTerminationDisabled
                               reason:@"Actively polling the feed"];
@@ -91,19 +94,29 @@ NSString * const kCTCSchedulerStatusChangedNotificationName = @"com.giorgiocalde
 }
 
 - (void)allowAppNap {
+    
   // Make sure we can keep running in the background if the system supports App Nap
-  if ([NSProcessInfo.processInfo respondsToSelector:@selector(beginActivityWithOptions:reason:)] && self.activityToken) {
+  // and that we have an activity token
+  if ([NSProcessInfo.processInfo respondsToSelector:@selector(beginActivityWithOptions:reason:)]
+      && self.activityToken) {
       [NSProcessInfo.processInfo endActivity:self.activityToken];
       self.activityToken = nil;
   }
 }
 
 - (void)updateAppNapStatus {
-    self.polling ? [self preventAppNap] : [self allowAppNap];
+    [self shouldPreventAppNap] ? [self preventAppNap] : [self allowAppNap];
+}
+
+- (BOOL)shouldPreventAppNap {
+    return self.isChecking
+    || [CTCDefaults shouldPreventFromSleeping];
 }
 
 - (void)setChecking:(BOOL)checking {
     _checking = checking;
+    
+    [self updateAppNapStatus];
     [self sendStatusChangedNotification];
 }
 

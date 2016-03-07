@@ -158,6 +158,7 @@
 		44FBC67D196316E900434B01 /* NSWindow+ShakeAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSWindow+ShakeAnimation.m"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Catch-Info.plist */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; path = "Catch-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Catch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E3D494E81C83A4A70003479B /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -252,6 +253,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E3D494E81C83A4A70003479B /* IOKit.framework */,
 				44FBC67A196312A400434B01 /* QuartzCore.framework */,
 				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
 				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
