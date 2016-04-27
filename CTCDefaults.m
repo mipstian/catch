@@ -25,6 +25,7 @@ NSString * const kCTCDefaultsDownloadedFilesKey = @"downloadedFiles"; // Depreca
 NSString * const kCTCDefaultsDownloadHistoryKey = @"history";
 NSString * const kCTCDefaultsOpenAtLoginKey = @"openAtLogin";
 NSString * const kCTCDefaultsShouldRunHeadless = @"headless";
+NSString * const kCTCDefaultsPreventSystemSleepKey = @"preventSystemSleep";
 
 
 @implementation CTCDefaults
@@ -51,7 +52,8 @@ NSString * const kCTCDefaultsShouldRunHeadless = @"headless";
                                   kCTCDefaultsTorrentsSavePathKey: defaultDownloadsDirectory,
                                   kCTCDefaultsShouldOrganizeTorrents: @NO,
                                   kCTCDefaultsShouldOpenTorrentsAutomatically: @YES,
-                                  kCTCDefaultsOpenAtLoginKey: @YES};
+                                  kCTCDefaultsOpenAtLoginKey: @YES,
+                                  kCTCDefaultsPreventSystemSleepKey: @YES};
     [NSUserDefaults.standardUserDefaults registerDefaults:appDefaults];
     
     // Migrate the downloads history format. Change old array of strings to new dictionary format
