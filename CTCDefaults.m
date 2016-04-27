@@ -19,12 +19,12 @@ NSString * const kCTCDefaultsOnlyUpdateBetweenKey = @"onlyUpdateBetween";
 NSString * const kCTCDefaultsUpdateFromKey = @"updateFrom";
 NSString * const kCTCDefaultsUpdateToKey = @"updateTo";
 NSString * const kCTCDefaultsTorrentsSavePathKey = @"savePath";
-NSString * const kCTCDefaultsShouldOrganizeTorrents = @"organizeTorrents";
-NSString * const kCTCDefaultsShouldOpenTorrentsAutomatically = @"openAutomatically";
+NSString * const kCTCDefaultsShouldOrganizeTorrentsKey = @"organizeTorrents";
+NSString * const kCTCDefaultsShouldOpenTorrentsAutomaticallyKey = @"openAutomatically";
 NSString * const kCTCDefaultsDownloadedFilesKey = @"downloadedFiles"; // Deprecated
 NSString * const kCTCDefaultsDownloadHistoryKey = @"history";
 NSString * const kCTCDefaultsOpenAtLoginKey = @"openAtLogin";
-NSString * const kCTCDefaultsShouldRunHeadless = @"headless";
+NSString * const kCTCDefaultsShouldRunHeadlessKey = @"headless";
 NSString * const kCTCDefaultsPreventSystemSleepKey = @"preventSystemSleep";
 
 
@@ -50,8 +50,8 @@ NSString * const kCTCDefaultsPreventSystemSleepKey = @"preventSystemSleep";
                                   kCTCDefaultsUpdateFromKey: dateFrom,
                                   kCTCDefaultsUpdateToKey: dateTo,
                                   kCTCDefaultsTorrentsSavePathKey: defaultDownloadsDirectory,
-                                  kCTCDefaultsShouldOrganizeTorrents: @NO,
-                                  kCTCDefaultsShouldOpenTorrentsAutomatically: @YES,
+                                  kCTCDefaultsShouldOrganizeTorrentsKey: @NO,
+                                  kCTCDefaultsShouldOpenTorrentsAutomaticallyKey: @YES,
                                   kCTCDefaultsOpenAtLoginKey: @YES,
                                   kCTCDefaultsPreventSystemSleepKey: @YES};
     [NSUserDefaults.standardUserDefaults registerDefaults:appDefaults];
@@ -161,11 +161,11 @@ NSString * const kCTCDefaultsPreventSystemSleepKey = @"preventSystemSleep";
 }
 
 + (BOOL)shouldOrganizeTorrentsInFolders {
-    return [NSUserDefaults.standardUserDefaults boolForKey:kCTCDefaultsShouldOrganizeTorrents];
+    return [NSUserDefaults.standardUserDefaults boolForKey:kCTCDefaultsShouldOrganizeTorrentsKey];
 }
 
 + (BOOL)shouldOpenTorrentsAutomatically {
-    return [NSUserDefaults.standardUserDefaults boolForKey:kCTCDefaultsShouldOpenTorrentsAutomatically];
+    return [NSUserDefaults.standardUserDefaults boolForKey:kCTCDefaultsShouldOpenTorrentsAutomaticallyKey];
 }
 
 + (NSString *)torrentsSavePath {
@@ -182,7 +182,11 @@ NSString * const kCTCDefaultsPreventSystemSleepKey = @"preventSystemSleep";
 }
 
 + (BOOL)shouldRunHeadless {
-    return [NSUserDefaults.standardUserDefaults boolForKey:kCTCDefaultsShouldRunHeadless];
+    return [NSUserDefaults.standardUserDefaults boolForKey:kCTCDefaultsShouldRunHeadlessKey];
+}
+
++ (BOOL)shouldPreventSystemSleep {
+    return [NSUserDefaults.standardUserDefaults boolForKey:kCTCDefaultsPreventSystemSleepKey];
 }
 
 @end

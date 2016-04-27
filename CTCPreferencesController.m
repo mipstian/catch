@@ -58,6 +58,9 @@
         // Apply the login item setting
         [CTCDefaults refreshLoginItemStatus];
         
+        // Apply power management settings
+        [CTCScheduler.sharedScheduler refreshActivity];
+        
         // Also force check
         [CTCScheduler.sharedScheduler forceCheck];
     }
