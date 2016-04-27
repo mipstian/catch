@@ -14,8 +14,6 @@ extern NSString * const kCTCDefaultsServiceFeedURLRegex;
 
 @interface CTCDefaults : NSObject
 
-+ (void)setDefaultDefaults;
-
 + (void)save;
 
 + (void)refreshLoginItemStatus;

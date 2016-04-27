@@ -8,9 +8,6 @@
 @implementation CTCAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    // Set default values for defaults
-    [CTCDefaults setDefaultDefaults];
-    
     // Enable Notification Center notifications
     [NSUserNotificationCenter.defaultUserNotificationCenter setDelegate:self];
 }

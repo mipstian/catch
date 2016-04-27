@@ -30,7 +30,7 @@ NSString * const kCTCDefaultsPreventSystemSleepKey = @"preventSystemSleep";
 
 @implementation CTCDefaults
 
-+ (void)setDefaultDefaults {
++ (void)initialize {
     // Create two dummy times (dates actually), just to have some value set
     NSDateComponents *comps = NSDateComponents.new;
     comps.hour = 24;
