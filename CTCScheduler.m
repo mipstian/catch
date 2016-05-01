@@ -96,7 +96,7 @@ NSString * const kCTCSchedulerStatusChangedNotificationName = @"com.giorgiocalde
     
     // Prevent App Nap (so we can keep checking the feed), and optionally system sleep
     NSActivityOptions options = CTCDefaults.shouldPreventSystemSleep ?
-        (NSActivityIdleSystemSleepDisabled & ~NSActivityIdleDisplaySleepDisabled) | NSActivitySuddenTerminationDisabled :
+        NSActivitySuddenTerminationDisabled | NSActivityIdleSystemSleepDisabled :
         NSActivitySuddenTerminationDisabled;
     
     self.activityToken = [NSProcessInfo.processInfo
