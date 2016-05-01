@@ -26,6 +26,8 @@ extern NSString * const kCTCDefaultsServiceFeedURLRegex;
 
 + (NSString *)appVersion;
 
++ (NSString *)buildNumber;
+
 + (NSString *)feedURL;
 
 + (BOOL)areTimeRestrictionsEnabled;
