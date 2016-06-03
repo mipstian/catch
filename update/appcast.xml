@@ -7,6 +7,25 @@
     <pubDate>Sun, 08 Aug 2010 22:51:00 +0100</pubDate>
     
     <item>
+      <title>Catch 1.9.4</title>
+      <pubDate>Fri, 3 Jun 2016 18:43:33 +0200</pubDate>
+      <description><![CDATA[
+        <h2>Catch 1.9.4</h2>
+        <ul>
+        <li>New setting to choose whether Catch prevents system sleep when active</li>
+        <li>Magnet links will be saved (and organized) as .webloc files if &ldquo;Open automatically&rdquo; is unchecked</li>
+        <li>Bug fixes</li>
+        </ul>
+      ]]></description>
+      <enclosure
+      url="https://github.com/mipstian/catch/releases/download/1.9.4/Catch-1.9.4.zip"
+      sparkle:version="508"
+      sparkle:shortVersionString="1.9.4"
+      type="application/octet-stream"/>
+      <sparkle:minimumSystemVersion>10.8.0</sparkle:minimumSystemVersion>
+    </item>
+    
+    <item>
         <title>Catch 1.9.3</title>
         <pubDate>Wed, 11 Nov 2015 05:04:46 +0100</pubDate>
         <description><![CDATA[
