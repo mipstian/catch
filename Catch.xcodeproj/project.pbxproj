@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2F7446990DB6B7EA00F9684A /* UI.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F7446970DB6B7EA00F9684A /* UI.xib */; };
-		3803C7AE11C3DA9300FC08DB /* CTCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3803C7AD11C3DA9300FC08DB /* CTCAppDelegate.m */; };
 		3803C7EC11C3E7AD00FC08DB /* CTCScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 3803C7EB11C3E7AD00FC08DB /* CTCScheduler.m */; };
 		38A3FD0D11CA01DD00157AEF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38A3FD0C11CA01DD00157AEF /* Localizable.strings */; };
 		38D39B6011C3A6E100C17C80 /* CTCMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D39B5F11C3A6E100C17C80 /* CTCMenuController.m */; };
@@ -35,10 +34,10 @@
 		44717ADD1913AF3400580054 /* CTCFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717AA91913173600580054 /* CTCFileUtils.m */; };
 		448CC7E817FE1F840063D3FD /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 448CC7E617FE1F840063D3FD /* Sparkle.framework */; };
 		44B3375619B4F95C00A020DF /* CTCRecentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44B3375519B4F95C00A020DF /* CTCRecentsController.m */; };
+		44C8926F1D1814A7008F8543 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C8926E1D1814A7008F8543 /* AppDelegate.swift */; };
 		44EAD12E1916682D002C7443 /* CTCApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 44EAD12D1916682D002C7443 /* CTCApplication.m */; };
 		44FBC67B196312A400434B01 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44FBC67A196312A400434B01 /* QuartzCore.framework */; };
 		44FBC67E196316E900434B01 /* NSWindow+ShakeAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 44FBC67D196316E900434B01 /* NSWindow+ShakeAnimation.m */; };
-		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
@@ -84,12 +83,9 @@
 
 /* Begin PBXFileReference section */
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
-		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32CA4F630368D1EE00C91783 /* Catch_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Catch_Prefix.pch; sourceTree = "<group>"; };
-		3803C7AC11C3DA9300FC08DB /* CTCAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCAppDelegate.h; sourceTree = "<group>"; };
-		3803C7AD11C3DA9300FC08DB /* CTCAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCAppDelegate.m; sourceTree = "<group>"; };
 		3803C7EA11C3E7AD00FC08DB /* CTCScheduler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCScheduler.h; sourceTree = "<group>"; };
 		3803C7EB11C3E7AD00FC08DB /* CTCScheduler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCScheduler.m; sourceTree = "<group>"; };
 		382AD67812DCCA9300E1FA73 /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -151,6 +147,8 @@
 		448CECE219157BDF0075ADD9 /* zh-Hant */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/UI.strings"; sourceTree = "<group>"; };
 		44B3375419B4F95C00A020DF /* CTCRecentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCRecentsController.h; sourceTree = "<group>"; };
 		44B3375519B4F95C00A020DF /* CTCRecentsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCRecentsController.m; sourceTree = "<group>"; };
+		44C8926D1D1814A6008F8543 /* Catch-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Catch-Bridging-Header.h"; sourceTree = "<group>"; };
+		44C8926E1D1814A7008F8543 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Sources/AppDelegate.swift; sourceTree = "<group>"; };
 		44EAD12C1916682D002C7443 /* CTCApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCApplication.h; sourceTree = "<group>"; };
 		44EAD12D1916682D002C7443 /* CTCApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCApplication.m; sourceTree = "<group>"; };
 		44FBC67A196312A400434B01 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -231,9 +229,9 @@
 		29B97315FDCFA39411CA2CEA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				44C8926D1D1814A6008F8543 /* Catch-Bridging-Header.h */,
 				8D1107310486CEB800E47090 /* Catch-Info.plist */,
 				32CA4F630368D1EE00C91783 /* Catch_Prefix.pch */,
-				29B97316FDCFA39411CA2CEA /* main.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -316,8 +314,7 @@
 			children = (
 				44EAD12C1916682D002C7443 /* CTCApplication.h */,
 				44EAD12D1916682D002C7443 /* CTCApplication.m */,
-				3803C7AC11C3DA9300FC08DB /* CTCAppDelegate.h */,
-				3803C7AD11C3DA9300FC08DB /* CTCAppDelegate.m */,
+				44C8926E1D1814A7008F8543 /* AppDelegate.swift */,
 			);
 			name = Application;
 			sourceTree = "<group>";
@@ -439,6 +436,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0700;
 				TargetAttributes = {
 					446D8B551918D146007AB22D = {
@@ -544,14 +542,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D11072D0486CEB800E47090 /* main.m in Sources */,
 				4456EE611916D20000B3FF1A /* NSDate+TimeOfDayMath.m in Sources */,
 				44EAD12E1916682D002C7443 /* CTCApplication.m in Sources */,
+				44C8926F1D1814A7008F8543 /* AppDelegate.swift in Sources */,
 				4456EE651916F17F00B3FF1A /* CTCBrowser.m in Sources */,
 				44B3375619B4F95C00A020DF /* CTCRecentsController.m in Sources */,
 				44717AA4191300B300580054 /* CTCDefaults.m in Sources */,
 				38D39B6011C3A6E100C17C80 /* CTCMenuController.m in Sources */,
-				3803C7AE11C3DA9300FC08DB /* CTCAppDelegate.m in Sources */,
 				446298EB191655080045EC72 /* CTCPreferencesController.m in Sources */,
 				44FBC67E196316E900434B01 /* NSWindow+ShakeAnimation.m in Sources */,
 				44717AA71913072200580054 /* CTCLoginItems.m in Sources */,
@@ -643,12 +640,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_PREFIX_HEADER = Catch_Prefix.pch;
 				INFOPLIST_FILE = "Catch-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_LDFLAGS = "-Wl,-rpath,@loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.giorgiocalderolla.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = Catch;
+				SWIFT_OBJC_BRIDGING_HEADER = "Catch-Bridging-Header.h";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -657,11 +658,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				GCC_PREFIX_HEADER = Catch_Prefix.pch;
 				INFOPLIST_FILE = "Catch-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				OTHER_LDFLAGS = "-Wl,-rpath,@loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.giorgiocalderolla.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = Catch;
+				SWIFT_OBJC_BRIDGING_HEADER = "Catch-Bridging-Header.h";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -708,6 +713,7 @@
 					"-Wno-unused-parameter",
 				);
 				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -744,6 +750,7 @@
 				LLVM_LTO = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
