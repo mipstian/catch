@@ -1,7 +1,7 @@
 #import "CTCPreferencesController.h"
 #import "CTCDefaults.h"
 #import "CTCScheduler.h"
-#import "NSWindow+ShakeAnimation.h"
+#import "Catch-Swift.h"
 
 
 @interface CTCPreferencesController ()
