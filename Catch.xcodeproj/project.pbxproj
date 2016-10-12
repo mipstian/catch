@@ -143,9 +143,9 @@
 		448CECE019157B880075ADD9 /* nl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/UI.strings; sourceTree = "<group>"; };
 		448CECE119157BB10075ADD9 /* zh-Hans */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/UI.strings"; sourceTree = "<group>"; };
 		448CECE219157BDF0075ADD9 /* zh-Hant */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/UI.strings"; sourceTree = "<group>"; };
-		44BA5D111DAEC0C300A9CE9A /* WindowShakeAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowShakeAnimation.swift; sourceTree = "<group>"; };
-		44BA5D131DAEC3B600A9CE9A /* RecentsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentsController.swift; sourceTree = "<group>"; };
-		44BA5D151DAECF1A00A9CE9A /* RecentsCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentsCellView.swift; sourceTree = "<group>"; };
+		44BA5D111DAEC0C300A9CE9A /* WindowShakeAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WindowShakeAnimation.swift; path = Sources/WindowShakeAnimation.swift; sourceTree = "<group>"; };
+		44BA5D131DAEC3B600A9CE9A /* RecentsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecentsController.swift; path = Sources/RecentsController.swift; sourceTree = "<group>"; };
+		44BA5D151DAECF1A00A9CE9A /* RecentsCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecentsCellView.swift; path = Sources/RecentsCellView.swift; sourceTree = "<group>"; };
 		44C8926D1D1814A6008F8543 /* Catch-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Catch-Bridging-Header.h"; sourceTree = "<group>"; };
 		44C8926E1D1814A7008F8543 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Sources/AppDelegate.swift; sourceTree = "<group>"; };
 		44EAD12C1916682D002C7443 /* CTCApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCApplication.h; sourceTree = "<group>"; };
