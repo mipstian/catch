@@ -176,11 +176,11 @@ NSString * const kCTCDefaultsPreventSystemSleepKey = @"preventSystemSleep";
     return [NSUserDefaults.standardUserDefaults stringForKey:kCTCDefaultsTorrentsSavePathKey].stringByStandardizingPath;
 }
 
-+ (NSArray *)downloadHistory {
++ (NSArray<NSDictionary *> *)downloadHistory {
     return [NSUserDefaults.standardUserDefaults arrayForKey:kCTCDefaultsDownloadHistoryKey];
 }
 
-+ (void)setDownloadHistory:(NSArray *)downloadHistory {
++ (void)setDownloadHistory:(NSArray<NSDictionary *> *)downloadHistory {
     [NSUserDefaults.standardUserDefaults setObject:downloadHistory
                                             forKey:kCTCDefaultsDownloadHistoryKey];
 }

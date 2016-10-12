@@ -14,7 +14,6 @@
 		38F9B09111C98E9E0021C540 /* Automator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38F9B09011C98E9E0021C540 /* Automator.framework */; };
 		4403ACF41914041C002F286C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4403ACF31914041C002F286C /* Assets.xcassets */; };
 		441297D417FE285500E9E21E /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 448CC7E617FE1F840063D3FD /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		4439DFDA19B5E48100408851 /* CTCRecentsCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4439DFD919B5E48100408851 /* CTCRecentsCellView.m */; };
 		4456EE611916D20000B3FF1A /* NSDate+TimeOfDayMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 4456EE601916D20000B3FF1A /* NSDate+TimeOfDayMath.m */; };
 		4456EE651916F17F00B3FF1A /* CTCBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4456EE641916F17F00B3FF1A /* CTCBrowser.m */; };
 		445D97A6191579C7006CD77C /* UI.strings in Resources */ = {isa = PBXBuildFile; fileRef = 445D97A4191579C7006CD77C /* UI.strings */; };
@@ -33,8 +32,9 @@
 		44717ADB1913AE2400580054 /* CTCFeedParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717AAC19131BC700580054 /* CTCFeedParser.m */; };
 		44717ADD1913AF3400580054 /* CTCFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717AA91913173600580054 /* CTCFileUtils.m */; };
 		448CC7E817FE1F840063D3FD /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 448CC7E617FE1F840063D3FD /* Sparkle.framework */; };
-		44B3375619B4F95C00A020DF /* CTCRecentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44B3375519B4F95C00A020DF /* CTCRecentsController.m */; };
 		44BA5D121DAEC0C400A9CE9A /* WindowShakeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BA5D111DAEC0C300A9CE9A /* WindowShakeAnimation.swift */; };
+		44BA5D141DAEC3B600A9CE9A /* RecentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BA5D131DAEC3B600A9CE9A /* RecentsController.swift */; };
+		44BA5D161DAECF1A00A9CE9A /* RecentsCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BA5D151DAECF1A00A9CE9A /* RecentsCellView.swift */; };
 		44C8926F1D1814A7008F8543 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C8926E1D1814A7008F8543 /* AppDelegate.swift */; };
 		44EAD12E1916682D002C7443 /* CTCApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 44EAD12D1916682D002C7443 /* CTCApplication.m */; };
 		44FBC67B196312A400434B01 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44FBC67A196312A400434B01 /* QuartzCore.framework */; };
@@ -105,8 +105,6 @@
 		4403ACF31914041C002F286C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4412E8161957F09200701124 /* com.giorgiocalderolla.Catch.CatchFeedHelper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = com.giorgiocalderolla.Catch.CatchFeedHelper.entitlements; sourceTree = "<group>"; };
 		4419CF37180627A900C77432 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
-		4439DFD819B5E48100408851 /* CTCRecentsCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCRecentsCellView.h; sourceTree = "<group>"; };
-		4439DFD919B5E48100408851 /* CTCRecentsCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCRecentsCellView.m; sourceTree = "<group>"; };
 		4456EE5F1916D20000B3FF1A /* NSDate+TimeOfDayMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeOfDayMath.h"; sourceTree = "<group>"; };
 		4456EE601916D20000B3FF1A /* NSDate+TimeOfDayMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeOfDayMath.m"; sourceTree = "<group>"; };
 		4456EE631916F17F00B3FF1A /* CTCBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCBrowser.h; sourceTree = "<group>"; };
@@ -145,9 +143,9 @@
 		448CECE019157B880075ADD9 /* nl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/UI.strings; sourceTree = "<group>"; };
 		448CECE119157BB10075ADD9 /* zh-Hans */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/UI.strings"; sourceTree = "<group>"; };
 		448CECE219157BDF0075ADD9 /* zh-Hant */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/UI.strings"; sourceTree = "<group>"; };
-		44B3375419B4F95C00A020DF /* CTCRecentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCRecentsController.h; sourceTree = "<group>"; };
-		44B3375519B4F95C00A020DF /* CTCRecentsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCRecentsController.m; sourceTree = "<group>"; };
 		44BA5D111DAEC0C300A9CE9A /* WindowShakeAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowShakeAnimation.swift; sourceTree = "<group>"; };
+		44BA5D131DAEC3B600A9CE9A /* RecentsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentsController.swift; sourceTree = "<group>"; };
+		44BA5D151DAECF1A00A9CE9A /* RecentsCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecentsCellView.swift; sourceTree = "<group>"; };
 		44C8926D1D1814A6008F8543 /* Catch-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Catch-Bridging-Header.h"; sourceTree = "<group>"; };
 		44C8926E1D1814A7008F8543 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Sources/AppDelegate.swift; sourceTree = "<group>"; };
 		44EAD12C1916682D002C7443 /* CTCApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCApplication.h; sourceTree = "<group>"; };
@@ -263,8 +261,7 @@
 		4439DFD719B5E45700408851 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				4439DFD819B5E48100408851 /* CTCRecentsCellView.h */,
-				4439DFD919B5E48100408851 /* CTCRecentsCellView.m */,
+				44BA5D151DAECF1A00A9CE9A /* RecentsCellView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -286,8 +283,7 @@
 				38D39B5F11C3A6E100C17C80 /* CTCMenuController.m */,
 				446298E9191655080045EC72 /* CTCPreferencesController.h */,
 				446298EA191655080045EC72 /* CTCPreferencesController.m */,
-				44B3375419B4F95C00A020DF /* CTCRecentsController.h */,
-				44B3375519B4F95C00A020DF /* CTCRecentsController.m */,
+				44BA5D131DAEC3B600A9CE9A /* RecentsController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -549,14 +545,14 @@
 				44BA5D121DAEC0C400A9CE9A /* WindowShakeAnimation.swift in Sources */,
 				44EAD12E1916682D002C7443 /* CTCApplication.m in Sources */,
 				44C8926F1D1814A7008F8543 /* AppDelegate.swift in Sources */,
+				44BA5D161DAECF1A00A9CE9A /* RecentsCellView.swift in Sources */,
 				4456EE651916F17F00B3FF1A /* CTCBrowser.m in Sources */,
-				44B3375619B4F95C00A020DF /* CTCRecentsController.m in Sources */,
 				44717AA4191300B300580054 /* CTCDefaults.m in Sources */,
 				38D39B6011C3A6E100C17C80 /* CTCMenuController.m in Sources */,
+				44BA5D141DAEC3B600A9CE9A /* RecentsController.swift in Sources */,
 				446298EB191655080045EC72 /* CTCPreferencesController.m in Sources */,
 				44717AA71913072200580054 /* CTCLoginItems.m in Sources */,
 				3803C7EC11C3E7AD00FC08DB /* CTCScheduler.m in Sources */,
-				4439DFDA19B5E48100408851 /* CTCRecentsCellView.m in Sources */,
 				44717AAA1913173600580054 /* CTCFileUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -42,9 +42,9 @@ extern NSString * const kCTCDefaultsServiceFeedURLRegex;
 
 + (NSString *)torrentsSavePath;
 
-+ (NSArray *)downloadHistory;
++ (NSArray<NSDictionary *> *)downloadHistory;
 
-+ (void)setDownloadHistory:(NSArray *)downloadHistory;
++ (void)setDownloadHistory:(NSArray<NSDictionary *> *)downloadHistory;
 
 + (BOOL)shouldRunHeadless;
 
