@@ -10,7 +10,6 @@
 		2F7446990DB6B7EA00F9684A /* UI.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2F7446970DB6B7EA00F9684A /* UI.xib */; };
 		3803C7EC11C3E7AD00FC08DB /* CTCScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 3803C7EB11C3E7AD00FC08DB /* CTCScheduler.m */; };
 		38A3FD0D11CA01DD00157AEF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38A3FD0C11CA01DD00157AEF /* Localizable.strings */; };
-		38D39B6011C3A6E100C17C80 /* CTCMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D39B5F11C3A6E100C17C80 /* CTCMenuController.m */; };
 		38F9B09111C98E9E0021C540 /* Automator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38F9B09011C98E9E0021C540 /* Automator.framework */; };
 		4403ACF41914041C002F286C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4403ACF31914041C002F286C /* Assets.xcassets */; };
 		441297D417FE285500E9E21E /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 448CC7E617FE1F840063D3FD /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -36,6 +35,7 @@
 		44BA5D141DAEC3B600A9CE9A /* RecentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BA5D131DAEC3B600A9CE9A /* RecentsController.swift */; };
 		44BA5D161DAECF1A00A9CE9A /* RecentsCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BA5D151DAECF1A00A9CE9A /* RecentsCellView.swift */; };
 		44BA5D1A1DB81A8E00A9CE9A /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BA5D191DB81A8E00A9CE9A /* Application.swift */; };
+		44BA5D1C1DB8220100A9CE9A /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BA5D1B1DB8220100A9CE9A /* MenuController.swift */; };
 		44C8926F1D1814A7008F8543 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C8926E1D1814A7008F8543 /* AppDelegate.swift */; };
 		44FBC67B196312A400434B01 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44FBC67A196312A400434B01 /* QuartzCore.framework */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -93,8 +93,6 @@
 		38704B0C11DB1EE900D28A39 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		38A3FD0911CA01C100157AEF /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		38B129A612DE65EC00B4E87D /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/Localizable.strings; sourceTree = "<group>"; };
-		38D39B5E11C3A6E100C17C80 /* CTCMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCMenuController.h; sourceTree = "<group>"; };
-		38D39B5F11C3A6E100C17C80 /* CTCMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCMenuController.m; sourceTree = "<group>"; };
 		38F22FAA120E358400BE8993 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		38F9B09011C98E9E0021C540 /* Automator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Automator.framework; path = /System/Library/Frameworks/Automator.framework; sourceTree = "<absolute>"; };
 		38FB6B3311DA986C0061E784 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -147,6 +145,7 @@
 		44BA5D131DAEC3B600A9CE9A /* RecentsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecentsController.swift; path = Sources/RecentsController.swift; sourceTree = "<group>"; };
 		44BA5D151DAECF1A00A9CE9A /* RecentsCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecentsCellView.swift; path = Sources/RecentsCellView.swift; sourceTree = "<group>"; };
 		44BA5D191DB81A8E00A9CE9A /* Application.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Application.swift; path = Sources/Application.swift; sourceTree = "<group>"; };
+		44BA5D1B1DB8220100A9CE9A /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuController.swift; path = Sources/MenuController.swift; sourceTree = "<group>"; };
 		44C8926D1D1814A6008F8543 /* Catch-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Catch-Bridging-Header.h"; sourceTree = "<group>"; };
 		44C8926E1D1814A7008F8543 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Sources/AppDelegate.swift; sourceTree = "<group>"; };
 		44FBC67A196312A400434B01 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -278,10 +277,9 @@
 		4456EE661916F1A600B3FF1A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				38D39B5E11C3A6E100C17C80 /* CTCMenuController.h */,
-				38D39B5F11C3A6E100C17C80 /* CTCMenuController.m */,
 				446298E9191655080045EC72 /* CTCPreferencesController.h */,
 				446298EA191655080045EC72 /* CTCPreferencesController.m */,
+				44BA5D1B1DB8220100A9CE9A /* MenuController.swift */,
 				44BA5D131DAEC3B600A9CE9A /* RecentsController.swift */,
 			);
 			name = Controllers;
@@ -545,8 +543,8 @@
 				44BA5D161DAECF1A00A9CE9A /* RecentsCellView.swift in Sources */,
 				4456EE651916F17F00B3FF1A /* CTCBrowser.m in Sources */,
 				44717AA4191300B300580054 /* CTCDefaults.m in Sources */,
-				38D39B6011C3A6E100C17C80 /* CTCMenuController.m in Sources */,
 				44BA5D1A1DB81A8E00A9CE9A /* Application.swift in Sources */,
+				44BA5D1C1DB8220100A9CE9A /* MenuController.swift in Sources */,
 				44BA5D141DAEC3B600A9CE9A /* RecentsController.swift in Sources */,
 				446298EB191655080045EC72 /* CTCPreferencesController.m in Sources */,
 				44717AA71913072200580054 /* CTCLoginItems.m in Sources */,
@@ -642,7 +640,7 @@
 				GCC_PREFIX_HEADER = Catch_Prefix.pch;
 				INFOPLIST_FILE = "Catch-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				OTHER_LDFLAGS = "-Wl,-rpath,@loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.giorgiocalderolla.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = Catch;
@@ -660,7 +658,7 @@
 				GCC_PREFIX_HEADER = Catch_Prefix.pch;
 				INFOPLIST_FILE = "Catch-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				OTHER_LDFLAGS = "-Wl,-rpath,@loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.giorgiocalderolla.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = Catch;

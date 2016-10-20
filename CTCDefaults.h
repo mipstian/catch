@@ -1,6 +1,8 @@
 #import <Foundation/Foundation.h>
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 extern NSTimeInterval const kCTCDefaultsFeedUpdateInterval;
 
 // Constant, non-localized, non-UI-related strings
@@ -51,3 +53,5 @@ extern NSString * const kCTCDefaultsServiceFeedURLRegex;
 + (BOOL)shouldPreventSystemSleep;
 
 @end
+
+NS_ASSUME_NONNULL_END

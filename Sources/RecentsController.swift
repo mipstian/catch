@@ -2,7 +2,7 @@ import AppKit
 
 
 class RecentsController: NSWindowController {
-  @IBOutlet private weak var table: NSTableView!
+  @IBOutlet fileprivate weak var table: NSTableView!
   
   fileprivate let downloadDateFormatter = DateFormatter()
   
@@ -25,6 +25,43 @@ class RecentsController: NSWindowController {
     )
   }
   
+  deinit {
+    NotificationCenter.default.removeObserver(self)
+  }
+}
+
+
+extension RecentsController: NSTableViewDataSource {
+  func numberOfRows(in tableView: NSTableView) -> Int {
+    return CTCDefaults.downloadHistory().count
+  }
+}
+
+
+extension RecentsController: NSTableViewDelegate {
+  func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+    let recent = CTCDefaults.downloadHistory()[row]
+    
+    guard let cell = tableView.make(withIdentifier: "RecentCell", owner: self) as? RecentsCellView else {
+      return nil
+    }
+    
+    cell.textField?.stringValue = recent["title"] as! String
+    
+    let downloadDate = recent["date"] as? Date
+    cell.downloadDateTextField.stringValue = downloadDate.map(downloadDateFormatter.string) ?? ""
+    
+    return cell
+  }
+  
+  func selectionShouldChange(in tableView: NSTableView) -> Bool {
+    return false
+  }
+}
+
+
+// MARK: Actions
+extension RecentsController {
   @IBAction override func showWindow(_ sender: Any?) {
     table.reloadData()
     NSApp.activate(ignoringOtherApps: true)
@@ -45,36 +82,5 @@ class RecentsController: NSWindowController {
         CTCBrowser.open(inBackgroundFile: downloadedFile["torrentFilePath"] as! String)
       }
     }
-  }
-  
-  deinit {
-    NotificationCenter.default.removeObserver(self)
-  }
-}
-
-extension RecentsController: NSTableViewDataSource {
-  func numberOfRows(in tableView: NSTableView) -> Int {
-    return CTCDefaults.downloadHistory().count
-  }
-}
-
-extension RecentsController: NSTableViewDelegate {
-  func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-    let recent = CTCDefaults.downloadHistory()[row]
-    
-    guard let cell = tableView.make(withIdentifier: "RecentCell", owner: self) as? RecentsCellView else {
-      return nil
-    }
-    
-    cell.textField?.stringValue = recent["title"] as! String
-    
-    let downloadDate = recent["date"] as? Date
-    cell.downloadDateTextField.stringValue = downloadDate.map(downloadDateFormatter.string) ?? ""
-    
-    return cell
-  }
-  
-  func selectionShouldChange(in tableView: NSTableView) -> Bool {
-    return false
   }
 }

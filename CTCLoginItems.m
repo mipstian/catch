@@ -34,13 +34,14 @@
         for(NSUInteger i = 0; i < loginItemsArray.count; i++) {
             LSSharedFileListItemRef itemRef = (__bridge LSSharedFileListItemRef)[loginItemsArray objectAtIndex:i];
             // Resolve the item with URL
-            if (LSSharedFileListItemResolve(itemRef, 0, (CFURLRef*)&url, NULL) == noErr) {
-                NSString *urlPath = [(__bridge NSURL*)url path];
+            CFURLRef resolvedURL = LSSharedFileListItemCopyResolvedURL(itemRef, 0, nil);
+            if (resolvedURL) {
+                NSString *urlPath = [(__bridge NSURL*)resolvedURL path];
                 if ([urlPath compare:appPath] == NSOrderedSame){
                     // Here I am. Remove me please.
-                    LSSharedFileListItemRemove(loginItems,itemRef);
+                    LSSharedFileListItemRemove(loginItems, itemRef);
                 }
-                CFRelease(url);
+                CFRelease(resolvedURL);
             }
         }
     }
