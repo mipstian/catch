@@ -16,7 +16,6 @@
 		4456EE611916D20000B3FF1A /* NSDate+TimeOfDayMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 4456EE601916D20000B3FF1A /* NSDate+TimeOfDayMath.m */; };
 		4456EE651916F17F00B3FF1A /* CTCBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 4456EE641916F17F00B3FF1A /* CTCBrowser.m */; };
 		445D97A6191579C7006CD77C /* UI.strings in Resources */ = {isa = PBXBuildFile; fileRef = 445D97A4191579C7006CD77C /* UI.strings */; };
-		446298EB191655080045EC72 /* CTCPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 446298EA191655080045EC72 /* CTCPreferencesController.m */; };
 		446D8B581918D146007AB22D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 446D8B571918D146007AB22D /* XCTest.framework */; };
 		446D8B5E1918D146007AB22D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 446D8B5C1918D146007AB22D /* InfoPlist.strings */; };
 		446D8B601918D146007AB22D /* TimeOfDayMathTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 446D8B5F1918D146007AB22D /* TimeOfDayMathTests.m */; };
@@ -37,6 +36,7 @@
 		44BA5D1A1DB81A8E00A9CE9A /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BA5D191DB81A8E00A9CE9A /* Application.swift */; };
 		44BA5D1C1DB8220100A9CE9A /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BA5D1B1DB8220100A9CE9A /* MenuController.swift */; };
 		44C8926F1D1814A7008F8543 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C8926E1D1814A7008F8543 /* AppDelegate.swift */; };
+		44E2CEA31DBC0B8F00ED7A8D /* PreferencesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E2CEA21DBC0B8F00ED7A8D /* PreferencesController.swift */; };
 		44FBC67B196312A400434B01 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44FBC67A196312A400434B01 /* QuartzCore.framework */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
@@ -110,8 +110,6 @@
 		445D97A319157955006CD77C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UI.xib; sourceTree = "<group>"; };
 		445D97A5191579C7006CD77C /* ca */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/UI.strings; sourceTree = "<group>"; };
 		445D97A719157A2C006CD77C /* de */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/UI.strings; sourceTree = "<group>"; };
-		446298E9191655080045EC72 /* CTCPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCPreferencesController.h; sourceTree = "<group>"; };
-		446298EA191655080045EC72 /* CTCPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCPreferencesController.m; sourceTree = "<group>"; };
 		446D8B561918D146007AB22D /* Catch Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Catch Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		446D8B571918D146007AB22D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		446D8B5B1918D146007AB22D /* Catch Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Catch Tests-Info.plist"; sourceTree = "<group>"; };
@@ -148,6 +146,7 @@
 		44BA5D1B1DB8220100A9CE9A /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuController.swift; path = Sources/MenuController.swift; sourceTree = "<group>"; };
 		44C8926D1D1814A6008F8543 /* Catch-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Catch-Bridging-Header.h"; sourceTree = "<group>"; };
 		44C8926E1D1814A7008F8543 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Sources/AppDelegate.swift; sourceTree = "<group>"; };
+		44E2CEA21DBC0B8F00ED7A8D /* PreferencesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreferencesController.swift; path = Sources/PreferencesController.swift; sourceTree = "<group>"; };
 		44FBC67A196312A400434B01 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* Catch-Info.plist */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; path = "Catch-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Catch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catch.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -277,10 +276,9 @@
 		4456EE661916F1A600B3FF1A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				446298E9191655080045EC72 /* CTCPreferencesController.h */,
-				446298EA191655080045EC72 /* CTCPreferencesController.m */,
 				44BA5D1B1DB8220100A9CE9A /* MenuController.swift */,
 				44BA5D131DAEC3B600A9CE9A /* RecentsController.swift */,
+				44E2CEA21DBC0B8F00ED7A8D /* PreferencesController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -546,9 +544,9 @@
 				44BA5D1A1DB81A8E00A9CE9A /* Application.swift in Sources */,
 				44BA5D1C1DB8220100A9CE9A /* MenuController.swift in Sources */,
 				44BA5D141DAEC3B600A9CE9A /* RecentsController.swift in Sources */,
-				446298EB191655080045EC72 /* CTCPreferencesController.m in Sources */,
 				44717AA71913072200580054 /* CTCLoginItems.m in Sources */,
 				3803C7EC11C3E7AD00FC08DB /* CTCScheduler.m in Sources */,
+				44E2CEA31DBC0B8F00ED7A8D /* PreferencesController.swift in Sources */,
 				44717AAA1913173600580054 /* CTCFileUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
