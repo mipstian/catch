@@ -115,7 +115,7 @@ class Scheduler {
           NSLog("Feed Checker error (downloading file): \(error)")
         }
         DispatchQueue.main.async {
-          completion(downloadedFile as! [String : Any], error)
+          completion(downloadedFile as? [String:Any], error)
         }
       }
     )
