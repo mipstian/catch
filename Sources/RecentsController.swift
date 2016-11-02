@@ -73,13 +73,13 @@ extension RecentsController {
     let recentToDownload = CTCDefaults.downloadHistory()[clickedRow] as! [String:Any]
     let isMagnetLink = recentToDownload["isMagnetLink"] as! Bool
     if isMagnetLink {
-      CTCBrowser.open(inBackgroundURL: URL(string: recentToDownload["url"] as! String)!)
+      Browser.openInBackground(url: URL(string: recentToDownload["url"] as! String)!)
     } else {
       Scheduler.shared.downloadFile(recentToDownload) { downloadedFile, error in
         guard CTCDefaults.shouldOpenTorrentsAutomatically(), let downloadedFile = downloadedFile else {
           return
         }
-        CTCBrowser.open(inBackgroundFile: downloadedFile["torrentFilePath"] as! String)
+        Browser.openInBackground(file: downloadedFile["torrentFilePath"] as! String)
       }
     }
   }
