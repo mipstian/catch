@@ -28,7 +28,7 @@ class MenuController: NSObject {
     menuBarItem.highlightMode = true
     
     // Set current name and version
-    menuVersion.title = "\(CTCDefaults.appName()) \(CTCDefaults.appVersion()) (\(CTCDefaults.buildNumber()))"
+    menuVersion.title = "\(Config.appName) \(Config.appVersion) (\(Config.buildNumber))"
     
     // Update UI whenever the scheduler status changes
     NotificationCenter.default.addObserver(

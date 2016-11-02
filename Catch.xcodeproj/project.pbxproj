@@ -29,6 +29,7 @@
 		448CC7E817FE1F840063D3FD /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 448CC7E617FE1F840063D3FD /* Sparkle.framework */; };
 		44B363461DC99D1900128259 /* Scheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B363451DC99D1900128259 /* Scheduler.swift */; };
 		44B363481DC9B9FB00128259 /* Browser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B363471DC9B9FB00128259 /* Browser.swift */; };
+		44B3634A1DC9BF1B00128259 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B363491DC9BF1B00128259 /* Config.swift */; };
 		44BA5D121DAEC0C400A9CE9A /* WindowShakeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BA5D111DAEC0C300A9CE9A /* WindowShakeAnimation.swift */; };
 		44BA5D141DAEC3B600A9CE9A /* RecentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BA5D131DAEC3B600A9CE9A /* RecentsController.swift */; };
 		44BA5D161DAECF1A00A9CE9A /* RecentsCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BA5D151DAECF1A00A9CE9A /* RecentsCellView.swift */; };
@@ -135,6 +136,7 @@
 		448CECE219157BDF0075ADD9 /* zh-Hant */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/UI.strings"; sourceTree = "<group>"; };
 		44B363451DC99D1900128259 /* Scheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Scheduler.swift; path = Sources/Scheduler.swift; sourceTree = "<group>"; };
 		44B363471DC9B9FB00128259 /* Browser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Browser.swift; path = Sources/Browser.swift; sourceTree = "<group>"; };
+		44B363491DC9BF1B00128259 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		44BA5D111DAEC0C300A9CE9A /* WindowShakeAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WindowShakeAnimation.swift; path = Sources/WindowShakeAnimation.swift; sourceTree = "<group>"; };
 		44BA5D131DAEC3B600A9CE9A /* RecentsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecentsController.swift; path = Sources/RecentsController.swift; sourceTree = "<group>"; };
 		44BA5D151DAECF1A00A9CE9A /* RecentsCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecentsCellView.swift; path = Sources/RecentsCellView.swift; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 			isa = PBXGroup;
 			children = (
 				44B363471DC9B9FB00128259 /* Browser.swift */,
+				44B363491DC9BF1B00128259 /* Config.swift */,
 				44B363451DC99D1900128259 /* Scheduler.swift */,
 				44717AA2191300B300580054 /* CTCDefaults.h */,
 				44717AA3191300B300580054 /* CTCDefaults.m */,
@@ -532,6 +535,7 @@
 				4456EE611916D20000B3FF1A /* NSDate+TimeOfDayMath.m in Sources */,
 				44B363461DC99D1900128259 /* Scheduler.swift in Sources */,
 				44BA5D121DAEC0C400A9CE9A /* WindowShakeAnimation.swift in Sources */,
+				44B3634A1DC9BF1B00128259 /* Config.swift in Sources */,
 				44C8926F1D1814A7008F8543 /* AppDelegate.swift in Sources */,
 				44BA5D161DAECF1A00A9CE9A /* RecentsCellView.swift in Sources */,
 				44B363481DC9B9FB00128259 /* Browser.swift in Sources */,

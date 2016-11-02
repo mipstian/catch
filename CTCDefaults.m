@@ -126,22 +126,6 @@ NSString * const kCTCDefaultsPreventSystemSleepKey = @"preventSystemSleep";
     return self.isTorrentsSavePathValid && self.isFeedURLValid;
 }
 
-+ (NSString *)infoStringForKey:(NSString *)key {
-    return [NSBundle.mainBundle objectForInfoDictionaryKey:key];
-}
-
-+ (NSString *)appName{
-    return [self infoStringForKey:@"CFBundleDisplayName"];
-}
-
-+ (NSString *)appVersion {
-    return [self infoStringForKey:@"CFBundleShortVersionString"];
-}
-
-+ (NSString *)buildNumber {
-    return [self infoStringForKey:@"CFBundleVersion"];
-}
-
 + (NSString *)feedURL {
     NSString *rawFeedURL = [NSUserDefaults.standardUserDefaults stringForKey:kCTCDefaultsFeedURLKey];
     return rawFeedURL ? [rawFeedURL stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet] : @"";
