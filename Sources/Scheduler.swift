@@ -90,7 +90,7 @@ class Scheduler {
     }
     
     // No need to prevent App Nap or system sleep if paused
-    if !isPolling { return }
+    guard isPolling else { return }
     
     // Prevent App Nap (so we can keep checking the feed), and optionally system sleep
     activityToken = ProcessInfo.processInfo.beginActivity(
@@ -123,7 +123,7 @@ class Scheduler {
   
   private func checkFeed() {
     // Don't check twice simultaneously
-    if isChecking { return }
+    guard !isChecking else { return }
     
     // Only work with valid preferences
     guard CTCDefaults.isConfigurationValid() else {
@@ -190,7 +190,7 @@ class Scheduler {
       
       let title = feedFile["title"] as! String
       
-      postUserNotificationForNewEpisode(episodeTitle: title)
+      postNewEpisodeUserNotification(episodeTitle: title)
       
       let url = feedFile["url"] as! String
       
@@ -206,7 +206,7 @@ class Scheduler {
     }
   }
   
-  private func postUserNotificationForNewEpisode(episodeTitle: String) {
+  private func postNewEpisodeUserNotification(episodeTitle: String) {
     // Post to Notification Center
     let notification = NSUserNotification()
     notification.title = NSLocalizedString("newtorrent", comment: "New torrent notification")
@@ -224,16 +224,14 @@ class Scheduler {
   }
 
   @objc private func tick(_ timer: Timer) {
-    guard isPolling else { return }
-    
-    // Don't check if current time is outside user-defined range
-    guard shouldCheckNow else { return }
+    // Don't check if paused or if current time is outside user-defined range
+    guard isPolling && shouldCheckNow else { return }
     
     checkFeed()
   }
   
   private func fireTimerNow() {
-    repeatingTimer.fireDate = Date.distantPast
+    repeatingTimer.fireDate = .distantPast
   }
   
   private func sendStatusChangedNotification() {
