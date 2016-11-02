@@ -16,8 +16,8 @@ class RecentsController: NSWindowController {
     
     // Subscribe to history changes
     NotificationCenter.default.addObserver(
-      forName: NSNotification.Name(rawValue: kCTCSchedulerStatusChangedNotificationName),
-      object: CTCScheduler.shared(),
+      forName: Scheduler.statusChangedNotification,
+      object: Scheduler.shared,
       queue: nil,
       using: { [weak self] _ in
         self?.table.reloadData()
@@ -70,12 +70,12 @@ extension RecentsController {
   
   @IBAction private func downloadRecentItemAgain(_ senderButton: NSButton) {
     let clickedRow = table.row(for: senderButton)
-    let recentToDownload = CTCDefaults.downloadHistory()[clickedRow]
+    let recentToDownload = CTCDefaults.downloadHistory()[clickedRow] as! [String:Any]
     let isMagnetLink = recentToDownload["isMagnetLink"] as! Bool
     if isMagnetLink {
       CTCBrowser.open(inBackgroundURL: URL(string: recentToDownload["url"] as! String)!)
     } else {
-      CTCScheduler.shared().downloadFile(recentToDownload) { downloadedFile, error in
+      Scheduler.shared.downloadFile(recentToDownload) { downloadedFile, error in
         guard CTCDefaults.shouldOpenTorrentsAutomatically(), let downloadedFile = downloadedFile else {
           return
         }
