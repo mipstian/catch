@@ -186,7 +186,7 @@
 				4456EE681916F1BB00B3FF1A /* Application */,
 				4456EE661916F1A600B3FF1A /* Controllers */,
 				4439DFD719B5E45700408851 /* Views */,
-				4456EE671916F1B100B3FF1A /* Libraries */,
+				4456EE671916F1B100B3FF1A /* Library */,
 				4456EE621916D2E700B3FF1A /* Extensions */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97315FDCFA39411CA2CEA /* Supporting Files */,
@@ -280,7 +280,7 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
-		4456EE671916F1B100B3FF1A /* Libraries */ = {
+		4456EE671916F1B100B3FF1A /* Library */ = {
 			isa = PBXGroup;
 			children = (
 				44B363471DC9B9FB00128259 /* Browser.swift */,
@@ -290,7 +290,7 @@
 				44717AA51913072200580054 /* CTCLoginItems.h */,
 				44717AA61913072200580054 /* CTCLoginItems.m */,
 			);
-			name = Libraries;
+			name = Library;
 			sourceTree = "<group>";
 		};
 		4456EE681916F1BB00B3FF1A /* Application */ = {
