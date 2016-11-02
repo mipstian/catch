@@ -3,9 +3,6 @@
 #import "CTCFileUtils.h"
 
 
-// Check feed every 10 minutes
-NSTimeInterval const kCTCDefaultsFeedUpdateInterval = 60 * 10;
-
 NSString * const kCTCDefaultsServiceFeedURLRegex = @"^https?://([^.]+\\.)*showrss.info/(.*)$";
 
 // NSUserDefaults keys

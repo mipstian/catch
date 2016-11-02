@@ -3,9 +3,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-extern NSTimeInterval const kCTCDefaultsFeedUpdateInterval;
-
-
 @interface CTCDefaults : NSObject
 
 + (void)save;

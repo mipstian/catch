@@ -57,7 +57,7 @@ class Scheduler {
     
     // Create a timer to check periodically
     repeatingTimer = Timer.scheduledTimer(
-      timeInterval: kCTCDefaultsFeedUpdateInterval,
+      timeInterval: Config.feedUpdateInterval,
       target: self,
       selector: #selector(tick),
       userInfo: nil,
