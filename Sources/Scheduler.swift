@@ -19,9 +19,9 @@ class Scheduler {
   private var shouldCheckNow: Bool {
     if !CTCDefaults.areTimeRestrictionsEnabled() { return true }
     
-    return NSDate().isTime(
-      ofDayBetweenDate: CTCDefaults.fromDateForTimeRestrictions(),
-      andDate: CTCDefaults.toDateForTimeRestrictions()
+    return Date().isTimeOfDayBetween(
+      startTimeOfDay: CTCDefaults.fromDateForTimeRestrictions(),
+      endTimeOfDay: CTCDefaults.toDateForTimeRestrictions()
     )
   }
   
