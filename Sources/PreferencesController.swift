@@ -62,7 +62,7 @@ extension PreferencesController {
       showFeeds(self)
       
       // Shake the window to signal invalid input
-      window?.performShakeAnimation()
+      window?.performShakeAnimation(duration: 0.3)
     }
   }
   

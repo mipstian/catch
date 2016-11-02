@@ -3,14 +3,10 @@ import AppKit
 
 extension NSWindow {
   // Stolen from: http://stackoverflow.com/questions/10517386
-  func performShakeAnimation() {
-    let numberOfShakes = 2
-    let shakeDuration: TimeInterval = 0.3
-    let shakeIntensity: CGFloat = 0.015
-    
+  func performShakeAnimation(duration: TimeInterval, numberOfShakes: Int = 2, intensity: CGFloat = 0.015) {
     let shakeAnimation = CAKeyframeAnimation()
     
-    let xOffset = frame.width * shakeIntensity
+    let xOffset = frame.width * intensity
     
     let shakePath = CGMutablePath()
     shakePath.move(to: CGPoint(x: frame.minX, y: frame.minY))
@@ -21,7 +17,7 @@ extension NSWindow {
     shakePath.closeSubpath()
     
     shakeAnimation.path = shakePath
-    shakeAnimation.duration = shakeDuration
+    shakeAnimation.duration = duration
     
     animations = ["frameOrigin": shakeAnimation]
     animator().setFrameOrigin(frame.origin)
