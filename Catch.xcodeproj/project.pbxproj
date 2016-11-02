@@ -24,12 +24,12 @@
 		44717AD61913A16500580054 /* com.giorgiocalderolla.Catch.CatchFeedHelper.xpc in CopyFiles */ = {isa = PBXBuildFile; fileRef = 44717AC41913A08700580054 /* com.giorgiocalderolla.Catch.CatchFeedHelper.xpc */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		44717AD91913A1C900580054 /* CTCFeedChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717AD81913A1C900580054 /* CTCFeedChecker.m */; };
 		44717ADD1913AF3400580054 /* CTCFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717AA91913173600580054 /* CTCFileUtils.m */; };
-		448CC7E817FE1F840063D3FD /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 448CC7E617FE1F840063D3FD /* Sparkle.framework */; };
 		44B363461DC99D1900128259 /* Scheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B363451DC99D1900128259 /* Scheduler.swift */; };
 		44B363481DC9B9FB00128259 /* Browser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B363471DC9B9FB00128259 /* Browser.swift */; };
 		44B3634A1DC9BF1B00128259 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B363491DC9BF1B00128259 /* Config.swift */; };
 		44B3634C1DCA6F7100128259 /* TimeOfDayMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B3634B1DCA6F7100128259 /* TimeOfDayMath.swift */; };
 		44B3634E1DCA744200128259 /* TimeOfDayMathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B3634D1DCA744200128259 /* TimeOfDayMathTests.swift */; };
+		44B3634F1DCA793F00128259 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 448CC7E617FE1F840063D3FD /* Sparkle.framework */; };
 		44BA5D121DAEC0C400A9CE9A /* WindowShakeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BA5D111DAEC0C300A9CE9A /* WindowShakeAnimation.swift */; };
 		44BA5D141DAEC3B600A9CE9A /* RecentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BA5D131DAEC3B600A9CE9A /* RecentsController.swift */; };
 		44BA5D161DAECF1A00A9CE9A /* RecentsCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BA5D151DAECF1A00A9CE9A /* RecentsCellView.swift */; };
@@ -120,7 +120,7 @@
 		44717ACD1913A08700580054 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		44717AD71913A1C900580054 /* CTCFeedChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCFeedChecker.h; sourceTree = "<group>"; };
 		44717AD81913A1C900580054 /* CTCFeedChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCFeedChecker.m; sourceTree = "<group>"; };
-		448CC7E617FE1F840063D3FD /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
+		448CC7E617FE1F840063D3FD /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Vendor/Sparkle.framework; sourceTree = "<group>"; };
 		448CECDC19157AA60075ADD9 /* es */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/UI.strings; sourceTree = "<group>"; };
 		448CECDD19157B020075ADD9 /* fi */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/UI.strings; sourceTree = "<group>"; };
 		448CECDE19157B300075ADD9 /* fr */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/UI.strings; sourceTree = "<group>"; };
@@ -171,7 +171,7 @@
 				44FBC67B196312A400434B01 /* QuartzCore.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				38F9B09111C98E9E0021C540 /* Automator.framework in Frameworks */,
-				448CC7E817FE1F840063D3FD /* Sparkle.framework in Frameworks */,
+				44B3634F1DCA793F00128259 /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -628,6 +628,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Vendor",
+				);
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				INFOPLIST_FILE = "Catch-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -646,6 +650,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Vendor",
+				);
 				INFOPLIST_FILE = "Catch-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				OTHER_LDFLAGS = "-Wl,-rpath,@loader_path/../Frameworks";
