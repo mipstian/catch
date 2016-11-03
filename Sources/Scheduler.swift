@@ -17,20 +17,18 @@ class Scheduler {
   private(set) var lastUpdateDate: Date? = nil
   
   private var shouldCheckNow: Bool {
-    if !CTCDefaults.areTimeRestrictionsEnabled() { return true }
+    if !Defaults.shared.areTimeRestrictionsEnabled { return true }
     
     return Date().isTimeOfDayBetween(
-      startTimeOfDay: CTCDefaults.fromDateForTimeRestrictions(),
-      endTimeOfDay: CTCDefaults.toDateForTimeRestrictions()
+      startTimeOfDay: Defaults.shared.fromDateForTimeRestrictions,
+      endTimeOfDay: Defaults.shared.toDateForTimeRestrictions
     )
   }
   
   private var downloadFolderBookmark: Data {
-    let url = URL(fileURLWithPath: CTCDefaults.torrentsSavePath())
-    
     // Create a bookmark so we can transfer access to the downloads path
     // to the feed checker service
-    return try! CTCFileUtils.bookmark(for: url)
+    return try! CTCFileUtils.bookmark(for: Defaults.shared.torrentsSavePath!)
   }
   
   private var repeatingTimer: Timer! = nil
@@ -94,7 +92,7 @@ class Scheduler {
     
     // Prevent App Nap (so we can keep checking the feed), and optionally system sleep
     activityToken = ProcessInfo.processInfo.beginActivity(
-      options: CTCDefaults.shouldPreventSystemSleep() ?
+      options: Defaults.shared.shouldPreventSystemSleep ?
         [.suddenTerminationDisabled, .idleSystemSleepDisabled] :
         .suddenTerminationDisabled,
       reason: "Actively polling the feed"
@@ -108,8 +106,8 @@ class Scheduler {
     feedChecker.downloadFile(
       file,
       toBookmark: downloadFolderBookmark,
-      organizingByFolder: CTCDefaults.shouldOrganizeTorrentsInFolders(),
-      savingMagnetLinks: !CTCDefaults.shouldOpenTorrentsAutomatically(),
+      organizingByFolder: Defaults.shared.shouldOrganizeTorrentsInFolders,
+      savingMagnetLinks: !Defaults.shared.shouldOpenTorrentsAutomatically,
       withReply: { downloadedFile, error in
         if let error = error {
           NSLog("Feed Checker error (downloading file): \(error)")
@@ -126,7 +124,7 @@ class Scheduler {
     guard !isChecking else { return }
     
     // Only work with valid preferences
-    guard CTCDefaults.isConfigurationValid() else {
+    guard Defaults.shared.isConfigurationValid else {
       NSLog("Refusing to check feed - invalid preferences")
       return
     }
@@ -143,9 +141,9 @@ class Scheduler {
   
   private func callFeedCheckerWithReplyHandler(replyHandler: @escaping CTCFeedCheckCompletionHandler) {
     // Read configuration
-    let feedURL = URL(string: CTCDefaults.feedURL())!
+    let feedURL = URL(string: Defaults.shared.feedURL)!
     
-    let history = CTCDefaults.downloadHistory()
+    let history = Defaults.shared.downloadHistory
     
     // Extract URLs from history
     let previouslyDownloadedURLs = history.map { $0["url"] as! String }
@@ -156,8 +154,8 @@ class Scheduler {
     feedChecker.checkShowRSSFeed(
       feedURL,
       downloadingToBookmark: downloadFolderBookmark,
-      organizingByFolder: CTCDefaults.shouldOrganizeTorrentsInFolders(),
-      savingMagnetLinks: !CTCDefaults.shouldOpenTorrentsAutomatically(),
+      organizingByFolder: Defaults.shared.shouldOrganizeTorrentsInFolders,
+      savingMagnetLinks: !Defaults.shared.shouldOpenTorrentsAutomatically,
       skippingURLs: previouslyDownloadedURLs,
       withReply: { downloadedFeedFiles, error in
         if let error = error {
@@ -171,7 +169,7 @@ class Scheduler {
   }
   
   private func handleDownloadedFeedFiles(_ downloadedFeedFiles: [[AnyHashable : Any]]) {
-    let shouldOpenTorrentsAutomatically = CTCDefaults.shouldOpenTorrentsAutomatically()
+    let shouldOpenTorrentsAutomatically = Defaults.shared.shouldOpenTorrentsAutomatically
     
     for feedFile in downloadedFeedFiles.reversed() {
       let isMagnetLink = (feedFile["isMagnetLink"] as? NSNumber)?.boolValue ?? false
@@ -195,14 +193,14 @@ class Scheduler {
       let url = feedFile["url"] as! String
       
       // Add url to history
-      var history = CTCDefaults.downloadHistory()
+      var history = Defaults.shared.downloadHistory
       history.append([
         "title": title,
         "url": url,
         "isMagnetLink": isMagnetLink,
         "date": Date()
       ])
-      CTCDefaults.setDownloadHistory(history)
+      Defaults.shared.downloadHistory = history
     }
   }
   

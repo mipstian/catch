@@ -10,7 +10,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
   
   func applicationWillTerminate(_: Notification) {
     // Persist defaults before quitting
-    CTCDefaults.save()
+    Defaults.shared.save()
   }
 }
 

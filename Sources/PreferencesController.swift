@@ -9,8 +9,9 @@ class PreferencesController: NSWindowController {
     showFeeds(self)
     
     // If the configuration isn't valid, pop up immediately
-    if !CTCDefaults.isConfigurationValid() { showWindow(self) }
+    if !Defaults.shared.isConfigurationValid { showWindow(self) }
     
+    // TODO: encapsulate this
     UserDefaults.standard.addObserver(self, forKeyPath: "savePath", options: .new, context: nil)
     UserDefaults.standard.addObserver(self, forKeyPath: "feedURL", options: .new, context: nil)
   }
@@ -20,8 +21,8 @@ class PreferencesController: NSWindowController {
   }
   
   fileprivate func refreshInvalidInputMarkers() {
-    torrentsSavePathWarningImageView.image = CTCDefaults.isTorrentsSavePathValid() ? #imageLiteral(resourceName: "success") : #imageLiteral(resourceName: "warning")
-    feedURLWarningImageView.image = CTCDefaults.isFeedURLValid() ? #imageLiteral(resourceName: "success") : #imageLiteral(resourceName: "warning")
+    torrentsSavePathWarningImageView.image = Defaults.shared.isTorrentsSavePathValid ? #imageLiteral(resourceName: "success") : #imageLiteral(resourceName: "warning")
+    feedURLWarningImageView.image = Defaults.shared.isFeedURLValid ? #imageLiteral(resourceName: "success") : #imageLiteral(resourceName: "warning")
   }
   
   deinit {
@@ -40,15 +41,15 @@ extension PreferencesController {
   }
   
   @IBAction private func savePreferences(_: Any?) {
-    CTCDefaults.save()
+    Defaults.shared.save()
     
-    if CTCDefaults.isConfigurationValid() {
+    if Defaults.shared.isConfigurationValid {
       // Hide the Preferences window
       window?.close()
       
       // Apply the login item setting
       // TODO: move to defaults
-      CTCDefaults.refreshLoginItemStatus()
+      Defaults.shared.refreshLoginItemStatus()
       
       // Apply power management settings
       // TODO: move to scheduler

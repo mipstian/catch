@@ -15,7 +15,6 @@
 		445D97A6191579C7006CD77C /* UI.strings in Resources */ = {isa = PBXBuildFile; fileRef = 445D97A4191579C7006CD77C /* UI.strings */; };
 		446D8B581918D146007AB22D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 446D8B571918D146007AB22D /* XCTest.framework */; };
 		446D8B5E1918D146007AB22D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 446D8B5C1918D146007AB22D /* InfoPlist.strings */; };
-		44717AA4191300B300580054 /* CTCDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717AA3191300B300580054 /* CTCDefaults.m */; };
 		44717AA71913072200580054 /* CTCLoginItems.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717AA61913072200580054 /* CTCLoginItems.m */; };
 		44717AAA1913173600580054 /* CTCFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717AA91913173600580054 /* CTCFileUtils.m */; };
 		44717AC51913A08700580054 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97325FDCFA39411CA2CEA /* Foundation.framework */; };
@@ -39,6 +38,7 @@
 		44E2CEA31DBC0B8F00ED7A8D /* PreferencesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E2CEA21DBC0B8F00ED7A8D /* PreferencesController.swift */; };
 		44E2CEA51DBC134E00ED7A8D /* FeedParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E2CEA41DBC134E00ED7A8D /* FeedParser.swift */; };
 		44FBC67B196312A400434B01 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44FBC67A196312A400434B01 /* QuartzCore.framework */; };
+		44FFCE3F1DCB92F4006E6DF0 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FFCE3E1DCB92F4006E6DF0 /* Defaults.swift */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
@@ -108,8 +108,6 @@
 		446D8B571918D146007AB22D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		446D8B5B1918D146007AB22D /* Catch Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Catch Tests-Info.plist"; sourceTree = "<group>"; };
 		446D8B5D1918D146007AB22D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		44717AA2191300B300580054 /* CTCDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCDefaults.h; sourceTree = "<group>"; };
-		44717AA3191300B300580054 /* CTCDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCDefaults.m; sourceTree = "<group>"; };
 		44717AA51913072200580054 /* CTCLoginItems.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCLoginItems.h; sourceTree = "<group>"; };
 		44717AA61913072200580054 /* CTCLoginItems.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCLoginItems.m; sourceTree = "<group>"; };
 		44717AA81913173600580054 /* CTCFileUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCFileUtils.h; sourceTree = "<group>"; };
@@ -143,6 +141,7 @@
 		44E2CEA21DBC0B8F00ED7A8D /* PreferencesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreferencesController.swift; path = Sources/PreferencesController.swift; sourceTree = "<group>"; };
 		44E2CEA41DBC134E00ED7A8D /* FeedParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedParser.swift; path = Sources/FeedParser.swift; sourceTree = SOURCE_ROOT; };
 		44FBC67A196312A400434B01 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		44FFCE3E1DCB92F4006E6DF0 /* Defaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Defaults.swift; path = Sources/Defaults.swift; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Catch-Info.plist */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; path = "Catch-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Catch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -281,9 +280,8 @@
 			children = (
 				44B363471DC9B9FB00128259 /* Browser.swift */,
 				44B363491DC9BF1B00128259 /* Config.swift */,
+				44FFCE3E1DCB92F4006E6DF0 /* Defaults.swift */,
 				44B363451DC99D1900128259 /* Scheduler.swift */,
-				44717AA2191300B300580054 /* CTCDefaults.h */,
-				44717AA3191300B300580054 /* CTCDefaults.m */,
 				44717AA51913072200580054 /* CTCLoginItems.h */,
 				44717AA61913072200580054 /* CTCLoginItems.m */,
 			);
@@ -530,12 +528,12 @@
 				44C8926F1D1814A7008F8543 /* AppDelegate.swift in Sources */,
 				44BA5D161DAECF1A00A9CE9A /* RecentsCellView.swift in Sources */,
 				44B363481DC9B9FB00128259 /* Browser.swift in Sources */,
-				44717AA4191300B300580054 /* CTCDefaults.m in Sources */,
 				44BA5D1A1DB81A8E00A9CE9A /* Application.swift in Sources */,
 				44B3634C1DCA6F7100128259 /* TimeOfDayMath.swift in Sources */,
 				44BA5D1C1DB8220100A9CE9A /* MenuController.swift in Sources */,
 				44BA5D141DAEC3B600A9CE9A /* RecentsController.swift in Sources */,
 				44717AA71913072200580054 /* CTCLoginItems.m in Sources */,
+				44FFCE3F1DCB92F4006E6DF0 /* Defaults.swift in Sources */,
 				44E2CEA31DBC0B8F00ED7A8D /* PreferencesController.swift in Sources */,
 				44717AAA1913173600580054 /* CTCFileUtils.m in Sources */,
 			);

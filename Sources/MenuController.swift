@@ -13,7 +13,7 @@ class MenuController: NSObject {
 
   override func awakeFromNib() {
     // Skip setup if we're running headless
-    guard !CTCDefaults.shouldRunHeadless() else { return }
+    guard !Defaults.shared.shouldRunHeadless else { return }
     
     // Create a date formatter for "last update" dates
     lastUpdateDateFormatter.timeStyle = .short
