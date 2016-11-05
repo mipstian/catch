@@ -179,11 +179,11 @@ class Scheduler {
         Browser.openInBackground(url: URL(string: feedFile["url"] as! String)!)
       }
       
-      let torrentFilePath = feedFile["torrentFilePath"] as! String
+      let torrentFilePath = feedFile["torrentFilePath"] as? String
       
       // Open normal torrent in torrent client, if requested
       if !isMagnetLink && shouldOpenTorrentsAutomatically {
-        Browser.openInBackground(file: torrentFilePath)
+        Browser.openInBackground(file: torrentFilePath!)
       }
       
       let title = feedFile["title"] as! String
