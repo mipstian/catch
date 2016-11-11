@@ -120,7 +120,7 @@ class Defaults {
   
   func refreshLoginItemStatus() {
     let shouldOpenAtLogin = UserDefaults.standard.bool(forKey: Keys.openAtLogin)
-    CTCLoginItems.toggleRegistered(asLoginItem: shouldOpenAtLogin)
+    Bundle.main.isLoginItem = shouldOpenAtLogin
   }
   
   private init() {
