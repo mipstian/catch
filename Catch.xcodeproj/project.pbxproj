@@ -111,14 +111,14 @@
 		446D8B571918D146007AB22D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		446D8B5B1918D146007AB22D /* Catch Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Catch Tests-Info.plist"; sourceTree = "<group>"; };
 		446D8B5D1918D146007AB22D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		44717AA81913173600580054 /* CTCFileUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCFileUtils.h; sourceTree = "<group>"; };
-		44717AA91913173600580054 /* CTCFileUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCFileUtils.m; sourceTree = "<group>"; };
+		44717AA81913173600580054 /* CTCFileUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTCFileUtils.h; path = Sources/Shared/CTCFileUtils.h; sourceTree = "<group>"; };
+		44717AA91913173600580054 /* CTCFileUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTCFileUtils.m; path = Sources/Shared/CTCFileUtils.m; sourceTree = "<group>"; };
 		44717AC41913A08700580054 /* com.giorgiocalderolla.Catch.CatchFeedHelper.xpc */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = com.giorgiocalderolla.Catch.CatchFeedHelper.xpc; sourceTree = BUILT_PRODUCTS_DIR; };
 		44717AC81913A08700580054 /* CatchFeedHelper-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CatchFeedHelper-Info.plist"; sourceTree = "<group>"; };
 		44717ACA1913A08700580054 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		44717ACD1913A08700580054 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		44717AD71913A1C900580054 /* CTCFeedChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCFeedChecker.h; sourceTree = "<group>"; };
-		44717AD81913A1C900580054 /* CTCFeedChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCFeedChecker.m; sourceTree = "<group>"; };
+		44717ACD1913A08700580054 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "Sources/Feed Helper/main.m"; sourceTree = SOURCE_ROOT; };
+		44717AD71913A1C900580054 /* CTCFeedChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTCFeedChecker.h; path = "Sources/Feed Helper/CTCFeedChecker.h"; sourceTree = SOURCE_ROOT; };
+		44717AD81913A1C900580054 /* CTCFeedChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTCFeedChecker.m; path = "Sources/Feed Helper/CTCFeedChecker.m"; sourceTree = SOURCE_ROOT; };
 		448CC7E617FE1F840063D3FD /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Vendor/Sparkle.framework; sourceTree = "<group>"; };
 		448CECDC19157AA60075ADD9 /* es */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/UI.strings; sourceTree = "<group>"; };
 		448CECDD19157B020075ADD9 /* fi */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/UI.strings; sourceTree = "<group>"; };
@@ -141,7 +141,7 @@
 		44BA5D151DAECF1A00A9CE9A /* RecentsCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecentsCellView.swift; path = Sources/App/RecentsCellView.swift; sourceTree = "<group>"; };
 		44BA5D191DB81A8E00A9CE9A /* Application.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Application.swift; path = Sources/App/Application.swift; sourceTree = "<group>"; };
 		44BA5D1B1DB8220100A9CE9A /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuController.swift; path = Sources/App/MenuController.swift; sourceTree = "<group>"; };
-		44C8926D1D1814A6008F8543 /* Catch-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Catch-Bridging-Header.h"; sourceTree = "<group>"; };
+		44C8926D1D1814A6008F8543 /* Catch-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Catch-Bridging-Header.h"; path = "Sources/App/Catch-Bridging-Header.h"; sourceTree = "<group>"; };
 		44C8926E1D1814A7008F8543 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Sources/App/AppDelegate.swift; sourceTree = "<group>"; };
 		44E2CEA21DBC0B8F00ED7A8D /* PreferencesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreferencesController.swift; path = Sources/App/PreferencesController.swift; sourceTree = "<group>"; };
 		44E2CEA41DBC134E00ED7A8D /* FeedParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedParser.swift; path = "Sources/Feed Helper/FeedParser.swift"; sourceTree = SOURCE_ROOT; };
@@ -646,7 +646,7 @@
 				OTHER_LDFLAGS = "-Wl,-rpath,@loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.giorgiocalderolla.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = Catch;
-				SWIFT_OBJC_BRIDGING_HEADER = "Catch-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Sources/App/Catch-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = app;
 			};
@@ -667,7 +667,7 @@
 				OTHER_LDFLAGS = "-Wl,-rpath,@loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.giorgiocalderolla.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = Catch;
-				SWIFT_OBJC_BRIDGING_HEADER = "Catch-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Sources/App/Catch-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = app;
 			};
