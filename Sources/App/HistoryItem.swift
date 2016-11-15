@@ -1,3 +1,6 @@
+import Foundation
+
+
 struct HistoryItem {
   let title: String
   let url: URL

@@ -129,7 +129,7 @@ class Defaults {
     let dateTo = Calendar.current.date(from: DateComponents(hour: 8, minute: 0))!
     
     // Use user's Downloads directory as a default, fallback on home
-    let defaultDownloadsDirectory = CTCFileUtils.userDownloadsDirectory() ?? CTCFileUtils.userHomeDirectory()
+    let defaultDownloadsDirectory = FileUtils.userDownloadsDirectory ?? FileUtils.userHomeDirectory
     NSLog("Default downloads directory is \(defaultDownloadsDirectory)")
     
     // Set smart default defaults
@@ -155,7 +155,7 @@ class Defaults {
       
       downloadHistory = downloadedFiles.flatMap(URL.init(string:)).map { url in
         return HistoryItem(
-          title: CTCFileUtils.filename(from: url),
+          title: FileUtils.filename(from: url),
           url: url,
           downloadDate: nil,
           isMagnetLink: false

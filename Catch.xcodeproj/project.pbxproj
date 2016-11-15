@@ -15,13 +15,15 @@
 		445D97A6191579C7006CD77C /* UI.strings in Resources */ = {isa = PBXBuildFile; fileRef = 445D97A4191579C7006CD77C /* UI.strings */; };
 		446D8B581918D146007AB22D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 446D8B571918D146007AB22D /* XCTest.framework */; };
 		446D8B5E1918D146007AB22D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 446D8B5C1918D146007AB22D /* InfoPlist.strings */; };
-		44717AAA1913173600580054 /* CTCFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717AA91913173600580054 /* CTCFileUtils.m */; };
 		44717AC51913A08700580054 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97325FDCFA39411CA2CEA /* Foundation.framework */; };
 		44717ACB1913A08700580054 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 44717AC91913A08700580054 /* InfoPlist.strings */; };
-		44717ACE1913A08700580054 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717ACD1913A08700580054 /* main.m */; };
 		44717AD61913A16500580054 /* com.giorgiocalderolla.Catch.CatchFeedHelper.xpc in CopyFiles */ = {isa = PBXBuildFile; fileRef = 44717AC41913A08700580054 /* com.giorgiocalderolla.Catch.CatchFeedHelper.xpc */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		44717AD91913A1C900580054 /* CTCFeedChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717AD81913A1C900580054 /* CTCFeedChecker.m */; };
-		44717ADD1913AF3400580054 /* CTCFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717AA91913173600580054 /* CTCFileUtils.m */; };
+		447E0F6C1DDAACE7001048AB /* FeedHelperService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447E0F6B1DDAACE7001048AB /* FeedHelperService.swift */; };
+		447E0F6D1DDAAD17001048AB /* FeedHelperService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447E0F6B1DDAACE7001048AB /* FeedHelperService.swift */; };
+		447E0F6F1DDAAD3D001048AB /* FeedHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447E0F6E1DDAAD3D001048AB /* FeedHelper.swift */; };
+		447E0F711DDAB073001048AB /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447E0F701DDAB073001048AB /* main.swift */; };
+		447E0F731DDAB24C001048AB /* FileUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447E0F721DDAB24C001048AB /* FileUtils.swift */; };
+		447E0F741DDAB24D001048AB /* FileUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447E0F721DDAB24C001048AB /* FileUtils.swift */; };
 		44AB5B5E1DCE794A00AE6EB6 /* HistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AB5B5D1DCE794A00AE6EB6 /* HistoryItem.swift */; };
 		44AB5B601DCE823A00AE6EB6 /* UserNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AB5B5F1DCE823A00AE6EB6 /* UserNotifications.swift */; };
 		44AB5B801DD54D7300AE6EB6 /* LoginItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AB5B7F1DD54D7300AE6EB6 /* LoginItem.swift */; };
@@ -111,14 +113,13 @@
 		446D8B571918D146007AB22D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		446D8B5B1918D146007AB22D /* Catch Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Catch Tests-Info.plist"; sourceTree = "<group>"; };
 		446D8B5D1918D146007AB22D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		44717AA81913173600580054 /* CTCFileUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTCFileUtils.h; path = Sources/Shared/CTCFileUtils.h; sourceTree = "<group>"; };
-		44717AA91913173600580054 /* CTCFileUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTCFileUtils.m; path = Sources/Shared/CTCFileUtils.m; sourceTree = "<group>"; };
 		44717AC41913A08700580054 /* com.giorgiocalderolla.Catch.CatchFeedHelper.xpc */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = com.giorgiocalderolla.Catch.CatchFeedHelper.xpc; sourceTree = BUILT_PRODUCTS_DIR; };
 		44717AC81913A08700580054 /* CatchFeedHelper-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CatchFeedHelper-Info.plist"; sourceTree = "<group>"; };
 		44717ACA1913A08700580054 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		44717ACD1913A08700580054 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "Sources/Feed Helper/main.m"; sourceTree = SOURCE_ROOT; };
-		44717AD71913A1C900580054 /* CTCFeedChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTCFeedChecker.h; path = "Sources/Feed Helper/CTCFeedChecker.h"; sourceTree = SOURCE_ROOT; };
-		44717AD81913A1C900580054 /* CTCFeedChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTCFeedChecker.m; path = "Sources/Feed Helper/CTCFeedChecker.m"; sourceTree = SOURCE_ROOT; };
+		447E0F6B1DDAACE7001048AB /* FeedHelperService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedHelperService.swift; path = Sources/Shared/FeedHelperService.swift; sourceTree = SOURCE_ROOT; };
+		447E0F6E1DDAAD3D001048AB /* FeedHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedHelper.swift; path = "Sources/Feed Helper/FeedHelper.swift"; sourceTree = SOURCE_ROOT; };
+		447E0F701DDAB073001048AB /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = main.swift; path = "Sources/Feed Helper/main.swift"; sourceTree = SOURCE_ROOT; };
+		447E0F721DDAB24C001048AB /* FileUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FileUtils.swift; path = Sources/Shared/FileUtils.swift; sourceTree = "<group>"; };
 		448CC7E617FE1F840063D3FD /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Vendor/Sparkle.framework; sourceTree = "<group>"; };
 		448CECDC19157AA60075ADD9 /* es */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/UI.strings; sourceTree = "<group>"; };
 		448CECDD19157B020075ADD9 /* fi */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/UI.strings; sourceTree = "<group>"; };
@@ -141,7 +142,6 @@
 		44BA5D151DAECF1A00A9CE9A /* RecentsCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecentsCellView.swift; path = Sources/App/RecentsCellView.swift; sourceTree = "<group>"; };
 		44BA5D191DB81A8E00A9CE9A /* Application.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Application.swift; path = Sources/App/Application.swift; sourceTree = "<group>"; };
 		44BA5D1B1DB8220100A9CE9A /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuController.swift; path = Sources/App/MenuController.swift; sourceTree = "<group>"; };
-		44C8926D1D1814A6008F8543 /* Catch-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Catch-Bridging-Header.h"; path = "Sources/App/Catch-Bridging-Header.h"; sourceTree = "<group>"; };
 		44C8926E1D1814A7008F8543 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Sources/App/AppDelegate.swift; sourceTree = "<group>"; };
 		44E2CEA21DBC0B8F00ED7A8D /* PreferencesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreferencesController.swift; path = Sources/App/PreferencesController.swift; sourceTree = "<group>"; };
 		44E2CEA41DBC134E00ED7A8D /* FeedParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedParser.swift; path = "Sources/Feed Helper/FeedParser.swift"; sourceTree = SOURCE_ROOT; };
@@ -210,8 +210,8 @@
 			isa = PBXGroup;
 			children = (
 				080E96DDFE201D6D7F000001 /* Catch */,
-				44717AC61913A08700580054 /* CatchFeedHelper */,
-				44717ADC1913AF2000580054 /* Shared Libraries */,
+				44717AC61913A08700580054 /* Feed Helper Service */,
+				44717ADC1913AF2000580054 /* Shared */,
 				446D8B591918D146007AB22D /* Catch Tests */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
@@ -222,7 +222,6 @@
 		29B97315FDCFA39411CA2CEA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				44C8926D1D1814A6008F8543 /* Catch-Bridging-Header.h */,
 				8D1107310486CEB800E47090 /* Catch-Info.plist */,
 			);
 			name = "Supporting Files";
@@ -322,14 +321,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		44717AC61913A08700580054 /* CatchFeedHelper */ = {
+		44717AC61913A08700580054 /* Feed Helper Service */ = {
 			isa = PBXGroup;
 			children = (
-				44717AD71913A1C900580054 /* CTCFeedChecker.h */,
-				44717AD81913A1C900580054 /* CTCFeedChecker.m */,
+				447E0F6E1DDAAD3D001048AB /* FeedHelper.swift */,
 				44E2CEA41DBC134E00ED7A8D /* FeedParser.swift */,
+				447E0F701DDAB073001048AB /* main.swift */,
 				44717AC71913A08700580054 /* Supporting Files */,
 			);
+			name = "Feed Helper Service";
 			path = CatchFeedHelper;
 			sourceTree = "<group>";
 		};
@@ -337,20 +337,19 @@
 			isa = PBXGroup;
 			children = (
 				4412E8161957F09200701124 /* com.giorgiocalderolla.Catch.CatchFeedHelper.entitlements */,
-				44717ACD1913A08700580054 /* main.m */,
 				44717AC81913A08700580054 /* CatchFeedHelper-Info.plist */,
 				44717AC91913A08700580054 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		44717ADC1913AF2000580054 /* Shared Libraries */ = {
+		44717ADC1913AF2000580054 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				44717AA81913173600580054 /* CTCFileUtils.h */,
-				44717AA91913173600580054 /* CTCFileUtils.m */,
+				447E0F6B1DDAACE7001048AB /* FeedHelperService.swift */,
+				447E0F721DDAB24C001048AB /* FileUtils.swift */,
 			);
-			name = "Shared Libraries";
+			name = Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -518,9 +517,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				44717ADD1913AF3400580054 /* CTCFileUtils.m in Sources */,
-				44717AD91913A1C900580054 /* CTCFeedChecker.m in Sources */,
-				44717ACE1913A08700580054 /* main.m in Sources */,
+				447E0F711DDAB073001048AB /* main.swift in Sources */,
+				447E0F6F1DDAAD3D001048AB /* FeedHelper.swift in Sources */,
+				447E0F741DDAB24D001048AB /* FileUtils.swift in Sources */,
+				447E0F6C1DDAACE7001048AB /* FeedHelperService.swift in Sources */,
 				44E2CEA51DBC134E00ED7A8D /* FeedParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -532,8 +532,10 @@
 				44AB5B821DD5532C00AE6EB6 /* BundleInfo.swift in Sources */,
 				44B363461DC99D1900128259 /* Scheduler.swift in Sources */,
 				44BA5D121DAEC0C400A9CE9A /* WindowShakeAnimation.swift in Sources */,
+				447E0F731DDAB24C001048AB /* FileUtils.swift in Sources */,
 				44B3634A1DC9BF1B00128259 /* Config.swift in Sources */,
 				44C8926F1D1814A7008F8543 /* AppDelegate.swift in Sources */,
+				447E0F6D1DDAAD17001048AB /* FeedHelperService.swift in Sources */,
 				44BA5D161DAECF1A00A9CE9A /* RecentsCellView.swift in Sources */,
 				44B363481DC9B9FB00128259 /* Browser.swift in Sources */,
 				44BA5D1A1DB81A8E00A9CE9A /* Application.swift in Sources */,
@@ -544,7 +546,6 @@
 				44AB5B601DCE823A00AE6EB6 /* UserNotifications.swift in Sources */,
 				44FFCE3F1DCB92F4006E6DF0 /* Defaults.swift in Sources */,
 				44E2CEA31DBC0B8F00ED7A8D /* PreferencesController.swift in Sources */,
-				44717AAA1913173600580054 /* CTCFileUtils.m in Sources */,
 				44AB5B801DD54D7300AE6EB6 /* LoginItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -646,7 +647,6 @@
 				OTHER_LDFLAGS = "-Wl,-rpath,@loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.giorgiocalderolla.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = Catch;
-				SWIFT_OBJC_BRIDGING_HEADER = "Sources/App/Catch-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = app;
 			};
@@ -667,7 +667,6 @@
 				OTHER_LDFLAGS = "-Wl,-rpath,@loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.giorgiocalderolla.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = Catch;
-				SWIFT_OBJC_BRIDGING_HEADER = "Sources/App/Catch-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = app;
 			};
