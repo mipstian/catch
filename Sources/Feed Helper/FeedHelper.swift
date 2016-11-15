@@ -36,7 +36,7 @@ extension FeedHelper: FeedHelperService {
       feed = try downloadFeed(feedURL: feedURL)
     } catch {
       reply([], NSError(
-        domain: feedCheckerErrorDomain,
+        domain: feedHelperErrorDomain,
         code: -5,
         userInfo: [
           NSLocalizedDescriptionKey: "Could not download feed",
@@ -52,7 +52,7 @@ extension FeedHelper: FeedHelperService {
       feedFiles = try FeedParser.parse(feed: feed)
     } catch {
       reply([], NSError(
-        domain: feedCheckerErrorDomain,
+        domain: feedHelperErrorDomain,
         code: -6,
         userInfo: [
           NSLocalizedDescriptionKey: "Could not parse feed",
@@ -231,7 +231,7 @@ fileprivate extension FeedHelper {
       )
     } catch {
       throw NSError(
-        domain: feedCheckerErrorDomain,
+        domain: feedHelperErrorDomain,
         code: -8,
         userInfo: [
           NSLocalizedDescriptionKey: "Could not serialize magnet link plist"
@@ -283,7 +283,7 @@ fileprivate extension FeedHelper {
       )
     } catch {
       throw NSError(
-        domain: feedCheckerErrorDomain,
+        domain: feedHelperErrorDomain,
         code: -1,
         userInfo: [
           NSLocalizedDescriptionKey: "Could not download file",
@@ -296,7 +296,7 @@ fileprivate extension FeedHelper {
     
     guard httpResponse.statusCode == 200 else {
       throw NSError(
-        domain: feedCheckerErrorDomain,
+        domain: feedHelperErrorDomain,
         code: -7,
         userInfo: [
           NSLocalizedDescriptionKey: "Could not download file (bad status code \(httpResponse.statusCode))"
@@ -335,7 +335,7 @@ fileprivate extension FeedHelper {
       if !pathAndFolderIsDirectory.boolValue {
         // Exists but isn't a directory! Aaargh! Abort!
         throw NSError(
-          domain: feedCheckerErrorDomain,
+          domain: feedHelperErrorDomain,
           code: -2,
           userInfo: [
             NSLocalizedDescriptionKey: "Download path is not a directory: \(pathAndFolder)"
@@ -353,7 +353,7 @@ fileprivate extension FeedHelper {
       } catch {
         // Folder creation failed :( Abort
         throw NSError(
-          domain: feedCheckerErrorDomain,
+          domain: feedHelperErrorDomain,
           code: -3,
           userInfo: [
             NSLocalizedDescriptionKey: "Couldn't create folder: \(pathAndFolder)",
@@ -370,7 +370,7 @@ fileprivate extension FeedHelper {
       try data.write(to: url, options: .atomicWrite)
     } catch {
       throw NSError(
-        domain: feedCheckerErrorDomain,
+        domain: feedHelperErrorDomain,
         code: -4,
         userInfo: [
           NSLocalizedDescriptionKey: "Couldn't save file to disk: \(url)",
