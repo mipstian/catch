@@ -5,7 +5,7 @@ let feedCheckerErrorDomain = "com.giorgiocalderolla.Catch.CatchFeedHelper"
 
 
 @objc protocol FeedHelperService {
-  typealias FeedCheckReply = (_ downloadedFeedFiles: [[AnyHashable:Any]]?, _ error: Error?) -> Void
+  typealias FeedCheckReply = (_ downloadedFeedFiles: [[AnyHashable:Any]], _ error: Error?) -> Void
   typealias FileDownloadReply = (_ downloadedFile: [AnyHashable:Any]?, _ error: Error?) -> Void
   
   func checkShowRSSFeed(

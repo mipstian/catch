@@ -15,7 +15,7 @@ extension FeedHelper: FeedHelperService {
     organizingByFolder shouldOrganizeByFolder: Bool,
     savingMagnetLinks shouldSaveMagnetLinks: Bool,
     skippingURLs previouslyDownloadedURLs: [String],
-    withReply reply: (_ downloadedFeedFiles: [[AnyHashable:Any]]?, _ error: Error?) -> Void) {
+    withReply reply: (_ downloadedFeedFiles: [[AnyHashable:Any]], _ error: Error?) -> Void) {
     NSLog("Checking feed")
     
     // Resolve the bookmark (that the main app gives us to transfer access to
