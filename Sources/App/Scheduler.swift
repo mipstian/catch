@@ -109,10 +109,11 @@ class Scheduler {
       organizingByFolder: Defaults.shared.shouldOrganizeTorrentsInFolders,
       savingMagnetLinks: !Defaults.shared.shouldOpenTorrentsAutomatically,
       withReply: { downloadedFile, error in
-        if let error = error {
-          NSLog("Feed Helper error (downloading file): \(error)")
-        }
         DispatchQueue.main.async {
+          if let error = error {
+            NSLog("Feed Helper error (downloading file): \(error)")
+          }
+          
           completion(downloadedFile as? [String:Any], error)
         }
       }
@@ -158,10 +159,11 @@ class Scheduler {
       savingMagnetLinks: !Defaults.shared.shouldOpenTorrentsAutomatically,
       skippingURLs: previouslyDownloadedURLs,
       withReply: { downloadedFeedFiles, error in
-        if let error = error {
-          NSLog("Feed Helper error (checking feed): \(error)")
-        }
         DispatchQueue.main.async {
+          if let error = error {
+            NSLog("Feed Helper error (checking feed): \(error)")
+          }
+          
           replyHandler(downloadedFeedFiles, error)
         }
       }
