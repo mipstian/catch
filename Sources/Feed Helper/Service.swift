@@ -13,19 +13,23 @@ final class Service: NSObject {
 extension Service: FeedHelperService {
   func checkShowRSSFeed(
     feedURL: URL,
-    downloadingToBookmark downloadFolderBookmark: Data,
-    organizingByFolder shouldOrganizeByFolder: Bool,
+    downloadingToBookmark downloadDirectoryBookmark: Data,
+    organizingByShow shouldOrganizeByShow: Bool,
     savingMagnetLinks shouldSaveMagnetLinks: Bool,
     skippingURLs previouslyDownloadedURLs: [String],
     withReply reply: (_ downloadedFeedFiles: [[AnyHashable:Any]]?, _ error: Error?) -> Void) {
     let downloadedFeedFiles: [[AnyHashable:Any]]
     
     do {
+      let downloadOptions = try DownloadOptions(
+        containerDirectoryBookmark: downloadDirectoryBookmark,
+        shouldOrganizeByShow: shouldOrganizeByShow,
+        shouldSaveMagnetLinks: shouldSaveMagnetLinks
+      )
+      
       downloadedFeedFiles = try FeedHelper.checkShowRSSFeed(
         feedURL: feedURL,
-        downloadingToBookmark: downloadFolderBookmark,
-        organizingByFolder: shouldOrganizeByFolder,
-        savingMagnetLinks: shouldSaveMagnetLinks,
+        downloadOptions: downloadOptions,
         skippingURLs: previouslyDownloadedURLs
       )
     } catch {
@@ -38,19 +42,20 @@ extension Service: FeedHelperService {
   
   func downloadFile(
     file: [AnyHashable:Any],
-    toBookmark downloadFolderBookmark: Data,
-    organizingByFolder shouldOrganizeByFolder: Bool,
+    toBookmark downloadDirectoryBookmark: Data,
+    organizingByShow shouldOrganizeByShow: Bool,
     savingMagnetLinks shouldSaveMagnetLinks: Bool,
     withReply reply: (_ downloadedFile: [AnyHashable:Any]?, _ error: Error?) -> Void) {
     let downloadedFile: [AnyHashable:Any]?
     
     do {
-      downloadedFile = try FeedHelper.downloadFile(
-        file: file,
-        toBookmark: downloadFolderBookmark,
-        organizingByFolder: shouldOrganizeByFolder,
-        savingMagnetLinks: shouldSaveMagnetLinks
+      let downloadOptions = try DownloadOptions(
+        containerDirectoryBookmark: downloadDirectoryBookmark,
+        shouldOrganizeByShow: shouldOrganizeByShow,
+        shouldSaveMagnetLinks: shouldSaveMagnetLinks
       )
+      
+      downloadedFile = try FeedHelper.downloadFile(file: file, downloadOptions: downloadOptions)
     } catch {
       reply(nil, error)
       return

@@ -106,7 +106,7 @@ class Scheduler {
     feedHelper.downloadFile(
       file: historyItem.dictionaryRepresentation,
       toBookmark: downloadFolderBookmark,
-      organizingByFolder: Defaults.shared.shouldOrganizeTorrentsInFolders,
+      organizingByShow: Defaults.shared.shouldOrganizeTorrentsByShow,
       savingMagnetLinks: !Defaults.shared.shouldOpenTorrentsAutomatically,
       withReply: { downloadedFile, error in
         DispatchQueue.main.async {
@@ -157,7 +157,7 @@ class Scheduler {
     feedHelper.checkShowRSSFeed(
       feedURL: feedURL,
       downloadingToBookmark: downloadFolderBookmark,
-      organizingByFolder: Defaults.shared.shouldOrganizeTorrentsInFolders,
+      organizingByShow: Defaults.shared.shouldOrganizeTorrentsByShow,
       savingMagnetLinks: !Defaults.shared.shouldOpenTorrentsAutomatically,
       skippingURLs: previouslyDownloadedURLs,
       withReply: { downloadedFeedFiles, error in

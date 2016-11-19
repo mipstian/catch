@@ -39,7 +39,7 @@ class Defaults {
     return UserDefaults.standard.object(forKey: Keys.updateTo) as! Date
   }
   
-  var shouldOrganizeTorrentsInFolders: Bool {
+  var shouldOrganizeTorrentsByShow: Bool {
     return UserDefaults.standard.bool(forKey: Keys.shouldOrganizeTorrents)
   }
   

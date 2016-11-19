@@ -24,6 +24,8 @@
 		447E0F741DDAB24D001048AB /* FileUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447E0F721DDAB24C001048AB /* FileUtils.swift */; };
 		44A212A51DE053BC00D6C2C0 /* WeblocSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A212A41DE053BC00D6C2C0 /* WeblocSerialization.swift */; };
 		44A6FA861DE0A785005303DF /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A6FA851DE0A785005303DF /* Service.swift */; };
+		44A6FA881DE0ADA5005303DF /* DownloadOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A6FA871DE0ADA5005303DF /* DownloadOptions.swift */; };
+		44A6FA891DE0ADA5005303DF /* DownloadOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A6FA871DE0ADA5005303DF /* DownloadOptions.swift */; };
 		44AB5B5E1DCE794A00AE6EB6 /* HistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AB5B5D1DCE794A00AE6EB6 /* HistoryItem.swift */; };
 		44AB5B601DCE823A00AE6EB6 /* UserNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AB5B5F1DCE823A00AE6EB6 /* UserNotifications.swift */; };
 		44AB5B801DD54D7300AE6EB6 /* LoginItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AB5B7F1DD54D7300AE6EB6 /* LoginItem.swift */; };
@@ -128,6 +130,7 @@
 		448CECE219157BDF0075ADD9 /* zh-Hant */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/UI.strings"; sourceTree = "<group>"; };
 		44A212A41DE053BC00D6C2C0 /* WeblocSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeblocSerialization.swift; path = "Sources/Feed Helper/WeblocSerialization.swift"; sourceTree = "<group>"; };
 		44A6FA851DE0A785005303DF /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Service.swift; path = "Sources/Feed Helper/Service.swift"; sourceTree = "<group>"; };
+		44A6FA871DE0ADA5005303DF /* DownloadOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DownloadOptions.swift; path = Sources/Shared/DownloadOptions.swift; sourceTree = "<group>"; };
 		44AB5B5D1DCE794A00AE6EB6 /* HistoryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HistoryItem.swift; path = Sources/App/HistoryItem.swift; sourceTree = "<group>"; };
 		44AB5B5F1DCE823A00AE6EB6 /* UserNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserNotifications.swift; path = Sources/App/UserNotifications.swift; sourceTree = "<group>"; };
 		44AB5B7F1DD54D7300AE6EB6 /* LoginItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginItem.swift; path = Sources/App/LoginItem.swift; sourceTree = "<group>"; };
@@ -339,6 +342,7 @@
 		44717ADC1913AF2000580054 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				44A6FA871DE0ADA5005303DF /* DownloadOptions.swift */,
 				447E0F6B1DDAACE7001048AB /* FeedHelperService.swift */,
 				447E0F721DDAB24C001048AB /* FileUtils.swift */,
 			);
@@ -512,6 +516,7 @@
 				44A6FA861DE0A785005303DF /* Service.swift in Sources */,
 				447E0F6F1DDAAD3D001048AB /* FeedHelper.swift in Sources */,
 				447E0F741DDAB24D001048AB /* FileUtils.swift in Sources */,
+				44A6FA891DE0ADA5005303DF /* DownloadOptions.swift in Sources */,
 				447E0F6C1DDAACE7001048AB /* FeedHelperService.swift in Sources */,
 				44A212A51DE053BC00D6C2C0 /* WeblocSerialization.swift in Sources */,
 				44E2CEA51DBC134E00ED7A8D /* FeedParser.swift in Sources */,
@@ -527,6 +532,7 @@
 				44BA5D121DAEC0C400A9CE9A /* WindowShakeAnimation.swift in Sources */,
 				447E0F731DDAB24C001048AB /* FileUtils.swift in Sources */,
 				44B3634A1DC9BF1B00128259 /* Config.swift in Sources */,
+				44A6FA881DE0ADA5005303DF /* DownloadOptions.swift in Sources */,
 				44C8926F1D1814A7008F8543 /* AppDelegate.swift in Sources */,
 				447E0F6D1DDAAD17001048AB /* FeedHelperService.swift in Sources */,
 				44BA5D161DAECF1A00A9CE9A /* RecentsCellView.swift in Sources */,
