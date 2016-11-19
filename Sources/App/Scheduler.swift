@@ -26,19 +26,10 @@ final class Scheduler {
   private var repeatingTimer: Timer! = nil
   private var activityToken: NSObjectProtocol? = nil
   
-  private var feedHelperProxy: FeedHelperProxy!
+  private let feedHelperProxy = FeedHelperProxy()
   
   private init() {
-    feedHelperProxy = FeedHelperProxy() { [weak self] in
-      guard let scheduler = self else { return }
-      
-      if scheduler.isChecking {
-        scheduler.handleFeedCheckCompletion(wasSuccessful: false)
-        NSLog("Feed helper service crashed")
-      } else {
-        NSLog("Feed helper service went offline")
-      }
-    }
+    feedHelperProxy.delegate = self
     
     // Create a timer to check periodically
     repeatingTimer = Timer.scheduledTimer(
@@ -174,7 +165,7 @@ final class Scheduler {
     }
   }
 
-  private func handleFeedCheckCompletion(wasSuccessful: Bool) {
+  fileprivate func handleFeedCheckCompletion(wasSuccessful: Bool) {
     isChecking = false
     lastUpdateWasSuccessful = wasSuccessful
     lastUpdateDate = Date()
@@ -195,5 +186,17 @@ final class Scheduler {
   
   private func sendStatusChangedNotification() {
     NotificationCenter.default.post(name: Scheduler.statusChangedNotification, object: self)
+  }
+}
+
+
+extension Scheduler: FeedHelperProxyDelegate {
+  func feedHelperConnectionWasInterrupted() {
+    if isChecking {
+      handleFeedCheckCompletion(wasSuccessful: false)
+      NSLog("Feed helper service crashed")
+    } else {
+      NSLog("Feed helper service went offline")
+    }
   }
 }

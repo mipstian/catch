@@ -1,7 +1,14 @@
 import Foundation
 
 
+protocol FeedHelperProxyDelegate: class {
+  func feedHelperConnectionWasInterrupted()
+}
+
+
 final class FeedHelperProxy {
+  weak var delegate: FeedHelperProxyDelegate? = nil
+  
   private static let xpcServiceName = "com.giorgiocalderolla.Catch.CatchFeedHelper"
   
   private let feedHelperConnection = NSXPCConnection(serviceName: xpcServiceName)
@@ -10,12 +17,14 @@ final class FeedHelperProxy {
     return feedHelperConnection.remoteObjectProxy as! FeedHelperService
   }
   
-  init(interruptionHandler: @escaping () -> ()) {
+  init() {
     // Create and start single connection to the feed helper
     // Messages will be delivered serially
     feedHelperConnection.remoteObjectInterface = NSXPCInterface(with: FeedHelperService.self)
     feedHelperConnection.interruptionHandler = {
-      DispatchQueue.main.async(execute: interruptionHandler)
+      DispatchQueue.main.async { [weak self] in
+        self?.delegate?.feedHelperConnectionWasInterrupted()
+      }
     }
     feedHelperConnection.resume()
   }
