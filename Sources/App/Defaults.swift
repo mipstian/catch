@@ -1,7 +1,7 @@
 import Foundation
 
 
-class Defaults {
+final class Defaults {
   static let shared = Defaults()
   private static let feedURLRegex = try! NSRegularExpression(
     pattern: "^https?://([^.]+\\.)*showrss.info/(.*)$"
@@ -111,6 +111,16 @@ class Defaults {
     }
     
     return true
+  }
+  
+  var downloadOptions: DownloadOptions? {
+    guard let torrentsSavePath = torrentsSavePath else { return nil }
+    
+    return DownloadOptions(
+      containerDirectory: torrentsSavePath,
+      shouldOrganizeByShow: shouldOrganizeTorrentsByShow,
+      shouldSaveMagnetLinks: !shouldOpenTorrentsAutomatically
+    )
   }
   
   func save() {
