@@ -103,7 +103,7 @@
 		38FB6B3511DA98710061E784 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4401571C1957A3150041D148 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/UI.strings; sourceTree = "<group>"; };
 		4401571D1957A3150041D148 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
-		4403ACF31914041C002F286C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4403ACF31914041C002F286C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Resources/App/Assets.xcassets; sourceTree = "<group>"; };
 		4412E8161957F09200701124 /* com.giorgiocalderolla.Catch.CatchFeedHelper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = com.giorgiocalderolla.Catch.CatchFeedHelper.entitlements; sourceTree = "<group>"; };
 		4419CF37180627A900C77432 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		445D97A319157955006CD77C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UI.xib; sourceTree = "<group>"; };
@@ -147,7 +147,7 @@
 		44E2CEA41DBC134E00ED7A8D /* FeedParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedParser.swift; path = "Sources/Feed Helper/FeedParser.swift"; sourceTree = SOURCE_ROOT; };
 		44FBC67A196312A400434B01 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		44FFCE3E1DCB92F4006E6DF0 /* Defaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Defaults.swift; path = Sources/App/Defaults.swift; sourceTree = "<group>"; };
-		8D1107310486CEB800E47090 /* Catch-Info.plist */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; path = "Catch-Info.plist"; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* Catch-Info.plist */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; name = "Catch-Info.plist"; path = "Resources/App/Catch-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Catch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -191,7 +191,6 @@
 				4456EE671916F1B100B3FF1A /* Library */,
 				4456EE621916D2E700B3FF1A /* Extensions */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
-				29B97315FDCFA39411CA2CEA /* Supporting Files */,
 			);
 			name = App;
 			sourceTree = "<group>";
@@ -219,18 +218,11 @@
 			name = Catch;
 			sourceTree = "<group>";
 		};
-		29B97315FDCFA39411CA2CEA /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				8D1107310486CEB800E47090 /* Catch-Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				4403ACF31914041C002F286C /* Assets.xcassets */,
+				8D1107310486CEB800E47090 /* Catch-Info.plist */,
 				2F7446970DB6B7EA00F9684A /* UI.xib */,
 				445D97A4191579C7006CD77C /* UI.strings */,
 				38A3FD0C11CA01DD00157AEF /* Localizable.strings */,
@@ -573,7 +565,7 @@
 				445D97A319157955006CD77C /* Base */,
 			);
 			name = UI.xib;
-			path = Resources;
+			path = Resources/App;
 			sourceTree = "<group>";
 		};
 		38A3FD0C11CA01DD00157AEF /* Localizable.strings */ = {
@@ -592,7 +584,7 @@
 				4401571D1957A3150041D148 /* pl */,
 			);
 			name = Localizable.strings;
-			path = Resources;
+			path = Resources/App;
 			sourceTree = "<group>";
 		};
 		445D97A4191579C7006CD77C /* UI.strings */ = {
@@ -610,7 +602,7 @@
 				4401571C1957A3150041D148 /* pl */,
 			);
 			name = UI.strings;
-			path = Resources;
+			path = Resources/App;
 			sourceTree = "<group>";
 		};
 		446D8B5C1918D146007AB22D /* InfoPlist.strings */ = {
@@ -643,7 +635,7 @@
 					"$(PROJECT_DIR)/Vendor",
 				);
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				INFOPLIST_FILE = "Catch-Info.plist";
+				INFOPLIST_FILE = "Resources/App/Catch-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				OTHER_LDFLAGS = "-Wl,-rpath,@loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.giorgiocalderolla.${PRODUCT_NAME:rfc1034identifier}";
@@ -663,7 +655,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Vendor",
 				);
-				INFOPLIST_FILE = "Catch-Info.plist";
+				INFOPLIST_FILE = "Resources/App/Catch-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				OTHER_LDFLAGS = "-Wl,-rpath,@loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.giorgiocalderolla.${PRODUCT_NAME:rfc1034identifier}";
