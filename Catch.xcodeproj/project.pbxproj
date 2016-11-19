@@ -182,7 +182,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		080E96DDFE201D6D7F000001 /* Catch */ = {
+		080E96DDFE201D6D7F000001 /* App */ = {
 			isa = PBXGroup;
 			children = (
 				4456EE681916F1BB00B3FF1A /* Application */,
@@ -193,7 +193,7 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97315FDCFA39411CA2CEA /* Supporting Files */,
 			);
-			name = Catch;
+			name = App;
 			sourceTree = "<group>";
 		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
@@ -209,10 +209,10 @@
 		29B97314FDCFA39411CA2CEA /* Catch */ = {
 			isa = PBXGroup;
 			children = (
-				080E96DDFE201D6D7F000001 /* Catch */,
-				44717AC61913A08700580054 /* Feed Helper Service */,
+				080E96DDFE201D6D7F000001 /* App */,
+				44717AC61913A08700580054 /* Feed Helper */,
 				44717ADC1913AF2000580054 /* Shared */,
-				446D8B591918D146007AB22D /* Catch Tests */,
+				446D8B591918D146007AB22D /* Tests */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
@@ -303,12 +303,13 @@
 			name = Application;
 			sourceTree = "<group>";
 		};
-		446D8B591918D146007AB22D /* Catch Tests */ = {
+		446D8B591918D146007AB22D /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 				44B3634D1DCA744200128259 /* TimeOfDayMathTests.swift */,
 				446D8B5A1918D146007AB22D /* Supporting Files */,
 			);
+			name = Tests;
 			path = "Catch Tests";
 			sourceTree = "<group>";
 		};
@@ -321,7 +322,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		44717AC61913A08700580054 /* Feed Helper Service */ = {
+		44717AC61913A08700580054 /* Feed Helper */ = {
 			isa = PBXGroup;
 			children = (
 				447E0F6E1DDAAD3D001048AB /* FeedHelper.swift */,
@@ -329,7 +330,7 @@
 				447E0F701DDAB073001048AB /* main.swift */,
 				44717AC71913A08700580054 /* Supporting Files */,
 			);
-			name = "Feed Helper Service";
+			name = "Feed Helper";
 			path = CatchFeedHelper;
 			sourceTree = "<group>";
 		};
