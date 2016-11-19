@@ -7,19 +7,13 @@ enum FeedHelper {
     downloadingToBookmark downloadFolderBookmark: Data,
     organizingByFolder shouldOrganizeByFolder: Bool,
     savingMagnetLinks shouldSaveMagnetLinks: Bool,
-    skippingURLs previouslyDownloadedURLs: [String],
-    withReply reply: (_ downloadedFeedFiles: [[AnyHashable:Any]], _ error: Error?) -> Void) {
+    skippingURLs previouslyDownloadedURLs: [String]
+    ) throws -> [[AnyHashable:Any]] {
     NSLog("Checking feed")
     
     // Resolve the bookmark (that the main app gives us to transfer access to
     // the download folder) to a URL
-    let downloadFolderURL: URL
-    do {
-      downloadFolderURL = try FileUtils.url(from: downloadFolderBookmark)
-    } catch {
-      reply([], error)
-      return
-    }
+    let downloadFolderURL = try FileUtils.url(from: downloadFolderBookmark)
     
     let downloadFolderPath = downloadFolderURL.path
     
@@ -28,15 +22,14 @@ enum FeedHelper {
     do {
       feed = try downloadFeed(feedURL: feedURL)
     } catch {
-      reply([], NSError(
+      throw NSError(
         domain: feedHelperErrorDomain,
         code: -5,
         userInfo: [
           NSLocalizedDescriptionKey: "Could not download feed",
           NSUnderlyingErrorKey: error
         ]
-      ))
-      return
+      )
     }
     
     // Parse the feed for files
@@ -44,71 +37,50 @@ enum FeedHelper {
     do {
       feedFiles = try FeedParser.parse(feed: feed)
     } catch {
-      reply([], NSError(
+      throw NSError(
         domain: feedHelperErrorDomain,
         code: -6,
         userInfo: [
           NSLocalizedDescriptionKey: "Could not parse feed",
           NSUnderlyingErrorKey: error
         ]
-      ))
-      return
+      )
     }
     
     // Download the files
-    let downloadedFeedFiles: [[AnyHashable:Any]]
-    do {
-      downloadedFeedFiles = try downloadFiles(
-        feedFiles: feedFiles,
-        toPath: downloadFolderPath,
-        organizingByFolder: shouldOrganizeByFolder,
-        savingMagnetLinks: shouldSaveMagnetLinks,
-        skippingURLs: previouslyDownloadedURLs
-      )
-    } catch {
-      reply([], error)
-      return
-    }
-    
-    reply(downloadedFeedFiles, nil)
+    return try downloadFiles(
+      feedFiles: feedFiles,
+      toPath: downloadFolderPath,
+      organizingByFolder: shouldOrganizeByFolder,
+      savingMagnetLinks: shouldSaveMagnetLinks,
+      skippingURLs: previouslyDownloadedURLs
+    )
   }
   
   static func downloadFile(
     file: [AnyHashable:Any],
     toBookmark downloadFolderBookmark: Data,
     organizingByFolder shouldOrganizeByFolder: Bool,
-    savingMagnetLinks shouldSaveMagnetLinks: Bool,
-    withReply reply: (_ downloadedFile: [AnyHashable:Any]?, _ error: Error?) -> Void) {
+    savingMagnetLinks shouldSaveMagnetLinks: Bool
+    ) throws -> [AnyHashable:Any]? {
     NSLog("Downloading single file")
     
     // Resolve the bookmark (that the main app gives us to transfer access to
     // the download folder) to a URL
-    let downloadFolderURL: URL
-    do {
-      downloadFolderURL = try FileUtils.url(from: downloadFolderBookmark)
-    } catch {
-      reply(nil, error)
-      return
-    }
+    let downloadFolderURL = try FileUtils.url(from: downloadFolderBookmark)
     
     let downloadFolderPath = downloadFolderURL.path
     
     // Download the file
-    let downloadedFiles: [[AnyHashable:Any]]
-    do {
-      downloadedFiles = try downloadFiles(
-        feedFiles: [file],
-        toPath: downloadFolderPath,
-        organizingByFolder: shouldOrganizeByFolder,
-        savingMagnetLinks: shouldSaveMagnetLinks,
-        skippingURLs: []
-      )
-    } catch {
-      reply(nil, error)
-      return
-    }
+    let downloadedFiles = try downloadFiles(
+      feedFiles: [file],
+      toPath: downloadFolderPath,
+      organizingByFolder: shouldOrganizeByFolder,
+      savingMagnetLinks: shouldSaveMagnetLinks,
+      skippingURLs: []
+    )
     
-    reply(downloadedFiles.first, nil)
+    return downloadedFiles.first
   }
 }
 

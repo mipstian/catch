@@ -135,7 +135,9 @@ class Scheduler {
     // Check the feed
     callFeedHelperWithReplyHandler { [weak self] (downloadedFeedFiles, error) in
       // Deal with new files
-      self?.handleDownloadedFeedFiles(downloadedFeedFiles)
+      if let downloadedFeedFiles = downloadedFeedFiles {
+        self?.handleDownloadedFeedFiles(downloadedFeedFiles)
+      }
       self?.handleFeedCheckCompletion(wasSuccessful: error == nil)
     }
   }
