@@ -97,7 +97,6 @@ class Defaults {
   var isFeedURLValid: Bool {
     let feedURLMatches = Defaults.feedURLRegex.firstMatch(
       in: feedURL,
-      options: [],
       range: NSMakeRange(0, feedURL.characters.count)
     )
     guard feedURLMatches != nil else {
