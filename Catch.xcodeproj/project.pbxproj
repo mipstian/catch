@@ -16,7 +16,6 @@
 		446D8B581918D146007AB22D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 446D8B571918D146007AB22D /* XCTest.framework */; };
 		446D8B5E1918D146007AB22D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 446D8B5C1918D146007AB22D /* InfoPlist.strings */; };
 		44717AC51913A08700580054 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97325FDCFA39411CA2CEA /* Foundation.framework */; };
-		44717ACB1913A08700580054 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 44717AC91913A08700580054 /* InfoPlist.strings */; };
 		44717AD61913A16500580054 /* com.giorgiocalderolla.Catch.CatchFeedHelper.xpc in CopyFiles */ = {isa = PBXBuildFile; fileRef = 44717AC41913A08700580054 /* com.giorgiocalderolla.Catch.CatchFeedHelper.xpc */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		447E0F6C1DDAACE7001048AB /* FeedHelperService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447E0F6B1DDAACE7001048AB /* FeedHelperService.swift */; };
 		447E0F6D1DDAAD17001048AB /* FeedHelperService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447E0F6B1DDAACE7001048AB /* FeedHelperService.swift */; };
@@ -115,7 +114,6 @@
 		446D8B5D1918D146007AB22D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		44717AC41913A08700580054 /* com.giorgiocalderolla.Catch.CatchFeedHelper.xpc */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = com.giorgiocalderolla.Catch.CatchFeedHelper.xpc; sourceTree = BUILT_PRODUCTS_DIR; };
 		44717AC81913A08700580054 /* CatchFeedHelper-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CatchFeedHelper-Info.plist"; sourceTree = "<group>"; };
-		44717ACA1913A08700580054 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		447E0F6B1DDAACE7001048AB /* FeedHelperService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedHelperService.swift; path = Sources/Shared/FeedHelperService.swift; sourceTree = SOURCE_ROOT; };
 		447E0F6E1DDAAD3D001048AB /* FeedHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedHelper.swift; path = "Sources/Feed Helper/FeedHelper.swift"; sourceTree = SOURCE_ROOT; };
 		447E0F701DDAB073001048AB /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = main.swift; path = "Sources/Feed Helper/main.swift"; sourceTree = SOURCE_ROOT; };
@@ -320,20 +318,19 @@
 				447E0F6E1DDAAD3D001048AB /* FeedHelper.swift */,
 				44E2CEA41DBC134E00ED7A8D /* FeedParser.swift */,
 				447E0F701DDAB073001048AB /* main.swift */,
-				44717AC71913A08700580054 /* Supporting Files */,
+				44717AC71913A08700580054 /* Resources */,
 			);
 			name = "Feed Helper";
-			path = CatchFeedHelper;
 			sourceTree = "<group>";
 		};
-		44717AC71913A08700580054 /* Supporting Files */ = {
+		44717AC71913A08700580054 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				4412E8161957F09200701124 /* com.giorgiocalderolla.Catch.CatchFeedHelper.entitlements */,
 				44717AC81913A08700580054 /* CatchFeedHelper-Info.plist */,
-				44717AC91913A08700580054 /* InfoPlist.strings */,
 			);
-			name = "Supporting Files";
+			name = Resources;
+			path = "Resources/Feed Helper";
 			sourceTree = "<group>";
 		};
 		44717ADC1913AF2000580054 /* Shared */ = {
@@ -480,7 +477,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				44717ACB1913A08700580054 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -609,14 +605,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				446D8B5D1918D146007AB22D /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		44717AC91913A08700580054 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				44717ACA1913A08700580054 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -821,7 +809,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CatchFeedHelper/com.giorgiocalderolla.Catch.CatchFeedHelper.entitlements;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				INFOPLIST_FILE = "CatchFeedHelper/CatchFeedHelper-Info.plist";
+				INFOPLIST_FILE = "Resources/Feed Helper/CatchFeedHelper-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACH_O_TYPE = mh_execute;
 				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_NAME}";
@@ -838,7 +826,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CatchFeedHelper/com.giorgiocalderolla.Catch.CatchFeedHelper.entitlements;
-				INFOPLIST_FILE = "CatchFeedHelper/CatchFeedHelper-Info.plist";
+				INFOPLIST_FILE = "Resources/Feed Helper/CatchFeedHelper-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACH_O_TYPE = mh_execute;
 				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_NAME}";
