@@ -6,7 +6,7 @@ enum FeedHelper {
     NSLog("Checking feed: \(url)")
     
     // Download the feed
-    let feed: XMLDocument
+    let feed: Data
     do {
       feed = try downloadFeed(url: url)
     } catch {
@@ -59,13 +59,13 @@ enum FeedHelper {
 
 // MARK: private utilities
 fileprivate extension FeedHelper {
-  static func downloadFeed(url: URL) throws -> XMLDocument {
+  static func downloadFeed(url: URL) throws -> Data {
     NSLog("Downloading feed \(url)")
     
     // Flush the cache, we want fresh results
     URLCache.shared.removeAllCachedResponses()
     
-    return try XMLDocument(contentsOf: url, options: 0)
+    return try Data(contentsOf: url)
   }
   
   static func downloadFiles(
