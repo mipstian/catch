@@ -5,10 +5,13 @@ enum FeedHelper {
   static func checkFeed(url: URL, downloadOptions: DownloadOptions, skippingURLs previouslyDownloadedURLs: [String]) throws -> [[AnyHashable:Any]] {
     NSLog("Checking feed: \(url)")
     
+    // Flush the cache, we want fresh results
+    URLCache.shared.removeAllCachedResponses()
+    
     // Download the feed
     let feed: Data
     do {
-      feed = try downloadFeed(url: url)
+      feed = try Data(contentsOf: url)
     } catch {
       throw NSError(
         domain: feedHelperErrorDomain,
@@ -59,15 +62,6 @@ enum FeedHelper {
 
 // MARK: private utilities
 fileprivate extension FeedHelper {
-  static func downloadFeed(url: URL) throws -> Data {
-    NSLog("Downloading feed \(url)")
-    
-    // Flush the cache, we want fresh results
-    URLCache.shared.removeAllCachedResponses()
-    
-    return try Data(contentsOf: url)
-  }
-  
   static func downloadFiles(
     feedFiles: [[AnyHashable:Any]],
     downloadOptions: DownloadOptions,
