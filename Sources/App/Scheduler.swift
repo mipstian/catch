@@ -31,7 +31,7 @@ final class Scheduler {
   
   /// Invoke the delegate immediately, and reset the timer
   /// (i.e. the next scheduled time will be after a full `interval`).
-  func scheduleNow() {
+  func fireNow() {
     repeatingTimer.fireDate = .distantPast
   }
   

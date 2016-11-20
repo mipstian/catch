@@ -11,7 +11,7 @@ final class FeedChecker {
     didSet {
       // If we have just been set to polling, check immediately
       if !oldValue && isPolling {
-        scheduler.scheduleNow()
+        scheduler.fireNow()
       }
       
       refreshPowerManagement()
@@ -43,7 +43,7 @@ final class FeedChecker {
     scheduler.delegate = self
 
     // Check now
-    scheduler.scheduleNow()
+    scheduler.fireNow()
 
     refreshPowerManagement()
   }
