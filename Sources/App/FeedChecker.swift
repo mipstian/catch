@@ -61,25 +61,6 @@ final class FeedChecker {
     )
   }
   
-  func downloadHistoryItem(_ historyItem: HistoryItem, completion: @escaping (([String:Any]?, Error?) -> ())) {
-    guard Defaults.shared.isConfigurationValid, let downloadOptions = Defaults.shared.downloadOptions else {
-      NSLog("Cannot download history item with invalid preferences")
-      return
-    }
-    
-    feedHelperProxy.downloadHistoryItem(
-      historyItem,
-      downloadOptions: downloadOptions,
-      completion: { downloadedFile, error in
-        if let error = error {
-          NSLog("Feed Helper error (downloading file): \(error)")
-        }
-        
-        completion(downloadedFile as? [String:Any], error)
-      }
-    )
-  }
-  
   fileprivate func checkFeed() {
     // Don't check twice simultaneously
     guard !isChecking else { return }

@@ -21,12 +21,16 @@ final class FeedHelperProxy {
     // Create and start single connection to the feed helper
     // Messages will be delivered serially
     feedHelperConnection.remoteObjectInterface = NSXPCInterface(with: FeedHelperService.self)
-    feedHelperConnection.interruptionHandler = {
-      DispatchQueue.main.async { [weak self] in
+    feedHelperConnection.interruptionHandler = { [weak self] in
+      DispatchQueue.main.async {
         self?.delegate?.feedHelperConnectionWasInterrupted()
       }
     }
     feedHelperConnection.resume()
+  }
+  
+  deinit {
+    feedHelperConnection.invalidate()
   }
   
   func checkFeed(
