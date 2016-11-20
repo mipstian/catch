@@ -123,6 +123,15 @@ final class Defaults {
     )
   }
   
+  func restricts(date: Date) -> Bool {
+    if !areTimeRestrictionsEnabled { return false }
+    
+    return !date.isTimeOfDayBetween(
+      startTimeOfDay: fromDateForTimeRestrictions,
+      endTimeOfDay: toDateForTimeRestrictions
+    )
+  }
+  
   func save() {
     UserDefaults.standard.synchronize()
   }
