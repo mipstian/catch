@@ -5,8 +5,26 @@ final class FeedChecker {
   static let statusChangedNotification = NSNotification.Name("FeedChecker.statusChangedNotification")
   static let shared = FeedChecker()
   
-  private(set) var isPolling = true { didSet { refreshActivity(); sendStatusChangedNotification() } }
-  private(set) var isChecking = false { didSet { sendStatusChangedNotification() } }
+  /// True iff periodically checking the feed. This is the opposite
+  /// of the user-facing "Paused" state.
+  var isPolling = true {
+    didSet {
+      // If we have just been set to polling, check immediately
+      if !oldValue && isPolling {
+        scheduler.scheduleNow()
+      }
+      
+      refreshActivity()
+      sendStatusChangedNotification()
+    }
+  }
+  
+  /// True iff a feed check is happening right now
+  private(set) var isChecking = false {
+    didSet {
+      sendStatusChangedNotification()
+    }
+  }
   
   /// True iff the last feed check succeeded, or if no check has been made yet.
   private(set) var lastUpdateWasSuccessful = true
@@ -30,15 +48,8 @@ final class FeedChecker {
     refreshActivity()
   }
   
-  func togglePause() {
-    isPolling = !isPolling
-    
-    // If we have just been set to polling, poll immediately
-    if isPolling { scheduler.scheduleNow() }
-  }
-  
+  /// Checks feed right now ignoring time restrictions and "paused" mode
   func forceCheck() {
-    // Check feed right now ignoring time restrictions and "paused" mode
     checkFeed()
   }
   

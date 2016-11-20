@@ -114,6 +114,6 @@ extension MenuController {
   }
   
   @IBAction private func togglePause(_ sender: Any?) {
-    FeedChecker.shared.togglePause()
+    FeedChecker.shared.isPolling = !FeedChecker.shared.isPolling
   }
 }
