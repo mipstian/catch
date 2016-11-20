@@ -6,6 +6,8 @@ protocol FeedHelperProxyDelegate: class {
 }
 
 
+/// Encapsulates an XPC connection to the Feed Helper service, and handles
+/// serialization/deserialization.
 final class FeedHelperProxy {
   weak var delegate: FeedHelperProxyDelegate? = nil
   
@@ -18,8 +20,7 @@ final class FeedHelperProxy {
   }
   
   init() {
-    // Create and start single connection to the feed helper
-    // Messages will be delivered serially
+    // Connect to the feed helper XPC service. Messages will be delivered serially.
     feedHelperConnection.remoteObjectInterface = NSXPCInterface(with: FeedHelperService.self)
     feedHelperConnection.interruptionHandler = { [weak self] in
       DispatchQueue.main.async {

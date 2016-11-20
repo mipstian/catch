@@ -66,7 +66,7 @@ extension PreferencesController {
     
     // Apply power management settings
     // TODO: move to feed checker
-    FeedChecker.shared.refreshActivity()
+    FeedChecker.shared.refreshPowerManagement()
     
     // Also force check
     FeedChecker.shared.forceCheck()
