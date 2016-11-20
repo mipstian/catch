@@ -1,9 +1,9 @@
 import Foundation
 
 
-final class Scheduler {
-  static let statusChangedNotification = NSNotification.Name("scheduler-status-changed")
-  static let shared = Scheduler()
+final class FeedChecker {
+  static let statusChangedNotification = NSNotification.Name("FeedChecker.statusChangedNotification")
+  static let shared = FeedChecker()
   
   private(set) var isPolling = true { didSet { refreshActivity(); sendStatusChangedNotification() } }
   private(set) var isChecking = false { didSet { sendStatusChangedNotification() } }
@@ -185,12 +185,12 @@ final class Scheduler {
   }
   
   private func sendStatusChangedNotification() {
-    NotificationCenter.default.post(name: Scheduler.statusChangedNotification, object: self)
+    NotificationCenter.default.post(name: FeedChecker.statusChangedNotification, object: self)
   }
 }
 
 
-extension Scheduler: FeedHelperProxyDelegate {
+extension FeedChecker: FeedHelperProxyDelegate {
   func feedHelperConnectionWasInterrupted() {
     if isChecking {
       handleFeedCheckCompletion(wasSuccessful: false)

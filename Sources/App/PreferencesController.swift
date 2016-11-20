@@ -52,11 +52,11 @@ extension PreferencesController {
       Defaults.shared.refreshLoginItemStatus()
       
       // Apply power management settings
-      // TODO: move to scheduler
-      Scheduler.shared.refreshActivity()
+      // TODO: move to feed checker
+      FeedChecker.shared.refreshActivity()
       
       // Also force check
-      Scheduler.shared.forceCheck()
+      FeedChecker.shared.forceCheck()
     }
     else {
       // Show the Feeds tab because all possible invalid inputs are currently there
