@@ -142,9 +142,9 @@ final class Defaults {
   }
   
   private init() {
-    // Create two dummy times (dates actually), just to have some value set
-    let dateFrom = Calendar.current.date(from: DateComponents(hour: 24, minute: 0))!
-    let dateTo = Calendar.current.date(from: DateComponents(hour: 8, minute: 0))!
+    // Default values for time restrictions
+    let timeFrom = Calendar.current.date(from: DateComponents(hour: 24, minute: 0))!
+    let timeTo = Calendar.current.date(from: DateComponents(hour: 8, minute: 0))!
     
     // Use user's Downloads directory as a default, fallback on home
     let defaultDownloadsDirectory = FileUtils.userDownloadsDirectory ?? FileUtils.userHomeDirectory
@@ -155,8 +155,8 @@ final class Defaults {
       defaults: [
         Keys.feedURL: "",
         Keys.onlyUpdateBetween: false,
-        Keys.updateFrom: dateFrom,
-        Keys.updateTo: dateTo,
+        Keys.updateFrom: timeFrom,
+        Keys.updateTo: timeTo,
         Keys.torrentsSavePath: defaultDownloadsDirectory,
         Keys.shouldOrganizeTorrents: false,
         Keys.shouldOpenTorrentsAutomatically: true,

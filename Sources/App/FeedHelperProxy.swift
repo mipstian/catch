@@ -11,9 +11,9 @@ protocol FeedHelperProxyDelegate: class {
 final class FeedHelperProxy {
   weak var delegate: FeedHelperProxyDelegate? = nil
   
-  private static let xpcServiceName = "com.giorgiocalderolla.Catch.CatchFeedHelper"
-  
-  private let feedHelperConnection = NSXPCConnection(serviceName: xpcServiceName)
+  private let feedHelperConnection = NSXPCConnection(
+    serviceName: "com.giorgiocalderolla.Catch.CatchFeedHelper"
+  )
   
   private var service: FeedHelperService {
     return feedHelperConnection.remoteObjectProxy as! FeedHelperService
@@ -39,8 +39,8 @@ final class FeedHelperProxy {
     downloadOptions: DownloadOptions,
     previouslyDownloadedURLs: [URL],
     completion: @escaping FeedHelperService.FeedCheckReply) {
-    service.checkShowRSSFeed(
-      feedURL: feedURL,
+    service.checkFeed(
+      url: feedURL,
       downloadingToBookmark: downloadOptions.containerDirectoryBookmark,
       organizingByShow: downloadOptions.shouldOrganizeByShow,
       savingMagnetLinks: downloadOptions.shouldSaveMagnetLinks,
@@ -57,7 +57,7 @@ final class FeedHelperProxy {
     _ historyItem: HistoryItem,
     downloadOptions: DownloadOptions,
     completion: @escaping FeedHelperService.FileDownloadReply) {
-    service.downloadFile(
+    service.download(
       file: historyItem.dictionaryRepresentation,
       toBookmark: downloadOptions.containerDirectoryBookmark,
       organizingByShow: downloadOptions.shouldOrganizeByShow,

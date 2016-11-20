@@ -2,13 +2,13 @@ import Foundation
 
 
 enum FeedHelper {
-  static func checkShowRSSFeed(feedURL: URL, downloadOptions: DownloadOptions, skippingURLs previouslyDownloadedURLs: [String]) throws -> [[AnyHashable:Any]] {
-    NSLog("Checking feed")
+  static func checkFeed(url: URL, downloadOptions: DownloadOptions, skippingURLs previouslyDownloadedURLs: [String]) throws -> [[AnyHashable:Any]] {
+    NSLog("Checking feed: \(url)")
     
     // Download the feed
     let feed: XMLDocument
     do {
-      feed = try downloadFeed(feedURL: feedURL)
+      feed = try downloadFeed(url: url)
     } catch {
       throw NSError(
         domain: feedHelperErrorDomain,
@@ -43,14 +43,13 @@ enum FeedHelper {
     )
   }
   
-  static func downloadFile(file: [AnyHashable:Any], downloadOptions: DownloadOptions) throws -> [AnyHashable:Any]? {
+  static func download(file: [AnyHashable:Any], downloadOptions: DownloadOptions) throws -> [AnyHashable:Any]? {
     NSLog("Downloading single file")
 
     // Download the file
     let downloadedFiles = try downloadFiles(
       feedFiles: [file],
-      downloadOptions: downloadOptions,
-      skippingURLs: []
+      downloadOptions: downloadOptions
     )
     
     return downloadedFiles.first
@@ -60,19 +59,19 @@ enum FeedHelper {
 
 // MARK: private utilities
 fileprivate extension FeedHelper {
-  static func downloadFeed(feedURL: URL) throws -> XMLDocument {
-    NSLog("Downloading feed \(feedURL)")
+  static func downloadFeed(url: URL) throws -> XMLDocument {
+    NSLog("Downloading feed \(url)")
     
     // Flush the cache, we want fresh results
     URLCache.shared.removeAllCachedResponses()
     
-    return try XMLDocument(contentsOf: feedURL, options: 0)
+    return try XMLDocument(contentsOf: url, options: 0)
   }
   
   static func downloadFiles(
     feedFiles: [[AnyHashable:Any]],
     downloadOptions: DownloadOptions,
-    skippingURLs previouslyDownloadedURLs: [String]) throws -> [[AnyHashable:Any]] {
+    skippingURLs previouslyDownloadedURLs: [String] = []) throws -> [[AnyHashable:Any]] {
     NSLog("Downloading files (if needed)")
     
     return try feedFiles.flatMap { file in
