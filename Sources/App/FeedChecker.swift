@@ -107,14 +107,15 @@ final class FeedChecker {
       url: URL(string: Defaults.shared.feedURL)!,
       downloadOptions: downloadOptions,
       previouslyDownloadedURLs: previouslyDownloadedURLs,
-      completion: { [weak self] downloadedFiles, error in
-        if let error = error {
-          NSLog("Feed Helper error (checking feed): \(error)")
-          self?.lastCheckStatus = .failed(Date(), error)
-        } else if let downloadedFiles = downloadedFiles {
+      completion: { [weak self] result in
+        switch result {
+        case .success(let downloadedFiles):
           // Deal with new files
           self?.handleDownloadedFeedFiles(downloadedFiles)
           self?.lastCheckStatus = .successful(Date())
+        case .failure(let error):
+          NSLog("Feed Helper error (checking feed): \(error)")
+          self?.lastCheckStatus = .failed(Date(), error)
         }
       }
     )

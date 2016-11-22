@@ -84,14 +84,14 @@ extension RecentsController {
       feedHelperProxy.download(
         historyItem: recentToDownload,
         downloadOptions: downloadOptions,
-        completion: { downloadedFile, error in
-          guard let downloadedFile = downloadedFile else {
-            NSLog("Feed Helper error (downloading file): \(error!)")
-            return
-          }
-          
-          if Defaults.shared.shouldOpenTorrentsAutomatically {
-            Browser.openInBackground(file: downloadedFile["torrentFilePath"] as! String)
+        completion: { result in
+          switch result {
+          case .success(let downloadedFile):
+            if Defaults.shared.shouldOpenTorrentsAutomatically {
+              Browser.openInBackground(file: downloadedFile["torrentFilePath"] as! String)
+            }
+          case .failure(let error):
+            NSLog("Feed Helper error (downloading file): \(error)")
           }
         }
       )
