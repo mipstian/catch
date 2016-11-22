@@ -35,12 +35,12 @@ final class FeedHelperProxy {
   }
   
   func checkFeed(
-    _ feedURL: URL,
+    url: URL,
     downloadOptions: DownloadOptions,
     previouslyDownloadedURLs: [URL],
     completion: @escaping FeedHelperService.FeedCheckReply) {
     service.checkFeed(
-      url: feedURL,
+      url: url,
       downloadingToBookmark: downloadOptions.containerDirectoryBookmark,
       organizingByShow: downloadOptions.shouldOrganizeByShow,
       savingMagnetLinks: downloadOptions.shouldSaveMagnetLinks,
@@ -53,8 +53,8 @@ final class FeedHelperProxy {
     )
   }
   
-  func downloadHistoryItem(
-    _ historyItem: HistoryItem,
+  func download(
+    historyItem: HistoryItem,
     downloadOptions: DownloadOptions,
     completion: @escaping FeedHelperService.FileDownloadReply) {
     service.download(
