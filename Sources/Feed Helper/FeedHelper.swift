@@ -5,7 +5,7 @@ import Foundation
 /// - Checking a feed (optionally downloading any new torrent files)
 /// - Downloading a single torrent file
 enum FeedHelper {
-  static func checkFeed(url: URL, downloadOptions: DownloadOptions, skippingURLs previouslyDownloadedURLs: [String]) throws -> [[AnyHashable:Any]] {
+  static func checkFeed(url: URL, downloadOptions: DownloadOptions, skippingURLs previouslyDownloadedURLs: [URL]) throws -> [[AnyHashable:Any]] {
     NSLog("Checking feed: \(url)")
     
     // Flush the cache, we want fresh results
@@ -26,10 +26,10 @@ enum FeedHelper {
       )
     }
     
-    // Parse the feed for files
-    let feedFiles: [FeedParser.FeedItem]
+    // Parse the feed
+    let episodes: [Episode]
     do {
-      feedFiles = try FeedParser.parse(feed: feed)
+      episodes = try FeedParser.parse(feed: feed)
     } catch {
       throw NSError(
         domain: feedHelperErrorDomain,
@@ -41,71 +41,60 @@ enum FeedHelper {
       )
     }
     
-    // Download the files
-    return try downloadFiles(
-      feedFiles: feedFiles,
+    // Download
+    return try download(
+      episodes: episodes,
       downloadOptions: downloadOptions,
       skippingURLs: previouslyDownloadedURLs
     )
   }
   
-  static func download(file: [AnyHashable:Any], downloadOptions: DownloadOptions) throws -> [AnyHashable:Any]? {
-    NSLog("Downloading single file")
+  static func download(episode: Episode, downloadOptions: DownloadOptions) throws -> [AnyHashable:Any]? {
+    NSLog("Downloading single episode")
 
-    // Download the file
-    let downloadedFiles = try downloadFiles(
-      feedFiles: [file],
+    let downloadedEpisodes = try download(
+      episodes: [episode],
       downloadOptions: downloadOptions
     )
     
-    return downloadedFiles.first
+    return downloadedEpisodes.first
   }
 }
 
 
 // MARK: private utilities
 fileprivate extension FeedHelper {
-  static func downloadFiles(
-    feedFiles: [[AnyHashable:Any]],
+  static func download(
+    episodes: [Episode],
     downloadOptions: DownloadOptions,
-    skippingURLs previouslyDownloadedURLs: [String] = []) throws -> [[AnyHashable:Any]] {
-    NSLog("Downloading files (if needed)")
+    skippingURLs previouslyDownloadedURLs: [URL] = []) throws -> [[AnyHashable:Any]] {
+    // Skip old episodes
+    let newEpisodes = episodes.filter {
+      return !previouslyDownloadedURLs.contains($0.url)
+    }
     
-    return try feedFiles.flatMap { file in
-      // TODO: should be a struct
-      let fileURL = file["url"] as! String
-      let fileTitle = file["title"] as! String
-      let fileShowName = file["showName"] as? String
-      
-      // Skip old files, invalid URLs
-      guard !previouslyDownloadedURLs.contains(fileURL),
-        let url = URL(string: fileURL) else {
-        return nil
-      }
-      
-      let isMagnetLink = url.scheme == "magnet"
-      
-      // First get the name for the show's directory, if we want it and it's available
-      let showName = downloadOptions.shouldOrganizeByShow ? fileShowName : nil
-      
-      // The file is new, return/save magnet or download torrent
-      if isMagnetLink {
+    guard !newEpisodes.isEmpty else {
+      NSLog("No new episodes to download")
+      return []
+    }
+    
+    NSLog("Downloading \(newEpisodes.count) new episodes")
+    
+    return try newEpisodes.flatMap { episode in
+      // Return/save magnet or download torrent
+      if episode.isMagnetized {
         let downloadedItemDescription: [AnyHashable:Any] = [
-          "url": fileURL,
-          "title": fileTitle,
+          "url": episode.url,
+          "title": episode.title,
           "isMagnetLink": true
         ]
         
         if downloadOptions.shouldSaveMagnetLinks {
           // Save the magnet link to a file
           do {
-            _ = try saveMagnetFile(
-              file: file,
-              to: downloadOptions.containerDirectory,
-              withShowName: showName
-            )
+            _ = try saveMagnetLink(for: episode, downloadOptions: downloadOptions)
           } catch {
-            NSLog("Could not save magnet link \(fileURL): \(error)")
+            NSLog("Could not save magnet link \(episode.url): \(error)")
             throw error
           }
         }
@@ -115,19 +104,18 @@ fileprivate extension FeedHelper {
       } else {
         let downloadedTorrentFile: URL
         do {
-          downloadedTorrentFile = try downloadFile(
-            file: file,
-            to: downloadOptions.containerDirectory,
-            withShowName: showName
+          downloadedTorrentFile = try downloadTorrentFile(
+            for: episode,
+            downloadOptions: downloadOptions
           )
         } catch {
-          NSLog("Could not download \(fileURL): \(error)")
+          NSLog("Could not download \(episode.url): \(error)")
           throw error
         }
         
         return [
-          "url": fileURL,
-          "title": fileTitle,
+          "url": episode.url,
+          "title": episode.title,
           "isMagnetLink": false,
           "torrentFilePath": downloadedTorrentFile.absoluteString
         ]
@@ -136,17 +124,12 @@ fileprivate extension FeedHelper {
   }
   
   /// Create a .webloc file that can be double-clicked to open the magnet link
-  static func saveMagnetFile(
-    file: [AnyHashable:Any],
-    to containerDirectory: URL,
-    withShowName showName: String?) throws -> URL {
-    // TODO: should be a struct
-    let fileURL = URL(string: file["url"] as! String)!
-    let fileTitle = file["title"] as! String
+  static func saveMagnetLink(for episode: Episode, downloadOptions: DownloadOptions) throws -> URL {
+    precondition(episode.isMagnetized)
     
     let data: Data
     do {
-      data = try PropertyListSerialization.weblocData(from: fileURL)
+      data = try PropertyListSerialization.weblocData(from: episode.url)
     } catch {
       throw NSError(
         domain: feedHelperErrorDomain,
@@ -158,12 +141,12 @@ fileprivate extension FeedHelper {
     }
     
     // Try to get a nice filename
-    let filename = FileUtils.magnetFilename(from: fileTitle)
+    let filename = FileUtils.magnetFilename(from: episode.title)
     
     // Compute destination path
     let fullPath = downloadPath(
-      in: containerDirectory,
-      subDirectory: showName,
+      in: downloadOptions.containerDirectory,
+      subDirectory: downloadOptions.shouldOrganizeByShow ? episode.showName : nil,
       filename: filename
     )
     
@@ -172,22 +155,13 @@ fileprivate extension FeedHelper {
     return fullPath
   }
   
-  static func downloadFile(
-    file: [AnyHashable:Any],
-    to containerDirectory: URL,
-    withShowName showName: String?) throws -> URL {
-    // TODO: should be a struct
-    let fileURL = URL(string: file["url"] as! String)!
-    let fileTitle = file["title"] as! String
+  static func downloadTorrentFile(for episode: Episode, downloadOptions: DownloadOptions) throws -> URL {
+    precondition(!episode.isMagnetized)
     
-    if let showName = showName {
-      NSLog("Downloading file to directory for show \(showName)")
-    } else {
-      NSLog("Downloading file")
-    }
+    NSLog("Downloading torrent file")
     
     // Download!
-    let urlRequest = URLRequest(url: fileURL)
+    let urlRequest = URLRequest(url: episode.url)
     var urlResponse: URLResponse?
     let downloadedFile: Data
     do {
@@ -200,7 +174,7 @@ fileprivate extension FeedHelper {
         domain: feedHelperErrorDomain,
         code: -1,
         userInfo: [
-          NSLocalizedDescriptionKey: "Could not download file",
+          NSLocalizedDescriptionKey: "Could not download torrent file",
           NSUnderlyingErrorKey: error
         ]
       )
@@ -213,7 +187,7 @@ fileprivate extension FeedHelper {
         domain: feedHelperErrorDomain,
         code: -7,
         userInfo: [
-          NSLocalizedDescriptionKey: "Could not download file (bad status code \(httpResponse.statusCode))"
+          NSLocalizedDescriptionKey: "Could not download torrent file (bad status code \(httpResponse.statusCode))"
         ]
       )
     }
@@ -221,12 +195,12 @@ fileprivate extension FeedHelper {
     NSLog("Download complete, filesize: \(downloadedFile.count)")
     
     // Try to get a nice filename
-    let filename = FileUtils.torrentFilename(from: fileTitle)
+    let filename = FileUtils.torrentFilename(from: episode.title)
     
     // Compute destination path
     let fullPath = downloadPath(
-      in: containerDirectory,
-      subDirectory: showName,
+      in: downloadOptions.containerDirectory,
+      subDirectory: downloadOptions.shouldOrganizeByShow ? episode.showName : nil,
       filename: filename
     )
     

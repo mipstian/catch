@@ -8,51 +8,53 @@ private extension XMLNode {
 }
 
 
+private extension Episode {
+  /// Try to initialize an episode with the data found in an RSS "item" element
+  init?(itemNode: XMLNode) {
+    // Get the .torrent URL or magnet link
+    guard let urlString = itemNode["enclosure/@url"] else {
+      NSLog("Missing feed item URL")
+      return nil
+    }
+    
+    guard let url = URL(string: urlString) else {
+      NSLog("Invalid feed item URL: \(urlString)")
+      return nil
+    }
+    
+    // Get the title (includes show name and season/episode numbers)
+    guard let title = itemNode["title"], title != "" else {
+      NSLog("Missing or empty feed item title")
+      return nil
+    }
+    
+    // Get the optional show name from the generic "tv:" namespace
+    let showName = itemNode["tv:show_name"]
+    
+    self.url = url
+    self.title = title
+    self.showName = showName
+  }
+}
+
+
 /// Parses episodes out of a broadcatching RSS feed.
 /// Supports additional data specified with the `tv` namespace.
-public class FeedParser: NSObject {
-  public typealias FeedItem = [String:String]
-  
-  public static func parse(feed: Data) throws -> [FeedItem] {
+class FeedParser: NSObject {
+  static func parse(feed: Data) throws -> [Episode] {
     NSLog("Parsing feed")
     
     // Parse xml
     let xml = try XMLDocument(data: feed, options: 0)
     
-    // Extract feed items
+    // Extract feed item nodes
     let itemNodes = try xml.nodes(forXPath: "//rss/channel/item")
     
-    // Extract files from NSXMLNodes
-    let items = itemNodes.flatMap { itemNode -> FeedItem? in
-      // Get the .torrent URL or magnet link
-      guard let urlString = itemNode["enclosure/@url"] else {
-        NSLog("Missing feed item URL")
-        return nil
-      }
-      
-      guard URL(string: urlString) != nil else {
-        NSLog("Invalid feed item URL: \(urlString)")
-        return nil
-      }
-      
-      // Get the title (includes show name and season/episode numbers)
-      guard let title = itemNode["title"], title != "" else {
-        NSLog("Missing or empty feed item title")
-        return nil
-      }
-      
-      var item = ["title": title, "url": urlString]
-      
-      // Get the optional show name from the generic "tv:" namespace
-      if let showName = itemNode["tv:show_name"] {
-        item["showName"] = showName
-      }
-      
-      return item
-    }
+    // Extract episodes from NSXMLNodes
+    let episodes = itemNodes.flatMap(Episode.init(itemNode:))
     
-    NSLog("Parsed \(items.count) files")
+    NSLog("Parsed \(episodes.count) episodes")
     
-    return items
+    return episodes
   }
 }
