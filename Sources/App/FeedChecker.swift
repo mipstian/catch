@@ -92,7 +92,11 @@ final class FeedChecker {
     guard lastCheckStatus != .inProgress else { return }
     
     // Only work with valid preferences
-    guard Defaults.shared.isConfigurationValid, let downloadOptions = Defaults.shared.downloadOptions else {
+    guard
+      Defaults.shared.isConfigurationValid,
+      let downloadOptions = Defaults.shared.downloadOptions,
+      let feedURL = Defaults.shared.feedURL
+    else {
       NSLog("Refusing to check feed - invalid preferences")
       return
     }
@@ -104,7 +108,7 @@ final class FeedChecker {
     
     // Check the feed
     feedHelperProxy.checkFeed(
-      url: URL(string: Defaults.shared.feedURL)!,
+      url: feedURL,
       downloadOptions: downloadOptions,
       previouslyDownloadedURLs: previouslyDownloadedURLs,
       completion: { [weak self] result in
