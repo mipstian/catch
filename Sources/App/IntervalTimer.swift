@@ -1,28 +1,30 @@
 import Foundation
 
 
-protocol SchedulerDelegate: class {
-  func schedulerFired()
+protocol IntervalTimerDelegate: class {
+  func timerFired()
 }
 
 
 /// Periodically invokes its delegate
-final class Scheduler {
-  weak var delegate: SchedulerDelegate? = nil
+final class IntervalTimer {
+  weak var delegate: IntervalTimerDelegate? = nil
   
   private var repeatingTimer: Timer! = nil
   
-  /// Creates a scheduler with the specified interval.
+  /// Creates a repeating timer with the specified interval.
   ///
   /// - Parameter interval: how long to wait between firing
-  init(interval: TimeInterval) {
-    repeatingTimer = Timer.scheduledTimer(
+  /// - Parameter tolerance: leeway for the os to schedule for energy efficiency
+  init(interval: TimeInterval, tolerance: TimeInterval) {
+    repeatingTimer = .scheduledTimer(
       timeInterval: interval,
       target: self,
       selector: #selector(timerFired),
       userInfo: nil,
       repeats: true
     )
+    repeatingTimer.tolerance = tolerance
   }
   
   deinit {
@@ -36,6 +38,6 @@ final class Scheduler {
   }
   
   @objc private func timerFired(_: Timer) {
-    delegate?.schedulerFired()
+    delegate?.timerFired()
   }
 }

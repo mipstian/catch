@@ -30,7 +30,7 @@ final class FeedChecker {
     didSet {
       // If we have just been set to polling, check immediately
       if oldValue == .paused && status == .polling {
-        scheduler.fireNow()
+        intervalTimer.fireNow()
       }
       
       refreshPowerManagement()
@@ -48,15 +48,18 @@ final class FeedChecker {
   private var activityToken: NSObjectProtocol? = nil
   
   private let feedHelperProxy = FeedHelperProxy()
-  private let scheduler = Scheduler(interval: Config.feedUpdateInterval)
+  private let intervalTimer = IntervalTimer(
+    interval: Config.feedUpdateInterval,
+    tolerance: Config.feedUpdateIntervalTolerance
+  )
   
   private init() {
     feedHelperProxy.delegate = self
     
-    scheduler.delegate = self
+    intervalTimer.delegate = self
 
     // Check now
-    scheduler.fireNow()
+    intervalTimer.fireNow()
 
     refreshPowerManagement()
   }
@@ -169,8 +172,8 @@ final class FeedChecker {
 }
 
 
-extension FeedChecker: SchedulerDelegate {
-  func schedulerFired() {
+extension FeedChecker: IntervalTimerDelegate {
+  func timerFired() {
     // Skip if paused or if current time is outside user-defined range
     guard status == .polling, !Defaults.shared.restricts(date: Date()) else { return }
     
