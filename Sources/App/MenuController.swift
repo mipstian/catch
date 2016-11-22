@@ -34,7 +34,7 @@ class MenuController: NSObject {
     
     // Update UI whenever the feed checker status changes
     NotificationCenter.default.addObserver(
-      forName: FeedChecker.statusChangedNotification,
+      forName: FeedChecker.stateChangedNotification,
       object: FeedChecker.shared,
       queue: nil,
       using: { [weak self] _ in
@@ -48,7 +48,7 @@ class MenuController: NSObject {
   
   private func refreshMenuContents() {
     let isChecking = FeedChecker.shared.isChecking
-    let isPolling = FeedChecker.shared.isPolling
+    let isPolling = FeedChecker.shared.status == .polling
     
     // Configure the menubar item's button
     let menuBarButtonTemplateImage: NSImage
@@ -115,6 +115,9 @@ extension MenuController {
   }
   
   @IBAction private func togglePause(_ sender: Any?) {
-    FeedChecker.shared.isPolling = !FeedChecker.shared.isPolling
+    switch FeedChecker.shared.status {
+    case .paused: FeedChecker.shared.status = .polling
+    case .polling: FeedChecker.shared.status = .paused
+    }
   }
 }

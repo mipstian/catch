@@ -18,7 +18,7 @@ class RecentsController: NSWindowController {
     
     // Subscribe to history changes
     NotificationCenter.default.addObserver(
-      forName: FeedChecker.statusChangedNotification,
+      forName: FeedChecker.stateChangedNotification,
       object: FeedChecker.shared,
       queue: nil,
       using: { [weak self] _ in
