@@ -48,7 +48,7 @@ extension RecentsController: NSTableViewDelegate {
       return nil
     }
     
-    cell.textField?.stringValue = historyItem.title
+    cell.textField?.stringValue = historyItem.episode.title
     
     cell.downloadDateTextField.stringValue = historyItem.downloadDate.map(downloadDateFormatter.string) ?? ""
     
@@ -71,10 +71,9 @@ extension RecentsController {
   
   @IBAction private func downloadRecentItemAgain(_ senderButton: NSButton) {
     let clickedRow = table.row(for: senderButton)
-    let recentToDownload = Defaults.shared.downloadHistory[clickedRow]
-    let isMagnetLink = recentToDownload.isMagnetLink
-    if isMagnetLink {
-      Browser.openInBackground(url: recentToDownload.url)
+    let recentEpisode = Defaults.shared.downloadHistory[clickedRow].episode
+    if recentEpisode.isMagnetized {
+      Browser.openInBackground(url: recentEpisode.url)
     } else {
       guard Defaults.shared.isConfigurationValid, let downloadOptions = Defaults.shared.downloadOptions else {
         NSLog("Cannot download torrent file with invalid preferences")
@@ -82,7 +81,7 @@ extension RecentsController {
       }
       
       feedHelperProxy.download(
-        historyItem: recentToDownload,
+        episode: recentEpisode,
         downloadOptions: downloadOptions,
         completion: { result in
           switch result {

@@ -22,6 +22,22 @@ struct Episode {
 }
 
 
+// Serialization
+extension Episode {
+  var dictionaryRepresentation: [AnyHashable:Any] {
+    var dictionary: [AnyHashable:Any] = [
+      "title": title,
+      "url": url.absoluteString
+    ]
+    if let showName = showName {
+      dictionary["showName"] = showName
+    }
+    return dictionary
+  }
+}
+
+
+// Deserialization
 extension Episode {
   init?(dictionary: [AnyHashable:Any]) {
     guard

@@ -107,7 +107,7 @@ final class FeedChecker {
     lastCheckStatus = .inProgress
     
     // Extract URLs from history
-    let previouslyDownloadedURLs = Defaults.shared.downloadHistory.map { $0.url }
+    let previouslyDownloadedURLs = Defaults.shared.downloadHistory.map { $0.episode.url }
     
     // Check the feed
     feedHelperProxy.checkFeed(
@@ -128,15 +128,17 @@ final class FeedChecker {
     )
   }
   
-  private func handleDownloadedFeedFiles(_ downloadedFeedFiles: [[AnyHashable : Any]]) {
+  private func handleDownloadedFeedFiles(_ downloadedFeedFiles: [[AnyHashable:Any]]) {
     let shouldOpenTorrentsAutomatically = Defaults.shared.shouldOpenTorrentsAutomatically
     
     for feedFile in downloadedFeedFiles.reversed() {
       let isMagnetLink = (feedFile["isMagnetLink"] as? NSNumber)?.boolValue ?? false
       
+      let url = URL(string: feedFile["url"] as! String)!
+      
       // Open magnet link, if requested
       if isMagnetLink && shouldOpenTorrentsAutomatically {
-        Browser.openInBackground(url: URL(string: feedFile["url"] as! String)!)
+        Browser.openInBackground(url: url)
       }
       
       let torrentFilePath = feedFile["torrentFilePath"] as? String
@@ -150,14 +152,14 @@ final class FeedChecker {
       
       NSUserNotificationCenter.default.deliverNewEpisodeNotification(episodeTitle: title)
       
-      let url = feedFile["url"] as! String
-      
       // Add to history
       let newHistoryItem = HistoryItem(
-        title: title,
-        url: URL(string: url)!,
-        downloadDate: Date(),
-        isMagnetLink: isMagnetLink
+        episode: Episode(
+          title: title,
+          url: url,
+          showName: nil // TODO: we should save this
+        ),
+        downloadDate: Date()
       )
       Defaults.shared.downloadHistory = [newHistoryItem] + Defaults.shared.downloadHistory
     }
