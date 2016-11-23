@@ -52,16 +52,15 @@ enum FeedHelper {
     }
     
     // Download new episodes
+    NSLog("Downloading \(newEpisodes.count) new episodes")
     let downloader = EpisodeDownloader(downloadOptions: downloadOptions)
-    return try downloader.download(episodes: newEpisodes)
+    return try newEpisodes.map(downloader.download(episode:))
   }
   
   static func download(episode: Episode, downloadOptions: DownloadOptions) throws -> [AnyHashable:Any]? {
     NSLog("Downloading single episode")
 
     let downloader = EpisodeDownloader(downloadOptions: downloadOptions)
-    let downloadedEpisodes = try downloader.download(episodes: [episode])
-    
-    return downloadedEpisodes.first
+    return try downloader.download(episode: episode)
   }
 }
