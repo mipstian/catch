@@ -40,7 +40,7 @@ private extension Episode {
 
 /// Parses episodes out of a broadcatching RSS feed.
 /// Supports additional data specified with the `tv` namespace.
-class FeedParser: NSObject {
+enum FeedParser {
   static func parse(feed: Data) throws -> [Episode] {
     NSLog("Parsing feed")
     
