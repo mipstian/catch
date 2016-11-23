@@ -42,9 +42,7 @@ enum FeedHelper {
     }
     
     // Skip old episodes
-    let newEpisodes = episodes.filter {
-      return !previouslyDownloadedURLs.contains($0.url)
-    }
+    let newEpisodes = episodes.filter { !previouslyDownloadedURLs.contains($0.url) }
     
     guard !newEpisodes.isEmpty else {
       NSLog("No new episodes to download")

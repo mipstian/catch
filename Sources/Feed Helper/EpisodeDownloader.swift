@@ -184,7 +184,7 @@ private extension Data {
         domain: feedHelperErrorDomain,
         code: -4,
         userInfo: [
-          NSLocalizedDescriptionKey: "Couldn't save file to disk: \(url)",
+          NSLocalizedDescriptionKey: "Couldn't write data to: \(url)",
           NSUnderlyingErrorKey: error
         ]
       )
