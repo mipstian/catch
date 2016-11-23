@@ -15,7 +15,7 @@ struct Episode {
   /// Name of the TV show this episode is from, if available.
   let showName: String?
   
-  /// Whether this episode's is a magnet link (instead of a .torrent file)
+  /// Whether this episode's url is a magnet link (instead of a .torrent file)
   var isMagnetized: Bool {
     return url.scheme == "magnet"
   }
