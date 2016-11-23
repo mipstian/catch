@@ -33,7 +33,6 @@ final class FeedChecker {
         intervalTimer.fireNow()
       }
       
-      refreshPowerManagement()
       postStateChangedNotification()
     }
   }
@@ -44,8 +43,6 @@ final class FeedChecker {
       postStateChangedNotification()
     }
   }
-  
-  private var activityToken: NSObjectProtocol? = nil
   
   private let feedHelperProxy = FeedHelperProxy()
   private let intervalTimer = IntervalTimer(
@@ -60,34 +57,11 @@ final class FeedChecker {
 
     // Check now
     intervalTimer.fireNow()
-
-    refreshPowerManagement()
   }
   
   /// Checks feed right now ignoring time restrictions and "paused" mode
   func forceCheck() {
     checkFeed()
-  }
-  
-  /// Makes the app's power management status (App Nap and system sleep) reflect the
-  /// current app state and settings
-  func refreshPowerManagement() {
-    // End previously started activity if any
-    if let token = activityToken {
-      ProcessInfo.processInfo.endActivity(token)
-      activityToken = nil
-    }
-    
-    // No need to prevent App Nap or system sleep if paused
-    guard status == .polling else { return }
-    
-    // Prevent App Nap (so we can keep checking the feed), and optionally system sleep
-    activityToken = ProcessInfo.processInfo.beginActivity(
-      options: Defaults.shared.shouldPreventSystemSleep ?
-        [.suddenTerminationDisabled, .idleSystemSleepDisabled] :
-        .suddenTerminationDisabled,
-      reason: "Actively polling the feed"
-    )
   }
   
   fileprivate func checkFeed() {

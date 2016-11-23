@@ -65,10 +65,6 @@ extension PreferencesController {
     // TODO: move to defaults
     Defaults.shared.refreshLoginItemStatus()
     
-    // Apply power management settings
-    // TODO: move to feed checker
-    FeedChecker.shared.refreshPowerManagement()
-    
     // Also force check
     FeedChecker.shared.forceCheck()
   }
