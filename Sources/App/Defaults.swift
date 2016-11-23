@@ -157,7 +157,8 @@ final class Defaults {
     let defaultToTime = Calendar.current.date(from: DateComponents(hour: 8, minute: 0))!
     
     // Use user's Downloads directory as a default, fallback on home
-    let defaultDownloadsDirectory = FileUtils.userDownloadsDirectory ?? FileUtils.userHomeDirectory
+    let defaultDownloadsDirectory = FileManager.default.downloadsDirectory ??
+      FileManager.default.homeDirectory
     
     // Set smart default defaults
     UserDefaults.standard.register(
@@ -181,9 +182,12 @@ final class Defaults {
       NSLog("Migrating download history to new format.")
       
       downloadHistory = downloadedFiles.flatMap(URL.init(string:)).map { url in
+        // Old history didn't save titles. This is better than nothing.
+        let title = url.suggestedDownloadFileName!
+        
         return HistoryItem(
           episode: Episode(
-            title: FileUtils.filename(from: url),
+            title: title,
             url: url,
             showName: nil
           ),

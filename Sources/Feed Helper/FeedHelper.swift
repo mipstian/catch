@@ -141,7 +141,7 @@ fileprivate extension FeedHelper {
     }
     
     // Try to get a nice filename
-    let filename = FileUtils.magnetFilename(from: episode.title)
+    let filename = episode.title.weblocFileName
     
     // Compute destination path
     let fullPath = downloadPath(
@@ -195,7 +195,7 @@ fileprivate extension FeedHelper {
     NSLog("Download complete, filesize: \(downloadedFile.count)")
     
     // Try to get a nice filename
-    let filename = FileUtils.torrentFilename(from: episode.title)
+    let filename = episode.title.torrentFileName
     
     // Compute destination path
     let fullPath = downloadPath(
@@ -266,7 +266,7 @@ fileprivate extension FeedHelper {
     var fullPath = containerDirectory
     
     if let subDirectory = subDirectory {
-      fullPath.appendPathComponent(FileUtils.fileName(from: subDirectory))
+      fullPath.appendPathComponent(subDirectory.sanitizedForFileSystem)
     }
     
     fullPath.appendPathComponent(filename)
