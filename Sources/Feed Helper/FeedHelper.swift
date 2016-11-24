@@ -5,7 +5,7 @@ import Foundation
 /// - Checking a feed (optionally downloading any new torrent files)
 /// - Downloading a single torrent file
 enum FeedHelper {
-  static func checkFeed(url: URL, downloadOptions: DownloadOptions, skippingURLs previouslyDownloadedURLs: [URL]) throws -> [[AnyHashable:Any]] {
+  static func checkFeed(url: URL, downloadOptions: DownloadOptions, skippingURLs previouslyDownloadedURLs: [URL]) throws -> [DownloadedEpisode] {
     NSLog("Checking feed: \(url)")
     
     // Flush the cache, we want fresh results
@@ -55,7 +55,7 @@ enum FeedHelper {
     return try newEpisodes.map(downloader.download(episode:))
   }
   
-  static func download(episode: Episode, downloadOptions: DownloadOptions) throws -> [AnyHashable:Any]? {
+  static func download(episode: Episode, downloadOptions: DownloadOptions) throws -> DownloadedEpisode {
     NSLog("Downloading single episode")
 
     let downloader = EpisodeDownloader(downloadOptions: downloadOptions)

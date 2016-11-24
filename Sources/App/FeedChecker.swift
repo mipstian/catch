@@ -92,7 +92,7 @@ final class FeedChecker {
         switch result {
         case .success(let downloadedFiles):
           // Deal with new files
-          self?.handleDownloadedFeedFiles(downloadedFiles)
+          self?.handleDownloadedEpisodes(downloadedFiles)
           self?.lastCheckStatus = .successful(Date())
         case .failure(let error):
           NSLog("Feed Helper error (checking feed): \(error)")
@@ -102,48 +102,32 @@ final class FeedChecker {
     )
   }
   
-  private func handleDownloadedFeedFiles(_ downloadedFeedFiles: [[AnyHashable:Any]]) {
+  private func handleDownloadedEpisodes(_ downloadedEpisodes: [DownloadedEpisode]) {
     let shouldOpenTorrentsAutomatically = Defaults.shared.shouldOpenTorrentsAutomatically
     
-    for feedFile in downloadedFeedFiles.reversed() {
-      let isMagnetLink = (feedFile["isMagnetLink"] as? NSNumber)?.boolValue ?? false
-      
-      let url = URL(string: feedFile["url"] as! String)!
+    for downloadedEpisode in downloadedEpisodes.reversed() {
+      let episode = downloadedEpisode.episode
       
       // Open magnet link, if requested
-      if isMagnetLink && shouldOpenTorrentsAutomatically {
-        Browser.openInBackground(url: url)
+      if episode.isMagnetized && shouldOpenTorrentsAutomatically {
+        Browser.openInBackground(url: episode.url)
       }
-      
-      let torrentFilePath = feedFile["torrentFilePath"] as? String
       
       // Open normal torrent in torrent client, if requested
-      if !isMagnetLink && shouldOpenTorrentsAutomatically {
-        Browser.openInBackground(file: torrentFilePath!)
+      if !episode.isMagnetized && shouldOpenTorrentsAutomatically {
+        Browser.openInBackground(file: downloadedEpisode.localURL!.path)
       }
       
-      let title = feedFile["title"] as! String
-      
-      NSUserNotificationCenter.default.deliverNewEpisodeNotification(episodeTitle: title)
+      NSUserNotificationCenter.default.deliverNotification(newEpisode: episode)
       
       // Add to history
-      let newHistoryItem = HistoryItem(
-        episode: Episode(
-          title: title,
-          url: url,
-          showName: nil // TODO: we should save this
-        ),
-        downloadDate: Date()
-      )
+      let newHistoryItem = HistoryItem(episode: episode, downloadDate: Date())
       Defaults.shared.downloadHistory = [newHistoryItem] + Defaults.shared.downloadHistory
     }
   }
   
   private func postStateChangedNotification() {
-    NotificationCenter.default.post(
-      name: FeedChecker.stateChangedNotification,
-      object: self
-    )
+    NotificationCenter.default.post(name: FeedChecker.stateChangedNotification, object: self)
   }
 }
 

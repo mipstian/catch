@@ -85,9 +85,9 @@ extension RecentsController {
         downloadOptions: downloadOptions,
         completion: { result in
           switch result {
-          case .success(let downloadedFile):
+          case .success(let downloadedEpisode):
             if Defaults.shared.shouldOpenTorrentsAutomatically {
-              Browser.openInBackground(file: downloadedFile["torrentFilePath"] as! String)
+              Browser.openInBackground(file: downloadedEpisode.localURL!.path)
             }
           case .failure(let error):
             NSLog("Feed Helper error (downloading file): \(error)")

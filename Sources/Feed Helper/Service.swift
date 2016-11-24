@@ -17,7 +17,7 @@ extension Service: FeedHelperService {
     savingMagnetLinks shouldSaveMagnetLinks: Bool,
     skippingURLs previouslyDownloadedURLs: [String],
     withReply reply: (_ downloadedFeedFiles: [[AnyHashable:Any]]?, _ error: Error?) -> Void) {
-    let downloadedFeedFiles: [[AnyHashable:Any]]
+    let downloadedEpisodes: [DownloadedEpisode]
     
     do {
       let downloadOptions = try DownloadOptions(
@@ -26,7 +26,7 @@ extension Service: FeedHelperService {
         shouldSaveMagnetLinks: shouldSaveMagnetLinks
       )
       
-      downloadedFeedFiles = try FeedHelper.checkFeed(
+      downloadedEpisodes = try FeedHelper.checkFeed(
         url: url,
         downloadOptions: downloadOptions,
         skippingURLs: previouslyDownloadedURLs.map { URL.init(string: $0)! }
@@ -36,7 +36,7 @@ extension Service: FeedHelperService {
       return
     }
     
-    reply(downloadedFeedFiles, nil)
+    reply(downloadedEpisodes.map { $0.dictionaryRepresentation }, nil)
   }
   
   func download(
@@ -45,7 +45,7 @@ extension Service: FeedHelperService {
     organizingByShow shouldOrganizeByShow: Bool,
     savingMagnetLinks shouldSaveMagnetLinks: Bool,
     withReply reply: (_ downloadedFile: [AnyHashable:Any]?, _ error: Error?) -> Void) {
-    let downloadedFile: [AnyHashable:Any]?
+    let downloadedFile: DownloadedEpisode
     
     do {
       let downloadOptions = try DownloadOptions(
@@ -63,7 +63,7 @@ extension Service: FeedHelperService {
       return
     }
     
-    reply(downloadedFile, nil)
+    reply(downloadedFile.dictionaryRepresentation, nil)
   }
 }
 

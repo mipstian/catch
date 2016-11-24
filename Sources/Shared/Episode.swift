@@ -22,7 +22,15 @@ struct Episode {
 }
 
 
-// Serialization
+struct DownloadedEpisode {
+  let episode: Episode
+  
+  /// Where the .torrent file was saved to the file system, if it was
+  let localURL: URL?
+}
+
+
+// MARK: Serialization
 extension Episode {
   var dictionaryRepresentation: [AnyHashable:Any] {
     var dictionary: [AnyHashable:Any] = [
@@ -37,7 +45,18 @@ extension Episode {
 }
 
 
-// Deserialization
+extension DownloadedEpisode {
+  var dictionaryRepresentation: [AnyHashable:Any] {
+    var dictionary = episode.dictionaryRepresentation
+    if let localURL = localURL {
+      dictionary["localURL"] = localURL.absoluteString
+    }
+    return dictionary
+  }
+}
+
+
+// MARK: Deserialization
 extension Episode {
   init?(dictionary: [AnyHashable:Any]) {
     guard
@@ -50,5 +69,15 @@ extension Episode {
     self.title = title
     self.url = url
     self.showName = dictionary["showName"] as? String
+  }
+}
+
+
+extension DownloadedEpisode {
+  init?(dictionary: [AnyHashable:Any]) {
+    guard let episode = Episode(dictionary: dictionary) else { return nil }
+    
+    self.episode = episode
+    self.localURL = (dictionary["localURL"] as? String).flatMap(URL.init(string:))
   }
 }
