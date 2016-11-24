@@ -54,13 +54,17 @@ final class Defaults {
     return URL(fileURLWithPath: expanded).standardizedFileURL
   }
   
+  /// Recently downloaded episodes, most recent first. Remembered so they won't be downloaded again
+  /// every time feeds are checked. They are presented in the UI as well.
   var downloadHistory: [HistoryItem] {
     get {
       let rawHistory = UserDefaults.standard.array(forKey: Keys.history) as! [[AnyHashable:Any]]
       return rawHistory.flatMap(HistoryItem.init(defaultsDictionary:))
     }
     set {
-      UserDefaults.standard.set(newValue.map { $0.dictionaryRepresentation }, forKey: Keys.history)
+      let truncatedCount = min(newValue.count, Config.historyLimit)
+      let serializedHistory = newValue.prefix(upTo: truncatedCount).map { $0.dictionaryRepresentation }
+      UserDefaults.standard.set(serializedHistory, forKey: Keys.history)
     }
   }
   
