@@ -842,7 +842,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "Resources/Feed Helper/com.giorgiocalderolla.Catch.CatchFeedHelper.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "Resources/Feed Helper/CatchFeedHelper-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
