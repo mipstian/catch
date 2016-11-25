@@ -27,6 +27,10 @@ class MenuController: NSObject {
     let bundle = Bundle.main
     menuVersion.title = "\(bundle.displayName) \(bundle.version) (\(bundle.buildNumber))"
     
+    #if DEBUG
+      menuVersion.title = "[DEBUG] " + menuVersion.title
+    #endif
+    
     // Update UI whenever the feed checker status changes
     NotificationCenter.default.addObserver(
       forName: FeedChecker.stateChangedNotification,
