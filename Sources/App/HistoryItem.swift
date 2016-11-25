@@ -12,6 +12,27 @@ struct HistoryItem {
 }
 
 
+extension HistoryItem: Equatable {
+  static func ==(lhs: HistoryItem, rhs: HistoryItem) -> Bool {
+    return lhs.episode == rhs.episode && lhs.downloadDate == rhs.downloadDate
+  }
+}
+
+
+extension HistoryItem: Comparable {
+  /// Cronological comparison
+  ///
+  /// - Note: Items with missing dates are considered older than every other item
+  static func <(lhs: HistoryItem, rhs: HistoryItem) -> Bool {
+    guard let lhsDate = lhs.downloadDate else { return true }
+    guard let rhsDate = rhs.downloadDate else { return false }
+    
+    return lhsDate < rhsDate
+  }
+}
+
+
+// MARK: Serialization
 extension HistoryItem {
   var dictionaryRepresentation: [AnyHashable:Any] {
     var dictionary: [AnyHashable:Any] = [

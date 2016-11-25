@@ -30,6 +30,16 @@ struct DownloadedEpisode {
 }
 
 
+extension Episode: Equatable {
+  static func ==(lhs: Episode, rhs: Episode) -> Bool {
+    return
+      lhs.title == rhs.title &&
+      lhs.url == rhs.url &&
+      lhs.showName == rhs.showName
+  }
+}
+
+
 // MARK: Serialization
 extension Episode {
   var dictionaryRepresentation: [AnyHashable:Any] {
