@@ -3,5 +3,6 @@ import Foundation
 
 // Standard XPC service setup
 let serviceListener = NSXPCListener.service()
-serviceListener.delegate = Service.shared
+let service = Service()
+serviceListener.delegate = service
 serviceListener.resume()
