@@ -23,17 +23,21 @@ class PreferencesController: NSWindowController {
     // If the configuration isn't valid, pop up immediately
     if !Defaults.shared.isConfigurationValid { showWindow(self) }
     
-    // TODO: encapsulate this
-    UserDefaults.standard.addObserver(self, forKeyPath: "savePath", options: .new, context: &kvoContext)
-    UserDefaults.standard.addObserver(self, forKeyPath: "feedURL", options: .new, context: &kvoContext)
-  }
-  
-  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey:Any]?, context: UnsafeMutableRawPointer?) {
-    if context == &kvoContext {
-      refreshInvalidInputMarkers()
-    } else {
-      super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
-    }
+    // Update UI whenever relevant defaults change
+    NotificationCenter.default.addObserver(
+      forName: Defaults.changedNotification,
+      object: Defaults.shared,
+      queue: nil,
+      using: { [weak self] notification in
+        guard
+          let changedKey = notification.userInfo?[Defaults.changedNotificationChangedKey] as? String,
+          [Defaults.Keys.torrentsSavePath, Defaults.Keys.feedURL].contains(changedKey)
+        else {
+          return
+        }
+        self?.refreshInvalidInputMarkers()
+      }
+    )
   }
   
   fileprivate func refreshInvalidInputMarkers() {
@@ -43,9 +47,7 @@ class PreferencesController: NSWindowController {
   
   deinit {
     automaticallyCheckForUpdatesCheckbox.unbind("value")
-    
-    UserDefaults.standard.removeObserver(self, forKeyPath: "savePath", context: &kvoContext)
-    UserDefaults.standard.removeObserver(self, forKeyPath: "feedURL", context: &kvoContext)
+    NotificationCenter.default.removeObserver(self)
   }
 }
 
@@ -74,10 +76,6 @@ extension PreferencesController {
     // Hide the Preferences window
     window?.close()
     
-    // Apply the login item setting
-    // TODO: move to defaults
-    Defaults.shared.refreshLoginItemStatus()
-    
     // Also force check
     FeedChecker.shared.forceCheck()
   }
@@ -92,5 +90,3 @@ extension PreferencesController {
     window?.toolbar?.selectedItemIdentifier = "Tweaks"
   }
 }
-
-private var kvoContext = 0

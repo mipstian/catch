@@ -3,10 +3,16 @@ import Foundation
 
 /// Singleton. Wrapper around UserDefaults.standard that provides a nice interface to the app's preferences
 /// and download history data.
-final class Defaults {
+final class Defaults: NSObject {
   static let shared = Defaults()
   
-  private struct Keys {
+  /// Posted whenever any default changes
+  static let changedNotification = NSNotification.Name("Defaults.changedNotification")
+  
+  /// Changed notification's userInfo includes which key's value has changed
+  static let changedNotificationChangedKey = "changedKey"
+  
+  struct Keys {
     static let feedURL = "feedURL"
     static let onlyUpdateBetween = "onlyUpdateBetween"
     static let updateFrom = "updateFrom"
@@ -18,6 +24,10 @@ final class Defaults {
     static let openAtLogin = "openAtLogin"
     static let shouldRunHeadless = "headless"
     static let preventSystemSleep = "preventSystemSleep"
+    
+    static let allKeys = [feedURL, onlyUpdateBetween, updateFrom, updateTo, torrentsSavePath,
+                          shouldOrganizeTorrents, shouldOpenTorrentsAutomatically, history,
+                          openAtLogin, shouldRunHeadless, preventSystemSleep]
   }
   
   var feedURL: URL? {
@@ -147,14 +157,16 @@ final class Defaults {
     UserDefaults.standard.synchronize()
   }
   
-  func refreshLoginItemStatus() {
+  private func refreshLoginItemStatus() {
     #if !DEBUG
       let shouldOpenAtLogin = UserDefaults.standard.bool(forKey: Keys.openAtLogin)
       Bundle.main.isLoginItem = shouldOpenAtLogin
     #endif
   }
   
-  private init() {
+  private override init() {
+    super.init()
+    
     // Default values for time restrictions
     let defaultFromTime = Calendar.current.date(from: DateComponents(hour: 24, minute: 0))!
     let defaultToTime = Calendar.current.date(from: DateComponents(hour: 8, minute: 0))!
@@ -179,8 +191,43 @@ final class Defaults {
     ]
     UserDefaults.standard.register(defaults: defaultDefaults)
     
+    // Observe changes for all keys
+    for key in Keys.allKeys {
+      UserDefaults.standard.addObserver(self, forKeyPath: key, context: &kvoContext)
+    }
+    
     // Register as a login item if needed
     refreshLoginItemStatus()
+  }
+  
+  override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey:Any]?, context: UnsafeMutableRawPointer?) {
+    if context == &kvoContext {
+      if let changedKey = keyPath {
+        if keyPath == Keys.openAtLogin {
+          refreshLoginItemStatus()
+        }
+        
+        postChangedNotification(for: changedKey)
+      }
+    } else {
+      super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+    }
+  }
+  
+  private func postChangedNotification(for defaultsKey: String) {
+    NotificationCenter.default.post(
+      name: Defaults.changedNotification,
+      object: self,
+      userInfo: [
+        Defaults.changedNotificationChangedKey: defaultsKey
+      ]
+    )
+  }
+  
+  deinit {
+    for key in Keys.allKeys {
+      UserDefaults.standard.removeObserver(self, forKeyPath: key, context: &kvoContext)
+    }
   }
 }
 
@@ -202,3 +249,6 @@ private extension HistoryItem {
     self.downloadDate = defaultsDictionary["date"] as? Date
   }
 }
+
+
+private var kvoContext = 0
