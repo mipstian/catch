@@ -110,6 +110,7 @@ private extension FeedChecker.LastCheckStatus {
     dateFormatter.timeStyle = .short
     
     let normalFormat = NSLocalizedString("lastupdate", comment: "Title for the last update time")
+    let skippedFormat = NSLocalizedString("lastupdateskipped", comment: "Title for the last update time if it was skipped")
     let failedFormat = NSLocalizedString("lastupdatefailed", comment: "Title for the last update time if it fails")
     
     switch self {
@@ -119,6 +120,8 @@ private extension FeedChecker.LastCheckStatus {
       return NSLocalizedString("updatingnow", comment: "An update is in progress")
     case .failed(let date, _):
       return String(format: failedFormat, dateFormatter.string(from: date))
+    case .skipped(let date):
+      return String(format: skippedFormat, dateFormatter.string(from: date))
     case .successful(let date):
       return String(format: normalFormat, dateFormatter.string(from: date))
     }

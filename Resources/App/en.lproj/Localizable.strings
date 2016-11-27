@@ -4,6 +4,7 @@
 "pause"="Pause";
 "resume"="Resume";
 "lastupdate"="Last Update: %@"; // %@ will be replaced by update time
+"lastupdateskipped"="Last Update (Skipped): %@"; // %@ will be replaced by update time
 "lastupdatefailed"="Last Update (Failed): %@"; // %@ will be replaced by update time
 "never"="Never"; // this is for the last update time, meaning "I still haven't made one"
 "updatingnow"="Updating Now...";
