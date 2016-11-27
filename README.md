@@ -3,7 +3,7 @@ Catch: Broadcatching made easy.
 
 <img src="http://www.giorgiocalderolla.com/ext/catch_icon.svg" alt="Icon" width="228" height="228">
 
-**[Catch](http://www.giorgiocalderolla.com/index.html#catch)** is a Mac OS X application that runs in the menubar, and will automatically download any new torrent files in your **[ShowRSS](http://showrss.karmorra.info/)** feed to a folder you can choose, optionally opening them in your favorite BitTorrent client. You will never miss an episode again :)
+**[Catch](http://www.giorgiocalderolla.com/index.html#catch)** is a Mac OS X application that runs in the menubar, and will automatically download episodes found in your **[ShowRSS](http://showrss.info/)** feed using your favorite BitTorrent client. You will never miss an episode again :)
 
 It's *free*, and open source.
 
@@ -15,11 +15,10 @@ Features:
 ---------
 
   * ShowRSS client
-  * Magnet support
-  * HTTPS support
-  * Very low Processor/Memory usage
-  * Only check your feed at night or in whatever period you choose
-  * Organize torrents in folders based on show name
+  * Magnet link and HTTPS support
+  * Very lightweight, won't slow down you Mac at all
+  * Configurable "hours of operation" (e.g. only check for new episodes at night)
+  * Organize episodes in folders based on show name
   * Automatically start downloading in your favorite BitTorrent client
   * Notification Center notifications
   * Automatic updates
