@@ -3,12 +3,12 @@ import Foundation
 
 /// A previously downloaded episode. These are called "Recent episodes" in the UI.
 struct HistoryItem {
-  let episode: Episode
+  var episode: Episode
   
   /// When this episode was downloaded.
   ///
   /// - Note: Very old items might not have a date set.
-  let downloadDate: Date?
+  var downloadDate: Date?
 }
 
 
