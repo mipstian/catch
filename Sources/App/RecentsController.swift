@@ -8,6 +8,8 @@ class RecentsController: NSWindowController {
   fileprivate let downloadDateFormatter = DateFormatter()
   fileprivate let feedHelperProxy = FeedHelperProxy()
   
+  fileprivate var sortedHistory: [HistoryItem] = []
+  
   override func awakeFromNib() {
     super.awakeFromNib()
     
@@ -22,9 +24,15 @@ class RecentsController: NSWindowController {
       object: FeedChecker.shared,
       queue: nil,
       using: { [weak self] _ in
-        self?.table.reloadData()
+        self?.reloadHistory()
       }
     )
+  }
+  
+  fileprivate func reloadHistory() {
+    // Keep a sorted copy of the download history, in reverse cronological order
+    sortedHistory = Defaults.shared.downloadHistory.sorted().reversed()
+    table.reloadData()
   }
   
   deinit {
@@ -35,15 +43,15 @@ class RecentsController: NSWindowController {
 
 extension RecentsController: NSTableViewDataSource {
   func numberOfRows(in tableView: NSTableView) -> Int {
-    return Defaults.shared.downloadHistory.count
+    return sortedHistory.count
   }
 }
 
 
 extension RecentsController: NSTableViewDelegate {
   func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-    // Get the item to display, in reverse cronological order
-    let historyItem = Defaults.shared.downloadHistory.sorted().reversed()[row]
+    // Get the item to display
+    let historyItem = sortedHistory[row]
     
     guard let cell = tableView.make(withIdentifier: "RecentCell", owner: self) as? RecentsCellView else {
       return nil
@@ -65,7 +73,7 @@ extension RecentsController: NSTableViewDelegate {
 // MARK: Actions
 extension RecentsController {
   @IBAction override func showWindow(_ sender: Any?) {
-    table.reloadData()
+    reloadHistory()
     NSApp.activate(ignoringOtherApps: true)
     super.showWindow(sender)
   }
