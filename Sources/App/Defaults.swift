@@ -56,7 +56,7 @@ final class Defaults: NSObject {
     return URL(fileURLWithPath: expanded).standardizedFileURL
   }
   
-  /// Recently downloaded episodes, most recent first. Remembered so they won't be downloaded again
+  /// Recently downloaded episodes. Remembered so they won't be downloaded again
   /// every time feeds are checked. They are presented in the UI as well.
   var downloadHistory: [HistoryItem] {
     get {
@@ -64,8 +64,11 @@ final class Defaults: NSObject {
       return rawHistory.flatMap(HistoryItem.init(defaultsDictionary:))
     }
     set {
+      // Only keep the most recent items
       let truncatedCount = min(newValue.count, Config.historyLimit)
-      let serializedHistory = newValue.prefix(upTo: truncatedCount).map { $0.dictionaryRepresentation }
+      let truncatedHistory = newValue.sorted().reversed().prefix(upTo: truncatedCount)
+      
+      let serializedHistory = truncatedHistory.map { $0.dictionaryRepresentation }
       UserDefaults.standard.set(serializedHistory, forKey: Keys.history)
     }
   }
