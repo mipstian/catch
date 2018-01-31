@@ -45,7 +45,7 @@ enum FeedParser {
     NSLog("Parsing feed")
     
     // Parse xml
-    let xml = try XMLDocument(data: feed, options: 0)
+    let xml = try XMLDocument(data: feed)
     
     // Extract feed item nodes
     let itemNodes = try xml.nodes(forXPath: "//rss/channel/item")

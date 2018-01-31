@@ -8,7 +8,7 @@ extension PropertyListSerialization {
     return try PropertyListSerialization.data(
       fromPropertyList: weblocPlist,
       format: .binary,
-      options: .allZeros
+      options: 0
     )
   }
 }

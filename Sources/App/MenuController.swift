@@ -15,7 +15,7 @@ class MenuController: NSObject {
     guard !Defaults.shared.shouldRunHeadless else { return }
     
     // Create the NSStatusItem and set its length
-    menuBarItem = NSStatusBar.system().statusItem(withLength: NSSquareStatusItemLength)
+    menuBarItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
     
     // Tell the NSStatusItem what menu to load
     menuBarItem.menu = menu
