@@ -51,7 +51,7 @@ enum FeedParser {
     let itemNodes = try xml.nodes(forXPath: "//rss/channel/item")
     
     // Extract episodes from NSXMLNodes
-    let episodes = itemNodes.flatMap(Episode.init(itemNode:))
+    let episodes = itemNodes.compactMap(Episode.init(itemNode:))
     
     NSLog("Parsed \(episodes.count) episodes")
     
