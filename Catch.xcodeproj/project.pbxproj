@@ -441,11 +441,11 @@
 				LastUpgradeCheck = 1000;
 				TargetAttributes = {
 					446D8B551918D146007AB22D = {
-						LastSwiftMigration = 0920;
+						LastSwiftMigration = 1000;
 						TestTargetID = 8D1107260486CEB800E47090;
 					};
 					44717AC31913A08700580054 = {
-						LastSwiftMigration = 0920;
+						LastSwiftMigration = 1000;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
 								enabled = 1;
@@ -453,7 +453,7 @@
 						};
 					};
 					8D1107260486CEB800E47090 = {
-						LastSwiftMigration = 0920;
+						LastSwiftMigration = 1000;
 					};
 				};
 			};
@@ -661,7 +661,7 @@
 				OTHER_LDFLAGS = "-Wl,-rpath,@loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.giorgiocalderolla.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = Catch;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -681,7 +681,7 @@
 				OTHER_LDFLAGS = "-Wl,-rpath,@loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.giorgiocalderolla.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = Catch;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -822,7 +822,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.giorgiocalderolla.Catch.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -846,7 +846,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.giorgiocalderolla.Catch.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -865,7 +865,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_NAME}";
 				PRODUCT_NAME = "com.giorgiocalderolla.Catch.$(TARGET_NAME:rfc1034identifier)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				WRAPPER_EXTENSION = xpc;
 			};
 			name = Debug;
@@ -881,7 +881,7 @@
 				MACH_O_TYPE = mh_execute;
 				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_NAME}";
 				PRODUCT_NAME = "com.giorgiocalderolla.Catch.$(TARGET_NAME:rfc1034identifier)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				WRAPPER_EXTENSION = xpc;
 			};
 			name = Release;
