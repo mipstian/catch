@@ -101,13 +101,21 @@ final class Defaults: NSObject {
     
     return true
   }
+    
+  var isShowRSSFeed: Bool {
+    guard
+      let host = feedURL?.host,
+      host.hasSuffix("showrss.info")
+      else {
+        return false
+    }
+    return true
+  }
   
   var isFeedURLValid: Bool {
     guard
       let url = feedURL,
-      let scheme = url.scheme,
-      let host = url.host,
-      let query = url.query
+      let scheme = url.scheme
     else {
       return false
     }
@@ -117,14 +125,11 @@ final class Defaults: NSObject {
       return false
     }
     
-    guard host.hasSuffix("showrss.info") else {
-      NSLog("Bad host in feed URL: \(host)")
-      return false
-    }
-    
-    guard query.contains("namespaces=true") else {
-      NSLog("Feed URL does not have namespaces enabled")
-      return false
+    if isShowRSSFeed,
+      let query = url.query,
+      !query.contains("namespaces=true") {
+        NSLog("Feed URL does not have namespaces enabled")
+        return false
     }
     
     return true
