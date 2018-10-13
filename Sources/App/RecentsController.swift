@@ -8,12 +8,14 @@ private extension NSUserInterfaceItemIdentifier {
 
 /// Manages the "Recent Episodes" window.
 class RecentsController: NSWindowController {
-  @IBOutlet fileprivate weak var table: NSTableView!
+  @IBOutlet private weak var table: NSTableView!
   
-  fileprivate let downloadDateFormatter = DateFormatter()
-  fileprivate let feedHelperProxy = FeedHelperProxy()
+  private let downloadDateFormatter = DateFormatter()
+  private let feedHelperProxy = FeedHelperProxy()
   
-  fileprivate var sortedHistory: [HistoryItem] = []
+  private var sortedHistory: [HistoryItem] = []
+  
+  private var feedCheckerObserver: NSObjectProtocol? = nil
   
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -23,8 +25,19 @@ class RecentsController: NSWindowController {
     downloadDateFormatter.dateStyle = .short
     downloadDateFormatter.doesRelativeDateFormatting = true
     
+    // Unsubscribe from everything first, so we don't subscribe multiple times.
+    // Why would this run multiple times you ask?
+    // Because (from the docs of NSTableView.makeView(withIdentifier:owner:)):
+    //
+    // Note that awakeFromNib() is called each time this method is called,
+    // which means that awakeFromNib is also called on owner, even though the
+    // owner is already awake.
+    //
+    // Makes no sense to me but whatever :)
+    unsubscribeFromEverything()
+    
     // Subscribe to history changes
-    NotificationCenter.default.addObserver(
+    feedCheckerObserver = NotificationCenter.default.addObserver(
       forName: FeedChecker.stateChangedNotification,
       object: FeedChecker.shared,
       queue: nil,
@@ -34,14 +47,20 @@ class RecentsController: NSWindowController {
     )
   }
   
-  fileprivate func reloadHistory() {
+  private func reloadHistory() {
     // Keep a sorted copy of the download history, in reverse cronological order
     sortedHistory = Defaults.shared.downloadHistory.sorted().reversed()
     table.reloadData()
   }
   
+  private func unsubscribeFromEverything() {
+    if let feedCheckerObserver = feedCheckerObserver {
+      NotificationCenter.default.removeObserver(feedCheckerObserver)
+    }
+  }
+  
   deinit {
-    NotificationCenter.default.removeObserver(self)
+    unsubscribeFromEverything()
   }
 }
 
