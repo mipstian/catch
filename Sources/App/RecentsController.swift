@@ -15,17 +15,15 @@ class RecentsController: NSWindowController {
   
   private var sortedHistory: [HistoryItem] = []
   
-  private var feedCheckerObserver: NSObjectProtocol? = nil
+  private var downloadHistoryObserver: NSObjectProtocol? = nil
+  
+  // Remember if awakeFromNib has been called
+  private var awake: Bool = false
   
   override func awakeFromNib() {
     super.awakeFromNib()
     
-    // Configure formatter for torrent download dates
-    downloadDateFormatter.timeStyle = .short
-    downloadDateFormatter.dateStyle = .short
-    downloadDateFormatter.doesRelativeDateFormatting = true
-    
-    // Unsubscribe from everything first, so we don't subscribe multiple times.
+    // Make sure the following only runs once per instance.
     // Why would this run multiple times you ask?
     // Because (from the docs of NSTableView.makeView(withIdentifier:owner:)):
     //
@@ -34,17 +32,25 @@ class RecentsController: NSWindowController {
     // owner is already awake.
     //
     // Makes no sense to me but whatever :)
-    unsubscribeFromEverything()
+    guard !awake else { return }
+    awake = true
     
-    // Subscribe to history changes
-    feedCheckerObserver = NotificationCenter.default.addObserver(
-      forName: FeedChecker.stateChangedNotification,
-      object: FeedChecker.shared,
+    // Configure formatter for torrent download dates
+    downloadDateFormatter.timeStyle = .short
+    downloadDateFormatter.dateStyle = .short
+    downloadDateFormatter.doesRelativeDateFormatting = true
+    
+    // Subscribe to changes to the download history
+    downloadHistoryObserver = NotificationCenter.default.addObserver(
+      forName: Defaults.downloadHistoryChangedNotification,
+      object: Defaults.shared,
       queue: nil,
       using: { [weak self] _ in
         self?.reloadHistory()
       }
     )
+    
+    reloadHistory()
   }
   
   private func reloadHistory() {
@@ -53,14 +59,10 @@ class RecentsController: NSWindowController {
     table.reloadData()
   }
   
-  private func unsubscribeFromEverything() {
-    if let feedCheckerObserver = feedCheckerObserver {
-      NotificationCenter.default.removeObserver(feedCheckerObserver)
-    }
-  }
-  
   deinit {
-    unsubscribeFromEverything()
+    if let observer = downloadHistoryObserver {
+      NotificationCenter.default.removeObserver(observer)
+    }
   }
 }
 
@@ -97,7 +99,6 @@ extension RecentsController: NSTableViewDelegate {
 // MARK: Actions
 extension RecentsController {
   @IBAction override func showWindow(_ sender: Any?) {
-    reloadHistory()
     NSApp.activate(ignoringOtherApps: true)
     super.showWindow(sender)
   }
