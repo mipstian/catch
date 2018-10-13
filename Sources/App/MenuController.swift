@@ -43,6 +43,15 @@ class MenuController: NSObject {
       }
     )
     
+    NotificationCenter.default.addObserver(
+      forName: Defaults.changedNotification,
+      object: Defaults.shared,
+      queue: nil,
+      using: { [weak self] _ in
+        self?.refreshMenuContents()
+      }
+    )
+    
     // Update UI now
     refreshMenuContents()
   }
