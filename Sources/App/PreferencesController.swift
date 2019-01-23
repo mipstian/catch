@@ -72,9 +72,7 @@ extension PreferencesController {
   }
   
   @IBAction private func addFeed(_: Any?) {
-    guard let sheet = addFeedSheetController.window else { return }
-    
-    window?.beginSheet(sheet, completionHandler: nil)
+    window?.beginSheet(addFeedSheetController.window!, completionHandler: nil)
   }
   
   @IBAction private func removeFeed(_: Any?) {

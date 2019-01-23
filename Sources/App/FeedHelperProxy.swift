@@ -34,13 +34,13 @@ final class FeedHelperProxy {
     feedHelperConnection.invalidate()
   }
   
-  func checkFeed(
-    url: URL,
+  func checkFeeds(
+    urls: [URL],
     downloadOptions: DownloadOptions,
     previouslyDownloadedURLs: [URL],
     completion: @escaping (Result<[DownloadedEpisode]>) -> Void) {
-    service.checkFeed(
-      url: url,
+    service.checkFeeds(
+      urls: urls.map { $0.absoluteString },
       downloadingToBookmark: downloadOptions.containerDirectoryBookmark,
       organizingByShow: downloadOptions.shouldOrganizeByShow,
       savingMagnetLinks: downloadOptions.shouldSaveMagnetLinks,

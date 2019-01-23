@@ -96,12 +96,9 @@ final class FeedChecker {
     // Extract URLs from history
     let previouslyDownloadedURLs = Defaults.shared.downloadHistory.map { $0.episode.url }
     
-    // TODO: check all
-    let feedURL = Defaults.shared.feedURLs[0]
-    
     // Check the feed
-    feedHelperProxy.checkFeed(
-      url: feedURL,
+    feedHelperProxy.checkFeeds(
+      urls: Defaults.shared.feedURLs,
       downloadOptions: downloadOptions,
       previouslyDownloadedURLs: previouslyDownloadedURLs,
       completion: { [weak self] result in
