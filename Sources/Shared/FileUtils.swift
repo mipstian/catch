@@ -38,4 +38,19 @@ extension URL {
   var suggestedDownloadFileName: String? {
     return pathComponents.last?.removingPercentEncoding
   }
+  
+  var isWritableDirectory: Bool {
+    var isDirectory: ObjCBool = false
+    guard FileManager.default.fileExists(atPath: path, isDirectory: &isDirectory), isDirectory.boolValue else {
+      // Download path does not exist or is not a directory
+      return false
+    }
+    
+    guard FileManager.default.isWritableFile(atPath: path) else {
+      // Download path is not writable
+      return false
+    }
+    
+    return true
+  }
 }

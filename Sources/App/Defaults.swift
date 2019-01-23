@@ -90,57 +90,19 @@ final class Defaults: NSObject {
   }
   
   var isConfigurationValid: Bool {
-    return isFeedURLValid
+    return hasValidFeeds
   }
   
   var isTorrentsSavePathValid: Bool {
-    guard let path = torrentsSavePath?.path else { return false }
-    
-    var isDirectory: ObjCBool = false
-    guard FileManager.default.fileExists(atPath: path, isDirectory: &isDirectory), isDirectory.boolValue else {
-      // Download path does not exist or is not a directory
-      return false
-    }
-    
-    guard FileManager.default.isWritableFile(atPath: path) else {
-      // Download path is not writable
-      return false
-    }
-    
-    return true
-  }
-    
-  var isShowRSSFeed: Bool {
-    guard
-      let host = feedURL?.host,
-      host.hasSuffix("showrss.info")
-      else {
-        return false
-    }
-    return true
+    return torrentsSavePath?.isWritableDirectory ?? false
   }
   
-  var isFeedURLValid: Bool {
-    guard
-      let url = feedURL,
-      let scheme = url.scheme
-    else {
-      return false
-    }
-    
-    guard ["http", "https"].contains(scheme) else {
-      NSLog("Bad scheme in feed URL: \(scheme)")
-      return false
-    }
-    
-    if isShowRSSFeed,
-      let query = url.query,
-      !query.contains("namespaces=true") {
-        NSLog("Feed URL does not have namespaces enabled")
-        return false
-    }
-    
-    return true
+  var hasValidFeeds: Bool {
+    return feedURL?.isValidFeedURL ?? false
+  }
+  
+  var hasShowRSSFeeds: Bool {
+    return feedURL?.isShowRSSFeed ?? false
   }
   
   var downloadOptions: DownloadOptions? {

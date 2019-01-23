@@ -91,8 +91,8 @@ class MenuController: NSObject {
     // Configure the "last update" item
     menuLastUpdate.title = FeedChecker.shared.lastCheckStatus.localizedDescription
     
-    menuLaunchShowRSS.isHidden = !Defaults.shared.isShowRSSFeed
-    menuTopSeparator.isHidden = !Defaults.shared.isShowRSSFeed
+    menuLaunchShowRSS.isHidden = !Defaults.shared.hasShowRSSFeeds
+    menuTopSeparator.isHidden = !Defaults.shared.hasShowRSSFeeds
   }
   
   deinit {
