@@ -14,8 +14,10 @@ private extension NSUserInterfaceItemIdentifier {
 /// Manages the "Preferences" window.
 class PreferencesController: NSWindowController {
   @IBOutlet private weak var feedsTableView: NSTableView!
+  @IBOutlet private weak var removeFeedButton: NSButton!
   @IBOutlet private weak var torrentsSavePathWarningImageView: NSImageView!
   @IBOutlet private weak var automaticallyCheckForUpdatesCheckbox: NSButton!
+  @IBOutlet private weak var addFeedSheetController: AddFeedController!
   
   override func awakeFromNib() {
     // Bind automatically check for updates checkbox to sparkle
@@ -43,11 +45,16 @@ class PreferencesController: NSWindowController {
     )
     
     refresh()
+    refreshRemoveButton()
   }
   
   private func refresh() {
     torrentsSavePathWarningImageView.image = Defaults.shared.isTorrentsSavePathValid ? #imageLiteral(resourceName: "success") : #imageLiteral(resourceName: "warning")
     feedsTableView.reloadData()
+  }
+  
+  private func refreshRemoveButton() {
+    removeFeedButton.isEnabled = !feedsTableView.selectedRowIndexes.isEmpty
   }
   
   deinit {
@@ -62,6 +69,18 @@ extension PreferencesController {
   @IBAction override func showWindow(_ sender: Any?) {
     NSApp.activate(ignoringOtherApps: true)
     super.showWindow(sender)
+  }
+  
+  @IBAction private func addFeed(_: Any?) {
+    guard let sheet = addFeedSheetController.window else { return }
+    
+    window?.beginSheet(sheet, completionHandler: nil)
+  }
+  
+  @IBAction private func removeFeed(_: Any?) {
+    guard let feedIndex = feedsTableView.selectedRowIndexes.first else { return }
+    
+    Defaults.shared.feedURLs.remove(at: feedIndex)
   }
   
   @IBAction private func savePreferences(_: Any?) {
@@ -120,5 +139,9 @@ extension PreferencesController: NSTableViewDelegate {
     cell.textField?.stringValue = feedURL.absoluteString
     
     return cell
+  }
+  
+  func tableViewSelectionDidChange(_ notification: Notification) {
+    refreshRemoveButton()
   }
 }
