@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
-        <plugIn identifier="com.apple.automator.AutomatorPalette" version="14313.18"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <plugIn identifier="com.apple.automator.AutomatorPalette" version="14460.31"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -33,7 +33,7 @@
             <connections>
                 <outlet property="automaticallyCheckForUpdatesCheckbox" destination="806" id="HZV-bf-GPz"/>
                 <outlet property="feedURLWarningImageView" destination="lIi-CM-MqY" id="Q3D-hE-heP"/>
-                <outlet property="torrentsSavePathWarningImageView" destination="fwJ-Gq-K1U" id="aXv-um-IZf"/>
+                <outlet property="torrentsSavePathWarningImageView" destination="bCX-qM-hVo" id="uvk-T2-fc2"/>
                 <outlet property="window" destination="552" id="Y5a-sh-KWH"/>
             </connections>
         </customObject>
@@ -128,12 +128,12 @@
         <window title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="552" userLabel="Preferences">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <rect key="contentRect" x="310" y="248" width="700" height="317"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
             <view key="contentView" id="553">
                 <rect key="frame" x="0.0" y="0.0" width="700" height="317"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="616">
+                    <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="616" userLabel="(Feed, Downloads, Tweaks)">
                         <rect key="frame" x="20" y="61" width="660" height="236"/>
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
@@ -248,87 +248,82 @@
                                                 <constraint firstItem="636" firstAttribute="leading" secondItem="637" secondAttribute="trailing" constant="8" symbolic="YES" id="zLq-sd-RCu"/>
                                             </constraints>
                                         </box>
-                                        <box autoresizesSubviews="NO" borderType="line" title="Torrent Files" translatesAutoresizingMaskIntoConstraints="NO" id="622">
-                                            <rect key="frame" x="-3" y="-4" width="666" height="123"/>
-                                            <view key="contentView" id="i02-Cg-gRD">
-                                                <rect key="frame" x="3" y="3" width="660" height="105"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                <subviews>
-                                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="625">
-                                                        <rect key="frame" x="13" y="72" width="53" height="17"/>
-                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Save to:" id="632">
-                                                            <font key="font" metaFont="system"/>
-                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                        </textFieldCell>
-                                                    </textField>
-                                                    <amPathPopUpButton verticalHuggingPriority="750" canChooseDirectories="YES" canChooseExistingPaths="YES" placeholder="No Selection" translatesAutoresizingMaskIntoConstraints="NO" id="791">
-                                                        <rect key="frame" x="70" y="67" width="205" height="25"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="lfS-iv-ge7"/>
-                                                        </constraints>
-                                                        <amVariablePopUpButtonCell key="cell" type="push" title="Desktop" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" tag="1004" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="794">
-                                                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                            <font key="font" metaFont="menu"/>
-                                                            <menu key="menu" title="OtherViews" id="795"/>
-                                                        </amVariablePopUpButtonCell>
-                                                        <connections>
-                                                            <binding destination="658" name="path" keyPath="values.savePath" id="793"/>
-                                                        </connections>
-                                                    </amPathPopUpButton>
-                                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="624">
-                                                        <rect key="frame" x="13" y="34" width="227" height="18"/>
-                                                        <buttonCell key="cell" type="check" title="Organize in folders by show name" bezelStyle="regularSquare" imagePosition="left" alignment="left" lineBreakMode="truncatingTail" state="on" inset="2" id="633">
-                                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                            <font key="font" metaFont="system"/>
-                                                        </buttonCell>
-                                                        <connections>
-                                                            <binding destination="658" name="value" keyPath="values.organizeTorrents" id="670"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="623">
-                                                        <rect key="frame" x="13" y="14" width="139" height="18"/>
-                                                        <buttonCell key="cell" type="check" title="Open automatically" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="634">
-                                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                            <font key="font" metaFont="system"/>
-                                                        </buttonCell>
-                                                        <connections>
-                                                            <binding destination="658" name="value" keyPath="values.openAutomatically" id="799"/>
-                                                        </connections>
-                                                    </button>
-                                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fwJ-Gq-K1U">
-                                                        <rect key="frame" x="287" y="72" width="18" height="18"/>
-                                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="warning" id="QCG-2j-VVy"/>
-                                                    </imageView>
-                                                </subviews>
-                                            </view>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="624" secondAttribute="trailing" constant="15" id="1GG-EY-Z1W"/>
-                                                <constraint firstItem="623" firstAttribute="leading" secondItem="624" secondAttribute="leading" id="5uF-v9-tnU"/>
-                                                <constraint firstItem="625" firstAttribute="baseline" secondItem="791" secondAttribute="baseline" id="G6U-8s-L9T"/>
-                                                <constraint firstAttribute="bottom" secondItem="623" secondAttribute="bottom" constant="15" id="MGf-4Q-vnz"/>
-                                                <constraint firstItem="624" firstAttribute="top" secondItem="791" secondAttribute="bottom" constant="20" id="OGQ-gC-ioe"/>
-                                                <constraint firstItem="625" firstAttribute="leading" secondItem="624" secondAttribute="leading" id="X5C-HD-i3q"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="623" secondAttribute="trailing" constant="15" id="c5c-wq-wWt"/>
-                                                <constraint firstItem="791" firstAttribute="top" secondItem="622" secondAttribute="top" constant="29" id="i1q-wO-PrP"/>
-                                                <constraint firstItem="fwJ-Gq-K1U" firstAttribute="leading" secondItem="791" secondAttribute="trailing" constant="15" id="iIc-xd-qXN"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fwJ-Gq-K1U" secondAttribute="trailing" constant="15" id="kxl-JD-s9h"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="791" secondAttribute="trailing" constant="15" id="lUa-kR-xIL"/>
-                                                <constraint firstItem="625" firstAttribute="leading" secondItem="622" secondAttribute="leading" constant="15" id="mF8-Y1-hxm"/>
-                                                <constraint firstItem="623" firstAttribute="top" secondItem="624" secondAttribute="bottom" constant="6" symbolic="YES" id="orv-Bx-XxH"/>
-                                                <constraint firstItem="791" firstAttribute="centerY" secondItem="fwJ-Gq-K1U" secondAttribute="centerY" id="wzR-Ub-ddT"/>
-                                                <constraint firstItem="791" firstAttribute="leading" secondItem="625" secondAttribute="trailing" constant="8" symbolic="YES" id="xzk-UC-HsG"/>
-                                            </constraints>
-                                        </box>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="622" firstAttribute="leading" secondItem="621" secondAttribute="leading" id="836-Hu-oE8"/>
-                                        <constraint firstItem="622" firstAttribute="top" secondItem="621" secondAttribute="bottom" constant="8" symbolic="YES" id="EEk-Xb-JAW"/>
                                         <constraint firstItem="621" firstAttribute="leading" secondItem="620" secondAttribute="leading" id="H0a-WB-OR2"/>
+                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="621" secondAttribute="bottom" id="JaL-yk-ibm"/>
                                         <constraint firstItem="621" firstAttribute="top" secondItem="620" secondAttribute="top" id="ST2-l3-ezT"/>
                                         <constraint firstAttribute="trailing" secondItem="621" secondAttribute="trailing" id="hhA-Ld-n2G"/>
-                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="622" secondAttribute="bottom" id="onv-Fe-lIn"/>
-                                        <constraint firstItem="621" firstAttribute="trailing" secondItem="622" secondAttribute="trailing" id="yGF-Mj-xrK"/>
+                                    </constraints>
+                                </view>
+                            </tabViewItem>
+                            <tabViewItem label="Downloads" identifier="Downloads" id="IP2-E9-LPh" userLabel="Downloads">
+                                <view key="view" id="jSL-Ww-UCe">
+                                    <rect key="frame" x="0.0" y="0.0" width="660" height="236"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5qh-sS-yih">
+                                            <rect key="frame" x="-2" y="217" width="53" height="17"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Save to:" id="Wcg-0x-5t9">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <amPathPopUpButton verticalHuggingPriority="750" canChooseDirectories="YES" canChooseExistingPaths="YES" placeholder="No Selection" translatesAutoresizingMaskIntoConstraints="NO" id="BuR-R5-3eB">
+                                            <rect key="frame" x="55" y="212" width="205" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="tAZ-lT-ow2"/>
+                                            </constraints>
+                                            <amVariablePopUpButtonCell key="cell" type="push" title="Other…" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" tag="1002" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="ko6-Tq-Huf">
+                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="menu"/>
+                                                <menu key="menu" title="OtherViews" id="uo2-wc-95k"/>
+                                            </amVariablePopUpButtonCell>
+                                            <connections>
+                                                <binding destination="658" name="path" keyPath="values.savePath" id="01t-vl-t65"/>
+                                            </connections>
+                                        </amPathPopUpButton>
+                                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bCX-qM-hVo">
+                                            <rect key="frame" x="265" y="217" width="18" height="18"/>
+                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="warning" id="bVV-Mi-MaK"/>
+                                        </imageView>
+                                        <button translatesAutoresizingMaskIntoConstraints="NO" id="bJl-7q-4yr">
+                                            <rect key="frame" x="-2" y="179" width="227" height="18"/>
+                                            <buttonCell key="cell" type="check" title="Organize in folders by show name" bezelStyle="regularSquare" imagePosition="left" alignment="left" lineBreakMode="truncatingTail" state="on" inset="2" id="Ufr-oQ-Cdo">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <binding destination="658" name="value" keyPath="values.organizeTorrents" id="Xmz-Kt-DbG"/>
+                                            </connections>
+                                        </button>
+                                        <button translatesAutoresizingMaskIntoConstraints="NO" id="shg-7R-wuU">
+                                            <rect key="frame" x="-2" y="159" width="139" height="18"/>
+                                            <buttonCell key="cell" type="check" title="Open automatically" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="JvD-eu-IrP">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <binding destination="658" name="value" keyPath="values.openAutomatically" id="QTN-lW-v2i"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="bJl-7q-4yr" firstAttribute="top" secondItem="BuR-R5-3eB" secondAttribute="bottom" constant="20" id="8nv-jd-JdB"/>
+                                        <constraint firstItem="bCX-qM-hVo" firstAttribute="centerY" secondItem="BuR-R5-3eB" secondAttribute="centerY" id="EAi-jH-9py"/>
+                                        <constraint firstItem="BuR-R5-3eB" firstAttribute="leading" secondItem="5qh-sS-yih" secondAttribute="trailing" constant="8" symbolic="YES" id="Ksy-eJ-Slb"/>
+                                        <constraint firstItem="BuR-R5-3eB" firstAttribute="top" secondItem="jSL-Ww-UCe" secondAttribute="top" id="Ro0-fP-NsM"/>
+                                        <constraint firstItem="shg-7R-wuU" firstAttribute="leading" secondItem="jSL-Ww-UCe" secondAttribute="leading" id="SK6-8b-n0J"/>
+                                        <constraint firstItem="BuR-R5-3eB" firstAttribute="baseline" secondItem="5qh-sS-yih" secondAttribute="baseline" id="SON-A9-K6f"/>
+                                        <constraint firstItem="shg-7R-wuU" firstAttribute="top" secondItem="bJl-7q-4yr" secondAttribute="bottom" constant="6" symbolic="YES" id="UkI-Eo-QqB"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="bCX-qM-hVo" secondAttribute="trailing" constant="20" symbolic="YES" id="Uvl-X2-AMo"/>
+                                        <constraint firstItem="5qh-sS-yih" firstAttribute="leading" secondItem="jSL-Ww-UCe" secondAttribute="leading" id="adb-0J-T5W"/>
+                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="shg-7R-wuU" secondAttribute="bottom" id="f3E-JI-YrR"/>
+                                        <constraint firstItem="bJl-7q-4yr" firstAttribute="leading" secondItem="jSL-Ww-UCe" secondAttribute="leading" id="fJP-2l-CRX"/>
+                                        <constraint firstItem="bCX-qM-hVo" firstAttribute="leading" secondItem="BuR-R5-3eB" secondAttribute="trailing" constant="8" symbolic="YES" id="ftL-aK-5zY"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="bJl-7q-4yr" secondAttribute="trailing" id="hGd-6v-Fx3"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="shg-7R-wuU" secondAttribute="trailing" id="vHw-4q-XQx"/>
                                     </constraints>
                                 </view>
                             </tabViewItem>
@@ -338,7 +333,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="980">
-                                            <rect key="frame" x="6" y="212" width="103" height="18"/>
+                                            <rect key="frame" x="-2" y="220" width="103" height="18"/>
                                             <buttonCell key="cell" type="check" title="Open at login" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="981">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -348,7 +343,7 @@
                                             </connections>
                                         </button>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="AN1-pr-EUN">
-                                            <rect key="frame" x="6" y="192" width="228" height="18"/>
+                                            <rect key="frame" x="-2" y="200" width="228" height="18"/>
                                             <buttonCell key="cell" type="check" title="Prevent system sleep when active" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="kuL-eb-cd0">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -358,7 +353,7 @@
                                             </connections>
                                         </button>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="806">
-                                            <rect key="frame" x="6" y="172" width="217" height="18"/>
+                                            <rect key="frame" x="-2" y="180" width="217" height="18"/>
                                             <buttonCell key="cell" type="check" title="Automatically check for updates" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="807">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -366,16 +361,16 @@
                                         </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="806" firstAttribute="leading" secondItem="619" secondAttribute="leading" constant="8" id="7Xn-iF-Bxd"/>
-                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="806" secondAttribute="bottom" constant="8" id="9ec-Za-Ud0"/>
-                                        <constraint firstItem="980" firstAttribute="top" secondItem="619" secondAttribute="top" constant="8" id="Crc-NF-5Jv"/>
-                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="806" secondAttribute="trailing" constant="8" id="VeJ-IQ-3XS"/>
-                                        <constraint firstItem="980" firstAttribute="leading" secondItem="619" secondAttribute="leading" constant="8" id="Z6r-wV-hzs"/>
+                                        <constraint firstItem="806" firstAttribute="leading" secondItem="619" secondAttribute="leading" id="7Xn-iF-Bxd"/>
+                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="806" secondAttribute="bottom" id="9ec-Za-Ud0"/>
+                                        <constraint firstItem="980" firstAttribute="top" secondItem="619" secondAttribute="top" id="Crc-NF-5Jv"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="806" secondAttribute="trailing" id="VeJ-IQ-3XS"/>
+                                        <constraint firstItem="980" firstAttribute="leading" secondItem="619" secondAttribute="leading" id="Z6r-wV-hzs"/>
                                         <constraint firstItem="806" firstAttribute="top" secondItem="AN1-pr-EUN" secondAttribute="bottom" constant="6" symbolic="YES" id="aTo-bk-WAm"/>
-                                        <constraint firstItem="AN1-pr-EUN" firstAttribute="leading" secondItem="619" secondAttribute="leading" constant="8" id="bnC-Av-6uz"/>
+                                        <constraint firstItem="AN1-pr-EUN" firstAttribute="leading" secondItem="619" secondAttribute="leading" id="bnC-Av-6uz"/>
                                         <constraint firstItem="AN1-pr-EUN" firstAttribute="top" secondItem="980" secondAttribute="bottom" constant="6" symbolic="YES" id="gRc-21-ji5"/>
-                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="AN1-pr-EUN" secondAttribute="trailing" constant="8" id="sor-xy-etC"/>
-                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="980" secondAttribute="trailing" constant="8" id="xrZ-65-g80"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="AN1-pr-EUN" secondAttribute="trailing" id="sor-xy-etC"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="980" secondAttribute="trailing" id="xrZ-65-g80"/>
                                     </constraints>
                                 </view>
                             </tabViewItem>
@@ -442,6 +437,13 @@ DQ
                             <action selector="showFeeds:" target="vyd-92-YXh" id="QSV-1w-pHR"/>
                         </connections>
                     </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="FD3CE538-2D6B-43FA-A777-ACC808E8F353" explicitItemIdentifier="Downloads" label="Downloads" paletteLabel="Downloads" tag="2" image="NSNetwork" selectable="YES" id="l44-oc-lDZ">
+                        <size key="minSize" width="32" height="32"/>
+                        <size key="maxSize" width="32" height="32"/>
+                        <connections>
+                            <action selector="showDownloads:" target="vyd-92-YXh" id="Qbs-Y1-cyl"/>
+                        </connections>
+                    </toolbarItem>
                     <toolbarItem implicitItemIdentifier="CEF5F33A-8114-4446-A5D4-507AAD29F880" explicitItemIdentifier="Tweaks" label="Tweaks" paletteLabel="Tweaks" tag="1" image="NSAdvanced" selectable="YES" id="613">
                         <size key="minSize" width="64" height="0.0"/>
                         <connections>
@@ -451,6 +453,7 @@ DQ
                 </allowedToolbarItems>
                 <defaultToolbarItems>
                     <toolbarItem reference="612"/>
+                    <toolbarItem reference="l44-oc-lDZ"/>
                     <toolbarItem reference="613"/>
                 </defaultToolbarItems>
             </toolbar>
@@ -460,7 +463,7 @@ DQ
         <window title="Recent Episodes" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="aQN-n7-TBr" userLabel="Recent Episodes" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="120" y="64" width="431" height="435"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
             <value key="minSize" type="size" width="200" height="300"/>
             <view key="contentView" id="gSi-VU-gYd">
                 <rect key="frame" x="0.0" y="0.0" width="431" height="435"/>
@@ -470,7 +473,7 @@ DQ
                         <rect key="frame" x="0.0" y="0.0" width="431" height="435"/>
                         <clipView key="contentView" drawsBackground="NO" id="KtZ-hY-aan">
                             <rect key="frame" x="0.0" y="0.0" width="431" height="435"/>
-                            <autoresizingMask key="autoresizingMask"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" alternatingRowBackgroundColors="YES" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="55" viewBased="YES" id="oof-vB-WHt">
                                     <rect key="frame" x="0.0" y="0.0" width="431" height="435"/>
@@ -582,7 +585,8 @@ DQ
         </window>
     </objects>
     <resources>
-        <image name="NSAdvanced" width="128" height="128"/>
+        <image name="NSAdvanced" width="32" height="32"/>
+        <image name="NSNetwork" width="32" height="32"/>
         <image name="NSRefreshFreestandingTemplate" width="14" height="14"/>
         <image name="rss" width="32" height="32"/>
         <image name="warning" width="18" height="18"/>
