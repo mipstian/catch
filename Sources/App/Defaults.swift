@@ -13,7 +13,7 @@ final class Defaults: NSObject {
   static let downloadHistoryChangedNotification = NSNotification.Name("Defaults.downloadHistoryChangedNotification")
   
   private struct Keys {
-    static let feedURL = "feedURL"
+    static let feedURLs = "feedURLs"
     static let onlyUpdateBetween = "onlyUpdateBetween"
     static let updateFrom = "updateFrom"
     static let updateTo = "updateTo"
@@ -26,9 +26,16 @@ final class Defaults: NSObject {
     static let preventSystemSleep = "preventSystemSleep"
   }
   
-  var feedURL: URL? {
-    guard let rawValue = UserDefaults.standard.string(forKey: Keys.feedURL) else { return nil }
-    return URL(string: rawValue.trimmingCharacters(in: .whitespacesAndNewlines))
+  var feedURLs: [URL] {
+    get {
+      let rawFeedURLs = UserDefaults.standard.array(forKey: Keys.feedURLs) as! [String]
+      return rawFeedURLs
+        .compactMap { return URL(string: $0) }
+        .filter { $0.isValidFeedURL }
+    }
+    set {
+      UserDefaults.standard.set(newValue.map { $0.absoluteString }, forKey: Keys.feedURLs)
+    }
   }
   
   var areTimeRestrictionsEnabled: Bool {
@@ -98,11 +105,11 @@ final class Defaults: NSObject {
   }
   
   var hasValidFeeds: Bool {
-    return feedURL?.isValidFeedURL ?? false
+    return feedURLs.count > 0
   }
   
   var hasShowRSSFeeds: Bool {
-    return feedURL?.isShowRSSFeed ?? false
+    return feedURLs.contains { $0.isShowRSSFeed }
   }
   
   var downloadOptions: DownloadOptions? {
@@ -148,7 +155,7 @@ final class Defaults: NSObject {
     
     // Set smart default defaults
     let defaultDefaults: [String:Any] = [
-      Keys.feedURL: "",
+      Keys.feedURLs: [],
       Keys.onlyUpdateBetween: false,
       Keys.updateFrom: defaultFromTime,
       Keys.updateTo: defaultToTime,
@@ -161,6 +168,15 @@ final class Defaults: NSObject {
       Keys.preventSystemSleep: true
     ]
     UserDefaults.standard.register(defaults: defaultDefaults)
+    
+    // Migrate from single-feed to multi-feed
+    if let legacyFeedURLString = UserDefaults.standard.string(forKey: "feedURL") {
+      NSLog("Migrating feed URLs defaults")
+      UserDefaults.standard.set(nil, forKey: "feedURL")
+      if let legacyFeedURL = URL(string: legacyFeedURLString) {
+        feedURLs.append(legacyFeedURL)
+      }
+    }
     
     // Observe changes for all keys
     NotificationCenter.default.addObserver(

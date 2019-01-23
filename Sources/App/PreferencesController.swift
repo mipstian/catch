@@ -6,10 +6,14 @@ private extension NSBindingName {
   static let checkboxValue = NSBindingName(rawValue: "value")
 }
 
+private extension NSUserInterfaceItemIdentifier {
+  static let feedCell = NSUserInterfaceItemIdentifier(rawValue: "FeedCell")
+}
+
 
 /// Manages the "Preferences" window.
 class PreferencesController: NSWindowController {
-  @IBOutlet private weak var feedURLWarningImageView: NSImageView!
+  @IBOutlet private weak var feedsTableView: NSTableView!
   @IBOutlet private weak var torrentsSavePathWarningImageView: NSImageView!
   @IBOutlet private weak var automaticallyCheckForUpdatesCheckbox: NSButton!
   
@@ -34,14 +38,16 @@ class PreferencesController: NSWindowController {
       object: Defaults.shared,
       queue: nil,
       using: { [weak self] notification in
-        self?.refreshInvalidInputMarkers()
+        self?.refresh()
       }
     )
+    
+    refresh()
   }
   
-  private func refreshInvalidInputMarkers() {
+  private func refresh() {
     torrentsSavePathWarningImageView.image = Defaults.shared.isTorrentsSavePathValid ? #imageLiteral(resourceName: "success") : #imageLiteral(resourceName: "warning")
-    feedURLWarningImageView.image = Defaults.shared.hasValidFeeds ? #imageLiteral(resourceName: "success") : #imageLiteral(resourceName: "error")
+    feedsTableView.reloadData()
   }
   
   deinit {
@@ -54,7 +60,6 @@ class PreferencesController: NSWindowController {
 // MARK: Actions
 extension PreferencesController {
   @IBAction override func showWindow(_ sender: Any?) {
-    refreshInvalidInputMarkers()
     NSApp.activate(ignoringOtherApps: true)
     super.showWindow(sender)
   }
@@ -92,5 +97,28 @@ extension PreferencesController {
   @IBAction private func showTweaks(_: Any?) {
     // Select the Tweaks tab
     window?.toolbar?.selectedItemIdentifier = .init(rawValue: "Tweaks")
+  }
+}
+
+
+extension PreferencesController: NSTableViewDataSource {
+  func numberOfRows(in tableView: NSTableView) -> Int {
+    return Defaults.shared.feedURLs.count
+  }
+}
+
+
+extension PreferencesController: NSTableViewDelegate {
+  func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+    // Get the item to display
+    let feedURL = Defaults.shared.feedURLs[row]
+    
+    guard let cell = tableView.makeView(withIdentifier: .feedCell, owner: self) as? NSTableCellView else {
+      return nil
+    }
+    
+    cell.textField?.stringValue = feedURL.absoluteString
+    
+    return cell
   }
 }

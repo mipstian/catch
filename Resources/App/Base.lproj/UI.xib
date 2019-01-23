@@ -32,7 +32,7 @@
         <customObject id="vyd-92-YXh" userLabel="Preferences Controller" customClass="PreferencesController" customModule="Catch" customModuleProvider="target">
             <connections>
                 <outlet property="automaticallyCheckForUpdatesCheckbox" destination="806" id="HZV-bf-GPz"/>
-                <outlet property="feedURLWarningImageView" destination="lIi-CM-MqY" id="Q3D-hE-heP"/>
+                <outlet property="feedsTableView" destination="RU6-h9-jS6" id="ef9-4C-7Td"/>
                 <outlet property="torrentsSavePathWarningImageView" destination="bCX-qM-hVo" id="uvk-T2-fc2"/>
                 <outlet property="window" destination="552" id="Y5a-sh-KWH"/>
             </connections>
@@ -142,118 +142,166 @@
                                     <rect key="frame" x="0.0" y="0.0" width="660" height="236"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <box autoresizesSubviews="NO" borderType="line" title="RSS Feed" translatesAutoresizingMaskIntoConstraints="NO" id="621">
-                                            <rect key="frame" x="-3" y="123" width="666" height="113"/>
-                                            <view key="contentView" id="bQf-OL-1yY">
-                                                <rect key="frame" x="3" y="3" width="660" height="95"/>
+                                        <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o0O-2K-GFb">
+                                            <rect key="frame" x="0.0" y="136" width="660" height="100"/>
+                                            <clipView key="contentView" id="LDJ-ov-g4E">
+                                                <rect key="frame" x="1" y="1" width="658" height="98"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="785">
-                                                        <rect key="frame" x="13" y="62" width="67" height="17"/>
-                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Feed URL:" id="786">
-                                                            <font key="font" metaFont="system"/>
-                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                        </textFieldCell>
-                                                    </textField>
-                                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="787">
-                                                        <rect key="frame" x="86" y="59" width="526" height="22"/>
-                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="https://showrss.info/..." drawsBackground="YES" id="788">
-                                                            <font key="font" metaFont="system"/>
-                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                        </textFieldCell>
+                                                    <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="RU6-h9-jS6">
+                                                        <rect key="frame" x="0.0" y="0.0" width="658" height="98"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <size key="intercellSpacing" width="3" height="2"/>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                                        <tableColumns>
+                                                            <tableColumn identifier="FeedCell" width="655" minWidth="40" maxWidth="1000" id="ftk-Uy-kT0">
+                                                                <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
+                                                                    <font key="font" metaFont="smallSystem"/>
+                                                                    <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                                    <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                                </tableHeaderCell>
+                                                                <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="h19-c7-EZX">
+                                                                    <font key="font" metaFont="system"/>
+                                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                </textFieldCell>
+                                                                <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                                <prototypeCellViews>
+                                                                    <tableCellView id="sPP-qC-xPY">
+                                                                        <rect key="frame" x="1" y="1" width="655" height="17"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <subviews>
+                                                                            <textField canDrawConcurrently="YES" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="BEZ-Z3-mzn">
+                                                                                <rect key="frame" x="-2" y="0.0" width="659" height="17"/>
+                                                                                <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="https://showrss.info/" id="Qc9-Xi-6cN">
+                                                                                    <font key="font" metaFont="system"/>
+                                                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                </textFieldCell>
+                                                                            </textField>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="trailing" secondItem="BEZ-Z3-mzn" secondAttribute="trailing" id="M9f-er-VXI"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="BEZ-Z3-mzn" secondAttribute="bottom" id="ZRZ-ZE-N6M"/>
+                                                                            <constraint firstItem="BEZ-Z3-mzn" firstAttribute="leading" secondItem="sPP-qC-xPY" secondAttribute="leading" id="rcu-vC-RsT"/>
+                                                                            <constraint firstItem="BEZ-Z3-mzn" firstAttribute="top" secondItem="sPP-qC-xPY" secondAttribute="top" id="tGE-9z-v3J"/>
+                                                                        </constraints>
+                                                                        <connections>
+                                                                            <outlet property="textField" destination="BEZ-Z3-mzn" id="vYh-JM-woO"/>
+                                                                        </connections>
+                                                                    </tableCellView>
+                                                                </prototypeCellViews>
+                                                            </tableColumn>
+                                                        </tableColumns>
                                                         <connections>
-                                                            <binding destination="658" name="value" keyPath="values.feedURL" id="798">
-                                                                <dictionary key="options">
-                                                                    <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                                                                </dictionary>
-                                                            </binding>
+                                                            <outlet property="dataSource" destination="vyd-92-YXh" id="g4D-2g-v4j"/>
+                                                            <outlet property="delegate" destination="vyd-92-YXh" id="ahp-B1-T1H"/>
                                                         </connections>
-                                                    </textField>
-                                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lIi-CM-MqY">
-                                                        <rect key="frame" x="627" y="61" width="18" height="18"/>
-                                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="warning" id="Rda-Ff-O9x"/>
-                                                    </imageView>
-                                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="638">
-                                                        <rect key="frame" x="13" y="19" width="176" height="18"/>
-                                                        <buttonCell key="cell" type="check" title="Only check feed between" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="645">
-                                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                            <font key="font" metaFont="system"/>
-                                                        </buttonCell>
-                                                        <connections>
-                                                            <binding destination="658" name="value" keyPath="values.onlyUpdateBetween" id="665"/>
-                                                        </connections>
-                                                    </button>
-                                                    <datePicker verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="637">
-                                                        <rect key="frame" x="195" y="16" width="85" height="27"/>
-                                                        <datePickerCell key="cell" borderStyle="bezel" alignment="left" id="646">
-                                                            <font key="font" metaFont="system"/>
-                                                            <date key="date" timeIntervalSinceReferenceDate="-595911600">
-                                                                <!--1982-02-12 21:00:00 +0000-->
-                                                            </date>
-                                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                            <datePickerElements key="datePickerElements" hour="YES" minute="YES"/>
-                                                        </datePickerCell>
-                                                        <connections>
-                                                            <binding destination="658" name="enabled" keyPath="values.onlyUpdateBetween" id="678"/>
-                                                            <binding destination="658" name="value" keyPath="values.updateFrom" id="667"/>
-                                                        </connections>
-                                                    </datePicker>
-                                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="636">
-                                                        <rect key="frame" x="283" y="20" width="27" height="17"/>
-                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="and" id="647">
-                                                            <font key="font" metaFont="system"/>
-                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                        </textFieldCell>
-                                                    </textField>
-                                                    <datePicker verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="635">
-                                                        <rect key="frame" x="316" y="16" width="85" height="27"/>
-                                                        <datePickerCell key="cell" borderStyle="bezel" alignment="left" id="648">
-                                                            <font key="font" metaFont="system"/>
-                                                            <date key="date" timeIntervalSinceReferenceDate="-590868000">
-                                                                <!--1982-04-12 06:00:00 +0000-->
-                                                            </date>
-                                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                            <datePickerElements key="datePickerElements" hour="YES" minute="YES"/>
-                                                        </datePickerCell>
-                                                        <connections>
-                                                            <binding destination="658" name="enabled" keyPath="values.onlyUpdateBetween" id="680"/>
-                                                            <binding destination="658" name="value" keyPath="values.updateTo" id="668"/>
-                                                        </connections>
-                                                    </datePicker>
+                                                    </tableView>
                                                 </subviews>
-                                            </view>
+                                            </clipView>
                                             <constraints>
-                                                <constraint firstItem="785" firstAttribute="leading" secondItem="621" secondAttribute="leading" constant="15" id="02P-HT-IN9"/>
-                                                <constraint firstItem="787" firstAttribute="top" secondItem="621" secondAttribute="top" constant="29" id="1ia-y0-dee"/>
-                                                <constraint firstItem="635" firstAttribute="leading" secondItem="636" secondAttribute="trailing" constant="8" symbolic="YES" id="ErH-Kk-aEm"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="787" secondAttribute="trailing" constant="15" id="HEg-u0-IcG"/>
-                                                <constraint firstItem="637" firstAttribute="leading" secondItem="638" secondAttribute="trailing" constant="8" symbolic="YES" id="JCJ-xK-YZO"/>
-                                                <constraint firstItem="636" firstAttribute="baseline" secondItem="638" secondAttribute="baseline" id="MYd-11-rf0"/>
-                                                <constraint firstAttribute="bottom" secondItem="637" secondAttribute="bottom" constant="15" id="N42-0F-zMk"/>
-                                                <constraint firstItem="787" firstAttribute="leading" secondItem="785" secondAttribute="trailing" constant="8" symbolic="YES" id="SjL-MW-5gT"/>
-                                                <constraint firstItem="787" firstAttribute="centerY" secondItem="lIi-CM-MqY" secondAttribute="centerY" id="Yd1-sy-QrJ"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="635" secondAttribute="trailing" constant="15" id="ZkY-Y0-g0e"/>
-                                                <constraint firstItem="785" firstAttribute="leading" secondItem="638" secondAttribute="leading" id="aQH-je-kzb"/>
-                                                <constraint firstItem="637" firstAttribute="centerY" secondItem="638" secondAttribute="centerY" id="cIp-Iq-WsO"/>
-                                                <constraint firstItem="lIi-CM-MqY" firstAttribute="leading" secondItem="787" secondAttribute="trailing" constant="15" id="nOg-Bp-kbL"/>
-                                                <constraint firstItem="637" firstAttribute="top" secondItem="787" secondAttribute="bottom" constant="20" id="s7w-t0-jVV"/>
-                                                <constraint firstAttribute="trailing" secondItem="lIi-CM-MqY" secondAttribute="trailing" constant="15" id="vKZ-RZ-7FE"/>
-                                                <constraint firstItem="785" firstAttribute="centerY" secondItem="787" secondAttribute="centerY" id="w2z-db-XGP"/>
-                                                <constraint firstItem="637" firstAttribute="centerY" secondItem="635" secondAttribute="centerY" id="xwP-sP-YfY"/>
-                                                <constraint firstItem="636" firstAttribute="leading" secondItem="637" secondAttribute="trailing" constant="8" symbolic="YES" id="zLq-sd-RCu"/>
+                                                <constraint firstAttribute="height" constant="100" id="0fL-Pu-sHT"/>
                                             </constraints>
-                                        </box>
+                                            <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="lMf-AW-hb3">
+                                                <rect key="frame" x="1" y="83" width="658" height="16"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </scroller>
+                                            <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="yH2-hT-FyH">
+                                                <rect key="frame" x="224" y="17" width="15" height="102"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </scroller>
+                                        </scrollView>
+                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WcX-Bq-UrM" userLabel="Add Feed">
+                                            <rect key="frame" x="0.0" y="108" width="19" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="WcX-Bq-UrM" secondAttribute="height" multiplier="1:1" id="U0y-Dk-6BG"/>
+                                            </constraints>
+                                            <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="PIo-UJ-qSA">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                        </button>
+                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AnU-XT-Qai" userLabel="Remove Feed">
+                                            <rect key="frame" x="19" y="108" width="19" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="AnU-XT-Qai" secondAttribute="height" multiplier="1:1" id="Nh0-qo-jCD"/>
+                                            </constraints>
+                                            <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="76S-g0-aOO">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                        </button>
+                                        <button translatesAutoresizingMaskIntoConstraints="NO" id="638">
+                                            <rect key="frame" x="-2" y="68" width="176" height="18"/>
+                                            <buttonCell key="cell" type="check" title="Only check feed between" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="645">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <binding destination="658" name="value" keyPath="values.onlyUpdateBetween" id="665"/>
+                                            </connections>
+                                        </button>
+                                        <datePicker verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="637">
+                                            <rect key="frame" x="180" y="66" width="85" height="27"/>
+                                            <datePickerCell key="cell" borderStyle="bezel" alignment="left" id="646">
+                                                <font key="font" metaFont="system"/>
+                                                <date key="date" timeIntervalSinceReferenceDate="-595911600">
+                                                    <!--1982-02-12 21:00:00 +0000-->
+                                                </date>
+                                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <datePickerElements key="datePickerElements" hour="YES" minute="YES"/>
+                                            </datePickerCell>
+                                            <connections>
+                                                <binding destination="658" name="enabled" keyPath="values.onlyUpdateBetween" id="678"/>
+                                                <binding destination="658" name="value" keyPath="values.updateFrom" id="667"/>
+                                            </connections>
+                                        </datePicker>
+                                        <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="636">
+                                            <rect key="frame" x="268" y="69" width="27" height="17"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="and" id="647">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <datePicker verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="635">
+                                            <rect key="frame" x="301" y="66" width="85" height="27"/>
+                                            <datePickerCell key="cell" borderStyle="bezel" alignment="left" id="648">
+                                                <font key="font" metaFont="system"/>
+                                                <date key="date" timeIntervalSinceReferenceDate="-590868000">
+                                                    <!--1982-04-12 06:00:00 +0000-->
+                                                </date>
+                                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <datePickerElements key="datePickerElements" hour="YES" minute="YES"/>
+                                            </datePickerCell>
+                                            <connections>
+                                                <binding destination="658" name="enabled" keyPath="values.onlyUpdateBetween" id="680"/>
+                                                <binding destination="658" name="value" keyPath="values.updateTo" id="668"/>
+                                            </connections>
+                                        </datePicker>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="621" firstAttribute="leading" secondItem="620" secondAttribute="leading" id="H0a-WB-OR2"/>
-                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="621" secondAttribute="bottom" id="JaL-yk-ibm"/>
-                                        <constraint firstItem="621" firstAttribute="top" secondItem="620" secondAttribute="top" id="ST2-l3-ezT"/>
-                                        <constraint firstAttribute="trailing" secondItem="621" secondAttribute="trailing" id="hhA-Ld-n2G"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="635" secondAttribute="trailing" id="9ny-pr-zwL"/>
+                                        <constraint firstItem="o0O-2K-GFb" firstAttribute="top" secondItem="620" secondAttribute="top" id="AYS-r4-uhM"/>
+                                        <constraint firstItem="WcX-Bq-UrM" firstAttribute="top" secondItem="o0O-2K-GFb" secondAttribute="bottom" constant="8" symbolic="YES" id="Aza-0j-bGQ"/>
+                                        <constraint firstItem="635" firstAttribute="leading" secondItem="636" secondAttribute="trailing" constant="8" symbolic="YES" id="Csm-zL-3xS"/>
+                                        <constraint firstAttribute="trailing" secondItem="o0O-2K-GFb" secondAttribute="trailing" id="HSp-pI-yuF"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="AnU-XT-Qai" secondAttribute="trailing" id="IJk-vu-vUy"/>
+                                        <constraint firstItem="637" firstAttribute="firstBaseline" secondItem="638" secondAttribute="baseline" id="LGT-q8-sCJ"/>
+                                        <constraint firstItem="636" firstAttribute="leading" secondItem="637" secondAttribute="trailing" constant="8" symbolic="YES" id="RJw-iA-uhj"/>
+                                        <constraint firstItem="635" firstAttribute="centerY" secondItem="637" secondAttribute="centerY" id="ZVZ-xC-o1W"/>
+                                        <constraint firstItem="638" firstAttribute="leading" secondItem="620" secondAttribute="leading" id="cdP-WW-Z1b"/>
+                                        <constraint firstItem="o0O-2K-GFb" firstAttribute="leading" secondItem="620" secondAttribute="leading" id="dYC-8a-P9m"/>
+                                        <constraint firstItem="637" firstAttribute="top" secondItem="WcX-Bq-UrM" secondAttribute="bottom" constant="20" id="gOw-ye-eUK"/>
+                                        <constraint firstItem="AnU-XT-Qai" firstAttribute="leading" secondItem="WcX-Bq-UrM" secondAttribute="trailing" id="mZn-uG-yWn"/>
+                                        <constraint firstItem="WcX-Bq-UrM" firstAttribute="leading" secondItem="620" secondAttribute="leading" id="vfE-IW-P3c"/>
+                                        <constraint firstItem="637" firstAttribute="firstBaseline" secondItem="636" secondAttribute="baseline" id="wD7-C8-sbd"/>
+                                        <constraint firstItem="AnU-XT-Qai" firstAttribute="centerY" secondItem="WcX-Bq-UrM" secondAttribute="centerY" id="wsv-Aa-3ML"/>
+                                        <constraint firstItem="637" firstAttribute="leading" secondItem="638" secondAttribute="trailing" constant="8" symbolic="YES" id="xVy-Ce-rxW"/>
                                     </constraints>
                                 </view>
                             </tabViewItem>
@@ -585,9 +633,11 @@ DQ
         </window>
     </objects>
     <resources>
+        <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NSAdvanced" width="32" height="32"/>
         <image name="NSNetwork" width="32" height="32"/>
         <image name="NSRefreshFreestandingTemplate" width="14" height="14"/>
+        <image name="NSRemoveTemplate" width="11" height="11"/>
         <image name="rss" width="32" height="32"/>
         <image name="warning" width="18" height="18"/>
     </resources>
