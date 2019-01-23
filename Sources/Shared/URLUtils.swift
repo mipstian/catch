@@ -11,6 +11,10 @@ extension URL {
     return query.contains("namespaces=true")
   }
   
+  var isMagnetLink: Bool {
+    return scheme == "magnet"
+  }
+  
   var isValidFeedURL: Bool {
     guard
       let scheme = scheme,

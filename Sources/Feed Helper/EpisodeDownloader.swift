@@ -9,8 +9,7 @@ struct EpisodeDownloader {
   let downloadOptions: DownloadOptions
   
   func download(episode: Episode) throws -> DownloadedEpisode {
-    // Return/save magnet or download torrent
-    if episode.isMagnetized {
+    if episode.url.isMagnetLink {
       if downloadOptions.shouldSaveMagnetLinks {
         // Save the magnet link to a file
         do {
@@ -23,7 +22,7 @@ struct EpisodeDownloader {
       
       // Return the magnet link, if needed the main app will open it on the fly
       return DownloadedEpisode(episode: episode, localURL: nil)
-    } else {
+    } else if episode.url.absoluteString.isTorrentFilePath {
       let downloadedTorrentFile: URL
       do {
         downloadedTorrentFile = try downloadTorrentFile(for: episode)
@@ -33,12 +32,15 @@ struct EpisodeDownloader {
       }
       
       return DownloadedEpisode(episode: episode, localURL: downloadedTorrentFile)
+    } else {
+      // Nothing to do here
+      return DownloadedEpisode(episode: episode, localURL: nil)
     }
   }
   
   /// Create a .webloc file that can be double-clicked to open the magnet link
   private func saveMagnetLink(for episode: Episode) throws -> URL {
-    precondition(episode.isMagnetized)
+    precondition(episode.url.isMagnetLink)
     
     let data: Data
     do {
@@ -69,7 +71,7 @@ struct EpisodeDownloader {
   }
   
   private func downloadTorrentFile(for episode: Episode) throws -> URL {
-    precondition(!episode.isMagnetized)
+    precondition(episode.url.absoluteString.isTorrentFilePath)
     
     NSLog("Downloading torrent file")
     

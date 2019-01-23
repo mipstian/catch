@@ -121,12 +121,14 @@ final class FeedChecker {
       
       // Open torrents automatically if requested
       if Defaults.shared.shouldOpenTorrentsAutomatically {
-        if episode.isMagnetized {
+        if episode.url.isMagnetLink {
           // Open magnet link
           Browser.openInBackground(url: episode.url)
-        } else {
+        } else if episode.url.absoluteString.isTorrentFilePath {
           // Open torrent file
           Browser.openInBackground(file: downloadedEpisode.localURL!.path)
+        } else {
+          // TODO: download from the generic URL
         }
       }
       
