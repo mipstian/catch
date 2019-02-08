@@ -7,7 +7,8 @@ private extension NSBindingName {
 }
 
 private extension NSUserInterfaceItemIdentifier {
-  static let feedCell = NSUserInterfaceItemIdentifier(rawValue: "FeedCell")
+  static let feedNameColumn = NSUserInterfaceItemIdentifier(rawValue: "FeedNameColumn")
+  static let feedURLColumn = NSUserInterfaceItemIdentifier(rawValue: "FeedURLColumn")
 }
 
 
@@ -19,7 +20,16 @@ class PreferencesController: NSWindowController {
   @IBOutlet private weak var automaticallyCheckForUpdatesCheckbox: NSButton!
   @IBOutlet private weak var addFeedSheetController: AddFeedController!
   
+  // Remember if awakeFromNib has been called
+  private var awake: Bool = false
+  
   override func awakeFromNib() {
+    super.awakeFromNib()
+    
+    // See RecentsController.swift
+    guard !awake else { return }
+    awake = true
+    
     // Bind automatically check for updates checkbox to sparkle
     #if !DEBUG
       automaticallyCheckForUpdatesCheckbox.bind(
@@ -45,12 +55,13 @@ class PreferencesController: NSWindowController {
     )
     
     refresh()
-    refreshRemoveButton()
   }
   
   private func refresh() {
     torrentsSavePathWarningImageView.image = Defaults.shared.isTorrentsSavePathValid ? #imageLiteral(resourceName: "success") : #imageLiteral(resourceName: "warning")
     feedsTableView.reloadData()
+    
+    refreshRemoveButton()
   }
   
   private func refreshRemoveButton() {
@@ -75,10 +86,10 @@ extension PreferencesController {
     window?.beginSheet(addFeedSheetController.window!, completionHandler: nil)
   }
   
-  @IBAction private func removeFeed(_: Any?) {
-    guard let feedIndex = feedsTableView.selectedRowIndexes.first else { return }
-    
-    Defaults.shared.feedURLs.remove(at: feedIndex)
+  @IBAction private func removeSelectedFeeds(_: Any?) {
+    for feedIndex in feedsTableView.selectedRowIndexes.reversed() {
+      Defaults.shared.feeds.remove(at: feedIndex)
+    }
   }
   
   @IBAction private func savePreferences(_: Any?) {
@@ -120,7 +131,7 @@ extension PreferencesController {
 
 extension PreferencesController: NSTableViewDataSource {
   func numberOfRows(in tableView: NSTableView) -> Int {
-    return Defaults.shared.feedURLs.count
+    return Defaults.shared.feeds.count
   }
 }
 
@@ -128,15 +139,23 @@ extension PreferencesController: NSTableViewDataSource {
 extension PreferencesController: NSTableViewDelegate {
   func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
     // Get the item to display
-    let feedURL = Defaults.shared.feedURLs[row]
+    let feed = Defaults.shared.feeds[row]
     
-    guard let cell = tableView.makeView(withIdentifier: .feedCell, owner: self) as? NSTableCellView else {
+    if tableColumn?.identifier == .feedNameColumn {
+      guard let cell = tableView.makeView(withIdentifier: .feedNameColumn, owner: self) as? NSTableCellView else {
+        return nil
+      }
+      cell.textField?.stringValue = feed.name
+      return cell
+    } else if tableColumn?.identifier == .feedURLColumn {
+      guard let cell = tableView.makeView(withIdentifier: .feedURLColumn, owner: self) as? NSTableCellView else {
+        return nil
+      }
+      cell.textField?.stringValue = feed.url.absoluteString
+      return cell
+    } else {
       return nil
     }
-    
-    cell.textField?.stringValue = feedURL.absoluteString
-    
-    return cell
   }
   
   func tableViewSelectionDidChange(_ notification: Notification) {
