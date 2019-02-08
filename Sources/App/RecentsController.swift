@@ -10,6 +10,8 @@ private extension NSUserInterfaceItemIdentifier {
 class RecentsController: NSWindowController {
   @IBOutlet private weak var table: NSTableView!
   
+  private let contextMenu = NSMenu(title: "")
+  
   private let downloadDateFormatter = DateFormatter()
   private let feedHelperProxy = FeedHelperProxy()
   
@@ -49,6 +51,16 @@ class RecentsController: NSWindowController {
         self?.reloadHistory()
       }
     )
+    
+    let copyURLItem = NSMenuItem(
+      title: "Copy Link",
+      action: #selector(copyURL),
+      keyEquivalent: ""
+    )
+    copyURLItem.target = self
+    contextMenu.addItem(copyURLItem)
+    
+    table.menu = contextMenu
     
     reloadHistory()
   }
@@ -131,6 +143,20 @@ extension RecentsController {
     } else {
       // TODO
       NSLog("Catch doesn't know how to redownload: \(recentEpisode.url)")
+    }
+  }
+  
+  @IBAction func copyURL(_ sender: Any?) {
+    let clickedRow = table.clickedRow
+    
+    guard clickedRow != -1 else { return }
+    
+    let recentEpisode = Defaults.shared.downloadHistory[clickedRow].episode
+    NSPasteboard.general.clearContents()
+    if #available(OSX 10.13, *) {
+      NSPasteboard.general.setString(recentEpisode.url.absoluteString, forType: .URL)
+    } else {
+      NSPasteboard.general.setString(recentEpisode.url.absoluteString, forType: .string)
     }
   }
 }
