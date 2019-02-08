@@ -141,20 +141,20 @@
             <rect key="contentRect" x="310" y="248" width="700" height="317"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
             <view key="contentView" id="553">
-                <rect key="frame" x="0.0" y="0.0" width="700" height="321"/>
+                <rect key="frame" x="0.0" y="0.0" width="700" height="362"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="616" userLabel="(Feed, Downloads, Tweaks)">
-                        <rect key="frame" x="20" y="61" width="660" height="240"/>
+                        <rect key="frame" x="20" y="61" width="660" height="281"/>
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
                             <tabViewItem label="Feed" identifier="Feed" id="617">
                                 <view key="view" id="620">
-                                    <rect key="frame" x="0.0" y="0.0" width="660" height="240"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="660" height="281"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o0O-2K-GFb">
-                                            <rect key="frame" x="0.0" y="90" width="660" height="150"/>
+                                            <rect key="frame" x="0.0" y="131" width="660" height="150"/>
                                             <clipView key="contentView" id="LDJ-ov-g4E">
                                                 <rect key="frame" x="1" y="0.0" width="658" height="149"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -267,7 +267,7 @@
                                             </tableHeaderView>
                                         </scrollView>
                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WcX-Bq-UrM" userLabel="Add Feed">
-                                            <rect key="frame" x="0.0" y="62" width="19" height="21"/>
+                                            <rect key="frame" x="0.0" y="103" width="19" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="WcX-Bq-UrM" secondAttribute="height" multiplier="1:1" id="U0y-Dk-6BG"/>
                                             </constraints>
@@ -280,7 +280,7 @@
                                             </connections>
                                         </button>
                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AnU-XT-Qai" userLabel="Remove Feed">
-                                            <rect key="frame" x="19" y="62" width="19" height="21"/>
+                                            <rect key="frame" x="19" y="103" width="19" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="AnU-XT-Qai" secondAttribute="height" multiplier="1:1" id="Nh0-qo-jCD"/>
                                             </constraints>
@@ -290,6 +290,16 @@
                                             </buttonCell>
                                             <connections>
                                                 <action selector="removeSelectedFeeds:" target="vyd-92-YXh" id="HS1-nU-hZC"/>
+                                            </connections>
+                                        </button>
+                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SIo-Vm-tN9">
+                                            <rect key="frame" x="-6" y="56" width="190" height="32"/>
+                                            <buttonCell key="cell" type="push" title="Import From OPML File…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6pY-YU-cuQ">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="importFromOPMLFile:" target="vyd-92-YXh" id="JrH-bO-49c"/>
                                             </connections>
                                         </button>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="638">
@@ -348,6 +358,7 @@
                                         <constraint firstItem="o0O-2K-GFb" firstAttribute="top" secondItem="620" secondAttribute="top" id="AYS-r4-uhM"/>
                                         <constraint firstItem="WcX-Bq-UrM" firstAttribute="top" secondItem="o0O-2K-GFb" secondAttribute="bottom" constant="8" symbolic="YES" id="Aza-0j-bGQ"/>
                                         <constraint firstItem="635" firstAttribute="leading" secondItem="636" secondAttribute="trailing" constant="8" symbolic="YES" id="Csm-zL-3xS"/>
+                                        <constraint firstItem="SIo-Vm-tN9" firstAttribute="bottom" secondItem="637" secondAttribute="top" constant="-20" id="GLH-Bf-DeS"/>
                                         <constraint firstAttribute="trailing" secondItem="o0O-2K-GFb" secondAttribute="trailing" id="HSp-pI-yuF"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="AnU-XT-Qai" secondAttribute="trailing" id="IJk-vu-vUy"/>
                                         <constraint firstItem="637" firstAttribute="firstBaseline" secondItem="638" secondAttribute="baseline" id="LGT-q8-sCJ"/>
@@ -356,8 +367,10 @@
                                         <constraint firstItem="635" firstAttribute="centerY" secondItem="637" secondAttribute="centerY" id="ZVZ-xC-o1W"/>
                                         <constraint firstItem="638" firstAttribute="leading" secondItem="620" secondAttribute="leading" id="cdP-WW-Z1b"/>
                                         <constraint firstItem="o0O-2K-GFb" firstAttribute="leading" secondItem="620" secondAttribute="leading" id="dYC-8a-P9m"/>
-                                        <constraint firstItem="637" firstAttribute="top" secondItem="WcX-Bq-UrM" secondAttribute="bottom" constant="20" id="gOw-ye-eUK"/>
+                                        <constraint firstItem="SIo-Vm-tN9" firstAttribute="top" secondItem="WcX-Bq-UrM" secondAttribute="bottom" constant="20" symbolic="YES" id="lM9-GO-QjY"/>
+                                        <constraint firstItem="SIo-Vm-tN9" firstAttribute="leading" secondItem="620" secondAttribute="leading" id="m6a-xW-3tl"/>
                                         <constraint firstItem="AnU-XT-Qai" firstAttribute="leading" secondItem="WcX-Bq-UrM" secondAttribute="trailing" id="mZn-uG-yWn"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="SIo-Vm-tN9" secondAttribute="trailing" id="ufc-9d-BZ1"/>
                                         <constraint firstItem="WcX-Bq-UrM" firstAttribute="leading" secondItem="620" secondAttribute="leading" id="vfE-IW-P3c"/>
                                         <constraint firstItem="637" firstAttribute="firstBaseline" secondItem="636" secondAttribute="baseline" id="wD7-C8-sbd"/>
                                         <constraint firstItem="AnU-XT-Qai" firstAttribute="centerY" secondItem="WcX-Bq-UrM" secondAttribute="centerY" id="wsv-Aa-3ML"/>
@@ -696,8 +709,8 @@ DQ
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="213" width="572" height="151"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
-            <view key="contentView" id="JVG-A7-ap0">
-                <rect key="frame" x="0.0" y="0.0" width="572" height="135"/>
+            <view key="contentView" misplaced="YES" id="JVG-A7-ap0">
+                <rect key="frame" x="0.0" y="0.0" width="572" height="151"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MSZ-yJ-ndF">
