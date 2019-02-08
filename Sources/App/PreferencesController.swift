@@ -101,14 +101,14 @@ extension PreferencesController {
     openPanel.canChooseFiles = true
     
     openPanel.beginSheetModal(for: window) { response in
-      if response == .OK, let url = openPanel.url {
-        do {
-          let data = try Data(contentsOf: url)
-          let feeds = try OPMLParser.parse(opml: data)
-          Defaults.shared.feeds += feeds
-        } catch {
-          NSLog("Couldn't parse OPML: \(error)")
-        }
+      guard response == .OK, let url = openPanel.url else { return }
+      
+      do {
+        let data = try Data(contentsOf: url)
+        let feeds = try OPMLParser.parse(opml: data)
+        Defaults.shared.feeds += feeds
+      } catch {
+        NSLog("Couldn't parse OPML: \(error)")
       }
     }
   }
