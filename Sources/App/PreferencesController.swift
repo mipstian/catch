@@ -105,8 +105,8 @@ extension PreferencesController {
       
       do {
         let data = try Data(contentsOf: url)
-        let feeds = try OPMLParser.parse(opml: data)
-        Defaults.shared.feeds += feeds
+        let parsedFeeds = try OPMLParser.parse(opml: data)
+        Defaults.shared.feeds += parsedFeeds
       } catch {
         NSLog("Couldn't parse OPML: \(error)")
       }

@@ -32,7 +32,7 @@ final class Defaults: NSObject {
       return rawFeeds.compactMap { return Feed(dictionary: $0) }
     }
     set {
-      UserDefaults.standard.set(newValue.map { $0.dictionaryRepresentation }, forKey: Keys.feeds)
+      UserDefaults.standard.set(newValue.removingDuplicates().map { $0.dictionaryRepresentation }, forKey: Keys.feeds)
     }
   }
   
@@ -216,5 +216,13 @@ private extension HistoryItem {
       showName: defaultsDictionary["showName"] as? String
     )
     self.downloadDate = defaultsDictionary["date"] as? Date
+  }
+}
+
+
+extension Collection where Element: Hashable {
+  func removingDuplicates() -> [Element] {
+    var set = Set<Element>()
+    return compactMap { set.insert($0).inserted ? $0 : nil }
   }
 }
