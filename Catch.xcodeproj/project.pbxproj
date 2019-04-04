@@ -12,7 +12,6 @@
 		38F9B09111C98E9E0021C540 /* Automator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38F9B09011C98E9E0021C540 /* Automator.framework */; };
 		4403ACF41914041C002F286C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4403ACF31914041C002F286C /* Assets.xcassets */; };
 		441297D417FE285500E9E21E /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 448CC7E617FE1F840063D3FD /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		4453A6641DE4ED1E00383E40 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4453A6631DE4ED1E00383E40 /* Result.swift */; };
 		4453A6661DE5065F00383E40 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4453A6651DE5065F00383E40 /* Episode.swift */; };
 		4453A6671DE5065F00383E40 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4453A6651DE5065F00383E40 /* Episode.swift */; };
 		4453A6691DE516B200383E40 /* SandboxBookmarks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4453A6681DE516B200383E40 /* SandboxBookmarks.swift */; };
@@ -122,7 +121,6 @@
 		4403ACF31914041C002F286C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Resources/App/Assets.xcassets; sourceTree = "<group>"; };
 		4412E8161957F09200701124 /* com.giorgiocalderolla.Catch.CatchFeedHelper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = com.giorgiocalderolla.Catch.CatchFeedHelper.entitlements; sourceTree = "<group>"; };
 		4419CF37180627A900C77432 /* nl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
-		4453A6631DE4ED1E00383E40 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Result.swift; path = Sources/App/Result.swift; sourceTree = "<group>"; };
 		4453A6651DE5065F00383E40 /* Episode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Episode.swift; path = Sources/Shared/Episode.swift; sourceTree = "<group>"; };
 		4453A6681DE516B200383E40 /* SandboxBookmarks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SandboxBookmarks.swift; path = Sources/Shared/SandboxBookmarks.swift; sourceTree = "<group>"; };
 		4453A66B1DE5D4DF00383E40 /* EpisodeDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EpisodeDownloader.swift; path = "Sources/Feed Helper/EpisodeDownloader.swift"; sourceTree = "<group>"; };
@@ -316,7 +314,6 @@
 				44A6FA8C1DE1A5F1005303DF /* IntervalTimer.swift */,
 				44C8198A220D73DC00D9DAAD /* OPMLParser.swift */,
 				4453A66D1DE60D6200383E40 /* PowerManager.swift */,
-				4453A6631DE4ED1E00383E40 /* Result.swift */,
 			);
 			name = Library;
 			sourceTree = "<group>";
@@ -454,11 +451,11 @@
 				LastUpgradeCheck = 1000;
 				TargetAttributes = {
 					446D8B551918D146007AB22D = {
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1020;
 						TestTargetID = 8D1107260486CEB800E47090;
 					};
 					44717AC31913A08700580054 = {
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1020;
 						SystemCapabilities = {
 							com.apple.Sandbox = {
 								enabled = 1;
@@ -466,7 +463,7 @@
 						};
 					};
 					8D1107260486CEB800E47090 = {
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
@@ -475,12 +472,7 @@
 			developmentRegion = en;
 			hasScannedForEncodings = 1;
 			knownRegions = (
-				English,
-				Japanese,
-				French,
-				German,
 				Italiano,
-				Italian,
 				"简体中文",
 				fr,
 				it,
@@ -495,6 +487,7 @@
 				nl,
 				Base,
 				pl,
+				ja,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* Catch */;
 			projectDirPath = "";
@@ -581,7 +574,6 @@
 				447E630121F8A671006DD261 /* AddFeedController.swift in Sources */,
 				44B363481DC9B9FB00128259 /* Browser.swift in Sources */,
 				447E62FE21F88351006DD261 /* URLUtils.swift in Sources */,
-				4453A6641DE4ED1E00383E40 /* Result.swift in Sources */,
 				4453A66E1DE60D6300383E40 /* PowerManager.swift in Sources */,
 				44BA5D1A1DB81A8E00A9CE9A /* Application.swift in Sources */,
 				44B3634C1DCA6F7100128259 /* TimeOfDayMath.swift in Sources */,
@@ -679,7 +671,7 @@
 				OTHER_LDFLAGS = "-Wl,-rpath,@loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.giorgiocalderolla.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = Catch;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -699,7 +691,7 @@
 				OTHER_LDFLAGS = "-Wl,-rpath,@loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.giorgiocalderolla.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = Catch;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -840,7 +832,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.giorgiocalderolla.Catch.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -864,7 +856,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.giorgiocalderolla.Catch.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -883,7 +875,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_NAME}";
 				PRODUCT_NAME = "com.giorgiocalderolla.Catch.$(TARGET_NAME:rfc1034identifier)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				WRAPPER_EXTENSION = xpc;
 			};
 			name = Debug;
@@ -899,7 +891,7 @@
 				MACH_O_TYPE = mh_execute;
 				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_NAME}";
 				PRODUCT_NAME = "com.giorgiocalderolla.Catch.$(TARGET_NAME:rfc1034identifier)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				WRAPPER_EXTENSION = xpc;
 			};
 			name = Release;
