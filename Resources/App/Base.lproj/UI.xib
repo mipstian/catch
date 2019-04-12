@@ -435,7 +435,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="S2I-1Y-6UQ"/>
                                             </constraints>
-                                            <amVariablePopUpButtonCell key="cell" type="push" title="Other…" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" tag="1002" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="Yf4-4g-oUK">
+                                            <amVariablePopUpButtonCell key="cell" type="push" title="Desktop" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" tag="1004" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="Yf4-4g-oUK">
                                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                 <font key="font" metaFont="menu"/>
                                                 <menu key="menu" title="OtherViews" id="SJk-ZN-vME"/>
@@ -449,9 +449,6 @@
                                             <buttonCell key="cell" type="check" title="Download non-torrents using script" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="oaM-9o-SAF">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
-                                                <connections>
-                                                    <action selector="downloadScriptCheckboxToggled:" target="vyd-92-YXh" id="FDX-VE-VQV"/>
-                                                </connections>
                                             </buttonCell>
                                             <connections>
                                                 <binding destination="658" name="value" keyPath="values.downloadScriptEnabled" id="bux-k9-YtT"/>
@@ -742,8 +739,8 @@ DQ
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="213" width="572" height="151"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
-            <view key="contentView" id="JVG-A7-ap0">
-                <rect key="frame" x="0.0" y="0.0" width="572" height="135"/>
+            <view key="contentView" misplaced="YES" id="JVG-A7-ap0">
+                <rect key="frame" x="0.0" y="0.0" width="572" height="151"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MSZ-yJ-ndF">

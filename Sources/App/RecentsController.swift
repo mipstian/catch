@@ -99,6 +99,11 @@ extension RecentsController: NSTableViewDelegate {
     
     cell.downloadDateTextField.stringValue = historyItem.downloadDate.map(downloadDateFormatter.string) ?? ""
     
+    let canDownloadNonTorrents = Defaults.shared.downloadScriptEnabled && Defaults.shared.downloadScriptPath != nil
+    let isTorrent = historyItem.episode.url.isMagnetLink || historyItem.episode.url.absoluteString.isTorrentFilePath
+    let canDownloadAgain = isTorrent || canDownloadNonTorrents
+    cell.downloadAgainButton.isHidden = !canDownloadAgain
+    
     return cell
   }
   
@@ -141,8 +146,13 @@ extension RecentsController {
         }
       )
     } else {
-      // TODO
-      NSLog("Catch doesn't know how to redownload: \(recentEpisode.url)")
+      // TODO: consolidate
+      if Defaults.shared.downloadScriptEnabled, let downloadScriptPath = Defaults.shared.downloadScriptPath {
+        Process.launchedProcess(
+          launchPath: downloadScriptPath.path,
+          arguments: [recentEpisode.url.absoluteString]
+        )
+      }
     }
   }
   
