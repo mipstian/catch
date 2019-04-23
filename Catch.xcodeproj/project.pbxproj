@@ -12,6 +12,7 @@
 		38F9B09111C98E9E0021C540 /* Automator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38F9B09011C98E9E0021C540 /* Automator.framework */; };
 		4403ACF41914041C002F286C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4403ACF31914041C002F286C /* Assets.xcassets */; };
 		441297D417FE285500E9E21E /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 448CC7E617FE1F840063D3FD /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		445089EE226F24E4009ED71A /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C81988220D6B7700D9DAAD /* Feed.swift */; };
 		4453A6661DE5065F00383E40 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4453A6651DE5065F00383E40 /* Episode.swift */; };
 		4453A6671DE5065F00383E40 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4453A6651DE5065F00383E40 /* Episode.swift */; };
 		4453A6691DE516B200383E40 /* SandboxBookmarks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4453A6681DE516B200383E40 /* SandboxBookmarks.swift */; };
@@ -307,7 +308,6 @@
 				44B363471DC9B9FB00128259 /* Browser.swift */,
 				44B363491DC9BF1B00128259 /* Config.swift */,
 				44FFCE3E1DCB92F4006E6DF0 /* Defaults.swift */,
-				44C81988220D6B7700D9DAAD /* Feed.swift */,
 				44B363451DC99D1900128259 /* FeedChecker.swift */,
 				44A6FA8A1DE0B85C005303DF /* FeedHelperProxy.swift */,
 				44AB5B5D1DCE794A00AE6EB6 /* HistoryItem.swift */,
@@ -374,6 +374,7 @@
 			children = (
 				44A6FA871DE0ADA5005303DF /* DownloadOptions.swift */,
 				4453A6651DE5065F00383E40 /* Episode.swift */,
+				44C81988220D6B7700D9DAAD /* Feed.swift */,
 				447E0F6B1DDAACE7001048AB /* FeedHelperService.swift */,
 				447E0F721DDAB24C001048AB /* FileUtils.swift */,
 				4453A6681DE516B200383E40 /* SandboxBookmarks.swift */,
@@ -542,6 +543,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				447E0F711DDAB073001048AB /* main.swift in Sources */,
+				445089EE226F24E4009ED71A /* Feed.swift in Sources */,
 				44A6FA861DE0A785005303DF /* Service.swift in Sources */,
 				447E0F6F1DDAAD3D001048AB /* FeedHelper.swift in Sources */,
 				447E0F741DDAB24D001048AB /* FileUtils.swift in Sources */,

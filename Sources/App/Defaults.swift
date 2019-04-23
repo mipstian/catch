@@ -225,17 +225,12 @@ final class Defaults: NSObject {
 private extension HistoryItem {
   init?(defaultsDictionary: [AnyHashable:Any]) {
     guard
-      let title = defaultsDictionary["title"] as? String,
-      let url = (defaultsDictionary["url"] as? String).flatMap(URL.init)
+      let episode = Episode(dictionary: defaultsDictionary)
     else {
       return nil
     }
     
-    self.episode = Episode(
-      title: title,
-      url: url,
-      showName: defaultsDictionary["showName"] as? String
-    )
+    self.episode = episode
     self.downloadDate = defaultsDictionary["date"] as? Date
   }
 }

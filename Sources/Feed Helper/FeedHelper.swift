@@ -5,22 +5,22 @@ import Foundation
 /// - Checking feeds (optionally downloading any new torrent files)
 /// - Downloading a single torrent file
 enum FeedHelper {
-  static func checkFeeds(urls: [URL], downloadOptions: DownloadOptions, skippingURLs previouslyDownloadedURLs: [URL]) throws -> [DownloadedEpisode] {
-    return try urls.flatMap {
-      try checkFeed(url: $0, downloadOptions: downloadOptions, skippingURLs: previouslyDownloadedURLs)
+  static func checkFeeds(feeds: [Feed], downloadOptions: DownloadOptions, skippingURLs previouslyDownloadedURLs: [URL]) throws -> [DownloadedEpisode] {
+    return try feeds.flatMap {
+      try checkFeed(feed: $0, downloadOptions: downloadOptions, skippingURLs: previouslyDownloadedURLs)
     }
   }
   
-  private static func checkFeed(url: URL, downloadOptions: DownloadOptions, skippingURLs previouslyDownloadedURLs: [URL]) throws -> [DownloadedEpisode] {
-    NSLog("Checking feed: \(url)")
+  private static func checkFeed(feed: Feed, downloadOptions: DownloadOptions, skippingURLs previouslyDownloadedURLs: [URL]) throws -> [DownloadedEpisode] {
+    NSLog("Checking feed: \(feed.url)")
     
     // Flush the cache, we want fresh results
     URLCache.shared.removeAllCachedResponses()
     
     // Download the feed
-    let feed: Data
+    let feedContents: Data
     do {
-      feed = try Data(contentsOf: url)
+      feedContents = try Data(contentsOf: feed.url)
     } catch {
       throw NSError(
         domain: feedHelperErrorDomain,
@@ -35,7 +35,7 @@ enum FeedHelper {
     // Parse the feed
     let episodes: [Episode]
     do {
-      episodes = try FeedParser.parse(feed: feed)
+      episodes = try FeedParser.parse(feed: feed, feedContents: feedContents)
     } catch {
       throw NSError(
         domain: feedHelperErrorDomain,

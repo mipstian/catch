@@ -10,7 +10,7 @@ private extension XMLNode {
 
 private extension Episode {
   /// Try to initialize an episode with the data found in an RSS "item" or Atom "entry" element
-  init?(itemNode: XMLNode) {
+  init?(itemNode: XMLNode, feed: Feed) {
     // Get the .torrent URL or magnet link
     guard let urlString = itemNode["enclosure/@url"] ?? itemNode["link/@href"] ?? itemNode["link"] else {
       NSLog("Missing feed item URL")
@@ -34,6 +34,7 @@ private extension Episode {
     self.url = url
     self.title = title
     self.showName = showName
+    self.feed = feed
   }
 }
 
@@ -41,11 +42,11 @@ private extension Episode {
 /// Parses episodes out of a broadcatching RSS feed.
 /// Supports additional data specified with the `tv` namespace.
 enum FeedParser {
-  static func parse(feed: Data) throws -> [Episode] {
+  static func parse(feed: Feed, feedContents: Data) throws -> [Episode] {
     NSLog("Parsing feed")
     
     // Parse xml
-    let xml = try XMLDocument(data: feed)
+    let xml = try XMLDocument(data: feedContents)
     
     // Extract feed item nodes
     let rssItemNodes = try xml.nodes(forXPath: "//rss/channel/item")
@@ -53,7 +54,7 @@ enum FeedParser {
     let itemNodes = rssItemNodes + atomItemNodes
     
     // Extract episodes from NSXMLNodes
-    let episodes = itemNodes.compactMap(Episode.init(itemNode:))
+    let episodes = itemNodes.compactMap { Episode(itemNode: $0, feed: feed) }
     
     NSLog("Parsed \(episodes.count) episodes")
     
