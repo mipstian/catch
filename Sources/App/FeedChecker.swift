@@ -103,9 +103,9 @@ final class FeedChecker {
       previouslyDownloadedURLs: previouslyDownloadedURLs,
       completion: { [weak self] result in
         switch result {
-        case .success(let downloadedFiles):
+        case .success(let downloadedEpisodes):
           // Deal with new files
-          self?.handleDownloadedEpisodes(downloadedFiles)
+          self?.handleDownloadedEpisodes(downloadedEpisodes)
           self?.lastCheckStatus = .successful(Date())
         case .failure(let error):
           NSLog("Feed Helper error (checking feed): \(error)")
