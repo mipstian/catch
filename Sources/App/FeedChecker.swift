@@ -129,6 +129,29 @@ final class FeedChecker {
           Browser.openInBackground(file: downloadedEpisode.localURL!.path)
         }
       }
+        
+      // Run a script on the torrent if requested
+      if Defaults.shared.runScript {
+        let task = Process()
+        let pipe = Pipe()
+        task.launchPath = Defaults.shared.scriptPath?.path
+        task.standardOutput = pipe
+        
+        if episode.isMagnetized {
+          // Run the script using the magnet URL as the argument.
+          task.arguments = [episode.url.absoluteString]
+        } else {
+          // Run the script using the file URL as the argument.
+          task.arguments = [downloadedEpisode.localURL!.path]
+        }
+        
+        task.launch()
+
+        let handle = pipe.fileHandleForReading
+        let data = handle.readDataToEndOfFile()
+        let printing = String (data: data, encoding: String.Encoding.utf8)
+        NSLog("%@", printing!)
+      }
       
       NSUserNotificationCenter.default.deliverNewEpisodeNotification(for: episode)
       

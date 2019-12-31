@@ -107,7 +107,11 @@ extension RecentsController {
     let clickedRow = table.row(for: senderButton)
     let recentEpisode = Defaults.shared.downloadHistory[clickedRow].episode
     if recentEpisode.isMagnetized {
-      Browser.openInBackground(url: recentEpisode.url)
+      if Defaults.shared.runScript {
+        executeScript(recentEpisode.url.absoluteString)
+      } else {
+        Browser.openInBackground(url: recentEpisode.url)
+      }
     } else {
       guard Defaults.shared.isConfigurationValid, let downloadOptions = Defaults.shared.downloadOptions else {
         NSLog("Cannot download torrent file with invalid preferences")
@@ -121,13 +125,32 @@ extension RecentsController {
           switch result {
           case .success(let downloadedEpisode):
             if Defaults.shared.shouldOpenTorrentsAutomatically {
-              Browser.openInBackground(file: downloadedEpisode.localURL!.path)
+              if Defaults.shared.runScript {
+                self.executeScript(downloadedEpisode.localURL!.path)
+              } else {
+                Browser.openInBackground(file: downloadedEpisode.localURL!.path)
+              }
             }
           case .failure(let error):
             NSLog("Feed Helper error (downloading file): \(error)")
           }
         }
       )
+    }
+  }
+  
+  private func executeScript(_ argument : String!) {
+    if Defaults.shared.runScript {
+      let task = Process()
+      let pipe = Pipe()
+      task.launchPath = Defaults.shared.scriptPath?.path
+      task.standardOutput = pipe
+      task.arguments = [argument]
+      task.launch()
+      let handle = pipe.fileHandleForReading
+      let data = handle.readDataToEndOfFile()
+      let printing = String (data: data, encoding: String.Encoding.utf8)
+      NSLog("%@", printing!)
     }
   }
 }

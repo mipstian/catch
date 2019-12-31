@@ -11,6 +11,7 @@ private extension NSBindingName {
 class PreferencesController: NSWindowController {
   @IBOutlet private weak var feedURLWarningImageView: NSImageView!
   @IBOutlet private weak var torrentsSavePathWarningImageView: NSImageView!
+  @IBOutlet private weak var scriptPathWarningImageView: NSImageView!
   @IBOutlet private weak var automaticallyCheckForUpdatesCheckbox: NSButton!
   
   override func awakeFromNib() {
@@ -42,6 +43,7 @@ class PreferencesController: NSWindowController {
   private func refreshInvalidInputMarkers() {
     torrentsSavePathWarningImageView.image = Defaults.shared.isTorrentsSavePathValid ? #imageLiteral(resourceName: "success") : #imageLiteral(resourceName: "warning")
     feedURLWarningImageView.image = Defaults.shared.isFeedURLValid ? #imageLiteral(resourceName: "success") : #imageLiteral(resourceName: "error")
+    scriptPathWarningImageView.image = Defaults.shared.isScriptPathValid ? #imageLiteral(resourceName: "success") : #imageLiteral(resourceName: "error")
   }
   
   deinit {

@@ -24,6 +24,8 @@ final class Defaults: NSObject {
     static let openAtLogin = "openAtLogin"
     static let shouldRunHeadless = "headless"
     static let preventSystemSleep = "preventSystemSleep"
+    static let runScript = "runScript"
+    static let scriptPath = "scriptPath"
   }
   
   var feedURL: URL? {
@@ -90,7 +92,8 @@ final class Defaults: NSObject {
   }
   
   var isConfigurationValid: Bool {
-    return isFeedURLValid
+    let result = isFeedURLValid && (!runScript || (runScript && isScriptPathValid) )
+    return result
   }
   
   var isTorrentsSavePathValid: Bool {
@@ -153,6 +156,36 @@ final class Defaults: NSObject {
     )
   }
   
+  var runScript: Bool {
+    let result = UserDefaults.standard.bool(forKey: Keys.runScript)
+    return result
+  }
+  
+  var scriptPath: URL? {
+    guard let rawValue = UserDefaults.standard.string(forKey: Keys.scriptPath) else {
+      return nil
+    }
+    let expanded = NSString(string: rawValue).expandingTildeInPath
+    return URL(fileURLWithPath: expanded).standardizedFileURL
+  }
+  
+  var isScriptPathValid: Bool {
+    guard let path = scriptPath?.path else { return false }
+
+    var isDirectory: ObjCBool = false
+    guard FileManager.default.fileExists(atPath: path, isDirectory: &isDirectory), !isDirectory.boolValue else {
+      // Download path does not exist or is a directory
+      return false
+    }
+    
+    guard FileManager.default.isExecutableFile(atPath: path) else {
+      // Download path is not executable
+      return false
+    }
+    
+    return true
+  }
+  
   func restricts(date: Date) -> Bool {
     if !areTimeRestrictionsEnabled { return false }
     
@@ -196,7 +229,9 @@ final class Defaults: NSObject {
       Keys.history: [],
       Keys.openAtLogin: true,
       Keys.shouldRunHeadless: false,
-      Keys.preventSystemSleep: true
+      Keys.preventSystemSleep: true,
+      Keys.runScript: false,
+      Keys.scriptPath: ""
     ]
     UserDefaults.standard.register(defaults: defaultDefaults)
     
