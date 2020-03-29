@@ -12,6 +12,8 @@
 		38F9B09111C98E9E0021C540 /* Automator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38F9B09011C98E9E0021C540 /* Automator.framework */; };
 		4403ACF41914041C002F286C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4403ACF31914041C002F286C /* Assets.xcassets */; };
 		441297D417FE285500E9E21E /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 448CC7E617FE1F840063D3FD /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		4441F59424308B77001AEC1E /* ServiceURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4441F59324308B77001AEC1E /* ServiceURLs.swift */; };
+		4441F59624308C8D001AEC1E /* Scripts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4441F59524308C8D001AEC1E /* Scripts.swift */; };
 		445089EE226F24E4009ED71A /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C81988220D6B7700D9DAAD /* Feed.swift */; };
 		4453A6661DE5065F00383E40 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4453A6651DE5065F00383E40 /* Episode.swift */; };
 		4453A6671DE5065F00383E40 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4453A6651DE5065F00383E40 /* Episode.swift */; };
@@ -43,7 +45,7 @@
 		44AB5B801DD54D7300AE6EB6 /* LoginItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AB5B7F1DD54D7300AE6EB6 /* LoginItem.swift */; };
 		44AB5B821DD5532C00AE6EB6 /* BundleInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AB5B811DD5532C00AE6EB6 /* BundleInfo.swift */; };
 		44B363461DC99D1900128259 /* FeedChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B363451DC99D1900128259 /* FeedChecker.swift */; };
-		44B363481DC9B9FB00128259 /* Browser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B363471DC9B9FB00128259 /* Browser.swift */; };
+		44B363481DC9B9FB00128259 /* WorkspaceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B363471DC9B9FB00128259 /* WorkspaceExtensions.swift */; };
 		44B3634A1DC9BF1B00128259 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B363491DC9BF1B00128259 /* Config.swift */; };
 		44B3634C1DCA6F7100128259 /* TimeOfDayMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B3634B1DCA6F7100128259 /* TimeOfDayMath.swift */; };
 		44B3634E1DCA744200128259 /* TimeOfDayMathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B3634D1DCA744200128259 /* TimeOfDayMathTests.swift */; };
@@ -122,6 +124,8 @@
 		4403ACF31914041C002F286C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Resources/App/Assets.xcassets; sourceTree = "<group>"; };
 		4412E8161957F09200701124 /* com.giorgiocalderolla.Catch.CatchFeedHelper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = com.giorgiocalderolla.Catch.CatchFeedHelper.entitlements; sourceTree = "<group>"; };
 		4419CF37180627A900C77432 /* nl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4441F59324308B77001AEC1E /* ServiceURLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceURLs.swift; sourceTree = "<group>"; };
+		4441F59524308C8D001AEC1E /* Scripts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scripts.swift; sourceTree = "<group>"; };
 		4453A6651DE5065F00383E40 /* Episode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Episode.swift; path = Sources/Shared/Episode.swift; sourceTree = "<group>"; };
 		4453A6681DE516B200383E40 /* SandboxBookmarks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SandboxBookmarks.swift; path = Sources/Shared/SandboxBookmarks.swift; sourceTree = "<group>"; };
 		4453A66B1DE5D4DF00383E40 /* EpisodeDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EpisodeDownloader.swift; path = "Sources/Feed Helper/EpisodeDownloader.swift"; sourceTree = "<group>"; };
@@ -158,7 +162,7 @@
 		44AB5B7F1DD54D7300AE6EB6 /* LoginItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginItem.swift; path = Sources/App/LoginItem.swift; sourceTree = "<group>"; };
 		44AB5B811DD5532C00AE6EB6 /* BundleInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BundleInfo.swift; path = Sources/App/BundleInfo.swift; sourceTree = "<group>"; };
 		44B363451DC99D1900128259 /* FeedChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedChecker.swift; path = Sources/App/FeedChecker.swift; sourceTree = "<group>"; };
-		44B363471DC9B9FB00128259 /* Browser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Browser.swift; path = Sources/App/Browser.swift; sourceTree = "<group>"; };
+		44B363471DC9B9FB00128259 /* WorkspaceExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WorkspaceExtensions.swift; path = Sources/App/WorkspaceExtensions.swift; sourceTree = "<group>"; };
 		44B363491DC9BF1B00128259 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Config.swift; path = Sources/App/Config.swift; sourceTree = "<group>"; };
 		44B3634B1DCA6F7100128259 /* TimeOfDayMath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeOfDayMath.swift; path = Sources/App/TimeOfDayMath.swift; sourceTree = "<group>"; };
 		44B3634D1DCA744200128259 /* TimeOfDayMathTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeOfDayMathTests.swift; path = Sources/Tests/TimeOfDayMathTests.swift; sourceTree = SOURCE_ROOT; };
@@ -284,9 +288,11 @@
 			children = (
 				44AB5B811DD5532C00AE6EB6 /* BundleInfo.swift */,
 				44AB5B7F1DD54D7300AE6EB6 /* LoginItem.swift */,
+				4441F59524308C8D001AEC1E /* Scripts.swift */,
 				44B3634B1DCA6F7100128259 /* TimeOfDayMath.swift */,
 				44AB5B5F1DCE823A00AE6EB6 /* UserNotifications.swift */,
 				44BA5D111DAEC0C300A9CE9A /* WindowShakeAnimation.swift */,
+				44B363471DC9B9FB00128259 /* WorkspaceExtensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -305,7 +311,6 @@
 		4456EE671916F1B100B3FF1A /* Library */ = {
 			isa = PBXGroup;
 			children = (
-				44B363471DC9B9FB00128259 /* Browser.swift */,
 				44B363491DC9BF1B00128259 /* Config.swift */,
 				44FFCE3E1DCB92F4006E6DF0 /* Defaults.swift */,
 				44B363451DC99D1900128259 /* FeedChecker.swift */,
@@ -314,6 +319,7 @@
 				44A6FA8C1DE1A5F1005303DF /* IntervalTimer.swift */,
 				44C8198A220D73DC00D9DAAD /* OPMLParser.swift */,
 				4453A66D1DE60D6200383E40 /* PowerManager.swift */,
+				4441F59324308B77001AEC1E /* ServiceURLs.swift */,
 			);
 			name = Library;
 			sourceTree = "<group>";
@@ -563,6 +569,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				44AB5B821DD5532C00AE6EB6 /* BundleInfo.swift in Sources */,
+				4441F59624308C8D001AEC1E /* Scripts.swift in Sources */,
 				44B363461DC99D1900128259 /* FeedChecker.swift in Sources */,
 				44C8198B220D73DC00D9DAAD /* OPMLParser.swift in Sources */,
 				44BA5D121DAEC0C400A9CE9A /* WindowShakeAnimation.swift in Sources */,
@@ -574,7 +581,8 @@
 				44BA5D161DAECF1A00A9CE9A /* RecentsCellView.swift in Sources */,
 				4453A6691DE516B200383E40 /* SandboxBookmarks.swift in Sources */,
 				447E630121F8A671006DD261 /* AddFeedController.swift in Sources */,
-				44B363481DC9B9FB00128259 /* Browser.swift in Sources */,
+				44B363481DC9B9FB00128259 /* WorkspaceExtensions.swift in Sources */,
+				4441F59424308B77001AEC1E /* ServiceURLs.swift in Sources */,
 				447E62FE21F88351006DD261 /* URLUtils.swift in Sources */,
 				4453A66E1DE60D6300383E40 /* PowerManager.swift in Sources */,
 				44BA5D1A1DB81A8E00A9CE9A /* Application.swift in Sources */,
@@ -664,6 +672,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 535;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Vendor",
@@ -687,6 +696,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CURRENT_PROJECT_VERSION = 535;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Vendor",
