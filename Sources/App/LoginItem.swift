@@ -14,7 +14,7 @@ extension Bundle {
     guard
       let list = Bundle.loginItemsList,
       let loginItems = LSSharedFileListCopySnapshot(list, nil).takeRetainedValue() as? [LSSharedFileListItem]
-      else {
+    else {
         return nil
     }
     
@@ -43,7 +43,7 @@ extension Bundle {
       if shouldRegister {
         LSSharedFileListInsertItemURL(
           loginItemsList,
-          kLSSharedFileListItemBeforeFirst.takeRetainedValue(),
+          nil,
           nil,
           nil,
           bundleURL as CFURL,
