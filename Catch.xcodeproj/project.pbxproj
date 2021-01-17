@@ -63,6 +63,7 @@
 		44FBC67B196312A400434B01 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44FBC67A196312A400434B01 /* QuartzCore.framework */; };
 		44FFCE3F1DCB92F4006E6DF0 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FFCE3E1DCB92F4006E6DF0 /* Defaults.swift */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		A77DD09625B43CF400886D57 /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77DD09525B43CF400886D57 /* PreferencesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -180,6 +181,7 @@
 		44FFCE3E1DCB92F4006E6DF0 /* Defaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; name = Defaults.swift; path = Sources/App/Defaults.swift; sourceTree = "<group>"; tabWidth = 2; };
 		8D1107310486CEB800E47090 /* Catch-Info.plist */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; name = "Catch-Info.plist"; path = "Resources/App/Catch-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Catch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A77DD09525B43CF400886D57 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -279,6 +281,7 @@
 			isa = PBXGroup;
 			children = (
 				44BA5D151DAECF1A00A9CE9A /* RecentsCellView.swift */,
+				A77DD09525B43CF400886D57 /* PreferencesView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -586,6 +589,7 @@
 				447E62FE21F88351006DD261 /* URLUtils.swift in Sources */,
 				4453A66E1DE60D6300383E40 /* PowerManager.swift in Sources */,
 				44BA5D1A1DB81A8E00A9CE9A /* Application.swift in Sources */,
+				A77DD09625B43CF400886D57 /* PreferencesView.swift in Sources */,
 				44B3634C1DCA6F7100128259 /* TimeOfDayMath.swift in Sources */,
 				44C81989220D6B7700D9DAAD /* Feed.swift in Sources */,
 				44AB5B5E1DCE794A00AE6EB6 /* HistoryItem.swift in Sources */,
