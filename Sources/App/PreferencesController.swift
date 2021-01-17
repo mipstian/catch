@@ -59,7 +59,24 @@ class PreferencesController: NSWindowController {
   }
   
   private func refresh() {
-    torrentsSavePathWarningImageView.image = Defaults.shared.isTorrentsSavePathValid ? #imageLiteral(resourceName: "success") : #imageLiteral(resourceName: "warning")
+    if #available(OSX 11.0, *) {
+      let image = Defaults.shared.isTorrentsSavePathValid ?
+        NSImage(
+          systemSymbolName: "checkmark.circle.fill",
+          accessibilityDescription: nil
+        ) :
+        NSImage(
+          systemSymbolName: "questionmark.folder.fill",
+          accessibilityDescription: nil
+        )
+      torrentsSavePathWarningImageView.image = image?
+        .withSymbolConfiguration(.init(scale: .large))
+      torrentsSavePathWarningImageView.contentTintColor = Defaults.shared.isTorrentsSavePathValid ?
+        nil : .orange
+    } else {
+      torrentsSavePathWarningImageView.image = Defaults.shared.isTorrentsSavePathValid ? #imageLiteral(resourceName: "success") : #imageLiteral(resourceName: "warning")
+    }
+    
     feedsTableView.reloadData()
     
     refreshRemoveButton()
