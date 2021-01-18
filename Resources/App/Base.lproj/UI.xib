@@ -42,6 +42,7 @@
                 <outlet property="addFeedSheetController" destination="cFd-Mt-3tR" id="Pw2-C9-f2M"/>
                 <outlet property="automaticallyCheckForUpdatesCheckbox" destination="806" id="HZV-bf-GPz"/>
                 <outlet property="downloadScriptCheckbox" destination="GJR-jo-BJL" id="yz5-UX-AF1"/>
+                <outlet property="feedContentsController" destination="q07-cJ-rHw" id="exC-H7-tIX"/>
                 <outlet property="feedsTableView" destination="RU6-h9-jS6" id="ef9-4C-7Td"/>
                 <outlet property="removeFeedButton" destination="AnU-XT-Qai" id="Dk3-s6-LhI"/>
                 <outlet property="torrentsSavePathWarningImageView" destination="bCX-qM-hVo" id="uvk-T2-fc2"/>
@@ -52,6 +53,13 @@
             <connections>
                 <outlet property="table" destination="oof-vB-WHt" id="meC-ED-tKy"/>
                 <outlet property="window" destination="aQN-n7-TBr" id="ncG-xn-Pbz"/>
+            </connections>
+        </customObject>
+        <customObject id="q07-cJ-rHw" customClass="FeedContentsController" customModule="Catch" customModuleProvider="target">
+            <connections>
+                <outlet property="progressIndicator" destination="kP0-yt-1dX" id="Mgk-oD-RH8"/>
+                <outlet property="textView" destination="nMY-Wr-a2c" id="8nC-ct-bKD"/>
+                <outlet property="window" destination="6AF-Wa-kWE" id="7i9-gM-d2t"/>
             </connections>
         </customObject>
         <userDefaultsController representsSharedInstance="YES" id="658"/>
@@ -139,7 +147,7 @@
         <window title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="552" userLabel="Preferences">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <rect key="contentRect" x="310" y="248" width="700" height="317"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1055"/>
             <view key="contentView" id="553" customClass="PreferencesView" customModule="Catch" customModuleProvider="target">
                 <rect key="frame" x="0.0" y="0.0" width="710" height="359"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -610,7 +618,7 @@ DQ
         <window title="Recent Episodes" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="aQN-n7-TBr" userLabel="Recent Episodes" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="120" y="64" width="431" height="435"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1055"/>
             <value key="minSize" type="size" width="200" height="300"/>
             <view key="contentView" id="gSi-VU-gYd">
                 <rect key="frame" x="0.0" y="0.0" width="451" height="435"/>
@@ -733,7 +741,7 @@ DQ
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="213" width="572" height="151"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1055"/>
             <view key="contentView" id="JVG-A7-ap0">
                 <rect key="frame" x="0.0" y="0.0" width="572" height="132"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -803,6 +811,55 @@ DQ
                 </constraints>
             </view>
             <point key="canvasLocation" x="135" y="-402.5"/>
+        </window>
+        <window title="Feed Contents" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="6AF-Wa-kWE">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <rect key="contentRect" x="689" y="399" width="600" height="600"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
+            <view key="contentView" id="apF-ZH-7em">
+                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AEs-Tp-9sU">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <clipView key="contentView" drawsBackground="NO" id="5cr-bY-gGX">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <textView editable="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" smartInsertDelete="YES" id="nMY-Wr-a2c">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <size key="minSize" width="600" height="600"/>
+                                    <size key="maxSize" width="600" height="10000000"/>
+                                    <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                </textView>
+                            </subviews>
+                        </clipView>
+                        <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="Es0-8e-oQs">
+                            <rect key="frame" x="-100" y="-100" width="240" height="16"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                        <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="9JU-V6-YwJ">
+                            <rect key="frame" x="584" y="0.0" width="16" height="600"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                    </scrollView>
+                    <progressIndicator maxValue="100" displayedWhenStopped="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="kP0-yt-1dX">
+                        <rect key="frame" x="292" y="292" width="16" height="16"/>
+                    </progressIndicator>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="kP0-yt-1dX" firstAttribute="centerY" secondItem="apF-ZH-7em" secondAttribute="centerY" id="5xZ-Un-P4G"/>
+                    <constraint firstAttribute="bottom" secondItem="AEs-Tp-9sU" secondAttribute="bottom" id="9X5-Py-ccF"/>
+                    <constraint firstItem="AEs-Tp-9sU" firstAttribute="top" secondItem="apF-ZH-7em" secondAttribute="top" id="Lus-jQ-RtD"/>
+                    <constraint firstItem="AEs-Tp-9sU" firstAttribute="leading" secondItem="apF-ZH-7em" secondAttribute="leading" id="Nu3-yw-VDu"/>
+                    <constraint firstAttribute="trailing" secondItem="AEs-Tp-9sU" secondAttribute="trailing" id="VcW-5V-hCW"/>
+                    <constraint firstItem="kP0-yt-1dX" firstAttribute="centerX" secondItem="apF-ZH-7em" secondAttribute="centerX" id="i1e-6A-c9d"/>
+                </constraints>
+            </view>
+            <point key="canvasLocation" x="849" y="-519"/>
         </window>
     </objects>
     <resources>
