@@ -7,6 +7,7 @@ class FeedContentsController: NSWindowController {
   @IBOutlet private var progressIndicator: NSProgressIndicator!
   
   private let feedHelperProxy = FeedHelperProxy()
+  private var loadingFeedsCount = 0 { didSet { refresh() } }
   
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -16,23 +17,32 @@ class FeedContentsController: NSWindowController {
     }
   }
   
+  func refresh() {
+    if loadingFeedsCount == 0 {
+      textView.alphaValue = 1
+      textView.isSelectable = true
+      progressIndicator.stopAnimation(self)
+    } else {
+      textView.alphaValue = 0.5
+      textView.isSelectable = false
+      progressIndicator.startAnimation(self)
+    }
+  }
+  
   func loadFeed(_ feed: Feed) {
-    textView.string = ""
-    textView.isSelectable = false
-    progressIndicator.startAnimation(self)
+    loadingFeedsCount += 1
     
     feedHelperProxy.download(feed: feed) { [weak self] result in
-      self?.progressIndicator.stopAnimation(self)
-      
       switch result {
       case .success(let feedContents):
         if let string = String(data: feedContents, encoding: .utf8) {
           self?.textView.string = string
-          self?.textView.isSelectable = true
         }
       case .failure(let error):
         NSLog("Feed Helper error (downloading feed contents): \(error)")
       }
+      
+      self?.loadingFeedsCount -= 1
     }
   }
 }
