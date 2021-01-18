@@ -147,16 +147,16 @@
         <window title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="552" userLabel="Preferences">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <rect key="contentRect" x="310" y="248" width="700" height="317"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1055"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
             <view key="contentView" id="553" customClass="PreferencesView" customModule="Catch" customModuleProvider="target">
-                <rect key="frame" x="0.0" y="0.0" width="710" height="359"/>
+                <rect key="frame" x="0.0" y="0.0" width="700" height="317"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="616" userLabel="(Feed, Downloads, Tweaks)">
-                        <rect key="frame" x="20" y="60" width="670" height="279"/>
+                        <rect key="frame" x="20" y="60" width="660" height="237"/>
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
-                            <tabViewItem label="Feed" identifier="Feed" id="617">
+                            <tabViewItem label="Feeds" identifier="Feeds" id="617">
                                 <view key="view" id="620">
                                     <rect key="frame" x="0.0" y="0.0" width="670" height="279"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -386,11 +386,11 @@
                             </tabViewItem>
                             <tabViewItem label="Downloads" identifier="Downloads" id="IP2-E9-LPh" userLabel="Downloads">
                                 <view key="view" id="jSL-Ww-UCe">
-                                    <rect key="frame" x="0.0" y="0.0" width="660" height="236"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="660" height="237"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5qh-sS-yih">
-                                            <rect key="frame" x="-2" y="217" width="53" height="17"/>
+                                            <rect key="frame" x="-2" y="220" width="53" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Save to:" id="Wcg-0x-5t9">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -398,7 +398,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <amPathPopUpButton verticalHuggingPriority="750" canChooseDirectories="YES" canChooseExistingPaths="YES" placeholder="No Selection" translatesAutoresizingMaskIntoConstraints="NO" id="BuR-R5-3eB">
-                                            <rect key="frame" x="55" y="212" width="205" height="25"/>
+                                            <rect key="frame" x="54" y="213" width="207" height="25"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="tAZ-lT-ow2"/>
                                             </constraints>
@@ -412,11 +412,11 @@
                                             </connections>
                                         </amPathPopUpButton>
                                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bCX-qM-hVo">
-                                            <rect key="frame" x="265" y="217" width="18" height="18"/>
+                                            <rect key="frame" x="265" y="218" width="18" height="18"/>
                                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="imageCell:bVV-Mi-MaK:image" id="bVV-Mi-MaK"/>
                                         </imageView>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="bJl-7q-4yr">
-                                            <rect key="frame" x="-2" y="179" width="227" height="18"/>
+                                            <rect key="frame" x="-2" y="180" width="231" height="18"/>
                                             <buttonCell key="cell" type="check" title="Organize in folders by show name" bezelStyle="regularSquare" imagePosition="left" alignment="left" lineBreakMode="truncatingTail" state="on" inset="2" id="Ufr-oQ-Cdo">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -426,7 +426,7 @@
                                             </connections>
                                         </button>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="shg-7R-wuU">
-                                            <rect key="frame" x="-2" y="159" width="139" height="18"/>
+                                            <rect key="frame" x="-2" y="158" width="143" height="18"/>
                                             <buttonCell key="cell" type="check" title="Open automatically" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="JvD-eu-IrP">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -436,7 +436,7 @@
                                             </connections>
                                         </button>
                                         <amPathPopUpButton verticalHuggingPriority="750" canChooseFiles="YES" canChooseExistingPaths="YES" placeholder="No Selection" translatesAutoresizingMaskIntoConstraints="NO" id="sad-5V-KVu">
-                                            <rect key="frame" x="239" y="117" width="205" height="25"/>
+                                            <rect key="frame" x="244" y="115" width="207" height="25"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="S2I-1Y-6UQ"/>
                                             </constraints>
@@ -450,7 +450,7 @@
                                             </connections>
                                         </amPathPopUpButton>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="GJR-jo-BJL">
-                                            <rect key="frame" x="-2" y="121" width="237" height="18"/>
+                                            <rect key="frame" x="-2" y="121" width="241" height="18"/>
                                             <buttonCell key="cell" type="check" title="Download non-torrents using script" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="oaM-9o-SAF">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -485,11 +485,11 @@
                             </tabViewItem>
                             <tabViewItem label="Tweaks" identifier="Tweaks" id="618">
                                 <view key="view" id="619">
-                                    <rect key="frame" x="0.0" y="0.0" width="660" height="236"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="660" height="237"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="980">
-                                            <rect key="frame" x="-2" y="220" width="103" height="18"/>
+                                            <rect key="frame" x="-2" y="220" width="107" height="18"/>
                                             <buttonCell key="cell" type="check" title="Open at login" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="981">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -499,7 +499,7 @@
                                             </connections>
                                         </button>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="AN1-pr-EUN">
-                                            <rect key="frame" x="-2" y="200" width="228" height="18"/>
+                                            <rect key="frame" x="-2" y="198" width="231" height="18"/>
                                             <buttonCell key="cell" type="check" title="Prevent system sleep when active" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="kuL-eb-cd0">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -509,7 +509,7 @@
                                             </connections>
                                         </button>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="806">
-                                            <rect key="frame" x="-2" y="180" width="217" height="18"/>
+                                            <rect key="frame" x="-2" y="176" width="221" height="18"/>
                                             <buttonCell key="cell" type="check" title="Automatically check for updates" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="807">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -536,7 +536,7 @@
                         </connections>
                     </tabView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="y8v-DN-YZd">
-                        <rect key="frame" x="212" y="20" width="286" height="20"/>
+                        <rect key="frame" x="207" y="20" width="286" height="20"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="555">
                                 <rect key="frame" x="-7" y="-7" width="188" height="32"/>
@@ -590,7 +590,7 @@ DQ
             </view>
             <toolbar key="toolbar" implicitIdentifier="CA2F34B0-7A44-4395-8E3C-8B6D18CC3ECC" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="604">
                 <allowedToolbarItems>
-                    <toolbarItem implicitItemIdentifier="414BD815-8F03-4AFC-AF27-7A671CD0847F" explicitItemIdentifier="Feed" label="Feed" paletteLabel="Feed" image="rss" sizingBehavior="auto" selectable="YES" id="612">
+                    <toolbarItem implicitItemIdentifier="414BD815-8F03-4AFC-AF27-7A671CD0847F" explicitItemIdentifier="Feeds" label="Feeds" paletteLabel="Feeds" image="rss" sizingBehavior="auto" selectable="YES" id="612">
                         <connections>
                             <action selector="showFeeds:" target="vyd-92-YXh" id="QSV-1w-pHR"/>
                         </connections>
@@ -618,7 +618,7 @@ DQ
         <window title="Recent Episodes" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="aQN-n7-TBr" userLabel="Recent Episodes" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="120" y="64" width="431" height="435"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1055"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
             <value key="minSize" type="size" width="200" height="300"/>
             <view key="contentView" id="gSi-VU-gYd">
                 <rect key="frame" x="0.0" y="0.0" width="451" height="435"/>
@@ -741,7 +741,7 @@ DQ
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="213" width="572" height="151"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1055"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
             <view key="contentView" id="JVG-A7-ap0">
                 <rect key="frame" x="0.0" y="0.0" width="572" height="132"/>
                 <autoresizingMask key="autoresizingMask"/>
