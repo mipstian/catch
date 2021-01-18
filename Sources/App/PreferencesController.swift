@@ -25,6 +25,8 @@ class PreferencesController: NSWindowController {
   
   private let feedsTableContextMenu = NSMenu(title: "")
   
+  private var sortedFeedList: [Feed] = []
+  
   // Remember if awakeFromNib has been called
   private var awake: Bool = false
   
@@ -110,9 +112,15 @@ class PreferencesController: NSWindowController {
       torrentsSavePathWarningImageView.image = Defaults.shared.isTorrentsSavePathValid ? #imageLiteral(resourceName: "success") : #imageLiteral(resourceName: "warning")
     }
     
-    feedsTableView.reloadData()
+    reloadFeedList()
     
     refreshRemoveButton()
+  }
+  
+  private func reloadFeedList() {
+    sortedFeedList = Defaults.shared.feeds.sorted { $0.name < $1.name }
+    
+    feedsTableView.reloadData()
   }
   
   private func refreshRemoveButton() {
@@ -139,7 +147,8 @@ extension PreferencesController {
   
   @IBAction private func removeSelectedFeeds(_: Any?) {
     for feedIndex in feedsTableView.selectedRowIndexes.reversed() {
-      Defaults.shared.feeds.remove(at: feedIndex)
+      let feedToRemove = sortedFeedList[feedIndex]
+      Defaults.shared.feeds.removeAll { $0 == feedToRemove }
     }
   }
   
@@ -202,7 +211,7 @@ extension PreferencesController {
   private func clickedFeed() -> Feed? {
     let clickedRow = feedsTableView.clickedRow
     guard clickedRow != -1 else { return nil }
-    return Defaults.shared.feeds[clickedRow]
+    return sortedFeedList[clickedRow]
   }
   
   @IBAction func copyName(_ sender: Any?) {
@@ -232,7 +241,7 @@ extension PreferencesController {
 
 extension PreferencesController: NSTableViewDataSource {
   func numberOfRows(in tableView: NSTableView) -> Int {
-    return Defaults.shared.feeds.count
+    return sortedFeedList.count
   }
 }
 
@@ -240,7 +249,7 @@ extension PreferencesController: NSTableViewDataSource {
 extension PreferencesController: NSTableViewDelegate {
   func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
     // Get the item to display
-    let feed = Defaults.shared.feeds[row]
+    let feed = sortedFeedList[row]
     
     if tableColumn?.identifier == .feedNameColumn {
       guard let cell = tableView.makeView(withIdentifier: .feedNameColumn, owner: self) as? NSTableCellView else {
