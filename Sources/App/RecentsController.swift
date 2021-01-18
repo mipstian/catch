@@ -60,6 +60,14 @@ class RecentsController: NSWindowController {
     copyURLItem.target = self
     contextMenu.addItem(copyURLItem)
     
+    let deleteItem = NSMenuItem(
+      title: "Delete",
+      action: #selector(deleteHistoryItem),
+      keyEquivalent: ""
+    )
+    deleteItem.target = self
+    contextMenu.addItem(deleteItem)
+    
     table.menu = contextMenu
     
     reloadHistory()
@@ -161,17 +169,27 @@ extension RecentsController {
     }
   }
   
-  @IBAction func copyURL(_ sender: Any?) {
+  private func clickedHistoryItem() -> HistoryItem? {
     let clickedRow = table.clickedRow
+    guard clickedRow != -1 else { return nil }
+    return sortedHistory[clickedRow]
+  }
+  
+  @IBAction func copyURL(_ sender: Any?) {
+    guard let clickedHistoryItem = clickedHistoryItem() else { return }
     
-    guard clickedRow != -1 else { return }
-    
-    let recentEpisode = Defaults.shared.downloadHistory[clickedRow].episode
+    let recentEpisode = clickedHistoryItem.episode
     NSPasteboard.general.clearContents()
     if #available(OSX 10.13, *) {
       NSPasteboard.general.setString(recentEpisode.url.absoluteString, forType: .URL)
     } else {
       NSPasteboard.general.setString(recentEpisode.url.absoluteString, forType: .string)
     }
+  }
+  
+  @IBAction func deleteHistoryItem(_ sender: Any?) {
+    guard let clickedHistoryItem = clickedHistoryItem() else { return }
+    
+    Defaults.shared.downloadHistory.removeAll { $0 == clickedHistoryItem }
   }
 }
