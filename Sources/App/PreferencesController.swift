@@ -123,7 +123,7 @@ class PreferencesController: NSWindowController {
   }
   
   private func reloadFeedList() {
-    sortedFeedList = Defaults.shared.feeds.sorted { $0.name < $1.name }
+    sortedFeedList = Defaults.shared.feeds.sorted { $0.name.localizedLowercase < $1.name.localizedLowercase }
     
     feedsTableView.reloadData()
   }
