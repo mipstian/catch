@@ -2,7 +2,7 @@ import Foundation
 
 
 /// A TV show episode, as found in broadcatching feeds
-struct Episode: Equatable {
+struct Episode: Equatable, Hashable {
   /// Title of the episode
   ///
   /// - Note: in feeds, this usually contains a season/episode number code and
