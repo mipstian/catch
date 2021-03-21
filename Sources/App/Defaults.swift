@@ -25,7 +25,7 @@ final class Defaults: NSObject {
     static let shouldRunHeadless = "headless"
     static let preventSystemSleep = "preventSystemSleep"
     static let downloadScriptPath = "downloadScriptPath"
-    static let downloadScriptEnabled = "downloadScriptEnabled"
+    static let isDownloadScriptEnabled = "downloadScriptEnabled"
   }
   
   var feeds: [Feed] {
@@ -80,8 +80,8 @@ final class Defaults: NSObject {
     }
   }
   
-  var downloadScriptEnabled: Bool {
-    return UserDefaults.standard.bool(forKey: Keys.downloadScriptEnabled)
+  var isDownloadScriptEnabled: Bool {
+    return UserDefaults.standard.bool(forKey: Keys.isDownloadScriptEnabled)
   }
   
   /// Recently downloaded episodes. Remembered so they won't be downloaded again
@@ -199,7 +199,7 @@ final class Defaults: NSObject {
       Keys.openAtLogin: true,
       Keys.shouldRunHeadless: false,
       Keys.preventSystemSleep: true,
-      Keys.downloadScriptEnabled: false
+      Keys.isDownloadScriptEnabled: false
     ]
     UserDefaults.standard.register(defaults: defaultDefaults)
     

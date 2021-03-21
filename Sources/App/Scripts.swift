@@ -3,7 +3,9 @@ import Foundation
 
 extension Process {
   static func runDownloadScript(url: URL, completion: ((Bool) -> ())? = nil) {
-    if Defaults.shared.downloadScriptEnabled, let downloadScriptPath = Defaults.shared.downloadScriptPath {
+    if Defaults.shared.isDownloadScriptEnabled, let downloadScriptPath = Defaults.shared.downloadScriptPath {
+      NSLog("Running download script")
+      
       let script = Process()
       script.launchPath = downloadScriptPath.path
       script.arguments = [url.absoluteString]
