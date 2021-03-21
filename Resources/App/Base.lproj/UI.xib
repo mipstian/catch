@@ -626,6 +626,7 @@ DQ
                     <outlet property="importFromOPMLButton" destination="SIo-Vm-tN9" id="lme-NT-tYN"/>
                     <outlet property="openAutomaticallyCheckbox" destination="shg-7R-wuU" id="wCo-7O-0Ts"/>
                     <outlet property="organizeCheckbox" destination="bJl-7q-4yr" id="jET-Ex-bVY"/>
+                    <outlet property="saveToLabel" destination="5qh-sS-yih" id="Y9T-XU-dwg"/>
                     <outlet property="toolBar" destination="604" id="EEc-Ql-Y2W"/>
                 </connections>
             </view>
@@ -783,7 +784,7 @@ DQ
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="213" width="572" height="151"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
-            <view key="contentView" id="JVG-A7-ap0">
+            <view key="contentView" id="JVG-A7-ap0" customClass="AddFeedView" customModule="Catch" customModuleProvider="target">
                 <rect key="frame" x="0.0" y="0.0" width="572" height="132"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
@@ -850,6 +851,11 @@ DQ
                     <constraint firstItem="PoK-lg-pPH" firstAttribute="top" secondItem="ygd-lr-Dgm" secondAttribute="bottom" constant="20" id="mzo-rJ-EGt"/>
                     <constraint firstAttribute="trailing" secondItem="ygd-lr-Dgm" secondAttribute="trailing" constant="20" symbolic="YES" id="ptW-zT-nAR"/>
                 </constraints>
+                <connections>
+                    <outlet property="addButton" destination="PoK-lg-pPH" id="yuN-UQ-wgj"/>
+                    <outlet property="cancelButton" destination="rXP-L3-jvF" id="Yga-jR-9Xg"/>
+                    <outlet property="feedNameField" destination="MSZ-yJ-ndF" id="bFb-oF-VgZ"/>
+                </connections>
             </view>
             <point key="canvasLocation" x="135" y="-402.5"/>
         </window>
@@ -865,7 +871,7 @@ DQ
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <clipView key="contentView" drawsBackground="NO" id="5cr-bY-gGX">
                             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                            <autoresizingMask key="autoresizingMask"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textView editable="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" smartInsertDelete="YES" id="nMY-Wr-a2c">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
