@@ -53,7 +53,7 @@ class RecentsController: NSWindowController {
     )
     
     let copyURLItem = NSMenuItem(
-      title: "Copy Link",
+      title: NSLocalizedString("Copy Link", comment: ""),
       action: #selector(copyURL),
       keyEquivalent: ""
     )
@@ -61,7 +61,7 @@ class RecentsController: NSWindowController {
     contextMenu.addItem(copyURLItem)
     
     let deleteItem = NSMenuItem(
-      title: "Delete",
+      title: NSLocalizedString("Delete", comment: ""),
       action: #selector(deleteHistoryItem),
       keyEquivalent: ""
     )
