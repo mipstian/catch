@@ -1,7 +1,7 @@
 Catch: Broadcatching made easy.
 =====
 
-<img src="http://www.giorgiocalderolla.com/ext/catch_icon.svg" alt="Icon" width="228" height="228">
+<img src="http://www.giorgiocalderolla.com/ext/catch_icon.svg?1" alt="Icon" width="150" height="150">
 
 **[Catch](http://www.giorgiocalderolla.com/index.html#catch)** is a Mac application that runs in the menu bar, and will automatically download episodes found in your **[ShowRSS](http://showrss.info/)** feed using your favorite BitTorrent client. You will never miss an episode again :)
 
