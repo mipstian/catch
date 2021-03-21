@@ -3,7 +3,7 @@ import AppKit
 
 extension NSWorkspace {
   func openInBackground(url: URL) {
-    // Open a link without bringing app that handles it to the foreground
+    // Open a link without bringing the app that handles it to the foreground
     open(
       [url],
       withAppBundleIdentifier: nil,
@@ -14,7 +14,7 @@ extension NSWorkspace {
   }
   
   func openInBackground(file: String) {
-    // Open a file without bringing app that handles it to the foreground
+    // Open a file without bringing the app that handles it to the foreground
     openFile(file, withApplication: nil, andDeactivate: false)
   }
 }
