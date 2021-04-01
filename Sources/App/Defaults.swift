@@ -148,10 +148,12 @@ final class Defaults: NSObject {
   var downloadOptions: DownloadOptions? {
     guard let torrentsSavePath = torrentsSavePath else { return nil }
     
+    // Disable downloading any files if the download script is enabled.
     return DownloadOptions(
       containerDirectory: torrentsSavePath,
       shouldOrganizeByShow: shouldOrganizeTorrentsByShow,
-      shouldSaveMagnetLinks: !shouldOpenTorrentsAutomatically
+      shouldSaveMagnetLinks: !shouldOpenTorrentsAutomatically && !isDownloadScriptEnabled,
+      shouldSaveTorrentFiles: !isDownloadScriptEnabled
     )
   }
   

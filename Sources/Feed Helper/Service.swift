@@ -11,6 +11,7 @@ extension Service: FeedHelperService {
     downloadingToBookmark downloadDirectoryBookmark: Data,
     organizingByShow shouldOrganizeByShow: Bool,
     savingMagnetLinks shouldSaveMagnetLinks: Bool,
+    savingTorrentFiles shouldSaveTorrentFiles: Bool,
     skippingURLs previouslyDownloadedURLs: [String],
     withReply reply: @escaping (_ downloadedFeedFiles: [[AnyHashable:Any]]?, _ error: Error?) -> Void) {
     let downloadedEpisodes: [DownloadedEpisode]
@@ -19,7 +20,8 @@ extension Service: FeedHelperService {
       let downloadOptions = try DownloadOptions(
         containerDirectoryBookmark: downloadDirectoryBookmark,
         shouldOrganizeByShow: shouldOrganizeByShow,
-        shouldSaveMagnetLinks: shouldSaveMagnetLinks
+        shouldSaveMagnetLinks: shouldSaveMagnetLinks,
+        shouldSaveTorrentFiles: shouldSaveTorrentFiles
       )
       
       downloadedEpisodes = try FeedHelper.checkFeeds(
@@ -55,6 +57,7 @@ extension Service: FeedHelperService {
     toBookmark downloadDirectoryBookmark: Data,
     organizingByShow shouldOrganizeByShow: Bool,
     savingMagnetLinks shouldSaveMagnetLinks: Bool,
+    savingTorrentFiles shouldSaveTorrentFiles: Bool,
     withReply reply: @escaping (_ downloadedFile: [AnyHashable:Any]?, _ error: Error?) -> Void) {
     let downloadedFile: DownloadedEpisode
     
@@ -62,7 +65,8 @@ extension Service: FeedHelperService {
       let downloadOptions = try DownloadOptions(
         containerDirectoryBookmark: downloadDirectoryBookmark,
         shouldOrganizeByShow: shouldOrganizeByShow,
-        shouldSaveMagnetLinks: shouldSaveMagnetLinks
+        shouldSaveMagnetLinks: shouldSaveMagnetLinks,
+        shouldSaveTorrentFiles: shouldSaveTorrentFiles
       )
       
       downloadedFile = try FeedHelper.download(

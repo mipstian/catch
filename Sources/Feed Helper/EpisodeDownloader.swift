@@ -22,7 +22,8 @@ struct EpisodeDownloader {
       
       // Return the magnet link, if needed the main app will open it on the fly
       return DownloadedEpisode(episode: episode, localURL: nil)
-    } else {
+    } else if downloadOptions.shouldSaveTorrentFiles {
+      // Treat episode url as torrent file and download
       let downloadedTorrentFile: URL
       do {
         downloadedTorrentFile = try downloadTorrentFile(for: episode)
@@ -32,6 +33,9 @@ struct EpisodeDownloader {
       }
       
       return DownloadedEpisode(episode: episode, localURL: downloadedTorrentFile)
+    } else {
+      // Treat episode url agnostically, just return it
+      return DownloadedEpisode(episode: episode, localURL: nil)
     }
   }
   
