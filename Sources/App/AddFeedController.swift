@@ -21,6 +21,11 @@ class AddFeedController: NSWindowController {
     
     window.sheetParent?.endSheet(window)
   }
+  
+  func clear() {
+    feedNameTextField.stringValue = ""
+    feedURLTextField.stringValue = ""
+  }
 }
 
 
