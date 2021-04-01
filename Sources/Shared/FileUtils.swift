@@ -17,10 +17,6 @@ extension String {
     return sanitizedForFileSystem.with(fileExtension: .torrentFileExtension)
   }
   
-  var isTorrentFilePath: Bool {
-    return hasSuffix(.torrentFileExtension)
-  }
-  
   var weblocFileName: String {
     return sanitizedForFileSystem.with(fileExtension: .weblocFileExtension)
   }

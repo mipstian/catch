@@ -138,7 +138,7 @@ final class FeedChecker {
             // Open magnet link
             NSWorkspace.shared.openInBackground(url: episode.url)
             addToDownloadHistory()
-          } else if episode.url.absoluteString.isTorrentFilePath {
+          } else {
             // Open torrent file
             NSWorkspace.shared.openInBackground(file: downloadedEpisode.localURL!.path)
             addToDownloadHistory()
