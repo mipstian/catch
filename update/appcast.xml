@@ -7,6 +7,31 @@
     <pubDate>Sun, 08 Aug 2010 22:51:00 +0100</pubDate>
     
     <item>
+      <title>Catch 2.0</title>
+      <pubDate>Wed, 7 Apr 2021 11:10:26 +0200</pubDate>
+      <description><![CDATA[
+        <h2>Catch 2.0</h2>
+        <ul>
+        <li>Support for any kind of feed (not just ShowRSS)</li>
+        <li>Multiple feeds</li>
+        <li>Download script support</li>
+        <li>Support for Big Sur</li>
+        <li>Support for Apple Silicon</li>
+        <li>Support for Dark Mode</li>
+        <li>Redesigned UI</li>
+        <li>Lots of quality of life improvements</li>
+        <li>Lots of under-the-hood improvements</li>
+        </ul>
+      ]]></description>
+      <enclosure
+      url="https://github.com/mipstian/catch/releases/download/2.0/Catch-2.0.zip"
+      sparkle:version="717"
+      sparkle:shortVersionString="2.0"
+      type="application/octet-stream"/>
+      <sparkle:minimumSystemVersion>10.11.0</sparkle:minimumSystemVersion>
+    </item>
+    
+    <item>
       <title>Catch 1.9.4</title>
       <pubDate>Fri, 3 Jun 2016 18:43:33 +0200</pubDate>
       <description><![CDATA[
