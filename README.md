@@ -14,7 +14,10 @@ Runs in the menubar, and won't slow your Mac down one bit. Notification Center n
     
 ### Complete
 
-Catch supports any number of RSS and Atom feeds, with special support for [ShowRSS](http://showrss.info/) feeds. Their contents will be downloaded with your favorite BitTorrent client or with a custom script. Supports Big Sur, Dark Mode, Apple Silicon, you name it.
+Catch accepts any number of RSS and Atom feeds, with special support for [ShowRSS](http://showrss.info/) feeds; their contents will be downloaded with your favorite BitTorrent client or with a custom script. You can configure Catch to be active only at specific hours of the day.
+
+### Native
+A true macOS app that supports Big Sur, Dark Mode, Apple Silicon, you name it.
 
 ### Polyglot
 
