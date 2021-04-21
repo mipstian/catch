@@ -21,7 +21,6 @@ final class Defaults: NSObject {
     static let shouldOrganizeTorrents = "organizeTorrents"
     static let shouldOpenTorrentsAutomatically = "openAutomatically"
     static let history = "history"
-    static let openAtLogin = "openAtLogin"
     static let shouldRunHeadless = "headless"
     static let preventSystemSleep = "preventSystemSleep"
     static let downloadScriptPath = "downloadScriptPath"
@@ -171,13 +170,6 @@ final class Defaults: NSObject {
     UserDefaults.standard.synchronize()
   }
   
-  private func refreshLoginItemStatus() {
-    #if !DEBUG
-      let shouldOpenAtLogin = UserDefaults.standard.bool(forKey: Keys.openAtLogin)
-      Bundle.main.isLoginItem = shouldOpenAtLogin
-    #endif
-  }
-  
   private override init() {
     super.init()
     
@@ -199,7 +191,6 @@ final class Defaults: NSObject {
       Keys.shouldOrganizeTorrents: false,
       Keys.shouldOpenTorrentsAutomatically: true,
       Keys.history: [],
-      Keys.openAtLogin: true,
       Keys.shouldRunHeadless: false,
       Keys.preventSystemSleep: true,
       Keys.isDownloadScriptEnabled: false
@@ -222,9 +213,6 @@ final class Defaults: NSObject {
       name: UserDefaults.didChangeNotification,
       object: nil
     )
-    
-    // Register as a login item if needed
-    refreshLoginItemStatus()
     
     // Load history from defaults at launch
     let rawHistory = UserDefaults.standard.array(forKey: Keys.history) as! [[AnyHashable:Any]]
