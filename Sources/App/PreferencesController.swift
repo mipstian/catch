@@ -231,9 +231,8 @@ extension PreferencesController {
     NSPasteboard.general.clearContents()
     if #available(OSX 10.13, *) {
       NSPasteboard.general.setString(feed.url.absoluteString, forType: .URL)
-    } else {
-      NSPasteboard.general.setString(feed.url.absoluteString, forType: .string)
     }
+    NSPasteboard.general.setString(feed.url.absoluteString, forType: .string)
   }
   
   @IBAction func showContents(_ sender: Any?) {
