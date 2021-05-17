@@ -135,16 +135,17 @@ final class FeedChecker {
             }
           }
         } else {
+          addToDownloadHistory()
           if episode.url.isMagnetLink {
             // Open magnet link
             NSWorkspace.shared.openInBackground(url: episode.url)
-            addToDownloadHistory()
           } else {
             // Open torrent file
             NSWorkspace.shared.openInBackground(file: downloadedEpisode.localURL!.path)
-            addToDownloadHistory()
           }
         }
+      } else {
+        addToDownloadHistory()
       }
       
       NSUserNotificationCenter.default.deliverNewEpisodeNotification(for: episode)
