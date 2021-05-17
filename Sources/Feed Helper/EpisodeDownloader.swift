@@ -72,16 +72,14 @@ struct EpisodeDownloader {
   }
   
   private func downloadTorrentFile(for episode: Episode) throws -> URL {
-    NSLog("Downloading torrent file")
+    NSLog("Downloading torrent file \(episode.url)")
     
     // Download!
-    let urlRequest = URLRequest(url: episode.url)
-    var urlResponse: URLResponse?
-    let downloadedFile: Data
+    let urlResponse: URLResponse
+    let fileData: Data
     do {
-      downloadedFile = try NSURLConnection.sendSynchronousRequest(
-        urlRequest,
-        returning: &urlResponse
+      (urlResponse, fileData) = try URLSession.shared.downloadSynchronously(
+        url: episode.url
       )
     } catch {
       throw NSError(
@@ -106,7 +104,7 @@ struct EpisodeDownloader {
       )
     }
     
-    NSLog("Download complete, filesize: \(downloadedFile.count)")
+    NSLog("Download complete, filesize: \(fileData.count)")
     
     // Try to get a nice filename from the episode's title
     let fileName = episode.title.torrentFileName
@@ -118,7 +116,7 @@ struct EpisodeDownloader {
       fileName: fileName
     )
     
-    try downloadedFile.writeWithIntermediateDirectories(to: fullPath)
+    try fileData.writeWithIntermediateDirectories(to: fullPath)
     
     return fullPath
   }
@@ -178,6 +176,35 @@ private extension Data {
           NSUnderlyingErrorKey: error
         ]
       )
+    }
+  }
+}
+
+
+private extension URLSession {
+  func downloadSynchronously(url: URL) throws -> (URLResponse, Data) {
+    let urlRequest = URLRequest(url: url)
+    
+    var downloadError: Error? = nil
+    var downloadedData: Data!
+    var urlResponse: URLResponse!
+    
+    let taskSemaphore = DispatchSemaphore(value: 0)
+    URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+      if let error = error {
+        downloadError = error
+      } else {
+        downloadedData = data!
+        urlResponse = response!
+      }
+      taskSemaphore.signal()
+    }.resume()
+    taskSemaphore.wait()
+    
+    if let downloadError = downloadError {
+      throw downloadError
+    } else {
+      return (urlResponse, downloadedData)
     }
   }
 }

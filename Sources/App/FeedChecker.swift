@@ -105,6 +105,7 @@ final class FeedChecker {
       completion: { [weak self] result in
         switch result {
         case .success(let downloadedEpisodes):
+          NSLog("Checking feed succeeded, \(downloadedEpisodes.count) new episodes found")
           // Deal with new files
           self?.handleDownloadedEpisodes(downloadedEpisodes)
           self?.lastCheckStatus = .successful(Date())
