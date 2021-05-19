@@ -149,11 +149,11 @@
             <rect key="contentRect" x="310" y="248" width="700" height="317"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
             <view key="contentView" id="553" customClass="PreferencesView" customModule="Catch" customModuleProvider="target">
-                <rect key="frame" x="0.0" y="0.0" width="700" height="317"/>
+                <rect key="frame" x="0.0" y="0.0" width="700" height="431"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="616" userLabel="(Feed, Downloads, Tweaks)">
-                        <rect key="frame" x="20" y="60" width="660" height="237"/>
+                        <rect key="frame" x="20" y="60" width="660" height="351"/>
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
                             <tabViewItem label="Feeds" identifier="Feeds" id="617">
@@ -638,9 +638,13 @@ DQ
                     <constraint firstItem="y8v-DN-YZd" firstAttribute="top" secondItem="616" secondAttribute="bottom" constant="20" id="lSe-Bn-qVW"/>
                 </constraints>
                 <connections>
+                    <outlet property="acceptButton" destination="554" id="9zd-UG-f1t"/>
+                    <outlet property="andLabel" destination="636" id="0mE-a5-Orr"/>
                     <outlet property="checkForUpdatesCheckbox" destination="806" id="a9t-HZ-aSN"/>
                     <outlet property="downloadScriptCheckbox" destination="GJR-jo-BJL" id="z5g-lf-uhF"/>
+                    <outlet property="helpButton" destination="555" id="7G6-RV-1PQ"/>
                     <outlet property="importFromOPMLButton" destination="SIo-Vm-tN9" id="lme-NT-tYN"/>
+                    <outlet property="onlyCheckBetweenCheckbox" destination="638" id="Pvk-2b-YCo"/>
                     <outlet property="openAtLoginButton" destination="zcn-Kt-bTj" id="UII-u5-8iI"/>
                     <outlet property="openAutomaticallyCheckbox" destination="shg-7R-wuU" id="wCo-7O-0Ts"/>
                     <outlet property="organizeCheckbox" destination="bJl-7q-4yr" id="jET-Ex-bVY"/>
@@ -681,15 +685,15 @@ DQ
             <rect key="contentRect" x="120" y="64" width="431" height="435"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
             <value key="minSize" type="size" width="200" height="300"/>
-            <view key="contentView" id="gSi-VU-gYd">
-                <rect key="frame" x="0.0" y="0.0" width="451" height="435"/>
+            <view key="contentView" misplaced="YES" id="gSi-VU-gYd">
+                <rect key="frame" x="0.0" y="0.0" width="431" height="435"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="57" horizontalPageScroll="10" verticalLineScroll="57" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i4W-ed-17Q">
                         <rect key="frame" x="0.0" y="0.0" width="451" height="435"/>
                         <clipView key="contentView" drawsBackground="NO" id="KtZ-hY-aan">
                             <rect key="frame" x="0.0" y="0.0" width="451" height="435"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" alternatingRowBackgroundColors="YES" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="55" viewBased="YES" id="oof-vB-WHt">
                                     <rect key="frame" x="0.0" y="0.0" width="451" height="435"/>
@@ -803,8 +807,8 @@ DQ
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="213" width="572" height="151"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
-            <view key="contentView" id="JVG-A7-ap0" customClass="AddFeedView" customModule="Catch" customModuleProvider="target">
-                <rect key="frame" x="0.0" y="0.0" width="572" height="132"/>
+            <view key="contentView" misplaced="YES" id="JVG-A7-ap0" customClass="AddFeedView" customModule="Catch" customModuleProvider="target">
+                <rect key="frame" x="0.0" y="0.0" width="572" height="151"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MSZ-yJ-ndF">
@@ -890,7 +894,7 @@ DQ
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <clipView key="contentView" drawsBackground="NO" id="5cr-bY-gGX">
                             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <textView editable="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" smartInsertDelete="YES" id="nMY-Wr-a2c">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
