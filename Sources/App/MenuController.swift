@@ -18,6 +18,10 @@ class MenuController: NSObject {
   @IBOutlet private weak var preferencesItem: NSMenuItem!
   @IBOutlet private weak var quitItem: NSMenuItem!
   
+  @IBOutlet private weak var visitWebsiteItem: NSMenuItem!
+  @IBOutlet private weak var showHelpItem: NSMenuItem!
+  @IBOutlet private weak var requestFeatureItem: NSMenuItem!
+  @IBOutlet private weak var reportProblemItem: NSMenuItem!
   @IBOutlet private weak var versionItem: NSMenuItem!
 
   private var menuBarItem: NSStatusItem!
@@ -45,6 +49,11 @@ class MenuController: NSObject {
     helpItem.title = NSLocalizedString("Help", comment: "")
     preferencesItem.title = NSLocalizedString("Preferences…", comment: "")
     quitItem.title = NSLocalizedString("Quit Catch", comment: "")
+    
+    visitWebsiteItem.title = NSLocalizedString("Visit Catch's Website", comment: "")
+    showHelpItem.title = NSLocalizedString("Help Me Configure Catch", comment: "")
+    requestFeatureItem.title = NSLocalizedString("Request a Feature", comment: "")
+    reportProblemItem.title = NSLocalizedString("Report a Problem with Catch", comment: "")
     
     // Set current name and version
     let bundle = Bundle.main
