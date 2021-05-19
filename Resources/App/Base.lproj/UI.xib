@@ -29,6 +29,7 @@
         </customObject>
         <customObject id="528" customClass="MenuController" customModule="Catch" customModuleProvider="target">
             <connections>
+                <outlet property="checkNowItem" destination="655" id="auX-Ar-eaL"/>
                 <outlet property="lastUpdateItem" destination="540" id="813"/>
                 <outlet property="launchShowRSSItem" destination="524" id="hOA-LO-Q3f"/>
                 <outlet property="menu" destination="523" id="529"/>
