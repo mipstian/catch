@@ -30,10 +30,13 @@
         <customObject id="528" customClass="MenuController" customModule="Catch" customModuleProvider="target">
             <connections>
                 <outlet property="checkNowItem" destination="655" id="auX-Ar-eaL"/>
+                <outlet property="helpItem" destination="533" id="SKu-MR-QBT"/>
                 <outlet property="lastUpdateItem" destination="540" id="813"/>
                 <outlet property="launchShowRSSItem" destination="524" id="hOA-LO-Q3f"/>
                 <outlet property="menu" destination="523" id="529"/>
                 <outlet property="pauseResumeItem" destination="541" id="812"/>
+                <outlet property="preferencesItem" destination="532" id="wgh-zI-PTi"/>
+                <outlet property="quitItem" destination="525" id="NWK-As-JXG"/>
                 <outlet property="recentEpisodesItem" destination="537" id="orI-M4-cM2"/>
                 <outlet property="topSeparatorItem" destination="531" id="Hbt-dA-qRM"/>
                 <outlet property="versionItem" destination="545" id="657"/>
