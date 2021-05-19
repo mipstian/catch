@@ -4,11 +4,15 @@ import AppKit
 /// Manages the app's menu and status item in the menubar.
 class MenuController: NSObject {
   @IBOutlet private weak var menu: NSMenu!
-  @IBOutlet private weak var menuVersion: NSMenuItem!
-  @IBOutlet private weak var menuPauseResume: NSMenuItem!
-  @IBOutlet private weak var menuLastUpdate: NSMenuItem!
-  @IBOutlet private weak var menuLaunchShowRSS: NSMenuItem!
-  @IBOutlet private weak var menuTopSeparator: NSMenuItem!
+  
+  @IBOutlet private weak var launchShowRSSItem: NSMenuItem!
+  @IBOutlet private weak var topSeparatorItem: NSMenuItem!
+  
+  @IBOutlet private weak var lastUpdateItem: NSMenuItem!
+  
+  @IBOutlet private weak var pauseResumeItem: NSMenuItem!
+  
+  @IBOutlet private weak var versionItem: NSMenuItem!
 
   private var menuBarItem: NSStatusItem!
 
@@ -25,12 +29,15 @@ class MenuController: NSObject {
     // Enable highlighting
     menuBarItem.highlightMode = true
     
+    // Load strings
+    launchShowRSSItem.title = NSLocalizedString("Launch ShowRSS", comment: "")
+    
     // Set current name and version
     let bundle = Bundle.main
-    menuVersion.title = "\(bundle.displayName) \(bundle.version) (\(bundle.buildNumber))"
+    versionItem.title = "\(bundle.displayName) \(bundle.version) (\(bundle.buildNumber))"
     
     #if DEBUG
-      menuVersion.title = "[DEBUG] " + menuVersion.title
+      versionItem.title = "[DEBUG] " + versionItem.title
     #endif
     
     // Update UI whenever the feed checker status changes
@@ -86,13 +93,13 @@ class MenuController: NSObject {
     case .paused:
       pauseResumeItemTitle = NSLocalizedString("resume", comment: "Description of resume action")
     }
-    menuPauseResume.title = pauseResumeItemTitle
+    pauseResumeItem.title = pauseResumeItemTitle
     
     // Configure the "last update" item
-    menuLastUpdate.title = FeedChecker.shared.lastCheckStatus.localizedDescription
+    lastUpdateItem.title = FeedChecker.shared.lastCheckStatus.localizedDescription
     
-    menuLaunchShowRSS.isHidden = !Defaults.shared.hasShowRSSFeeds
-    menuTopSeparator.isHidden = !Defaults.shared.hasShowRSSFeeds
+    launchShowRSSItem.isHidden = !Defaults.shared.hasShowRSSFeeds
+    topSeparatorItem.isHidden = !Defaults.shared.hasShowRSSFeeds
   }
   
   deinit {
