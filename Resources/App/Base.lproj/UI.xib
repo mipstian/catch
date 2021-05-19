@@ -33,6 +33,7 @@
                 <outlet property="launchShowRSSItem" destination="524" id="hOA-LO-Q3f"/>
                 <outlet property="menu" destination="523" id="529"/>
                 <outlet property="pauseResumeItem" destination="541" id="812"/>
+                <outlet property="recentEpisodesItem" destination="537" id="orI-M4-cM2"/>
                 <outlet property="topSeparatorItem" destination="531" id="Hbt-dA-qRM"/>
                 <outlet property="versionItem" destination="545" id="657"/>
             </connections>
@@ -72,7 +73,7 @@
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="531"/>
-                <menuItem title="Recent Episodes..." id="537">
+                <menuItem title="Recent Episodes…" id="537">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="showWindow:" target="zvH-gu-SiD" id="woM-Jh-Pl1"/>
