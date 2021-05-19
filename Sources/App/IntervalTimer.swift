@@ -1,16 +1,12 @@
 import Foundation
 
 
-protocol IntervalTimerDelegate: AnyObject {
-  func timerFired()
-}
-
-
 /// Periodically invokes its delegate
 final class IntervalTimer {
-  weak var delegate: IntervalTimerDelegate? = nil
-  
   private var repeatingTimer: Timer! = nil
+  
+  /// What to call when the timer fires
+  var handler: (() -> ())?
   
   /// Creates a repeating timer with the specified interval.
   ///
@@ -38,6 +34,6 @@ final class IntervalTimer {
   }
   
   @objc private func timerFired(_: Timer) {
-    delegate?.timerFired()
+    handler?()
   }
 }
