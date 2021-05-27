@@ -1,4 +1,5 @@
 import AppKit
+import os
 
 
 private extension NSUserInterfaceItemIdentifier {
@@ -147,7 +148,7 @@ extension RecentsController {
         NSWorkspace.shared.openInBackground(url: recentEpisode.url)
       } else {
         guard Defaults.shared.isConfigurationValid, let downloadOptions = Defaults.shared.downloadOptions else {
-          NSLog("Cannot download torrent file with invalid preferences")
+          os_log("Cannot download torrent file with invalid preferences", log: .main, type: .info)
           return
         }
         
@@ -161,7 +162,7 @@ extension RecentsController {
                 NSWorkspace.shared.openInBackground(file: downloadedEpisode.localURL!.path)
               }
             case .failure(let error):
-              NSLog("Feed Helper error (downloading file): \(error)")
+              os_log("Feed Helper error (downloading file): %{public}@", log: .main, type: .error, error.localizedDescription)
             }
           }
         )

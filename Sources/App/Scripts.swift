@@ -1,10 +1,11 @@
 import Foundation
+import os
 
 
 extension Process {
   static func runDownloadScript(url: URL, completion: ((Bool) -> ())? = nil) {
     if Defaults.shared.isDownloadScriptEnabled, let downloadScriptPath = Defaults.shared.downloadScriptPath {
-      NSLog("Running download script")
+      os_log("Running download script", log: .main, type: .info)
       
       let script = Process()
       script.launchPath = downloadScriptPath.path
@@ -15,7 +16,7 @@ extension Process {
           completion?(success)
           
           if !success {
-            NSLog("Script termination status: \(process.terminationStatus)")
+            os_log("Script termination status: %d", log: .main, type: .error, process.terminationStatus)
           }
         }
       }
