@@ -1,4 +1,5 @@
 import Foundation
+import os
 
 
 // In a sandboxed environment, URL bookmarks can be passed from an app to an unpriviledged
@@ -21,7 +22,7 @@ extension URL {
     do {
       self = try URL(resolvingBookmarkData: sandboxBookmark, bookmarkDataIsStale: &isStale)
     } catch {
-      NSLog("Could not get URL from bookmark: \(error)")
+      os_log("Could not get URL from bookmark: %{public}@", log: .main, type: .error, error.localizedDescription)
       throw error
     }
   }

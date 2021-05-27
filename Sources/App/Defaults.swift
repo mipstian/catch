@@ -1,4 +1,5 @@
 import Foundation
+import os
 
 
 /// Singleton. Wrapper around UserDefaults.standard that provides a nice interface to the app's preferences
@@ -99,7 +100,7 @@ final class Defaults: NSObject {
             seenEpisodes.insert(newItem.episode)
             uniqueItems.append(newItem)
           } else {
-            NSLog("Discarding duplicate history item: \(newItem)")
+            os_log("Discarding duplicate history item: %{public}@", log: .main, type: .info, "\(newItem)")
           }
         }
       }
@@ -199,7 +200,7 @@ final class Defaults: NSObject {
     
     // Migrate from single-feed to multi-feed
     if let legacyFeedURLString = UserDefaults.standard.string(forKey: "feedURL") {
-      NSLog("Migrating feed URLs defaults")
+      os_log("Migrating feed URLs defaults", log: .main, type: .info)
       UserDefaults.standard.set(nil, forKey: "feedURL")
       if let legacyFeedURL = URL(string: legacyFeedURLString) {
         feeds.append(Feed(name: "ShowRSS", url: legacyFeedURL))

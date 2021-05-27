@@ -1,4 +1,5 @@
 import Foundation
+import os
 
 
 private extension XMLNode {
@@ -13,18 +14,18 @@ private extension Episode {
   init?(itemNode: XMLNode, feed: Feed) {
     // Get the .torrent URL or magnet link
     guard let urlString = itemNode["enclosure/@url"] ?? itemNode["link/@href"] ?? itemNode["link"] else {
-      NSLog("Missing feed item URL")
+      os_log("Missing feed item URL", log: .helper, type: .info)
       return nil
     }
     
     guard let url = URL(string: urlString) else {
-      NSLog("Invalid feed item URL: \(urlString)")
+      os_log("Invalid feed item URL: %{public}@", log: .helper, type: .info, urlString)
       return nil
     }
     
     // Get the title (includes show name and season/episode numbers)
     guard let title = itemNode["title"], title != "" else {
-      NSLog("Missing or empty feed item title")
+      os_log("Missing or empty feed item title", log: .helper, type: .info)
       return nil
     }
     
@@ -43,7 +44,7 @@ private extension Episode {
 /// Supports additional data specified with the `tv` namespace.
 enum FeedParser {
   static func parse(feed: Feed, feedContents: Data) throws -> [Episode] {
-    NSLog("Parsing feed")
+    os_log("Parsing feed...", log: .helper, type: .info)
     
     // Parse xml
     let xml = try XMLDocument(data: feedContents)
@@ -56,7 +57,7 @@ enum FeedParser {
     // Extract episodes from NSXMLNodes
     let episodes = itemNodes.compactMap { Episode(itemNode: $0, feed: feed) }
     
-    NSLog("Parsed \(episodes.count) episodes")
+    os_log("Parsed %d episodes", log: .helper, type: .info, episodes.count)
     
     return episodes
   }
