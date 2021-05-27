@@ -1,4 +1,5 @@
 import Foundation
+import os
 
 
 /// Downloads episodes to the file system.
@@ -15,7 +16,7 @@ struct EpisodeDownloader {
         do {
           _ = try saveMagnetLink(for: episode)
         } catch {
-          NSLog("Could not save magnet link \(episode.url): \(error)")
+          os_log("Could not save magnet link %{public}@: %{public}@", log: .helper, type: .error, "\(episode.url)", error.localizedDescription)
           throw error
         }
       }
@@ -28,7 +29,7 @@ struct EpisodeDownloader {
       do {
         downloadedTorrentFile = try downloadTorrentFile(for: episode)
       } catch {
-        NSLog("Could not download \(episode.url): \(error)")
+        os_log("Could not download %{public}@: %{public}@", log: .helper, type: .error, "\(episode.url)", error.localizedDescription)
         throw error
       }
       
@@ -72,7 +73,7 @@ struct EpisodeDownloader {
   }
   
   private func downloadTorrentFile(for episode: Episode) throws -> URL {
-    NSLog("Downloading torrent file \(episode.url)")
+    os_log("Downloading torrent file %{public}@", log: .helper, type: .info, "\(episode.url)")
     
     // Download!
     let urlResponse: URLResponse
@@ -104,7 +105,7 @@ struct EpisodeDownloader {
       )
     }
     
-    NSLog("Download complete, filesize: \(fileData.count)")
+    os_log("Download complete, filesize: %d", log: .helper, type: .info, fileData.count)
     
     // Try to get a nice filename from the episode's title
     let fileName = episode.title.torrentFileName
@@ -161,7 +162,7 @@ private extension Data {
         )
       }
       
-      NSLog("Directory \(containerDirectory) created")
+      os_log("Directory %{public}@ created", log: .helper, type: .info, "\(containerDirectory)")
     }
     
     // Write!
