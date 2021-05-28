@@ -52,7 +52,6 @@ class PreferencesView: NSView {
       
       for item in toolBar.items {
         if let symbolName = symbolsByIdentifier[item.itemIdentifier.rawValue] {
-          
           item.image = NSImage(
             systemSymbolName: symbolName,
             accessibilityDescription: nil
