@@ -644,7 +644,7 @@ DQ
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="aBG-Wd-Mnw">
-                                                            <rect key="frame" x="20" y="0.0" width="380" height="57"/>
+                                                            <rect key="frame" x="8" y="0.0" width="390" height="57"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="cu4-uA-Wyj" userLabel="Torrent Name Text Field">
                                                                     <rect key="frame" x="-2" y="33" width="85" height="16"/>
@@ -673,7 +673,7 @@ DQ
                                                             </constraints>
                                                         </customView>
                                                         <button horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="qnB-n2-sX0">
-                                                            <rect key="frame" x="407" y="22" width="14" height="14"/>
+                                                            <rect key="frame" x="406" y="22" width="14" height="14"/>
                                                             <buttonCell key="cell" type="inline" bezelStyle="inline" image="NSRefreshFreestandingTemplate" imagePosition="overlaps" alignment="left" imageScaling="proportionallyDown" id="l06-6G-zCp">
                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="smallSystemBold"/>
@@ -685,11 +685,11 @@ DQ
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstAttribute="bottom" secondItem="aBG-Wd-Mnw" secondAttribute="bottom" id="AL2-Rq-O8a"/>
-                                                        <constraint firstAttribute="trailing" secondItem="qnB-n2-sX0" secondAttribute="trailing" constant="7" id="Bt4-cS-2em"/>
+                                                        <constraint firstAttribute="trailing" secondItem="qnB-n2-sX0" secondAttribute="trailing" constant="8" id="Bt4-cS-2em"/>
                                                         <constraint firstAttribute="centerY" secondItem="qnB-n2-sX0" secondAttribute="centerY" id="TDz-lx-2xc"/>
-                                                        <constraint firstItem="aBG-Wd-Mnw" firstAttribute="leading" secondItem="W93-2s-nQP" secondAttribute="leading" constant="20" id="UOi-Zq-YaY"/>
+                                                        <constraint firstItem="aBG-Wd-Mnw" firstAttribute="leading" secondItem="W93-2s-nQP" secondAttribute="leading" constant="8" id="UOi-Zq-YaY"/>
                                                         <constraint firstItem="aBG-Wd-Mnw" firstAttribute="top" secondItem="W93-2s-nQP" secondAttribute="top" id="mdR-52-FOa"/>
-                                                        <constraint firstItem="qnB-n2-sX0" firstAttribute="leading" secondItem="aBG-Wd-Mnw" secondAttribute="trailing" constant="7" id="uBs-q4-tYG"/>
+                                                        <constraint firstItem="qnB-n2-sX0" firstAttribute="leading" secondItem="aBG-Wd-Mnw" secondAttribute="trailing" constant="8" id="uBs-q4-tYG"/>
                                                     </constraints>
                                                     <connections>
                                                         <outlet property="downloadAgainButton" destination="qnB-n2-sX0" id="X9o-hK-60a"/>
