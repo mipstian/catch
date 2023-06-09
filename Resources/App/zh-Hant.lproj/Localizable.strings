@@ -2,11 +2,11 @@
 
 // in menu:
 "pause"="暫停"; // this is a verb
-"resume"="重新開始"; // this is a verb
-"lastupdate"="最後更新: %@"; // %@ will be replaced by update time
-"lastupdatefailed"="最後更新 (失敗): %@"; // %@ will be replaced by update time
-"never"="仍沒有"; // this is for the last update time, meaning "I still haven't made one"
-"updatingnow"="正在更新...";
+"resume"="繼續"; // this is a verb
+"lastupdate"="上次更新：%@"; // %@ will be replaced by update time
+"lastupdatefailed"="上次更新失敗：%@"; // %@ will be replaced by update time
+"never"="未曾更新"; // this is for the last update time, meaning "I still haven't made one"
+"updatingnow"="正在更新⋯";
 // for notifications:
-"newtorrent"="新種子已下載";
-"newtorrentdesc"="種子 %@ 已下載!"; // %@ will be replaced by filename
+"newtorrent"="已下載新種子";
+"newtorrentdesc"="已下載「%@」！"; // %@ will be replaced by filename
