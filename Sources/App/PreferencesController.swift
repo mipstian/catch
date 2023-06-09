@@ -33,11 +33,11 @@ class PreferencesController: NSWindowController {
     
     // Bind automatically check for updates checkbox to sparkle
     #if !DEBUG
-      automaticallyCheckForUpdatesCheckbox.bind(
-        .checkboxValue,
-        to: SUUpdater.shared(),
-        withKeyPath: "automaticallyChecksForUpdates"
-      )
+    automaticallyCheckForUpdatesCheckbox.bind(
+      .checkboxValue,
+      to: SUUpdater.shared()!,
+      withKeyPath: "automaticallyChecksForUpdates"
+    )
     #endif
     
     showFeeds(self)
