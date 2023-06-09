@@ -15,10 +15,10 @@ Features:
 ---------
 
   * ShowRSS client
-  * Magnet link and HTTPS support
-  * Very lightweight, won't slow down you Mac at all
-  * Configurable "hours of operation" (e.g. only check for new episodes at night)
-  * Organize episodes in folders based on show name
+  * Magnet link and HTTPS support
+  * Very lightweight, won't slow down you Mac at all
+  * Configurable "hours of operation" (e.g. only check for new episodes at night)
+  * Organize episodes in folders based on show name
   * Automatically start downloading in your favorite BitTorrent client
   * Notification Center notifications
   * Automatic updates
