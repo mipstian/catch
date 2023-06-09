@@ -184,22 +184,24 @@
     // Clear menu
     [self.menuRecentTorrents.submenu removeAllItems];
     
-    // Add new items
+    // Create a formatter for torrent download dates
     NSDateFormatter *dateFormatter = NSDateFormatter.new;
     dateFormatter.timeStyle = NSDateFormatterShortStyle;
     dateFormatter.dateStyle = NSDateFormatterShortStyle;
+    dateFormatter.doesRelativeDateFormatting = YES;
     
+    // Add new items
     [recents enumerateObjectsUsingBlock:^(NSDictionary *recent, NSUInteger index, BOOL *stop) {
-        NSString *menuTitle = [NSString stringWithFormat:@"%lu %@", index + 1, [recent valueForKey:@"title"]];
+        NSString *menuTitle = [NSString stringWithFormat:@"%lu %@", index + 1, recent[@"title"]];
         NSMenuItem *newItem = [[NSMenuItem alloc] initWithTitle:menuTitle
                                                          action:NULL
                                                   keyEquivalent:@""];
-        NSDate *downloadDate = (NSDate *)[recent objectForKey:@"date"];
-        if(downloadDate) {
+        NSDate *downloadDate = (NSDate *)recent[@"date"];
+        if (downloadDate) {
             // it may be interesting to have a bit more structure or intelligence to showing the dates for recent
             // items (just stuff this week based on preference?), or show the date in the list.. this solves
             // the problem of "how recent was recent?" tho with the tooltip.
-            [newItem setToolTip:[dateFormatter stringFromDate:downloadDate]];
+            newItem.toolTip = [dateFormatter stringFromDate:downloadDate];
         }
         newItem.enabled = NO;
         [self.menuRecentTorrents.submenu addItem:newItem];

@@ -225,7 +225,7 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
         NSArray *history = CTCDefaults.downloadHistory;
         NSDictionary *newHistoryEntry = @{@"title": feedFile[@"title"],
                                           @"url": feedFile[@"url"],
-                                          @"date": [NSDate date]};
+                                          @"date": NSDate.date};
         NSArray *newHistory = [@[newHistoryEntry] arrayByAddingObjectsFromArray:history];
         CTCDefaults.downloadHistory = newHistory;
     }
