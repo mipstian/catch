@@ -320,12 +320,10 @@
 		44717AC61913A08700580054 /* CatchFeedHelper */ = {
 			isa = PBXGroup;
 			children = (
-				4412E8161957F09200701124 /* com.giorgiocalderolla.Catch.CatchFeedHelper.entitlements */,
 				44717AD71913A1C900580054 /* CTCFeedChecker.h */,
 				44717AD81913A1C900580054 /* CTCFeedChecker.m */,
 				44717AAB19131BC700580054 /* CTCFeedParser.h */,
 				44717AAC19131BC700580054 /* CTCFeedParser.m */,
-				44717ACD1913A08700580054 /* main.m */,
 				44717AC71913A08700580054 /* Supporting Files */,
 			);
 			path = CatchFeedHelper;
@@ -334,6 +332,8 @@
 		44717AC71913A08700580054 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4412E8161957F09200701124 /* com.giorgiocalderolla.Catch.CatchFeedHelper.entitlements */,
+				44717ACD1913A08700580054 /* main.m */,
 				44717AC81913A08700580054 /* CatchFeedHelper-Info.plist */,
 				44717AC91913A08700580054 /* InfoPlist.strings */,
 				44717ACC1913A08700580054 /* CatchFeedHelper-Prefix.pch */,
