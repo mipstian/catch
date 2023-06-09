@@ -16,25 +16,6 @@ enum FileUtils {
     return NSHomeDirectory()
   }
   
-  static func bookmark(for url: URL) throws -> Data {
-    return try url.bookmarkData(options: .minimalBookmark)
-  }
-  
-  static func url(from bookmark: Data) throws -> URL {
-    var isStale = false
-    let url: URL
-    
-    do {
-      // TODO: figure out why this init is optional, which contradicts the docs
-      url = try URL(resolvingBookmarkData: bookmark, bookmarkDataIsStale: &isStale)!
-    } catch {
-      NSLog("Could not get URL from bookmark: \(error)")
-      throw error
-    }
-    
-    return url
-  }
-  
   static func filename(from fileURL: URL) -> String {
     // Compute destination filename
     let filename = fileURL.pathComponents.last!

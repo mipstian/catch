@@ -11,9 +11,7 @@ struct DownloadOptions {
 // Serialization
 extension DownloadOptions {
   var containerDirectoryBookmark: Data {
-    // Create a bookmark so we can transfer access to the downloads path
-    // to the feed helper service
-    return try! FileUtils.bookmark(for: containerDirectory)
+    return try! .sandboxBookmark(for: containerDirectory)
   }
 }
 
@@ -21,9 +19,7 @@ extension DownloadOptions {
 // Deserialization
 extension DownloadOptions {
   init(containerDirectoryBookmark: Data, shouldOrganizeByShow: Bool, shouldSaveMagnetLinks: Bool) throws {
-    // Resolve the bookmark that the main app gives us to transfer access to
-    // the download directory
-    containerDirectory = try FileUtils.url(from: containerDirectoryBookmark)
+    containerDirectory = try URL(sandboxBookmark: containerDirectoryBookmark)
     
     self.shouldOrganizeByShow = shouldOrganizeByShow
     self.shouldSaveMagnetLinks = shouldSaveMagnetLinks
