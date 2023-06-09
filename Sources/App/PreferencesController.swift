@@ -148,12 +148,6 @@ extension PreferencesController {
     // Select the Tweaks tab
     window?.toolbar?.selectedItemIdentifier = .init(rawValue: "Tweaks")
   }
-  
-  @IBAction private func downloadScriptCheckboxToggled(_: Any?) {
-    if downloadScriptCheckbox.state == .off {
-      Defaults.shared.downloadScriptPath = nil
-    }
-  }
 }
 
 

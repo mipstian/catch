@@ -128,7 +128,13 @@ final class FeedChecker {
           // Open torrent file
           Browser.openInBackground(file: downloadedEpisode.localURL!.path)
         } else {
-          // TODO: download from the generic URL
+          // TODO: consolidate
+          if Defaults.shared.downloadScriptEnabled, let downloadScriptPath = Defaults.shared.downloadScriptPath {
+            Process.launchedProcess(
+              launchPath: downloadScriptPath.path,
+              arguments: [episode.url.absoluteString]
+            )
+          }
         }
       }
       
