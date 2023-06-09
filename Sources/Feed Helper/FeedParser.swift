@@ -11,11 +11,14 @@ private extension XMLNode {
 public class FeedParser: NSObject {
   public typealias FeedItem = [String:String]
   
-  public static func parse(feed: XMLDocument) throws -> [FeedItem] {
+  public static func parse(feed: Data) throws -> [FeedItem] {
     NSLog("Parsing feed")
     
+    // Parse xml
+    let xml = try XMLDocument(data: feed, options: 0)
+    
     // Extract feed items
-    let itemNodes = try feed.nodes(forXPath: "//rss/channel/item")
+    let itemNodes = try xml.nodes(forXPath: "//rss/channel/item")
     
     // Extract files from NSXMLNodes
     let items = itemNodes.flatMap { itemNode -> FeedItem? in
