@@ -565,6 +565,7 @@
 				445D97A319157955006CD77C /* Base */,
 			);
 			name = UI.xib;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		38A3FD0C11CA01DD00157AEF /* Localizable.strings */ = {
@@ -583,6 +584,7 @@
 				4401571D1957A3150041D148 /* pl */,
 			);
 			name = Localizable.strings;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		445D97A4191579C7006CD77C /* UI.strings */ = {
@@ -600,6 +602,7 @@
 				4401571C1957A3150041D148 /* pl */,
 			);
 			name = UI.strings;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		446D8B5C1918D146007AB22D /* InfoPlist.strings */ = {
