@@ -5,6 +5,7 @@ class RecentsController: NSWindowController {
   @IBOutlet fileprivate weak var table: NSTableView!
   
   fileprivate let downloadDateFormatter = DateFormatter()
+  fileprivate let feedHelperProxy = FeedHelperProxy()
   
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -74,12 +75,25 @@ extension RecentsController {
     if isMagnetLink {
       Browser.openInBackground(url: recentToDownload.url)
     } else {
-      FeedChecker.shared.downloadHistoryItem(recentToDownload) { downloadedFile, error in
-        guard Defaults.shared.shouldOpenTorrentsAutomatically, let downloadedFile = downloadedFile else {
-          return
-        }
-        Browser.openInBackground(file: downloadedFile["torrentFilePath"] as! String)
+      guard Defaults.shared.isConfigurationValid, let downloadOptions = Defaults.shared.downloadOptions else {
+        NSLog("Cannot download torrent file with invalid preferences")
+        return
       }
+      
+      feedHelperProxy.downloadHistoryItem(
+        recentToDownload,
+        downloadOptions: downloadOptions,
+        completion: { downloadedFile, error in
+          guard let downloadedFile = downloadedFile else {
+            NSLog("Feed Helper error (downloading file): \(error!)")
+            return
+          }
+          
+          if Defaults.shared.shouldOpenTorrentsAutomatically {
+            Browser.openInBackground(file: downloadedFile["torrentFilePath"] as! String)
+          }
+        }
+      )
     }
   }
 }
