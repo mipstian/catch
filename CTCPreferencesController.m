@@ -9,7 +9,7 @@
     [self showFeeds:self];
     
     // If the configuration isn't valid, pop up immediately
-    if (CTCDefaults.isConfigurationValid) [self showWindow:self];
+    if (!CTCDefaults.isConfigurationValid) [self showWindow:self];
 }
 
 - (void)showWindow:(id)sender {
