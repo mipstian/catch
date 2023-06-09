@@ -65,10 +65,21 @@
         [self setSchedulerStatusActive:isSchedulerActive running:isSchedulerRunning];
     };
     
+    void (^handleSchedulerLastUpdateStatusChange)(NSNotification *) = ^(NSNotification *notification) {
+        BOOL wasSuccessful = [notification.userInfo[@"successful"] boolValue];
+        NSDate *lastUpdateDate = notification.userInfo[@"time"];
+        [self setLastUpdateStatus:wasSuccessful time:lastUpdateDate];
+        [self refreshRecentsMenu];
+    };
+    
     [NSNotificationCenter.defaultCenter addObserverForName:kCTCSchedulerStatusNotificationName
                                                     object:self.scheduler
                                                      queue:nil
                                                 usingBlock:handleSchedulerStatusChange];
+    [NSNotificationCenter.defaultCenter addObserverForName:kCTCSchedulerLastUpdateStatusNotificationName
+                                                    object:self.scheduler
+                                                     queue:nil
+                                                usingBlock:handleSchedulerLastUpdateStatusChange];
 }
 
 - (IBAction)browseService:(id)sender {
@@ -232,7 +243,23 @@
 	[self.menuPauseResume setTitle:NSLocalizedString(@"resume", @"Description of resume action")];
 }
 
-- (void)refreshRecent:(NSArray*)recentTorrentNames {
+- (void)refreshRecentsMenu {
+    // Also refresh the list of recently downloaded torrents
+	// Get the full list
+	NSArray *downloaded = [NSUserDefaults.standardUserDefaults arrayForKey:PREFERENCE_KEY_HISTORY];
+    
+	// Get last 10 elements
+	NSRange recentRange;
+	recentRange.length = (downloaded.count > 10) ? 10 : downloaded.count;
+	recentRange.location = downloaded.count - recentRange.length;
+	NSArray *recents = [downloaded subarrayWithRange:recentRange];
+    
+    // Extract titles
+    NSMutableArray *recentTorrentNames = NSMutableArray.array;
+    for (NSDictionary *recentItem in recents) {
+        [recentTorrentNames addObject:recentItem[@"title"]];
+    }
+    
     // Clear menu
 	[self.menuRecentTorrents.submenu removeAllItems];
 	

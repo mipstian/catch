@@ -12,6 +12,4 @@ extern NSString * const SERVICE_FEED_LEGACY_URL_PREFIX;
 
 @interface CTCAppDelegate : NSObject
 
-- (void)lastUpdateStatus:(BOOL)lastUpdateWasSuccessful time:(NSDate*)time;
-
 @end
