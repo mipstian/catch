@@ -64,10 +64,9 @@ NSString * const kCTCDefaultsOpenAtLoginKey = @"openAtLogin";
 		NSMutableArray *newDownloadedFiles = NSMutableArray.array;
 		
 		for (NSString *url in downloadedFiles) {
-			[newDownloadedFiles addObject:[NSDictionary dictionaryWithObjectsAndKeys:
-                                           [CTCFileUtils computeFilenameFromURL:[NSURL URLWithString:url]], @"title",
-                                           url, @"url",
-                                           nil]];
+            NSString *fileName = [CTCFileUtils computeFilenameFromURL:[NSURL URLWithString:url]];
+			[newDownloadedFiles addObject:@{@"title": fileName,
+                                            @"url": url}];
 		}
 		
         self.downloadHistory = newDownloadedFiles;
