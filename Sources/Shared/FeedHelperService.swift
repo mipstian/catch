@@ -1,7 +1,7 @@
 import Foundation
 
 
-let feedCheckerErrorDomain = "com.giorgiocalderolla.Catch.CatchFeedHelper"
+let feedHelperErrorDomain = "com.giorgiocalderolla.Catch.CatchFeedHelper"
 
 
 @objc protocol FeedHelperService {

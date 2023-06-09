@@ -27,31 +27,31 @@ class Scheduler {
   
   private var downloadFolderBookmark: Data {
     // Create a bookmark so we can transfer access to the downloads path
-    // to the feed checker service
+    // to the feed helper service
     return try! FileUtils.bookmark(for: Defaults.shared.torrentsSavePath!)
   }
   
   private var repeatingTimer: Timer! = nil
-  private let feedCheckerConnection = NSXPCConnection(serviceName: xpcServiceName)
+  private let feedHelperConnection = NSXPCConnection(serviceName: xpcServiceName)
   private var activityToken: NSObjectProtocol? = nil
   
   private init() {
     // Create and start single connection to the feed helper
     // Messages will be delivered serially
-    feedCheckerConnection.remoteObjectInterface = NSXPCInterface(with: FeedHelperService.self)
-    feedCheckerConnection.interruptionHandler = { [weak self] in
+    feedHelperConnection.remoteObjectInterface = NSXPCInterface(with: FeedHelperService.self)
+    feedHelperConnection.interruptionHandler = { [weak self] in
       DispatchQueue.main.async {
         guard let scheduler = self else { return }
   
         if scheduler.isChecking {
           scheduler.handleFeedCheckCompletion(wasSuccessful: false)
-          NSLog("Feed checker service crashed")
+          NSLog("Feed helper service crashed")
         } else {
-          NSLog("Feed checker service went offline")
+          NSLog("Feed helper service went offline")
         }
       }
     }
-    feedCheckerConnection.resume()
+    feedHelperConnection.resume()
     
     // Create a timer to check periodically
     repeatingTimer = Timer.scheduledTimer(
@@ -100,17 +100,17 @@ class Scheduler {
   }
   
   func downloadHistoryItem(_ historyItem: HistoryItem, completion: @escaping (([String:Any]?, Error?) -> ())) {
-    // Call feed checker service
-    let feedChecker = feedCheckerConnection.remoteObjectProxy as! FeedHelperService
+    // Call feed helper service
+    let feedHelper = feedHelperConnection.remoteObjectProxy as! FeedHelperService
     
-    feedChecker.downloadFile(
+    feedHelper.downloadFile(
       file: historyItem.dictionaryRepresentation,
       toBookmark: downloadFolderBookmark,
       organizingByFolder: Defaults.shared.shouldOrganizeTorrentsInFolders,
       savingMagnetLinks: !Defaults.shared.shouldOpenTorrentsAutomatically,
       withReply: { downloadedFile, error in
         if let error = error {
-          NSLog("Feed Checker error (downloading file): \(error)")
+          NSLog("Feed Helper error (downloading file): \(error)")
         }
         DispatchQueue.main.async {
           completion(downloadedFile as? [String:Any], error)
@@ -132,14 +132,14 @@ class Scheduler {
     isChecking = true
     
     // Check the feed
-    callFeedCheckerWithReplyHandler { [weak self] (downloadedFeedFiles, error) in
+    callFeedHelperWithReplyHandler { [weak self] (downloadedFeedFiles, error) in
       // Deal with new files
       self?.handleDownloadedFeedFiles(downloadedFeedFiles)
       self?.handleFeedCheckCompletion(wasSuccessful: error == nil)
     }
   }
   
-  private func callFeedCheckerWithReplyHandler(replyHandler: @escaping FeedHelperService.FeedCheckReply) {
+  private func callFeedHelperWithReplyHandler(replyHandler: @escaping FeedHelperService.FeedCheckReply) {
     // Read configuration
     let feedURL = URL(string: Defaults.shared.feedURL)!
     
@@ -148,10 +148,10 @@ class Scheduler {
     // Extract URLs from history
     let previouslyDownloadedURLs = history.map { $0.url.absoluteString }
     
-    // Call feed checker service
-    let feedChecker = feedCheckerConnection.remoteObjectProxy as! FeedHelperService
+    // Call feed helper service
+    let feedHelper = feedHelperConnection.remoteObjectProxy as! FeedHelperService
     
-    feedChecker.checkShowRSSFeed(
+    feedHelper.checkShowRSSFeed(
       feedURL: feedURL,
       downloadingToBookmark: downloadFolderBookmark,
       organizingByFolder: Defaults.shared.shouldOrganizeTorrentsInFolders,
@@ -159,7 +159,7 @@ class Scheduler {
       skippingURLs: previouslyDownloadedURLs,
       withReply: { downloadedFeedFiles, error in
         if let error = error {
-          NSLog("Feed Checker error (checking feed): \(error)")
+          NSLog("Feed Helper error (checking feed): \(error)")
         }
         DispatchQueue.main.async {
           replyHandler(downloadedFeedFiles, error)
