@@ -58,8 +58,8 @@ NSString* const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info/
 	[scheduler forceCheck];
 }
 
-- (void)schedulerStatus:(int)status running:(int)running {
-	[gui setStatus:status running:running];
+- (void)schedulerStatusActive:(BOOL)isActive running:(BOOL)isRunning {
+	[gui setStatusActive:isActive running:isRunning];
 }
 
 - (void)lastUpdateStatus:(int)status time:(NSDate*)time {

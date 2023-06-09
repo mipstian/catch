@@ -24,7 +24,7 @@ static NSString* const GROWL_NEW_TORRENT = @"New torrent";
 	item = [[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength];
 	
 	// Update status UI
-	[self setStatus:1 running:0];
+	[self setStatusActive:1 running:0];
 	[self setLastUpdateStatus:1 time:nil];
     
     NSString *appNameAndVersion = [NSString stringWithFormat:@"%@ %@", CTCDefaults.appName, CTCDefaults.appVersion];
@@ -130,13 +130,13 @@ static NSString* const GROWL_NEW_TORRENT = @"New torrent";
 	[[NSApp delegate] quit];
 }
 
-- (void)setStatus:(int)status running:(int)running {
+- (void)setStatusActive:(BOOL)isActive running:(BOOL)isRunning {
 	SEL action = nil;
 	
-	if (running) {
+	if (isRunning) {
 		action = @selector(setRefreshing);
 	} else {
-		if (status) {
+		if (isActive) {
 			action = @selector(setIdle);
 		} else {
 			action = @selector(setDisabled);
