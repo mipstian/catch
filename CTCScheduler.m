@@ -47,8 +47,12 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
     // Messages will be delivered serially
     self.feedCheckerConnection = [[NSXPCConnection alloc] initWithServiceName:@"com.giorgiocalderolla.Catch.CatchFeedHelper"];
     self.feedCheckerConnection.remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(CTCFeedCheck)];
+    __weak typeof(self) weakSelf = self;
     self.feedCheckerConnection.interruptionHandler = ^{
-        NSLog(@"Feed checker service went offline");
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (weakSelf) weakSelf.checking = NO;
+            NSLog(@"Feed checker service went offline");
+        });
     };
     [self.feedCheckerConnection resume];
     
