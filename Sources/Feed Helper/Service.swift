@@ -17,15 +17,23 @@ extension Service: FeedHelperService {
     organizingByFolder shouldOrganizeByFolder: Bool,
     savingMagnetLinks shouldSaveMagnetLinks: Bool,
     skippingURLs previouslyDownloadedURLs: [String],
-    withReply reply: (_ downloadedFeedFiles: [[AnyHashable:Any]], _ error: Error?) -> Void) {
-    FeedHelper.checkShowRSSFeed(
-      feedURL: feedURL,
-      downloadingToBookmark: downloadFolderBookmark,
-      organizingByFolder: shouldOrganizeByFolder,
-      savingMagnetLinks: shouldSaveMagnetLinks,
-      skippingURLs: previouslyDownloadedURLs,
-      withReply: reply
-    )
+    withReply reply: (_ downloadedFeedFiles: [[AnyHashable:Any]]?, _ error: Error?) -> Void) {
+    let downloadedFeedFiles: [[AnyHashable:Any]]
+    
+    do {
+      downloadedFeedFiles = try FeedHelper.checkShowRSSFeed(
+        feedURL: feedURL,
+        downloadingToBookmark: downloadFolderBookmark,
+        organizingByFolder: shouldOrganizeByFolder,
+        savingMagnetLinks: shouldSaveMagnetLinks,
+        skippingURLs: previouslyDownloadedURLs
+      )
+    } catch {
+      reply(nil, error)
+      return
+    }
+    
+    reply(downloadedFeedFiles, nil)
   }
   
   func downloadFile(
@@ -34,13 +42,21 @@ extension Service: FeedHelperService {
     organizingByFolder shouldOrganizeByFolder: Bool,
     savingMagnetLinks shouldSaveMagnetLinks: Bool,
     withReply reply: (_ downloadedFile: [AnyHashable:Any]?, _ error: Error?) -> Void) {
-    FeedHelper.downloadFile(
-      file: file,
-      toBookmark: downloadFolderBookmark,
-      organizingByFolder: shouldOrganizeByFolder,
-      savingMagnetLinks: shouldSaveMagnetLinks,
-      withReply: reply
-    )
+    let downloadedFile: [AnyHashable:Any]?
+    
+    do {
+      downloadedFile = try FeedHelper.downloadFile(
+        file: file,
+        toBookmark: downloadFolderBookmark,
+        organizingByFolder: shouldOrganizeByFolder,
+        savingMagnetLinks: shouldSaveMagnetLinks
+      )
+    } catch {
+      reply(nil, error)
+      return
+    }
+    
+    reply(downloadedFile, nil)
   }
 }
 
