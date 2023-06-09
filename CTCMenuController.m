@@ -126,8 +126,16 @@
 
 - (void)setIdle {
     // Sets the images (status: idle)
-    [self.menuBarItem setImage:[NSImage imageNamed:@"menubar_idle"]];
-    [self.menuBarItem setAlternateImage:[NSImage imageNamed:@"menubar_idle-inv"]];
+    if ([self.menuBarItem respondsToSelector:@selector(button)]) {
+        // Yosemite
+        self.menuBarItem.button.image = [NSImage imageNamed:@"Menubar_Idle_Template"];
+        self.menuBarItem.button.appearsDisabled = NO;
+    }
+    else {
+        // Older versions of OS X
+        [self.menuBarItem setImage:[NSImage imageNamed:@"menubar_idle"]];
+        [self.menuBarItem setAlternateImage:[NSImage imageNamed:@"menubar_idle-inv"]];
+    }
     
     // Set pause/resume to "pause"
     [self.menuPauseResume setTitle:NSLocalizedString(@"pause", @"Description of pause action")];
@@ -135,8 +143,16 @@
 
 - (void)setRefreshing {
     // Sets the images (status: refreshing)
-    [self.menuBarItem setImage:[NSImage imageNamed:@"menubar_refreshing"]];
-    [self.menuBarItem setAlternateImage:[NSImage imageNamed:@"menubar_refreshing-inv"]];
+    if ([self.menuBarItem respondsToSelector:@selector(button)]) {
+        // Yosemite
+        self.menuBarItem.button.image = [NSImage imageNamed:@"Menubar_Refreshing_Template"];
+        self.menuBarItem.button.appearsDisabled = NO;
+    }
+    else {
+        // Older versions of OS X
+        [self.menuBarItem setImage:[NSImage imageNamed:@"menubar_refreshing"]];
+        [self.menuBarItem setAlternateImage:[NSImage imageNamed:@"menubar_refreshing-inv"]];
+    }
     
     // Set pause/resume to "pause"
     [self.menuPauseResume setTitle:NSLocalizedString(@"pause", @"Description of pause action")];
@@ -147,8 +163,16 @@
 
 - (void)setDisabled {
     // Sets the images (status: disabled)
-    [self.menuBarItem setImage:[NSImage imageNamed:@"menubar_disabled"]];
-    [self.menuBarItem setAlternateImage:[NSImage imageNamed:@"menubar_disabled-inv"]];
+    if ([self.menuBarItem respondsToSelector:@selector(button)]) {
+        // Yosemite
+        self.menuBarItem.button.image = [NSImage imageNamed:@"Menubar_Disabled_Template"];
+        self.menuBarItem.button.appearsDisabled = YES;
+    }
+    else {
+        // Older versions of OS X
+        [self.menuBarItem setImage:[NSImage imageNamed:@"menubar_disabled"]];
+        [self.menuBarItem setAlternateImage:[NSImage imageNamed:@"menubar_disabled-inv"]];
+    }
     
     // Set pause/resume to "resume"
     [self.menuPauseResume setTitle:NSLocalizedString(@"resume", @"Description of resume action")];
