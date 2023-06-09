@@ -1,45 +1,41 @@
 import Foundation
 
 
-private extension String {
-  static let torrentFileExtension = ".torrent"
-  static let weblocFileExtension = ".webloc"
+extension String {
+  private static let torrentFileExtension = ".torrent"
+  private static let weblocFileExtension = ".webloc"
+  
+  var sanitizedForFileSystem: String {
+    return replacingOccurrences(of: "/", with: "").trimmingCharacters(in: .whitespaces)
+  }
+  
+  private func with(fileExtension: String) -> String {
+    return hasSuffix(fileExtension) ? self : self + fileExtension
+  }
+  
+  var torrentFileName: String {
+    return sanitizedForFileSystem.with(fileExtension: .torrentFileExtension)
+  }
+  
+  var weblocFileName: String {
+    return sanitizedForFileSystem.with(fileExtension: .weblocFileExtension)
+  }
 }
 
 
-enum FileUtils {
-  static var userDownloadsDirectory: String? {
-    return NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true).first
-  }
-  
-  static var userHomeDirectory: String {
+extension FileManager {
+  var homeDirectory: String {
     return NSHomeDirectory()
   }
   
-  static func filename(from url: URL) -> String {
-    return url.pathComponents.last!.removingPercentEncoding!
+  var downloadsDirectory: String? {
+    return NSSearchPathForDirectoriesInDomains(.downloadsDirectory, .userDomainMask, true).first
   }
-  
-  static func fileName(from string: String) -> String {
-    return string
-      .replacingOccurrences(of: "/", with: "")
-      .trimmingCharacters(in: .whitespaces)
-  }
-  
-  private static func fileName(from string: String, fileExtension: String) -> String {
-    let cleanName = fileName(from: string)
-    
-    let hasExtension = cleanName.hasSuffix(fileExtension)
-    
-    // Add extension if needed
-    return hasExtension ? cleanName : cleanName + fileExtension
-  }
-  
-  static func torrentFilename(from string: String) -> String {
-    return fileName(from: string, fileExtension: .torrentFileExtension)
-  }
-  
-  static func magnetFilename(from string: String) -> String {
-    return fileName(from: string, fileExtension: .weblocFileExtension)
+}
+
+
+extension URL {
+  var suggestedDownloadFileName: String? {
+    return pathComponents.last?.removingPercentEncoding
   }
 }
