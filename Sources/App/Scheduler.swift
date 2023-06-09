@@ -134,7 +134,7 @@ class Scheduler {
     // Check the feed
     callFeedCheckerWithReplyHandler { [weak self] (downloadedFeedFiles, error) in
       // Deal with new files
-      self?.handleDownloadedFeedFiles(downloadedFeedFiles!) // TODO: nullability specifier
+      self?.handleDownloadedFeedFiles(downloadedFeedFiles)
       self?.handleFeedCheckCompletion(wasSuccessful: error == nil)
     }
   }
