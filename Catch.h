@@ -27,26 +27,26 @@ extern NSString* const SERVICE_FEED_LEGACY_URL_PREFIX;
 	FeedChecker* feedChecker;
 }
 
-- (id) init;
+- (id)init;
 
-- (void) applicationDidFinishLaunching:(NSNotification*)aNotification;
+- (void)applicationDidFinishLaunching:(NSNotification*)aNotification;
 
-- (void) schedulerStatus:(int)status running:(int)running;
+- (void)schedulerStatus:(int)status running:(int)running;
 
-- (void) lastUpdateStatus:(int)status time:(NSDate*)time;
+- (void)lastUpdateStatus:(int)status time:(NSDate*)time;
 
-- (void) checkNow;
+- (void)checkNow;
 
-- (void) togglePause;
+- (void)togglePause;
 
-- (void) savePreferences;
+- (void)savePreferences;
 
-- (BOOL) isConfigurationValid;
+- (BOOL)isConfigurationValid;
 
-- (void) torrentNotificationWithDescription:(NSString*)description;
+- (void)torrentNotificationWithDescription:(NSString*)description;
 
-- (void) orderFrontStandardAboutPanel:(id)sender;
+- (void)orderFrontStandardAboutPanel:(id)sender;
 
-- (void) quit;
+- (void)quit;
 
 @end
