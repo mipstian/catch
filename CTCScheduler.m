@@ -49,7 +49,9 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
     self.feedCheckerConnection.remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(CTCFeedCheck)];
     __weak typeof(self) weakSelf = self;
     self.feedCheckerConnection.interruptionHandler = ^{
-        [weakSelf handleFeedCheckCompletion:NO];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (weakSelf) [weakSelf handleFeedCheckCompletion:NO];
+        });
     };
     [self.feedCheckerConnection resume];
     
@@ -119,9 +121,11 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
     [self callFeedCheckerWithReplyHandler:^(NSArray *downloadedFeedFiles,
                                             NSError *error){
         // Deal with new files
-        [weakSelf handleDownloadedFeedFiles:downloadedFeedFiles];
-        
-        [weakSelf handleFeedCheckCompletion:error == nil];
+        if (weakSelf) {
+            [weakSelf handleDownloadedFeedFiles:downloadedFeedFiles];
+            
+            [weakSelf handleFeedCheckCompletion:error == nil];
+        }
     }];
 }
 
