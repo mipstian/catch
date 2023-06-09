@@ -23,7 +23,6 @@
                 <outlet property="menu" destination="523" id="529"/>
                 <outlet property="menuLastUpdate" destination="540" id="813"/>
                 <outlet property="menuPauseResume" destination="541" id="812"/>
-                <outlet property="menuRecentTorrents" destination="537" id="814"/>
                 <outlet property="menuVersion" destination="545" id="657"/>
             </connections>
         </customObject>
@@ -485,8 +484,8 @@ DQ
                                                     <rect key="frame" x="1" y="1" width="139" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cu4-uA-Wyj">
-                                                            <rect key="frame" x="0.0" y="13" width="100" height="17"/>
+                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="cu4-uA-Wyj">
+                                                            <rect key="frame" x="3" y="7" width="97" height="17"/>
                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="Cqp-ov-mrU">
                                                                 <font key="font" metaFont="system"/>
                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -494,6 +493,10 @@ DQ
                                                             </textFieldCell>
                                                         </textField>
                                                     </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="centerY" secondItem="cu4-uA-Wyj" secondAttribute="centerY" id="0oR-sx-Jlh"/>
+                                                        <constraint firstItem="cu4-uA-Wyj" firstAttribute="leading" secondItem="W93-2s-nQP" secondAttribute="leading" constant="5" id="FMr-J6-jwm"/>
+                                                    </constraints>
                                                     <connections>
                                                         <outlet property="textField" destination="cu4-uA-Wyj" id="gOx-4H-cyu"/>
                                                     </connections>
@@ -517,8 +520,8 @@ DQ
                                                     <rect key="frame" x="143" y="1" width="135" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OUf-bu-XvW">
-                                                            <rect key="frame" x="0.0" y="13" width="100" height="17"/>
+                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="OUf-bu-XvW">
+                                                            <rect key="frame" x="3" y="7" width="97" height="17"/>
                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="v8n-3T-Z0R">
                                                                 <font key="font" metaFont="system"/>
                                                                 <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
@@ -526,6 +529,10 @@ DQ
                                                             </textFieldCell>
                                                         </textField>
                                                     </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="OUf-bu-XvW" firstAttribute="leading" secondItem="OoV-7K-Gmr" secondAttribute="leading" constant="5" id="Jjp-Oz-qvT"/>
+                                                        <constraint firstAttribute="centerY" secondItem="OUf-bu-XvW" secondAttribute="centerY" id="Qr5-lN-34s"/>
+                                                    </constraints>
                                                     <connections>
                                                         <outlet property="textField" destination="OUf-bu-XvW" id="Ves-w5-bHZ"/>
                                                     </connections>
@@ -549,14 +556,15 @@ DQ
                                                     <rect key="frame" x="281" y="1" width="199" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fL9-yB-sch">
-                                                            <rect key="frame" x="0.0" y="-5" width="50" height="32"/>
-                                                            <buttonCell key="cell" type="push" bezelStyle="rounded" image="NSActionTemplate" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="nVH-bA-lMI">
-                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="system"/>
-                                                            </buttonCell>
-                                                        </button>
+                                                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Tko-VC-ugV">
+                                                            <rect key="frame" x="5" y="8" width="14" height="14"/>
+                                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSRefreshFreestandingTemplate" id="nQz-wG-gIz"/>
+                                                        </imageView>
                                                     </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="Tko-VC-ugV" firstAttribute="leading" secondItem="NMC-fT-klG" secondAttribute="leading" constant="5" id="12O-q3-TJX"/>
+                                                        <constraint firstAttribute="centerY" secondItem="Tko-VC-ugV" secondAttribute="centerY" id="ffW-wH-3O3"/>
+                                                    </constraints>
                                                 </tableCellView>
                                             </prototypeCellViews>
                                         </tableColumn>
@@ -590,8 +598,8 @@ DQ
         </window>
     </objects>
     <resources>
-        <image name="NSActionTemplate" width="14" height="14"/>
         <image name="NSAdvanced" width="32" height="32"/>
+        <image name="NSRefreshFreestandingTemplate" width="14" height="14"/>
         <image name="rss" width="32" height="32"/>
         <image name="warning" width="9" height="9"/>
     </resources>
