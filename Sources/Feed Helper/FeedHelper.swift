@@ -1,15 +1,8 @@
 import Foundation
 
 
-class FeedHelper: NSObject {
-  static let shared = FeedHelper()
-  
-  private override init() {}
-}
-
-
-extension FeedHelper: FeedHelperService {
-  func checkShowRSSFeed(
+enum FeedHelper {
+  static func checkShowRSSFeed(
     feedURL: URL,
     downloadingToBookmark downloadFolderBookmark: Data,
     organizingByFolder shouldOrganizeByFolder: Bool,
@@ -80,7 +73,7 @@ extension FeedHelper: FeedHelperService {
     reply(downloadedFeedFiles, nil)
   }
   
-  func downloadFile(
+  static func downloadFile(
     file: [AnyHashable:Any],
     toBookmark downloadFolderBookmark: Data,
     organizingByFolder shouldOrganizeByFolder: Bool,
@@ -122,7 +115,7 @@ extension FeedHelper: FeedHelperService {
 
 // MARK: private utilities
 fileprivate extension FeedHelper {
-  func downloadFeed(feedURL: URL) throws -> XMLDocument {
+  static func downloadFeed(feedURL: URL) throws -> XMLDocument {
     NSLog("Downloading feed \(feedURL)")
     
     // Flush the cache, we want fresh results
@@ -131,7 +124,7 @@ fileprivate extension FeedHelper {
     return try XMLDocument(contentsOf: feedURL, options: 0)
   }
   
-  func downloadFiles(
+  static func downloadFiles(
     feedFiles: [[AnyHashable:Any]],
     toPath downloadPath: String,
     organizingByFolder shouldOrganizeByFolder: Bool,
@@ -204,7 +197,7 @@ fileprivate extension FeedHelper {
   }
   
   /// Create a .webloc file that can be double-clicked to open the magnet link
-  func saveMagnetFile(
+  static func saveMagnetFile(
     file: [AnyHashable:Any],
     toPath downloadPath: String,
     withShowName showName: String?) throws -> String {
@@ -240,7 +233,7 @@ fileprivate extension FeedHelper {
     return pathAndFilename
   }
   
-  func downloadFile(
+  static func downloadFile(
     file: [AnyHashable:Any],
     toPath downloadPath: String,
     withShowName showName: String?) throws -> String {
@@ -303,7 +296,7 @@ fileprivate extension FeedHelper {
     return pathAndFilename
   }
   
-  func writeData(data: Data, toPath pathAndFilename: String) throws {
+  static func writeData(data: Data, toPath pathAndFilename: String) throws {
     let url = URL(fileURLWithPath: pathAndFilename)
     let pathAndFolder = url.deletingLastPathComponent()
     
@@ -357,7 +350,7 @@ fileprivate extension FeedHelper {
     }
   }
   
-  func fullPathWithContainerFolder(
+  static func fullPathWithContainerFolder(
     containerFolder: String,
     suggestedSubFolder: String?,
     filename: String) -> String {
@@ -371,16 +364,5 @@ fileprivate extension FeedHelper {
     containerFolderURL.appendPathComponent(filename)
     
     return containerFolderURL.standardizedFileURL.path
-  }
-}
-
-
-extension FeedHelper: NSXPCListenerDelegate {
-  func listener(_ listener: NSXPCListener, shouldAcceptNewConnection newConnection: NSXPCConnection) -> Bool {
-    newConnection.exportedInterface = NSXPCInterface(with: FeedHelperService.self)
-    newConnection.exportedObject = self
-    newConnection.resume()
-    
-    return true
   }
 }
