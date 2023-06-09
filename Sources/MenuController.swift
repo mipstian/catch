@@ -2,10 +2,10 @@ import AppKit
 
 
 class MenuController: NSObject {
-  @IBOutlet weak var menu: NSMenu!
-  @IBOutlet weak var menuVersion: NSMenuItem!
-  @IBOutlet weak var menuPauseResume: NSMenuItem!
-  @IBOutlet weak var menuLastUpdate: NSMenuItem!
+  @IBOutlet private weak var menu: NSMenu!
+  @IBOutlet private weak var menuVersion: NSMenuItem!
+  @IBOutlet private weak var menuPauseResume: NSMenuItem!
+  @IBOutlet private weak var menuLastUpdate: NSMenuItem!
   
   private var menuBarItem: NSStatusItem!
   
