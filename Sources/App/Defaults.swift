@@ -9,7 +9,7 @@ final class Defaults: NSObject {
   /// Posted whenever any default changes
   static let changedNotification = NSNotification.Name("Defaults.changedNotification")
   
-  struct Keys {
+  private struct Keys {
     static let feedURL = "feedURL"
     static let onlyUpdateBetween = "onlyUpdateBetween"
     static let updateFrom = "updateFrom"
@@ -79,7 +79,7 @@ final class Defaults: NSObject {
   }
   
   var isConfigurationValid: Bool {
-    return isTorrentsSavePathValid && isFeedURLValid
+    return isFeedURLValid
   }
   
   var isTorrentsSavePathValid: Bool {
@@ -87,12 +87,12 @@ final class Defaults: NSObject {
     
     var isDirectory: ObjCBool = false
     guard FileManager.default.fileExists(atPath: path, isDirectory: &isDirectory), isDirectory.boolValue else {
-      NSLog("Download path \(path) does not exist or is not a directory")
+      // Download path does not exist or is not a directory
       return false
     }
     
     guard FileManager.default.isWritableFile(atPath: path) else {
-      NSLog("Download path \(path) is not writable")
+      // Download path is not writable
       return false
     }
     

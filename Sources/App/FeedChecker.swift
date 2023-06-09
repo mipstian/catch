@@ -16,6 +16,7 @@ final class FeedChecker {
     case neverHappened
     case inProgress
     case successful(Date)
+    case skipped(Date)
     case failed(Date, Error)
   }
   
@@ -68,13 +69,21 @@ final class FeedChecker {
     // Don't check twice simultaneously
     guard lastCheckStatus != .inProgress else { return }
     
+    // Skip check if downloads directory isn't currently available
+    guard Defaults.shared.isTorrentsSavePathValid else {
+      NSLog("Skipping feed check: downloads directory is not available")
+      lastCheckStatus = .skipped(Date())
+      return
+    }
+    
     // Only work with valid preferences
     guard
       Defaults.shared.isConfigurationValid,
       let downloadOptions = Defaults.shared.downloadOptions,
       let feedURL = Defaults.shared.feedURL
     else {
-      NSLog("Refusing to check feed - invalid preferences")
+      NSLog("Skipping feed check: invalid preferences")
+      lastCheckStatus = .skipped(Date())
       return
     }
     
