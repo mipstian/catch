@@ -7,11 +7,11 @@
     NSCalendar *calendar = NSCalendar.currentCalendar;
     
     // Get minutes and hours from each date
-    NSDateComponents *dateComp = [calendar components:NSHourCalendarUnit|NSMinuteCalendarUnit
+    NSDateComponents *dateComp = [calendar components:NSCalendarUnitHour|NSCalendarUnitMinute
                                             fromDate:self];
-    NSDateComponents *fromComp = [calendar components:NSHourCalendarUnit|NSMinuteCalendarUnit
+    NSDateComponents *fromComp = [calendar components:NSCalendarUnitHour|NSCalendarUnitMinute
                                              fromDate:from];
-    NSDateComponents *toComp = [calendar components:NSHourCalendarUnit|NSMinuteCalendarUnit
+    NSDateComponents *toComp = [calendar components:NSCalendarUnitHour|NSCalendarUnitMinute
                                            fromDate:to];
     
     BOOL timeRangeCrossesMidnight = fromComp.hour > toComp.hour || (fromComp.hour == toComp.hour && fromComp.minute > toComp.minute);

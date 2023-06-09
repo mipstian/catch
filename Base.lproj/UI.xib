@@ -19,7 +19,7 @@
             </connections>
         </customObject>
         <customObject id="205" customClass="AppDelegate" customModule="Catch" customModuleProvider="target"/>
-        <customObject id="528" customClass="CTCMenuController">
+        <customObject id="528" customClass="MenuController" customModule="Catch" customModuleProvider="target">
             <connections>
                 <outlet property="menu" destination="523" id="529"/>
                 <outlet property="menuLastUpdate" destination="540" id="813"/>
@@ -155,7 +155,7 @@
                                                         </textFieldCell>
                                                     </textField>
                                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="787">
-                                                        <rect key="frame" x="88" y="61" width="535" height="22"/>
+                                                        <rect key="frame" x="88" y="61" width="526" height="22"/>
                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="http://showrss.info/..." drawsBackground="YES" id="788">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -170,7 +170,7 @@
                                                         </connections>
                                                     </textField>
                                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lIi-CM-MqY">
-                                                        <rect key="frame" x="638" y="68" width="9" height="9"/>
+                                                        <rect key="frame" x="629" y="63" width="18" height="18"/>
                                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="warning" id="Rda-Ff-O9x"/>
                                                     </imageView>
                                                     <button translatesAutoresizingMaskIntoConstraints="NO" id="638">
@@ -295,7 +295,7 @@
                                                         </connections>
                                                     </button>
                                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fwJ-Gq-K1U">
-                                                        <rect key="frame" x="289" y="78" width="9" height="9"/>
+                                                        <rect key="frame" x="289" y="74" width="18" height="18"/>
                                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="warning" id="QCG-2j-VVy"/>
                                                     </imageView>
                                                 </subviews>
