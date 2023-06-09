@@ -1,3 +1,5 @@
 Catch.xcodeproj/xcuserdata/*.xcuserdatad/*
 Catch.xcodeproj/project.xcworkspace/*.xcworkspacedata
 Catch.xcodeproj/project.xcworkspace/xcuserdata/*.xcuserdatad/*
+
+Catch.xcodeproj/project.xcworkspace/xcshareddata/*

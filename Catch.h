@@ -20,6 +20,7 @@ extern NSString* const APPLICATION_FEATURE_REQUEST_URL;
 extern NSString* const APPLICATION_HELP_URL;
 extern NSString* const SERVICE_URL;
 extern NSString* const SERVICE_FEED_URL_PREFIX;
+extern NSString* const SERVICE_FEED_LEGACY_URL_PREFIX;
 
 
 @interface Catch : NSObject {

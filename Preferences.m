@@ -93,6 +93,10 @@ int const FEED_UPDATE_INTERVAL = 60*10; // 10 minutes
 	// Most importantly, validate feed URL
 	NSString* feedURL = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCE_KEY_FEED_URL];
 	NSRange range = [feedURL rangeOfString:SERVICE_FEED_URL_PREFIX];
+    if (range.location != 0) {
+        // Try the legacy URL prefix and consider that valid
+        range = [feedURL rangeOfString:SERVICE_FEED_LEGACY_URL_PREFIX];
+    }
 	if (range.location != 0) {
 		// The URL should start with the prefix!
 		NSLog(@"1: %lu %lu", (unsigned long)range.location, (unsigned long)range.length);

@@ -12,12 +12,13 @@
 // Constant, non-localized, non-UI-related strings
 NSString* const APPLICATION_NAME = @"Catch";
 NSString* const APPLICATION_VERSION = @"1.5";
-NSString* const APPLICATION_WEBSITE_URL = @"http://github.com/showrss/catch";
-NSString* const APPLICATION_BUG_REPORT_URL = @"https://github.com/showrss/catch/issues/new";
-NSString* const APPLICATION_FEATURE_REQUEST_URL = @"https://github.com/showrss/catch/issues/new";
-NSString* const APPLICATION_HELP_URL = @"https://github.com/showrss/catch/wiki/Help";
+NSString* const APPLICATION_WEBSITE_URL = @"http://github.com/mipstian/catch";
+NSString* const APPLICATION_BUG_REPORT_URL = @"https://github.com/mipstian/catch/issues/new";
+NSString* const APPLICATION_FEATURE_REQUEST_URL = @"https://github.com/mipstian/catch/issues/new";
+NSString* const APPLICATION_HELP_URL = @"https://github.com/showrss/mipstian/wiki/Help";
 NSString* const SERVICE_URL = @"http://showrss.info/";
 NSString* const SERVICE_FEED_URL_PREFIX = @"http://showrss.info/rss.php?";
+NSString* const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info/rss.php?";
 
 
 @implementation Catch
@@ -141,7 +142,7 @@ NSString* const SERVICE_FEED_URL_PREFIX = @"http://showrss.info/rss.php?";
 		NSArray  *loginItemsArray = (NSArray *)LSSharedFileListCopySnapshot(loginItems, &seedValue);
 
 		for(NSUInteger i ; i < loginItemsArray.count; i++){
-			LSSharedFileListItemRef itemRef = (LSSharedFileListItemRef)loginItemsArray[i];
+			LSSharedFileListItemRef itemRef = (LSSharedFileListItemRef)[loginItemsArray objectAtIndex:i];
 			// Resolve the item with URL
 			if (LSSharedFileListItemResolve(itemRef, 0, (CFURLRef*) &url, NULL) == noErr) {
 				NSString * urlPath = [(NSURL*)url path];
