@@ -12,8 +12,6 @@ extern NSString * const SERVICE_FEED_LEGACY_URL_PREFIX;
 
 @interface CTCAppDelegate : NSObject
 
-- (void)schedulerStatusActive:(BOOL)isActive running:(BOOL)isRunning;
-
 - (void)lastUpdateStatus:(BOOL)lastUpdateWasSuccessful time:(NSDate*)time;
 
 @end

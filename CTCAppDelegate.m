@@ -33,10 +33,6 @@ NSString * const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info
     }
 }
 
-- (void)schedulerStatusActive:(BOOL)isActive running:(BOOL)isRunning {
-	[self.mainController setStatusActive:isActive running:isRunning];
-}
-
 - (void)lastUpdateStatus:(BOOL)lastUpdateWasSuccessful time:(NSDate*)time {
 	[self.mainController setLastUpdateStatus:lastUpdateWasSuccessful time:time];
 	

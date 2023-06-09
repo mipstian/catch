@@ -4,6 +4,9 @@
 #import "CTCDefaults.h"
 
 
+NSString * const kCTCSchedulerStatusNotificationName = @"com.giorgiocalderolla.Catch.scheduler-status-update";
+
+
 @interface CTCScheduler ()
 
 @property (strong, nonatomic) NSTimer *repeatingTimer;
@@ -97,7 +100,10 @@
 	NSLog(@"Scheduler status: active = %d, running = %d", self.isActive, self.isRunning);
 	
 	// Report status to application delegate
-	[[NSApp delegate] schedulerStatusActive:self.isActive running:self.isRunning];
+    [NSNotificationCenter.defaultCenter postNotificationName:kCTCSchedulerStatusNotificationName
+                                                      object:self
+                                                    userInfo:@{@"isActive": @(self.isActive),
+                                                               @"isRunning": @(self.isRunning)}];
 }
 
 - (BOOL)pauseResume {
