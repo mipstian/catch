@@ -55,12 +55,13 @@ class Defaults {
     return URL(fileURLWithPath: expanded).standardizedFileURL
   }
   
-  var downloadHistory: [[AnyHashable:Any]] {
+  var downloadHistory: [HistoryItem] {
     get {
-      return UserDefaults.standard.array(forKey: Keys.history) as! [[AnyHashable:Any]]
+      let rawHistory = UserDefaults.standard.array(forKey: Keys.history) as! [[AnyHashable:Any]]
+      return rawHistory.flatMap(HistoryItem.init(defaultsDictionary:))
     }
     set {
-      UserDefaults.standard.set(newValue, forKey: Keys.history)
+      UserDefaults.standard.set(newValue.map { $0.dictionaryRepresentation }, forKey: Keys.history)
     }
   }
   
@@ -153,10 +154,12 @@ class Defaults {
       NSLog("Migrating download history to new format.")
       
       downloadHistory = downloadedFiles.flatMap(URL.init(string:)).map { url in
-        return [
-          "title": CTCFileUtils.filename(from: url),
-          "url": url
-        ]
+        return HistoryItem(
+          title: CTCFileUtils.filename(from: url),
+          url: url,
+          downloadDate: nil,
+          isMagnetLink: false
+        )
       }
       
       UserDefaults.standard.removeObject(forKey: Keys.downloadedFiles)
@@ -169,5 +172,20 @@ class Defaults {
     
     // Register as a login item if needed
     refreshLoginItemStatus()
+  }
+}
+
+
+private extension HistoryItem {
+  init?(defaultsDictionary: [AnyHashable:Any]) {
+    guard let title = defaultsDictionary["title"] as? String,
+      let url = (defaultsDictionary["url"] as? String).flatMap(URL.init) else {
+        return nil
+    }
+    
+    self.title = title
+    self.url = url
+    self.downloadDate = defaultsDictionary["date"] as? Date
+    self.isMagnetLink = (defaultsDictionary["isMagnetLink"] as? NSNumber)?.boolValue ?? false
   }
 }

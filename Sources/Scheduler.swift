@@ -99,12 +99,12 @@ class Scheduler {
     )
   }
   
-  func downloadFile(_ file: [String:Any], completion: @escaping (([String:Any]?, Error?) -> ())) {
+  func downloadHistoryItem(_ historyItem: HistoryItem, completion: @escaping (([String:Any]?, Error?) -> ())) {
     // Call feed checker service
     let feedChecker = feedCheckerConnection.remoteObjectProxy as! CTCFeedCheck
     
     feedChecker.downloadFile(
-      file,
+      historyItem.dictionaryRepresentation,
       toBookmark: downloadFolderBookmark,
       organizingByFolder: Defaults.shared.shouldOrganizeTorrentsInFolders,
       savingMagnetLinks: !Defaults.shared.shouldOpenTorrentsAutomatically,
@@ -146,7 +146,7 @@ class Scheduler {
     let history = Defaults.shared.downloadHistory
     
     // Extract URLs from history
-    let previouslyDownloadedURLs = history.map { $0["url"] as! String }
+    let previouslyDownloadedURLs = history.map { $0.url.absoluteString }
     
     // Call feed checker service
     let feedChecker = feedCheckerConnection.remoteObjectProxy as! CTCFeedCheck
@@ -192,14 +192,14 @@ class Scheduler {
       
       let url = feedFile["url"] as! String
       
-      // Add url to history
-      let newHistoryEntry: [AnyHashable:Any] = [
-        "title": title,
-        "url": url,
-        "isMagnetLink": isMagnetLink,
-        "date": Date()
-      ]
-      Defaults.shared.downloadHistory = [newHistoryEntry] + Defaults.shared.downloadHistory
+      // Add to history
+      let newHistoryItem = HistoryItem(
+        title: title,
+        url: URL(string: url)!,
+        downloadDate: Date(),
+        isMagnetLink: isMagnetLink
+      )
+      Defaults.shared.downloadHistory = [newHistoryItem] + Defaults.shared.downloadHistory
     }
   }
   

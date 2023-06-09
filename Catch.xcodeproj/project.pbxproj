@@ -23,6 +23,7 @@
 		44717AD61913A16500580054 /* com.giorgiocalderolla.Catch.CatchFeedHelper.xpc in CopyFiles */ = {isa = PBXBuildFile; fileRef = 44717AC41913A08700580054 /* com.giorgiocalderolla.Catch.CatchFeedHelper.xpc */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		44717AD91913A1C900580054 /* CTCFeedChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717AD81913A1C900580054 /* CTCFeedChecker.m */; };
 		44717ADD1913AF3400580054 /* CTCFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717AA91913173600580054 /* CTCFileUtils.m */; };
+		44AB5B5E1DCE794A00AE6EB6 /* HistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AB5B5D1DCE794A00AE6EB6 /* HistoryItem.swift */; };
 		44B363461DC99D1900128259 /* Scheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B363451DC99D1900128259 /* Scheduler.swift */; };
 		44B363481DC9B9FB00128259 /* Browser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B363471DC9B9FB00128259 /* Browser.swift */; };
 		44B3634A1DC9BF1B00128259 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B363491DC9BF1B00128259 /* Config.swift */; };
@@ -126,6 +127,7 @@
 		448CECE019157B880075ADD9 /* nl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/UI.strings; sourceTree = "<group>"; };
 		448CECE119157BB10075ADD9 /* zh-Hans */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/UI.strings"; sourceTree = "<group>"; };
 		448CECE219157BDF0075ADD9 /* zh-Hant */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/UI.strings"; sourceTree = "<group>"; };
+		44AB5B5D1DCE794A00AE6EB6 /* HistoryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HistoryItem.swift; path = Sources/HistoryItem.swift; sourceTree = "<group>"; };
 		44B363451DC99D1900128259 /* Scheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Scheduler.swift; path = Sources/Scheduler.swift; sourceTree = "<group>"; };
 		44B363471DC9B9FB00128259 /* Browser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Browser.swift; path = Sources/Browser.swift; sourceTree = "<group>"; };
 		44B363491DC9BF1B00128259 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Config.swift; path = Sources/Config.swift; sourceTree = "<group>"; };
@@ -281,6 +283,7 @@
 				44B363471DC9B9FB00128259 /* Browser.swift */,
 				44B363491DC9BF1B00128259 /* Config.swift */,
 				44FFCE3E1DCB92F4006E6DF0 /* Defaults.swift */,
+				44AB5B5D1DCE794A00AE6EB6 /* HistoryItem.swift */,
 				44B363451DC99D1900128259 /* Scheduler.swift */,
 				44717AA51913072200580054 /* CTCLoginItems.h */,
 				44717AA61913072200580054 /* CTCLoginItems.m */,
@@ -530,6 +533,7 @@
 				44B363481DC9B9FB00128259 /* Browser.swift in Sources */,
 				44BA5D1A1DB81A8E00A9CE9A /* Application.swift in Sources */,
 				44B3634C1DCA6F7100128259 /* TimeOfDayMath.swift in Sources */,
+				44AB5B5E1DCE794A00AE6EB6 /* HistoryItem.swift in Sources */,
 				44BA5D1C1DB8220100A9CE9A /* MenuController.swift in Sources */,
 				44BA5D141DAEC3B600A9CE9A /* RecentsController.swift in Sources */,
 				44717AA71913072200580054 /* CTCLoginItems.m in Sources */,

@@ -40,16 +40,15 @@ extension RecentsController: NSTableViewDataSource {
 
 extension RecentsController: NSTableViewDelegate {
   func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-    let recent = Defaults.shared.downloadHistory[row]
+    let historyItem = Defaults.shared.downloadHistory[row]
     
     guard let cell = tableView.make(withIdentifier: "RecentCell", owner: self) as? RecentsCellView else {
       return nil
     }
     
-    cell.textField?.stringValue = recent["title"] as! String
+    cell.textField?.stringValue = historyItem.title
     
-    let downloadDate = recent["date"] as? Date
-    cell.downloadDateTextField.stringValue = downloadDate.map(downloadDateFormatter.string) ?? ""
+    cell.downloadDateTextField.stringValue = historyItem.downloadDate.map(downloadDateFormatter.string) ?? ""
     
     return cell
   }
@@ -70,12 +69,12 @@ extension RecentsController {
   
   @IBAction private func downloadRecentItemAgain(_ senderButton: NSButton) {
     let clickedRow = table.row(for: senderButton)
-    let recentToDownload = Defaults.shared.downloadHistory[clickedRow] as! [String:Any]
-    let isMagnetLink = recentToDownload["isMagnetLink"] as! Bool
+    let recentToDownload = Defaults.shared.downloadHistory[clickedRow]
+    let isMagnetLink = recentToDownload.isMagnetLink
     if isMagnetLink {
-      Browser.openInBackground(url: URL(string: recentToDownload["url"] as! String)!)
+      Browser.openInBackground(url: recentToDownload.url)
     } else {
-      Scheduler.shared.downloadFile(recentToDownload) { downloadedFile, error in
+      Scheduler.shared.downloadHistoryItem(recentToDownload) { downloadedFile, error in
         guard Defaults.shared.shouldOpenTorrentsAutomatically, let downloadedFile = downloadedFile else {
           return
         }
