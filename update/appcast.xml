@@ -20,7 +20,7 @@
         ]]></description>
         <enclosure
         url="https://github.com/mipstian/catch/releases/download/1.9.3/Catch-1.9.3.zip"
-        sparkle:version="1.9.3"
+        sparkle:version="502"
         type="application/octet-stream"/>
         <sparkle:minimumSystemVersion>10.8.0</sparkle:minimumSystemVersion>
     </item>
