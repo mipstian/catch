@@ -4,7 +4,7 @@
 "pause"="Pausieren"; // this is a verb
 "resume"="Fortsetzen"; // this is a verb
 "lastupdate"="Letztes Update: %@"; // %@ will be replaced by update time
-"lastupdatefailed"="Letzes Update (fehlgeschlagen): %@"; // %@ will be replaced by update time
+"lastupdatefailed"="Letztes Update (fehlgeschlagen): %@"; // %@ will be replaced by update time
 "never"="Noch nie"; // this is for the last update time, meaning "I still haven't made one"
 "updatingnow"="Updatet jetzt...";
 // for notifications:
