@@ -186,7 +186,7 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 - (void)handleDownloadedFeedFiles:(NSArray *)downloadedFeedFiles {
     BOOL shouldOpenTorrentsAutomatically = CTCDefaults.shouldOpenTorrentsAutomatically;
     
-    for (NSDictionary *feedFile in downloadedFeedFiles) {
+    for (NSDictionary *feedFile in downloadedFeedFiles.reverseObjectEnumerator) {
         BOOL isMagnetLink = [feedFile[@"isMagnetLink"] boolValue];
         
         // Open magnet link
@@ -208,8 +208,9 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
         
         // Add url to history
         NSArray *history = CTCDefaults.downloadHistory;
-        NSArray *newHistory = [history arrayByAddingObject:@{@"title": feedFile[@"title"],
-                                                             @"url": feedFile[@"url"]}];
+        NSDictionary *newHistoryEntry = @{@"title": feedFile[@"title"],
+                                          @"url": feedFile[@"url"]};
+        NSArray *newHistory = [@[newHistoryEntry] arrayByAddingObjectsFromArray:history];
         CTCDefaults.downloadHistory = newHistory;
     }
 }

@@ -170,7 +170,7 @@
 	[self.menuRecentTorrents.submenu removeAllItems];
 	
 	// Add new items
-    [recentTorrentNames.reverseObjectEnumerator.allObjects enumerateObjectsUsingBlock:^(NSString *title, NSUInteger index, BOOL *stop) {
+    [recentTorrentNames enumerateObjectsUsingBlock:^(NSString *title, NSUInteger index, BOOL *stop) {
         NSString *menuTitle = [NSString stringWithFormat:@"%lu %@", index + 1, title];
 		NSMenuItem *newItem = [[NSMenuItem alloc] initWithTitle:menuTitle
                                                          action:NULL
