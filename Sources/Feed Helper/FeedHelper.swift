@@ -249,7 +249,7 @@ fileprivate extension FeedHelper {
     
     // Write!
     do {
-      try data.write(to: url, options: .atomicWrite)
+      try data.write(to: url, options: .atomic)
     } catch {
       throw NSError(
         domain: feedHelperErrorDomain,
