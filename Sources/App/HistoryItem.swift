@@ -12,11 +12,7 @@ struct HistoryItem {
 }
 
 
-extension HistoryItem: Equatable {
-  static func ==(lhs: HistoryItem, rhs: HistoryItem) -> Bool {
-    return lhs.episode == rhs.episode && lhs.downloadDate == rhs.downloadDate
-  }
-}
+extension HistoryItem: Equatable {}
 
 
 extension HistoryItem: Comparable {
