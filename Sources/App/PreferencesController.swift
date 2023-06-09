@@ -69,7 +69,7 @@ class PreferencesController: NSWindowController {
     // Set up context menu actions
     do {
       let copyNameItem = NSMenuItem(
-        title: "Copy Name",
+        title: NSLocalizedString("Copy Name", comment: ""),
         action: #selector(copyName),
         keyEquivalent: ""
       )
@@ -77,7 +77,7 @@ class PreferencesController: NSWindowController {
       feedsTableContextMenu.addItem(copyNameItem)
       
       let copyAddressItem = NSMenuItem(
-        title: "Copy Address",
+        title: NSLocalizedString("Copy Address", comment: ""),
         action: #selector(copyAddress),
         keyEquivalent: ""
       )
@@ -85,7 +85,7 @@ class PreferencesController: NSWindowController {
       feedsTableContextMenu.addItem(copyAddressItem)
       
       let showContentsItem = NSMenuItem(
-        title: "Show Contents",
+        title: NSLocalizedString("Show Contents", comment: ""),
         action: #selector(showContents),
         keyEquivalent: ""
       )

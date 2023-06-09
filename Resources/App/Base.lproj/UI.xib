@@ -148,12 +148,12 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <rect key="contentRect" x="310" y="248" width="700" height="317"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
-            <view key="contentView" id="553" customClass="PreferencesView" customModule="Catch" customModuleProvider="target">
-                <rect key="frame" x="0.0" y="0.0" width="700" height="431"/>
+            <view key="contentView" misplaced="YES" id="553" customClass="PreferencesView" customModule="Catch" customModuleProvider="target">
+                <rect key="frame" x="0.0" y="0.0" width="700" height="317"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="616" userLabel="(Feed, Downloads, Tweaks)">
-                        <rect key="frame" x="20" y="60" width="660" height="351"/>
+                        <rect key="frame" x="20" y="60" width="660" height="237"/>
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
                             <tabViewItem label="Feeds" identifier="Feeds" id="617">
@@ -624,6 +624,8 @@ DQ
                 <connections>
                     <outlet property="downloadScriptCheckbox" destination="GJR-jo-BJL" id="z5g-lf-uhF"/>
                     <outlet property="importFromOPMLButton" destination="SIo-Vm-tN9" id="lme-NT-tYN"/>
+                    <outlet property="openAutomaticallyCheckbox" destination="shg-7R-wuU" id="wCo-7O-0Ts"/>
+                    <outlet property="organizeCheckbox" destination="bJl-7q-4yr" id="jET-Ex-bVY"/>
                     <outlet property="toolBar" destination="604" id="EEc-Ql-Y2W"/>
                 </connections>
             </view>

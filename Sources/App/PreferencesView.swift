@@ -2,8 +2,11 @@ import AppKit
 
 
 class PreferencesView: NSView {
-  @IBOutlet weak var downloadScriptCheckbox: NSButton!
   @IBOutlet weak var importFromOPMLButton: NSButton!
+  
+  @IBOutlet weak var organizeCheckbox: NSButton!
+  @IBOutlet weak var openAutomaticallyCheckbox: NSButton!
+  @IBOutlet weak var downloadScriptCheckbox: NSButton!
   
   @IBOutlet weak var toolBar: NSToolbar!
   
@@ -11,6 +14,9 @@ class PreferencesView: NSView {
     super.awakeFromNib()
     
     importFromOPMLButton.title = NSLocalizedString("Import From OPML File…", comment: "")
+    
+    organizeCheckbox.title = NSLocalizedString("Organize in folders by show name", comment: "")
+    openAutomaticallyCheckbox.title = NSLocalizedString("Open automatically", comment: "")
     downloadScriptCheckbox.title = NSLocalizedString("Download using script:", comment: "")
     
     for item in toolBar.items {
