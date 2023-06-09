@@ -11,7 +11,7 @@ NSString * const kCTCDefaultsApplicationBugReportURL = @"https://github.com/mips
 NSString * const kCTCDefaultsApplicationFeatureRequestURL = @"https://github.com/mipstian/catch/issues/new?labels=enhancement";
 NSString * const kCTCDefaultsApplicationHelpURL = @"https://github.com/mipstian/catch/wiki/Configuration";
 NSString * const kCTCDefaultsServiceURL = @"https://showrss.info/";
-NSString * const kCTCDefaultsServiceFeedURLPrefixRegex = @"^https?://showrss.info/rss.php\\?(.*)$";
+NSString * const kCTCDefaultsServiceFeedURLRegex = @"^https?://showrss.info/rss.php\\?(.*)$";
 
 // NSUserDefaults keys
 NSString * const kCTCDefaultsFeedURLKey = @"feedURL";
@@ -91,10 +91,10 @@ NSString * const kCTCDefaultsShouldRunHeadless = @"headless";
 
 + (BOOL)isFeedURLValid {
     NSString *feedURL = CTCDefaults.feedURL;
-    NSPredicate *feedURLTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", kCTCDefaultsServiceFeedURLPrefixRegex];
+    NSPredicate *feedURLTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", kCTCDefaultsServiceFeedURLRegex];
     if (![feedURLTest evaluateWithObject:feedURL]) {
         // The URL should match the prefix regex!
-        NSLog(@"Feed URL (%@) does not match Regex (%@)", feedURL, kCTCDefaultsServiceFeedURLPrefixRegex);
+        NSLog(@"Feed URL (%@) does not match Regex (%@)", feedURL, kCTCDefaultsServiceFeedURLRegex);
         return NO;
     }
     if ([feedURL rangeOfString:@"namespaces"].location == NSNotFound) {
