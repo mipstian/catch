@@ -12,12 +12,16 @@ class PreferencesController: NSWindowController {
     if !Defaults.shared.isConfigurationValid { showWindow(self) }
     
     // TODO: encapsulate this
-    UserDefaults.standard.addObserver(self, forKeyPath: "savePath", options: .new, context: nil)
-    UserDefaults.standard.addObserver(self, forKeyPath: "feedURL", options: .new, context: nil)
+    UserDefaults.standard.addObserver(self, forKeyPath: "savePath", options: .new, context: &kvoContext)
+    UserDefaults.standard.addObserver(self, forKeyPath: "feedURL", options: .new, context: &kvoContext)
   }
   
   override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey:Any]?, context: UnsafeMutableRawPointer?) {
-    refreshInvalidInputMarkers()
+    if context == &kvoContext {
+      refreshInvalidInputMarkers()
+    } else {
+      super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+    }
   }
   
   fileprivate func refreshInvalidInputMarkers() {
@@ -26,8 +30,8 @@ class PreferencesController: NSWindowController {
   }
   
   deinit {
-    UserDefaults.standard.removeObserver(self, forKeyPath: "savePath")
-    UserDefaults.standard.removeObserver(self, forKeyPath: "feedURL")
+    UserDefaults.standard.removeObserver(self, forKeyPath: "savePath", context: &kvoContext)
+    UserDefaults.standard.removeObserver(self, forKeyPath: "feedURL", context: &kvoContext)
   }
 }
 
@@ -77,3 +81,5 @@ extension PreferencesController {
     window?.toolbar?.selectedItemIdentifier = "Tweaks"
   }
 }
+
+private var kvoContext = 0
