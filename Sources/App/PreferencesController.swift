@@ -84,6 +84,11 @@ extension PreferencesController {
     window?.toolbar?.selectedItemIdentifier = .init(rawValue: "Feed")
   }
   
+  @IBAction fileprivate func showDownloads(_: Any?) {
+    // Select the Downloads tab
+    window?.toolbar?.selectedItemIdentifier = .init(rawValue: "Downloads")
+  }
+  
   @IBAction private func showTweaks(_: Any?) {
     // Select the Tweaks tab
     window?.toolbar?.selectedItemIdentifier = .init(rawValue: "Tweaks")
