@@ -14,34 +14,18 @@ final class FeedChecker {
   /// The date/time of the last feed check, nil if no check has been made yet.
   private(set) var lastUpdateDate: Date? = nil
   
-  private var shouldCheckNow: Bool {
-    if !Defaults.shared.areTimeRestrictionsEnabled { return true }
-    
-    return Date().isTimeOfDayBetween(
-      startTimeOfDay: Defaults.shared.fromDateForTimeRestrictions,
-      endTimeOfDay: Defaults.shared.toDateForTimeRestrictions
-    )
-  }
-  
-  private var repeatingTimer: Timer! = nil
   private var activityToken: NSObjectProtocol? = nil
   
   private let feedHelperProxy = FeedHelperProxy()
+  private let scheduler = Scheduler(interval: Config.feedUpdateInterval)
   
   private init() {
     feedHelperProxy.delegate = self
     
-    // Create a timer to check periodically
-    repeatingTimer = Timer.scheduledTimer(
-      timeInterval: Config.feedUpdateInterval,
-      target: self,
-      selector: #selector(tick),
-      userInfo: nil,
-      repeats: true
-    )
+    scheduler.delegate = self
 
-    // Check now as well
-    fireTimerNow()
+    // Check now
+    scheduler.scheduleNow()
 
     refreshActivity()
   }
@@ -50,7 +34,7 @@ final class FeedChecker {
     isPolling = !isPolling
     
     // If we have just been set to polling, poll immediately
-    if isPolling { fireTimerNow() }
+    if isPolling { scheduler.scheduleNow() }
   }
   
   func forceCheck() {
@@ -96,7 +80,7 @@ final class FeedChecker {
     )
   }
   
-  private func checkFeed() {
+  fileprivate func checkFeed() {
     // Don't check twice simultaneously
     guard !isChecking else { return }
     
@@ -172,23 +156,27 @@ final class FeedChecker {
     
     sendStatusChangedNotification()
   }
-
-  @objc private func tick(_ timer: Timer) {
-    // Don't check if paused or if current time is outside user-defined range
-    guard isPolling && shouldCheckNow else { return }
-    
-    checkFeed()
-  }
-  
-  private func fireTimerNow() {
-    repeatingTimer.fireDate = .distantPast
-  }
   
   private func sendStatusChangedNotification() {
-    NotificationCenter.default.post(name: FeedChecker.statusChangedNotification, object: self)
+    NotificationCenter.default.post(
+      name: FeedChecker.statusChangedNotification,
+      object: self
+    )
   }
 }
 
+
+extension FeedChecker: SchedulerDelegate {
+  func schedulerFired() {
+    // Skip if paused
+    guard isPolling else { return }
+    
+    // Skip if current time is outside user-defined range
+    guard !Defaults.shared.restricts(date: Date()) else { return }
+    
+    checkFeed()
+  }
+}
 
 extension FeedChecker: FeedHelperProxyDelegate {
   func feedHelperConnectionWasInterrupted() {
