@@ -8,19 +8,17 @@ static NSString * const kCTCFileUtilsTorrentExtension = @".torrent";
 
 + (NSData *)bookmarkForURL:(NSURL *)url
                      error:(NSError * __autoreleasing *)outError {
-    // Create a bookmark so we can transfer access to the downloads path
-    // to the feed checker service
     NSError *error = nil;
-    NSData *downloadFolderBookmark = [url bookmarkDataWithOptions:NSURLBookmarkCreationMinimalBookmark
+    NSData *bookmark = [url bookmarkDataWithOptions:NSURLBookmarkCreationMinimalBookmark
                                                  includingResourceValuesForKeys:@[]
                                                                   relativeToURL:nil
                                                                           error:&error];
-    if (!downloadFolderBookmark || error) {
+    if (!bookmark || error) {
         *outError = error;
         return nil;
     }
     
-    return downloadFolderBookmark;
+    return bookmark;
 }
 
 + (NSURL *)URLFromBookmark:(NSData *)bookmark

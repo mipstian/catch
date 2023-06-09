@@ -143,6 +143,9 @@ NSString * const kCTCSchedulerStatusChangedNotificationName = @"com.giorgiocalde
 - (NSData *)downloadFolderBookmark {
     NSError *error;
     NSURL *url = [NSURL fileURLWithPath:CTCDefaults.torrentsSavePath];
+  
+    // Create a bookmark so we can transfer access to the downloads path
+    // to the feed checker service
     NSData *bookmark = [CTCFileUtils bookmarkForURL:url error:&error];
     
     if (!bookmark) {
