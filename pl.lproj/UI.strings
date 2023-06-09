@@ -1,0 +1,78 @@
+
+/* Class = "NSMenuItem"; title = "Launch ShowRSS website"; ObjectID = "524"; */
+"524.title" = "Otwórz stronę ShowRSS";
+
+/* Class = "NSMenuItem"; title = "Zakończ Catch"; ObjectID = "525"; */
+"525.title" = "Zakończ Catch";
+
+/* Class = "NSMenuItem"; title = "Preferencje..."; ObjectID = "532"; */
+"532.title" = "Preferencje...";
+
+/* Class = "NSMenuItem"; title = "Pomoc"; ObjectID = "533"; */
+"533.title" = "Pomoc";
+
+/* Class = "NSMenuItem"; title = "Otwórz stronę domową Catch"; ObjectID = "535"; */
+"535.title" = "Otwórz stronę domową Catch";
+
+/* Class = "NSMenuItem"; title = "Ostatnio pobrane torrenty"; ObjectID = "537"; */
+"537.title" = "Ostatnio pobrane torrenty";
+
+/* Class = "NSMenuItem"; title = "Pomoc w konfiguracji"; ObjectID = "542"; */
+"542.title" = "Pomoc w konfiguracji";
+
+/* Class = "NSMenuItem"; title = "Masz pomysł?"; ObjectID = "543"; */
+"543.title" = "Masz pomysł?";
+
+/* Class = "NSMenuItem"; title = "Zgłoś problem"; ObjectID = "544"; */
+"544.title" = "Zgłoś problem";
+
+/* Class = "NSWindow"; title = "Preferencje"; ObjectID = "552"; */
+"552.title" = "Preferencje";
+
+/* Class = "NSButtonCell"; title = "Pomoc w konfiguracji"; ObjectID = "592"; */
+"592.title" = "Pomoc w konfiguracji";
+
+/* Class = "NSButtonCell"; title = "OK"; ObjectID = "593"; */
+"593.title" = "OK";
+
+/* Class = "NSToolbarItem"; label = "Kanał RSS"; ObjectID = "612"; */
+"612.label" = "Kanał RSS";
+
+/* Class = "NSToolbarItem"; label = "Inne"; ObjectID = "613"; */
+"613.label" = "Inne";
+
+/* Class = "NSBox"; title = "Kanał ShowRSS"; ObjectID = "621"; */
+"621.title" = "Kanał ShowRSS";
+
+/* Class = "NSBox"; title = "Torrenty"; ObjectID = "622"; */
+"622.title" = "Torrenty";
+
+/* Class = "NSTextFieldCell"; title = "Zapisz torrenty w:"; ObjectID = "632"; */
+"632.title" = "Zapisz torrenty w:";
+
+/* Class = "NSButtonCell"; title = "Uporządkuj torrenty według tytułu serialu"; ObjectID = "633"; */
+"633.title" = "Uporządkuj torrenty według tytułu serialu";
+
+/* Class = "NSButtonCell"; title = "Automatycznie otwórz torrenty"; ObjectID = "634"; */
+"634.title" = "Automatycznie otwórz torrenty";
+
+/* Class = "NSButtonCell"; title = "Sprawdzaj kanał od"; ObjectID = "645"; */
+"645.title" = "Sprawdzaj kanał od";
+
+/* Class = "NSTextFieldCell"; title = "do"; ObjectID = "647"; */
+"647.title" = "do";
+
+/* Class = "NSMenuItem"; title = "Sprawdź teraz"; ObjectID = "655"; */
+"655.title" = "Sprawdź teraz";
+
+/* Class = "NSTextFieldCell"; title = "URL kanału:"; ObjectID = "786"; */
+"786.title" = "URL kanału:";
+
+/* Class = "NSButtonCell"; title = "Automatycznie sprawdzaj dostępność aktualizacji"; ObjectID = "807"; */
+"807.title" = "Automatycznie sprawdzaj dostępność aktualizacji";
+
+/* Class = "NSMenuItem"; title = "Pokaż w Finderze"; ObjectID = "815"; */
+"815.title" = "Pokaż w Finderze";
+
+/* Class = "NSButtonCell"; title = "Otwórz przy logowaniu"; ObjectID = "981"; */
+"981.title" = "Otwórz przy logowaniu";
