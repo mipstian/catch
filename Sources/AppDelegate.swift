@@ -3,12 +3,12 @@ import AppKit
 
 @NSApplicationMain
 final class AppDelegate: NSObject, NSApplicationDelegate {
-  func applicationDidFinishLaunching(_: NSNotification) {
+  func applicationDidFinishLaunching(_: Notification) {
     // Enable Notification Center notifications
-    NSUserNotificationCenter.defaultUserNotificationCenter().delegate = self
+    NSUserNotificationCenter.default.delegate = self
   }
   
-  func applicationWillTerminate(_: NSNotification) {
+  func applicationWillTerminate(_: Notification) {
     // Persist defaults before quitting
     CTCDefaults.save()
   }
@@ -16,7 +16,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
 
 extension AppDelegate: NSUserNotificationCenterDelegate {
-  func userNotificationCenter(_: NSUserNotificationCenter, shouldPresentNotification _: NSUserNotification) -> Bool {
+  func userNotificationCenter(_: NSUserNotificationCenter, shouldPresent _: NSUserNotification) -> Bool {
     return true
   }
 }
