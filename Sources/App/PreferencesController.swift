@@ -1,12 +1,23 @@
 import AppKit
+import Sparkle
 
 
 /// Manages the "Preferences" window.
 class PreferencesController: NSWindowController {
   @IBOutlet private weak var feedURLWarningImageView: NSImageView!
   @IBOutlet private weak var torrentsSavePathWarningImageView: NSImageView!
+  @IBOutlet private weak var automaticallyCheckForUpdatesCheckbox: NSButton!
   
   override func awakeFromNib() {
+    // Bind automatically check for updates checkbox to sparkle
+    #if !DEBUG
+      automaticallyCheckForUpdatesCheckbox.bind(
+        "value",
+        to: SUUpdater.shared(),
+        withKeyPath: "automaticallyChecksForUpdates"
+      )
+    #endif
+    
     showFeeds(self)
     
     // If the configuration isn't valid, pop up immediately
@@ -31,6 +42,8 @@ class PreferencesController: NSWindowController {
   }
   
   deinit {
+    automaticallyCheckForUpdatesCheckbox.unbind("value")
+    
     UserDefaults.standard.removeObserver(self, forKeyPath: "savePath", context: &kvoContext)
     UserDefaults.standard.removeObserver(self, forKeyPath: "feedURL", context: &kvoContext)
   }
