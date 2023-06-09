@@ -19,7 +19,7 @@ extension NSWindow {
     shakeAnimation.path = shakePath
     shakeAnimation.duration = duration
     
-    animations = ["frameOrigin": shakeAnimation]
+    animations = [NSAnimatablePropertyKey(rawValue: "frameOrigin"): shakeAnimation]
     animator().setFrameOrigin(frame.origin)
   }
 }

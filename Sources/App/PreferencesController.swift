@@ -2,6 +2,11 @@ import AppKit
 import Sparkle
 
 
+private extension NSBindingName {
+  static let checkboxValue = NSBindingName(rawValue: "value")
+}
+
+
 /// Manages the "Preferences" window.
 class PreferencesController: NSWindowController {
   @IBOutlet private weak var feedURLWarningImageView: NSImageView!
@@ -12,7 +17,7 @@ class PreferencesController: NSWindowController {
     // Bind automatically check for updates checkbox to sparkle
     #if !DEBUG
       automaticallyCheckForUpdatesCheckbox.bind(
-        "value",
+        .checkboxValue,
         to: SUUpdater.shared(),
         withKeyPath: "automaticallyChecksForUpdates"
       )
@@ -40,7 +45,7 @@ class PreferencesController: NSWindowController {
   }
   
   deinit {
-    automaticallyCheckForUpdatesCheckbox.unbind("value")
+    automaticallyCheckForUpdatesCheckbox.unbind(.checkboxValue)
     NotificationCenter.default.removeObserver(self)
   }
 }
@@ -76,11 +81,11 @@ extension PreferencesController {
   
   @IBAction fileprivate func showFeeds(_: Any?) {
     // Select the Feeds tab
-    window?.toolbar?.selectedItemIdentifier = "Feed"
+    window?.toolbar?.selectedItemIdentifier = .init(rawValue: "Feed")
   }
   
   @IBAction private func showTweaks(_: Any?) {
     // Select the Tweaks tab
-    window?.toolbar?.selectedItemIdentifier = "Tweaks"
+    window?.toolbar?.selectedItemIdentifier = .init(rawValue: "Tweaks")
   }
 }

@@ -1,6 +1,11 @@
 import AppKit
 
 
+private extension NSUserInterfaceItemIdentifier {
+  static let recentsCell = NSUserInterfaceItemIdentifier(rawValue: "RecentCell")
+}
+
+
 /// Manages the "Recent Episodes" window.
 class RecentsController: NSWindowController {
   @IBOutlet fileprivate weak var table: NSTableView!
@@ -53,7 +58,7 @@ extension RecentsController: NSTableViewDelegate {
     // Get the item to display
     let historyItem = sortedHistory[row]
     
-    guard let cell = tableView.make(withIdentifier: "RecentCell", owner: self) as? RecentsCellView else {
+    guard let cell = tableView.makeView(withIdentifier: .recentsCell, owner: self) as? RecentsCellView else {
       return nil
     }
     
