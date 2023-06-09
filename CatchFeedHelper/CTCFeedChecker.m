@@ -49,7 +49,7 @@ NSString * kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedH
     NSArray* feedFiles = [CTCFeedParser parseURLs:feed];
     if (!feedFiles) {
         reply(@[], [NSError errorWithDomain:kCTCFeedCheckerErrorDomain
-                                       code:-1
+                                       code:-2
                                    userInfo:nil]);
         return;
     }
@@ -135,7 +135,7 @@ NSString * kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedH
             else {
                 NSLog(@"Could not download %@", url);
                 *error = [NSError errorWithDomain:kCTCFeedCheckerErrorDomain
-                                             code:-1
+                                             code:-3
                                          userInfo:nil];
             }
 		}
