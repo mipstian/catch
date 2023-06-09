@@ -97,7 +97,18 @@ extension RecentsController: NSTableViewDelegate {
     
     cell.textField?.stringValue = historyItem.episode.title
     
-    cell.downloadDateTextField.stringValue = historyItem.downloadDate.map(downloadDateFormatter.string) ?? ""
+    let formattedDownloadDate = historyItem.downloadDate.map(downloadDateFormatter.string)
+    
+    let feedName = historyItem.episode.feed?.name ?? "ShowRSS"
+    
+    let subtitle: String
+    if let formattedDownloadDate = formattedDownloadDate {
+      subtitle = "\(feedName) • \(formattedDownloadDate)"
+    } else {
+      subtitle = feedName
+    }
+    
+    cell.downloadDateTextField.stringValue = subtitle
     
     let canDownloadNonTorrents = Defaults.shared.downloadScriptEnabled && Defaults.shared.downloadScriptPath != nil
     let isTorrent = historyItem.episode.url.isMagnetLink || historyItem.episode.url.absoluteString.isTorrentFilePath

@@ -2,7 +2,7 @@ import Foundation
 
 
 /// A previously downloaded episode. These are called "Recent episodes" in the UI.
-struct HistoryItem {
+struct HistoryItem: Equatable {
   var episode: Episode
   
   /// When this episode was downloaded.
@@ -10,9 +10,6 @@ struct HistoryItem {
   /// - Note: Very old items might not have a date set.
   var downloadDate: Date?
 }
-
-
-extension HistoryItem: Equatable {}
 
 
 extension HistoryItem: Comparable {
@@ -40,6 +37,9 @@ extension HistoryItem {
     }
     if let downloadDate = downloadDate {
       dictionary["date"] = downloadDate
+    }
+    if let feed = episode.feed {
+      dictionary["feed"] = feed.dictionaryRepresentation
     }
     return dictionary
   }

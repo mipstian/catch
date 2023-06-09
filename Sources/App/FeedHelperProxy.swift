@@ -40,7 +40,7 @@ final class FeedHelperProxy {
     previouslyDownloadedURLs: [URL],
     completion: @escaping (Result<[DownloadedEpisode], Error>) -> Void) {
     service.checkFeeds(
-      urls: feeds.map { $0.url.absoluteString },
+      feeds: feeds.map { $0.dictionaryRepresentation },
       downloadingToBookmark: downloadOptions.containerDirectoryBookmark,
       organizingByShow: downloadOptions.shouldOrganizeByShow,
       savingMagnetLinks: downloadOptions.shouldSaveMagnetLinks,

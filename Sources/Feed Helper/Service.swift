@@ -7,7 +7,7 @@ final class Service: NSObject {}
 
 extension Service: FeedHelperService {
   func checkFeeds(
-    urls: [String],
+    feeds: [[AnyHashable:Any]],
     downloadingToBookmark downloadDirectoryBookmark: Data,
     organizingByShow shouldOrganizeByShow: Bool,
     savingMagnetLinks shouldSaveMagnetLinks: Bool,
@@ -23,7 +23,7 @@ extension Service: FeedHelperService {
       )
       
       downloadedEpisodes = try FeedHelper.checkFeeds(
-        urls: urls.map { URL.init(string: $0)! },
+        feeds: feeds.map { Feed(dictionary: $0)! },
         downloadOptions: downloadOptions,
         skippingURLs: previouslyDownloadedURLs.map { URL.init(string: $0)! }
       )
