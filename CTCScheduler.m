@@ -1,6 +1,7 @@
 #import "CTCScheduler.h"
 #import "CTCFeedChecker.h"
 #import "CTCDefaults.h"
+#import "CTCFileUtils.h"
 #import "NSDate+TimeOfDayMath.h"
 
 
@@ -100,6 +101,10 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
     __weak typeof(self) weakSelf = self;
     [self callFeedCheckerWithReplyHandler:^(NSArray *downloadedFeedFiles,
                                             NSError *error){
+        if (error) {
+            NSLog(@"Error checking feed: %@", error);
+        }
+        
         // Deal with new files
         [weakSelf handleDownloadedFeedFiles:downloadedFeedFiles];
         
@@ -108,23 +113,17 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 }
 
 - (NSData *)downloadFolderBookmark {
-    NSString *downloadPath = CTCDefaults.torrentsSavePath;
+    NSError *error;
+    NSURL *url = [NSURL fileURLWithPath:CTCDefaults.torrentsSavePath];
+    NSData *bookmark = [CTCFileUtils bookmarkForURL:url error:&error];
     
-    // Create a bookmark so we can transfer access to the downloads path
-    // to the feed checker service
-    NSURL *downloadFolderURL = [NSURL fileURLWithPath:downloadPath];
-    NSError *error = nil;
-    NSData *downloadFolderBookmark = [downloadFolderURL bookmarkDataWithOptions:NSURLBookmarkCreationMinimalBookmark
-                                                 includingResourceValuesForKeys:@[]
-                                                                  relativeToURL:nil
-                                                                          error:&error];
-    if (!downloadFolderBookmark || error) {
-        // Not really handling this error
+    if (!bookmark) {
+        // Not really handling this at all
         [NSException raise:@"Couldn't create bookmark for downloads folder"
                     format:@"Error: %@", error];
     }
     
-    return downloadFolderBookmark;
+    return bookmark;
 }
 
 - (void)callFeedCheckerWithReplyHandler:(CTCFeedCheckCompletionHandler)replyHandler {
