@@ -37,8 +37,7 @@ class RecentsController: NSWindowController {
     let isMagnetLink = recentToDownload["isMagnetLink"] as! Bool
     if isMagnetLink {
       CTCBrowser.open(inBackgroundURL: URL(string: recentToDownload["url"] as! String)!)
-    }
-    else {
+    } else {
       CTCScheduler.shared().downloadFile(recentToDownload) { downloadedFile, error in
         guard CTCDefaults.shouldOpenTorrentsAutomatically(), let downloadedFile = downloadedFile else {
           return
