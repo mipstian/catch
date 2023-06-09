@@ -22,4 +22,4 @@ Features:
   * Automatic updates
   * Speaks English (US and UK), Deutsch, Français, Español, Català, Finnish (suomi), 中文 (简体), 中文 (繁體) and Italiano
 
-**[Report a bug](https://github.com/mipstian/catch/releases)**
+**[Report a bug](https://github.com/mipstian/catch/issues)**
