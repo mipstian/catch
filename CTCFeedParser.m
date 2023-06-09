@@ -4,7 +4,7 @@
 @implementation CTCFeedParser
 
 + (NSArray*)parseURLs:(NSXMLDocument*)feed {
-	NSLog(@"CTCFeedParser: parsing feed for URLs");
+	NSLog(@"Parsing feed for URLs");
 	
 	NSError* error = nil;
 	
@@ -12,11 +12,11 @@
 	NSArray* fileNodes = [feed nodesForXPath:@"//rss/channel/item" error:&error];
 	
     if (!fileNodes) {
-        NSLog(@"CTCFeedParser: parsing for URLs failed: %@", error);
+        NSLog(@"Parsing for URLs failed: %@", error);
 		return nil;
     }
     
-    NSLog(@"CTCFeedParser: parsed %lu files", (unsigned long)fileNodes.count);
+    NSLog(@"Parsed %lu files", (unsigned long)fileNodes.count);
 	
 	// Extract URLs from NSXMLNodes
 	NSMutableArray* feedFiles = [NSMutableArray arrayWithCapacity:fileNodes.count];
@@ -28,13 +28,13 @@
 							 title, @"title", url, @"url", nil]];
 	}
     
-    NSLog(@"CTCFeedParser: parsed files: %@", feedFiles);
+    NSLog(@"Parsed files: %@", feedFiles);
 	
 	return feedFiles;
 }
 
 + (NSArray*)parseFolders:(NSXMLDocument*)feed {
-	NSLog(@"CTCFeedParser: parsing feed for folders");
+	NSLog(@"Parsing feed for folders");
 	
 	NSError* error = nil;
 	
@@ -42,9 +42,9 @@
 	NSArray* folderNodes = [feed nodesForXPath:@"//rss/channel/item/showrss:showname" error:&error];
 	
 	if (folderNodes) {
-		NSLog(@"CTCFeedParser: parsed %lu folders", (unsigned long)folderNodes.count);
+		NSLog(@"Parsed %lu folders", (unsigned long)folderNodes.count);
 	} else {
-		NSLog(@"CTCFeedParser: parsing for folders failed: %@", error);
+		NSLog(@"Parsing for folders failed: %@", error);
 		return nil;
 	}
 	
@@ -58,7 +58,7 @@
 		[fileFolders addObject:folder];
 	}
 	
-	NSLog(@"CTCFeedParser: parsed folders:\n%@", fileFolders);
+	NSLog(@"Parsed folders:\n%@", fileFolders);
 	
 	return fileFolders;
 }
