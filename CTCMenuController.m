@@ -126,13 +126,11 @@
 
 - (void)setIdle {
     // Sets the images (status: idle)
-    if ([self.menuBarItem respondsToSelector:@selector(button)]) {
-        // Yosemite
+    if (self.shouldUseTemplateMenubarIcons) {
         self.menuBarItem.button.image = [NSImage imageNamed:@"Menubar_Idle_Template"];
         self.menuBarItem.button.appearsDisabled = NO;
     }
     else {
-        // Older versions of OS X
         [self.menuBarItem setImage:[NSImage imageNamed:@"menubar_idle"]];
         [self.menuBarItem setAlternateImage:[NSImage imageNamed:@"menubar_idle-inv"]];
     }
@@ -143,13 +141,11 @@
 
 - (void)setRefreshing {
     // Sets the images (status: refreshing)
-    if ([self.menuBarItem respondsToSelector:@selector(button)]) {
-        // Yosemite
+    if (self.shouldUseTemplateMenubarIcons) {
         self.menuBarItem.button.image = [NSImage imageNamed:@"Menubar_Refreshing_Template"];
         self.menuBarItem.button.appearsDisabled = NO;
     }
     else {
-        // Older versions of OS X
         [self.menuBarItem setImage:[NSImage imageNamed:@"menubar_refreshing"]];
         [self.menuBarItem setAlternateImage:[NSImage imageNamed:@"menubar_refreshing-inv"]];
     }
@@ -163,13 +159,11 @@
 
 - (void)setDisabled {
     // Sets the images (status: disabled)
-    if ([self.menuBarItem respondsToSelector:@selector(button)]) {
-        // Yosemite
+    if (self.shouldUseTemplateMenubarIcons) {
         self.menuBarItem.button.image = [NSImage imageNamed:@"Menubar_Disabled_Template"];
         self.menuBarItem.button.appearsDisabled = YES;
     }
     else {
-        // Older versions of OS X
         [self.menuBarItem setImage:[NSImage imageNamed:@"menubar_disabled"]];
         [self.menuBarItem setAlternateImage:[NSImage imageNamed:@"menubar_disabled-inv"]];
     }
@@ -207,6 +201,11 @@
     [self.menuRecentTorrents.submenu addItem:self.menuShowInFinder];
     
     self.menuRecentTorrents.enabled = YES;
+}
+
+- (BOOL)shouldUseTemplateMenubarIcons {
+    // Use template images in Yosemite and up, plain icons otherwise
+    return [self.menuBarItem respondsToSelector:@selector(button)];
 }
 
 @end
