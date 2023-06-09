@@ -193,14 +193,13 @@ class Scheduler {
       let url = feedFile["url"] as! String
       
       // Add url to history
-      var history = Defaults.shared.downloadHistory
-      history.append([
+      let newHistoryEntry: [AnyHashable:Any] = [
         "title": title,
         "url": url,
         "isMagnetLink": isMagnetLink,
         "date": Date()
-      ])
-      Defaults.shared.downloadHistory = history
+      ]
+      Defaults.shared.downloadHistory = [newHistoryEntry] + Defaults.shared.downloadHistory
     }
   }
   
