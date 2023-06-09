@@ -38,7 +38,7 @@ NSString* const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info/
 	[self refreshLoginItemStatus];
 	
 	// Create a feed checker
-	feedChecker = [[[FeedChecker alloc] init] retain];
+	feedChecker = [[FeedChecker alloc] init];
 
 	return self;
 }
@@ -52,7 +52,7 @@ NSString* const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info/
 	}
 	
 	NSLog(@"Catch: creating scheduler for feed checker");
-	scheduler = [[[Scheduler alloc] initWithFeedChecker:feedChecker] retain];
+	scheduler = [[Scheduler alloc] initWithFeedChecker:feedChecker];
 	
 	// Also check now
 	[scheduler forceCheck];

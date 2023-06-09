@@ -16,7 +16,7 @@
 	active = 1;
 	running = 0;
 	
-	feedChecker = [theFeedChecker retain];
+	feedChecker = theFeedChecker;
 	
 	// run a runloop in another thread
 	[self performSelectorInBackground:@selector(loopRun) withObject:nil];
@@ -30,12 +30,11 @@
 	@autoreleasepool {
 		NSRunLoop *currentRunLoop = NSRunLoop.currentRunLoop;
 
-		repeatingTimer = [[NSTimer scheduledTimerWithTimeInterval:FEED_UPDATE_INTERVAL
+		repeatingTimer = [NSTimer scheduledTimerWithTimeInterval:FEED_UPDATE_INTERVAL
 														   target:self
 														 selector:@selector(tick:)
 														 userInfo:nil
-														  repeats:YES]
-						  retain];
+														  repeats:YES];
 		[currentRunLoop addTimer:repeatingTimer forMode:NSDefaultRunLoopMode];
 		[currentRunLoop run];
 	}

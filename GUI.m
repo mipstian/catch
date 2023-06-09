@@ -21,7 +21,7 @@ static NSString* const GROWL_NEW_TORRENT = @"New torrent";
 	[NSBundle loadNibNamed:@"MainMenu" owner:[NSApp delegate]];
 	 
 	// Create the NSStatusBar and set its length
-	item = [[[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength] retain];
+	item = [[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength];
 	
 	// Update status UI
 	[self setStatus:1 running:0];
@@ -161,7 +161,6 @@ static NSString* const GROWL_NEW_TORRENT = @"New torrent";
 		NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 		[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
 		NSString* lastUpdateTime = [dateFormatter stringFromDate:time];
-		[dateFormatter release];
 		lastUpdateString = [NSString stringWithFormat:baseLastUpdateString,lastUpdateTime];
 	} else {
 		lastUpdateString = [NSString stringWithFormat:baseLastUpdateString,NSLocalizedString(@"never", @"Never happened")];
@@ -218,7 +217,6 @@ static NSString* const GROWL_NEW_TORRENT = @"New torrent";
 }
 
 - (void)refreshMenuWithRecent:(NSArray *)recentTorrents {
-	[menuShowInFinder retain];
 	
 	// Clear menu
 	NSArray* items = [[menuRecentTorrents submenu] itemArray];
@@ -231,13 +229,11 @@ static NSString* const GROWL_NEW_TORRENT = @"New torrent";
 		NSMenuItem* newItem = [[NSMenuItem alloc] initWithTitle:title action:NULL keyEquivalent:@""];
 		[newItem setEnabled:NO];
 		[[menuRecentTorrents submenu] addItem:newItem];
-		[newItem release];
 	}
 	
 	// Put the Show in finder menu back
 	[[menuRecentTorrents submenu] addItem:menuShowInFinder];
 	
-	[menuShowInFinder release];
 
 	[menuRecentTorrents setEnabled:YES];
 }
@@ -276,7 +272,6 @@ static NSString* const GROWL_NEW_TORRENT = @"New torrent";
 		notification.informativeText = description;
 		notification.soundName = NSUserNotificationDefaultSoundName;
 		[[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
-		[notification release];
 	} else {
 		[GrowlApplicationBridge notifyWithTitle:NSLocalizedString(@"newtorrent", @"New torrent notification")
 									 description:description notificationName:GROWL_NEW_TORRENT
