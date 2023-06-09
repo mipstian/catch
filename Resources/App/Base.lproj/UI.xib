@@ -38,8 +38,12 @@
                 <outlet property="preferencesItem" destination="532" id="wgh-zI-PTi"/>
                 <outlet property="quitItem" destination="525" id="NWK-As-JXG"/>
                 <outlet property="recentEpisodesItem" destination="537" id="orI-M4-cM2"/>
+                <outlet property="reportProblemItem" destination="544" id="43Y-0A-xFO"/>
+                <outlet property="requestFeatureItem" destination="543" id="rAx-1J-vMI"/>
+                <outlet property="showHelpItem" destination="542" id="q0K-WW-Psa"/>
                 <outlet property="topSeparatorItem" destination="531" id="Hbt-dA-qRM"/>
                 <outlet property="versionItem" destination="545" id="657"/>
+                <outlet property="visitWebsiteItem" destination="535" id="I9F-lM-5Gg"/>
             </connections>
         </customObject>
         <customObject id="vyd-92-YXh" userLabel="Preferences Controller" customClass="PreferencesController" customModule="Catch" customModuleProvider="target">
