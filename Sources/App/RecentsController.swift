@@ -37,6 +37,8 @@ class RecentsController: NSWindowController {
     guard !awake else { return }
     awake = true
     
+    window?.title = NSLocalizedString("Recent Episodes", comment: "")
+    
     // Configure formatter for torrent download dates
     downloadDateFormatter.timeStyle = .short
     downloadDateFormatter.dateStyle = .short
