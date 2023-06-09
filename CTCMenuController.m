@@ -36,19 +36,16 @@
     // Create the NSStatusBar and set its length
 	self.menuBarItem = [NSStatusBar.systemStatusBar statusItemWithLength:NSSquareStatusItemLength];
     
-    NSString *appNameAndVersion = [NSString stringWithFormat:@"%@ %@", CTCDefaults.appName, CTCDefaults.appVersion];
-    
 	// Tell the NSStatusItem what menu to load
-	[self.menuBarItem setMenu:self.menu];
-	// Set the tooptip for our item
-	[self.menuBarItem setToolTip:appNameAndVersion];
+    self.menuBarItem.menu = self.menu;
 	// Enable highlighting
-	[self.menuBarItem setHighlightMode:YES];
+    self.menuBarItem.highlightMode = YES;
+    
 	// Set current name and version
-	[self.menuVersion setTitle:appNameAndVersion];
+	self.menuVersion.title = [NSString stringWithFormat:@"%@ %@", CTCDefaults.appName, CTCDefaults.appVersion];
 	
 	// Disable the recent torrents menu until there's something to show
-	[self.menuRecentTorrents setEnabled:NO];
+    self.menuRecentTorrents.enabled = NO;
 }
 
 - (void)setupNotificationHandlers {
