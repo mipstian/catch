@@ -29,19 +29,23 @@ final class FeedChecker {
   /// This can be changed by users with "Pause" and "Resume".
   var status: Status = .polling {
     didSet {
-      // If we have just been set to polling, check immediately
-      if oldValue == .paused && status == .polling {
-        intervalTimer.fireNow()
+      if oldValue != status {
+        // If we have just been set to polling, check immediately
+        if oldValue == .paused && status == .polling {
+          intervalTimer.fireNow()
+        }
+        
+        postStateChangedNotification()
       }
-      
-      postStateChangedNotification()
     }
   }
   
   /// What happened with the last feed check
   fileprivate(set) var lastCheckStatus: LastCheckStatus = .neverHappened {
     didSet {
-      postStateChangedNotification()
+      if oldValue != lastCheckStatus {
+        postStateChangedNotification()
+      }
     }
   }
   

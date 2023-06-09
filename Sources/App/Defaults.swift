@@ -9,6 +9,9 @@ final class Defaults: NSObject {
   /// Posted whenever any default changes
   static let changedNotification = NSNotification.Name("Defaults.changedNotification")
   
+  /// Posted whenever `downloadHistory` changes
+  static let downloadHistoryChangedNotification = NSNotification.Name("Defaults.downloadHistoryChangedNotification")
+  
   private struct Keys {
     static let feedURL = "feedURL"
     static let onlyUpdateBetween = "onlyUpdateBetween"
@@ -70,6 +73,11 @@ final class Defaults: NSObject {
       
       let serializedHistory = truncatedHistory.map { $0.dictionaryRepresentation }
       UserDefaults.standard.set(serializedHistory, forKey: Keys.history)
+      
+      NotificationCenter.default.post(
+        name: Defaults.downloadHistoryChangedNotification,
+        object: self
+      )
     }
   }
   
