@@ -50,11 +50,13 @@ static NSString * const kCTCFileUtilsTorrentExtension = @".torrent";
     return [filename stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
-+ (NSString *)addTorrentExtensionTo:(NSString*)filename {
-    BOOL hasExtension = [filename hasSuffix:kCTCFileUtilsTorrentExtension];
++ (NSString *)torrentFilenameFromString:(NSString*)name {
+    NSString *cleanName = [self fileNameFromString:name];
+    
+    BOOL hasExtension = [cleanName hasSuffix:kCTCFileUtilsTorrentExtension];
     
     // Add .torrent extension if needed
-    return hasExtension ? filename : [filename stringByAppendingString:kCTCFileUtilsTorrentExtension];
+    return hasExtension ? cleanName : [cleanName stringByAppendingString:kCTCFileUtilsTorrentExtension];
 }
 
 + (NSString *)userDownloadsDirectory {
@@ -68,8 +70,8 @@ static NSString * const kCTCFileUtilsTorrentExtension = @".torrent";
     return NSHomeDirectory();
 }
 
-+ (NSString *)folderNameForShowWithName:(NSString *)showName {
-    return [[showName stringByReplacingOccurrencesOfString:@"/" withString:@""] stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceCharacterSet];
++ (NSString *)fileNameFromString:(NSString *)name {
+    return [[name stringByReplacingOccurrencesOfString:@"/" withString:@""] stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceCharacterSet];
 }
 
 @end
