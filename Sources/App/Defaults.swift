@@ -105,25 +105,13 @@ final class Defaults: NSObject {
   var isFeedURLValid: Bool {
     guard
       let url = feedURL,
-      let scheme = url.scheme,
-      let host = url.host,
-      let query = url.query
+      let scheme = url.scheme
     else {
       return false
     }
     
     guard ["http", "https"].contains(scheme) else {
       NSLog("Bad scheme in feed URL: \(scheme)")
-      return false
-    }
-    
-    guard host.hasSuffix("showrss.info") else {
-      NSLog("Bad host in feed URL: \(host)")
-      return false
-    }
-    
-    guard query.contains("namespaces=true") else {
-      NSLog("Feed URL does not have namespaces enabled")
       return false
     }
     

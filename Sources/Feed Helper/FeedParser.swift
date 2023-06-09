@@ -12,7 +12,7 @@ private extension Episode {
   /// Try to initialize an episode with the data found in an RSS "item" element
   init?(itemNode: XMLNode) {
     // Get the .torrent URL or magnet link
-    guard let urlString = itemNode["enclosure/@url"] else {
+    guard let urlString = itemNode["enclosure/@url"] ?? itemNode["link"] else {
       NSLog("Missing feed item URL")
       return nil
     }
