@@ -37,7 +37,8 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
     if (!self) {
         return nil;
     }
-    
+  
+    self.activityToken = nil;
     self.polling = YES;
     self.checking = NO;
     
@@ -61,7 +62,7 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
     // Check now as well
     [self fireTimerNow];
     
-    [self preventAppNap];
+    [self updateAppNapStatus];
     
     return self;
 }
@@ -71,8 +72,20 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
     if ([NSProcessInfo.processInfo respondsToSelector:@selector(beginActivityWithOptions:reason:)]) {
         self.activityToken = [NSProcessInfo.processInfo
                               beginActivityWithOptions:NSActivityIdleSystemSleepDisabled|NSActivitySuddenTerminationDisabled
-                              reason:@"Background checking is the whole point of the app"];
+                              reason:@"Actively polling the feed"];
     }
+}
+
+- (void)allowAppNap {
+  // Make sure we can keep running in the background if the system supports App Nap
+  if ([NSProcessInfo.processInfo respondsToSelector:@selector(beginActivityWithOptions:reason:)] && self.activityToken) {
+      [NSProcessInfo.processInfo endActivity:self.activityToken];
+      self.activityToken = nil;
+  }
+}
+
+- (void)updateAppNapStatus {
+    self.polling ? [self preventAppNap] : [self allowAppNap];
 }
 
 - (void)setChecking:(BOOL)checking {
@@ -82,6 +95,8 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 
 - (void)setPolling:(BOOL)polling {
     _polling = polling;
+    
+    [self updateAppNapStatus];
     
     [self reportStatus];
 }
