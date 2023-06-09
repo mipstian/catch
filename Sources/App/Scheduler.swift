@@ -28,7 +28,7 @@ class Scheduler {
   private var downloadFolderBookmark: Data {
     // Create a bookmark so we can transfer access to the downloads path
     // to the feed checker service
-    return try! CTCFileUtils.bookmark(for: Defaults.shared.torrentsSavePath!)
+    return try! FileUtils.bookmark(for: Defaults.shared.torrentsSavePath!)
   }
   
   private var repeatingTimer: Timer! = nil
@@ -38,7 +38,7 @@ class Scheduler {
   private init() {
     // Create and start single connection to the feed helper
     // Messages will be delivered serially
-    feedCheckerConnection.remoteObjectInterface = NSXPCInterface(with: CTCFeedCheck.self)
+    feedCheckerConnection.remoteObjectInterface = NSXPCInterface(with: FeedHelperService.self)
     feedCheckerConnection.interruptionHandler = { [weak self] in
       DispatchQueue.main.async {
         guard let scheduler = self else { return }
@@ -101,10 +101,10 @@ class Scheduler {
   
   func downloadHistoryItem(_ historyItem: HistoryItem, completion: @escaping (([String:Any]?, Error?) -> ())) {
     // Call feed checker service
-    let feedChecker = feedCheckerConnection.remoteObjectProxy as! CTCFeedCheck
+    let feedChecker = feedCheckerConnection.remoteObjectProxy as! FeedHelperService
     
     feedChecker.downloadFile(
-      historyItem.dictionaryRepresentation,
+      file: historyItem.dictionaryRepresentation,
       toBookmark: downloadFolderBookmark,
       organizingByFolder: Defaults.shared.shouldOrganizeTorrentsInFolders,
       savingMagnetLinks: !Defaults.shared.shouldOpenTorrentsAutomatically,
@@ -139,7 +139,7 @@ class Scheduler {
     }
   }
   
-  private func callFeedCheckerWithReplyHandler(replyHandler: @escaping CTCFeedCheckCompletionHandler) {
+  private func callFeedCheckerWithReplyHandler(replyHandler: @escaping FeedHelperService.FeedCheckReply) {
     // Read configuration
     let feedURL = URL(string: Defaults.shared.feedURL)!
     
@@ -149,10 +149,10 @@ class Scheduler {
     let previouslyDownloadedURLs = history.map { $0.url.absoluteString }
     
     // Call feed checker service
-    let feedChecker = feedCheckerConnection.remoteObjectProxy as! CTCFeedCheck
+    let feedChecker = feedCheckerConnection.remoteObjectProxy as! FeedHelperService
     
     feedChecker.checkShowRSSFeed(
-      feedURL,
+      feedURL: feedURL,
       downloadingToBookmark: downloadFolderBookmark,
       organizingByFolder: Defaults.shared.shouldOrganizeTorrentsInFolders,
       savingMagnetLinks: !Defaults.shared.shouldOpenTorrentsAutomatically,
