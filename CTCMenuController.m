@@ -161,7 +161,7 @@
     
 	// Get last 10 elements
     NSUInteger recentsCount = MIN(downloadHistory.count, 10U);
-    NSArray *recents = [downloadHistory subarrayWithRange:NSMakeRange(downloadHistory.count - recentsCount, recentsCount)];
+    NSArray *recents = [downloadHistory subarrayWithRange:NSMakeRange(0U, recentsCount)];
     
     // Extract titles
     NSArray *recentTorrentNames = [recents valueForKey:@"title"];
