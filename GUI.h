@@ -1,9 +1,9 @@
 //
-//  GUI.h
-//  Catch
+//	GUI.h
+//	Catch
 //
-//  Created by Giorgio Calderolla on 6/12/10.
-//  Copyright 2010 n\a. All rights reserved.
+//	Created by Giorgio Calderolla on 6/12/10.
+//	Copyright 2010 n\a. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -12,7 +12,7 @@
 #import "Preferences.h"
 
 
-@interface GUI : NSObject <GrowlApplicationBridgeDelegate,  NSUserNotificationCenterDelegate> {
+@interface GUI : NSObject <GrowlApplicationBridgeDelegate,	NSUserNotificationCenterDelegate> {
 	// Outlets and UI components
 	IBOutlet NSMenu* menu;
 	IBOutlet NSMenuItem* menuVersion;
@@ -24,7 +24,7 @@
 	IBOutlet NSWindow* preferencesWindow;
 	IBOutlet NSTabView* preferencesTabs;
 	NSStatusItem* item;
-    BOOL notificationCenterIsAvailable;
+	BOOL notificationCenterIsAvailable;
 	
 	// Images
 	NSImage* iconIdle;

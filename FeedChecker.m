@@ -1,9 +1,9 @@
 //
-//  FeedChecker.m
-//  Catch
+//	FeedChecker.m
+//	Catch
 //
-//  Created by Giorgio Calderolla on 6/18/10.
-//  Copyright 2010 n\a. All rights reserved.
+//	Created by Giorgio Calderolla on 6/18/10.
+//	Copyright 2010 n\a. All rights reserved.
 //
 
 #import "FeedChecker.h"
@@ -74,7 +74,7 @@
 	
 	// Get file URLs with XPath
 	NSArray* fileNodes = [feed nodesForXPath:@"//rss/channel/item" error:&error];
-    NSLog(@"File Nodes:  %@", fileNodes);
+	NSLog(@"File Nodes:	 %@", fileNodes);
 	
 	if (fileNodes) {
 		NSLog(@"FeedChecker: got %lu files", (unsigned long)fileNodes.count);
@@ -87,11 +87,11 @@
 	NSMutableArray* fileURLs = [NSMutableArray arrayWithCapacity:[fileNodes count]];
 	
 	for(NSXMLNode* file in fileNodes) {
-        NSString* url = [[[file nodesForXPath:@"enclosure/@url" error:&error] lastObject] stringValue];
-        NSString* title = [[[file nodesForXPath:@"title" error:&error] lastObject] stringValue];
+		NSString* url = [[[file nodesForXPath:@"enclosure/@url" error:&error] lastObject] stringValue];
+		NSString* title = [[[file nodesForXPath:@"title" error:&error] lastObject] stringValue];
 		NSLog(@"FeedChecker: got file: %@ at %@", title, url);
-        [fileURLs addObject:[NSDictionary dictionaryWithObjectsAndKeys:
-                             title, @"title", url, @"url", nil]];
+		[fileURLs addObject:[NSDictionary dictionaryWithObjectsAndKeys:
+							 title, @"title", url, @"url", nil]];
 	}
 	
 	return fileURLs;
@@ -152,7 +152,7 @@
 	for (NSDictionary* file in files) {
 		// Skip old files
 		BOOL old = NO;
-        NSString* url = [file objectForKey:@"url"];
+		NSString* url = [file objectForKey:@"url"];
 		
 		NSArray* downloadedFiles = [[NSUserDefaults standardUserDefaults] arrayForKey:PREFERENCE_KEY_HISTORY];
 		
@@ -167,39 +167,39 @@
 		}
 		
 		// The file is new, open magnet or download torrent
-        if ([url rangeOfString:@"magnet:"].location == 0) {
-                NSLog(@"FeedChecker: it's a magnet %@ at %@", [file objectForKey:@"title"], url);
-                downloadingFailed = ![[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:url]];
-        } else {
-            NSLog(@"FeedChecker: it's a file %@ at %@", [file objectForKey:@"title"], url);
-            // First get the folder, if available
-            NSString* folder = [fileFolders objectAtIndex:[files indexOfObject:file]];
-            downloadingFailed = (![self downloadFile:[NSURL URLWithString:url] inFolder:folder]);
-        }
-    
-        if (downloadingFailed) {
-            NSLog(@"FeedChecker: download of %@ failed",url);
-        } else {
-            // Notify of addition
-            if ([[NSUserDefaults standardUserDefaults] boolForKey:PREFERENCE_KEY_GROWL_NOTIFICATIONS]) {
-                [[NSApp delegate] torrentNotificationWithDescription:
-                 [NSString stringWithFormat:NSLocalizedString(@"newtorrentdesc", @"New torrent notification"), [file objectForKey:@"title"]]];
-            }
-            
-            // Add url to history
-            NSArray* newDownloadedFiles = nil;
-            
-            if (downloadedFiles) {
-                // Other old downloads are there. Add the new one
-                newDownloadedFiles = [downloadedFiles arrayByAddingObject:file];
-            } else {
-                // First download ever. Initialize the preference
-                newDownloadedFiles = [NSArray arrayWithObject:file];
-            }
-            [[NSUserDefaults standardUserDefaults]
-             setObject:newDownloadedFiles
-             forKey:PREFERENCE_KEY_HISTORY];
-        }
+		if ([url rangeOfString:@"magnet:"].location == 0) {
+				NSLog(@"FeedChecker: it's a magnet %@ at %@", [file objectForKey:@"title"], url);
+				downloadingFailed = ![[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:url]];
+		} else {
+			NSLog(@"FeedChecker: it's a file %@ at %@", [file objectForKey:@"title"], url);
+			// First get the folder, if available
+			NSString* folder = [fileFolders objectAtIndex:[files indexOfObject:file]];
+			downloadingFailed = (![self downloadFile:[NSURL URLWithString:url] inFolder:folder]);
+		}
+	
+		if (downloadingFailed) {
+			NSLog(@"FeedChecker: download of %@ failed",url);
+		} else {
+			// Notify of addition
+			if ([[NSUserDefaults standardUserDefaults] boolForKey:PREFERENCE_KEY_GROWL_NOTIFICATIONS]) {
+				[[NSApp delegate] torrentNotificationWithDescription:
+				 [NSString stringWithFormat:NSLocalizedString(@"newtorrentdesc", @"New torrent notification"), [file objectForKey:@"title"]]];
+			}
+			
+			// Add url to history
+			NSArray* newDownloadedFiles = nil;
+			
+			if (downloadedFiles) {
+				// Other old downloads are there. Add the new one
+				newDownloadedFiles = [downloadedFiles arrayByAddingObject:file];
+			} else {
+				// First download ever. Initialize the preference
+				newDownloadedFiles = [NSArray arrayWithObject:file];
+			}
+			[[NSUserDefaults standardUserDefaults]
+			 setObject:newDownloadedFiles
+			 forKey:PREFERENCE_KEY_HISTORY];
+		}
 	}
 	
 	if (downloadingFailed) return NO;

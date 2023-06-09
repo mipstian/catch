@@ -1,9 +1,9 @@
 //
-//  Catch.m
-//  Catch
+//	Catch.m
+//	Catch
 //
-//  Created by Giorgio Calderolla on 6/12/10.
-//  Copyright 2010 n\a. All rights reserved.
+//	Created by Giorgio Calderolla on 6/12/10.
+//	Copyright 2010 n\a. All rights reserved.
 //
 
 #import "Catch.h"
@@ -73,9 +73,9 @@ NSString* const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info/
 	NSArray* recent = [downloaded subarrayWithRange:recentRange];
 	NSArray* cleanRecent = [NSArray array];
 	int count = [recent count];
-    
+	
 	for (int i = 1; i <= count; i++) {
-        NSString* clean = [[recent objectAtIndex:count-i] objectForKey:@"title"];
+		NSString* clean = [[recent objectAtIndex:count-i] objectForKey:@"title"];
 		clean = [[NSString stringWithFormat:@"%d ",i] stringByAppendingString:clean];
 		cleanRecent = [cleanRecent arrayByAddingObject:clean];
 	}
