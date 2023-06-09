@@ -19,12 +19,12 @@ NSString * const kCTCDefaultsFeedURLKey = @"feedURL";
 NSString * const kCTCDefaultsOnlyUpdateBetweenKey = @"onlyUpdateBetween";
 NSString * const kCTCDefaultsUpdateFromKey = @"updateFrom";
 NSString * const kCTCDefaultsUpdateToKey = @"updateTo";
-NSString * const PREFERENCE_KEY_SAVE_PATH = @"savePath";
+NSString * const kCTCDefaultsTorrentsSavePathKey = @"savePath";
 NSString * const kCTCDefaultsShouldOrganizeTorrents = @"organizeTorrents";
-NSString * const PREFERENCE_KEY_OPEN_AUTOMATICALLY = @"openAutomatically";
+NSString * const kCTCDefaultsShouldOpenTorrentsAutomatically = @"openAutomatically";
 NSString * const kCTCDefaultsShouldSendNotificationsKey = @"growlNotifications";
 NSString * const kCTCDefaultsDownloadedFilesKey = @"downloadedFiles"; // Deprecated
-NSString * const PREFERENCE_KEY_HISTORY = @"history";
+NSString * const kCTCDefaultsDownloadHistoryKey = @"history";
 NSString * const kCTCDefaultsOpenAtLoginKey = @"openAtLogin";
 
 
@@ -57,16 +57,16 @@ NSString * const kCTCDefaultsOpenAtLoginKey = @"openAtLogin";
                                   kCTCDefaultsOnlyUpdateBetweenKey: @NO,
                                   kCTCDefaultsUpdateFromKey: dateFrom,
                                   kCTCDefaultsUpdateToKey: dateTo,
-                                  PREFERENCE_KEY_SAVE_PATH: downloadsDirectory,
+                                  kCTCDefaultsTorrentsSavePathKey: downloadsDirectory,
                                   kCTCDefaultsShouldOrganizeTorrents: @NO,
-                                  PREFERENCE_KEY_OPEN_AUTOMATICALLY: @YES,
+                                  kCTCDefaultsShouldOpenTorrentsAutomatically: @YES,
                                   kCTCDefaultsShouldSendNotificationsKey: @YES,
                                   kCTCDefaultsOpenAtLoginKey: @YES};
 	[NSUserDefaults.standardUserDefaults registerDefaults:appDefaults];
     
 	// Migrate the downloads history format. Change old array of strings to new dictionary format
 	NSArray *downloadedFiles = [NSUserDefaults.standardUserDefaults arrayForKey:kCTCDefaultsDownloadedFilesKey];
-	NSArray *history = [NSUserDefaults.standardUserDefaults arrayForKey:PREFERENCE_KEY_HISTORY];
+	NSArray *history = self.downloadHistory;
 	if (downloadedFiles && !history) {
 		NSLog(@"Migrating download history to new format.");
 		
@@ -79,15 +79,13 @@ NSString * const kCTCDefaultsOpenAtLoginKey = @"openAtLogin";
                                            nil]];
 		}
 		
-		[NSUserDefaults.standardUserDefaults setObject:newDownloadedFiles
-                                                forKey:PREFERENCE_KEY_HISTORY];
+        self.downloadHistory = newDownloadedFiles;
 		[NSUserDefaults.standardUserDefaults removeObjectForKey:kCTCDefaultsDownloadedFilesKey];
 	}
     
     // If history was never set or migrated, init it to empty array
     if (!downloadedFiles && !history) {
-        [NSUserDefaults.standardUserDefaults setObject:@[]
-                                                forKey:PREFERENCE_KEY_HISTORY];
+        self.downloadHistory = @[];
     }
     
     // Register as a login item if needed
@@ -108,7 +106,7 @@ NSString * const kCTCDefaultsOpenAtLoginKey = @"openAtLogin";
 
 + (BOOL)isConfigurationValid {
 	// Validate torrent folder. This should never fail!
-	NSString *torrentFolder = [NSUserDefaults.standardUserDefaults stringForKey:PREFERENCE_KEY_SAVE_PATH];
+	NSString *torrentFolder = self.torrentsSavePath;
 	torrentFolder = [torrentFolder stringByStandardizingPath];
 	
 	if (!torrentFolder) return NO;
@@ -178,6 +176,23 @@ NSString * const kCTCDefaultsOpenAtLoginKey = @"openAtLogin";
 
 + (BOOL)shouldOrganizeTorrentsInFolders {
     return [NSUserDefaults.standardUserDefaults boolForKey:kCTCDefaultsShouldOrganizeTorrents];
+}
+
++ (BOOL)shouldOpenTorrentsAutomatically {
+    return [NSUserDefaults.standardUserDefaults boolForKey:kCTCDefaultsShouldOpenTorrentsAutomatically];
+}
+
++ (NSString *)torrentsSavePath {
+    return [NSUserDefaults.standardUserDefaults stringForKey:kCTCDefaultsTorrentsSavePathKey];
+}
+
++ (NSArray *)downloadHistory {
+    return [NSUserDefaults.standardUserDefaults arrayForKey:kCTCDefaultsDownloadHistoryKey];
+}
+
++ (void)setDownloadHistory:(NSArray *)downloadHistory {
+    [NSUserDefaults.standardUserDefaults setObject:downloadHistory
+                                            forKey:kCTCDefaultsDownloadHistoryKey];
 }
 
 @end

@@ -111,7 +111,7 @@
 	// Launch finder with the torrent folder open
 	if (!CTCDefaults.isConfigurationValid) return;
     
-    NSString *torrentFolder = [NSUserDefaults.standardUserDefaults stringForKey:PREFERENCE_KEY_SAVE_PATH];
+    NSString *torrentFolder = CTCDefaults.torrentsSavePath;
     [NSWorkspace.sharedWorkspace openFile:[torrentFolder stringByStandardizingPath]];
 }
 
@@ -246,7 +246,7 @@
 - (void)refreshRecentsMenu {
     // Also refresh the list of recently downloaded torrents
 	// Get the full list
-	NSArray *downloaded = [NSUserDefaults.standardUserDefaults arrayForKey:PREFERENCE_KEY_HISTORY];
+	NSArray *downloaded = CTCDefaults.downloadHistory;
     
 	// Get last 10 elements
 	NSRange recentRange;
