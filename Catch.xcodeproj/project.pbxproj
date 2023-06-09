@@ -27,7 +27,6 @@
 		44717ACE1913A08700580054 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717ACD1913A08700580054 /* main.m */; };
 		44717AD61913A16500580054 /* com.giorgiocalderolla.Catch.CatchFeedHelper.xpc in CopyFiles */ = {isa = PBXBuildFile; fileRef = 44717AC41913A08700580054 /* com.giorgiocalderolla.Catch.CatchFeedHelper.xpc */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		44717AD91913A1C900580054 /* CTCFeedChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717AD81913A1C900580054 /* CTCFeedChecker.m */; };
-		44717ADB1913AE2400580054 /* CTCFeedParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717AAC19131BC700580054 /* CTCFeedParser.m */; };
 		44717ADD1913AF3400580054 /* CTCFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717AA91913173600580054 /* CTCFileUtils.m */; };
 		448CC7E817FE1F840063D3FD /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 448CC7E617FE1F840063D3FD /* Sparkle.framework */; };
 		44BA5D121DAEC0C400A9CE9A /* WindowShakeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BA5D111DAEC0C300A9CE9A /* WindowShakeAnimation.swift */; };
@@ -37,6 +36,7 @@
 		44BA5D1C1DB8220100A9CE9A /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BA5D1B1DB8220100A9CE9A /* MenuController.swift */; };
 		44C8926F1D1814A7008F8543 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C8926E1D1814A7008F8543 /* AppDelegate.swift */; };
 		44E2CEA31DBC0B8F00ED7A8D /* PreferencesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E2CEA21DBC0B8F00ED7A8D /* PreferencesController.swift */; };
+		44E2CEA51DBC134E00ED7A8D /* FeedParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E2CEA41DBC134E00ED7A8D /* FeedParser.swift */; };
 		44FBC67B196312A400434B01 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44FBC67A196312A400434B01 /* QuartzCore.framework */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
@@ -122,8 +122,6 @@
 		44717AA61913072200580054 /* CTCLoginItems.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCLoginItems.m; sourceTree = "<group>"; };
 		44717AA81913173600580054 /* CTCFileUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCFileUtils.h; sourceTree = "<group>"; };
 		44717AA91913173600580054 /* CTCFileUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCFileUtils.m; sourceTree = "<group>"; };
-		44717AAB19131BC700580054 /* CTCFeedParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTCFeedParser.h; path = ../CTCFeedParser.h; sourceTree = "<group>"; };
-		44717AAC19131BC700580054 /* CTCFeedParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTCFeedParser.m; path = ../CTCFeedParser.m; sourceTree = "<group>"; };
 		44717AC41913A08700580054 /* com.giorgiocalderolla.Catch.CatchFeedHelper.xpc */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = com.giorgiocalderolla.Catch.CatchFeedHelper.xpc; sourceTree = BUILT_PRODUCTS_DIR; };
 		44717AC81913A08700580054 /* CatchFeedHelper-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CatchFeedHelper-Info.plist"; sourceTree = "<group>"; };
 		44717ACA1913A08700580054 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -147,6 +145,7 @@
 		44C8926D1D1814A6008F8543 /* Catch-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Catch-Bridging-Header.h"; sourceTree = "<group>"; };
 		44C8926E1D1814A7008F8543 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Sources/AppDelegate.swift; sourceTree = "<group>"; };
 		44E2CEA21DBC0B8F00ED7A8D /* PreferencesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreferencesController.swift; path = Sources/PreferencesController.swift; sourceTree = "<group>"; };
+		44E2CEA41DBC134E00ED7A8D /* FeedParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedParser.swift; path = Sources/FeedParser.swift; sourceTree = SOURCE_ROOT; };
 		44FBC67A196312A400434B01 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* Catch-Info.plist */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; path = "Catch-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Catch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catch.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -331,8 +330,7 @@
 			children = (
 				44717AD71913A1C900580054 /* CTCFeedChecker.h */,
 				44717AD81913A1C900580054 /* CTCFeedChecker.m */,
-				44717AAB19131BC700580054 /* CTCFeedParser.h */,
-				44717AAC19131BC700580054 /* CTCFeedParser.m */,
+				44E2CEA41DBC134E00ED7A8D /* FeedParser.swift */,
 				44717AC71913A08700580054 /* Supporting Files */,
 			);
 			path = CatchFeedHelper;
@@ -525,9 +523,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				44717ADD1913AF3400580054 /* CTCFileUtils.m in Sources */,
-				44717ADB1913AE2400580054 /* CTCFeedParser.m in Sources */,
 				44717AD91913A1C900580054 /* CTCFeedChecker.m in Sources */,
 				44717ACE1913A08700580054 /* main.m in Sources */,
+				44E2CEA51DBC134E00ED7A8D /* FeedParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -632,6 +630,7 @@
 		26FC0A850875C7B200E6366F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -651,6 +650,7 @@
 		26FC0A860875C7B200E6366F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				GCC_PREFIX_HEADER = Catch_Prefix.pch;
@@ -823,13 +823,18 @@
 		44717ACF1913A08700580054 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CatchFeedHelper/com.giorgiocalderolla.Catch.CatchFeedHelper.entitlements;
 				GCC_PREFIX_HEADER = "CatchFeedHelper/CatchFeedHelper-Prefix.pch";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "CatchFeedHelper/CatchFeedHelper-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACH_O_TYPE = mh_execute;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_NAME}";
 				PRODUCT_NAME = "com.giorgiocalderolla.Catch.$(TARGET_NAME:rfc1034identifier)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				WRAPPER_EXTENSION = xpc;
 			};
@@ -838,10 +843,14 @@
 		44717AD01913A08700580054 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CatchFeedHelper/com.giorgiocalderolla.Catch.CatchFeedHelper.entitlements;
 				GCC_PREFIX_HEADER = "CatchFeedHelper/CatchFeedHelper-Prefix.pch";
 				INFOPLIST_FILE = "CatchFeedHelper/CatchFeedHelper-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACH_O_TYPE = mh_execute;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_NAME}";
 				PRODUCT_NAME = "com.giorgiocalderolla.Catch.$(TARGET_NAME:rfc1034identifier)";
 				SWIFT_VERSION = 3.0;

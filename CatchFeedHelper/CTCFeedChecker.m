@@ -1,6 +1,6 @@
 #import "CTCFeedChecker.h"
-#import "CTCFeedParser.h"
 #import "CTCFileUtils.h"
+#import "com_giorgiocalderolla_Catch_CatchFeedHelper-Swift.h"
 
 
 NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHelper";
@@ -58,7 +58,7 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
     }
     
     // Parse the feed for files
-    NSArray<NSDictionary *> *feedFiles = [CTCFeedParser parseFiles:feed error:&error];
+    NSArray<NSDictionary *> *feedFiles = [FeedParser parseWithFeed:feed error:&error];
     if (!feedFiles) {
         reply(@[], [NSError errorWithDomain:kCTCFeedCheckerErrorDomain
                                        code:-6
@@ -155,7 +155,7 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
         BOOL isMagnetLink = [url.scheme isEqualToString:@"magnet"];
         
         // First get the folder, if we want it and it's available
-        NSString *showName = shouldOrganizeByFolder && ![file[@"showName"] isEqualTo:NSNull.null] ? file[@"showName"] : nil;
+        NSString *showName = shouldOrganizeByFolder ? file[@"showName"] : nil;
         
         // The file is new, return/save magnet or download torrent
         if (isMagnetLink) {
