@@ -140,7 +140,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <rect key="contentRect" x="310" y="248" width="700" height="317"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
-            <view key="contentView" id="553">
+            <view key="contentView" id="553" customClass="PreferencesView" customModule="Catch" customModuleProvider="target">
                 <rect key="frame" x="0.0" y="0.0" width="710" height="359"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
@@ -576,6 +576,9 @@ DQ
                     <constraint firstAttribute="trailing" secondItem="616" secondAttribute="trailing" constant="20" symbolic="YES" id="hQc-BR-fbI"/>
                     <constraint firstItem="y8v-DN-YZd" firstAttribute="top" secondItem="616" secondAttribute="bottom" constant="20" id="lSe-Bn-qVW"/>
                 </constraints>
+                <connections>
+                    <outlet property="toolBar" destination="604" id="EEc-Ql-Y2W"/>
+                </connections>
             </view>
             <toolbar key="toolbar" implicitIdentifier="CA2F34B0-7A44-4395-8E3C-8B6D18CC3ECC" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="604">
                 <allowedToolbarItems>
