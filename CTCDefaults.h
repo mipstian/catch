@@ -10,4 +10,6 @@ extern NSTimeInterval const kCTCDefaultsFeedUpdateInterval;
 
 + (NSString *)appVersion;
 
++ (void)refreshLoginItemStatus;
+
 @end

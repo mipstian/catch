@@ -1,6 +1,5 @@
 #import "CTCAppDelegate.h"
 #import "CTCMainController.h"
-#import "CTCLoginItems.h"
 #import "Preferences.h"
 
 
@@ -21,29 +20,14 @@ NSString * const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info
 
 @implementation CTCAppDelegate
 
-- (id)init {
-	self = [super init];
-	if (!self) {
-		return nil;
-	}
-
-	NSLog(@"Loading preferences");
-	
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 	// Create preferences and set default values
-	[Preferences setDefaults];
+	[Preferences setDefaultDefaults];
+    
     // This ensures we have the latest values from the user
 	[Preferences save];
 	
-	// Register as a login item if needed
-	[self refreshLoginItemStatus];
-
-	return self;
-}
-
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-	NSLog(@"Catch: finished launching");
-	
-	// show Preferences folder if the config is not valid
+	// Show Preferences window if the config is not valid
 	if (![Preferences validate]) {
 		[self.mainController showPreferences:self];
 	}
@@ -62,29 +46,20 @@ NSString * const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info
 	// Also refresh the list of recently downloaded torrents
 	// Get the full list
 	NSArray *downloaded = [NSUserDefaults.standardUserDefaults arrayForKey:PREFERENCE_KEY_HISTORY];
+    
 	// Get last 10 elements
 	NSRange recentRange;
 	recentRange.length = (downloaded.count > 10) ? 10 : downloaded.count;
 	recentRange.location = downloaded.count - recentRange.length;
-	
 	NSArray *recents = [downloaded subarrayWithRange:recentRange];
     
+    // Extract titles
     NSMutableArray *recentNames = NSMutableArray.array;
     for (NSDictionary *recentItem in recents) {
         [recentNames addObject:recentItem[@"title"]];
     }
 	
 	[self.mainController refreshRecent:recentNames];
-}
-
-- (void)savePreferences {
-	[Preferences save];
-	
-	// Register as a login item if needed
-	[self refreshLoginItemStatus];
-	
-	// Also force check
-	[self.mainController forceCheck];
 }
 
 - (BOOL)isConfigurationValid {
@@ -97,10 +72,6 @@ NSString * const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info
 
 - (void)orderFrontStandardAboutPanel:(id)sender {
 	// Do nothing
-}
-
-- (void)refreshLoginItemStatus {
-    [CTCLoginItems toggleRegisteredAsLoginItem:[NSUserDefaults.standardUserDefaults boolForKey:PREFERENCE_KEY_OPEN_AT_LOGIN]];
 }
 
 - (void)quit {
