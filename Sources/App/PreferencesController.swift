@@ -21,6 +21,8 @@ class PreferencesController: NSWindowController {
   @IBOutlet private weak var addFeedSheetController: AddFeedController!
   @IBOutlet private weak var downloadScriptCheckbox: NSButton!
   
+  private let feedsTableContextMenu = NSMenu(title: "")
+  
   // Remember if awakeFromNib has been called
   private var awake: Bool = false
   
@@ -54,6 +56,35 @@ class PreferencesController: NSWindowController {
         self?.refresh()
       }
     )
+    
+    // Set up context menu actions
+    do {
+      let copyNameItem = NSMenuItem(
+        title: "Copy Name",
+        action: #selector(copyName),
+        keyEquivalent: ""
+      )
+      copyNameItem.target = self
+      feedsTableContextMenu.addItem(copyNameItem)
+      
+      let copyAddressItem = NSMenuItem(
+        title: "Copy Address",
+        action: #selector(copyAddress),
+        keyEquivalent: ""
+      )
+      copyAddressItem.target = self
+      feedsTableContextMenu.addItem(copyAddressItem)
+      
+      let showContentsItem = NSMenuItem(
+        title: "Show Contents",
+        action: #selector(showContents),
+        keyEquivalent: ""
+      )
+      showContentsItem.target = self
+      feedsTableContextMenu.addItem(showContentsItem)
+      
+      feedsTableView.menu = feedsTableContextMenu
+    }
     
     refresh()
   }
@@ -164,6 +195,32 @@ extension PreferencesController {
   @IBAction private func showTweaks(_: Any?) {
     // Select the Tweaks tab
     window?.toolbar?.selectedItemIdentifier = .init(rawValue: "Tweaks")
+  }
+  
+  private func clickedFeed() -> Feed? {
+    let clickedRow = feedsTableView.clickedRow
+    guard clickedRow != -1 else { return nil }
+    return Defaults.shared.feeds[clickedRow]
+  }
+  
+  @IBAction func copyName(_ sender: Any?) {
+    guard let feed = clickedFeed() else { return }
+    NSPasteboard.general.clearContents()
+    NSPasteboard.general.setString(feed.name, forType: .string)
+  }
+  
+  @IBAction func copyAddress(_ sender: Any?) {
+    guard let feed = clickedFeed() else { return }
+    NSPasteboard.general.clearContents()
+    if #available(OSX 10.13, *) {
+      NSPasteboard.general.setString(feed.url.absoluteString, forType: .URL)
+    } else {
+      NSPasteboard.general.setString(feed.url.absoluteString, forType: .string)
+    }
+  }
+  
+  @IBAction func showContents(_ sender: Any?) {
+    guard let feed = clickedFeed() else { return }
   }
 }
 

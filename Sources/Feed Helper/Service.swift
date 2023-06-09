@@ -35,6 +35,21 @@ extension Service: FeedHelperService {
     reply(downloadedEpisodes.map { $0.dictionaryRepresentation }, nil)
   }
   
+  func download(feed: [AnyHashable : Any], withReply reply: @escaping (Data?, Error?) -> Void) {
+    let feedContents: Data
+    
+    do {
+      feedContents = try FeedHelper.downloadFeed(
+        feed: Feed(dictionary: feed)!
+      )
+    } catch {
+      reply(nil, error)
+      return
+    }
+    
+    reply(feedContents, nil)
+  }
+  
   func download(
     episode: [AnyHashable:Any],
     toBookmark downloadDirectoryBookmark: Data,

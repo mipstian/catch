@@ -15,6 +15,11 @@ let feedHelperErrorDomain = "com.giorgiocalderolla.Catch.CatchFeedHelper"
   )
   
   func download(
+    feed: [AnyHashable:Any],
+    withReply reply: @escaping (_ downloadedFeed: Data?, _ error: Error?) -> Void
+  )
+  
+  func download(
     episode: [AnyHashable:Any],
     toBookmark downloadDirectoryBookmark: Data,
     organizingByShow shouldOrganizeByShow: Bool,

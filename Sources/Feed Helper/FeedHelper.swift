@@ -11,13 +11,10 @@ enum FeedHelper {
     }
   }
   
-  private static func checkFeed(feed: Feed, downloadOptions: DownloadOptions, skippingURLs previouslyDownloadedURLs: [URL]) throws -> [DownloadedEpisode] {
-    NSLog("Checking feed: \(feed.url)")
-    
+  static func downloadFeed(feed: Feed) throws -> Data {
     // Flush the cache, we want fresh results
     URLCache.shared.removeAllCachedResponses()
     
-    // Download the feed
     let feedContents: Data
     do {
       feedContents = try Data(contentsOf: feed.url)
@@ -31,6 +28,15 @@ enum FeedHelper {
         ]
       )
     }
+    
+    return feedContents
+  }
+  
+  private static func checkFeed(feed: Feed, downloadOptions: DownloadOptions, skippingURLs previouslyDownloadedURLs: [URL]) throws -> [DownloadedEpisode] {
+    NSLog("Checking feed: \(feed.url)")
+    
+    // Download the feed
+    let feedContents = try downloadFeed(feed: feed)
     
     // Parse the feed
     let episodes: [Episode]
