@@ -149,7 +149,7 @@
 		lastUpdateString = [NSString stringWithFormat:baseLastUpdateString,NSLocalizedString(@"never", @"Never happened")];
 	}
 	
-	[self performSelectorOnMainThread:@selector(setMenuLastUpdateStatus:) withObject:lastUpdateString waitUntilDone:YES];
+    [self setMenuLastUpdateStatus:lastUpdateString];
 }
 
 - (void)setMenuLastUpdateStatus:(NSString*)title {
@@ -196,29 +196,23 @@
 }
 
 - (void)refreshRecent:(NSArray*)recentTorrents {
-	[self performSelectorOnMainThread:@selector(refreshMenuWithRecent:) withObject:recentTorrents waitUntilDone:YES];
-}
-
-- (void)refreshMenuWithRecent:(NSArray *)recentTorrents {
-	
-	// Clear menu
-	NSArray* items = [[menuRecentTorrents submenu] itemArray];
+    // Clear menu
+	NSArray* items = menuRecentTorrents.submenu.itemArray;
 	for (NSMenuItem* menuItem in items) {
-		[[menuRecentTorrents submenu] removeItem:menuItem];
+		[menuRecentTorrents.submenu removeItem:menuItem];
 	}
 	
 	// Add new items
 	for (NSString* title in recentTorrents) {
 		NSMenuItem* newItem = [[NSMenuItem alloc] initWithTitle:title action:NULL keyEquivalent:@""];
-		[newItem setEnabled:NO];
-		[[menuRecentTorrents submenu] addItem:newItem];
+        newItem.enabled = NO;
+		[menuRecentTorrents.submenu addItem:newItem];
 	}
 	
 	// Put the Show in finder menu back
-	[[menuRecentTorrents submenu] addItem:menuShowInFinder];
+	[menuRecentTorrents.submenu addItem:menuShowInFinder];
 	
-
-	[menuRecentTorrents setEnabled:YES];
+    menuRecentTorrents.enabled = YES;
 }
 
 - (void)showBadURLSheet {
