@@ -14,6 +14,10 @@ class MenuController: NSObject {
   @IBOutlet private weak var checkNowItem: NSMenuItem!
   @IBOutlet private weak var pauseResumeItem: NSMenuItem!
   
+  @IBOutlet private weak var helpItem: NSMenuItem!
+  @IBOutlet private weak var preferencesItem: NSMenuItem!
+  @IBOutlet private weak var quitItem: NSMenuItem!
+  
   @IBOutlet private weak var versionItem: NSMenuItem!
 
   private var menuBarItem: NSStatusItem!
@@ -37,6 +41,10 @@ class MenuController: NSObject {
     recentEpisodesItem.title = NSLocalizedString("Recent Episodes…", comment: "")
     
     checkNowItem.title = NSLocalizedString("Check Now", comment: "")
+    
+    helpItem.title = NSLocalizedString("Help", comment: "")
+    preferencesItem.title = NSLocalizedString("Preferences…", comment: "")
+    quitItem.title = NSLocalizedString("Quit Catch", comment: "")
     
     // Set current name and version
     let bundle = Bundle.main
