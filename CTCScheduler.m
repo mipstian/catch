@@ -13,8 +13,8 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 @property (strong, nonatomic) NSTimer *repeatingTimer;
 @property (strong, nonatomic) NSXPCConnection *feedCheckerConnection;
 @property (strong, nonatomic) id<NSObject> activityToken;
-@property (assign, nonatomic, getter = isActive) BOOL active;
-@property (assign, nonatomic, getter = isRunning) BOOL running;
+@property (assign, nonatomic, getter = isPolling) BOOL polling;
+@property (assign, nonatomic, getter = isChecking) BOOL checking;
 
 @end
 
@@ -37,8 +37,8 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
         return nil;
     }
     
-	self.active = YES;
-	self.running = NO;
+	self.polling = YES;
+	self.checking = NO;
     
     // Create and start single connection to the feed helper
     // Messages will be delivered serially
@@ -99,7 +99,7 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 
 - (void)checkFeed {
     // Don't check twice simultaneously
-    if (self.isRunning) return;
+    if (self.isChecking) return;
     
 	// Only work with valid preferences
 	if (!CTCDefaults.isConfigurationValid) {
@@ -107,7 +107,7 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 		return;
 	}
 	
-	self.running = YES;
+	self.checking = YES;
 	
     [self reportStatus];
 	
@@ -123,7 +123,7 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 }
 
 - (void)handleFeedCheckCompletion:(BOOL)wasSuccessful {
-    self.running = NO;
+    self.checking = NO;
     
     [self reportStatus];
     [NSNotificationCenter.defaultCenter postNotificationName:kCTCSchedulerLastUpdateStatusNotificationName
@@ -133,7 +133,7 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 }
 
 - (void)reportStatus {
-	NSLog(@"Scheduler status: active = %d, running = %d", self.isActive, self.isRunning);
+	NSLog(@"Scheduler status updated (polling = %d, checking = %d)", self.isPolling, self.isChecking);
 	
 	// Report status to application delegate
     [NSNotificationCenter.defaultCenter postNotificationName:kCTCSchedulerStatusNotificationName
@@ -142,12 +142,12 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 }
 
 - (void)togglePause {
-	self.active = !self.isActive;
+	self.polling = !self.isPolling;
 	
     [self reportStatus];
     
-    // If we have just been set to active, check right now
-    if (self.isActive) [self fireTimerNow];
+    // If we have just been set to polling, poll immediately
+    if (self.isPolling) [self fireTimerNow];
 }
 
 - (void)forceCheck {
@@ -164,7 +164,7 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 - (void)tick:(NSTimer*)timer {
 	NSLog(@"Scheduler tick");
 	
-	if (!self.isActive) {
+	if (!self.isPolling) {
 		NSLog(@"Scheduler tick skipped (paused)");
 		return;
 	}

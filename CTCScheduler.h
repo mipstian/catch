@@ -7,8 +7,8 @@ extern NSString * const kCTCSchedulerLastUpdateStatusNotificationName;
 
 @interface CTCScheduler : NSObject
 
-@property (assign, nonatomic, readonly, getter = isActive) BOOL active;
-@property (assign, nonatomic, readonly, getter = isRunning) BOOL running;
+@property (assign, nonatomic, readonly, getter = isPolling) BOOL polling;
+@property (assign, nonatomic, readonly, getter = isChecking) BOOL checking;
 
 + (instancetype)sharedScheduler;
 

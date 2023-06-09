@@ -85,11 +85,11 @@
 }
 
 - (void)refreshSchedulerStatus {
-    if (CTCScheduler.sharedScheduler.isRunning) {
+    if (CTCScheduler.sharedScheduler.isChecking) {
         [self setRefreshing];
 	}
     else {
-		if (CTCScheduler.sharedScheduler.isActive) {
+		if (CTCScheduler.sharedScheduler.isPolling) {
             [self setIdle];
 		}
         else {
