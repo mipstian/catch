@@ -117,10 +117,25 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
     // Extract URLs from history
     NSArray *previouslyDownloadedURLs = [history valueForKey:@"url"];
     
+    // Create a bookmark so we can transfer access to the downloads path
+    // to the feed checker service
+    NSURL *downloadFolderURL = [NSURL fileURLWithPath:downloadPath];
+    NSError *error = nil;
+    NSData *downloadFolderBookmark = [downloadFolderURL bookmarkDataWithOptions:NSURLBookmarkCreationMinimalBookmark
+                                                 includingResourceValuesForKeys:@[]
+                                                                  relativeToURL:nil
+                                                                          error:&error];
+    if (!downloadFolderBookmark || error) {
+        NSLog(@"Couldn't create bookmark for downloads folder: %@", error);
+        
+        // Not really handling this error
+        return;
+    }
+    
     // Call feed checker service
     CTCFeedChecker *feedChecker = [self.feedCheckerConnection remoteObjectProxy];
     [feedChecker checkShowRSSFeed:feedURL
-                downloadingToPath:downloadPath
+            downloadingToBookmark:downloadFolderBookmark
                organizingByFolder:organizeByFolder
                      skippingURLs:previouslyDownloadedURLs
                         withReply:^(NSArray *downloadedFeedFiles, NSError *error) {
