@@ -12,8 +12,6 @@
 
 
 @interface Scheduler : NSObject {
-	NSAutoreleasePool* pool;
-	NSRunLoop* runLoop;
 	NSTimer* repeatingTimer;
 	FeedChecker* feedChecker;
 	int active;

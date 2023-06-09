@@ -27,20 +27,18 @@
 - (void) loopRun {
 	NSLog(@"Scheduler: running RunLoop");
 	
-	pool = [[NSAutoreleasePool alloc] init];
-	
-	runLoop = [[NSRunLoop currentRunLoop] retain];
-	
-	repeatingTimer = [[NSTimer scheduledTimerWithTimeInterval:FEED_UPDATE_INTERVAL
-													   target:self
-													 selector:@selector(tick:) 
-													 userInfo:nil
-													  repeats:YES]
-					  retain];
-	[runLoop addTimer:repeatingTimer forMode:NSDefaultRunLoopMode];
-	[runLoop run];
-	
-	[pool release];
+	@autoreleasepool {
+		NSRunLoop *currentRunLoop = NSRunLoop.currentRunLoop;
+
+		repeatingTimer = [[NSTimer scheduledTimerWithTimeInterval:FEED_UPDATE_INTERVAL
+														   target:self
+														 selector:@selector(tick:)
+														 userInfo:nil
+														  repeats:YES]
+						  retain];
+		[currentRunLoop addTimer:repeatingTimer forMode:NSDefaultRunLoopMode];
+		[currentRunLoop run];
+	}
 }
 
 - (void) reportStatus {
