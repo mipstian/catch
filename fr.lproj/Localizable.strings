@@ -1,5 +1,4 @@
 /* Don't remove %@ signs or you'll break the application */
-/* See UI.strings for general instructions*/
 
 // in menu:
 "pause"="Pause"; // this is a verb
@@ -10,7 +9,6 @@
 "updatingnow"="Mettre à jour maintenant...";
 // in preferences:
 "badurl"="L'adresse URL source entrée n'est pas valide. Utilisez le bouton aide pour apprendre comment configurer Catch.";
-"badurlok"="OK";
 // for notifications:
 "newtorrent"="Nouveau torrent téléchargé";
 "newtorrentdesc"="Le fichier torrent %@ à été téléchargé!"; // %@ will be replaced by filename

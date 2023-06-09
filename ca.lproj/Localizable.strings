@@ -1,5 +1,4 @@
 /* Don't remove %@ signs or you'll break the application */
-/* See UI.strings for general instructions*/
 
 // in menu:
 "pause"="Pausar"; // this is a verb
@@ -10,7 +9,6 @@
 "updatingnow"="Actualitzant...";
 // in preferences:
 "badurl"="L'URL del feed que has introduït no és vàlida. Utilitza el botó d'ajuda de sota per detalls sobre com configurar Catch.";
-"badurlok"="OK";
 // for notifications:
 "newtorrent"="Nou torrent descarregat";
 "newtorrentdesc"="S'ha descarregat l'arxiu torrent %@ !"; // %@ will be replaced by filename

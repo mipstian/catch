@@ -1,5 +1,4 @@
 /* Don't remove %@ signs or you'll break the application */
-/* See UI.strings for general instructions*/
 
 // in menu:
 "pause"="Pysäytä"; // this is a verb
@@ -10,7 +9,6 @@
 "updatingnow"="Päivitetään...";
 // in preferences:
 "badurl"="URL-syötteesi ei toimi. Käytä Ohjeet-painiketta, niin saat lisätietoa alkuun pääsemisessä";
-"badurlok"="OK";
 // for notifications:
 "newtorrent"="Uusi torrent ladattu";
 "newtorrentdesc"="Torrent-tiedosto %@ on ladattu!"; // %@ will be replaced by filename

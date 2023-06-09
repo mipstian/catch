@@ -141,7 +141,7 @@ NSString * const kCTCDefaultsOpenAtLoginKey = @"openAtLogin";
 
 + (NSString *)feedURL {
 	NSString *rawFeedURL = [NSUserDefaults.standardUserDefaults stringForKey:kCTCDefaultsFeedURLKey];
-	return [rawFeedURL stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
+	return rawFeedURL ? [rawFeedURL stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet] : @"";
 }
 
 + (BOOL)areTimeRestrictionsEnabled {
