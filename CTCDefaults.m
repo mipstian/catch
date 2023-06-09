@@ -97,7 +97,6 @@ NSString * const kCTCDefaultsOpenAtLoginKey = @"openAtLogin";
 + (BOOL)isConfigurationValid {
 	// Validate torrent folder. This should never fail!
 	NSString *torrentFolder = self.torrentsSavePath;
-	torrentFolder = [torrentFolder stringByStandardizingPath];
 	
 	if (!torrentFolder) return NO;
     
@@ -169,7 +168,7 @@ NSString * const kCTCDefaultsOpenAtLoginKey = @"openAtLogin";
 }
 
 + (NSString *)torrentsSavePath {
-    return [NSUserDefaults.standardUserDefaults stringForKey:kCTCDefaultsTorrentsSavePathKey];
+    return [NSUserDefaults.standardUserDefaults stringForKey:kCTCDefaultsTorrentsSavePathKey].stringByStandardizingPath;
 }
 
 + (NSArray *)downloadHistory {
