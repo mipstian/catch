@@ -156,6 +156,7 @@
 				44717AA3191300B300580054 /* CTCDefaults.m */,
 				44717AA51913072200580054 /* CTCLoginItems.h */,
 				44717AA61913072200580054 /* CTCLoginItems.m */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97315FDCFA39411CA2CEA /* Supporting Files */,
 			);
 			name = Catch;
@@ -176,7 +177,6 @@
 				080E96DDFE201D6D7F000001 /* Catch */,
 				44717AC61913A08700580054 /* CatchFeedHelper */,
 				44717ADC1913AF2000580054 /* Shared Libraries */,
-				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
