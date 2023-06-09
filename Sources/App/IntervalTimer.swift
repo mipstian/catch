@@ -1,7 +1,7 @@
 import Foundation
 
 
-/// Periodically invokes its delegate
+/// Periodically invokes its handler
 final class IntervalTimer {
   private var repeatingTimer: Timer! = nil
   
@@ -27,7 +27,7 @@ final class IntervalTimer {
     repeatingTimer.invalidate()
   }
   
-  /// Invoke the delegate immediately, and reset the timer
+  /// Invoke handler immediately, and reset the timer
   /// (i.e. the next scheduled time will be after a full `interval`).
   func fireNow() {
     repeatingTimer.fireDate = .distantPast
