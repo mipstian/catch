@@ -4,7 +4,7 @@
 @implementation CTCFeedParser
 
 + (NSArray*)parseFiles:(NSXMLDocument*)feed {
-	NSLog(@"Parsing feed for URLs");
+	NSLog(@"Parsing feed");
 	
 	NSError *error = nil;
 	
@@ -15,8 +15,6 @@
         NSLog(@"Parsing for URLs failed: %@", error);
 		return nil;
     }
-    
-    NSLog(@"Parsed %lu files", (unsigned long)fileNodes.count);
 	
 	// Extract URLs from NSXMLNodes
 	NSMutableArray *feedFiles = [NSMutableArray arrayWithCapacity:fileNodes.count];
@@ -30,7 +28,7 @@
                                @"showName": showName ?: NSNull.null}];
 	}
     
-    NSLog(@"Parsed files: %@", feedFiles);
+    NSLog(@"Parsed %lu files: %@", (unsigned long)fileNodes.count, feedFiles);
 	
 	return feedFiles;
 }
