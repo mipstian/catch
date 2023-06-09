@@ -7,7 +7,9 @@ class MenuController: NSObject {
   @IBOutlet private weak var menuVersion: NSMenuItem!
   @IBOutlet private weak var menuPauseResume: NSMenuItem!
   @IBOutlet private weak var menuLastUpdate: NSMenuItem!
-  
+  @IBOutlet private weak var menuLaunchShowRSS: NSMenuItem!
+  @IBOutlet private weak var menuTopSeparator: NSMenuItem!
+
   private var menuBarItem: NSStatusItem!
 
   override func awakeFromNib() {
@@ -35,6 +37,15 @@ class MenuController: NSObject {
     NotificationCenter.default.addObserver(
       forName: FeedChecker.stateChangedNotification,
       object: FeedChecker.shared,
+      queue: nil,
+      using: { [weak self] _ in
+        self?.refreshMenuContents()
+      }
+    )
+    
+    NotificationCenter.default.addObserver(
+      forName: Defaults.changedNotification,
+      object: Defaults.shared,
       queue: nil,
       using: { [weak self] _ in
         self?.refreshMenuContents()
@@ -79,6 +90,9 @@ class MenuController: NSObject {
     
     // Configure the "last update" item
     menuLastUpdate.title = FeedChecker.shared.lastCheckStatus.localizedDescription
+    
+    menuLaunchShowRSS.isHidden = !Defaults.shared.isShowRSSFeed
+    menuTopSeparator.isHidden = !Defaults.shared.isShowRSSFeed
   }
   
   deinit {
