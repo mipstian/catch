@@ -42,6 +42,8 @@ class PreferencesController: NSWindowController {
     guard !awake else { return }
     awake = true
     
+    window?.title = NSLocalizedString("Preferences", comment: "")
+    
     // Bind automatically check for updates checkbox to sparkle
     #if !DEBUG
     automaticallyCheckForUpdatesCheckbox.bind(
