@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1070" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4510"/>
-        <plugIn identifier="com.apple.automator.AutomatorPalette" version="3336"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
+        <plugIn identifier="com.apple.automator.AutomatorPalette" version="5056"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -123,7 +123,7 @@
                 <outlet property="preferencesWindow" destination="552" id="594"/>
             </connections>
         </customObject>
-        <window title="Voorkeuren" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" wantsToBeColor="NO" visibleAtLaunch="NO" animationBehavior="default" id="552" userLabel="PreferencesWindow">
+        <window title="Voorkeuren" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="552" userLabel="PreferencesWindow">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="310" y="248" width="642" height="279"/>
@@ -299,9 +299,9 @@ DQ
                                                     <amPathPopUpButton verticalHuggingPriority="750" canChooseDirectories="YES" canChooseExistingPaths="YES" placeholder="No Selection" id="791">
                                                         <rect key="frame" x="156" y="65" width="174" height="26"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                        <amVariablePopUpButtonCell key="cell" type="push" title="Other…" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" tag="1002" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="794">
+                                                        <amVariablePopUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="794">
                                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                            <font key="font" metaFont="system"/>
+                                                            <font key="font" metaFont="menu"/>
                                                             <menu key="menu" title="OtherViews" id="795"/>
                                                         </amVariablePopUpButtonCell>
                                                         <connections>
@@ -363,7 +363,7 @@ DQ
             </view>
             <toolbar key="toolbar" implicitIdentifier="CA2F34B0-7A44-4395-8E3C-8B6D18CC3ECC" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="604">
                 <allowedToolbarItems>
-                    <toolbarItem implicitItemIdentifier="414BD815-8F03-4AFC-AF27-7A671CD0847F" explicitItemIdentifier="Feeds" label="Feeds" paletteLabel="Feeds" image="feeds" selectable="YES" id="612">
+                    <toolbarItem implicitItemIdentifier="414BD815-8F03-4AFC-AF27-7A671CD0847F" explicitItemIdentifier="Feeds" label="Feeds" paletteLabel="Feeds" image="NSUserAccounts" selectable="YES" id="612">
                         <connections>
                             <action selector="showFeeds:" target="528" id="614"/>
                         </connections>
@@ -385,6 +385,6 @@ DQ
     </objects>
     <resources>
         <image name="NSAdvanced" width="32" height="32"/>
-        <image name="feeds" width="102.40284729003906" height="102.40284729003906"/>
+        <image name="NSUserAccounts" width="32" height="32"/>
     </resources>
 </document>
