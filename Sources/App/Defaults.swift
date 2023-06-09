@@ -13,7 +13,7 @@ final class Defaults: NSObject {
   static let downloadHistoryChangedNotification = NSNotification.Name("Defaults.downloadHistoryChangedNotification")
   
   private struct Keys {
-    static let feedURLs = "feedURLs"
+    static let feeds = "feeds"
     static let onlyUpdateBetween = "onlyUpdateBetween"
     static let updateFrom = "updateFrom"
     static let updateTo = "updateTo"
@@ -26,15 +26,13 @@ final class Defaults: NSObject {
     static let preventSystemSleep = "preventSystemSleep"
   }
   
-  var feedURLs: [URL] {
+  var feeds: [Feed] {
     get {
-      let rawFeedURLs = UserDefaults.standard.array(forKey: Keys.feedURLs) as! [String]
-      return rawFeedURLs
-        .compactMap { return URL(string: $0) }
-        .filter { $0.isValidFeedURL }
+      let rawFeeds = UserDefaults.standard.array(forKey: Keys.feeds) as! [[AnyHashable:Any]]
+      return rawFeeds.compactMap { return Feed(dictionary: $0) }
     }
     set {
-      UserDefaults.standard.set(newValue.map { $0.absoluteString }, forKey: Keys.feedURLs)
+      UserDefaults.standard.set(newValue.map { $0.dictionaryRepresentation }, forKey: Keys.feeds)
     }
   }
   
@@ -75,7 +73,7 @@ final class Defaults: NSObject {
     }
     set {
       // Only keep the most recent items
-      let truncatedCount = min(newValue.count, Config.historyLimit * feedURLs.count)
+      let truncatedCount = min(newValue.count, Config.historyLimit * feeds.count)
       let truncatedHistory = newValue.sorted().reversed().prefix(upTo: truncatedCount)
       
       let serializedHistory = truncatedHistory.map { $0.dictionaryRepresentation }
@@ -105,11 +103,11 @@ final class Defaults: NSObject {
   }
   
   var hasValidFeeds: Bool {
-    return feedURLs.count > 0
+    return feeds.count > 0
   }
   
   var hasShowRSSFeeds: Bool {
-    return feedURLs.contains { $0.isShowRSSFeed }
+    return feeds.contains { $0.url.isShowRSSFeed }
   }
   
   var downloadOptions: DownloadOptions? {
@@ -155,7 +153,7 @@ final class Defaults: NSObject {
     
     // Set smart default defaults
     let defaultDefaults: [String:Any] = [
-      Keys.feedURLs: [],
+      Keys.feeds: [],
       Keys.onlyUpdateBetween: false,
       Keys.updateFrom: defaultFromTime,
       Keys.updateTo: defaultToTime,
@@ -174,7 +172,7 @@ final class Defaults: NSObject {
       NSLog("Migrating feed URLs defaults")
       UserDefaults.standard.set(nil, forKey: "feedURL")
       if let legacyFeedURL = URL(string: legacyFeedURLString) {
-        feedURLs.append(legacyFeedURL)
+        feeds.append(Feed(name: "ShowRSS", url: legacyFeedURL))
       }
     }
     

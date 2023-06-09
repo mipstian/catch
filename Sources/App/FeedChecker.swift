@@ -98,7 +98,7 @@ final class FeedChecker {
     
     // Check the feed
     feedHelperProxy.checkFeeds(
-      urls: Defaults.shared.feedURLs,
+      urls: Defaults.shared.feeds.map { $0.url },
       downloadOptions: downloadOptions,
       previouslyDownloadedURLs: previouslyDownloadedURLs,
       completion: { [weak self] result in

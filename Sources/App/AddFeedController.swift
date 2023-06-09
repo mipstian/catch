@@ -3,6 +3,7 @@ import AppKit
 
 /// Manages the "Add Feed" window (run as a sheet)
 class AddFeedController: NSWindowController {
+  @IBOutlet private weak var feedNameTextField: NSTextField!
   @IBOutlet private weak var feedURLTextField: NSTextField!
   @IBOutlet private weak var addButton: NSButton!
   
@@ -26,14 +27,19 @@ class AddFeedController: NSWindowController {
 // MARK: Actions
 extension AddFeedController {
   @IBAction private func add(_ sender: Any?) {
+    let feedName = feedNameTextField.stringValue
+    
     guard
+      feedName != "",
       let feedURL = URL(string: feedURLTextField.stringValue),
       feedURL.isValidFeedURL
     else {
       return
     }
     
-    Defaults.shared.feedURLs.append(feedURL)
+    let newFeed = Feed(name: feedName, url: feedURL)
+    
+    Defaults.shared.feeds.append(newFeed)
     
     dismiss()
   }

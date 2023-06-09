@@ -53,6 +53,7 @@
 		44BA5D161DAECF1A00A9CE9A /* RecentsCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BA5D151DAECF1A00A9CE9A /* RecentsCellView.swift */; };
 		44BA5D1A1DB81A8E00A9CE9A /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BA5D191DB81A8E00A9CE9A /* Application.swift */; };
 		44BA5D1C1DB8220100A9CE9A /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BA5D1B1DB8220100A9CE9A /* MenuController.swift */; };
+		44C81989220D6B7700D9DAAD /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C81988220D6B7700D9DAAD /* Feed.swift */; };
 		44C8926F1D1814A7008F8543 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C8926E1D1814A7008F8543 /* AppDelegate.swift */; };
 		44E2CEA31DBC0B8F00ED7A8D /* PreferencesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E2CEA21DBC0B8F00ED7A8D /* PreferencesController.swift */; };
 		44E2CEA51DBC134E00ED7A8D /* FeedParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E2CEA41DBC134E00ED7A8D /* FeedParser.swift */; };
@@ -166,6 +167,7 @@
 		44BA5D151DAECF1A00A9CE9A /* RecentsCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecentsCellView.swift; path = Sources/App/RecentsCellView.swift; sourceTree = "<group>"; };
 		44BA5D191DB81A8E00A9CE9A /* Application.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Application.swift; path = Sources/App/Application.swift; sourceTree = "<group>"; };
 		44BA5D1B1DB8220100A9CE9A /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; name = MenuController.swift; path = Sources/App/MenuController.swift; sourceTree = "<group>"; tabWidth = 2; };
+		44C81988220D6B7700D9DAAD /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		44C8926E1D1814A7008F8543 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Sources/App/AppDelegate.swift; sourceTree = "<group>"; };
 		44E2CEA21DBC0B8F00ED7A8D /* PreferencesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreferencesController.swift; path = Sources/App/PreferencesController.swift; sourceTree = "<group>"; };
 		44E2CEA41DBC134E00ED7A8D /* FeedParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedParser.swift; path = "Sources/Feed Helper/FeedParser.swift"; sourceTree = SOURCE_ROOT; };
@@ -305,6 +307,7 @@
 				44B363471DC9B9FB00128259 /* Browser.swift */,
 				44B363491DC9BF1B00128259 /* Config.swift */,
 				44FFCE3E1DCB92F4006E6DF0 /* Defaults.swift */,
+				44C81988220D6B7700D9DAAD /* Feed.swift */,
 				44B363451DC99D1900128259 /* FeedChecker.swift */,
 				44A6FA8A1DE0B85C005303DF /* FeedHelperProxy.swift */,
 				44AB5B5D1DCE794A00AE6EB6 /* HistoryItem.swift */,
@@ -578,6 +581,7 @@
 				4453A66E1DE60D6300383E40 /* PowerManager.swift in Sources */,
 				44BA5D1A1DB81A8E00A9CE9A /* Application.swift in Sources */,
 				44B3634C1DCA6F7100128259 /* TimeOfDayMath.swift in Sources */,
+				44C81989220D6B7700D9DAAD /* Feed.swift in Sources */,
 				44AB5B5E1DCE794A00AE6EB6 /* HistoryItem.swift in Sources */,
 				4453A6661DE5065F00383E40 /* Episode.swift in Sources */,
 				44BA5D1C1DB8220100A9CE9A /* MenuController.swift in Sources */,

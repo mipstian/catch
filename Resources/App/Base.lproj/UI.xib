@@ -22,6 +22,7 @@
         <customObject id="cFd-Mt-3tR" customClass="AddFeedController" customModule="Catch" customModuleProvider="target">
             <connections>
                 <outlet property="addButton" destination="PoK-lg-pPH" id="es9-fW-Nwy"/>
+                <outlet property="feedNameTextField" destination="MSZ-yJ-ndF" id="mjQ-60-oEl"/>
                 <outlet property="feedURLTextField" destination="ygd-lr-Dgm" id="r62-gr-TJ7"/>
                 <outlet property="window" destination="Ysu-iS-waa" id="eum-de-ulp"/>
             </connections>
@@ -155,18 +156,18 @@
                                         <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o0O-2K-GFb">
                                             <rect key="frame" x="0.0" y="90" width="660" height="150"/>
                                             <clipView key="contentView" id="LDJ-ov-g4E">
-                                                <rect key="frame" x="1" y="1" width="658" height="148"/>
+                                                <rect key="frame" x="1" y="0.0" width="658" height="149"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
-                                                    <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="RU6-h9-jS6">
-                                                        <rect key="frame" x="0.0" y="0.0" width="658" height="148"/>
+                                                    <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" headerView="u4z-6k-nwl" viewBased="YES" id="RU6-h9-jS6">
+                                                        <rect key="frame" x="0.0" y="0.0" width="658" height="124"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                         <tableColumns>
-                                                            <tableColumn identifier="FeedCell" width="655" minWidth="40" maxWidth="1000" id="ftk-Uy-kT0">
-                                                                <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
+                                                            <tableColumn identifier="FeedNameColumn" width="120" minWidth="40" maxWidth="1000" id="ftk-Uy-kT0">
+                                                                <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="Name">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                     <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -179,12 +180,12 @@
                                                                 <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                 <prototypeCellViews>
                                                                     <tableCellView id="sPP-qC-xPY">
-                                                                        <rect key="frame" x="1" y="1" width="655" height="17"/>
+                                                                        <rect key="frame" x="1" y="1" width="120" height="17"/>
                                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textField canDrawConcurrently="YES" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="BEZ-Z3-mzn">
-                                                                                <rect key="frame" x="-2" y="0.0" width="659" height="17"/>
-                                                                                <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="https://showrss.info/" id="Qc9-Xi-6cN">
+                                                                                <rect key="frame" x="-2" y="0.0" width="124" height="17"/>
+                                                                                <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="ShowRSS" id="Qc9-Xi-6cN">
                                                                                     <font key="font" metaFont="system"/>
                                                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -203,6 +204,44 @@
                                                                     </tableCellView>
                                                                 </prototypeCellViews>
                                                             </tableColumn>
+                                                            <tableColumn identifier="FeedURLColumn" width="531" minWidth="10" maxWidth="3.4028234663852886e+38" id="PnP-0h-ZOc">
+                                                                <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="URL">
+                                                                    <font key="font" metaFont="smallSystem"/>
+                                                                    <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </tableHeaderCell>
+                                                                <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="hto-Ya-Rr2">
+                                                                    <font key="font" metaFont="system"/>
+                                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                </textFieldCell>
+                                                                <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                                <prototypeCellViews>
+                                                                    <tableCellView id="jqK-HK-7UM">
+                                                                        <rect key="frame" x="124" y="1" width="531" height="17"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <subviews>
+                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="ZzT-Ia-ms5">
+                                                                                <rect key="frame" x="-2" y="0.0" width="535" height="17"/>
+                                                                                <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="https://showrss.info/" id="huW-IS-pbb">
+                                                                                    <font key="font" metaFont="system"/>
+                                                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                                </textFieldCell>
+                                                                            </textField>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="trailing" secondItem="ZzT-Ia-ms5" secondAttribute="trailing" id="RJA-b8-Twr"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="ZzT-Ia-ms5" secondAttribute="bottom" id="YsO-hG-kQV"/>
+                                                                            <constraint firstItem="ZzT-Ia-ms5" firstAttribute="leading" secondItem="jqK-HK-7UM" secondAttribute="leading" id="ZqV-2S-eFi"/>
+                                                                            <constraint firstItem="ZzT-Ia-ms5" firstAttribute="top" secondItem="jqK-HK-7UM" secondAttribute="top" id="gKZ-iz-EDK"/>
+                                                                        </constraints>
+                                                                        <connections>
+                                                                            <outlet property="textField" destination="ZzT-Ia-ms5" id="0AN-l0-cbS"/>
+                                                                        </connections>
+                                                                    </tableCellView>
+                                                                </prototypeCellViews>
+                                                            </tableColumn>
                                                         </tableColumns>
                                                         <connections>
                                                             <outlet property="dataSource" destination="vyd-92-YXh" id="g4D-2g-v4j"/>
@@ -215,13 +254,17 @@
                                                 <constraint firstAttribute="height" constant="150" id="0fL-Pu-sHT"/>
                                             </constraints>
                                             <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="lMf-AW-hb3">
-                                                <rect key="frame" x="1" y="83" width="658" height="16"/>
+                                                <rect key="frame" x="1" y="133" width="658" height="16"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
                                             <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="yH2-hT-FyH">
                                                 <rect key="frame" x="224" y="17" width="15" height="102"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
+                                            <tableHeaderView key="headerView" id="u4z-6k-nwl">
+                                                <rect key="frame" x="0.0" y="0.0" width="658" height="25"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </tableHeaderView>
                                         </scrollView>
                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WcX-Bq-UrM" userLabel="Add Feed">
                                             <rect key="frame" x="0.0" y="62" width="19" height="21"/>
@@ -246,7 +289,7 @@
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
                                             <connections>
-                                                <action selector="removeFeed:" target="vyd-92-YXh" id="9wE-hW-d82"/>
+                                                <action selector="removeSelectedFeeds:" target="vyd-92-YXh" id="HS1-nU-hZC"/>
                                             </connections>
                                         </button>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="638">
@@ -654,9 +697,20 @@ DQ
             <rect key="contentRect" x="196" y="213" width="572" height="151"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
             <view key="contentView" id="JVG-A7-ap0">
-                <rect key="frame" x="0.0" y="0.0" width="572" height="103"/>
+                <rect key="frame" x="0.0" y="0.0" width="572" height="135"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MSZ-yJ-ndF">
+                        <rect key="frame" x="20" y="93" width="532" height="22"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Feed Name" drawsBackground="YES" id="87S-jd-Ks5">
+                            <font key="font" usesAppearanceFont="YES"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                        <connections>
+                            <outlet property="delegate" destination="cFd-Mt-3tR" id="XIm-0X-w5A"/>
+                        </connections>
+                    </textField>
                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ygd-lr-Dgm">
                         <rect key="frame" x="20" y="61" width="532" height="22"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="https://..." drawsBackground="YES" id="zrr-bq-pHZ">
@@ -696,15 +750,18 @@ DQ
                     </button>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="MSZ-yJ-ndF" firstAttribute="leading" secondItem="JVG-A7-ap0" secondAttribute="leading" constant="20" symbolic="YES" id="AD7-9v-qPU"/>
                     <constraint firstItem="PoK-lg-pPH" firstAttribute="leading" secondItem="rXP-L3-jvF" secondAttribute="trailing" constant="12" symbolic="YES" id="Awt-vB-4kz"/>
+                    <constraint firstAttribute="trailing" secondItem="MSZ-yJ-ndF" secondAttribute="trailing" constant="20" symbolic="YES" id="Fog-gg-Yd5"/>
+                    <constraint firstItem="MSZ-yJ-ndF" firstAttribute="top" secondItem="JVG-A7-ap0" secondAttribute="top" constant="20" symbolic="YES" id="OXv-RW-oNa"/>
                     <constraint firstItem="rXP-L3-jvF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="JVG-A7-ap0" secondAttribute="leading" constant="20" symbolic="YES" id="RwT-LJ-wAT"/>
                     <constraint firstAttribute="bottom" secondItem="PoK-lg-pPH" secondAttribute="bottom" constant="20" symbolic="YES" id="W4e-xc-W4t"/>
+                    <constraint firstItem="ygd-lr-Dgm" firstAttribute="top" secondItem="MSZ-yJ-ndF" secondAttribute="bottom" constant="10" symbolic="YES" id="WUj-6K-NAt"/>
                     <constraint firstItem="rXP-L3-jvF" firstAttribute="centerY" secondItem="PoK-lg-pPH" secondAttribute="centerY" id="gnb-9L-gaw"/>
                     <constraint firstItem="ygd-lr-Dgm" firstAttribute="leading" secondItem="JVG-A7-ap0" secondAttribute="leading" constant="20" symbolic="YES" id="iss-Vg-DrC"/>
                     <constraint firstAttribute="trailing" secondItem="PoK-lg-pPH" secondAttribute="trailing" constant="20" symbolic="YES" id="jxp-af-PVA"/>
                     <constraint firstItem="PoK-lg-pPH" firstAttribute="top" secondItem="ygd-lr-Dgm" secondAttribute="bottom" constant="20" id="mzo-rJ-EGt"/>
                     <constraint firstAttribute="trailing" secondItem="ygd-lr-Dgm" secondAttribute="trailing" constant="20" symbolic="YES" id="ptW-zT-nAR"/>
-                    <constraint firstItem="ygd-lr-Dgm" firstAttribute="top" secondItem="JVG-A7-ap0" secondAttribute="top" constant="20" symbolic="YES" id="uc6-Gz-eV9"/>
                 </constraints>
             </view>
             <point key="canvasLocation" x="135" y="-402.5"/>
