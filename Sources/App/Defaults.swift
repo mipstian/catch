@@ -153,20 +153,19 @@ final class Defaults {
   
   private init() {
     // Default values for time restrictions
-    let timeFrom = Calendar.current.date(from: DateComponents(hour: 24, minute: 0))!
-    let timeTo = Calendar.current.date(from: DateComponents(hour: 8, minute: 0))!
+    let defaultFromTime = Calendar.current.date(from: DateComponents(hour: 24, minute: 0))!
+    let defaultToTime = Calendar.current.date(from: DateComponents(hour: 8, minute: 0))!
     
     // Use user's Downloads directory as a default, fallback on home
     let defaultDownloadsDirectory = FileUtils.userDownloadsDirectory ?? FileUtils.userHomeDirectory
-    NSLog("Default downloads directory is \(defaultDownloadsDirectory)")
     
     // Set smart default defaults
     UserDefaults.standard.register(
       defaults: [
         Keys.feedURL: "",
         Keys.onlyUpdateBetween: false,
-        Keys.updateFrom: timeFrom,
-        Keys.updateTo: timeTo,
+        Keys.updateFrom: defaultFromTime,
+        Keys.updateTo: defaultToTime,
         Keys.torrentsSavePath: defaultDownloadsDirectory,
         Keys.shouldOrganizeTorrents: false,
         Keys.shouldOpenTorrentsAutomatically: true,
