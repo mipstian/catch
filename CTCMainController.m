@@ -158,10 +158,10 @@
 }
 
 - (IBAction)togglePause:(id)sender {
-	if ([self.scheduler pauseResume]) {
-		// If the scheduler is now active, also force a check right away
-		[self.scheduler forceCheck];
-	}
+    [self.scheduler togglePause];
+    
+    // If the scheduler is now active, also force a check right away
+	if (self.scheduler.isActive) [self.scheduler forceCheck];
 }
 
 - (IBAction)quit:(id)sender {
