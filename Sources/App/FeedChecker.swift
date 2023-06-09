@@ -83,8 +83,8 @@ final class FeedChecker {
     // Only work with valid preferences
     guard
       Defaults.shared.isConfigurationValid,
-      let downloadOptions = Defaults.shared.downloadOptions,
-      let feedURL = Defaults.shared.feedURL
+      Defaults.shared.hasValidFeeds,
+      let downloadOptions = Defaults.shared.downloadOptions
     else {
       NSLog("Skipping feed check: invalid preferences")
       lastCheckStatus = .skipped(Date())
@@ -95,6 +95,9 @@ final class FeedChecker {
     
     // Extract URLs from history
     let previouslyDownloadedURLs = Defaults.shared.downloadHistory.map { $0.episode.url }
+    
+    // TODO: check all
+    let feedURL = Defaults.shared.feedURLs[0]
     
     // Check the feed
     feedHelperProxy.checkFeed(
