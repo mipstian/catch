@@ -209,18 +209,12 @@ fileprivate extension FeedHelper {
     toPath downloadPath: String,
     withShowName showName: String?) throws -> String {
     // TODO: should be a struct
-    let fileURL = file["url"] as! String
+    let fileURL = URL(string: file["url"] as! String)!
     let fileTitle = file["title"] as! String
-    
-    let weblocPlist = ["URL": fileURL]
     
     let data: Data
     do {
-      data = try PropertyListSerialization.data(
-        fromPropertyList: weblocPlist,
-        format: .binary,
-        options: .allZeros
-      )
+      data = try PropertyListSerialization.weblocData(from: fileURL)
     } catch {
       throw NSError(
         domain: feedHelperErrorDomain,
