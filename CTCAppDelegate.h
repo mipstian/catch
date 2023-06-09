@@ -1,14 +1,7 @@
-//
-//  Catch.h
-//  Catch
-//
-//  Created by Giorgio Calderolla on 6/12/10.
-//  Copyright 2010 n\a. All rights reserved.
-//
-
 #import <Cocoa/Cocoa.h>
 #import "Preferences.h"
 #import "CTCScheduler.h"
+
 
 extern NSString * const APPLICATION_WEBSITE_URL;
 extern NSString * const APPLICATION_BUG_REPORT_URL;
