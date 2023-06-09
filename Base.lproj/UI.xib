@@ -160,7 +160,7 @@
                                                         </textFieldCell>
                                                     </textField>
                                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="787">
-                                                        <rect key="frame" x="87" y="60" width="543" height="22"/>
+                                                        <rect key="frame" x="87" y="60" width="536" height="22"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="http://showrss.info/rss.php?..." drawsBackground="YES" id="788">
                                                             <font key="font" metaFont="system"/>
@@ -237,7 +237,7 @@
                                                 </subviews>
                                             </view>
                                             <constraints>
-                                                <constraint firstItem="lIi-CM-MqY" firstAttribute="leading" secondItem="787" secondAttribute="trailing" constant="8" id="4Ny-mo-Jgz"/>
+                                                <constraint firstItem="lIi-CM-MqY" firstAttribute="leading" secondItem="787" secondAttribute="trailing" constant="15" id="4Ny-mo-Jgz"/>
                                                 <constraint firstItem="787" firstAttribute="top" secondItem="621" secondAttribute="top" constant="29" id="Ad6-8t-hD5"/>
                                                 <constraint firstItem="787" firstAttribute="centerY" secondItem="lIi-CM-MqY" secondAttribute="centerY" id="P0P-d4-tvv"/>
                                                 <constraint firstItem="785" firstAttribute="leading" secondItem="621" secondAttribute="leading" constant="15" id="R2v-u3-XOn"/>
@@ -313,7 +313,7 @@
                                                         </connections>
                                                     </button>
                                                     <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fwJ-Gq-K1U">
-                                                        <rect key="frame" x="336" y="78" width="9" height="9"/>
+                                                        <rect key="frame" x="343" y="78" width="9" height="9"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="warning" id="QCG-2j-VVy"/>
                                                     </imageView>
@@ -326,7 +326,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="623" secondAttribute="bottom" constant="15" id="EQF-ys-Nj3"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fwJ-Gq-K1U" secondAttribute="trailing" constant="15" id="Itw-n8-XBv"/>
                                                 <constraint firstItem="791" firstAttribute="leading" secondItem="625" secondAttribute="trailing" constant="8" symbolic="YES" id="KJa-vv-eHg"/>
-                                                <constraint firstItem="fwJ-Gq-K1U" firstAttribute="leading" secondItem="791" secondAttribute="trailing" constant="8" id="LfG-Z2-KAQ"/>
+                                                <constraint firstItem="fwJ-Gq-K1U" firstAttribute="leading" secondItem="791" secondAttribute="trailing" constant="15" id="LfG-Z2-KAQ"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="623" secondAttribute="trailing" constant="15" id="bFN-oL-PeV"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="624" secondAttribute="trailing" constant="15" id="fdl-LG-g90"/>
                                                 <constraint firstItem="791" firstAttribute="centerY" secondItem="fwJ-Gq-K1U" secondAttribute="centerY" id="j5p-tO-ZN2"/>
