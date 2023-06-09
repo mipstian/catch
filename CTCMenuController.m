@@ -170,9 +170,9 @@
     NSDateFormatter *dateFormatter = NSDateFormatter.new;
     dateFormatter.timeStyle = NSDateFormatterShortStyle;
     dateFormatter.dateStyle = NSDateFormatterShortStyle;
-    NSUInteger index = 0;
-    for(NSDictionary *recent in recents) {
-        NSString *menuTitle = [NSString stringWithFormat:@"%lu %@", ++index, [recent valueForKey:@"title"]];
+    
+    [recents enumerateObjectsUsingBlock:^(NSDictionary *recent, NSUInteger index, BOOL *stop) {
+        NSString *menuTitle = [NSString stringWithFormat:@"%lu %@", index + 1, [recent valueForKey:@"title"]];
         NSMenuItem *newItem = [[NSMenuItem alloc] initWithTitle:menuTitle
                                                          action:NULL
                                                   keyEquivalent:@""];
@@ -185,7 +185,8 @@
         }
         newItem.enabled = NO;
         [self.menuRecentTorrents.submenu addItem:newItem];
-    }
+        
+    }];
     
     // Put the Show in finder menu back
     [self.menuRecentTorrents.submenu addItem:self.menuShowInFinder];
