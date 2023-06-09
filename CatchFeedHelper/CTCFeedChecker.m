@@ -195,7 +195,7 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
     
     // Download!
     NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:fileURL];
-    NSURLResponse *urlResponse = NSURLResponse.new;
+    NSHTTPURLResponse *urlResponse = NSHTTPURLResponse.new;
     NSData *downloadedFile = [NSURLConnection sendSynchronousRequest:urlRequest
                                            returningResponse:&urlResponse
                                                        error:&error];
@@ -205,6 +205,13 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
                                         code:-1
                                     userInfo:@{NSLocalizedDescriptionKey: @"Could not download file",
                                                NSUnderlyingErrorKey: error}];
+        return nil;
+    }
+    
+    if (urlResponse.statusCode != 200) {
+        *outError = [NSError errorWithDomain:kCTCFeedCheckerErrorDomain
+                                        code:-7
+                                    userInfo:@{NSLocalizedDescriptionKey: @"Could not download file (bad status code)"}];
         return nil;
     }
     
