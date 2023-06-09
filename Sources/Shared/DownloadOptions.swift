@@ -2,9 +2,9 @@ import Foundation
 
 
 struct DownloadOptions {
-  let containerDirectory: URL
-  let shouldOrganizeByShow: Bool
-  let shouldSaveMagnetLinks: Bool
+  var containerDirectory: URL
+  var shouldOrganizeByShow: Bool
+  var shouldSaveMagnetLinks: Bool
 }
 
 

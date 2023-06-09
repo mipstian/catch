@@ -7,13 +7,13 @@ struct Episode {
   ///
   /// - Note: in feeds, this usually contains a season/episode number code and
   ///         other stuff that isn't strictly the title
-  let title: String
+  var title: String
   
   /// Magnet link or .torrent file URL for this episode
-  let url: URL
+  var url: URL
   
   /// Name of the TV show this episode is from, if available.
-  let showName: String?
+  var showName: String?
   
   /// Whether this episode's url is a magnet link (instead of a .torrent file)
   var isMagnetized: Bool {
@@ -23,10 +23,10 @@ struct Episode {
 
 
 struct DownloadedEpisode {
-  let episode: Episode
+  var episode: Episode
   
   /// Where the .torrent file was saved to the file system, if it was
-  let localURL: URL?
+  var localURL: URL?
 }
 
 
