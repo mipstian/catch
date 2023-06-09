@@ -23,6 +23,6 @@ Features:
   * Automatically start downloading in your favorite BitTorrent client
   * Notification Center notifications
   * Automatic updates
-  * Speaks English (US and UK), Deutsch, Français, Español, Polski, Català, Finnish (suomi), 中文 (简体), 中文 (繁體) and Italiano
+  * Speaks English, Deutsch, Français, Español, Polski, Català, Finnish (suomi), 中文 (简体), 中文 (繁體) and Italiano
 
 **[Report a bug](https://github.com/mipstian/catch/issues)**
