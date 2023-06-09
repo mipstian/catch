@@ -37,10 +37,6 @@
 		44EAD12E1916682D002C7443 /* CTCApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 44EAD12D1916682D002C7443 /* CTCApplication.m */; };
 		44FBC67B196312A400434B01 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44FBC67A196312A400434B01 /* QuartzCore.framework */; };
 		44FBC67E196316E900434B01 /* NSWindow+ShakeAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 44FBC67D196316E900434B01 /* NSWindow+ShakeAnimation.m */; };
-		49A776FA1971B5C00084F12F /* RSS.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A776F81971B5C00084F12F /* RSS.png */; };
-		49A776FB1971B5C00084F12F /* RSS@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A776F91971B5C00084F12F /* RSS@2x.png */; };
-		49A776FE1971B60C0084F12F /* RSSWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A776FC1971B60C0084F12F /* RSSWhite.png */; };
-		49A776FF1971B60C0084F12F /* RSSWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49A776FD1971B60C0084F12F /* RSSWhite@2x.png */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
@@ -156,10 +152,6 @@
 		44FBC67A196312A400434B01 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		44FBC67C196316E900434B01 /* NSWindow+ShakeAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSWindow+ShakeAnimation.h"; sourceTree = "<group>"; };
 		44FBC67D196316E900434B01 /* NSWindow+ShakeAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSWindow+ShakeAnimation.m"; sourceTree = "<group>"; };
-		49A776F81971B5C00084F12F /* RSS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RSS.png; sourceTree = "<group>"; };
-		49A776F91971B5C00084F12F /* RSS@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RSS@2x.png"; sourceTree = "<group>"; };
-		49A776FC1971B60C0084F12F /* RSSWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RSSWhite.png; sourceTree = "<group>"; };
-		49A776FD1971B60C0084F12F /* RSSWhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RSSWhite@2x.png"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Catch-Info.plist */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; path = "Catch-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Catch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -244,10 +236,6 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				49A776F81971B5C00084F12F /* RSS.png */,
-				49A776F91971B5C00084F12F /* RSS@2x.png */,
-				49A776FC1971B60C0084F12F /* RSSWhite.png */,
-				49A776FD1971B60C0084F12F /* RSSWhite@2x.png */,
 				4403ACF31914041C002F286C /* Assets.xcassets */,
 				38DB9D5911C7FEC5000DA168 /* app-icon.icns */,
 				2F7446970DB6B7EA00F9684A /* UI.xib */,
@@ -508,12 +496,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49A776FE1971B60C0084F12F /* RSSWhite.png in Resources */,
-				49A776FA1971B5C00084F12F /* RSS.png in Resources */,
 				2F7446990DB6B7EA00F9684A /* UI.xib in Resources */,
-				49A776FB1971B5C00084F12F /* RSS@2x.png in Resources */,
 				38DB9D5A11C7FEC5000DA168 /* app-icon.icns in Resources */,
-				49A776FF1971B60C0084F12F /* RSSWhite@2x.png in Resources */,
 				38A3FD0D11CA01DD00157AEF /* Localizable.strings in Resources */,
 				4403ACF41914041C002F286C /* Assets.xcassets in Resources */,
 				445D97A6191579C7006CD77C /* UI.strings in Resources */,

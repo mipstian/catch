@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1080" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="5056"/>
@@ -128,7 +128,7 @@
         <window title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="552" userLabel="PreferencesWindow">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <rect key="contentRect" x="310" y="248" width="700" height="316"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="778"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="800"/>
             <view key="contentView" id="553">
                 <rect key="frame" x="0.0" y="0.0" width="700" height="316"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -450,7 +450,7 @@ DQ
             </view>
             <toolbar key="toolbar" implicitIdentifier="CA2F34B0-7A44-4395-8E3C-8B6D18CC3ECC" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="604">
                 <allowedToolbarItems>
-                    <toolbarItem implicitItemIdentifier="414BD815-8F03-4AFC-AF27-7A671CD0847F" explicitItemIdentifier="Feed" label="Feed" paletteLabel="Feed" image="RSS" selectable="YES" id="612">
+                    <toolbarItem implicitItemIdentifier="414BD815-8F03-4AFC-AF27-7A671CD0847F" explicitItemIdentifier="Feed" label="Feed" paletteLabel="Feed" image="rss" selectable="YES" id="612">
                         <size key="minSize" width="64" height="0.0"/>
                         <connections>
                             <action selector="showFeeds:" target="vyd-92-YXh" id="QSV-1w-pHR"/>
@@ -473,7 +473,7 @@ DQ
     </objects>
     <resources>
         <image name="NSAdvanced" width="32" height="32"/>
-        <image name="RSS" width="32" height="32"/>
+        <image name="rss" width="32" height="32"/>
         <image name="warning" width="9" height="9"/>
     </resources>
 </document>
