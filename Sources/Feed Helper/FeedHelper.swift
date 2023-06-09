@@ -2,20 +2,8 @@ import Foundation
 
 
 enum FeedHelper {
-  static func checkShowRSSFeed(
-    feedURL: URL,
-    downloadingToBookmark downloadFolderBookmark: Data,
-    organizingByFolder shouldOrganizeByFolder: Bool,
-    savingMagnetLinks shouldSaveMagnetLinks: Bool,
-    skippingURLs previouslyDownloadedURLs: [String]
-    ) throws -> [[AnyHashable:Any]] {
+  static func checkShowRSSFeed(feedURL: URL, downloadOptions: DownloadOptions, skippingURLs previouslyDownloadedURLs: [String]) throws -> [[AnyHashable:Any]] {
     NSLog("Checking feed")
-    
-    // Resolve the bookmark (that the main app gives us to transfer access to
-    // the download folder) to a URL
-    let downloadFolderURL = try FileUtils.url(from: downloadFolderBookmark)
-    
-    let downloadFolderPath = downloadFolderURL.path
     
     // Download the feed
     let feed: XMLDocument
@@ -50,33 +38,18 @@ enum FeedHelper {
     // Download the files
     return try downloadFiles(
       feedFiles: feedFiles,
-      toPath: downloadFolderPath,
-      organizingByFolder: shouldOrganizeByFolder,
-      savingMagnetLinks: shouldSaveMagnetLinks,
+      downloadOptions: downloadOptions,
       skippingURLs: previouslyDownloadedURLs
     )
   }
   
-  static func downloadFile(
-    file: [AnyHashable:Any],
-    toBookmark downloadFolderBookmark: Data,
-    organizingByFolder shouldOrganizeByFolder: Bool,
-    savingMagnetLinks shouldSaveMagnetLinks: Bool
-    ) throws -> [AnyHashable:Any]? {
+  static func downloadFile(file: [AnyHashable:Any], downloadOptions: DownloadOptions) throws -> [AnyHashable:Any]? {
     NSLog("Downloading single file")
-    
-    // Resolve the bookmark (that the main app gives us to transfer access to
-    // the download folder) to a URL
-    let downloadFolderURL = try FileUtils.url(from: downloadFolderBookmark)
-    
-    let downloadFolderPath = downloadFolderURL.path
-    
+
     // Download the file
     let downloadedFiles = try downloadFiles(
       feedFiles: [file],
-      toPath: downloadFolderPath,
-      organizingByFolder: shouldOrganizeByFolder,
-      savingMagnetLinks: shouldSaveMagnetLinks,
+      downloadOptions: downloadOptions,
       skippingURLs: []
     )
     
@@ -98,9 +71,7 @@ fileprivate extension FeedHelper {
   
   static func downloadFiles(
     feedFiles: [[AnyHashable:Any]],
-    toPath downloadPath: String,
-    organizingByFolder shouldOrganizeByFolder: Bool,
-    savingMagnetLinks shouldSaveMagnetLinks: Bool,
+    downloadOptions: DownloadOptions,
     skippingURLs previouslyDownloadedURLs: [String]) throws -> [[AnyHashable:Any]] {
     NSLog("Downloading files (if needed)")
     
@@ -118,8 +89,8 @@ fileprivate extension FeedHelper {
       
       let isMagnetLink = url.scheme == "magnet"
       
-      // First get the folder, if we want it and it's available
-      let showName = shouldOrganizeByFolder ? fileShowName : nil
+      // First get the name for the show's directory, if we want it and it's available
+      let showName = downloadOptions.shouldOrganizeByShow ? fileShowName : nil
       
       // The file is new, return/save magnet or download torrent
       if isMagnetLink {
@@ -129,12 +100,12 @@ fileprivate extension FeedHelper {
           "isMagnetLink": true
         ]
         
-        if shouldSaveMagnetLinks {
+        if downloadOptions.shouldSaveMagnetLinks {
           // Save the magnet link to a file
           do {
             _ = try saveMagnetFile(
               file: file,
-              toPath: downloadPath,
+              to: downloadOptions.containerDirectory,
               withShowName: showName
             )
           } catch {
@@ -146,11 +117,11 @@ fileprivate extension FeedHelper {
         // Return the magnet link, if needed the main app will open it on the fly
         return downloadedItemDescription
       } else {
-        let downloadedTorrentFile: String
+        let downloadedTorrentFile: URL
         do {
           downloadedTorrentFile = try downloadFile(
             file: file,
-            toPath: downloadPath,
+            to: downloadOptions.containerDirectory,
             withShowName: showName
           )
         } catch {
@@ -162,7 +133,7 @@ fileprivate extension FeedHelper {
           "url": fileURL,
           "title": fileTitle,
           "isMagnetLink": false,
-          "torrentFilePath": downloadedTorrentFile
+          "torrentFilePath": downloadedTorrentFile.absoluteString
         ]
       }
     }
@@ -171,8 +142,8 @@ fileprivate extension FeedHelper {
   /// Create a .webloc file that can be double-clicked to open the magnet link
   static func saveMagnetFile(
     file: [AnyHashable:Any],
-    toPath downloadPath: String,
-    withShowName showName: String?) throws -> String {
+    to containerDirectory: URL,
+    withShowName showName: String?) throws -> URL {
     // TODO: should be a struct
     let fileURL = URL(string: file["url"] as! String)!
     let fileTitle = file["title"] as! String
@@ -194,27 +165,27 @@ fileprivate extension FeedHelper {
     let filename = FileUtils.magnetFilename(from: fileTitle)
     
     // Compute destination path
-    let pathAndFilename = fullPathWithContainerFolder(
-      containerFolder: downloadPath,
-      suggestedSubFolder: showName,
+    let fullPath = downloadPath(
+      in: containerDirectory,
+      subDirectory: showName,
       filename: filename
     )
     
-    try writeData(data: data, toPath: pathAndFilename)
+    try writeData(data: data, to: fullPath)
     
-    return pathAndFilename
+    return fullPath
   }
   
   static func downloadFile(
     file: [AnyHashable:Any],
-    toPath downloadPath: String,
-    withShowName showName: String?) throws -> String {
+    to containerDirectory: URL,
+    withShowName showName: String?) throws -> URL {
     // TODO: should be a struct
     let fileURL = URL(string: file["url"] as! String)!
     let fileTitle = file["title"] as! String
     
     if let showName = showName {
-      NSLog("Downloading file to folder for show \(showName)")
+      NSLog("Downloading file to directory for show \(showName)")
     } else {
       NSLog("Downloading file")
     }
@@ -257,54 +228,53 @@ fileprivate extension FeedHelper {
     let filename = FileUtils.torrentFilename(from: fileTitle)
     
     // Compute destination path
-    let pathAndFilename = fullPathWithContainerFolder(
-      containerFolder: downloadPath,
-      suggestedSubFolder: showName,
+    let fullPath = downloadPath(
+      in: containerDirectory,
+      subDirectory: showName,
       filename: filename
     )
     
-    try writeData(data: downloadedFile, toPath: pathAndFilename)
+    try writeData(data: downloadedFile, to: fullPath)
     
-    return pathAndFilename
+    return fullPath
   }
   
-  static func writeData(data: Data, toPath pathAndFilename: String) throws {
-    let url = URL(fileURLWithPath: pathAndFilename)
-    let pathAndFolder = url.deletingLastPathComponent()
+  static func writeData(data: Data, to url: URL) throws {
+    let containerDirectory = url.deletingLastPathComponent()
     
     // Check if the destination dir exists, if it doesn't create it
-    var pathAndFolderIsDirectory: ObjCBool = false
-    if FileManager.default.fileExists(atPath: pathAndFolder.path, isDirectory: &pathAndFolderIsDirectory) {
-      if !pathAndFolderIsDirectory.boolValue {
+    var isDirectory: ObjCBool = false
+    if FileManager.default.fileExists(atPath: containerDirectory.path, isDirectory: &isDirectory) {
+      if !isDirectory.boolValue {
         // Exists but isn't a directory! Aaargh! Abort!
         throw NSError(
           domain: feedHelperErrorDomain,
           code: -2,
           userInfo: [
-            NSLocalizedDescriptionKey: "Download path is not a directory: \(pathAndFolder)"
+            NSLocalizedDescriptionKey: "Download path is not a directory: \(containerDirectory)"
           ]
         )
       }
     } else {
-      // Create folder
+      // Directory doesn't exist, create it
       do {
         try FileManager.default.createDirectory(
-          atPath: pathAndFolder.path,
+          atPath: containerDirectory.path,
           withIntermediateDirectories: true
         )
       } catch {
-        // Folder creation failed :( Abort
+        // Directory creation failed :( Abort
         throw NSError(
           domain: feedHelperErrorDomain,
           code: -3,
           userInfo: [
-            NSLocalizedDescriptionKey: "Couldn't create folder: \(pathAndFolder)",
+            NSLocalizedDescriptionKey: "Couldn't create directory: \(containerDirectory)",
             NSUnderlyingErrorKey: error
           ]
         )
       }
       
-      NSLog("Folder \(pathAndFolder) created")
+      NSLog("Directory \(containerDirectory) created")
     }
     
     // Write!
@@ -322,19 +292,15 @@ fileprivate extension FeedHelper {
     }
   }
   
-  static func fullPathWithContainerFolder(
-    containerFolder: String,
-    suggestedSubFolder: String?,
-    filename: String) -> String {
-    var containerFolderURL = URL(fileURLWithPath: containerFolder)
+  static func downloadPath(in containerDirectory: URL, subDirectory: String?, filename: String) -> URL {
+    var fullPath = containerDirectory
     
-    if let suggestedSubFolder = suggestedSubFolder {
-      let folder = FileUtils.fileName(from: suggestedSubFolder)
-      containerFolderURL.appendPathComponent(folder)
+    if let subDirectory = subDirectory {
+      fullPath.appendPathComponent(FileUtils.fileName(from: subDirectory))
     }
     
-    containerFolderURL.appendPathComponent(filename)
+    fullPath.appendPathComponent(filename)
     
-    return containerFolderURL.standardizedFileURL.path
+    return fullPath.standardizedFileURL
   }
 }

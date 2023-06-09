@@ -10,8 +10,8 @@ let feedHelperErrorDomain = "com.giorgiocalderolla.Catch.CatchFeedHelper"
   
   func checkShowRSSFeed(
     feedURL: URL,
-    downloadingToBookmark downloadFolderBookmark: Data,
-    organizingByFolder shouldOrganizeByFolder: Bool,
+    downloadingToBookmark downloadDirectoryBookmark: Data,
+    organizingByShow shouldOrganizeByShow: Bool,
     savingMagnetLinks shouldSaveMagnetLinks: Bool,
     skippingURLs previouslyDownloadedURLs: [String],
     withReply reply: FeedCheckReply
@@ -19,8 +19,8 @@ let feedHelperErrorDomain = "com.giorgiocalderolla.Catch.CatchFeedHelper"
   
   func downloadFile(
     file: [AnyHashable:Any],
-    toBookmark downloadFolderBookmark: Data,
-    organizingByFolder shouldOrganizeByFolder: Bool,
+    toBookmark downloadDirectoryBookmark: Data,
+    organizingByShow shouldOrganizeByShow: Bool,
     savingMagnetLinks shouldSaveMagnetLinks: Bool,
     withReply reply: FileDownloadReply
   )
