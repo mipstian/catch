@@ -1,8 +1,7 @@
 import Foundation
 
 
-/// Implements the FeedHelperService XPC protocol, and handles
-/// serialization/deserialization
+/// Implements the FeedHelperService XPC protocol, and handles serialization/deserialization
 final class Service: NSObject {
   static let shared = Service()
   

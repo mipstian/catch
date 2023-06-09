@@ -14,7 +14,7 @@ final class FeedChecker {
         scheduler.scheduleNow()
       }
       
-      refreshActivity()
+      refreshPowerManagement()
       sendStatusChangedNotification()
     }
   }
@@ -45,7 +45,7 @@ final class FeedChecker {
     // Check now
     scheduler.scheduleNow()
 
-    refreshActivity()
+    refreshPowerManagement()
   }
   
   /// Checks feed right now ignoring time restrictions and "paused" mode
@@ -53,7 +53,9 @@ final class FeedChecker {
     checkFeed()
   }
   
-  func refreshActivity() {
+  /// Makes the app's power management status (App Nap and system sleep) reflect the
+  /// current app state and settings
+  func refreshPowerManagement() {
     // End previously started activity if any
     if let token = activityToken {
       ProcessInfo.processInfo.endActivity(token)
