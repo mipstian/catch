@@ -215,6 +215,7 @@
 		29B97315FDCFA39411CA2CEA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8D1107310486CEB800E47090 /* Catch-Info.plist */,
 				32CA4F630368D1EE00C91783 /* Catch_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 			);
@@ -237,7 +238,6 @@
 				44717A9E1912F95000580054 /* menubar_refreshing-inv@2x.png */,
 				38D39B6611C3A70000C17C80 /* menubar_refreshing.png */,
 				44717A9C1912F8D800580054 /* menubar_refreshing@2x.png */,
-				8D1107310486CEB800E47090 /* Catch-Info.plist */,
 				2F7446970DB6B7EA00F9684A /* UI.xib */,
 				38A3FD0C11CA01DD00157AEF /* Localizable.strings */,
 				381066FA11CF3F8300FDED93 /* MainMenu.xib */,
