@@ -91,14 +91,14 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
     NSURL *downloadFolderURL = [CTCFileUtils URLFromBookmark:downloadFolderBookmark
                                                        error:&error];
     if (!downloadFolderURL) {
-        reply(error);
+        reply(nil, error);
         return;
     }
     
     NSString *downloadFolderPath = downloadFolderURL.path;
     
     // Download the file
-    [self downloadFiles:@[file]
+    NSArray *downloadedFiles = [self downloadFiles:@[file]
                  toPath:downloadFolderPath
      organizingByFolder:shouldOrganizeByFolder
            skippingURLs:@[]
@@ -106,7 +106,7 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
     
     NSLog(@"All done");
     
-    reply(error);
+    reply(downloadedFiles.firstObject, error);
 }
 
 - (NSXMLDocument*)downloadFeed:(NSURL*)feedURL

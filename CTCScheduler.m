@@ -180,14 +180,15 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
     [self checkFeed];
 }
 
-- (void)downloadFile:(NSDictionary *)file {
+- (void)downloadFile:(NSDictionary *)file
+          completion:(void (^)(NSDictionary *downloadedFile, NSError *error))completion {
     // Call feed checker service
     CTCFeedChecker *feedChecker = [self.feedCheckerConnection remoteObjectProxy];
     [feedChecker downloadFile:file
                    toBookmark:[self downloadFolderBookmark]
            organizingByFolder:CTCDefaults.shouldOrganizeTorrentsInFolders
-                    withReply:^(NSError *error) {
-                        // TODO
+                    withReply:^(NSDictionary *downloadedFile, NSError *error) {
+                        completion(downloadedFile, error);
     }];
 }
 

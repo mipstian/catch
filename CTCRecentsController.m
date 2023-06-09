@@ -55,7 +55,12 @@
         [NSWorkspace.sharedWorkspace openURL:[NSURL URLWithString:recentToDownload[@"url"]]];
     }
     else {
-        [CTCScheduler.sharedScheduler downloadFile:recentToDownload];
+        [CTCScheduler.sharedScheduler downloadFile:recentToDownload
+                                        completion:^(NSDictionary *downloadedFile, NSError *error) {
+                if (downloadedFile && CTCDefaults.shouldOpenTorrentsAutomatically) {
+                    [NSWorkspace.sharedWorkspace openFile:downloadedFile[@"torrentFilePath"]];
+                }
+         }];
     }
 }
 
