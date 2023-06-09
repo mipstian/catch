@@ -65,7 +65,12 @@ static NSString* const GROWL_NEW_TORRENT = @"New torrent";
 	[menuVersion setTitle:[NSString stringWithFormat:@"%@ %@", APPLICATION_NAME, APPLICATION_VERSION] ];
 
 	// Enable Growl
-	[GrowlApplicationBridge setGrowlDelegate:self];
+    notificationCenterIsAvailable = (NSClassFromString(@"NSUserNotificationCenter")!=nil);
+    if (notificationCenterIsAvailable) {
+        [[NSUserNotificationCenter defaultUserNotificationCenter] setDelegate:self];
+    } else {
+        [GrowlApplicationBridge setGrowlDelegate:self];
+    }
 	
 	// Select the first tab of the Preferences
 	[self showFeeds:self];
@@ -291,10 +296,25 @@ static NSString* const GROWL_NEW_TORRENT = @"New torrent";
 }
 
 - (void) torrentNotificationWithDescription:(NSString*)description {
-	[GrowlApplicationBridge notifyWithTitle:NSLocalizedString(@"newtorrent", @"New torrent notification")
-								 description:description notificationName:GROWL_NEW_TORRENT
-									iconData:nil priority:0 isSticky:NO
-								clickContext:nil];
+    if (notificationCenterIsAvailable) {
+        NSUserNotification *notification = [[NSUserNotification alloc] init];
+        notification.title = NSLocalizedString(@"newtorrent", @"New torrent notification");
+        notification.informativeText = description;
+        notification.soundName = NSUserNotificationDefaultSoundName;
+        [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
+        [notification release];
+    } else {
+        [GrowlApplicationBridge notifyWithTitle:NSLocalizedString(@"newtorrent", @"New torrent notification")
+                                     description:description notificationName:GROWL_NEW_TORRENT
+                                        iconData:nil priority:0 isSticky:NO
+                                    clickContext:nil];
+    }
+}
+
+- (BOOL)userNotificationCenter:(NSUserNotificationCenter *)center
+     shouldPresentNotification:(NSUserNotification *)notification
+{
+    return YES;
 }
 
 @end
