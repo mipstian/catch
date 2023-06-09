@@ -149,29 +149,29 @@
             <rect key="contentRect" x="310" y="248" width="700" height="317"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
             <view key="contentView" id="553" customClass="PreferencesView" customModule="Catch" customModuleProvider="target">
-                <rect key="frame" x="0.0" y="0.0" width="700" height="409"/>
+                <rect key="frame" x="0.0" y="0.0" width="700" height="431"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="616" userLabel="(Feed, Downloads, Tweaks)">
-                        <rect key="frame" x="20" y="60" width="660" height="329"/>
+                        <rect key="frame" x="20" y="60" width="660" height="351"/>
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
                             <tabViewItem label="Feeds" identifier="Feeds" id="617">
                                 <view key="view" id="620">
-                                    <rect key="frame" x="0.0" y="0.0" width="660" height="329"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="660" height="351"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V8T-B4-GjP">
-                                            <rect key="frame" x="0.0" y="0.0" width="660" height="329"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="660" height="351"/>
                                             <subviews>
                                                 <scrollView autohidesScrollers="YES" horizontalLineScroll="50" horizontalPageScroll="10" verticalLineScroll="50" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8AM-H5-xVR">
-                                                    <rect key="frame" x="0.0" y="129" width="590" height="200"/>
+                                                    <rect key="frame" x="0.0" y="129" width="590" height="222"/>
                                                     <clipView key="contentView" drawsBackground="NO" id="ffu-f7-1Bh">
-                                                        <rect key="frame" x="1" y="1" width="588" height="198"/>
+                                                        <rect key="frame" x="1" y="1" width="588" height="220"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" alternatingRowBackgroundColors="YES" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="48" rowSizeStyle="automatic" viewBased="YES" id="ZyI-YF-l8d">
-                                                                <rect key="frame" x="0.0" y="0.0" width="588" height="198"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="588" height="220"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <size key="intercellSpacing" width="3" height="2"/>
                                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -247,7 +247,7 @@
                                                         <nil key="backgroundColor"/>
                                                     </clipView>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="200" id="IIX-uc-Q2h"/>
+                                                        <constraint firstAttribute="height" constant="222" id="IIX-uc-Q2h"/>
                                                     </constraints>
                                                     <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.083333333333333329" horizontal="YES" id="juY-7b-F02">
                                                         <rect key="frame" x="1" y="183" width="559" height="16"/>
@@ -657,15 +657,15 @@ DQ
             <rect key="contentRect" x="120" y="64" width="431" height="435"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
             <value key="minSize" type="size" width="200" height="300"/>
-            <view key="contentView" id="gSi-VU-gYd">
-                <rect key="frame" x="0.0" y="0.0" width="451" height="435"/>
+            <view key="contentView" misplaced="YES" id="gSi-VU-gYd">
+                <rect key="frame" x="0.0" y="0.0" width="431" height="435"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="57" horizontalPageScroll="10" verticalLineScroll="57" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i4W-ed-17Q">
                         <rect key="frame" x="0.0" y="0.0" width="451" height="435"/>
                         <clipView key="contentView" drawsBackground="NO" id="KtZ-hY-aan">
                             <rect key="frame" x="0.0" y="0.0" width="451" height="435"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" alternatingRowBackgroundColors="YES" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="55" viewBased="YES" id="oof-vB-WHt">
                                     <rect key="frame" x="0.0" y="0.0" width="451" height="435"/>
