@@ -129,6 +129,9 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 	self.active = !self.isActive;
 	
     [self reportStatus];
+    
+    // If we have just been set to active, check right now
+    if (self.isActive) [self.repeatingTimer setFireDate:NSDate.distantPast];
 }
 
 - (void)forceCheck {
