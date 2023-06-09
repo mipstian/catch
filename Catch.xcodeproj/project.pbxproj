@@ -185,6 +185,7 @@
 				44717AA3191300B300580054 /* CTCDefaults.m */,
 				44717AA51913072200580054 /* CTCLoginItems.h */,
 				44717AA61913072200580054 /* CTCLoginItems.m */,
+				29B97315FDCFA39411CA2CEA /* Supporting Files */,
 			);
 			name = Catch;
 			sourceTree = "<group>";
@@ -205,20 +206,19 @@
 				44717AC61913A08700580054 /* CatchFeedHelper */,
 				44717ADC1913AF2000580054 /* Shared Libraries */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
-				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
 			name = Catch;
 			sourceTree = "<group>";
 		};
-		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+		29B97315FDCFA39411CA2CEA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
 				32CA4F630368D1EE00C91783 /* Catch_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 			);
-			name = "Other Sources";
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
