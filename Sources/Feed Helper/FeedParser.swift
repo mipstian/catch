@@ -38,9 +38,8 @@ public class FeedParser: NSObject {
       
       var item = ["title": title, "url": urlString]
       
-      // Get the show name from the generic "tv:" namespace, fallback to the old "showrss:" namespace
-      // This field is optional
-      if let showName = itemNode["tv:show_name"] ?? itemNode["showrss:showname"] {
+      // Get the optional show name from the generic "tv:" namespace
+      if let showName = itemNode["tv:show_name"] {
         item["showName"] = showName
       }
       
