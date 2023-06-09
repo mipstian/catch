@@ -19,7 +19,7 @@
         </customObject>
         <customObject id="205" userLabel="Catch" customClass="CTCAppDelegate">
             <connections>
-                <outlet property="gui" destination="528" id="810"/>
+                <outlet property="mainController" destination="528" id="X8M-do-PQ0"/>
             </connections>
         </customObject>
         <customObject id="392" customClass="NSFontManager"/>
