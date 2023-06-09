@@ -6,8 +6,7 @@
 #import "NSDate+TimeOfDayMath.h"
 
 
-NSString * const kCTCSchedulerStatusNotificationName = @"com.giorgiocalderolla.Catch.scheduler-status-update";
-NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgiocalderolla.Catch.scheduler-last-update-status-update";
+NSString * const kCTCSchedulerStatusChangedNotificationName = @"com.giorgiocalderolla.Catch.scheduler-status-changed";
 
 
 @interface CTCScheduler ()
@@ -17,6 +16,8 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 @property (strong, nonatomic) id<NSObject> activityToken;
 @property (assign, nonatomic, getter = isPolling) BOOL polling;
 @property (assign, nonatomic, getter = isChecking) BOOL checking;
+@property (assign, nonatomic) BOOL lastUpdateWasSuccessful;
+@property (strong, nonatomic) NSDate *lastUpdateDate;
 
 @end
 
@@ -42,7 +43,9 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
     self.activityToken = nil;
     self.polling = YES;
     self.checking = NO;
-    
+    self.lastUpdateWasSuccessful = YES;
+    self.lastUpdateDate = nil;
+  
     // Create and start single connection to the feed helper
     // Messages will be delivered serially
     self.feedCheckerConnection = [[NSXPCConnection alloc] initWithServiceName:@"com.giorgiocalderolla.Catch.CatchFeedHelper"];
@@ -101,7 +104,7 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 
 - (void)setChecking:(BOOL)checking {
     _checking = checking;
-    [self reportStatus];
+    [self sendStatusChangedNotification];
 }
 
 - (void)setPolling:(BOOL)polling {
@@ -109,7 +112,7 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
     
     [self updateAppNapStatus];
     
-    [self reportStatus];
+    [self sendStatusChangedNotification];
 }
 
 - (void)checkFeed {
@@ -178,18 +181,17 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 
 - (void)handleFeedCheckCompletion:(BOOL)wasSuccessful {
     self.checking = NO;
-    
-    [NSNotificationCenter.defaultCenter postNotificationName:kCTCSchedulerLastUpdateStatusNotificationName
-                                                      object:self
-                                                    userInfo:@{@"successful": @(wasSuccessful),
-                                                               @"time": NSDate.date}];
+    self.lastUpdateWasSuccessful = wasSuccessful;
+    self.lastUpdateDate = NSDate.date;
+  
+    [self sendStatusChangedNotification];
 }
 
-- (void)reportStatus {
+- (void)sendStatusChangedNotification {
     NSLog(@"Scheduler status updated (polling = %d, checking = %d)", self.isPolling, self.isChecking);
     
     // Report status to application delegate
-    [NSNotificationCenter.defaultCenter postNotificationName:kCTCSchedulerStatusNotificationName
+    [NSNotificationCenter.defaultCenter postNotificationName:kCTCSchedulerStatusChangedNotificationName
                                                       object:self
                                                     userInfo:nil];
 }

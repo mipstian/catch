@@ -28,7 +28,7 @@
 - (void)setupObservers {
     __weak typeof(self) weakSelf = self;
     
-    [NSNotificationCenter.defaultCenter addObserverForName:kCTCSchedulerLastUpdateStatusNotificationName
+    [NSNotificationCenter.defaultCenter addObserverForName:kCTCSchedulerStatusChangedNotificationName
                                                     object:CTCScheduler.sharedScheduler
                                                      queue:nil
                                                 usingBlock:^(NSNotification *notification) {
