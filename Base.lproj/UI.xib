@@ -30,7 +30,6 @@
         </customObject>
         <customObject id="vyd-92-YXh" userLabel="Preferences Controller" customClass="CTCPreferencesController">
             <connections>
-                <outlet property="preferencesTabs" destination="616" id="lTF-MC-rwk"/>
                 <outlet property="window" destination="552" id="Y5a-sh-KWH"/>
             </connections>
         </customObject>
