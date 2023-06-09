@@ -1,29 +1,35 @@
 import Foundation
 
 
-/// Periodically invokes the Feed Helper service to check a feed.
+/// Singleton. Periodically invokes the Feed Helper service to check a feed.
 final class FeedChecker {
-  static let statusChangedNotification = NSNotification.Name("FeedChecker.statusChangedNotification")
+  enum Status {
+    case polling, paused
+  }
+  
   static let shared = FeedChecker()
   
-  /// True iff periodically checking the feed. This is the opposite
-  /// of the user-facing "Paused" state.
-  var isPolling = true {
+  /// Posted whenever the status or last check status changes
+  static let stateChangedNotification = NSNotification.Name("FeedChecker.stateChangedNotification")
+  
+  /// Current checker status.
+  /// This can be changed by users with "Pause" and "Resume".
+  var status: Status = .polling {
     didSet {
       // If we have just been set to polling, check immediately
-      if !oldValue && isPolling {
+      if oldValue == .paused && status == .polling {
         scheduler.fireNow()
       }
       
       refreshPowerManagement()
-      postStatusChangedNotification()
+      postStateChangedNotification()
     }
   }
   
   /// True iff a feed check is happening right now
   private(set) var isChecking = false {
     didSet {
-      postStatusChangedNotification()
+      postStateChangedNotification()
     }
   }
   
@@ -64,7 +70,7 @@ final class FeedChecker {
     }
     
     // No need to prevent App Nap or system sleep if paused
-    guard isPolling else { return }
+    guard status == .polling else { return }
     
     // Prevent App Nap (so we can keep checking the feed), and optionally system sleep
     activityToken = ProcessInfo.processInfo.beginActivity(
@@ -149,12 +155,12 @@ final class FeedChecker {
     lastUpdateWasSuccessful = wasSuccessful
     lastUpdateDate = Date()
     
-    postStatusChangedNotification()
+    postStateChangedNotification()
   }
   
-  private func postStatusChangedNotification() {
+  private func postStateChangedNotification() {
     NotificationCenter.default.post(
-      name: FeedChecker.statusChangedNotification,
+      name: FeedChecker.stateChangedNotification,
       object: self
     )
   }
@@ -164,7 +170,7 @@ final class FeedChecker {
 extension FeedChecker: SchedulerDelegate {
   func schedulerFired() {
     // Skip if paused
-    guard isPolling else { return }
+    guard status == .polling else { return }
     
     // Skip if current time is outside user-defined range
     guard !Defaults.shared.restricts(date: Date()) else { return }
