@@ -13,8 +13,9 @@ extension URL {
   
   var isValidFeedURL: Bool {
     guard
-      let scheme = scheme
-      else {
+      let scheme = scheme,
+      host != nil
+    else {
         return false
     }
     
