@@ -361,7 +361,6 @@
 				GCC_PREFIX_HEADER = Catch_Prefix.pch;
 				INFOPLIST_FILE = "Catch-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = Catch;
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
@@ -383,7 +382,6 @@
 				GCC_PREFIX_HEADER = Catch_Prefix.pch;
 				INFOPLIST_FILE = "Catch-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = Catch;
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
