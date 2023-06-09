@@ -243,13 +243,11 @@
 - (void)refreshRecentsMenu {
     // Also refresh the list of recently downloaded torrents
 	// Get the full list
-	NSArray *downloaded = CTCDefaults.downloadHistory;
+	NSArray *downloadHistory = CTCDefaults.downloadHistory;
     
 	// Get last 10 elements
-	NSRange recentRange;
-	recentRange.length = (downloaded.count > 10) ? 10 : downloaded.count;
-	recentRange.location = downloaded.count - recentRange.length;
-	NSArray *recents = [downloaded subarrayWithRange:recentRange];
+    NSUInteger recentsCount = MIN(downloadHistory.count, 10);
+    NSArray *recents = [downloadHistory subarrayWithRange:NSMakeRange(downloadHistory.count - recentsCount, recentsCount)];
     
     // Extract titles
     NSArray *recentTorrentNames = [recents valueForKey:@"title"];
