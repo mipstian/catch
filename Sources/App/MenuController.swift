@@ -11,6 +11,7 @@ class MenuController: NSObject {
   @IBOutlet private weak var recentEpisodesItem: NSMenuItem!
   @IBOutlet private weak var lastUpdateItem: NSMenuItem!
   
+  @IBOutlet private weak var checkNowItem: NSMenuItem!
   @IBOutlet private weak var pauseResumeItem: NSMenuItem!
   
   @IBOutlet private weak var versionItem: NSMenuItem!
@@ -34,6 +35,8 @@ class MenuController: NSObject {
     launchShowRSSItem.title = NSLocalizedString("Launch ShowRSS", comment: "")
     
     recentEpisodesItem.title = NSLocalizedString("Recent Episodes…", comment: "")
+    
+    checkNowItem.title = NSLocalizedString("Check Now", comment: "")
     
     // Set current name and version
     let bundle = Bundle.main
