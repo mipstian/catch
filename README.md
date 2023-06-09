@@ -1,7 +1,7 @@
 Catch: Broadcatching made easy.
 =====
 
-![Icon](http://www.giorgiocalderolla.com/img/catch_icon.png?1)
+<img src="http://www.giorgiocalderolla.com/ext/catch_icon.svg" alt="Icon" width="228" height="228">
 
 **[Catch](http://www.giorgiocalderolla.com/index.html#catch)** is a Mac OS X application that runs in the menubar, and will automatically download any new torrent files in your **[ShowRSS](http://showrss.karmorra.info/)** feed to a folder you can choose, optionally opening them in your favorite BitTorrent client. You will never miss an episode again :)
 
