@@ -16,12 +16,6 @@ extern NSTimeInterval const kCTCDefaultsFeedUpdateInterval;
 + (BOOL)isFeedURLValid;
 + (BOOL)isTorrentsSavePathValid;
 
-+ (NSString *)appName;
-
-+ (NSString *)appVersion;
-
-+ (NSString *)buildNumber;
-
 + (NSString *)feedURL;
 
 + (BOOL)areTimeRestrictionsEnabled;
