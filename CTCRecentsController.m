@@ -52,7 +52,10 @@
     
     BOOL isMagnetLink = [recentToDownload[@"isMagnetLink"] boolValue];
     if (isMagnetLink) {
-        [NSWorkspace.sharedWorkspace openURL:[NSURL URLWithString:recentToDownload[@"url"]]];
+        // Open magnet links without bring app that handles them to the foreground
+        NSArray* urls = [NSArray arrayWithObject:[NSURL URLWithString:recentToDownload[@"url"]]];
+        [[NSWorkspace sharedWorkspace] openURLs:urls withAppBundleIdentifier:nil 
+            options:NSWorkspaceLaunchWithoutActivation additionalEventParamDescriptor:nil launchIdentifiers:nil];
     }
     else {
         [CTCScheduler.sharedScheduler downloadFile:recentToDownload
