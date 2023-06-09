@@ -124,7 +124,7 @@
 	if ([fromComp hour] > [toComp hour] ||
 		([fromComp hour] == [toComp hour] && [fromComp minute] > [toComp minute])) {
 		// Time range crosses midnight (e.g. 11 PM to 3 AM)
-		if ([nowComp hour] > [toComp hour] && [nowComp hour] < [fromComp hour] ||
+		if (([nowComp hour] > [toComp hour] && [nowComp hour] < [fromComp hour]) ||
 			([nowComp hour] == [toComp hour] && [nowComp minute] > [toComp minute]) ||
 			([nowComp hour] == [fromComp hour] && [nowComp minute] < [fromComp minute])) {
 			// We are outside of allowed time range
@@ -132,7 +132,7 @@
 		}
 	} else {
 		// Time range doesn't cross midnight (e.g. 4 AM to 5 PM)
-		if ([nowComp hour] > [toComp hour] && [nowComp hour] < [fromComp hour] ||
+		if (([nowComp hour] > [toComp hour] && [nowComp hour] < [fromComp hour]) ||
 			([nowComp hour] == [toComp hour] && [nowComp minute] > [toComp minute]) ||
 			([nowComp hour] == [fromComp hour] && [nowComp minute] < [fromComp minute])) {
 			// We are outside of allowed time range

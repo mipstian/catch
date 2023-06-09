@@ -77,7 +77,7 @@
 	NSArray* fileNodes = [feed nodesForXPath:@"//rss/channel/item/enclosure/@url" error:&error];
 	
 	if (fileNodes) {
-		NSLog(@"FeedChecker: got %d files", [fileNodes count]);
+		NSLog(@"FeedChecker: got %lu files", (unsigned long)fileNodes.count);
 	} else {
 		NSLog(@"FeedChecker: parsing for URLs failed: %@", error);
 		return nil;
@@ -104,7 +104,7 @@
 	NSArray* folderNodes = [feed nodesForXPath:@"//rss/channel/item/showrss:showname" error:&error];
 	
 	if (folderNodes) {
-		NSLog(@"FeedChecker: got %d folders", [folderNodes count]);
+		NSLog(@"FeedChecker: got %lu folders", (unsigned long)folderNodes.count);
 	} else {
 		NSLog(@"FeedChecker: parsing for folders failed: %@", error);
 		return nil;
@@ -207,7 +207,7 @@
 	
 	if (!downloadedFile) return NO;
 
-	NSLog(@"FeedChecker: download complete, filesize: %d", [downloadedFile length]);
+	NSLog(@"FeedChecker: download complete, filesize: %lu", (unsigned long)downloadedFile.length);
 	
 	// Get the suggested filename, append extension if needed
 	NSString* filename = [urlResponse suggestedFilename];
