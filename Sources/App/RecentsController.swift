@@ -75,7 +75,7 @@ class RecentsController: NSWindowController {
   
   private func reloadHistory() {
     // Keep a sorted copy of the download history, in reverse cronological order
-    sortedHistory = Defaults.shared.downloadHistory.sorted().reversed()
+    sortedHistory = Defaults.shared.downloadHistory
     table.reloadData()
   }
   

@@ -86,6 +86,7 @@ final class Defaults: NSObject {
   
   /// Recently downloaded episodes. Remembered so they won't be downloaded again
   /// every time feeds are checked. They are presented in the UI as well.
+  /// Automatically kept sorted chronologically, newest to oldest.
   var downloadHistory: [HistoryItem] {
     get {
       let rawHistory = UserDefaults.standard.array(forKey: Keys.history) as! [[AnyHashable:Any]]
