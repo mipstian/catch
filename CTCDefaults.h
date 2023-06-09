@@ -34,8 +34,6 @@ extern NSString * const kCTCDefaultsServiceFeedURLPrefix;
 
 + (NSDate *)toDateForTimeRestrictions;
 
-+ (BOOL)shouldSendNotifications;
-
 + (BOOL)shouldOrganizeTorrentsInFolders;
 
 + (BOOL)shouldOpenTorrentsAutomatically;
