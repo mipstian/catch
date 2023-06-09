@@ -12,6 +12,7 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 
 @property (strong, nonatomic) NSTimer *repeatingTimer;
 @property (strong, nonatomic) NSXPCConnection *feedCheckerConnection;
+@property (strong, nonatomic) id<NSObject> activityToken;
 @property (assign, nonatomic, getter = isActive) BOOL active;
 @property (assign, nonatomic, getter = isRunning) BOOL running;
 
@@ -56,10 +57,21 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 														 userInfo:nil
 														  repeats:YES];
     
-    // Fire the timer ASAP
-    [self.repeatingTimer setFireDate:NSDate.distantPast];
+    // Check now as well
+    [self fireTimerNow];
+    
+    [self preventAppNap];
 	
 	return self;
+}
+
+- (void)preventAppNap {
+    // Make sure we can keep running in the background if the system supports App Nap
+    if ([NSProcessInfo.processInfo respondsToSelector:@selector(beginActivityWithOptions:reason:)]) {
+        self.activityToken = [NSProcessInfo.processInfo
+                              beginActivityWithOptions:NSActivityIdleSystemSleepDisabled|NSActivitySuddenTerminationDisabled
+                              reason:@"Background checking is the whole point of the app"];
+    }
 }
 
 - (void)callFeedCheckerWithReplyHandler:(CTCFeedCheckCompletionHandler)replyHandler {
@@ -86,25 +98,27 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 }
 
 - (void)checkFeed {
+    // Don't check twice simultaneously
+    if (self.isRunning) return;
+    
 	// Only work with valid preferences
 	if (!CTCDefaults.isConfigurationValid) {
 		NSLog(@"Refusing to check feed - invalid preferences");
 		return;
 	}
-    
-    // Don't check twice simultaneously
-    if (self.isRunning) return;
 	
 	self.running = YES;
 	
     [self reportStatus];
 	
+    // Check the feed
+    __weak typeof(self) weakSelf = self;
     [self callFeedCheckerWithReplyHandler:^(NSArray *downloadedFeedFiles,
                                             NSError *error){
         // Deal with new files
-        [self handleDownloadedFeedFiles:downloadedFeedFiles];
+        [weakSelf handleDownloadedFeedFiles:downloadedFeedFiles];
         
-        [self handleFeedCheckCompletion:error == nil];
+        [weakSelf handleFeedCheckCompletion:error == nil];
     }];
 }
 
@@ -133,7 +147,7 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
     [self reportStatus];
     
     // If we have just been set to active, check right now
-    if (self.isActive) [self.repeatingTimer setFireDate:NSDate.distantPast];
+    if (self.isActive) [self fireTimerNow];
 }
 
 - (void)forceCheck {
@@ -141,6 +155,10 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
     
 	// Check feed right now ignoring time restrictions and "paused" mode
 	[self checkFeed];
+}
+
+- (void)fireTimerNow {
+    [self.repeatingTimer setFireDate:NSDate.distantPast];
 }
 
 - (void)tick:(NSTimer*)timer {
