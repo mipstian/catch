@@ -16,8 +16,8 @@ class RecentsController: NSWindowController {
     
     // Subscribe to history changes
     NotificationCenter.default.addObserver(
-      forName: Scheduler.statusChangedNotification,
-      object: Scheduler.shared,
+      forName: FeedChecker.statusChangedNotification,
+      object: FeedChecker.shared,
       queue: nil,
       using: { [weak self] _ in
         self?.table.reloadData()
@@ -74,7 +74,7 @@ extension RecentsController {
     if isMagnetLink {
       Browser.openInBackground(url: recentToDownload.url)
     } else {
-      Scheduler.shared.downloadHistoryItem(recentToDownload) { downloadedFile, error in
+      FeedChecker.shared.downloadHistoryItem(recentToDownload) { downloadedFile, error in
         guard Defaults.shared.shouldOpenTorrentsAutomatically, let downloadedFile = downloadedFile else {
           return
         }

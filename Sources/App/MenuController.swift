@@ -31,10 +31,10 @@ class MenuController: NSObject {
     let bundle = Bundle.main
     menuVersion.title = "\(bundle.displayName) \(bundle.version) (\(bundle.buildNumber))"
     
-    // Update UI whenever the scheduler status changes
+    // Update UI whenever the feed checker status changes
     NotificationCenter.default.addObserver(
-      forName: Scheduler.statusChangedNotification,
-      object: Scheduler.shared,
+      forName: FeedChecker.statusChangedNotification,
+      object: FeedChecker.shared,
       queue: nil,
       using: { [weak self] _ in
         self?.refreshMenuContents()
@@ -46,8 +46,8 @@ class MenuController: NSObject {
   }
   
   private func refreshMenuContents() {
-    let isChecking = Scheduler.shared.isChecking
-    let isPolling = Scheduler.shared.isPolling
+    let isChecking = FeedChecker.shared.isChecking
+    let isPolling = FeedChecker.shared.isPolling
     
     // Configure the menubar item's button
     let menuBarButtonTemplateImage: NSImage
@@ -78,9 +78,9 @@ class MenuController: NSObject {
     
     // Configure the "last update" item
     // Example: "Last update: 3:45 AM"
-    let lastUpdateDate = Scheduler.shared.lastUpdateDate
+    let lastUpdateDate = FeedChecker.shared.lastUpdateDate
     
-    let lastUpdateStatusFormat = Scheduler.shared.lastUpdateWasSuccessful ?
+    let lastUpdateStatusFormat = FeedChecker.shared.lastUpdateWasSuccessful ?
       NSLocalizedString("lastupdate", comment: "Title for the last update time") :
       NSLocalizedString("lastupdatefailed", comment: "Title for the last update time if it fails")
     
@@ -110,10 +110,10 @@ class MenuController: NSObject {
 // MARK: Actions
 extension MenuController {
   @IBAction private func checkNow(_ sender: Any?) {
-    Scheduler.shared.forceCheck()
+    FeedChecker.shared.forceCheck()
   }
   
   @IBAction private func togglePause(_ sender: Any?) {
-    Scheduler.shared.togglePause()
+    FeedChecker.shared.togglePause()
   }
 }
