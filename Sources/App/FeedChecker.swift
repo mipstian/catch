@@ -6,7 +6,7 @@ enum FeedCheckerError: Error {
 }
 
 
-/// Singleton. Periodically invokes the Feed Helper service to check a feed.
+/// Singleton. Periodically invokes the Feed Helper service to check the feeds.
 final class FeedChecker {
   enum Status {
     case polling, paused
@@ -64,12 +64,12 @@ final class FeedChecker {
     intervalTimer.fireNow()
   }
   
-  /// Checks feed right now ignoring time restrictions and "paused" mode
+  /// Checks feeds right now ignoring time restrictions and "paused" mode
   func forceCheck() {
-    checkFeed()
+    checkFeeds()
   }
   
-  private func checkFeed() {
+  private func checkFeeds() {
     // Don't check twice simultaneously
     guard lastCheckStatus != .inProgress else { return }
     
@@ -96,9 +96,9 @@ final class FeedChecker {
     // Extract URLs from history
     let previouslyDownloadedURLs = Defaults.shared.downloadHistory.map { $0.episode.url }
     
-    // Check the feed
+    // Check feeds
     feedHelperProxy.checkFeeds(
-      urls: Defaults.shared.feeds.map { $0.url },
+      feeds: Defaults.shared.feeds,
       downloadOptions: downloadOptions,
       previouslyDownloadedURLs: previouslyDownloadedURLs,
       completion: { [weak self] result in
@@ -156,7 +156,7 @@ extension FeedChecker: IntervalTimerDelegate {
     // Skip if paused or if current time is outside user-defined range
     guard status == .polling, !Defaults.shared.restricts(date: Date()) else { return }
     
-    checkFeed()
+    checkFeeds()
   }
 }
 

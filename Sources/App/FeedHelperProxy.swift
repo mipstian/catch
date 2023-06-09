@@ -35,12 +35,12 @@ final class FeedHelperProxy {
   }
   
   func checkFeeds(
-    urls: [URL],
+    feeds: [Feed],
     downloadOptions: DownloadOptions,
     previouslyDownloadedURLs: [URL],
     completion: @escaping (Result<[DownloadedEpisode], Error>) -> Void) {
     service.checkFeeds(
-      urls: urls.map { $0.absoluteString },
+      urls: feeds.map { $0.url.absoluteString },
       downloadingToBookmark: downloadOptions.containerDirectoryBookmark,
       organizingByShow: downloadOptions.shouldOrganizeByShow,
       savingMagnetLinks: downloadOptions.shouldSaveMagnetLinks,
