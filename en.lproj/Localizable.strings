@@ -8,5 +8,5 @@
 "never"="Never"; // this is for the last update time, meaning "I still haven't made one"
 "updatingnow"="Updating now...";
 // for notifications:
-"newtorrent"="New torrent downloaded";
-"newtorrentdesc"="Torrent file %@ has been downloaded!"; // %@ will be replaced by filename
+"newtorrent"="New episode";
+"newtorrentdesc"="Episode %@ has been added!"; // %@ will be replaced by filename
