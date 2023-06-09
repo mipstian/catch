@@ -56,9 +56,11 @@
         [self.window close];
         
         // Apply the login item setting
+        // TODO: move to defaults
         [CTCDefaults refreshLoginItemStatus];
         
         // Apply power management settings
+        // TODO: move to scheduler
         [CTCScheduler.sharedScheduler refreshActivity];
         
         // Also force check
