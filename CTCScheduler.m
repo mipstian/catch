@@ -82,6 +82,7 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 
 - (void)setPolling:(BOOL)polling {
     _polling = polling;
+    
     [self reportStatus];
 }
 
@@ -101,10 +102,6 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
     __weak typeof(self) weakSelf = self;
     [self callFeedCheckerWithReplyHandler:^(NSArray *downloadedFeedFiles,
                                             NSError *error){
-        if (error) {
-            NSLog(@"Error checking feed: %@", error);
-        }
-        
         // Deal with new files
         [weakSelf handleDownloadedFeedFiles:downloadedFeedFiles];
         
@@ -142,6 +139,9 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
                organizingByFolder:CTCDefaults.shouldOrganizeTorrentsInFolders
                      skippingURLs:previouslyDownloadedURLs
                         withReply:^(NSArray *downloadedFeedFiles, NSError *error) {
+                            if (error) {
+                                NSLog(@"Feed Checker error (checking feed): %@", error);
+                            }
                             dispatch_async(dispatch_get_main_queue(), ^{
                                 replyHandler(downloadedFeedFiles, error);
                             });
@@ -188,6 +188,9 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
                    toBookmark:[self downloadFolderBookmark]
            organizingByFolder:CTCDefaults.shouldOrganizeTorrentsInFolders
                     withReply:^(NSDictionary *downloadedFile, NSError *error) {
+                        if (error) {
+                            NSLog(@"Feed Checker error (downloading file): %@", error);
+                        }
                         dispatch_async(dispatch_get_main_queue(), ^{
                             completion(downloadedFile, error);
                         });
