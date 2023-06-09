@@ -29,12 +29,12 @@
         </customObject>
         <customObject id="528" customClass="MenuController" customModule="Catch" customModuleProvider="target">
             <connections>
+                <outlet property="lastUpdateItem" destination="540" id="813"/>
+                <outlet property="launchShowRSSItem" destination="524" id="hOA-LO-Q3f"/>
                 <outlet property="menu" destination="523" id="529"/>
-                <outlet property="menuLastUpdate" destination="540" id="813"/>
-                <outlet property="menuLaunchShowRSS" destination="524" id="hOA-LO-Q3f"/>
-                <outlet property="menuPauseResume" destination="541" id="812"/>
-                <outlet property="menuTopSeparator" destination="531" id="Hbt-dA-qRM"/>
-                <outlet property="menuVersion" destination="545" id="657"/>
+                <outlet property="pauseResumeItem" destination="541" id="812"/>
+                <outlet property="topSeparatorItem" destination="531" id="Hbt-dA-qRM"/>
+                <outlet property="versionItem" destination="545" id="657"/>
             </connections>
         </customObject>
         <customObject id="vyd-92-YXh" userLabel="Preferences Controller" customClass="PreferencesController" customModule="Catch" customModuleProvider="target">
