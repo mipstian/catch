@@ -154,7 +154,7 @@
 		BOOL old = NO;
         NSString* url = [file objectForKey:@"url"];
 		
-		NSArray* downloadedFiles = [[NSUserDefaults standardUserDefaults] arrayForKey:PREFERENCE_KEY_DOWNLOADED_FILES];
+		NSArray* downloadedFiles = [[NSUserDefaults standardUserDefaults] arrayForKey:PREFERENCE_KEY_HISTORY];
 		
 		if (downloadedFiles) {
 			for (NSDictionary* downloadedFile in downloadedFiles) {
@@ -192,7 +192,7 @@
             }
             [[NSUserDefaults standardUserDefaults]
              setObject:newDownloadedFiles
-             forKey:PREFERENCE_KEY_DOWNLOADED_FILES];
+             forKey:PREFERENCE_KEY_HISTORY];
         }
 	}
 	
@@ -202,13 +202,13 @@
 }
 
 - (BOOL) openMagnet:(NSURL*)magnetURL {
-    BOOL opennedURL = [[NSWorkspace sharedWorkspace] openURL:magnetURL];
+    BOOL openedURL = [[NSWorkspace sharedWorkspace] openURL:magnetURL];
     
 	if ([[NSUserDefaults standardUserDefaults] boolForKey:PREFERENCE_KEY_GROWL_NOTIFICATIONS]) {
 		[[NSApp delegate] torrentNotificationWithDescription:
 		 [NSString stringWithFormat:NSLocalizedString(@"newtorrentdesc", @"New torrent notification"),magnetURL]];
 	}
-	return opennedURL;
+	return openedURL;
 }
 
 - (BOOL) downloadFile:(NSURL*)fileURL inFolder:(NSString*)folder {

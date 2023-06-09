@@ -20,6 +20,7 @@ NSString* const PREFERENCE_KEY_OPEN_AUTOMATICALLY = @"openAutomatically";
 NSString* const PREFERENCE_KEY_GROWL_NOTIFICATIONS = @"growlNotifications";
 NSString* const PREFERENCE_KEY_CHECK_FOR_UPDATES = @"checkForUpdates";
 NSString* const PREFERENCE_KEY_DOWNLOADED_FILES = @"downloadedFiles";
+NSString* const PREFERENCE_KEY_HISTORY = @"history";
 NSString* const PREFERENCE_KEY_OPEN_AT_LOGIN = @"openAtLogin";
 
 // Defaults
@@ -98,8 +99,9 @@ int const FEED_UPDATE_INTERVAL = 60*10; // 10 minutes
     
 	// Migrate the downloads history format. Change old array of strings to new dictionary format
     NSArray* downloadedFiles = [[NSUserDefaults standardUserDefaults] arrayForKey:PREFERENCE_KEY_DOWNLOADED_FILES];
+    NSArray* history = [[NSUserDefaults standardUserDefaults] arrayForKey:PREFERENCE_KEY_HISTORY];
     
-    if (downloadedFiles && [[downloadedFiles objectAtIndex:1]isKindOfClass:[NSString class]]) {
+    if (downloadedFiles && !history) {
 		NSLog(@"Preferences: Migrating download history to new format.");
         
         NSMutableArray* newDownloadedFiles = [[NSMutableArray alloc] init];
@@ -109,10 +111,10 @@ int const FEED_UPDATE_INTERVAL = 60*10; // 10 minutes
                 [FeedChecker computeFilenameFromURL:[NSURL URLWithString:url]], @"title",
                 url, @"url",
                 nil]];
-            
         }
         
-        [[NSUserDefaults standardUserDefaults] setObject:newDownloadedFiles forKey:PREFERENCE_KEY_DOWNLOADED_FILES];
+        [[NSUserDefaults standardUserDefaults] setObject:newDownloadedFiles forKey:PREFERENCE_KEY_HISTORY];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:PREFERENCE_KEY_DOWNLOADED_FILES];
     }
 
 	// Most importantly, validate feed URL
