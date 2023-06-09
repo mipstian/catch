@@ -16,12 +16,8 @@ enum FileUtils {
     return NSHomeDirectory()
   }
   
-  static func filename(from fileURL: URL) -> String {
-    // Compute destination filename
-    let filename = fileURL.pathComponents.last!
-    
-    // Reverse urlencode
-    return filename.removingPercentEncoding!
+  static func filename(from url: URL) -> String {
+    return url.pathComponents.last!.removingPercentEncoding!
   }
   
   static func fileName(from string: String) -> String {
