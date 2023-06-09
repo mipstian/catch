@@ -1,10 +1,22 @@
 import Foundation
 
 
+enum FeedCheckerError: Error {
+  case serviceCrashed
+}
+
+
 /// Singleton. Periodically invokes the Feed Helper service to check a feed.
 final class FeedChecker {
   enum Status {
     case polling, paused
+  }
+  
+  enum LastCheckStatus {
+    case neverHappened
+    case inProgress
+    case successful(Date)
+    case failed(Date, Error)
   }
   
   static let shared = FeedChecker()
@@ -26,18 +38,12 @@ final class FeedChecker {
     }
   }
   
-  /// True iff a feed check is happening right now
-  private(set) var isChecking = false {
+  /// What happened with the last feed check
+  fileprivate(set) var lastCheckStatus: LastCheckStatus = .neverHappened {
     didSet {
       postStateChangedNotification()
     }
   }
-  
-  /// True iff the last feed check succeeded, or if no check has been made yet.
-  private(set) var lastUpdateWasSuccessful = true
-  
-  /// The date/time of the last feed check, nil if no check has been made yet.
-  private(set) var lastUpdateDate: Date? = nil
   
   private var activityToken: NSObjectProtocol? = nil
   
@@ -83,7 +89,7 @@ final class FeedChecker {
   
   fileprivate func checkFeed() {
     // Don't check twice simultaneously
-    guard !isChecking else { return }
+    guard lastCheckStatus != .inProgress else { return }
     
     // Only work with valid preferences
     guard Defaults.shared.isConfigurationValid, let downloadOptions = Defaults.shared.downloadOptions else {
@@ -91,7 +97,7 @@ final class FeedChecker {
       return
     }
     
-    isChecking = true
+    lastCheckStatus = .inProgress
     
     // Extract URLs from history
     let previouslyDownloadedURLs = Defaults.shared.downloadHistory.map { $0.url }
@@ -104,13 +110,12 @@ final class FeedChecker {
       completion: { [weak self] downloadedFiles, error in
         if let error = error {
           NSLog("Feed Helper error (checking feed): \(error)")
-        }
-        
-        // Deal with new files
-        if let downloadedFiles = downloadedFiles {
+          self?.lastCheckStatus = .failed(Date(), error)
+        } else if let downloadedFiles = downloadedFiles {
+          // Deal with new files
           self?.handleDownloadedFeedFiles(downloadedFiles)
+          self?.lastCheckStatus = .successful(Date())
         }
-        self?.handleFeedCheckCompletion(wasSuccessful: error == nil)
       }
     )
   }
@@ -149,14 +154,6 @@ final class FeedChecker {
       Defaults.shared.downloadHistory = [newHistoryItem] + Defaults.shared.downloadHistory
     }
   }
-
-  fileprivate func handleFeedCheckCompletion(wasSuccessful: Bool) {
-    isChecking = false
-    lastUpdateWasSuccessful = wasSuccessful
-    lastUpdateDate = Date()
-    
-    postStateChangedNotification()
-  }
   
   private func postStateChangedNotification() {
     NotificationCenter.default.post(
@@ -169,11 +166,8 @@ final class FeedChecker {
 
 extension FeedChecker: SchedulerDelegate {
   func schedulerFired() {
-    // Skip if paused
-    guard status == .polling else { return }
-    
-    // Skip if current time is outside user-defined range
-    guard !Defaults.shared.restricts(date: Date()) else { return }
+    // Skip if paused or if current time is outside user-defined range
+    guard status == .polling, !Defaults.shared.restricts(date: Date()) else { return }
     
     checkFeed()
   }
@@ -182,11 +176,20 @@ extension FeedChecker: SchedulerDelegate {
 
 extension FeedChecker: FeedHelperProxyDelegate {
   func feedHelperConnectionWasInterrupted() {
-    if isChecking {
-      handleFeedCheckCompletion(wasSuccessful: false)
-      NSLog("Feed helper service crashed")
-    } else {
-      NSLog("Feed helper service went offline")
+    if lastCheckStatus == .inProgress {
+      lastCheckStatus = .failed(Date(), FeedCheckerError.serviceCrashed)
+    }
+  }
+}
+
+
+extension FeedChecker.LastCheckStatus: Equatable {
+  static func ==(lhs: FeedChecker.LastCheckStatus, rhs: FeedChecker.LastCheckStatus) -> Bool {
+    switch (lhs, rhs) {
+    case (.neverHappened, .neverHappened), (.inProgress, .inProgress): return true
+    case (.successful(let lhsDate), .successful(let rhsDate)): return lhsDate == rhsDate
+    case (.failed(let lhsDate, _), .failed(let rhsDate, _)): return lhsDate == rhsDate
+    default: return false
     }
   }
 }

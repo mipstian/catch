@@ -9,15 +9,10 @@ class MenuController: NSObject {
   @IBOutlet private weak var menuLastUpdate: NSMenuItem!
   
   private var menuBarItem: NSStatusItem!
-  
-  private let lastUpdateDateFormatter = DateFormatter()
 
   override func awakeFromNib() {
     // Skip setup if we're running headless
     guard !Defaults.shared.shouldRunHeadless else { return }
-    
-    // Create a date formatter for "last update" dates
-    lastUpdateDateFormatter.timeStyle = .short
     
     // Create the NSStatusItem and set its length
     menuBarItem = NSStatusBar.system().statusItem(withLength: NSSquareStatusItemLength)
@@ -47,23 +42,19 @@ class MenuController: NSObject {
   }
   
   private func refreshMenuContents() {
-    let isChecking = FeedChecker.shared.isChecking
-    let isPolling = FeedChecker.shared.status == .polling
-    
     // Configure the menubar item's button
     let menuBarButtonTemplateImage: NSImage
     let menuBarButtonAppearsDisabled: Bool
-    
-    switch (isChecking, isPolling) {
-    case (true, _):
+    switch (FeedChecker.shared.lastCheckStatus, FeedChecker.shared.status) {
+    case (.inProgress, _):
       // Refreshing in progress (whether paused or not)
       menuBarButtonTemplateImage = #imageLiteral(resourceName: "Menubar_Refreshing_Template")
       menuBarButtonAppearsDisabled = false
-    case (false, true):
+    case (_, .polling):
       // Active but not refreshing now
       menuBarButtonTemplateImage = #imageLiteral(resourceName: "Menubar_Idle_Template")
       menuBarButtonAppearsDisabled = false
-    case (false, false):
+    case (_, .paused):
       // Paused and not refreshing now
       menuBarButtonTemplateImage = #imageLiteral(resourceName: "Menubar_Disabled_Template")
       menuBarButtonAppearsDisabled = true
@@ -73,33 +64,17 @@ class MenuController: NSObject {
     menuBarItem.button?.appearsDisabled = menuBarButtonAppearsDisabled
     
     // Configure the pause/resume item
-    menuPauseResume.title = !isChecking && !isPolling ?
-      NSLocalizedString("resume", comment: "Description of resume action") :
-      NSLocalizedString("pause", comment: "Description of pause action")
+    let pauseResumeItemTitle: String
+    switch FeedChecker.shared.status {
+    case .polling:
+      pauseResumeItemTitle = NSLocalizedString("pause", comment: "Description of pause action")
+    case .paused:
+      pauseResumeItemTitle = NSLocalizedString("resume", comment: "Description of resume action")
+    }
+    menuPauseResume.title = pauseResumeItemTitle
     
     // Configure the "last update" item
-    // Example: "Last update: 3:45 AM"
-    let lastUpdateDate = FeedChecker.shared.lastUpdateDate
-    
-    let lastUpdateStatusFormat = FeedChecker.shared.lastUpdateWasSuccessful ?
-      NSLocalizedString("lastupdate", comment: "Title for the last update time") :
-      NSLocalizedString("lastupdatefailed", comment: "Title for the last update time if it fails")
-    
-    let lastUpdateText: String
-    if isChecking {
-      lastUpdateText = NSLocalizedString("updatingnow", comment: "An update is in progress")
-    } else {
-      let lastDateString: String
-      if let lastUpdateDate = lastUpdateDate {
-        lastDateString = lastUpdateDateFormatter.string(from: lastUpdateDate)
-      } else {
-        lastDateString = NSLocalizedString("never", comment: "Never happened")
-      }
-      
-      lastUpdateText = String(format: lastUpdateStatusFormat, lastDateString)
-    }
-    
-    menuLastUpdate.title = lastUpdateText
+    menuLastUpdate.title = FeedChecker.shared.lastCheckStatus.localizedDescription
   }
   
   deinit {
@@ -118,6 +93,30 @@ extension MenuController {
     switch FeedChecker.shared.status {
     case .paused: FeedChecker.shared.status = .polling
     case .polling: FeedChecker.shared.status = .paused
+    }
+  }
+}
+
+
+private extension FeedChecker.LastCheckStatus {
+  /// User-readable description.
+  /// Example: "Last update: 3:45 AM".
+  var localizedDescription: String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.timeStyle = .short
+    
+    let normalFormat = NSLocalizedString("lastupdate", comment: "Title for the last update time")
+    let failedFormat = NSLocalizedString("lastupdatefailed", comment: "Title for the last update time if it fails")
+    
+    switch self {
+    case .neverHappened:
+      return String(format: normalFormat, NSLocalizedString("never", comment: "Never happened"))
+    case .inProgress:
+      return NSLocalizedString("updatingnow", comment: "An update is in progress")
+    case .failed(let date, _):
+      return String(format: failedFormat, dateFormatter.string(from: date))
+    case .successful(let date):
+      return String(format: normalFormat, dateFormatter.string(from: date))
     }
   }
 }
