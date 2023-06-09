@@ -110,7 +110,7 @@
                 </menuItem>
             </items>
         </menu>
-        <customObject id="528" customClass="GUI">
+        <customObject id="528" customClass="CTCMainController">
             <connections>
                 <outlet property="menu" destination="523" id="529"/>
                 <outlet property="menuCheckNow" destination="655" id="811"/>

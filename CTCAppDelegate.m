@@ -1,5 +1,5 @@
 #import "CTCAppDelegate.h"
-#import "GUI.h"
+#import "CTCMainController.h"
 #import "CTCLoginItems.h"
 
 
@@ -15,7 +15,7 @@ NSString * const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info
 
 @interface CTCAppDelegate ()
 @property (strong, nonatomic) CTCScheduler *scheduler;
-@property (strong, nonatomic) IBOutlet GUI *gui;
+@property (strong, nonatomic) IBOutlet CTCMainController *gui;
 @end
 
 
