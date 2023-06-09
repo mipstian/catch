@@ -1,7 +1,7 @@
 <rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle"> 
   <channel> 
     <title>Catch Appcast</title> 
-    <link>https://raw.github.com/showrss/catch/master/update/appcast.xml</link> 
+    <link>https://raw.github.com/mipstian/catch/master/update/appcast.xml</link> 
     <description>Most recent version available.</description> 
     <language>en</language> 
     <pubDate>Sun, 08 Aug 2010 22:51:00 +0100</pubDate> 
