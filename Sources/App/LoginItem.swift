@@ -5,7 +5,7 @@ extension Bundle {
   private static var loginItemsList: LSSharedFileList? {
     return LSSharedFileListCreate(
       nil,
-      kLSSharedFileListSessionLoginItems.takeUnretainedValue(),
+      kLSSharedFileListSessionLoginItems.takeRetainedValue(),
       nil
     )?.takeRetainedValue()
   }
@@ -43,7 +43,7 @@ extension Bundle {
       if shouldRegister {
         LSSharedFileListInsertItemURL(
           loginItemsList,
-          kLSSharedFileListItemBeforeFirst.takeUnretainedValue(),
+          kLSSharedFileListItemBeforeFirst.takeRetainedValue(),
           nil,
           nil,
           bundleURL as CFURL,
