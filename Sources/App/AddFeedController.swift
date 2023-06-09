@@ -25,6 +25,7 @@ class AddFeedController: NSWindowController {
   func clear() {
     feedNameTextField.stringValue = ""
     feedURLTextField.stringValue = ""
+    window?.makeFirstResponder(feedNameTextField)
   }
 }
 
