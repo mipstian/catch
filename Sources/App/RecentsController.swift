@@ -118,11 +118,6 @@ extension RecentsController: NSTableViewDelegate {
     
     cell.downloadDateTextField.stringValue = subtitle
     
-    let canDownloadNonTorrents = Defaults.shared.isDownloadScriptEnabled && Defaults.shared.downloadScriptPath != nil
-    let isTorrent = historyItem.episode.url.isMagnetLink || historyItem.episode.url.absoluteString.isTorrentFilePath
-    let canDownloadAgain = isTorrent || canDownloadNonTorrents
-    cell.downloadAgainButton.isHidden = !canDownloadAgain
-    
     return cell
   }
   
@@ -148,7 +143,7 @@ extension RecentsController {
     } else {
       if recentEpisode.url.isMagnetLink {
         NSWorkspace.shared.openInBackground(url: recentEpisode.url)
-      } else if recentEpisode.url.absoluteString.isTorrentFilePath {
+      } else {
         guard Defaults.shared.isConfigurationValid, let downloadOptions = Defaults.shared.downloadOptions else {
           NSLog("Cannot download torrent file with invalid preferences")
           return

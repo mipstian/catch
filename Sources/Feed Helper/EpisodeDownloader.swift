@@ -22,7 +22,7 @@ struct EpisodeDownloader {
       
       // Return the magnet link, if needed the main app will open it on the fly
       return DownloadedEpisode(episode: episode, localURL: nil)
-    } else if episode.url.absoluteString.isTorrentFilePath {
+    } else {
       let downloadedTorrentFile: URL
       do {
         downloadedTorrentFile = try downloadTorrentFile(for: episode)
@@ -32,9 +32,6 @@ struct EpisodeDownloader {
       }
       
       return DownloadedEpisode(episode: episode, localURL: downloadedTorrentFile)
-    } else {
-      // Nothing to do here
-      return DownloadedEpisode(episode: episode, localURL: nil)
     }
   }
   
@@ -71,8 +68,6 @@ struct EpisodeDownloader {
   }
   
   private func downloadTorrentFile(for episode: Episode) throws -> URL {
-    precondition(episode.url.absoluteString.isTorrentFilePath)
-    
     NSLog("Downloading torrent file")
     
     // Download!
