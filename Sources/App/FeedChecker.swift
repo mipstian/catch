@@ -119,24 +119,32 @@ final class FeedChecker {
   private func handleDownloadedEpisodes(_ downloadedEpisodes: [DownloadedEpisode]) {
     for downloadedEpisode in downloadedEpisodes {
       let episode = downloadedEpisode.episode
+      let historyItem = HistoryItem(episode: episode, downloadDate: Date())
+      
+      func addToDownloadHistory() {
+        Defaults.shared.downloadHistory.append(historyItem)
+      }
       
       // Open torrents automatically if requested
       if Defaults.shared.shouldOpenTorrentsAutomatically {
         if episode.url.isMagnetLink {
           // Open magnet link
           NSWorkspace.shared.openInBackground(url: episode.url)
+          addToDownloadHistory()
         } else if episode.url.absoluteString.isTorrentFilePath {
           // Open torrent file
           NSWorkspace.shared.openInBackground(file: downloadedEpisode.localURL!.path)
+          addToDownloadHistory()
         } else {
-          Process.runDownloadScript(url: episode.url)
+          Process.runDownloadScript(url: episode.url) { success in
+            if success {
+              addToDownloadHistory()
+            }
+          }
         }
       }
       
       NSUserNotificationCenter.default.deliverNewEpisodeNotification(for: episode)
-      
-      // Add to history
-      Defaults.shared.downloadHistory.append(HistoryItem(episode: episode, downloadDate: Date()))
     }
   }
   
