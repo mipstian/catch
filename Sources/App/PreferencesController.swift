@@ -92,6 +92,27 @@ extension PreferencesController {
     }
   }
   
+  @IBAction private func importFromOPMLFile(_: Any?) {
+    guard let window = self.window else { return }
+    
+    let openPanel = NSOpenPanel()
+    openPanel.allowsMultipleSelection = false
+    openPanel.canChooseDirectories = false
+    openPanel.canChooseFiles = true
+    
+    openPanel.beginSheetModal(for: window) { response in
+      if response == .OK, let url = openPanel.url {
+        do {
+          let data = try Data(contentsOf: url)
+          let feeds = try OPMLParser.parse(opml: data)
+          Defaults.shared.feeds += feeds
+        } catch {
+          NSLog("Couldn't parse OPML: \(error)")
+        }
+      }
+    }
+  }
+  
   @IBAction private func savePreferences(_: Any?) {
     Defaults.shared.save()
     
