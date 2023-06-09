@@ -33,6 +33,7 @@
                 <outlet property="window" destination="552" id="Y5a-sh-KWH"/>
             </connections>
         </customObject>
+        <customObject id="0bd-Z3-ggh" userLabel="Browser" customClass="CTCBrowser"/>
         <customObject id="599" customClass="SUUpdater"/>
         <userDefaultsController representsSharedInstance="YES" id="658"/>
         <menu autoenablesItems="NO" id="523">
@@ -40,7 +41,7 @@
                 <menuItem title="Launch ShowRSS website" id="524">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
-                        <action selector="browseService:" target="-3" id="Hxz-fq-N6b"/>
+                        <action selector="browseService:" target="0bd-Z3-ggh" id="pwn-oH-6nE"/>
                     </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="531"/>
@@ -81,25 +82,25 @@
                             <menuItem title="Visit Catch's website" id="535">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="browseWebsite:" target="-3" id="0PC-io-xer"/>
+                                    <action selector="browseWebsite:" target="0bd-Z3-ggh" id="81M-az-HxY"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Help me configure Catch" id="542">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="browseHelp:" target="-3" id="uiX-hE-Fwt"/>
+                                    <action selector="browseHelp:" target="0bd-Z3-ggh" id="xMW-QJ-68b"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Request a feature" id="543">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="browseFeatureRequest:" target="-3" id="bQx-K5-9e8"/>
+                                    <action selector="browseFeatureRequest:" target="0bd-Z3-ggh" id="wvP-CT-Gzl"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Report a problem with Catch" id="544">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="browseBugReport:" target="-3" id="CP2-Ao-TkC"/>
+                                    <action selector="browseBugReport:" target="0bd-Z3-ggh" id="BdU-90-Wwd"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="&lt;name and version>" enabled="NO" id="545">
@@ -402,7 +403,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="browseHelp:" target="-3" id="Lx8-Td-NRe"/>
+                                    <action selector="browseHelp:" target="0bd-Z3-ggh" id="fCa-SF-aMY"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="554">
