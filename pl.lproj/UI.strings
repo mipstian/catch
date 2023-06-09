@@ -15,7 +15,7 @@
 "535.title" = "Otwórz stronę domową Catch";
 
 /* Class = "NSMenuItem"; title = "Ostatnio pobrane torrenty"; ObjectID = "537"; */
-"537.title" = "Ostatnio pobrane torrenty";
+"537.title" = "Ostatnio pobrane torrenty...";
 
 /* Class = "NSMenuItem"; title = "Pomoc w konfiguracji"; ObjectID = "542"; */
 "542.title" = "Pomoc w konfiguracji";
@@ -76,3 +76,5 @@
 
 /* Class = "NSButtonCell"; title = "Otwórz przy logowaniu"; ObjectID = "981"; */
 "981.title" = "Otwórz przy logowaniu";
+
+"aQN-n7-TBr.title" = "Ostatnio Pobrane Torrenty";

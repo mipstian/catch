@@ -34,6 +34,7 @@
 		44717ADB1913AE2400580054 /* CTCFeedParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717AAC19131BC700580054 /* CTCFeedParser.m */; };
 		44717ADD1913AF3400580054 /* CTCFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717AA91913173600580054 /* CTCFileUtils.m */; };
 		448CC7E817FE1F840063D3FD /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 448CC7E617FE1F840063D3FD /* Sparkle.framework */; };
+		44B3375619B4F95C00A020DF /* CTCRecentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44B3375519B4F95C00A020DF /* CTCRecentsController.m */; };
 		44EAD12E1916682D002C7443 /* CTCApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 44EAD12D1916682D002C7443 /* CTCApplication.m */; };
 		44FBC67B196312A400434B01 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44FBC67A196312A400434B01 /* QuartzCore.framework */; };
 		44FBC67E196316E900434B01 /* NSWindow+ShakeAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 44FBC67D196316E900434B01 /* NSWindow+ShakeAnimation.m */; };
@@ -147,6 +148,8 @@
 		448CECE019157B880075ADD9 /* nl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/UI.strings; sourceTree = "<group>"; };
 		448CECE119157BB10075ADD9 /* zh-Hans */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/UI.strings"; sourceTree = "<group>"; };
 		448CECE219157BDF0075ADD9 /* zh-Hant */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/UI.strings"; sourceTree = "<group>"; };
+		44B3375419B4F95C00A020DF /* CTCRecentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCRecentsController.h; sourceTree = "<group>"; };
+		44B3375519B4F95C00A020DF /* CTCRecentsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCRecentsController.m; sourceTree = "<group>"; };
 		44EAD12C1916682D002C7443 /* CTCApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCApplication.h; sourceTree = "<group>"; };
 		44EAD12D1916682D002C7443 /* CTCApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCApplication.m; sourceTree = "<group>"; };
 		44FBC67A196312A400434B01 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -277,6 +280,8 @@
 				38D39B5F11C3A6E100C17C80 /* CTCMenuController.m */,
 				446298E9191655080045EC72 /* CTCPreferencesController.h */,
 				446298EA191655080045EC72 /* CTCPreferencesController.m */,
+				44B3375419B4F95C00A020DF /* CTCRecentsController.h */,
+				44B3375519B4F95C00A020DF /* CTCRecentsController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -534,6 +539,7 @@
 				4456EE611916D20000B3FF1A /* NSDate+TimeOfDayMath.m in Sources */,
 				44EAD12E1916682D002C7443 /* CTCApplication.m in Sources */,
 				4456EE651916F17F00B3FF1A /* CTCBrowser.m in Sources */,
+				44B3375619B4F95C00A020DF /* CTCRecentsController.m in Sources */,
 				44717AA4191300B300580054 /* CTCDefaults.m in Sources */,
 				38D39B6011C3A6E100C17C80 /* CTCMenuController.m in Sources */,
 				3803C7AE11C3DA9300FC08DB /* CTCAppDelegate.m in Sources */,
