@@ -5,16 +5,13 @@ let feedHelperErrorDomain = "com.giorgiocalderolla.Catch.CatchFeedHelper"
 
 
 @objc protocol FeedHelperService {
-  typealias FeedCheckReply = (_ downloadedFeedFiles: [[AnyHashable:Any]]?, _ error: Error?) -> Void
-  typealias FileDownloadReply = (_ downloadedFile: [AnyHashable:Any]?, _ error: Error?) -> Void
-  
   func checkFeed(
     url: URL,
     downloadingToBookmark downloadDirectoryBookmark: Data,
     organizingByShow shouldOrganizeByShow: Bool,
     savingMagnetLinks shouldSaveMagnetLinks: Bool,
     skippingURLs previouslyDownloadedURLs: [String],
-    withReply reply: FeedCheckReply
+    withReply reply: (_ downloadedFeedFiles: [[AnyHashable:Any]]?, _ error: Error?) -> Void
   )
   
   func download(
@@ -22,6 +19,6 @@ let feedHelperErrorDomain = "com.giorgiocalderolla.Catch.CatchFeedHelper"
     toBookmark downloadDirectoryBookmark: Data,
     organizingByShow shouldOrganizeByShow: Bool,
     savingMagnetLinks shouldSaveMagnetLinks: Bool,
-    withReply reply: FileDownloadReply
+    withReply reply: (_ downloadedFile: [AnyHashable:Any]?, _ error: Error?) -> Void
   )
 }
