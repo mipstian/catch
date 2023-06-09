@@ -1,7 +1,7 @@
 import Foundation
 
 
-protocol IntervalTimerDelegate: class {
+protocol IntervalTimerDelegate: AnyObject {
   func timerFired()
 }
 
