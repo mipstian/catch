@@ -19,6 +19,16 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 
 @implementation CTCScheduler
 
++ (instancetype)sharedScheduler {
+    static CTCScheduler *sharedScheduler = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedScheduler = CTCScheduler.new;
+    });
+    
+    return sharedScheduler;
+}
+
 - (id)init {
     self = [super init];
     if (!self) {
@@ -108,8 +118,7 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 	// Report status to application delegate
     [NSNotificationCenter.defaultCenter postNotificationName:kCTCSchedulerStatusNotificationName
                                                       object:self
-                                                    userInfo:@{@"isActive": @(self.isActive),
-                                                               @"isRunning": @(self.isRunning)}];
+                                                    userInfo:nil];
 }
 
 - (void)togglePause {

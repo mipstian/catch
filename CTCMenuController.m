@@ -1,40 +1,33 @@
-#import "CTCMainController.h"
+#import "CTCMenuController.h"
 #import "CTCDefaults.h"
 #import "CTCScheduler.h"
 
 
-@interface CTCMainController ()
+@interface CTCMenuController ()
+
 @property (strong, nonatomic) IBOutlet NSMenu *menu;
 @property (strong, nonatomic) IBOutlet NSMenuItem *menuVersion;
 @property (strong, nonatomic) IBOutlet NSMenuItem *menuPauseResume;
 @property (strong, nonatomic) IBOutlet NSMenuItem *menuLastUpdate;
 @property (strong, nonatomic) IBOutlet NSMenuItem *menuRecentTorrents;
 @property (strong, nonatomic) IBOutlet NSMenuItem *menuShowInFinder;
-@property (strong, nonatomic) IBOutlet NSWindow *preferencesWindow;
-@property (strong, nonatomic) IBOutlet NSTabView *preferencesTabs;
 
 @property (strong, nonatomic) NSStatusItem *menuBarItem;
 
-@property (strong, nonatomic) CTCScheduler *scheduler;
 @end
 
 
-@implementation CTCMainController
+@implementation CTCMenuController
 
 - (void)awakeFromNib {
-    self.scheduler = CTCScheduler.new;
-    
     [self setupMenuItem];
     
-	// Update UI with initial dummy values
-	[self setSchedulerStatusActive:YES running:NO];
+	// Update UI with initial values
+    [self refreshSchedulerStatus];
 	[self setLastUpdateStatus:YES time:nil];
 
 	// Enable Notification Center notifications
     [NSUserNotificationCenter.defaultUserNotificationCenter setDelegate:self];
-	
-	// Select the first tab of the Preferences
-	[self showFeeds:self];
     
     [self setupNotificationHandlers];
 }
@@ -60,9 +53,7 @@
 
 - (void)setupNotificationHandlers {
     void (^handleSchedulerStatusChange)(NSNotification *) = ^(NSNotification *notification) {
-        BOOL isSchedulerActive = [notification.userInfo[@"isActive"] boolValue];
-        BOOL isSchedulerRunning = [notification.userInfo[@"isRunning"] boolValue];
-        [self setSchedulerStatusActive:isSchedulerActive running:isSchedulerRunning];
+        [self refreshSchedulerStatus];
     };
     
     void (^handleSchedulerLastUpdateStatusChange)(NSNotification *) = ^(NSNotification *notification) {
@@ -73,11 +64,11 @@
     };
     
     [NSNotificationCenter.defaultCenter addObserverForName:kCTCSchedulerStatusNotificationName
-                                                    object:self.scheduler
+                                                    object:CTCScheduler.sharedScheduler
                                                      queue:nil
                                                 usingBlock:handleSchedulerStatusChange];
     [NSNotificationCenter.defaultCenter addObserverForName:kCTCSchedulerLastUpdateStatusNotificationName
-                                                    object:self.scheduler
+                                                    object:CTCScheduler.sharedScheduler
                                                      queue:nil
                                                 usingBlock:handleSchedulerLastUpdateStatusChange];
 }
@@ -115,53 +106,15 @@
     [NSWorkspace.sharedWorkspace openFile:torrentFolder.stringByStandardizingPath];
 }
 
-- (IBAction)showPreferences:(id)sender {
-	// Show the Preferences window
-	[NSApp activateIgnoringOtherApps:YES];
-	[self.preferencesWindow makeKeyAndOrderFront:self];
-}
-
-- (IBAction)savePreferences:(id)sender {
-	// Save preferences
-	[CTCDefaults save];
-	
-	if (CTCDefaults.isConfigurationValid) {
-		// Hide the Preferences window
-		[self.preferencesWindow close];
-        
-        // Also force check
-        [self forceCheck];
-	} else {
-		// The feed URL is probably invalid, warn user
-		[self showBadURLSheet];
-	}
-}
-
-- (IBAction)showFeeds:(id)sender {
-	// Select the Feeds tab
-    self.preferencesWindow.toolbar.selectedItemIdentifier = @"Feeds";
-	[self.preferencesTabs selectFirstTabViewItem:self];
-}
-
-- (IBAction)showTweaks:(id)sender {
-	// Select the Tweaks tab
-	self.preferencesWindow.toolbar.selectedItemIdentifier = @"Tweaks";
-	[self.preferencesTabs selectLastTabViewItem:self];
-}
-
-- (void)forceCheck {
-    [self.scheduler forceCheck];
-}
-
 - (IBAction)checkNow:(id)sender {
-	[self forceCheck];
+	[CTCScheduler.sharedScheduler forceCheck];
 }
 
 - (IBAction)togglePause:(id)sender {
-    [self.scheduler togglePause];
+    [CTCScheduler.sharedScheduler togglePause];
     
     // If the scheduler is now active, also force a check right away
-	if (self.scheduler.isActive) [self.scheduler forceCheck];
+	if (CTCScheduler.sharedScheduler.isActive) [CTCScheduler.sharedScheduler forceCheck];
 }
 
 - (IBAction)quit:(id)sender {
@@ -171,11 +124,11 @@
 	[NSApp terminate:nil];
 }
 
-- (void)setSchedulerStatusActive:(BOOL)isActive running:(BOOL)isRunning {
-	if (isRunning) {
+- (void)refreshSchedulerStatus {
+    if (CTCScheduler.sharedScheduler.isRunning) {
         [self setRefreshing];
 	} else {
-		if (isActive) {
+		if (CTCScheduler.sharedScheduler.isActive) {
             [self setIdle];
 		} else {
             [self setDisabled];
@@ -269,23 +222,6 @@
 	[self.menuRecentTorrents.submenu addItem:self.menuShowInFinder];
 	
     self.menuRecentTorrents.enabled = YES;
-}
-
-- (void)showBadURLSheet {
-	[self showFeeds:self];
-	
-	// Show a sheet warning the user: the feed URL is invalid
-	NSBeginAlertSheet(
-					  NSLocalizedString(@"badurl", @"Message for bad feed URL in preferences"),
-					  NSLocalizedString(@"badurlok", @"OK Button for bad feed URL in preferences"),
-					  nil,
-                      nil,
-                      self.preferencesWindow,
-                      self,
-					  NULL,
-                      NULL,
-					  nil,
-                      @"");
 }
 
 - (BOOL)userNotificationCenter:(NSUserNotificationCenter *)center

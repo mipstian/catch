@@ -17,12 +17,29 @@
                 <outlet property="delegate" destination="205" id="801"/>
             </connections>
         </customObject>
-        <customObject id="205" userLabel="Catch" customClass="CTCAppDelegate">
+        <customObject id="205" customClass="CTCAppDelegate">
             <connections>
-                <outlet property="mainController" destination="528" id="VGH-HD-0zS"/>
+                <outlet property="preferencesController" destination="vyd-92-YXh" id="Vzp-gF-Omq"/>
             </connections>
         </customObject>
-        <customObject id="392" customClass="NSFontManager"/>
+        <customObject id="528" customClass="CTCMenuController">
+            <connections>
+                <outlet property="menu" destination="523" id="529"/>
+                <outlet property="menuLastUpdate" destination="540" id="813"/>
+                <outlet property="menuPauseResume" destination="541" id="812"/>
+                <outlet property="menuRecentTorrents" destination="537" id="814"/>
+                <outlet property="menuShowInFinder" destination="815" id="987"/>
+                <outlet property="menuVersion" destination="545" id="657"/>
+            </connections>
+        </customObject>
+        <customObject id="vyd-92-YXh" userLabel="Preferences Controller" customClass="CTCPreferencesController">
+            <connections>
+                <outlet property="preferencesTabs" destination="616" id="lTF-MC-rwk"/>
+                <outlet property="window" destination="552" id="Y5a-sh-KWH"/>
+            </connections>
+        </customObject>
+        <customObject id="599" customClass="SUUpdater"/>
+        <userDefaultsController representsSharedInstance="YES" id="658"/>
         <menu autoenablesItems="NO" id="523">
             <items>
                 <menuItem title="Launch ShowRSS website" id="524">
@@ -99,7 +116,7 @@
                 <menuItem title="Preferences..." id="532">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
-                        <action selector="showPreferences:" target="528" id="551"/>
+                        <action selector="showPreferences:" target="vyd-92-YXh" id="Gem-Gn-vCm"/>
                     </connections>
                 </menuItem>
                 <menuItem title="Quit Catch" id="525">
@@ -110,19 +127,6 @@
                 </menuItem>
             </items>
         </menu>
-        <customObject id="528" customClass="CTCMainController">
-            <connections>
-                <outlet property="menu" destination="523" id="529"/>
-                <outlet property="menuCheckNow" destination="655" id="811"/>
-                <outlet property="menuLastUpdate" destination="540" id="813"/>
-                <outlet property="menuPauseResume" destination="541" id="812"/>
-                <outlet property="menuRecentTorrents" destination="537" id="814"/>
-                <outlet property="menuShowInFinder" destination="815" id="987"/>
-                <outlet property="menuVersion" destination="545" id="657"/>
-                <outlet property="preferencesTabs" destination="616" id="651"/>
-                <outlet property="preferencesWindow" destination="552" id="594"/>
-            </connections>
-        </customObject>
         <window title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="552" userLabel="PreferencesWindow">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <rect key="contentRect" x="310" y="248" width="700" height="328"/>
@@ -270,7 +274,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="lfS-iv-ge7"/>
                                                         </constraints>
-                                                        <amVariablePopUpButtonCell key="cell" type="push" title="Desktop" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" tag="1004" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="794">
+                                                        <amVariablePopUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="794">
                                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="menu"/>
                                                             <menu key="menu" title="OtherViews" id="795"/>
@@ -410,7 +414,7 @@ DQ
 </string>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="savePreferences:" target="528" id="595"/>
+                                    <action selector="savePreferences:" target="vyd-92-YXh" id="n0i-TO-zPy"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -439,13 +443,13 @@ DQ
                     <toolbarItem implicitItemIdentifier="414BD815-8F03-4AFC-AF27-7A671CD0847F" explicitItemIdentifier="Feeds" label="Feeds" paletteLabel="Feeds" image="NSUserAccounts" selectable="YES" id="612">
                         <size key="minSize" width="64" height="0.0"/>
                         <connections>
-                            <action selector="showFeeds:" target="528" id="614"/>
+                            <action selector="showFeeds:" target="vyd-92-YXh" id="cHW-vH-r3k"/>
                         </connections>
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="CEF5F33A-8114-4446-A5D4-507AAD29F880" explicitItemIdentifier="Tweaks" label="Tweaks" paletteLabel="Tweaks" tag="1" image="NSAdvanced" selectable="YES" id="613">
                         <size key="minSize" width="64" height="0.0"/>
                         <connections>
-                            <action selector="showTweaks:" target="528" id="615"/>
+                            <action selector="showTweaks:" target="vyd-92-YXh" id="XTd-Wh-jIc"/>
                         </connections>
                     </toolbarItem>
                 </allowedToolbarItems>
@@ -455,8 +459,7 @@ DQ
                 </defaultToolbarItems>
             </toolbar>
         </window>
-        <customObject id="599" customClass="SUUpdater"/>
-        <userDefaultsController representsSharedInstance="YES" id="658"/>
+        <customObject id="392" customClass="NSFontManager"/>
     </objects>
     <resources>
         <image name="NSAdvanced" width="32" height="32"/>

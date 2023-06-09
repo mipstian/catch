@@ -1,10 +1,12 @@
 #import "CTCAppDelegate.h"
-#import "CTCMainController.h"
+#import "CTCMenuController.h"
+#import "CTCPreferencesController.h"
 #import "CTCDefaults.h"
+#import "CTCScheduler.h"
 
 
 @interface CTCAppDelegate ()
-@property (strong, nonatomic) IBOutlet CTCMainController *mainController;
+@property (strong, nonatomic) IBOutlet CTCPreferencesController *preferencesController;
 @end
 
 
@@ -14,13 +16,8 @@
 	// Create preferences and set default values
 	[CTCDefaults setDefaultDefaults];
 	
-	// Valid config? Check feed, otherwise show Preferences
-	if (CTCDefaults.isConfigurationValid) {
-        [self.mainController forceCheck];
-	}
-    else {
-        [self.mainController showPreferences:self];
-    }
+	// Valid config? Check feed right now
+	if (CTCDefaults.isConfigurationValid) [CTCScheduler.sharedScheduler forceCheck];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
