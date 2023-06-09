@@ -8,15 +8,9 @@ import Foundation
 struct EpisodeDownloader {
   let downloadOptions: DownloadOptions
   
-  func download(episode: Episode) throws -> [AnyHashable:Any] {
+  func download(episode: Episode) throws -> DownloadedEpisode {
     // Return/save magnet or download torrent
     if episode.isMagnetized {
-      let downloadedItemDescription: [AnyHashable:Any] = [
-        "url": episode.url,
-        "title": episode.title,
-        "isMagnetLink": true
-      ]
-      
       if downloadOptions.shouldSaveMagnetLinks {
         // Save the magnet link to a file
         do {
@@ -28,7 +22,7 @@ struct EpisodeDownloader {
       }
       
       // Return the magnet link, if needed the main app will open it on the fly
-      return downloadedItemDescription
+      return DownloadedEpisode(episode: episode, localURL: nil)
     } else {
       let downloadedTorrentFile: URL
       do {
@@ -38,12 +32,7 @@ struct EpisodeDownloader {
         throw error
       }
       
-      return [
-        "url": episode.url,
-        "title": episode.title,
-        "isMagnetLink": false,
-        "torrentFilePath": downloadedTorrentFile.absoluteString
-      ]
+      return DownloadedEpisode(episode: episode, localURL: downloadedTorrentFile)
     }
   }
   

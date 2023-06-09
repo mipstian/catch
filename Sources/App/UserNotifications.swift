@@ -2,10 +2,13 @@ import Foundation
 
 
 extension NSUserNotificationCenter {
-  func deliverNewEpisodeNotification(episodeTitle: String) {
+  func deliverNotification(newEpisode: Episode) {
     let notification = NSUserNotification()
     notification.title = NSLocalizedString("newtorrent", comment: "New torrent notification")
-    notification.informativeText = String(format: NSLocalizedString("newtorrentdesc", comment: "New torrent notification"), episodeTitle)
+    notification.informativeText = .localizedStringWithFormat(
+      NSLocalizedString("newtorrentdesc", comment: "New torrent notification"),
+      newEpisode.title
+    )
     notification.soundName = NSUserNotificationDefaultSoundName
     deliver(notification)
   }

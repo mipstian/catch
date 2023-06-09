@@ -38,7 +38,7 @@ final class FeedHelperProxy {
     url: URL,
     downloadOptions: DownloadOptions,
     previouslyDownloadedURLs: [URL],
-    completion: @escaping (Result<[[AnyHashable:Any]]>) -> Void) {
+    completion: @escaping (Result<[DownloadedEpisode]>) -> Void) {
     service.checkFeed(
       url: url,
       downloadingToBookmark: downloadOptions.containerDirectoryBookmark,
@@ -48,7 +48,7 @@ final class FeedHelperProxy {
       withReply: { downloadedFeedFiles, error in
         DispatchQueue.main.async {
           if let downloadedFeedFiles = downloadedFeedFiles {
-            completion(.success(downloadedFeedFiles))
+            completion(.success(downloadedFeedFiles.map { DownloadedEpisode(dictionary: $0)! }))
           } else if let error = error {
             completion(.failure(error))
           } else {
@@ -62,7 +62,7 @@ final class FeedHelperProxy {
   func download(
     episode: Episode,
     downloadOptions: DownloadOptions,
-    completion: @escaping (Result<[AnyHashable:Any]>) -> Void) {
+    completion: @escaping (Result<DownloadedEpisode>) -> Void) {
     service.download(
       episode: episode.dictionaryRepresentation,
       toBookmark: downloadOptions.containerDirectoryBookmark,
@@ -71,7 +71,7 @@ final class FeedHelperProxy {
       withReply: { downloadedFile, error in
         DispatchQueue.main.async {
           if let downloadedFile = downloadedFile {
-            completion(.success(downloadedFile))
+            completion(.success(DownloadedEpisode(dictionary: downloadedFile)!))
           } else if let error = error {
             completion(.failure(error))
           } else {
