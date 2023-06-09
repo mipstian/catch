@@ -7,8 +7,6 @@
 "lastupdatefailed"="Viimeisin päivitys (epäonnistunut): %@"; // %@ will be replaced by update time
 "never"="Ei koskaan"; // this is for the last update time, meaning "I still haven't made one"
 "updatingnow"="Päivitetään...";
-// in preferences:
-"badurl"="URL-syötteesi ei toimi. Käytä Ohjeet-painiketta, niin saat lisätietoa alkuun pääsemisessä";
 // for notifications:
 "newtorrent"="Uusi torrent ladattu";
 "newtorrentdesc"="Torrent-tiedosto %@ on ladattu!"; // %@ will be replaced by filename

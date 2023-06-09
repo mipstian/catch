@@ -7,8 +7,6 @@
 "lastupdatefailed"="Ostatnia nieudana aktualizacja: %@"; // %@ will be replaced by update time
 "never"="Nigdy"; // this is for the last update time, meaning "I still haven't made one"
 "updatingnow"="Updating now...";
-// in preferences:
-"badurl"="Adres kanału RSS jest nieprawidłowy. Kliknij przycisk Pomoc aby uzyskać wsparcie przy konfiguracji.";
 // for notifications:
 "newtorrent"="Pobrano nowy plik .torrent";
 "newtorrentdesc"="Torrent dla %@ został pobrany."; // %@ will be replaced by filename

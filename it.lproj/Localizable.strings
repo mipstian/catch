@@ -7,8 +7,6 @@
 "lastupdatefailed"="Ultimo aggiornamento (fallito): %@"; // %@ will be replaced by update time
 "never"="Mai"; // this is for the last update time, meaning "I still haven't made one"
 "updatingnow"="Aggiornamento in corso...";
-// in preferences:
-"badurl"="L'URL del feed che hai inserito non è valida. Usa il bottone Aiutami per i dettagli su come configurare Catch.";
 // for notifications:
 "newtorrent"="Nuovo torrent scaricato";
 "newtorrentdesc"="Il torrent %@ è stato scaricato!"; // %@ will be replaced by filename

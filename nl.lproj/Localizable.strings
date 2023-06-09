@@ -7,8 +7,6 @@
 "lastupdatefailed"="Laatste update (mislukt): %@"; // %@ will be replaced by update time
 "never"="Nooit"; // this is for the last update time, meaning "I still haven't made one"
 "updatingnow"="Aan het updaten...";
-// in preferences:
-"badurl"="Dee ingevoerde feed URL is ongeldig. Gebruik de knop hieronder voor hulp bij het configureren van Catch.";
 // for notifications:
 "newtorrent"="Nieuwe torrent gedownload";
 "newtorrentdesc"="Torrent bestand %@ is gedownload!"; // %@ will be replaced by filename

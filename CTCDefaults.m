@@ -82,32 +82,14 @@ NSString * const kCTCDefaultsOpenAtLoginKey = @"openAtLogin";
 
 + (void)save {
 	[NSUserDefaults.standardUserDefaults synchronize];
-    
-    // Register as a login item if needed
-    [self refreshLoginItemStatus];
 }
 
 + (void)refreshLoginItemStatus {
     [CTCLoginItems toggleRegisteredAsLoginItem:[NSUserDefaults.standardUserDefaults boolForKey:kCTCDefaultsOpenAtLoginKey]];
 }
 
-+ (BOOL)isConfigurationValid {
-	// Validate torrent folder. This should never fail!
-	NSString *torrentFolder = self.torrentsSavePath;
-	
-	if (!torrentFolder) return NO;
-    
-	BOOL isDirectory = NO;
-	if ([NSFileManager.defaultManager fileExistsAtPath:torrentFolder
-                                           isDirectory:&isDirectory]) {
-		if (!isDirectory) return NO;
-	}
-    else {
-		return NO;
-	}
-    
-	// Most importantly, validate feed URL
-	NSString *feedURL = CTCDefaults.feedURL;
++ (BOOL)isFeedURLValid {
+    NSString *feedURL = CTCDefaults.feedURL;
 	if (![feedURL hasPrefix:kCTCDefaultsServiceFeedURLPrefix]) {
 		// The URL should start with the prefix!
 		NSLog(@"Feed URL (%@) does not start with expected prefix (%@)", feedURL, kCTCDefaultsServiceFeedURLPrefix);
@@ -120,6 +102,28 @@ NSString * const kCTCDefaultsOpenAtLoginKey = @"openAtLogin";
 	}
 	
 	return YES;
+}
+
++ (BOOL)isTorrentsSavePathValid {
+    NSString *torrentFolder = self.torrentsSavePath;
+    
+    if (!torrentFolder) return NO;
+    
+    BOOL isDirectory = NO;
+    BOOL fileExists = [NSFileManager.defaultManager fileExistsAtPath:torrentFolder
+                                                         isDirectory:&isDirectory];
+    if (!fileExists) return NO;
+    if (!isDirectory) return NO;
+    
+    BOOL isDirectoryWritable = [NSFileManager.defaultManager
+                                isWritableFileAtPath:torrentFolder];
+    if (!isDirectoryWritable) return NO;
+    
+    return YES;
+}
+
++ (BOOL)isConfigurationValid {
+    return self.isTorrentsSavePathValid && self.isFeedURLValid;
 }
 
 + (NSString *)infoStringForKey:(NSString *)key {
