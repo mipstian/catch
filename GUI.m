@@ -8,14 +8,6 @@
 
 #import "GUI.h"
 
-// Filenames of images
-static NSString* const MENUBAR_IDLE = @"menubar_idle";
-static NSString* const MENUBAR_IDLE_INV = @"menubar_idle-inv";
-static NSString* const MENUBAR_REFRESHING = @"menubar_refreshing";
-static NSString* const MENUBAR_REFRESHING_INV = @"menubar_refreshing-inv";
-static NSString* const MENUBAR_DISABLED = @"menubar_disabled";
-static NSString* const MENUBAR_DISABLED_INV = @"menubar_disabled-inv";
-
 // Growl notification IDs
 static NSString* const GROWL_NEW_TORRENT = @"New torrent";
 
@@ -28,14 +20,6 @@ static NSString* const GROWL_NEW_TORRENT = @"New torrent";
 	 
 	// Create the NSStatusBar and set its length
 	item = [[[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength] retain];
-
-	// Load images
-	iconIdle = [NSImage imageNamed:MENUBAR_IDLE];
-	iconIdleInv = [NSImage imageNamed:MENUBAR_IDLE_INV];
-	iconRefreshing = [NSImage imageNamed:MENUBAR_REFRESHING];
-	iconRefreshingInv = [NSImage imageNamed:MENUBAR_REFRESHING_INV];
-	iconDisabled = [NSImage imageNamed:MENUBAR_DISABLED];
-	iconDisabledInv = [NSImage imageNamed:MENUBAR_DISABLED_INV];
 	
 	// Update status UI
 	[self setStatus:1 running:0];
@@ -188,8 +172,8 @@ static NSString* const GROWL_NEW_TORRENT = @"New torrent";
 
 - (void)setIdle {
 	// Sets the images (status: idle)
-	[item setImage:iconIdle];
-	[item setAlternateImage:iconIdleInv];
+	[item setImage:[NSImage imageNamed:@"menubar_idle"]];
+	[item setAlternateImage:[NSImage imageNamed:@"menubar_idle-inv"]];
 	
 	// Enable "check now" menu
 	[menuCheckNow setEnabled:YES];
@@ -200,8 +184,8 @@ static NSString* const GROWL_NEW_TORRENT = @"New torrent";
 
 - (void)setRefreshing {
 	// Sets the images (status: refreshing)
-	[item setImage:iconRefreshing];
-	[item setAlternateImage:iconRefreshingInv];
+	[item setImage:[NSImage imageNamed:@"menubar_refreshing"]];
+	[item setAlternateImage:[NSImage imageNamed:@"menubar_refreshing-inv"]];
 	
 	// Disable "check now" menu
 	[menuCheckNow setEnabled:NO];
@@ -215,8 +199,8 @@ static NSString* const GROWL_NEW_TORRENT = @"New torrent";
 
 - (void)setDisabled {
 	// Sets the images (status: disabled)
-	[item setImage:iconDisabled];
-	[item setAlternateImage:iconDisabledInv];
+	[item setImage:[NSImage imageNamed:@"menubar_disabled"]];
+	[item setAlternateImage:[NSImage imageNamed:@"menubar_disabled-inv"]];
 	
 	// Disable "check now" menu
 	[menuCheckNow setEnabled:NO];
