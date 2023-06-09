@@ -1,7 +1,7 @@
 import Foundation
 
 
-protocol FeedHelperProxyDelegate: class {
+protocol FeedHelperProxyDelegate: AnyObject {
   func feedHelperConnectionWasInterrupted()
 }
 
