@@ -123,7 +123,7 @@
 
 - (IBAction)savePreferences:(id)sender {
 	// Save preferences
-	[Preferences save];
+	[CTCDefaults save];
 	
 	// Also force check
 	[self forceCheck];
@@ -168,7 +168,7 @@
 	NSLog(@"Quitting");
     
 	// Save preferences
-	[Preferences save];
+	[CTCDefaults save];
 	
 	// Quit
 	[NSApp terminate:nil];

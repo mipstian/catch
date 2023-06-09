@@ -15,10 +15,16 @@ extern NSString * const kCTCDefaultsLegacyServiceFeedURLPrefix;
 
 @interface CTCDefaults : NSObject
 
++ (void)setDefaultDefaults;
+
++ (void)save;
+
++ (void)refreshLoginItemStatus;
+
 + (NSString *)appName;
 
 + (NSString *)appVersion;
 
-+ (void)refreshLoginItemStatus;
++ (NSString *)feedURL;
 
 @end

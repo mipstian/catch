@@ -46,7 +46,7 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 
 - (void)callFeedCheckerWithReplyHandler:(CTCFeedCheckCompletionHandler)replyHandler {
     // Read configuration
-    NSURL *feedURL = [NSURL URLWithString:Preferences.feedURL];
+    NSURL *feedURL = [NSURL URLWithString:CTCDefaults.feedURL];
     NSString *downloadPath = [NSUserDefaults.standardUserDefaults stringForKey:PREFERENCE_KEY_SAVE_PATH];
     BOOL organizeByFolder = [NSUserDefaults.standardUserDefaults boolForKey:PREFERENCE_KEY_ORGANIZE_TORRENTS];
     NSArray *history = [NSUserDefaults.standardUserDefaults arrayForKey:PREFERENCE_KEY_HISTORY];

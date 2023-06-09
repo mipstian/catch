@@ -17,9 +17,6 @@ extern NSString * const PREFERENCE_KEY_OPEN_AT_LOGIN;
 
 @interface Preferences : NSObject
 
-+ (void)setDefaultDefaults;
-+ (void)save;
 + (BOOL)isConfigurationValid;
-+ (NSString *)feedURL;
 
 @end

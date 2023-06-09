@@ -1,5 +1,6 @@
 #import "CTCAppDelegate.h"
 #import "CTCMainController.h"
+#import "CTCDefaults.h"
 #import "Preferences.h"
 
 
@@ -12,7 +13,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 	// Create preferences and set default values
-	[Preferences setDefaultDefaults];
+	[CTCDefaults setDefaultDefaults];
 	
 	// Valid config? Check feed, otherwise show Preferences
 	if (Preferences.isConfigurationValid) {
