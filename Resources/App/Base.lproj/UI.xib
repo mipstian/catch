@@ -653,8 +653,8 @@ DQ
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="213" width="572" height="151"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
-            <view key="contentView" misplaced="YES" id="JVG-A7-ap0">
-                <rect key="frame" x="0.0" y="0.0" width="572" height="151"/>
+            <view key="contentView" id="JVG-A7-ap0">
+                <rect key="frame" x="0.0" y="0.0" width="572" height="103"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ygd-lr-Dgm">
