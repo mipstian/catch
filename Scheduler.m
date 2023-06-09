@@ -14,7 +14,6 @@
 @interface Scheduler ()
 
 @property (strong, nonatomic) NSTimer* repeatingTimer;
-@property (strong, nonatomic) FeedChecker* feedChecker;
 @property (strong, nonatomic) NSXPCConnection *feedCheckerConnection;
 @property (assign, nonatomic, getter = isActive) BOOL active;
 @property (assign, nonatomic, getter = isRunning) BOOL running;
@@ -24,11 +23,9 @@
 
 @implementation Scheduler
 
-- (id)initWithFeedChecker:(FeedChecker*)feedChecker {
+- (id)init {
 	self.active = YES;
 	self.running = NO;
-	
-	self.feedChecker = feedChecker;
     
     // Create a single connection to the feed helper
     // Messages will be delivered serially
@@ -46,12 +43,14 @@
 	return self;
 }
 
-- (void)callFeedCheckerWithReplyHandler:(void (^)(NSError *))replyHandler {
+- (void)callFeedCheckerWithReplyHandler:(CTCFeedCheckCompletionHandler)replyHandler {
+    // Read configuration
     NSURL *feedURL = [NSURL URLWithString:Preferences.feedURL];
     NSString *downloadPath = [NSUserDefaults.standardUserDefaults stringForKey:PREFERENCE_KEY_SAVE_PATH];
     BOOL organizeByFolder = [NSUserDefaults.standardUserDefaults boolForKey:PREFERENCE_KEY_ORGANIZE_TORRENTS];
     NSArray *previouslyDownloadedURLs = [NSUserDefaults.standardUserDefaults arrayForKey:PREFERENCE_KEY_HISTORY];
     
+    // Call feed checker service
     CTCFeedChecker *feedChecker = [self.feedCheckerConnection remoteObjectProxy];
     [feedChecker checkShowRSSFeed:feedURL
                 downloadingToPath:downloadPath
@@ -108,8 +107,8 @@
 	
     [self reportStatus];
 	
-    [self callFeedCheckerWithReplyHandler:^(NSError *error){
-        BOOL wasCheckSuccessful = error == nil;
+    [self callFeedCheckerWithReplyHandler:^(BOOL wasCheckSuccessful,
+                                            NSArray *downloadedFeedFiles){
         self.running = NO;
         [self reportStatus];
         [[NSApp delegate] lastUpdateStatus:wasCheckSuccessful

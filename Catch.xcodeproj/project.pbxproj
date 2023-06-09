@@ -12,7 +12,6 @@
 		3803C7E711C3E72900FC08DB /* Preferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 3803C7E611C3E72900FC08DB /* Preferences.m */; };
 		3803C7EC11C3E7AD00FC08DB /* Scheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 3803C7EB11C3E7AD00FC08DB /* Scheduler.m */; };
 		381066FB11CF3F8300FDED93 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 381066FA11CF3F8300FDED93 /* MainMenu.xib */; };
-		3831003811CBEA9300D4BF9A /* FeedChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3831003711CBEA9300D4BF9A /* FeedChecker.m */; };
 		38A3FD0D11CA01DD00157AEF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38A3FD0C11CA01DD00157AEF /* Localizable.strings */; };
 		38D39B6011C3A6E100C17C80 /* GUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D39B5F11C3A6E100C17C80 /* GUI.m */; };
 		38D39B6711C3A70000C17C80 /* menubar_idle-inv.png in Resources */ = {isa = PBXBuildFile; fileRef = 38D39B6111C3A70000C17C80 /* menubar_idle-inv.png */; };
@@ -33,12 +32,13 @@
 		44717AA4191300B300580054 /* CTCDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717AA3191300B300580054 /* CTCDefaults.m */; };
 		44717AA71913072200580054 /* CTCLoginItems.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717AA61913072200580054 /* CTCLoginItems.m */; };
 		44717AAA1913173600580054 /* CTCFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717AA91913173600580054 /* CTCFileUtils.m */; };
-		44717AAD19131BC700580054 /* CTCFeedParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717AAC19131BC700580054 /* CTCFeedParser.m */; };
 		44717AC51913A08700580054 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97325FDCFA39411CA2CEA /* Foundation.framework */; };
 		44717ACB1913A08700580054 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 44717AC91913A08700580054 /* InfoPlist.strings */; };
 		44717ACE1913A08700580054 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717ACD1913A08700580054 /* main.m */; };
 		44717AD61913A16500580054 /* com.giorgiocalderolla.Catch.CatchFeedHelper.xpc in CopyFiles */ = {isa = PBXBuildFile; fileRef = 44717AC41913A08700580054 /* com.giorgiocalderolla.Catch.CatchFeedHelper.xpc */; };
 		44717AD91913A1C900580054 /* CTCFeedChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717AD81913A1C900580054 /* CTCFeedChecker.m */; };
+		44717ADB1913AE2400580054 /* CTCFeedParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717AAC19131BC700580054 /* CTCFeedParser.m */; };
+		44717ADD1913AF3400580054 /* CTCFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717AA91913173600580054 /* CTCFileUtils.m */; };
 		448CC7E817FE1F840063D3FD /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 448CC7E617FE1F840063D3FD /* Sparkle.framework */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -93,8 +93,6 @@
 		381066FA11CF3F8300FDED93 /* MainMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 		382AD67812DCCA9300E1FA73 /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/Localizable.strings; sourceTree = "<group>"; };
 		382AD67912DCCAB300E1FA73 /* ca */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ca; path = ca.lproj/UI.xib; sourceTree = "<group>"; };
-		3831003611CBEA9300D4BF9A /* FeedChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedChecker.h; sourceTree = "<group>"; };
-		3831003711CBEA9300D4BF9A /* FeedChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedChecker.m; sourceTree = "<group>"; };
 		38704B0911DB1EC900D28A39 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/UI.xib"; sourceTree = "<group>"; };
 		38704B0A11DB1ED500D28A39 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		38704B0B11DB1EE000D28A39 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hant"; path = "zh-Hant.lproj/UI.xib"; sourceTree = "<group>"; };
@@ -136,8 +134,8 @@
 		44717AA61913072200580054 /* CTCLoginItems.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCLoginItems.m; sourceTree = "<group>"; };
 		44717AA81913173600580054 /* CTCFileUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCFileUtils.h; sourceTree = "<group>"; };
 		44717AA91913173600580054 /* CTCFileUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCFileUtils.m; sourceTree = "<group>"; };
-		44717AAB19131BC700580054 /* CTCFeedParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCFeedParser.h; sourceTree = "<group>"; };
-		44717AAC19131BC700580054 /* CTCFeedParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCFeedParser.m; sourceTree = "<group>"; };
+		44717AAB19131BC700580054 /* CTCFeedParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CTCFeedParser.h; path = ../CTCFeedParser.h; sourceTree = "<group>"; };
+		44717AAC19131BC700580054 /* CTCFeedParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CTCFeedParser.m; path = ../CTCFeedParser.m; sourceTree = "<group>"; };
 		44717AC41913A08700580054 /* com.giorgiocalderolla.Catch.CatchFeedHelper.xpc */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = com.giorgiocalderolla.Catch.CatchFeedHelper.xpc; sourceTree = BUILT_PRODUCTS_DIR; };
 		44717AC81913A08700580054 /* CatchFeedHelper-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CatchFeedHelper-Info.plist"; sourceTree = "<group>"; };
 		44717ACA1913A08700580054 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -183,16 +181,10 @@
 				3803C7E611C3E72900FC08DB /* Preferences.m */,
 				3803C7EA11C3E7AD00FC08DB /* Scheduler.h */,
 				3803C7EB11C3E7AD00FC08DB /* Scheduler.m */,
-				3831003611CBEA9300D4BF9A /* FeedChecker.h */,
-				3831003711CBEA9300D4BF9A /* FeedChecker.m */,
 				44717AA2191300B300580054 /* CTCDefaults.h */,
 				44717AA3191300B300580054 /* CTCDefaults.m */,
 				44717AA51913072200580054 /* CTCLoginItems.h */,
 				44717AA61913072200580054 /* CTCLoginItems.m */,
-				44717AA81913173600580054 /* CTCFileUtils.h */,
-				44717AA91913173600580054 /* CTCFileUtils.m */,
-				44717AAB19131BC700580054 /* CTCFeedParser.h */,
-				44717AAC19131BC700580054 /* CTCFeedParser.m */,
 			);
 			name = Catch;
 			sourceTree = "<group>";
@@ -211,6 +203,7 @@
 			children = (
 				080E96DDFE201D6D7F000001 /* Catch */,
 				44717AC61913A08700580054 /* CatchFeedHelper */,
+				44717ADC1913AF2000580054 /* Shared Libraries */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
@@ -269,6 +262,8 @@
 			children = (
 				44717AD71913A1C900580054 /* CTCFeedChecker.h */,
 				44717AD81913A1C900580054 /* CTCFeedChecker.m */,
+				44717AAB19131BC700580054 /* CTCFeedParser.h */,
+				44717AAC19131BC700580054 /* CTCFeedParser.m */,
 				44717ACD1913A08700580054 /* main.m */,
 				44717AC71913A08700580054 /* Supporting Files */,
 			);
@@ -283,6 +278,15 @@
 				44717ACC1913A08700580054 /* CatchFeedHelper-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		44717ADC1913AF2000580054 /* Shared Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				44717AA81913173600580054 /* CTCFileUtils.h */,
+				44717AA91913173600580054 /* CTCFileUtils.m */,
+			);
+			name = "Shared Libraries";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -407,6 +411,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44717ADD1913AF3400580054 /* CTCFileUtils.m in Sources */,
+				44717ADB1913AE2400580054 /* CTCFeedParser.m in Sources */,
 				44717AD91913A1C900580054 /* CTCFeedChecker.m in Sources */,
 				44717ACE1913A08700580054 /* main.m in Sources */,
 			);
@@ -424,8 +430,6 @@
 				44717AA71913072200580054 /* CTCLoginItems.m in Sources */,
 				3803C7EC11C3E7AD00FC08DB /* Scheduler.m in Sources */,
 				44717AAA1913173600580054 /* CTCFileUtils.m in Sources */,
-				44717AAD19131BC700580054 /* CTCFeedParser.m in Sources */,
-				3831003811CBEA9300D4BF9A /* FeedChecker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

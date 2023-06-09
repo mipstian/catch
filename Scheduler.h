@@ -8,12 +8,9 @@
 
 #import <Cocoa/Cocoa.h>
 #import "Preferences.h"
-#import "FeedChecker.h"
 
 
 @interface Scheduler : NSObject
-
-- (id)initWithFeedChecker:(FeedChecker*)feedChecker;
 
 - (BOOL)pauseResume;
 

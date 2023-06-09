@@ -8,7 +8,6 @@
 
 #import "Preferences.h"
 #import "Catch.h"
-#import "FeedChecker.h"
 #import "CTCFileUtils.h"
 
 
