@@ -51,7 +51,7 @@
 "632.title" = "Enregistrer les torrents ici:";
 
 /* Class = "NSButtonCell"; title = "Organizer les torrents dans des dossiers par nom d'émissions"; ObjectID = "633"; */
-"633.title" = "Organizer les torrents dans des dossiers par nom d'émissions";
+"633.title" = "Organiser les torrents dans des dossiers par nom d'émissions";
 
 /* Class = "NSButtonCell"; title = "Ouvrir les torrents automatiquement"; ObjectID = "634"; */
 "634.title" = "Ouvrir les torrents automatiquement";
@@ -68,8 +68,8 @@
 /* Class = "NSTextFieldCell"; title = "URL source:"; ObjectID = "786"; */
 "786.title" = "URL source:";
 
-/* Class = "NSMenu"; title = "AutresVues"; ObjectID = "795"; */
-"795.title" = "AutresVues";
+/* Class = "NSMenu"; title = "Autres Vues"; ObjectID = "795"; */
+"795.title" = "Autres Vues";
 
 /* Class = "NSButtonCell"; title = "Vérifier automatiquement les mises à jour"; ObjectID = "807"; */
 "807.title" = "Vérifier automatiquement les mises à jour";
