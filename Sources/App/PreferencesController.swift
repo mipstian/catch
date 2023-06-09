@@ -147,6 +147,7 @@ extension PreferencesController {
   }
   
   @IBAction private func addFeed(_: Any?) {
+    addFeedSheetController.clear()
     window?.beginSheet(addFeedSheetController.window!, completionHandler: nil)
   }
   
