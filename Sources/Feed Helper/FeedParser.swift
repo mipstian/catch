@@ -39,7 +39,7 @@ private extension Episode {
 }
 
 
-/// Parses episodes out of a broadcatching RSS feed.
+/// Parses episodes out of a broadcatching RSS or Atom feed.
 /// Supports additional data specified with the `tv` namespace.
 enum FeedParser {
   static func parse(feed: Feed, feedContents: Data) throws -> [Episode] {
