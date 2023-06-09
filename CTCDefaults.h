@@ -13,12 +13,8 @@ extern NSString * const kCTCDefaultsServiceFeedURLPrefix;
 extern NSString * const kCTCDefaultsLegacyServiceFeedURLPrefix;
 
 extern NSString * const PREFERENCE_KEY_SAVE_PATH;
-extern NSString * const PREFERENCE_KEY_ORGANIZE_TORRENTS;
 extern NSString * const PREFERENCE_KEY_OPEN_AUTOMATICALLY;
-extern NSString * const PREFERENCE_KEY_SEND_NOTIFICATIONS;
-extern NSString * const PREFERENCE_KEY_DOWNLOADED_FILES; //Deprecated
 extern NSString * const PREFERENCE_KEY_HISTORY;
-extern NSString * const PREFERENCE_KEY_OPEN_AT_LOGIN;
 
 
 @interface CTCDefaults : NSObject
@@ -42,5 +38,9 @@ extern NSString * const PREFERENCE_KEY_OPEN_AT_LOGIN;
 + (NSDate *)fromDateForTimeRestrictions;
 
 + (NSDate *)toDateForTimeRestrictions;
+
++ (BOOL)shouldSendNotifications;
+
++ (BOOL)shouldOrganizeTorrentsInFolders;
 
 @end
