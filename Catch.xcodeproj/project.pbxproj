@@ -183,9 +183,9 @@
 		44FFCE3E1DCB92F4006E6DF0 /* Defaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; name = Defaults.swift; path = Sources/App/Defaults.swift; sourceTree = "<group>"; tabWidth = 2; };
 		8D1107310486CEB800E47090 /* Catch-Info.plist */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; name = "Catch-Info.plist"; path = "Resources/App/Catch-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Catch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catch.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A74F608C25B57C6100BA52A0 /* FeedContentsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedContentsController.swift; sourceTree = "<group>"; };
-		A74F609425B5C27100BA52A0 /* FeedCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCellView.swift; sourceTree = "<group>"; };
-		A77DD09525B43CF400886D57 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
+		A74F608C25B57C6100BA52A0 /* FeedContentsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FeedContentsController.swift; path = Sources/App/FeedContentsController.swift; sourceTree = "<group>"; };
+		A74F609425B5C27100BA52A0 /* FeedCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FeedCellView.swift; path = Sources/App/FeedCellView.swift; sourceTree = "<group>"; };
+		A77DD09525B43CF400886D57 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PreferencesView.swift; path = Sources/App/PreferencesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
