@@ -34,12 +34,11 @@
 
 		// Parse the feed
 		NSArray* fileURLs = [self parseURLs:feed];
-		NSArray* fileFolders = nil;
-		if (organize) fileFolders = [self parseFolders:feed];
+		NSArray* fileFolders = organize ? [self parseFolders:feed] : nil;
 
 		if (!fileURLs) return NO;
 
-		if (!fileFolders || [fileURLs count] != [fileFolders count]) {
+		if (!fileFolders || fileURLs.count != fileFolders.count) {
 			// Make sure we have good folders
 			fileFolders = nil;
 			if (organize) {
