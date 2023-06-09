@@ -128,15 +128,7 @@ fileprivate extension FeedHelper {
     // Flush the cache, we want fresh results
     URLCache.shared.removeAllCachedResponses()
     
-    // Create a NSXMLDocument by downloading feed
-    let document: XMLDocument
-    do {
-      document = try XMLDocument(contentsOf: feedURL, options: 0)
-    } catch {
-      throw error
-    }
-    
-    return document
+    return try XMLDocument(contentsOf: feedURL, options: 0)
   }
   
   func downloadFiles(
@@ -249,11 +241,7 @@ fileprivate extension FeedHelper {
       filename: filename
     )
     
-    do {
-      try writeData(data: data, toPath: pathAndFilename)
-    } catch {
-      throw error
-    }
+    try writeData(data: data, toPath: pathAndFilename)
     
     return pathAndFilename
   }
@@ -316,11 +304,7 @@ fileprivate extension FeedHelper {
       filename: filename
     )
     
-    do {
-      try writeData(data: downloadedFile, toPath: pathAndFilename)
-    } catch {
-      throw error
-    }
+    try writeData(data: downloadedFile, toPath: pathAndFilename)
     
     return pathAndFilename
   }
@@ -347,8 +331,7 @@ fileprivate extension FeedHelper {
       do {
         try FileManager.default.createDirectory(
           atPath: pathAndFolder.path,
-          withIntermediateDirectories: true,
-          attributes: nil
+          withIntermediateDirectories: true
         )
       } catch {
         // Folder creation failed :( Abort

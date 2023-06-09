@@ -17,19 +17,7 @@ enum FileUtils {
   }
   
   static func bookmark(for url: URL) throws -> Data {
-    let bookmark: Data
-      
-    do {
-      bookmark = try url.bookmarkData(
-        options: .minimalBookmark,
-        includingResourceValuesForKeys: [],
-        relativeTo: nil
-      )
-    } catch {
-      throw error
-    }
-    
-    return bookmark
+    return try url.bookmarkData(options: .minimalBookmark)
   }
   
   static func url(from bookmark: Data) throws -> URL {
@@ -38,12 +26,7 @@ enum FileUtils {
     
     do {
       // TODO: figure out why this init is optional, which contradicts the docs
-      url = try URL(
-        resolvingBookmarkData: bookmark,
-        options: [],
-        relativeTo: nil,
-        bookmarkDataIsStale: &isStale
-      )!
+      url = try URL(resolvingBookmarkData: bookmark, bookmarkDataIsStale: &isStale)!
     } catch {
       NSLog("Could not get URL from bookmark: \(error)")
       throw error
