@@ -161,9 +161,6 @@
 	[item setImage:[NSImage imageNamed:@"menubar_idle"]];
 	[item setAlternateImage:[NSImage imageNamed:@"menubar_idle-inv"]];
 	
-	// Enable "check now" menu
-	[menuCheckNow setEnabled:YES];
-	
 	// Set pause/resume to "pause"
 	[menuPauseResume setTitle:NSLocalizedString(@"pause", @"Description of pause action")];
 }
@@ -172,9 +169,6 @@
 	// Sets the images (status: refreshing)
 	[item setImage:[NSImage imageNamed:@"menubar_refreshing"]];
 	[item setAlternateImage:[NSImage imageNamed:@"menubar_refreshing-inv"]];
-	
-	// Disable "check now" menu
-	[menuCheckNow setEnabled:NO];
 	
 	// Set pause/resume to "pause"
 	[menuPauseResume setTitle:NSLocalizedString(@"pause", @"Description of pause action")];
@@ -187,9 +181,6 @@
 	// Sets the images (status: disabled)
 	[item setImage:[NSImage imageNamed:@"menubar_disabled"]];
 	[item setAlternateImage:[NSImage imageNamed:@"menubar_disabled-inv"]];
-	
-	// Disable "check now" menu
-	[menuCheckNow setEnabled:NO];
 	
 	// Set pause/resume to "resume"
 	[menuPauseResume setTitle:NSLocalizedString(@"resume", @"Description of resume action")];
