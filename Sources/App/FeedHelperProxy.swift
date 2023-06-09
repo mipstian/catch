@@ -45,13 +45,14 @@ final class FeedHelperProxy {
       organizingByShow: downloadOptions.shouldOrganizeByShow,
       savingMagnetLinks: downloadOptions.shouldSaveMagnetLinks,
       skippingURLs: previouslyDownloadedURLs.map { $0.absoluteString },
-      withReply: { downloadedFeedFiles, error in
+      withReply: { downloadedEpisodes, error in
         DispatchQueue.main.async {
-          if let downloadedFeedFiles = downloadedFeedFiles {
-            completion(.success(downloadedFeedFiles.map { DownloadedEpisode(dictionary: $0)! }))
-          } else if let error = error {
+          switch (downloadedEpisodes, error) {
+          case (let rawDownloadedEpisodes?, nil):
+            completion(.success(rawDownloadedEpisodes.map { DownloadedEpisode(dictionary: $0)! }))
+          case (nil, let error?):
             completion(.failure(error))
-          } else {
+          default:
             fatalError("Bad service reply")
           }
         }
@@ -70,11 +71,12 @@ final class FeedHelperProxy {
       savingMagnetLinks: downloadOptions.shouldSaveMagnetLinks,
       withReply: { downloadedFile, error in
         DispatchQueue.main.async {
-          if let downloadedFile = downloadedFile {
-            completion(.success(DownloadedEpisode(dictionary: downloadedFile)!))
-          } else if let error = error {
+          switch (downloadedFile, error) {
+          case (let rawDownloadedFile?, nil):
+            completion(.success(DownloadedEpisode(dictionary: rawDownloadedFile)!))
+          case (nil, let error?):
             completion(.failure(error))
-          } else {
+          default:
             fatalError("Bad service reply")
           }
         }
