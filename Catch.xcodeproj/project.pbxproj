@@ -18,6 +18,7 @@
 		4453A6691DE516B200383E40 /* SandboxBookmarks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4453A6681DE516B200383E40 /* SandboxBookmarks.swift */; };
 		4453A66A1DE516B200383E40 /* SandboxBookmarks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4453A6681DE516B200383E40 /* SandboxBookmarks.swift */; };
 		4453A66C1DE5D4DF00383E40 /* EpisodeDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4453A66B1DE5D4DF00383E40 /* EpisodeDownloader.swift */; };
+		4453A66E1DE60D6300383E40 /* PowerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4453A66D1DE60D6200383E40 /* PowerManager.swift */; };
 		445D97A6191579C7006CD77C /* UI.strings in Resources */ = {isa = PBXBuildFile; fileRef = 445D97A4191579C7006CD77C /* UI.strings */; };
 		446D8B581918D146007AB22D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 446D8B571918D146007AB22D /* XCTest.framework */; };
 		44717AC51913A08700580054 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97325FDCFA39411CA2CEA /* Foundation.framework */; };
@@ -120,6 +121,7 @@
 		4453A6651DE5065F00383E40 /* Episode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Episode.swift; path = Sources/Shared/Episode.swift; sourceTree = "<group>"; };
 		4453A6681DE516B200383E40 /* SandboxBookmarks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SandboxBookmarks.swift; path = Sources/Shared/SandboxBookmarks.swift; sourceTree = "<group>"; };
 		4453A66B1DE5D4DF00383E40 /* EpisodeDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EpisodeDownloader.swift; path = "Sources/Feed Helper/EpisodeDownloader.swift"; sourceTree = "<group>"; };
+		4453A66D1DE60D6200383E40 /* PowerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PowerManager.swift; path = Sources/App/PowerManager.swift; sourceTree = "<group>"; };
 		445D97A319157955006CD77C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UI.xib; sourceTree = "<group>"; };
 		445D97A5191579C7006CD77C /* ca */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/UI.strings; sourceTree = "<group>"; };
 		445D97A719157A2C006CD77C /* de */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/UI.strings; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 				44A6FA8A1DE0B85C005303DF /* FeedHelperProxy.swift */,
 				44AB5B5D1DCE794A00AE6EB6 /* HistoryItem.swift */,
 				44A6FA8C1DE1A5F1005303DF /* IntervalTimer.swift */,
+				4453A66D1DE60D6200383E40 /* PowerManager.swift */,
 				4453A6631DE4ED1E00383E40 /* Result.swift */,
 			);
 			name = Library;
@@ -562,6 +565,7 @@
 				4453A6691DE516B200383E40 /* SandboxBookmarks.swift in Sources */,
 				44B363481DC9B9FB00128259 /* Browser.swift in Sources */,
 				4453A6641DE4ED1E00383E40 /* Result.swift in Sources */,
+				4453A66E1DE60D6300383E40 /* PowerManager.swift in Sources */,
 				44BA5D1A1DB81A8E00A9CE9A /* Application.swift in Sources */,
 				44B3634C1DCA6F7100128259 /* TimeOfDayMath.swift in Sources */,
 				44AB5B5E1DCE794A00AE6EB6 /* HistoryItem.swift in Sources */,

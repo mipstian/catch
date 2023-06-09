@@ -6,6 +6,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
   func applicationDidFinishLaunching(_: Notification) {
     // Enable Notification Center notifications
     NSUserNotificationCenter.default.delegate = self
+    
+    PowerManager.shared.startMonitoring()
   }
   
   func applicationWillTerminate(_: Notification) {
