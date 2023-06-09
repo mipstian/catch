@@ -21,8 +21,6 @@
     self.downloadDateFormatter.dateStyle = NSDateFormatterShortStyle;
     self.downloadDateFormatter.doesRelativeDateFormatting = YES;
     
-    self.table.selectionHighlightStyle = NSTableViewSelectionHighlightStyleSourceList;
-    
     [self setupObservers];
 }
 
