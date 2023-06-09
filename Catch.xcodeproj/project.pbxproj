@@ -64,6 +64,7 @@
 		44FFCE3F1DCB92F4006E6DF0 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44FFCE3E1DCB92F4006E6DF0 /* Defaults.swift */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		A74F608D25B57C6100BA52A0 /* FeedContentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74F608C25B57C6100BA52A0 /* FeedContentsController.swift */; };
+		A74F609525B5C27100BA52A0 /* FeedCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74F609425B5C27100BA52A0 /* FeedCellView.swift */; };
 		A77DD09625B43CF400886D57 /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77DD09525B43CF400886D57 /* PreferencesView.swift */; };
 /* End PBXBuildFile section */
 
@@ -183,6 +184,7 @@
 		8D1107310486CEB800E47090 /* Catch-Info.plist */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; name = "Catch-Info.plist"; path = "Resources/App/Catch-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Catch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A74F608C25B57C6100BA52A0 /* FeedContentsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedContentsController.swift; sourceTree = "<group>"; };
+		A74F609425B5C27100BA52A0 /* FeedCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCellView.swift; sourceTree = "<group>"; };
 		A77DD09525B43CF400886D57 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -283,6 +285,7 @@
 			isa = PBXGroup;
 			children = (
 				44BA5D151DAECF1A00A9CE9A /* RecentsCellView.swift */,
+				A74F609425B5C27100BA52A0 /* FeedCellView.swift */,
 				A77DD09525B43CF400886D57 /* PreferencesView.swift */,
 			);
 			name = Views;
@@ -586,6 +589,7 @@
 				447E0F6D1DDAAD17001048AB /* FeedHelperService.swift in Sources */,
 				44BA5D161DAECF1A00A9CE9A /* RecentsCellView.swift in Sources */,
 				4453A6691DE516B200383E40 /* SandboxBookmarks.swift in Sources */,
+				A74F609525B5C27100BA52A0 /* FeedCellView.swift in Sources */,
 				447E630121F8A671006DD261 /* AddFeedController.swift in Sources */,
 				44B363481DC9B9FB00128259 /* WorkspaceExtensions.swift in Sources */,
 				4441F59424308B77001AEC1E /* ServiceURLs.swift in Sources */,
@@ -753,7 +757,7 @@
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 558;
+				CURRENT_PROJECT_VERSION = 658;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -818,7 +822,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 558;
+				CURRENT_PROJECT_VERSION = 658;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;

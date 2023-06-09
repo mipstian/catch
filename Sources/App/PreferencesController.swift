@@ -2,6 +2,11 @@ import AppKit
 import Sparkle
 
 
+private extension NSUserInterfaceItemIdentifier {
+  static let feedCell = NSUserInterfaceItemIdentifier(rawValue: "FeedCell")
+}
+
+
 private extension NSBindingName {
   static let checkboxValue = NSBindingName(rawValue: "value")
 }
@@ -251,21 +256,14 @@ extension PreferencesController: NSTableViewDelegate {
     // Get the item to display
     let feed = sortedFeedList[row]
     
-    if tableColumn?.identifier == .feedNameColumn {
-      guard let cell = tableView.makeView(withIdentifier: .feedNameColumn, owner: self) as? NSTableCellView else {
-        return nil
-      }
-      cell.textField?.stringValue = feed.name
-      return cell
-    } else if tableColumn?.identifier == .feedURLColumn {
-      guard let cell = tableView.makeView(withIdentifier: .feedURLColumn, owner: self) as? NSTableCellView else {
-        return nil
-      }
-      cell.textField?.stringValue = feed.url.absoluteString
-      return cell
-    } else {
+    guard let cell = tableView.makeView(withIdentifier: .feedCell, owner: self) as? FeedCellView else {
       return nil
     }
+    
+    cell.textField?.stringValue = feed.name
+    cell.urlTextField.stringValue = feed.url.absoluteString
+    
+    return cell
   }
   
   func tableViewSelectionDidChange(_ notification: Notification) {
