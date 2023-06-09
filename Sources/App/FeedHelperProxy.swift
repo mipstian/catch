@@ -44,6 +44,7 @@ final class FeedHelperProxy {
       downloadingToBookmark: downloadOptions.containerDirectoryBookmark,
       organizingByShow: downloadOptions.shouldOrganizeByShow,
       savingMagnetLinks: downloadOptions.shouldSaveMagnetLinks,
+      savingTorrentFiles: downloadOptions.shouldSaveTorrentFiles,
       skippingURLs: previouslyDownloadedURLs.map { $0.absoluteString },
       withReply: { downloadedEpisodes, error in
         DispatchQueue.main.async {
@@ -87,6 +88,7 @@ final class FeedHelperProxy {
       toBookmark: downloadOptions.containerDirectoryBookmark,
       organizingByShow: downloadOptions.shouldOrganizeByShow,
       savingMagnetLinks: downloadOptions.shouldSaveMagnetLinks,
+      savingTorrentFiles: downloadOptions.shouldSaveTorrentFiles,
       withReply: { downloadedFile, error in
         DispatchQueue.main.async {
           switch (downloadedFile, error) {
