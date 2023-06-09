@@ -9,7 +9,7 @@ enum Config {
   /// How much leeway to give to the os for scheduling.
   static let feedUpdateIntervalTolerance: TimeInterval = 30
   
-  /// Maximum number of episodes to keep in the download history.
+  /// Maximum number of episodes per feed to keep in the download history.
   ///
   /// - SeeAlso: `downloadHistory` in `Defaults`
   /// - Note: this should be always higher than the number of episodes in a feed,

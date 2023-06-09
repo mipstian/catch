@@ -75,7 +75,7 @@ final class Defaults: NSObject {
     }
     set {
       // Only keep the most recent items
-      let truncatedCount = min(newValue.count, Config.historyLimit)
+      let truncatedCount = min(newValue.count, Config.historyLimit * feedURLs.count)
       let truncatedHistory = newValue.sorted().reversed().prefix(upTo: truncatedCount)
       
       let serializedHistory = truncatedHistory.map { $0.dictionaryRepresentation }
