@@ -5,9 +5,6 @@ import Foundation
 /// and download history data.
 final class Defaults {
   static let shared = Defaults()
-  private static let feedURLRegex = try! NSRegularExpression(
-    pattern: "^https?://([^.]+\\.)*showrss.info/(.*)$"
-  )
   
   private struct Keys {
     static let feedURL = "feedURL"
@@ -24,9 +21,9 @@ final class Defaults {
     static let preventSystemSleep = "preventSystemSleep"
   }
   
-  var feedURL: String {
-    let rawValue = UserDefaults.standard.string(forKey: Keys.feedURL)
-    return rawValue?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+  var feedURL: URL? {
+    guard let rawValue = UserDefaults.standard.string(forKey: Keys.feedURL) else { return nil }
+    return URL(string: rawValue.trimmingCharacters(in: .whitespacesAndNewlines))
   }
   
   var areTimeRestrictionsEnabled: Bool {
@@ -97,17 +94,26 @@ final class Defaults {
   }
   
   var isFeedURLValid: Bool {
-    let feedURLMatches = Defaults.feedURLRegex.firstMatch(
-      in: feedURL,
-      range: NSMakeRange(0, feedURL.characters.count)
-    )
-    guard feedURLMatches != nil else {
-      // The URL should match the regex
-      NSLog("Feed URL (\(feedURL)) does not match regex")
+    guard
+      let url = feedURL,
+      let scheme = url.scheme,
+      let host = url.host,
+      let query = url.query
+    else {
       return false
     }
-    guard feedURL.contains("namespaces") else {
-      // The URL should have the namespaces parameter set
+    
+    guard ["http", "https"].contains(scheme) else {
+      NSLog("Bad scheme in feed URL: \(scheme)")
+      return false
+    }
+    
+    guard host.hasSuffix("showrss.info") else {
+      NSLog("Bad host in feed URL: \(host)")
+      return false
+    }
+    
+    guard query.contains("namespaces=true") else {
       NSLog("Feed URL does not have namespaces enabled")
       return false
     }
