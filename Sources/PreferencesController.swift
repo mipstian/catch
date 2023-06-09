@@ -52,10 +52,10 @@ extension PreferencesController {
       
       // Apply power management settings
       // TODO: move to scheduler
-      CTCScheduler.shared().refreshActivity()
+      Scheduler.shared.refreshActivity()
       
       // Also force check
-      CTCScheduler.shared().forceCheck()
+      Scheduler.shared.forceCheck()
     }
     else {
       // Show the Feeds tab because all possible invalid inputs are currently there

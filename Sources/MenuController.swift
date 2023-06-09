@@ -32,8 +32,8 @@ class MenuController: NSObject {
     
     // Update UI whenever the scheduler status changes
     NotificationCenter.default.addObserver(
-      forName: NSNotification.Name(kCTCSchedulerStatusChangedNotificationName),
-      object: CTCScheduler.shared(),
+      forName: Scheduler.statusChangedNotification,
+      object: Scheduler.shared,
       queue: nil,
       using: { [weak self] _ in
         self?.refreshMenuContents()
@@ -45,8 +45,8 @@ class MenuController: NSObject {
   }
   
   private func refreshMenuContents() {
-    let isChecking = CTCScheduler.shared().isChecking
-    let isPolling = CTCScheduler.shared().isPolling
+    let isChecking = Scheduler.shared.isChecking
+    let isPolling = Scheduler.shared.isPolling
     
     // Configure the menubar item's button
     let menuBarButtonTemplateImage: NSImage
@@ -77,9 +77,9 @@ class MenuController: NSObject {
     
     // Configure the "last update" item
     // Example: "Last update: 3:45 AM"
-    let lastUpdateDate = CTCScheduler.shared().lastUpdateDate
+    let lastUpdateDate = Scheduler.shared.lastUpdateDate
     
-    let lastUpdateStatusFormat = CTCScheduler.shared().lastUpdateWasSuccessful ?
+    let lastUpdateStatusFormat = Scheduler.shared.lastUpdateWasSuccessful ?
       NSLocalizedString("lastupdate", comment: "Title for the last update time") :
       NSLocalizedString("lastupdatefailed", comment: "Title for the last update time if it fails")
     
@@ -109,10 +109,10 @@ class MenuController: NSObject {
 // MARK: Actions
 extension MenuController {
   @IBAction private func checkNow(_ sender: Any?) {
-    CTCScheduler.shared().forceCheck()
+    Scheduler.shared.forceCheck()
   }
   
   @IBAction private func togglePause(_ sender: Any?) {
-    CTCScheduler.shared().togglePause()
+    Scheduler.shared.togglePause()
   }
 }
