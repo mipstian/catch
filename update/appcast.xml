@@ -7,6 +7,23 @@
     <pubDate>Sun, 08 Aug 2010 22:51:00 +0100</pubDate>
     
     <item>
+      <title>Catch 2.0.1</title>
+      <pubDate>Mon, 26 Apr 2021 16:36:41 +0200</pubDate>
+      <description><![CDATA[
+        <h2>Catch 2.0.1</h2>
+        <ul>
+        <li>Removed deprecated automatic &ldquo;Open at Login&rdquo; functionality, added instructions to do it manually</li>
+        </ul>
+      ]]></description>
+      <enclosure
+      url="https://github.com/mipstian/catch/releases/download/2.0.1/Catch-2.0.1.zip"
+      sparkle:version="720"
+      sparkle:shortVersionString="2.0.1"
+      type="application/octet-stream"/>
+      <sparkle:minimumSystemVersion>10.11.0</sparkle:minimumSystemVersion>
+    </item>
+    
+    <item>
       <title>Catch 2.0</title>
       <pubDate>Wed, 7 Apr 2021 11:10:26 +0200</pubDate>
       <description><![CDATA[
