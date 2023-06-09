@@ -74,6 +74,16 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
     }
 }
 
+- (void)setChecking:(BOOL)checking {
+    _checking = checking;
+    [self reportStatus];
+}
+
+- (void)setPolling:(BOOL)polling {
+    _polling = polling;
+    [self reportStatus];
+}
+
 - (void)checkFeed {
     // Don't check twice simultaneously
     if (self.isChecking) return;
@@ -85,8 +95,6 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 	}
 	
 	self.checking = YES;
-	
-    [self reportStatus];
 	
     // Check the feed
     __weak typeof(self) weakSelf = self;
@@ -125,7 +133,6 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 - (void)handleFeedCheckCompletion:(BOOL)wasSuccessful {
     self.checking = NO;
     
-    [self reportStatus];
     [NSNotificationCenter.defaultCenter postNotificationName:kCTCSchedulerLastUpdateStatusNotificationName
                                                       object:self
                                                     userInfo:@{@"successful": @(wasSuccessful),
@@ -143,8 +150,6 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 
 - (void)togglePause {
 	self.polling = !self.isPolling;
-	
-    [self reportStatus];
     
     // If we have just been set to polling, poll immediately
     if (self.isPolling) [self fireTimerNow];
