@@ -205,7 +205,7 @@
                                                                 </prototypeCellViews>
                                                             </tableColumn>
                                                             <tableColumn identifier="FeedURLColumn" width="531" minWidth="10" maxWidth="3.4028234663852886e+38" id="PnP-0h-ZOc">
-                                                                <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="URL">
+                                                                <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Address">
                                                                     <font key="font" metaFont="smallSystem"/>
                                                                     <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
