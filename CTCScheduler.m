@@ -150,7 +150,7 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 	}
 	
 	// Don't check if current time is outside user-defined range
-	if (CTCDefaults.areTimeRestrictionsEnabled && ![self checkTime]) {
+	if (![self shouldCheckNow]) {
         NSLog(@"Scheduler tick skipped (outside of user-defined time range)");
         return;
 	}
@@ -194,7 +194,9 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
     }
 }
 
-- (BOOL)checkTime {
+- (BOOL)shouldCheckNow {
+    if (!CTCDefaults.areTimeRestrictionsEnabled) return YES;
+    
     return [NSDate.date isTimeOfDayBetweenDate:CTCDefaults.fromDateForTimeRestrictions
                                        andDate:CTCDefaults.toDateForTimeRestrictions];
 }
