@@ -11,17 +11,17 @@
 #import "CTCFileUtils.h"
 
 
-NSString *const PREFERENCE_KEY_FEED_URL = @"feedURL";
-NSString *const PREFERENCE_KEY_ONLY_UPDATE_BETWEEN = @"onlyUpdateBetween";
-NSString *const PREFERENCE_KEY_UPDATE_FROM = @"updateFrom";
-NSString *const PREFERENCE_KEY_UPDATE_TO = @"updateTo";
-NSString *const PREFERENCE_KEY_SAVE_PATH = @"savePath";
-NSString *const PREFERENCE_KEY_ORGANIZE_TORRENTS = @"organizeTorrents";
-NSString *const PREFERENCE_KEY_OPEN_AUTOMATICALLY = @"openAutomatically";
-NSString *const PREFERENCE_KEY_SEND_NOTIFICATIONS = @"growlNotifications";
-NSString *const PREFERENCE_KEY_DOWNLOADED_FILES = @"downloadedFiles";
-NSString *const PREFERENCE_KEY_HISTORY = @"history";
-NSString *const PREFERENCE_KEY_OPEN_AT_LOGIN = @"openAtLogin";
+NSString * const PREFERENCE_KEY_FEED_URL = @"feedURL";
+NSString * const PREFERENCE_KEY_ONLY_UPDATE_BETWEEN = @"onlyUpdateBetween";
+NSString * const PREFERENCE_KEY_UPDATE_FROM = @"updateFrom";
+NSString * const PREFERENCE_KEY_UPDATE_TO = @"updateTo";
+NSString * const PREFERENCE_KEY_SAVE_PATH = @"savePath";
+NSString * const PREFERENCE_KEY_ORGANIZE_TORRENTS = @"organizeTorrents";
+NSString * const PREFERENCE_KEY_OPEN_AUTOMATICALLY = @"openAutomatically";
+NSString * const PREFERENCE_KEY_SEND_NOTIFICATIONS = @"growlNotifications";
+NSString * const PREFERENCE_KEY_DOWNLOADED_FILES = @"downloadedFiles";
+NSString * const PREFERENCE_KEY_HISTORY = @"history";
+NSString * const PREFERENCE_KEY_OPEN_AT_LOGIN = @"openAtLogin";
 
 // Defaults
 int const FEED_UPDATE_INTERVAL = 60 * 10; // 10 minutes
