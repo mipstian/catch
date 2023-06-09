@@ -50,8 +50,15 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
     __weak typeof(self) weakSelf = self;
     self.feedCheckerConnection.interruptionHandler = ^{
         dispatch_async(dispatch_get_main_queue(), ^{
-            if (weakSelf) weakSelf.checking = NO;
-            NSLog(@"Feed checker service went offline");
+            if (!weakSelf) return;
+          
+            if (weakSelf.checking) {
+              [weakSelf handleFeedCheckCompletion:NO];
+              NSLog(@"Feed checker service crashed");
+            }
+            else {
+              NSLog(@"Feed checker service went offline");
+            }
         });
     };
     [self.feedCheckerConnection resume];
