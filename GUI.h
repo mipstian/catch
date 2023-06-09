@@ -25,14 +25,6 @@
 	IBOutlet NSTabView* preferencesTabs;
 	NSStatusItem* item;
 	BOOL notificationCenterIsAvailable;
-	
-	// Images
-	NSImage* iconIdle;
-	NSImage* iconIdleInv;
-	NSImage* iconRefreshing;
-	NSImage* iconRefreshingInv;
-	NSImage* iconDisabled;
-	NSImage* iconDisabledInv;
 }
 
 /* Launch the system browser, open the service (ShowRSS) */
