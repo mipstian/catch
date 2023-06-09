@@ -81,8 +81,8 @@ extension RecentsController {
         return
       }
       
-      feedHelperProxy.downloadHistoryItem(
-        recentToDownload,
+      feedHelperProxy.download(
+        historyItem: recentToDownload,
         downloadOptions: downloadOptions,
         completion: { downloadedFile, error in
           guard let downloadedFile = downloadedFile else {
