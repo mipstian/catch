@@ -7,6 +7,26 @@
     <pubDate>Sun, 08 Aug 2010 22:51:00 +0100</pubDate>
     
     <item>
+        <title>Catch 1.8</title>
+        <pubDate>Sun, 13 Jul 2014 18:51:05 +0200</pubDate>
+        <description><![CDATA[
+            <h2>Changes:</h2>
+            <ul>
+            <li>Polish localization</li>
+            <li>Improved Preferences window</li>
+            <li>Fixed which torrents are displayed in the recent torrents menu</li>
+            <li>Security improvements</li>
+            <li>New icon for the Feed tab in Preferences</li>
+            </ul>
+        ]]></description>
+        <enclosure
+        url="https://github.com/mipstian/catch/releases/download/1.8/Catch-1.8.zip"
+        sparkle:version="1.8"
+        type="application/octet-stream"/>
+        <sparkle:minimumSystemVersion>10.8.0</sparkle:minimumSystemVersion>
+    </item>
+    
+    <item>
         <title>Catch 1.7</title>
         <pubDate>Thu, 15 May 2014 13:16:05 +0200</pubDate>
         <description><![CDATA[
