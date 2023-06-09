@@ -178,14 +178,14 @@ class Scheduler {
       
       // Open magnet link, if requested
       if isMagnetLink && shouldOpenTorrentsAutomatically {
-        CTCBrowser.open(inBackgroundURL: URL(string: feedFile["url"] as! String))
+        Browser.openInBackground(url: URL(string: feedFile["url"] as! String)!)
       }
       
-      let torrentFilePath = feedFile["torrentFilePath"] as! String!
+      let torrentFilePath = feedFile["torrentFilePath"] as! String
       
       // Open normal torrent in torrent client, if requested
       if !isMagnetLink && shouldOpenTorrentsAutomatically {
-        CTCBrowser.open(inBackgroundFile: torrentFilePath)
+        Browser.openInBackground(file: torrentFilePath)
       }
       
       let title = feedFile["title"] as! String
