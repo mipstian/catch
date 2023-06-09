@@ -19,6 +19,7 @@ class PreferencesController: NSWindowController {
   @IBOutlet private weak var torrentsSavePathWarningImageView: NSImageView!
   @IBOutlet private weak var automaticallyCheckForUpdatesCheckbox: NSButton!
   @IBOutlet private weak var addFeedSheetController: AddFeedController!
+  @IBOutlet private weak var downloadScriptCheckbox: NSButton!
   
   // Remember if awakeFromNib has been called
   private var awake: Bool = false
@@ -146,6 +147,12 @@ extension PreferencesController {
   @IBAction private func showTweaks(_: Any?) {
     // Select the Tweaks tab
     window?.toolbar?.selectedItemIdentifier = .init(rawValue: "Tweaks")
+  }
+  
+  @IBAction private func downloadScriptCheckboxToggled(_: Any?) {
+    if downloadScriptCheckbox.state == .off {
+      Defaults.shared.downloadScriptPath = nil
+    }
   }
 }
 

@@ -24,6 +24,8 @@ final class Defaults: NSObject {
     static let openAtLogin = "openAtLogin"
     static let shouldRunHeadless = "headless"
     static let preventSystemSleep = "preventSystemSleep"
+    static let downloadScriptPath = "downloadScriptPath"
+    static let downloadScriptEnabled = "downloadScriptEnabled"
   }
   
   var feeds: [Feed] {
@@ -62,6 +64,24 @@ final class Defaults: NSObject {
     }
     let expanded = NSString(string: rawValue).expandingTildeInPath
     return URL(fileURLWithPath: expanded).standardizedFileURL
+  }
+  
+  var downloadScriptPath: URL? {
+    get {
+      guard let rawValue = UserDefaults.standard.string(forKey: Keys.downloadScriptPath) else {
+        return nil
+      }
+      let expanded = NSString(string: rawValue).expandingTildeInPath
+      return URL(fileURLWithPath: expanded).standardizedFileURL
+    }
+    set {
+      let rawValue = newValue?.absoluteString
+      UserDefaults.standard.set(rawValue, forKey: Keys.downloadScriptPath)
+    }
+  }
+  
+  var downloadScriptEnabled: Bool {
+    return UserDefaults.standard.bool(forKey: Keys.downloadScriptEnabled)
   }
   
   /// Recently downloaded episodes. Remembered so they won't be downloaded again
@@ -163,7 +183,8 @@ final class Defaults: NSObject {
       Keys.history: [],
       Keys.openAtLogin: true,
       Keys.shouldRunHeadless: false,
-      Keys.preventSystemSleep: true
+      Keys.preventSystemSleep: true,
+      Keys.downloadScriptEnabled: false
     ]
     UserDefaults.standard.register(defaults: defaultDefaults)
     

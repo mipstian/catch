@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
-        <plugIn identifier="com.apple.automator.AutomatorPalette" version="14460.31"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
+        <plugIn identifier="com.apple.automator.AutomatorPalette" version="14490.70"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -41,6 +41,7 @@
             <connections>
                 <outlet property="addFeedSheetController" destination="cFd-Mt-3tR" id="Pw2-C9-f2M"/>
                 <outlet property="automaticallyCheckForUpdatesCheckbox" destination="806" id="HZV-bf-GPz"/>
+                <outlet property="downloadScriptCheckbox" destination="GJR-jo-BJL" id="yz5-UX-AF1"/>
                 <outlet property="feedsTableView" destination="RU6-h9-jS6" id="ef9-4C-7Td"/>
                 <outlet property="removeFeedButton" destination="AnU-XT-Qai" id="Dk3-s6-LhI"/>
                 <outlet property="torrentsSavePathWarningImageView" destination="bCX-qM-hVo" id="uvk-T2-fc2"/>
@@ -141,11 +142,11 @@
             <rect key="contentRect" x="310" y="248" width="700" height="317"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
             <view key="contentView" id="553">
-                <rect key="frame" x="0.0" y="0.0" width="700" height="362"/>
+                <rect key="frame" x="0.0" y="0.0" width="700" height="317"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="616" userLabel="(Feed, Downloads, Tweaks)">
-                        <rect key="frame" x="20" y="61" width="660" height="281"/>
+                        <rect key="frame" x="20" y="61" width="660" height="236"/>
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
                             <tabViewItem label="Feed" identifier="Feed" id="617">
@@ -429,21 +430,53 @@
                                                 <binding destination="658" name="value" keyPath="values.openAutomatically" id="QTN-lW-v2i"/>
                                             </connections>
                                         </button>
+                                        <amPathPopUpButton verticalHuggingPriority="750" canChooseFiles="YES" canChooseExistingPaths="YES" placeholder="No Selection" translatesAutoresizingMaskIntoConstraints="NO" id="sad-5V-KVu">
+                                            <rect key="frame" x="239" y="117" width="205" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="S2I-1Y-6UQ"/>
+                                            </constraints>
+                                            <amVariablePopUpButtonCell key="cell" type="push" title="Other…" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" tag="1002" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="Yf4-4g-oUK">
+                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="menu"/>
+                                                <menu key="menu" title="OtherViews" id="SJk-ZN-vME"/>
+                                            </amVariablePopUpButtonCell>
+                                            <connections>
+                                                <binding destination="658" name="path" keyPath="values.downloadScriptPath" id="Aj2-Xb-V1C"/>
+                                            </connections>
+                                        </amPathPopUpButton>
+                                        <button translatesAutoresizingMaskIntoConstraints="NO" id="GJR-jo-BJL">
+                                            <rect key="frame" x="-2" y="121" width="237" height="18"/>
+                                            <buttonCell key="cell" type="check" title="Download non-torrents using script" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="oaM-9o-SAF">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                                <connections>
+                                                    <action selector="downloadScriptCheckboxToggled:" target="vyd-92-YXh" id="FDX-VE-VQV"/>
+                                                </connections>
+                                            </buttonCell>
+                                            <connections>
+                                                <binding destination="658" name="value" keyPath="values.downloadScriptEnabled" id="bux-k9-YtT"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="bJl-7q-4yr" firstAttribute="top" secondItem="BuR-R5-3eB" secondAttribute="bottom" constant="20" id="8nv-jd-JdB"/>
                                         <constraint firstItem="bCX-qM-hVo" firstAttribute="centerY" secondItem="BuR-R5-3eB" secondAttribute="centerY" id="EAi-jH-9py"/>
                                         <constraint firstItem="BuR-R5-3eB" firstAttribute="leading" secondItem="5qh-sS-yih" secondAttribute="trailing" constant="8" symbolic="YES" id="Ksy-eJ-Slb"/>
+                                        <constraint firstItem="GJR-jo-BJL" firstAttribute="baseline" secondItem="sad-5V-KVu" secondAttribute="baseline" id="NjI-JA-l6A"/>
+                                        <constraint firstItem="sad-5V-KVu" firstAttribute="top" secondItem="shg-7R-wuU" secondAttribute="bottom" constant="20" id="QPG-EE-xau"/>
                                         <constraint firstItem="BuR-R5-3eB" firstAttribute="top" secondItem="jSL-Ww-UCe" secondAttribute="top" id="Ro0-fP-NsM"/>
                                         <constraint firstItem="shg-7R-wuU" firstAttribute="leading" secondItem="jSL-Ww-UCe" secondAttribute="leading" id="SK6-8b-n0J"/>
                                         <constraint firstItem="BuR-R5-3eB" firstAttribute="baseline" secondItem="5qh-sS-yih" secondAttribute="baseline" id="SON-A9-K6f"/>
                                         <constraint firstItem="shg-7R-wuU" firstAttribute="top" secondItem="bJl-7q-4yr" secondAttribute="bottom" constant="6" symbolic="YES" id="UkI-Eo-QqB"/>
-                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="bCX-qM-hVo" secondAttribute="trailing" constant="20" symbolic="YES" id="Uvl-X2-AMo"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="bCX-qM-hVo" secondAttribute="trailing" id="Uvl-X2-AMo"/>
                                         <constraint firstItem="5qh-sS-yih" firstAttribute="leading" secondItem="jSL-Ww-UCe" secondAttribute="leading" id="adb-0J-T5W"/>
+                                        <constraint firstItem="sad-5V-KVu" firstAttribute="leading" secondItem="GJR-jo-BJL" secondAttribute="trailing" constant="8" symbolic="YES" id="c7z-FE-9fa"/>
                                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="shg-7R-wuU" secondAttribute="bottom" id="f3E-JI-YrR"/>
                                         <constraint firstItem="bJl-7q-4yr" firstAttribute="leading" secondItem="jSL-Ww-UCe" secondAttribute="leading" id="fJP-2l-CRX"/>
                                         <constraint firstItem="bCX-qM-hVo" firstAttribute="leading" secondItem="BuR-R5-3eB" secondAttribute="trailing" constant="8" symbolic="YES" id="ftL-aK-5zY"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="bJl-7q-4yr" secondAttribute="trailing" id="hGd-6v-Fx3"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="sad-5V-KVu" secondAttribute="trailing" id="pTc-av-i7M"/>
+                                        <constraint firstItem="GJR-jo-BJL" firstAttribute="leading" secondItem="jSL-Ww-UCe" secondAttribute="leading" id="svj-8f-z0H"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="shg-7R-wuU" secondAttribute="trailing" id="vHw-4q-XQx"/>
                                     </constraints>
                                 </view>
@@ -709,8 +742,8 @@ DQ
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="213" width="572" height="151"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
-            <view key="contentView" misplaced="YES" id="JVG-A7-ap0">
-                <rect key="frame" x="0.0" y="0.0" width="572" height="151"/>
+            <view key="contentView" id="JVG-A7-ap0">
+                <rect key="frame" x="0.0" y="0.0" width="572" height="135"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MSZ-yJ-ndF">
