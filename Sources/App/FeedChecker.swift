@@ -57,12 +57,19 @@ final class FeedChecker {
   )
   
   private init() {
-    feedHelperProxy.delegate = self
+    intervalTimer.handler = { [weak self] in
+      guard let self = self else { return }
+      
+      // Skip if paused or if current time is outside user-defined range
+      guard self.status == .polling, !Defaults.shared.restricts(date: Date()) else { return }
+      
+      self.checkFeeds()
+    }
     
-    intervalTimer.delegate = self
-
     // Check now
     intervalTimer.fireNow()
+    
+    feedHelperProxy.delegate = self
   }
   
   /// Checks feeds right now ignoring time restrictions and "paused" mode
@@ -154,16 +161,6 @@ final class FeedChecker {
   
   private func postStateChangedNotification() {
     NotificationCenter.default.post(name: FeedChecker.stateChangedNotification, object: self)
-  }
-}
-
-
-extension FeedChecker: IntervalTimerDelegate {
-  func timerFired() {
-    // Skip if paused or if current time is outside user-defined range
-    guard status == .polling, !Defaults.shared.restricts(date: Date()) else { return }
-    
-    checkFeeds()
   }
 }
 
