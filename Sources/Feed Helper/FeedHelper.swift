@@ -2,10 +2,16 @@ import Foundation
 
 
 /// Implements the two functions of the Feed Helper service:
-/// - Checking a feed (optionally downloading any new torrent files)
+/// - Checking feeds (optionally downloading any new torrent files)
 /// - Downloading a single torrent file
 enum FeedHelper {
-  static func checkFeed(url: URL, downloadOptions: DownloadOptions, skippingURLs previouslyDownloadedURLs: [URL]) throws -> [DownloadedEpisode] {
+  static func checkFeeds(urls: [URL], downloadOptions: DownloadOptions, skippingURLs previouslyDownloadedURLs: [URL]) throws -> [DownloadedEpisode] {
+    return try urls.flatMap {
+      try checkFeed(url: $0, downloadOptions: downloadOptions, skippingURLs: previouslyDownloadedURLs)
+    }
+  }
+  
+  private static func checkFeed(url: URL, downloadOptions: DownloadOptions, skippingURLs previouslyDownloadedURLs: [URL]) throws -> [DownloadedEpisode] {
     NSLog("Checking feed: \(url)")
     
     // Flush the cache, we want fresh results

@@ -5,8 +5,8 @@ let feedHelperErrorDomain = "com.giorgiocalderolla.Catch.CatchFeedHelper"
 
 
 @objc protocol FeedHelperService {
-  func checkFeed(
-    url: URL,
+  func checkFeeds(
+    urls: [String],
     downloadingToBookmark downloadDirectoryBookmark: Data,
     organizingByShow shouldOrganizeByShow: Bool,
     savingMagnetLinks shouldSaveMagnetLinks: Bool,
