@@ -60,6 +60,24 @@ final class FeedHelperProxy {
     )
   }
   
+  func download(feed: Feed, completion: @escaping (Result<Data, Error>) -> Void) {
+    service.download(
+      feed: feed.dictionaryRepresentation,
+      withReply: { (feedContents, error) in
+        DispatchQueue.main.async {
+          switch (feedContents, error) {
+          case (let feedContents?, nil):
+            completion(.success(feedContents))
+          case (nil, let error?):
+            completion(.failure(error))
+          default:
+            fatalError("Bad service reply")
+          }
+        }
+      }
+    )
+  }
+  
   func download(
     episode: Episode,
     downloadOptions: DownloadOptions,

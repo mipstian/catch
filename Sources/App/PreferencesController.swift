@@ -21,6 +21,8 @@ class PreferencesController: NSWindowController {
   @IBOutlet private weak var addFeedSheetController: AddFeedController!
   @IBOutlet private weak var downloadScriptCheckbox: NSButton!
   
+  @IBOutlet private var feedContentsController: FeedContentsController!
+  
   private let feedsTableContextMenu = NSMenu(title: "")
   
   // Remember if awakeFromNib has been called
@@ -221,6 +223,9 @@ extension PreferencesController {
   
   @IBAction func showContents(_ sender: Any?) {
     guard let feed = clickedFeed() else { return }
+    
+    feedContentsController.loadFeed(feed)
+    feedContentsController.showWindow(sender)
   }
 }
 
