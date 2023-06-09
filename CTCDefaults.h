@@ -9,7 +9,7 @@ extern NSString * const kCTCDefaultsApplicationBugReportURL;
 extern NSString * const kCTCDefaultsApplicationFeatureRequestURL;
 extern NSString * const kCTCDefaultsApplicationHelpURL;
 extern NSString * const kCTCDefaultsServiceURL;
-extern NSString * const kCTCDefaultsServiceFeedURLPrefix;
+extern NSString * const kCTCDefaultsServiceFeedURLRegex;
 
 
 @interface CTCDefaults : NSObject
