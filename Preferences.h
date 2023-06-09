@@ -23,13 +23,11 @@ extern NSString* const PREFERENCE_KEY_OPEN_AT_LOGIN;
 extern int const FEED_UPDATE_INTERVAL;
 
 
-@interface Preferences : NSObject {
-}
+@interface Preferences : NSObject
 
-- (void) setDefaults;
-
-- (void) save;
-
-- (BOOL) validate;
+- (void)setDefaults;
+- (void)save;
+- (BOOL)validate;
+- (NSString *)feedURL;
 
 @end

@@ -70,6 +70,11 @@ int const FEED_UPDATE_INTERVAL = 60*10; // 10 minutes
 	[defaults registerDefaults:appDefaults];
 }
 
+- (NSString *)feedURL {
+    NSString* rawFeedURL = [NSUserDefaults.standardUserDefaults stringForKey:PREFERENCE_KEY_FEED_URL];
+    return [rawFeedURL stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
+}
+
 - (void) save {
 	NSLog(@"Preferences: Synchronizing");
 	// Write preferences to disk
@@ -91,7 +96,7 @@ int const FEED_UPDATE_INTERVAL = 60*10; // 10 minutes
 	}
 
 	// Most importantly, validate feed URL
-	NSString* feedURL = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCE_KEY_FEED_URL];
+	NSString* feedURL = self.feedURL;
 	NSRange range = [feedURL rangeOfString:SERVICE_FEED_URL_PREFIX];
     if (range.location != 0) {
         // Try the legacy URL prefix and consider that valid
