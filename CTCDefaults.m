@@ -108,14 +108,12 @@ NSString * const kCTCDefaultsOpenAtLoginKey = @"openAtLogin";
     
 	// Most importantly, validate feed URL
 	NSString *feedURL = CTCDefaults.feedURL;
-	NSRange range = [feedURL rangeOfString:kCTCDefaultsServiceFeedURLPrefix];
-	if (range.location != 0) {
+	if (![feedURL hasPrefix:kCTCDefaultsServiceFeedURLPrefix]) {
 		// The URL should start with the prefix!
-		NSLog(@"Feed URL does not start with expected prefix. Range of expected prefix: %lu %lu", (unsigned long)range.location, (unsigned long)range.length);
+		NSLog(@"Feed URL (%@) does not start with expected prefix (%@)", feedURL, kCTCDefaultsServiceFeedURLPrefix);
 		return NO;
 	}
-	range = [feedURL rangeOfString:@"namespaces"];
-	if (range.location == NSNotFound) {
+	if ([feedURL rangeOfString:@"namespaces"].location == NSNotFound) {
 		// The URL should have the namespaces parameter set
 		NSLog(@"Feed URL does not have namespaces enabled");
 		return NO;

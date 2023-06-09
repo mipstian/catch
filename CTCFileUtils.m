@@ -15,13 +15,10 @@ static NSString * const kCTCFileUtilsTorrentExtension = @".torrent";
 }
 
 + (NSString *)addTorrentExtensionTo:(NSString*)filename {
-	NSRange range = [filename rangeOfString:kCTCFileUtilsTorrentExtension];
-    
-    // Extension is missing if not found or if found but not at the end of the filename
-    BOOL extensionMissing = range.location == NSNotFound || range.location + range.length != filename.length;
+    BOOL hasExtension = [filename hasSuffix:kCTCFileUtilsTorrentExtension];
     
     // Add .torrent extension if needed
-    return extensionMissing ? [filename stringByAppendingString:kCTCFileUtilsTorrentExtension] : filename;
+    return hasExtension ? filename : [filename stringByAppendingString:kCTCFileUtilsTorrentExtension];
 }
 
 + (NSString *)userDownloadsDirectory {
