@@ -28,7 +28,7 @@ NSString * const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info
 	[Preferences save];
 	
 	// Show Preferences window if the config is not valid
-	if (![Preferences validate]) {
+	if (!Preferences.isConfigurationValid) {
 		[self.mainController showPreferences:self];
 	}
 	
@@ -60,10 +60,6 @@ NSString * const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info
     }
 	
 	[self.mainController refreshRecent:recentNames];
-}
-
-- (BOOL)isConfigurationValid {
-	return [Preferences validate];
 }
 
 - (void)torrentNotificationWithDescription:(NSString *)description {

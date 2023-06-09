@@ -65,7 +65,7 @@
 
 - (void)checkFeed {
 	// Only work with valid preferences
-	if (![Preferences validate]) {
+	if (!Preferences.isConfigurationValid) {
 		NSLog(@"Refusing to check feed - invalid preferences");
 		return;
 	}

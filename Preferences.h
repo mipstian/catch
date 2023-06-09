@@ -19,7 +19,7 @@ extern NSString * const PREFERENCE_KEY_OPEN_AT_LOGIN;
 
 + (void)setDefaultDefaults;
 + (void)save;
-+ (BOOL)validate;
++ (BOOL)isConfigurationValid;
 + (NSString *)feedURL;
 
 @end
