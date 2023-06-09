@@ -143,6 +143,10 @@ NSString * const kCTCDefaultsPreventSystemSleepKey = @"preventSystemSleep";
     return [self infoStringForKey:@"CFBundleShortVersionString"];
 }
 
++ (NSString *)buildNumber {
+    return [self infoStringForKey:@"CFBundleVersion"];
+}
+
 + (NSString *)feedURL {
     NSString *rawFeedURL = [NSUserDefaults.standardUserDefaults stringForKey:kCTCDefaultsFeedURLKey];
     return rawFeedURL ? [rawFeedURL stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet] : @"";

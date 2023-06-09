@@ -46,7 +46,7 @@
     self.menuBarItem.highlightMode = YES;
     
     // Set current name and version
-    self.menuVersion.title = [NSString stringWithFormat:@"%@ %@", CTCDefaults.appName, CTCDefaults.appVersion];
+    self.menuVersion.title = [NSString stringWithFormat:@"%@ %@ (%@)", CTCDefaults.appName, CTCDefaults.appVersion, CTCDefaults.buildNumber];
 }
 
 - (void)setupObservers {
