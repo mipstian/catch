@@ -1,6 +1,7 @@
 #import "CTCScheduler.h"
 #import "CTCFeedChecker.h"
 #import "CTCDefaults.h"
+#import "NSDate+TimeOfDayMath.h"
 
 
 NSString * const kCTCSchedulerStatusNotificationName = @"com.giorgiocalderolla.Catch.scheduler-status-update";
@@ -188,41 +189,8 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
 }
 
 - (BOOL)checkTime {
-	NSDate *now = NSDate.date;
-	NSDate *from = CTCDefaults.fromDateForTimeRestrictions;
-	NSDate *to = CTCDefaults.toDateForTimeRestrictions;
-	
-	NSCalendar *calendar = NSCalendar.currentCalendar;
-	
-	// Get minutes and hours from each date
-	NSDateComponents *nowComp = [calendar components:NSHourCalendarUnit|NSMinuteCalendarUnit
-												   fromDate:now];
-	NSDateComponents *fromComp = [calendar components:NSHourCalendarUnit|NSMinuteCalendarUnit
-													fromDate:from];
-	NSDateComponents *toComp = [calendar components:NSHourCalendarUnit|NSMinuteCalendarUnit
-												  fromDate:to];
-	
-	if (fromComp.hour > toComp.hour ||
-		(fromComp.hour == toComp.hour && fromComp.minute > toComp.minute)) {
-		// Time range crosses midnight (e.g. 11 PM to 3 AM)
-		if ((nowComp.hour > toComp.hour && nowComp.hour < fromComp.hour) ||
-			(nowComp.hour == toComp.hour && nowComp.minute > toComp.minute) ||
-			(nowComp.hour == fromComp.hour && nowComp.minute < fromComp.minute)) {
-			// We are outside of allowed time range
-			return NO;
-		}
-	}
-    else {
-		// Time range doesn't cross midnight (e.g. 4 AM to 5 PM)
-		if ((nowComp.hour > toComp.hour || nowComp.hour < fromComp.hour) ||
-			(nowComp.hour == toComp.hour && nowComp.minute > toComp.minute) ||
-			(nowComp.hour == fromComp.hour && nowComp.minute < fromComp.minute)) {
-			// We are outside of allowed time range
-			return NO;
-		}
-	}
-	
-	return YES;
+    return [NSDate.date isTimeOfDayBetweenDate:CTCDefaults.fromDateForTimeRestrictions
+                                       andDate:CTCDefaults.toDateForTimeRestrictions];
 }
 
 @end

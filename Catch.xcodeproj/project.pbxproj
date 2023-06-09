@@ -16,6 +16,7 @@
 		38F9B09111C98E9E0021C540 /* Automator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38F9B09011C98E9E0021C540 /* Automator.framework */; };
 		4403ACF41914041C002F286C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4403ACF31914041C002F286C /* Assets.xcassets */; };
 		441297D417FE285500E9E21E /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 448CC7E617FE1F840063D3FD /* Sparkle.framework */; };
+		4456EE611916D20000B3FF1A /* NSDate+TimeOfDayMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 4456EE601916D20000B3FF1A /* NSDate+TimeOfDayMath.m */; };
 		445D97A6191579C7006CD77C /* UI.strings in Resources */ = {isa = PBXBuildFile; fileRef = 445D97A4191579C7006CD77C /* UI.strings */; };
 		446298EB191655080045EC72 /* CTCPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 446298EA191655080045EC72 /* CTCPreferencesController.m */; };
 		44717AA4191300B300580054 /* CTCDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717AA3191300B300580054 /* CTCDefaults.m */; };
@@ -92,6 +93,8 @@
 		38FB6B3511DA98710061E784 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4403ACF31914041C002F286C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4419CF37180627A900C77432 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4456EE5F1916D20000B3FF1A /* NSDate+TimeOfDayMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeOfDayMath.h"; sourceTree = "<group>"; };
+		4456EE601916D20000B3FF1A /* NSDate+TimeOfDayMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeOfDayMath.m"; sourceTree = "<group>"; };
 		445D97A319157955006CD77C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UI.xib; sourceTree = "<group>"; };
 		445D97A5191579C7006CD77C /* ca */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/UI.strings; sourceTree = "<group>"; };
 		445D97A719157A2C006CD77C /* de */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/UI.strings; sourceTree = "<group>"; };
@@ -165,6 +168,7 @@
 				44717AA3191300B300580054 /* CTCDefaults.m */,
 				44717AA51913072200580054 /* CTCLoginItems.h */,
 				44717AA61913072200580054 /* CTCLoginItems.m */,
+				4456EE621916D2E700B3FF1A /* Categories */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97315FDCFA39411CA2CEA /* Supporting Files */,
 			);
@@ -224,6 +228,15 @@
 				448CC7E617FE1F840063D3FD /* Sparkle.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4456EE621916D2E700B3FF1A /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				4456EE5F1916D20000B3FF1A /* NSDate+TimeOfDayMath.h */,
+				4456EE601916D20000B3FF1A /* NSDate+TimeOfDayMath.m */,
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 		44717AC61913A08700580054 /* CatchFeedHelper */ = {
@@ -382,6 +395,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
+				4456EE611916D20000B3FF1A /* NSDate+TimeOfDayMath.m in Sources */,
 				44EAD12E1916682D002C7443 /* CTCApplication.m in Sources */,
 				44717AA4191300B300580054 /* CTCDefaults.m in Sources */,
 				38D39B6011C3A6E100C17C80 /* CTCMenuController.m in Sources */,
