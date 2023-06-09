@@ -118,7 +118,7 @@ extension RecentsController: NSTableViewDelegate {
     
     cell.downloadDateTextField.stringValue = subtitle
     
-    let canDownloadNonTorrents = Defaults.shared.downloadScriptEnabled && Defaults.shared.downloadScriptPath != nil
+    let canDownloadNonTorrents = Defaults.shared.isDownloadScriptEnabled && Defaults.shared.downloadScriptPath != nil
     let isTorrent = historyItem.episode.url.isMagnetLink || historyItem.episode.url.absoluteString.isTorrentFilePath
     let canDownloadAgain = isTorrent || canDownloadNonTorrents
     cell.downloadAgainButton.isHidden = !canDownloadAgain
@@ -142,30 +142,33 @@ extension RecentsController {
   @IBAction private func downloadRecentItemAgain(_ senderButton: NSButton) {
     let clickedRow = table.row(for: senderButton)
     let recentEpisode = Defaults.shared.downloadHistory[clickedRow].episode
-    if recentEpisode.url.isMagnetLink {
-      NSWorkspace.shared.openInBackground(url: recentEpisode.url)
-    } else if recentEpisode.url.absoluteString.isTorrentFilePath {
-      guard Defaults.shared.isConfigurationValid, let downloadOptions = Defaults.shared.downloadOptions else {
-        NSLog("Cannot download torrent file with invalid preferences")
-        return
-      }
-      
-      feedHelperProxy.download(
-        episode: recentEpisode,
-        downloadOptions: downloadOptions,
-        completion: { result in
-          switch result {
-          case .success(let downloadedEpisode):
-            if Defaults.shared.shouldOpenTorrentsAutomatically {
-              NSWorkspace.shared.openInBackground(file: downloadedEpisode.localURL!.path)
-            }
-          case .failure(let error):
-            NSLog("Feed Helper error (downloading file): \(error)")
-          }
-        }
-      )
-    } else {
+    
+    if Defaults.shared.isDownloadScriptEnabled {
       Process.runDownloadScript(url: recentEpisode.url)
+    } else {
+      if recentEpisode.url.isMagnetLink {
+        NSWorkspace.shared.openInBackground(url: recentEpisode.url)
+      } else if recentEpisode.url.absoluteString.isTorrentFilePath {
+        guard Defaults.shared.isConfigurationValid, let downloadOptions = Defaults.shared.downloadOptions else {
+          NSLog("Cannot download torrent file with invalid preferences")
+          return
+        }
+        
+        feedHelperProxy.download(
+          episode: recentEpisode,
+          downloadOptions: downloadOptions,
+          completion: { result in
+            switch result {
+            case .success(let downloadedEpisode):
+              if Defaults.shared.shouldOpenTorrentsAutomatically {
+                NSWorkspace.shared.openInBackground(file: downloadedEpisode.localURL!.path)
+              }
+            case .failure(let error):
+              NSLog("Feed Helper error (downloading file): \(error)")
+            }
+          }
+        )
+      }
     }
   }
   

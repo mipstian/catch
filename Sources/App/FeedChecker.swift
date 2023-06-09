@@ -127,19 +127,21 @@ final class FeedChecker {
       
       // Open torrents automatically if requested
       if Defaults.shared.shouldOpenTorrentsAutomatically {
-        if episode.url.isMagnetLink {
-          // Open magnet link
-          NSWorkspace.shared.openInBackground(url: episode.url)
-          addToDownloadHistory()
-        } else if episode.url.absoluteString.isTorrentFilePath {
-          // Open torrent file
-          NSWorkspace.shared.openInBackground(file: downloadedEpisode.localURL!.path)
-          addToDownloadHistory()
-        } else {
+        if Defaults.shared.isDownloadScriptEnabled {
           Process.runDownloadScript(url: episode.url) { success in
             if success {
               addToDownloadHistory()
             }
+          }
+        } else {
+          if episode.url.isMagnetLink {
+            // Open magnet link
+            NSWorkspace.shared.openInBackground(url: episode.url)
+            addToDownloadHistory()
+          } else if episode.url.absoluteString.isTorrentFilePath {
+            // Open torrent file
+            NSWorkspace.shared.openInBackground(file: downloadedEpisode.localURL!.path)
+            addToDownloadHistory()
           }
         }
       }

@@ -149,11 +149,11 @@
             <rect key="contentRect" x="310" y="248" width="700" height="317"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
             <view key="contentView" id="553" customClass="PreferencesView" customModule="Catch" customModuleProvider="target">
-                <rect key="frame" x="0.0" y="0.0" width="700" height="431"/>
+                <rect key="frame" x="0.0" y="0.0" width="700" height="317"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="616" userLabel="(Feed, Downloads, Tweaks)">
-                        <rect key="frame" x="20" y="60" width="660" height="351"/>
+                        <rect key="frame" x="20" y="60" width="660" height="237"/>
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
                             <tabViewItem label="Feeds" identifier="Feeds" id="617">
@@ -190,7 +190,7 @@
                                                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                         <prototypeCellViews>
                                                                             <tableCellView id="oYf-lt-ych" customClass="FeedCellView" customModule="Catch" customModuleProvider="target">
-                                                                                <rect key="frame" x="1" y="1" width="527" height="48"/>
+                                                                                <rect key="frame" x="11" y="1" width="527" height="48"/>
                                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                 <subviews>
                                                                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="25w-Sz-mPU">
@@ -473,7 +473,7 @@
                                             </connections>
                                         </button>
                                         <amPathPopUpButton verticalHuggingPriority="750" canChooseFiles="YES" canChooseExistingPaths="YES" placeholder="No Selection" translatesAutoresizingMaskIntoConstraints="NO" id="sad-5V-KVu">
-                                            <rect key="frame" x="244" y="115" width="207" height="25"/>
+                                            <rect key="frame" x="164" y="115" width="207" height="25"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="S2I-1Y-6UQ"/>
                                             </constraints>
@@ -487,8 +487,8 @@
                                             </connections>
                                         </amPathPopUpButton>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="GJR-jo-BJL">
-                                            <rect key="frame" x="-2" y="121" width="241" height="18"/>
-                                            <buttonCell key="cell" type="check" title="Download non-torrents using script" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="oaM-9o-SAF">
+                                            <rect key="frame" x="-2" y="121" width="161" height="18"/>
+                                            <buttonCell key="cell" type="check" title="Download using script" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="oaM-9o-SAF">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
                                             </buttonCell>
@@ -657,15 +657,15 @@ DQ
             <rect key="contentRect" x="120" y="64" width="431" height="435"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
             <value key="minSize" type="size" width="200" height="300"/>
-            <view key="contentView" misplaced="YES" id="gSi-VU-gYd">
-                <rect key="frame" x="0.0" y="0.0" width="431" height="435"/>
+            <view key="contentView" id="gSi-VU-gYd">
+                <rect key="frame" x="0.0" y="0.0" width="451" height="435"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="57" horizontalPageScroll="10" verticalLineScroll="57" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i4W-ed-17Q">
                         <rect key="frame" x="0.0" y="0.0" width="451" height="435"/>
                         <clipView key="contentView" drawsBackground="NO" id="KtZ-hY-aan">
                             <rect key="frame" x="0.0" y="0.0" width="451" height="435"/>
-                            <autoresizingMask key="autoresizingMask"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" alternatingRowBackgroundColors="YES" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="55" viewBased="YES" id="oof-vB-WHt">
                                     <rect key="frame" x="0.0" y="0.0" width="451" height="435"/>
