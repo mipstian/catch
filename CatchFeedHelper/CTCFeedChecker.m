@@ -178,18 +178,17 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
 	
 	// Check if the destination dir exists, if it doesn't create it
 	BOOL pathAndFolderIsDirectory = NO;
-	if ([[NSFileManager defaultManager] fileExistsAtPath:pathAndFolder isDirectory:&pathAndFolderIsDirectory]) {
+	if ([NSFileManager.defaultManager fileExistsAtPath:pathAndFolder isDirectory:&pathAndFolderIsDirectory]) {
 		if (!pathAndFolderIsDirectory) {
 			// Exists but isn't a directory! Aaargh! Abort!
 			return nil;
 		}
-        
 	} else {
 		// Create folder
-		if (![[NSFileManager defaultManager] createDirectoryAtPath:pathAndFolder
-                                       withIntermediateDirectories:YES
-                                                        attributes:nil
-                                                             error:&error]) {
+		if (![NSFileManager.defaultManager createDirectoryAtPath:pathAndFolder
+                                     withIntermediateDirectories:YES
+                                                      attributes:nil
+                                                           error:&error]) {
 			// Folder creation failed :( Abort
 			NSLog(@"Couldn't create folder %@", pathAndFolder);
 			return nil;
