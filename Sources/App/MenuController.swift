@@ -8,6 +8,7 @@ class MenuController: NSObject {
   @IBOutlet private weak var launchShowRSSItem: NSMenuItem!
   @IBOutlet private weak var topSeparatorItem: NSMenuItem!
   
+  @IBOutlet private weak var recentEpisodesItem: NSMenuItem!
   @IBOutlet private weak var lastUpdateItem: NSMenuItem!
   
   @IBOutlet private weak var pauseResumeItem: NSMenuItem!
@@ -31,6 +32,8 @@ class MenuController: NSObject {
     
     // Load strings
     launchShowRSSItem.title = NSLocalizedString("Launch ShowRSS", comment: "")
+    
+    recentEpisodesItem.title = NSLocalizedString("Recent Episodes…", comment: "")
     
     // Set current name and version
     let bundle = Bundle.main
