@@ -20,7 +20,6 @@ extern NSString * const PREFERENCE_KEY_SEND_NOTIFICATIONS;
 extern NSString * const PREFERENCE_KEY_DOWNLOADED_FILES; //Deprecated
 extern NSString * const PREFERENCE_KEY_HISTORY;
 extern NSString * const PREFERENCE_KEY_OPEN_AT_LOGIN;
-extern int const FEED_UPDATE_INTERVAL;
 
 
 @interface Preferences : NSObject

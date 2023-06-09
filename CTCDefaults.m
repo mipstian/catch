@@ -1,6 +1,10 @@
 #import "CTCDefaults.h"
 
 
+// Check feed every 10 minutes
+NSTimeInterval const kCTCDefaultsFeedUpdateInterval = 60 * 10;
+
+
 @implementation CTCDefaults
 
 + (NSString *)infoStringForKey:(NSString *)key {

@@ -1,14 +1,7 @@
-//
-//  FeedChecker.m
-//  Catch
-//
-//  Created by Giorgio Calderolla on 6/12/10.
-//  Copyright 2010 n\a. All rights reserved.
-//
-
 #import "CTCScheduler.h"
 #import "CTCAppDelegate.h"
 #import "CTCFeedChecker.h"
+#import "CTCDefaults.h"
 
 
 @interface CTCScheduler ()
@@ -39,7 +32,7 @@
     [self.feedCheckerConnection resume];
 	
 	// Create a timer to check periodically
-    self.repeatingTimer = [NSTimer scheduledTimerWithTimeInterval:FEED_UPDATE_INTERVAL
+    self.repeatingTimer = [NSTimer scheduledTimerWithTimeInterval:kCTCDefaultsFeedUpdateInterval
 														   target:self
 														 selector:@selector(tick:)
 														 userInfo:nil
@@ -70,6 +63,29 @@
                         withReply:replyHandler];
 }
 
+- (void)checkFeed {
+	// Only work with valid preferences
+	if (![Preferences validate]) {
+		NSLog(@"Scheduler: tick skipped, invalid preferences");
+		return;
+	}
+	
+	self.running = YES;
+	
+    [self reportStatus];
+	
+    [self callFeedCheckerWithReplyHandler:^(NSArray *downloadedFeedFiles,
+                                            NSError *error){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.running = NO;
+            [self reportStatus];
+            [[NSApp delegate] lastUpdateStatus:error == nil
+                                          time:NSDate.date];
+            [self handleDownloadedFeedFiles:downloadedFeedFiles];
+        });
+    }];
+}
+
 - (void)reportStatus {
 	NSLog(@"Scheduler: reporting status: active = %d, running = %d", self.isActive, self.isRunning);
 	
@@ -89,7 +105,7 @@
 	NSLog(@"Scheduler: forcing check");
     
 	// Set the next timer fire date to be ASAP
-	[self.repeatingTimer setFireDate:NSDate.distantPast];
+	[self checkFeed];
 }
 
 - (void)tick:(NSTimer*)timer {
@@ -100,12 +116,6 @@
 		return;
 	}
 	
-	// Only work with valid preferences
-	if (![Preferences validate]) {
-		NSLog(@"Scheduler: tick skipped, invalid preferences");
-		return;
-	}
-	
 	// Don't check if current time is outside user-defined range
 	if ([NSUserDefaults.standardUserDefaults boolForKey:PREFERENCE_KEY_ONLY_UPDATE_BETWEEN]) {
 		if (![self checkTime]) {
@@ -113,21 +123,8 @@
 			return;
 		}
 	}
-	
-	self.running = YES;
-	
-    [self reportStatus];
-	
-    [self callFeedCheckerWithReplyHandler:^(NSArray *downloadedFeedFiles,
-                                            NSError *error){
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.running = NO;
-            [self reportStatus];
-            [[NSApp delegate] lastUpdateStatus:error == nil
-                                          time:NSDate.date];
-            [self handleDownloadedFeedFiles:downloadedFeedFiles];
-        });
-    }];
+    
+    [self checkFeed];
 }
 
 - (void)handleDownloadedFeedFiles:(NSArray *)downloadedFeedFiles {
