@@ -103,22 +103,21 @@ final class FeedChecker {
   }
   
   private func handleDownloadedEpisodes(_ downloadedEpisodes: [DownloadedEpisode]) {
-    let shouldOpenTorrentsAutomatically = Defaults.shared.shouldOpenTorrentsAutomatically
-    
     for downloadedEpisode in downloadedEpisodes.reversed() {
       let episode = downloadedEpisode.episode
       
-      // Open magnet link, if requested
-      if episode.isMagnetized && shouldOpenTorrentsAutomatically {
-        Browser.openInBackground(url: episode.url)
+      // Open torrents automatically if requested
+      if Defaults.shared.shouldOpenTorrentsAutomatically {
+        if episode.isMagnetized {
+          // Open magnet link
+          Browser.openInBackground(url: episode.url)
+        } else {
+          // Open torrent file
+          Browser.openInBackground(file: downloadedEpisode.localURL!.path)
+        }
       }
       
-      // Open normal torrent in torrent client, if requested
-      if !episode.isMagnetized && shouldOpenTorrentsAutomatically {
-        Browser.openInBackground(file: downloadedEpisode.localURL!.path)
-      }
-      
-      NSUserNotificationCenter.default.deliverNotification(newEpisode: episode)
+      NSUserNotificationCenter.default.deliverNewEpisodeNotification(for: episode)
       
       // Add to history
       let newHistoryItem = HistoryItem(episode: episode, downloadDate: Date())
