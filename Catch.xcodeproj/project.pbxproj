@@ -442,7 +442,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0700;
 				TargetAttributes = {
 					446D8B551918D146007AB22D = {
 						TestTargetID = 8D1107260486CEB800E47090;
@@ -649,6 +649,7 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_PREFIX_HEADER = Catch_Prefix.pch;
 				INFOPLIST_FILE = "Catch-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.giorgiocalderolla.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = Catch;
 				WRAPPER_EXTENSION = app;
 			};
@@ -659,6 +660,7 @@
 			buildSettings = {
 				GCC_PREFIX_HEADER = Catch_Prefix.pch;
 				INFOPLIST_FILE = "Catch-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.giorgiocalderolla.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = Catch;
 				WRAPPER_EXTENSION = app;
 			};
@@ -680,6 +682,7 @@
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
@@ -767,6 +770,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "Catch Tests/Catch Tests-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.giorgiocalderolla.Catch.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -791,6 +795,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "Catch Tests/Catch Tests-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.giorgiocalderolla.Catch.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -805,6 +810,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = "CatchFeedHelper/CatchFeedHelper-Info.plist";
 				MACH_O_TYPE = mh_execute;
+				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_NAME}";
 				PRODUCT_NAME = "com.giorgiocalderolla.Catch.$(TARGET_NAME:rfc1034identifier)";
 				WRAPPER_EXTENSION = xpc;
 			};
@@ -817,6 +823,7 @@
 				GCC_PREFIX_HEADER = "CatchFeedHelper/CatchFeedHelper-Prefix.pch";
 				INFOPLIST_FILE = "CatchFeedHelper/CatchFeedHelper-Info.plist";
 				MACH_O_TYPE = mh_execute;
+				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_NAME}";
 				PRODUCT_NAME = "com.giorgiocalderolla.Catch.$(TARGET_NAME:rfc1034identifier)";
 				WRAPPER_EXTENSION = xpc;
 			};
