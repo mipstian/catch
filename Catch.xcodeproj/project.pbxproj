@@ -12,6 +12,7 @@
 		38F9B09111C98E9E0021C540 /* Automator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38F9B09011C98E9E0021C540 /* Automator.framework */; };
 		4403ACF41914041C002F286C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4403ACF31914041C002F286C /* Assets.xcassets */; };
 		441297D417FE285500E9E21E /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 448CC7E617FE1F840063D3FD /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		4453A6641DE4ED1E00383E40 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4453A6631DE4ED1E00383E40 /* Result.swift */; };
 		445D97A6191579C7006CD77C /* UI.strings in Resources */ = {isa = PBXBuildFile; fileRef = 445D97A4191579C7006CD77C /* UI.strings */; };
 		446D8B581918D146007AB22D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 446D8B571918D146007AB22D /* XCTest.framework */; };
 		44717AC51913A08700580054 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97325FDCFA39411CA2CEA /* Foundation.framework */; };
@@ -110,6 +111,7 @@
 		4403ACF31914041C002F286C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Resources/App/Assets.xcassets; sourceTree = "<group>"; };
 		4412E8161957F09200701124 /* com.giorgiocalderolla.Catch.CatchFeedHelper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = com.giorgiocalderolla.Catch.CatchFeedHelper.entitlements; sourceTree = "<group>"; };
 		4419CF37180627A900C77432 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4453A6631DE4ED1E00383E40 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Result.swift; path = Sources/App/Result.swift; sourceTree = "<group>"; };
 		445D97A319157955006CD77C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UI.xib; sourceTree = "<group>"; };
 		445D97A5191579C7006CD77C /* ca */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/UI.strings; sourceTree = "<group>"; };
 		445D97A719157A2C006CD77C /* de */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/UI.strings; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 				44A6FA8A1DE0B85C005303DF /* FeedHelperProxy.swift */,
 				44AB5B5D1DCE794A00AE6EB6 /* HistoryItem.swift */,
 				44B363451DC99D1900128259 /* FeedChecker.swift */,
+				4453A6631DE4ED1E00383E40 /* Result.swift */,
 				44A6FA8C1DE1A5F1005303DF /* Scheduler.swift */,
 			);
 			name = Library;
@@ -543,6 +546,7 @@
 				447E0F6D1DDAAD17001048AB /* FeedHelperService.swift in Sources */,
 				44BA5D161DAECF1A00A9CE9A /* RecentsCellView.swift in Sources */,
 				44B363481DC9B9FB00128259 /* Browser.swift in Sources */,
+				4453A6641DE4ED1E00383E40 /* Result.swift in Sources */,
 				44BA5D1A1DB81A8E00A9CE9A /* Application.swift in Sources */,
 				44B3634C1DCA6F7100128259 /* TimeOfDayMath.swift in Sources */,
 				44AB5B5E1DCE794A00AE6EB6 /* HistoryItem.swift in Sources */,

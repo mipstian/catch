@@ -38,7 +38,7 @@ final class FeedHelperProxy {
     url: URL,
     downloadOptions: DownloadOptions,
     previouslyDownloadedURLs: [URL],
-    completion: @escaping FeedHelperService.FeedCheckReply) {
+    completion: @escaping (Result<[[AnyHashable:Any]]>) -> Void) {
     service.checkFeed(
       url: url,
       downloadingToBookmark: downloadOptions.containerDirectoryBookmark,
@@ -47,7 +47,13 @@ final class FeedHelperProxy {
       skippingURLs: previouslyDownloadedURLs.map { $0.absoluteString },
       withReply: { downloadedFeedFiles, error in
         DispatchQueue.main.async {
-          completion(downloadedFeedFiles, error)
+          if let downloadedFeedFiles = downloadedFeedFiles {
+            completion(.success(downloadedFeedFiles))
+          } else if let error = error {
+            completion(.failure(error))
+          } else {
+            fatalError("Bad service reply")
+          }
         }
       }
     )
@@ -56,7 +62,7 @@ final class FeedHelperProxy {
   func download(
     historyItem: HistoryItem,
     downloadOptions: DownloadOptions,
-    completion: @escaping FeedHelperService.FileDownloadReply) {
+    completion: @escaping (Result<[AnyHashable:Any]>) -> Void) {
     service.download(
       file: historyItem.dictionaryRepresentation,
       toBookmark: downloadOptions.containerDirectoryBookmark,
@@ -64,7 +70,13 @@ final class FeedHelperProxy {
       savingMagnetLinks: downloadOptions.shouldSaveMagnetLinks,
       withReply: { downloadedFile, error in
         DispatchQueue.main.async {
-          completion(downloadedFile, error)
+          if let downloadedFile = downloadedFile {
+            completion(.success(downloadedFile))
+          } else if let error = error {
+            completion(.failure(error))
+          } else {
+            fatalError("Bad service reply")
+          }
         }
       }
     )
