@@ -24,6 +24,8 @@
 
 - (BOOL) downloadFile:(NSURL*)fileURL inFolder:(NSString*)folder;
 
+- (BOOL) openMagnet:(NSURL*)magnetURL;
+
 + (NSString*) computeFilenameFromURL:(NSURL*)fileURL;
 
 + (NSString*) addTorrentExtensionTo:(NSString*)filename;
