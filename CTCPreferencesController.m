@@ -36,7 +36,7 @@
 
 - (IBAction)showFeeds:(id)sender {
 	// Select the Feeds tab
-    self.window.toolbar.selectedItemIdentifier = @"Feeds";
+    self.window.toolbar.selectedItemIdentifier = @"Feed";
 }
 
 - (IBAction)showTweaks:(id)sender {
