@@ -64,7 +64,7 @@ final class FeedHelperProxy {
     downloadOptions: DownloadOptions,
     completion: @escaping (Result<[AnyHashable:Any]>) -> Void) {
     service.download(
-      file: historyItem.dictionaryRepresentation,
+      episode: historyItem.dictionaryRepresentation,
       toBookmark: downloadOptions.containerDirectoryBookmark,
       organizingByShow: downloadOptions.shouldOrganizeByShow,
       savingMagnetLinks: downloadOptions.shouldSaveMagnetLinks,

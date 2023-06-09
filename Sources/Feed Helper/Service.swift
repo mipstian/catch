@@ -29,7 +29,7 @@ extension Service: FeedHelperService {
       downloadedFeedFiles = try FeedHelper.checkFeed(
         url: url,
         downloadOptions: downloadOptions,
-        skippingURLs: previouslyDownloadedURLs
+        skippingURLs: previouslyDownloadedURLs.map { URL.init(string: $0)! }
       )
     } catch {
       reply(nil, error)
@@ -40,7 +40,7 @@ extension Service: FeedHelperService {
   }
   
   func download(
-    file: [AnyHashable:Any],
+    episode: [AnyHashable:Any],
     toBookmark downloadDirectoryBookmark: Data,
     organizingByShow shouldOrganizeByShow: Bool,
     savingMagnetLinks shouldSaveMagnetLinks: Bool,
@@ -54,7 +54,10 @@ extension Service: FeedHelperService {
         shouldSaveMagnetLinks: shouldSaveMagnetLinks
       )
       
-      downloadedFile = try FeedHelper.download(file: file, downloadOptions: downloadOptions)
+      downloadedFile = try FeedHelper.download(
+        episode: Episode(dictionary: episode)!,
+        downloadOptions: downloadOptions
+      )
     } catch {
       reply(nil, error)
       return

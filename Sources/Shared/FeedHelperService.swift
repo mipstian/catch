@@ -18,7 +18,7 @@ let feedHelperErrorDomain = "com.giorgiocalderolla.Catch.CatchFeedHelper"
   )
   
   func download(
-    file: [AnyHashable:Any],
+    episode: [AnyHashable:Any],
     toBookmark downloadDirectoryBookmark: Data,
     organizingByShow shouldOrganizeByShow: Bool,
     savingMagnetLinks shouldSaveMagnetLinks: Bool,
