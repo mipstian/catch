@@ -12,8 +12,6 @@
 #import "FeedChecker.h"
 @class GUI;
 
-extern NSString* const APPLICATION_NAME;
-extern NSString* const APPLICATION_VERSION;
 extern NSString* const APPLICATION_WEBSITE_URL;
 extern NSString* const APPLICATION_BUG_REPORT_URL;
 extern NSString* const APPLICATION_FEATURE_REQUEST_URL;

@@ -7,6 +7,8 @@
 //
 
 #import "GUI.h"
+#import "CTCDefaults.h"
+
 
 // Growl notification IDs
 static NSString* const GROWL_NEW_TORRENT = @"New torrent";
@@ -24,15 +26,17 @@ static NSString* const GROWL_NEW_TORRENT = @"New torrent";
 	// Update status UI
 	[self setStatus:1 running:0];
 	[self setLastUpdateStatus:1 time:nil];
+    
+    NSString *appNameAndVersion = [NSString stringWithFormat:@"%@ %@", CTCDefaults.appName, CTCDefaults.appVersion];
 
 	// Tell the NSStatusItem what menu to load
 	[item setMenu:menu];
 	// Set the tooptip for our item
-	[item setToolTip:[NSString stringWithFormat:@"%@ %@", APPLICATION_NAME, APPLICATION_VERSION] ];
+	[item setToolTip:appNameAndVersion];
 	// Enable highlighting
 	[item setHighlightMode:YES];
 	// Set current name and version
-	[menuVersion setTitle:[NSString stringWithFormat:@"%@ %@", APPLICATION_NAME, APPLICATION_VERSION] ];
+	[menuVersion setTitle:appNameAndVersion];
 
 	// Enable Growl
 	notificationCenterIsAvailable = (NSClassFromString(@"NSUserNotificationCenter")!=nil);
@@ -262,7 +266,7 @@ static NSString* const GROWL_NEW_TORRENT = @"New torrent";
 }
 
 - (NSString*)applicationNameForGrowl {
-	return APPLICATION_NAME;
+	return CTCDefaults.appName;
 }
 
 - (void)torrentNotificationWithDescription:(NSString*)description {
