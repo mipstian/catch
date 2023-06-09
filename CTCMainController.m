@@ -261,14 +261,14 @@
 	[self.menuRecentTorrents.submenu removeAllItems];
 	
 	// Add new items
-	for (NSString *title in recentTorrentNames) {
-        NSString *menuTitle = [NSString stringWithFormat:@"%lu %@", (unsigned long)[recentTorrentNames indexOfObject:title] + 1, title];
+    [recentTorrentNames enumerateObjectsUsingBlock:^(NSString *title, NSUInteger index, BOOL *stop) {
+        NSString *menuTitle = [NSString stringWithFormat:@"%lu %@", index + 1, title];
 		NSMenuItem *newItem = [[NSMenuItem alloc] initWithTitle:menuTitle
                                                          action:NULL
                                                   keyEquivalent:@""];
         newItem.enabled = NO;
 		[self.menuRecentTorrents.submenu addItem:newItem];
-	}
+    }];
 	
 	// Put the Show in finder menu back
 	[self.menuRecentTorrents.submenu addItem:self.menuShowInFinder];
