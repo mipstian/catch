@@ -9,6 +9,7 @@
 #import "FeedChecker.h"
 #import "Catch.h"
 #import "CTCFileUtils.h"
+#import "CTCFeedParser.h"
 
 
 @implementation FeedChecker
@@ -33,8 +34,8 @@
 		if (!feed) return NO;
 
 		// Parse the feed
-		NSArray* fileURLs = [self parseURLs:feed];
-		NSArray* fileFolders = organize ? [self parseFolders:feed] : nil;
+		NSArray* fileURLs = [CTCFeedParser parseURLs:feed];
+		NSArray* fileFolders = organize ? [CTCFeedParser parseFolders:feed] : nil;
 
 		if (!fileURLs) return NO;
 
@@ -57,66 +58,6 @@
 	}
 	
 	return YES;
-}
-
-- (NSArray*)parseURLs:(NSXMLDocument*)feed {
-	NSLog(@"FeedChecker: parsing feed for URLs");
-	
-	NSError* error = nil;
-	
-	// Get file URLs with XPath
-	NSArray* fileNodes = [feed nodesForXPath:@"//rss/channel/item" error:&error];
-	NSLog(@"File Nodes:	 %@", fileNodes);
-	
-	if (fileNodes) {
-		NSLog(@"FeedChecker: got %lu files", (unsigned long)fileNodes.count);
-	} else {
-		NSLog(@"FeedChecker: parsing for URLs failed: %@", error);
-		return nil;
-	}
-	
-	// Extract URLs from NSXMLNodes
-	NSMutableArray* fileURLs = [NSMutableArray arrayWithCapacity:[fileNodes count]];
-	
-	for(NSXMLNode* file in fileNodes) {
-		NSString* url = [[[file nodesForXPath:@"enclosure/@url" error:&error] lastObject] stringValue];
-		NSString* title = [[[file nodesForXPath:@"title" error:&error] lastObject] stringValue];
-		NSLog(@"FeedChecker: got file: %@ at %@", title, url);
-		[fileURLs addObject:[NSDictionary dictionaryWithObjectsAndKeys:
-							 title, @"title", url, @"url", nil]];
-	}
-	
-	return fileURLs;
-}
-
-- (NSArray*)parseFolders:(NSXMLDocument*)feed {
-	NSLog(@"FeedChecker: parsing feed for folders");
-	
-	NSError* error = nil;
-	
-	// Get file folders with XPath
-	NSArray* folderNodes = [feed nodesForXPath:@"//rss/channel/item/showrss:showname" error:&error];
-	
-	if (folderNodes) {
-		NSLog(@"FeedChecker: got %lu folders", (unsigned long)folderNodes.count);
-	} else {
-		NSLog(@"FeedChecker: parsing for folders failed: %@", error);
-		return nil;
-	}
-	
-	// Extract folders from NSXMLNodes
-	NSMutableArray* fileFolders = [NSMutableArray arrayWithCapacity:[folderNodes count]];
-	
-	for(NSXMLNode* node in folderNodes) {
-		NSString* folder = [node stringValue];
-		folder = [folder stringByReplacingOccurrencesOfString:@"/" withString:@""]; // Strip slashes
-		folder = [folder stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]; // Trim whitespace
-		[fileFolders addObject:folder];
-	}
-	
-	NSLog(@"FeedChecker: got folders:\n%@", fileFolders);
-	
-	return fileFolders;
 }
 
 - (NSXMLDocument*)downloadFeed:(NSURL*)feedURL {
