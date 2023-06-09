@@ -9,6 +9,8 @@ class PreferencesView: NSView {
   @IBOutlet weak var openAutomaticallyCheckbox: NSButton!
   @IBOutlet weak var downloadScriptCheckbox: NSButton!
   
+  @IBOutlet weak var preventSleepCheckbox: NSButton!
+  @IBOutlet weak var checkForUpdatesCheckbox: NSButton!
   @IBOutlet weak var openAtLoginButton: NSButton!
   
   @IBOutlet weak var toolBar: NSToolbar!
@@ -23,6 +25,8 @@ class PreferencesView: NSView {
     openAutomaticallyCheckbox.title = NSLocalizedString("Open automatically", comment: "")
     downloadScriptCheckbox.title = NSLocalizedString("Download using script:", comment: "")
     
+    preventSleepCheckbox.title = NSLocalizedString("Prevent system sleep when active", comment: "")
+    checkForUpdatesCheckbox.title = NSLocalizedString("Automatically check for updates", comment: "")
     openAtLoginButton.title = NSLocalizedString("Open at Login", comment: "")
     
     for item in toolBar.items {
