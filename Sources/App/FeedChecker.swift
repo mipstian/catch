@@ -1,5 +1,6 @@
 import Foundation
 import AppKit
+import os
 
 
 enum FeedCheckerError: Error {
@@ -83,7 +84,7 @@ final class FeedChecker {
     
     // Skip check if downloads directory isn't currently available
     guard Defaults.shared.isTorrentsSavePathValid else {
-      NSLog("Skipping feed check: downloads directory is not available")
+      os_log("Skipping feed check: downloads directory is not available", log: .helper, type: .info)
       lastCheckStatus = .skipped(Date())
       return
     }
@@ -94,7 +95,7 @@ final class FeedChecker {
       Defaults.shared.hasValidFeeds,
       let downloadOptions = Defaults.shared.downloadOptions
     else {
-      NSLog("Skipping feed check: invalid preferences")
+      os_log("Skipping feed check: invalid preferences", log: .helper, type: .info)
       lastCheckStatus = .skipped(Date())
       return
     }
@@ -112,12 +113,12 @@ final class FeedChecker {
       completion: { [weak self] result in
         switch result {
         case .success(let downloadedEpisodes):
-          NSLog("Checking feed succeeded, \(downloadedEpisodes.count) new episodes found")
+          os_log("Checking feed succeeded, %d new episodes found", log: .main, type: .info, downloadedEpisodes.count)
           // Deal with new files
           self?.handleDownloadedEpisodes(downloadedEpisodes)
           self?.lastCheckStatus = .successful(Date())
         case .failure(let error):
-          NSLog("Feed Helper error (checking feed): \(error)")
+          os_log("Feed Helper error (checking feed): %{public}@", log: .main, type: .error, error.localizedDescription)
           self?.lastCheckStatus = .failed(Date(), error)
         }
       }
