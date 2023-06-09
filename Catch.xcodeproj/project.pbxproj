@@ -34,10 +34,10 @@
 		44717ADD1913AF3400580054 /* CTCFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717AA91913173600580054 /* CTCFileUtils.m */; };
 		448CC7E817FE1F840063D3FD /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 448CC7E617FE1F840063D3FD /* Sparkle.framework */; };
 		44B3375619B4F95C00A020DF /* CTCRecentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44B3375519B4F95C00A020DF /* CTCRecentsController.m */; };
+		44BA5D121DAEC0C400A9CE9A /* WindowShakeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BA5D111DAEC0C300A9CE9A /* WindowShakeAnimation.swift */; };
 		44C8926F1D1814A7008F8543 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C8926E1D1814A7008F8543 /* AppDelegate.swift */; };
 		44EAD12E1916682D002C7443 /* CTCApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 44EAD12D1916682D002C7443 /* CTCApplication.m */; };
 		44FBC67B196312A400434B01 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44FBC67A196312A400434B01 /* QuartzCore.framework */; };
-		44FBC67E196316E900434B01 /* NSWindow+ShakeAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 44FBC67D196316E900434B01 /* NSWindow+ShakeAnimation.m */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
@@ -147,13 +147,12 @@
 		448CECE219157BDF0075ADD9 /* zh-Hant */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/UI.strings"; sourceTree = "<group>"; };
 		44B3375419B4F95C00A020DF /* CTCRecentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCRecentsController.h; sourceTree = "<group>"; };
 		44B3375519B4F95C00A020DF /* CTCRecentsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCRecentsController.m; sourceTree = "<group>"; };
+		44BA5D111DAEC0C300A9CE9A /* WindowShakeAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowShakeAnimation.swift; sourceTree = "<group>"; };
 		44C8926D1D1814A6008F8543 /* Catch-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Catch-Bridging-Header.h"; sourceTree = "<group>"; };
 		44C8926E1D1814A7008F8543 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Sources/AppDelegate.swift; sourceTree = "<group>"; };
 		44EAD12C1916682D002C7443 /* CTCApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCApplication.h; sourceTree = "<group>"; };
 		44EAD12D1916682D002C7443 /* CTCApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCApplication.m; sourceTree = "<group>"; };
 		44FBC67A196312A400434B01 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		44FBC67C196316E900434B01 /* NSWindow+ShakeAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSWindow+ShakeAnimation.h"; sourceTree = "<group>"; };
-		44FBC67D196316E900434B01 /* NSWindow+ShakeAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSWindow+ShakeAnimation.m"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Catch-Info.plist */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; path = "Catch-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Catch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -196,7 +195,7 @@
 				4456EE661916F1A600B3FF1A /* Controllers */,
 				4439DFD719B5E45700408851 /* Views */,
 				4456EE671916F1B100B3FF1A /* Libraries */,
-				4456EE621916D2E700B3FF1A /* Categories */,
+				4456EE621916D2E700B3FF1A /* Extensions */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97315FDCFA39411CA2CEA /* Supporting Files */,
 			);
@@ -270,15 +269,14 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
-		4456EE621916D2E700B3FF1A /* Categories */ = {
+		4456EE621916D2E700B3FF1A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				4456EE5F1916D20000B3FF1A /* NSDate+TimeOfDayMath.h */,
 				4456EE601916D20000B3FF1A /* NSDate+TimeOfDayMath.m */,
-				44FBC67C196316E900434B01 /* NSWindow+ShakeAnimation.h */,
-				44FBC67D196316E900434B01 /* NSWindow+ShakeAnimation.m */,
+				44BA5D111DAEC0C300A9CE9A /* WindowShakeAnimation.swift */,
 			);
-			name = Categories;
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		4456EE661916F1A600B3FF1A /* Controllers */ = {
@@ -548,6 +546,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4456EE611916D20000B3FF1A /* NSDate+TimeOfDayMath.m in Sources */,
+				44BA5D121DAEC0C400A9CE9A /* WindowShakeAnimation.swift in Sources */,
 				44EAD12E1916682D002C7443 /* CTCApplication.m in Sources */,
 				44C8926F1D1814A7008F8543 /* AppDelegate.swift in Sources */,
 				4456EE651916F17F00B3FF1A /* CTCBrowser.m in Sources */,
@@ -555,7 +554,6 @@
 				44717AA4191300B300580054 /* CTCDefaults.m in Sources */,
 				38D39B6011C3A6E100C17C80 /* CTCMenuController.m in Sources */,
 				446298EB191655080045EC72 /* CTCPreferencesController.m in Sources */,
-				44FBC67E196316E900434B01 /* NSWindow+ShakeAnimation.m in Sources */,
 				44717AA71913072200580054 /* CTCLoginItems.m in Sources */,
 				3803C7EC11C3E7AD00FC08DB /* CTCScheduler.m in Sources */,
 				4439DFDA19B5E48100408851 /* CTCRecentsCellView.m in Sources */,
