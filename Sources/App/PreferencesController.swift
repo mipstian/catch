@@ -1,6 +1,7 @@
 import AppKit
 
 
+/// Manages the "Preferences" window.
 class PreferencesController: NSWindowController {
   @IBOutlet private weak var feedURLWarningImageView: NSImageView!
   @IBOutlet private weak var torrentsSavePathWarningImageView: NSImageView!

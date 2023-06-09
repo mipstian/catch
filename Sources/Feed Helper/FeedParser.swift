@@ -8,6 +8,8 @@ private extension XMLNode {
 }
 
 
+/// Parses episodes out of a broadcatching RSS feed.
+/// Supports additional data specified with the `tv` namespace.
 public class FeedParser: NSObject {
   public typealias FeedItem = [String:String]
   

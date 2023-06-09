@@ -1,6 +1,7 @@
 import Foundation
 
 
+/// Periodically invokes the Feed Helper service to check a feed.
 final class FeedChecker {
   static let statusChangedNotification = NSNotification.Name("FeedChecker.statusChangedNotification")
   static let shared = FeedChecker()

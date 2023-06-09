@@ -1,6 +1,7 @@
 import AppKit
 
 
+/// Manages the "Recent Episodes" window.
 class RecentsController: NSWindowController {
   @IBOutlet fileprivate weak var table: NSTableView!
   

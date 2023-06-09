@@ -14,7 +14,7 @@ final class Scheduler {
   
   /// Creates a scheduler with the specified interval.
   ///
-  /// - Parameter interval: how long to wait between
+  /// - Parameter interval: how long to wait between firing
   init(interval: TimeInterval) {
     repeatingTimer = Timer.scheduledTimer(
       timeInterval: interval,

@@ -1,6 +1,7 @@
 import AppKit
 
 
+/// Manages the app's menu and status item in the menubar.
 class MenuController: NSObject {
   @IBOutlet private weak var menu: NSMenu!
   @IBOutlet private weak var menuVersion: NSMenuItem!

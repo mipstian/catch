@@ -1,6 +1,8 @@
 import Foundation
 
 
+/// Wrapper around UserDefaults.standard that provides a nice interface to the app's preferences
+/// and download history data.
 final class Defaults {
   static let shared = Defaults()
   private static let feedURLRegex = try! NSRegularExpression(

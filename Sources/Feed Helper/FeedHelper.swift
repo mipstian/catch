@@ -1,6 +1,9 @@
 import Foundation
 
 
+/// Implements the two functions of the Feed Helper service:
+/// - Checking a feed (optionally downloading any new torrent files)
+/// - Downloading a single torrent file
 enum FeedHelper {
   static func checkFeed(url: URL, downloadOptions: DownloadOptions, skippingURLs previouslyDownloadedURLs: [String]) throws -> [[AnyHashable:Any]] {
     NSLog("Checking feed: \(url)")
