@@ -137,8 +137,10 @@ final class Defaults {
   }
   
   func refreshLoginItemStatus() {
-    let shouldOpenAtLogin = UserDefaults.standard.bool(forKey: Keys.openAtLogin)
-    Bundle.main.isLoginItem = shouldOpenAtLogin
+    #if !DEBUG
+      let shouldOpenAtLogin = UserDefaults.standard.bool(forKey: Keys.openAtLogin)
+      Bundle.main.isLoginItem = shouldOpenAtLogin
+    #endif
   }
   
   private init() {
