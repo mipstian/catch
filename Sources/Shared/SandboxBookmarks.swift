@@ -19,8 +19,7 @@ extension URL {
     var isStale = false
     
     do {
-      // TODO: figure out why this init is optional, which contradicts the docs
-      self = try URL(resolvingBookmarkData: sandboxBookmark, bookmarkDataIsStale: &isStale)!
+      self = try URL(resolvingBookmarkData: sandboxBookmark, bookmarkDataIsStale: &isStale)
     } catch {
       NSLog("Could not get URL from bookmark: \(error)")
       throw error
