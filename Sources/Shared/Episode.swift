@@ -9,16 +9,11 @@ struct Episode {
   ///         other stuff that isn't strictly the title
   var title: String
   
-  /// Magnet link or .torrent file URL for this episode
+  /// Magnet link, .torrent file, or generic URL for this episode
   var url: URL
   
   /// Name of the TV show this episode is from, if available.
   var showName: String?
-  
-  /// Whether this episode's url is a magnet link (instead of a .torrent file)
-  var isMagnetized: Bool {
-    return url.scheme == "magnet"
-  }
 }
 
 

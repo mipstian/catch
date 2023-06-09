@@ -106,9 +106,9 @@ extension RecentsController {
   @IBAction private func downloadRecentItemAgain(_ senderButton: NSButton) {
     let clickedRow = table.row(for: senderButton)
     let recentEpisode = Defaults.shared.downloadHistory[clickedRow].episode
-    if recentEpisode.isMagnetized {
+    if recentEpisode.url.isMagnetLink {
       Browser.openInBackground(url: recentEpisode.url)
-    } else {
+    } else if recentEpisode.url.absoluteString.isTorrentFilePath {
       guard Defaults.shared.isConfigurationValid, let downloadOptions = Defaults.shared.downloadOptions else {
         NSLog("Cannot download torrent file with invalid preferences")
         return
@@ -128,6 +128,9 @@ extension RecentsController {
           }
         }
       )
+    } else {
+      // TODO
+      NSLog("Catch doesn't know how to redownload: \(recentEpisode.url)")
     }
   }
 }
