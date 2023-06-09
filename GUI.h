@@ -22,7 +22,7 @@
 /* Set GUI widgets to reflect status */
 - (void)setStatusActive:(BOOL)isActive running:(BOOL)isRunning;
 - (void)setLastUpdateStatus:(BOOL)lastUpdateWasSuccessful time:(NSDate *)time;
-- (void)refreshRecent:(NSArray *)recentTorrents;
+- (void)refreshRecent:(NSArray *)recentTorrentNames;
 
 /* Notifications */
 - (void)torrentNotificationWithDescription:(NSString *)description;
