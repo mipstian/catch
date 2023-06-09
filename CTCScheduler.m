@@ -76,30 +76,32 @@ NSString * const kCTCSchedulerStatusChangedNotificationName = @"com.giorgiocalde
     // Check now as well
     [self fireTimerNow];
     
-    [self updateAppNapStatus];
+    [self refreshActivity];
     
     return self;
 }
 
-- (void)preventAppNap {
-    // Make sure we can keep running in the background if the system supports App Nap
-    if ([NSProcessInfo.processInfo respondsToSelector:@selector(beginActivityWithOptions:reason:)]) {
-        self.activityToken = [NSProcessInfo.processInfo
-                              beginActivityWithOptions:NSActivityIdleSystemSleepDisabled|NSActivitySuddenTerminationDisabled
-                              reason:@"Actively polling the feed"];
+- (void)refreshActivity {
+    // Do nothing if the system doesn't support activities
+    if (![NSProcessInfo.processInfo respondsToSelector:@selector(beginActivityWithOptions:reason:)]) return;
+    
+    // End previously started activity if any
+    if (self.activityToken != nil) {
+        [NSProcessInfo.processInfo endActivity:self.activityToken];
+        self.activityToken = nil;
     }
-}
-
-- (void)allowAppNap {
-  // Make sure we can keep running in the background if the system supports App Nap
-  if ([NSProcessInfo.processInfo respondsToSelector:@selector(beginActivityWithOptions:reason:)] && self.activityToken) {
-      [NSProcessInfo.processInfo endActivity:self.activityToken];
-      self.activityToken = nil;
-  }
-}
-
-- (void)updateAppNapStatus {
-    self.polling ? [self preventAppNap] : [self allowAppNap];
+    
+    // No need to prevent App Nap or system sleep if paused
+    if (!self.polling) return;
+    
+    // Prevent App Nap (so we can keep checking the feed), and optionally system sleep
+    NSActivityOptions options = CTCDefaults.shouldPreventSystemSleep ?
+        NSActivityIdleSystemSleepDisabled|NSActivitySuddenTerminationDisabled :
+        NSActivitySuddenTerminationDisabled;
+    
+    self.activityToken = [NSProcessInfo.processInfo
+                          beginActivityWithOptions:options
+                          reason:@"Actively polling the feed"];
 }
 
 - (void)setChecking:(BOOL)checking {
@@ -110,7 +112,7 @@ NSString * const kCTCSchedulerStatusChangedNotificationName = @"com.giorgiocalde
 - (void)setPolling:(BOOL)polling {
     _polling = polling;
     
-    [self updateAppNapStatus];
+    [self refreshActivity];
     
     [self sendStatusChangedNotification];
 }
