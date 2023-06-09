@@ -75,7 +75,7 @@ NSString * const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info
 	
 	for (int i = 1; i <= count; i++) {
 		NSString *clean = [[recent objectAtIndex:count-i] objectForKey:@"title"];
-		clean = [[NSString stringWithFormat:@"%d ",i] stringByAppendingString:clean];
+		clean = [NSString stringWithFormat:@"%d %@", i, clean];
 		cleanRecent = [cleanRecent arrayByAddingObject:clean];
 	}
 	
