@@ -41,7 +41,7 @@ final class FeedChecker {
   }
   
   /// What happened with the last feed check
-  fileprivate(set) var lastCheckStatus: LastCheckStatus = .neverHappened {
+  private(set) var lastCheckStatus: LastCheckStatus = .neverHappened {
     didSet {
       if oldValue != lastCheckStatus {
         postStateChangedNotification()
@@ -69,7 +69,7 @@ final class FeedChecker {
     checkFeed()
   }
   
-  fileprivate func checkFeed() {
+  private func checkFeed() {
     // Don't check twice simultaneously
     guard lastCheckStatus != .inProgress else { return }
     
