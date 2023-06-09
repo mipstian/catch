@@ -47,28 +47,29 @@ extension PreferencesController {
   @IBAction private func savePreferences(_: Any?) {
     Defaults.shared.save()
     
-    if Defaults.shared.isConfigurationValid {
-      // Hide the Preferences window
-      window?.close()
-      
-      // Apply the login item setting
-      // TODO: move to defaults
-      Defaults.shared.refreshLoginItemStatus()
-      
-      // Apply power management settings
-      // TODO: move to feed checker
-      FeedChecker.shared.refreshActivity()
-      
-      // Also force check
-      FeedChecker.shared.forceCheck()
-    }
-    else {
+    guard Defaults.shared.isConfigurationValid else {
       // Show the Feeds tab because all possible invalid inputs are currently there
       showFeeds(self)
       
       // Shake the window to signal invalid input
       window?.performShakeAnimation(duration: 0.3)
+      
+      return
     }
+    
+    // Hide the Preferences window
+    window?.close()
+    
+    // Apply the login item setting
+    // TODO: move to defaults
+    Defaults.shared.refreshLoginItemStatus()
+    
+    // Apply power management settings
+    // TODO: move to feed checker
+    FeedChecker.shared.refreshActivity()
+    
+    // Also force check
+    FeedChecker.shared.forceCheck()
   }
   
   @IBAction fileprivate func showFeeds(_: Any?) {
