@@ -9,4 +9,4 @@
 "updatingnow"="Aan het updaten...";
 // for notifications:
 "newtorrent"="Nieuwe torrent gedownload";
-"newtorrentdesc"="Torrent bestand %@ is gedownload!"; // %@ will be replaced by filename
+"newtorrentdesc"="Torrent-bestand %@ is gedownload!"; // %@ will be replaced by filename
