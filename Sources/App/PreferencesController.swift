@@ -29,12 +29,6 @@ class PreferencesController: NSWindowController {
       object: Defaults.shared,
       queue: nil,
       using: { [weak self] notification in
-        guard
-          let changedKey = notification.userInfo?[Defaults.changedNotificationChangedKey] as? String,
-          [Defaults.Keys.torrentsSavePath, Defaults.Keys.feedURL].contains(changedKey)
-        else {
-          return
-        }
         self?.refreshInvalidInputMarkers()
       }
     )

@@ -12,29 +12,24 @@ final class PowerManager {
   
   /// Start listening for changes that affect power management.
   func startMonitoring() {
+    let refresh = { [weak self] (_: Notification) -> Void in
+      self?.refreshPowerManagement()
+    }
+    
+    // Listen to FeedChecker state changes.
     NotificationCenter.default.addObserver(
       forName: FeedChecker.stateChangedNotification,
       object: FeedChecker.shared,
       queue: nil,
-      using: { [weak self] _ in
-        self?.refreshPowerManagement()
-      }
+      using: refresh
     )
     
-    // Listen for relevant Defaults changes.
+    // Listen for Defaults changes.
     NotificationCenter.default.addObserver(
       forName: Defaults.changedNotification,
       object: Defaults.shared,
       queue: nil,
-      using: { [weak self] notification in
-        guard
-          let changedKey = notification.userInfo?[Defaults.changedNotificationChangedKey] as? String,
-          changedKey == Defaults.Keys.preventSystemSleep
-        else {
-          return
-        }
-        self?.refreshPowerManagement()
-      }
+      using: refresh
     )
     
     refreshPowerManagement()
