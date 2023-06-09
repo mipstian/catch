@@ -1,4 +1,4 @@
 #import <Foundation/Foundation.h>
 
 
-@interface CTCMenuController : NSObject <NSUserNotificationCenterDelegate> @end
+@interface CTCMenuController : NSObject @end
