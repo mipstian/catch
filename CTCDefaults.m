@@ -12,7 +12,6 @@ NSString * const kCTCDefaultsApplicationFeatureRequestURL = @"https://github.com
 NSString * const kCTCDefaultsApplicationHelpURL = @"https://github.com/mipstian/catch/wiki/Configuration";
 NSString * const kCTCDefaultsServiceURL = @"http://showrss.info/";
 NSString * const kCTCDefaultsServiceFeedURLPrefix = @"http://showrss.info/rss.php?";
-NSString * const kCTCDefaultsLegacyServiceFeedURLPrefix = @"http://showrss.karmorra.info/rss.php?";
 
 // NSUserDefaults keys
 NSString * const kCTCDefaultsFeedURLKey = @"feedURL";
@@ -122,10 +121,6 @@ NSString * const kCTCDefaultsOpenAtLoginKey = @"openAtLogin";
 	// Most importantly, validate feed URL
 	NSString *feedURL = CTCDefaults.feedURL;
 	NSRange range = [feedURL rangeOfString:kCTCDefaultsServiceFeedURLPrefix];
-	if (range.location != 0) {
-		// Try the legacy URL prefix and consider that valid
-		range = [feedURL rangeOfString:kCTCDefaultsLegacyServiceFeedURLPrefix];
-	}
 	if (range.location != 0) {
 		// The URL should start with the prefix!
 		NSLog(@"Feed URL does not start with expected prefix. Range of expected prefix: %lu %lu", (unsigned long)range.location, (unsigned long)range.length);
