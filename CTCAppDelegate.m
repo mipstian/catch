@@ -10,9 +10,6 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 	// Create preferences and set default values
 	[CTCDefaults setDefaultDefaults];
-	
-	// Valid config? Check feed right now
-	if (CTCDefaults.isConfigurationValid) [CTCScheduler.sharedScheduler forceCheck];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
