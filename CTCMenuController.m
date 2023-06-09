@@ -97,7 +97,6 @@
     NSString *lastUpdateText = nil;
     if (CTCScheduler.sharedScheduler.isChecking) {
         lastUpdateText = NSLocalizedString(@"updatingnow", @"An update is in progress");
-        
     }
     else {
         lastUpdateText = lastUpdateDate ?
