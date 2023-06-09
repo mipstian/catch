@@ -14,10 +14,11 @@ NSString * const kCTCDefaultsServiceURL = @"http://showrss.info/";
 NSString * const kCTCDefaultsServiceFeedURLPrefix = @"http://showrss.info/rss.php?";
 NSString * const kCTCDefaultsLegacyServiceFeedURLPrefix = @"http://showrss.karmorra.info/rss.php?";
 
+// NSUserDefaults keys
 NSString * const kCTCDefaultsFeedURLKey = @"feedURL";
 NSString * const kCTCDefaultsOnlyUpdateBetweenKey = @"onlyUpdateBetween";
-NSString * const PREFERENCE_KEY_UPDATE_FROM = @"updateFrom";
-NSString * const PREFERENCE_KEY_UPDATE_TO = @"updateTo";
+NSString * const kCTCDefaultsUpdateFromKey = @"updateFrom";
+NSString * const kCTCDefaultsUpdateToKey = @"updateTo";
 NSString * const PREFERENCE_KEY_SAVE_PATH = @"savePath";
 NSString * const PREFERENCE_KEY_ORGANIZE_TORRENTS = @"organizeTorrents";
 NSString * const PREFERENCE_KEY_OPEN_AUTOMATICALLY = @"openAutomatically";
@@ -54,8 +55,8 @@ NSString * const PREFERENCE_KEY_OPEN_AT_LOGIN = @"openAtLogin";
 	// Set smart defaults for the preferences
 	NSDictionary *appDefaults = @{kCTCDefaultsFeedURLKey: @"",
                                   kCTCDefaultsOnlyUpdateBetweenKey: @NO,
-                                  PREFERENCE_KEY_UPDATE_FROM: dateFrom,
-                                  PREFERENCE_KEY_UPDATE_TO: dateTo,
+                                  kCTCDefaultsUpdateFromKey: dateFrom,
+                                  kCTCDefaultsUpdateToKey: dateTo,
                                   PREFERENCE_KEY_SAVE_PATH: downloadsDirectory,
                                   PREFERENCE_KEY_ORGANIZE_TORRENTS: @NO,
                                   PREFERENCE_KEY_OPEN_AUTOMATICALLY: @YES,
@@ -161,6 +162,14 @@ NSString * const PREFERENCE_KEY_OPEN_AT_LOGIN = @"openAtLogin";
 
 + (BOOL)areTimeRestrictionsEnabled {
     return [NSUserDefaults.standardUserDefaults boolForKey:kCTCDefaultsOnlyUpdateBetweenKey];
+}
+
++ (NSDate *)fromDateForTimeRestrictions {
+    return (NSDate *)[NSUserDefaults.standardUserDefaults objectForKey:kCTCDefaultsUpdateFromKey];
+}
+
++ (NSDate *)toDateForTimeRestrictions {
+    return (NSDate *)[NSUserDefaults.standardUserDefaults objectForKey:kCTCDefaultsUpdateToKey];
 }
 
 @end
