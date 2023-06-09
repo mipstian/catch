@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <development version="6300" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
-        <plugIn identifier="com.apple.automator.AutomatorPalette" version="10117"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
+        <plugIn identifier="com.apple.automator.AutomatorPalette" version="11201"/>
+        <capability name="box content view" minToolsVersion="7.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -34,7 +34,7 @@
                 <outlet property="window" destination="552" id="Y5a-sh-KWH"/>
             </connections>
         </customObject>
-        <customObject id="zvH-gu-SiD" userLabel="Recents Controller" customClass="CTCRecentsController">
+        <customObject id="zvH-gu-SiD" userLabel="Recents Controller" customClass="RecentsController" customModule="Catch" customModuleProvider="target">
             <connections>
                 <outlet property="table" destination="oof-vB-WHt" id="meC-ED-tKy"/>
                 <outlet property="window" destination="aQN-n7-TBr" id="ncG-xn-Pbz"/>
@@ -126,7 +126,7 @@
         <window title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="552" userLabel="PreferencesWindow">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <rect key="contentRect" x="310" y="248" width="700" height="317"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="778"/>
             <view key="contentView" id="553">
                 <rect key="frame" x="0.0" y="0.0" width="700" height="317"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -140,9 +140,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="660" height="236"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <box autoresizesSubviews="NO" title="ShowRSS Feed" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="621">
+                                        <box autoresizesSubviews="NO" borderType="line" title="ShowRSS Feed" translatesAutoresizingMaskIntoConstraints="NO" id="621">
                                             <rect key="frame" x="-3" y="123" width="666" height="113"/>
-                                            <view key="contentView">
+                                            <view key="contentView" id="bQf-OL-1yY">
                                                 <rect key="frame" x="1" y="1" width="664" height="97"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
@@ -226,31 +226,29 @@
                                                 </subviews>
                                             </view>
                                             <constraints>
-                                                <constraint firstItem="lIi-CM-MqY" firstAttribute="leading" secondItem="787" secondAttribute="trailing" constant="15" id="4Ny-mo-Jgz"/>
-                                                <constraint firstItem="787" firstAttribute="top" secondItem="621" secondAttribute="top" constant="29" id="Ad6-8t-hD5"/>
-                                                <constraint firstItem="787" firstAttribute="centerY" secondItem="lIi-CM-MqY" secondAttribute="centerY" id="P0P-d4-tvv"/>
-                                                <constraint firstItem="785" firstAttribute="leading" secondItem="621" secondAttribute="leading" constant="15" id="R2v-u3-XOn"/>
-                                                <constraint firstItem="636" firstAttribute="leading" secondItem="637" secondAttribute="trailing" constant="8" symbolic="YES" id="RCy-rB-Gza"/>
-                                                <constraint firstAttribute="trailing" secondItem="lIi-CM-MqY" secondAttribute="trailing" constant="15" id="SWX-kw-nAX"/>
-                                                <constraint firstItem="637" firstAttribute="centerY" secondItem="635" secondAttribute="centerY" id="ghN-hZ-8hX"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="635" secondAttribute="trailing" constant="15" id="hbk-w7-FgE"/>
-                                                <constraint firstItem="787" firstAttribute="leading" secondItem="785" secondAttribute="trailing" constant="8" symbolic="YES" id="m4t-Vd-iyd"/>
-                                                <constraint firstItem="635" firstAttribute="leading" secondItem="636" secondAttribute="trailing" constant="8" symbolic="YES" id="ndS-bp-mDY"/>
-                                                <constraint firstAttribute="bottom" secondItem="637" secondAttribute="bottom" constant="15" id="o14-VB-kfP"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="787" secondAttribute="trailing" constant="15" id="pJ1-Jt-MNS"/>
-                                                <constraint firstItem="637" firstAttribute="top" secondItem="787" secondAttribute="bottom" constant="20" id="pjV-GX-gjF"/>
-                                                <constraint firstItem="637" firstAttribute="leading" secondItem="638" secondAttribute="trailing" constant="8" symbolic="YES" id="qVg-Kc-gPF"/>
-                                                <constraint firstItem="637" firstAttribute="centerY" secondItem="638" secondAttribute="centerY" id="qio-jR-gfa"/>
-                                                <constraint firstItem="785" firstAttribute="centerY" secondItem="787" secondAttribute="centerY" id="rhh-JP-25J"/>
-                                                <constraint firstItem="636" firstAttribute="baseline" secondItem="638" secondAttribute="baseline" id="trN-nh-5Er"/>
-                                                <constraint firstItem="785" firstAttribute="leading" secondItem="638" secondAttribute="leading" id="vbo-cS-Ydp"/>
+                                                <constraint firstItem="785" firstAttribute="leading" secondItem="621" secondAttribute="leading" constant="15" id="02P-HT-IN9"/>
+                                                <constraint firstItem="787" firstAttribute="top" secondItem="621" secondAttribute="top" constant="29" id="1ia-y0-dee"/>
+                                                <constraint firstItem="635" firstAttribute="leading" secondItem="636" secondAttribute="trailing" constant="8" symbolic="YES" id="ErH-Kk-aEm"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="787" secondAttribute="trailing" constant="15" id="HEg-u0-IcG"/>
+                                                <constraint firstItem="637" firstAttribute="leading" secondItem="638" secondAttribute="trailing" constant="8" symbolic="YES" id="JCJ-xK-YZO"/>
+                                                <constraint firstItem="636" firstAttribute="baseline" secondItem="638" secondAttribute="baseline" id="MYd-11-rf0"/>
+                                                <constraint firstAttribute="bottom" secondItem="637" secondAttribute="bottom" constant="15" id="N42-0F-zMk"/>
+                                                <constraint firstItem="787" firstAttribute="leading" secondItem="785" secondAttribute="trailing" constant="8" symbolic="YES" id="SjL-MW-5gT"/>
+                                                <constraint firstItem="787" firstAttribute="centerY" secondItem="lIi-CM-MqY" secondAttribute="centerY" id="Yd1-sy-QrJ"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="635" secondAttribute="trailing" constant="15" id="ZkY-Y0-g0e"/>
+                                                <constraint firstItem="785" firstAttribute="leading" secondItem="638" secondAttribute="leading" id="aQH-je-kzb"/>
+                                                <constraint firstItem="637" firstAttribute="centerY" secondItem="638" secondAttribute="centerY" id="cIp-Iq-WsO"/>
+                                                <constraint firstItem="lIi-CM-MqY" firstAttribute="leading" secondItem="787" secondAttribute="trailing" constant="15" id="nOg-Bp-kbL"/>
+                                                <constraint firstItem="637" firstAttribute="top" secondItem="787" secondAttribute="bottom" constant="20" id="s7w-t0-jVV"/>
+                                                <constraint firstAttribute="trailing" secondItem="lIi-CM-MqY" secondAttribute="trailing" constant="15" id="vKZ-RZ-7FE"/>
+                                                <constraint firstItem="785" firstAttribute="centerY" secondItem="787" secondAttribute="centerY" id="w2z-db-XGP"/>
+                                                <constraint firstItem="637" firstAttribute="centerY" secondItem="635" secondAttribute="centerY" id="xwP-sP-YfY"/>
+                                                <constraint firstItem="636" firstAttribute="leading" secondItem="637" secondAttribute="trailing" constant="8" symbolic="YES" id="zLq-sd-RCu"/>
                                             </constraints>
-                                            <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                                            <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </box>
-                                        <box autoresizesSubviews="NO" title="Torrent Files" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="622">
+                                        <box autoresizesSubviews="NO" borderType="line" title="Torrent Files" translatesAutoresizingMaskIntoConstraints="NO" id="622">
                                             <rect key="frame" x="-3" y="-4" width="666" height="123"/>
-                                            <view key="contentView">
+                                            <view key="contentView" id="i02-Cg-gRD">
                                                 <rect key="frame" x="1" y="1" width="664" height="107"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
@@ -303,24 +301,22 @@
                                                 </subviews>
                                             </view>
                                             <constraints>
-                                                <constraint firstItem="791" firstAttribute="top" secondItem="622" secondAttribute="top" constant="29" id="6E5-8l-sGN"/>
-                                                <constraint firstItem="623" firstAttribute="top" secondItem="624" secondAttribute="bottom" constant="6" symbolic="YES" id="CeY-ND-exE"/>
-                                                <constraint firstItem="623" firstAttribute="leading" secondItem="624" secondAttribute="leading" id="Ct9-i8-dtR"/>
-                                                <constraint firstAttribute="bottom" secondItem="623" secondAttribute="bottom" constant="15" id="EQF-ys-Nj3"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fwJ-Gq-K1U" secondAttribute="trailing" constant="15" id="Itw-n8-XBv"/>
-                                                <constraint firstItem="791" firstAttribute="leading" secondItem="625" secondAttribute="trailing" constant="8" symbolic="YES" id="KJa-vv-eHg"/>
-                                                <constraint firstItem="fwJ-Gq-K1U" firstAttribute="leading" secondItem="791" secondAttribute="trailing" constant="15" id="LfG-Z2-KAQ"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="623" secondAttribute="trailing" constant="15" id="bFN-oL-PeV"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="624" secondAttribute="trailing" constant="15" id="fdl-LG-g90"/>
-                                                <constraint firstItem="791" firstAttribute="centerY" secondItem="fwJ-Gq-K1U" secondAttribute="centerY" id="j5p-tO-ZN2"/>
-                                                <constraint firstItem="625" firstAttribute="baseline" secondItem="791" secondAttribute="baseline" id="liP-df-61I"/>
-                                                <constraint firstItem="625" firstAttribute="leading" secondItem="624" secondAttribute="leading" id="oOL-hr-Tkn"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="791" secondAttribute="trailing" constant="15" id="pbz-R1-Wf5"/>
-                                                <constraint firstItem="625" firstAttribute="leading" secondItem="622" secondAttribute="leading" constant="15" id="q4i-wH-BXf"/>
-                                                <constraint firstItem="624" firstAttribute="top" secondItem="791" secondAttribute="bottom" constant="20" id="sSw-cH-cQz"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="624" secondAttribute="trailing" constant="15" id="1GG-EY-Z1W"/>
+                                                <constraint firstItem="623" firstAttribute="leading" secondItem="624" secondAttribute="leading" id="5uF-v9-tnU"/>
+                                                <constraint firstItem="625" firstAttribute="baseline" secondItem="791" secondAttribute="baseline" id="G6U-8s-L9T"/>
+                                                <constraint firstAttribute="bottom" secondItem="623" secondAttribute="bottom" constant="15" id="MGf-4Q-vnz"/>
+                                                <constraint firstItem="624" firstAttribute="top" secondItem="791" secondAttribute="bottom" constant="20" id="OGQ-gC-ioe"/>
+                                                <constraint firstItem="625" firstAttribute="leading" secondItem="624" secondAttribute="leading" id="X5C-HD-i3q"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="623" secondAttribute="trailing" constant="15" id="c5c-wq-wWt"/>
+                                                <constraint firstItem="791" firstAttribute="top" secondItem="622" secondAttribute="top" constant="29" id="i1q-wO-PrP"/>
+                                                <constraint firstItem="fwJ-Gq-K1U" firstAttribute="leading" secondItem="791" secondAttribute="trailing" constant="15" id="iIc-xd-qXN"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fwJ-Gq-K1U" secondAttribute="trailing" constant="15" id="kxl-JD-s9h"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="791" secondAttribute="trailing" constant="15" id="lUa-kR-xIL"/>
+                                                <constraint firstItem="625" firstAttribute="leading" secondItem="622" secondAttribute="leading" constant="15" id="mF8-Y1-hxm"/>
+                                                <constraint firstItem="623" firstAttribute="top" secondItem="624" secondAttribute="bottom" constant="6" symbolic="YES" id="orv-Bx-XxH"/>
+                                                <constraint firstItem="791" firstAttribute="centerY" secondItem="fwJ-Gq-K1U" secondAttribute="centerY" id="wzR-Ub-ddT"/>
+                                                <constraint firstItem="791" firstAttribute="leading" secondItem="625" secondAttribute="trailing" constant="8" symbolic="YES" id="xzk-UC-HsG"/>
                                             </constraints>
-                                            <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                                            <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </box>
                                     </subviews>
                                     <constraints>
@@ -464,7 +460,7 @@ DQ
         <window title="Recent Episodes" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="aQN-n7-TBr" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="120" y="64" width="409" height="435"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="778"/>
             <value key="minSize" type="size" width="200" height="300"/>
             <view key="contentView" id="gSi-VU-gYd">
                 <rect key="frame" x="0.0" y="0.0" width="409" height="435"/>
@@ -473,11 +469,11 @@ DQ
                     <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="57" horizontalPageScroll="10" verticalLineScroll="57" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i4W-ed-17Q">
                         <rect key="frame" x="0.0" y="0.0" width="409" height="435"/>
                         <clipView key="contentView" drawsBackground="NO" id="KtZ-hY-aan">
-                            <rect key="frame" x="1" y="17" width="238" height="117"/>
+                            <rect key="frame" x="0.0" y="0.0" width="409" height="435"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" alternatingRowBackgroundColors="YES" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="55" viewBased="YES" id="oof-vB-WHt">
-                                    <rect key="frame" x="0.0" y="0.0" width="410" height="0.0"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="410" height="435"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -496,7 +492,7 @@ DQ
                                             </textFieldCell>
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                             <prototypeCellViews>
-                                                <tableCellView id="W93-2s-nQP" customClass="CTCRecentsCellView">
+                                                <tableCellView id="W93-2s-nQP" customClass="RecentsCellView" customModule="Catch" customModuleProvider="target">
                                                     <rect key="frame" x="1" y="1" width="407" height="57"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
@@ -566,7 +562,7 @@ DQ
                             <nil key="backgroundColor"/>
                         </clipView>
                         <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="Lmq-LW-vEW">
-                            <rect key="frame" x="1" y="119" width="223" height="15"/>
+                            <rect key="frame" x="0.0" y="419" width="409" height="16"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="FGR-XB-oB0">
@@ -589,6 +585,6 @@ DQ
         <image name="NSAdvanced" width="32" height="32"/>
         <image name="NSRefreshFreestandingTemplate" width="14" height="14"/>
         <image name="rss" width="32" height="32"/>
-        <image name="warning" width="9" height="9"/>
+        <image name="warning" width="18" height="18"/>
     </resources>
 </document>
