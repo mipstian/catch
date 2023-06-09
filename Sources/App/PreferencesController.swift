@@ -1,4 +1,5 @@
 import AppKit
+import os
 import Sparkle
 
 
@@ -179,7 +180,7 @@ extension PreferencesController {
         let parsedFeeds = try OPMLParser().parse(opml: data)
         Defaults.shared.feeds += parsedFeeds
       } catch {
-        NSLog("Couldn't parse OPML: \(error)")
+        os_log("Couldn't parse OPML: %{public}@", log: .main, type: .error, error.localizedDescription)
       }
     }
   }
@@ -191,7 +192,7 @@ extension PreferencesController {
     do {
       data = try OPMLSerializer().serialize(feeds: Defaults.shared.feeds)
     } catch {
-      NSLog("Couldn't serialize OPML: \(error)")
+      os_log("Couldn't serialize OPML: %{public}@", log: .main, type: .error, error.localizedDescription)
       return
     }
     
@@ -205,7 +206,7 @@ extension PreferencesController {
         try data.write(to: url)
       }
       catch {
-        NSLog("Couldn't write OPML: \(error)")
+        os_log("Couldn't write OPML: %{public}@", log: .main, type: .error, error.localizedDescription)
       }
     }
   }

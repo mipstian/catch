@@ -1,4 +1,5 @@
 import AppKit
+import os
 
 
 /// Manages the "Feed Contents" window.
@@ -41,7 +42,7 @@ class FeedContentsController: NSWindowController {
           self?.textView.string = string
         }
       case .failure(let error):
-        NSLog("Feed Helper error (downloading feed contents): \(error)")
+        os_log("Feed Helper error (downloading feed contents): %{public}@", log: .main, type: .error, error.localizedDescription)
       }
       
       self?.loadingFeedsCount -= 1

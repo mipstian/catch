@@ -64,6 +64,8 @@
 		A74F608D25B57C6100BA52A0 /* FeedContentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74F608C25B57C6100BA52A0 /* FeedContentsController.swift */; };
 		A74F609525B5C27100BA52A0 /* FeedCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74F609425B5C27100BA52A0 /* FeedCellView.swift */; };
 		A77DD09625B43CF400886D57 /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77DD09525B43CF400886D57 /* PreferencesView.swift */; };
+		A7B1138F266005D000B14A47 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B1138E266005D000B14A47 /* Logging.swift */; };
+		A7B11390266005D000B14A47 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B1138E266005D000B14A47 /* Logging.swift */; };
 		A7FA8FE226072836002FC21E /* AddFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FA8FE126072836002FC21E /* AddFeedView.swift */; };
 /* End PBXBuildFile section */
 
@@ -174,6 +176,7 @@
 		A74F608C25B57C6100BA52A0 /* FeedContentsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FeedContentsController.swift; path = Sources/App/FeedContentsController.swift; sourceTree = "<group>"; };
 		A74F609425B5C27100BA52A0 /* FeedCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FeedCellView.swift; path = Sources/App/FeedCellView.swift; sourceTree = "<group>"; };
 		A77DD09525B43CF400886D57 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PreferencesView.swift; path = Sources/App/PreferencesView.swift; sourceTree = "<group>"; };
+		A7B1138E266005D000B14A47 /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Logging.swift; path = Sources/Shared/Logging.swift; sourceTree = "<group>"; };
 		A7FA8FE126072836002FC21E /* AddFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddFeedView.swift; path = Sources/App/AddFeedView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -317,6 +320,7 @@
 				44C8198A220D73DC00D9DAAD /* OPML.swift */,
 				4453A66D1DE60D6200383E40 /* PowerManager.swift */,
 				4441F59324308B77001AEC1E /* ServiceURLs.swift */,
+				A7B1138E266005D000B14A47 /* Logging.swift */,
 			);
 			name = Library;
 			sourceTree = "<group>";
@@ -546,6 +550,7 @@
 				447E0F711DDAB073001048AB /* main.swift in Sources */,
 				445089EE226F24E4009ED71A /* Feed.swift in Sources */,
 				44A6FA861DE0A785005303DF /* Service.swift in Sources */,
+				A7B11390266005D000B14A47 /* Logging.swift in Sources */,
 				447E0F6F1DDAAD3D001048AB /* FeedHelper.swift in Sources */,
 				447E0F741DDAB24D001048AB /* FileUtils.swift in Sources */,
 				44A6FA891DE0ADA5005303DF /* DownloadOptions.swift in Sources */,
@@ -584,6 +589,7 @@
 				4453A66E1DE60D6300383E40 /* PowerManager.swift in Sources */,
 				44BA5D1A1DB81A8E00A9CE9A /* Application.swift in Sources */,
 				A77DD09625B43CF400886D57 /* PreferencesView.swift in Sources */,
+				A7B1138F266005D000B14A47 /* Logging.swift in Sources */,
 				44B3634C1DCA6F7100128259 /* TimeOfDayMath.swift in Sources */,
 				44C81989220D6B7700D9DAAD /* Feed.swift in Sources */,
 				44AB5B5E1DCE794A00AE6EB6 /* HistoryItem.swift in Sources */,
@@ -689,7 +695,7 @@
 					"@executable_path/../Frameworks",
 				);
 				OTHER_LDFLAGS = "-Wl,-rpath,@loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.giorgiocalderolla.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = org.giorgiocalderolla.Catch;
 				PRODUCT_NAME = Catch;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				WRAPPER_EXTENSION = app;
@@ -725,7 +731,7 @@
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 780;
+				CURRENT_PROJECT_VERSION = 781;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -746,8 +752,8 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LLVM_LTO = NO;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MARKETING_VERSION = 2.1;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MARKETING_VERSION = 2.2;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
 					"-Wextra",
@@ -790,7 +796,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 780;
+				CURRENT_PROJECT_VERSION = 781;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -808,8 +814,8 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LLVM_LTO = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MARKETING_VERSION = 2.1;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MARKETING_VERSION = 2.2;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";

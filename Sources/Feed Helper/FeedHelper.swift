@@ -1,4 +1,5 @@
 import Foundation
+import os
 
 
 /// Implements the two functions of the Feed Helper service:
@@ -33,7 +34,7 @@ enum FeedHelper {
   }
   
   private static func checkFeed(feed: Feed, downloadOptions: DownloadOptions, skippingURLs previouslyDownloadedURLs: [URL]) throws -> [DownloadedEpisode] {
-    NSLog("Checking feed: \(feed.url)")
+    os_log("Checking feed: %{public}@", log: .helper, type: .info, "\(feed.url)")
     
     // Download the feed
     let feedContents = try downloadFeed(feed: feed)
@@ -57,20 +58,20 @@ enum FeedHelper {
     let newEpisodes = episodes.filter { !previouslyDownloadedURLs.contains($0.url) }
     
     guard !newEpisodes.isEmpty else {
-      NSLog("No new episodes to download")
+      os_log("No new episodes to download", log: .helper, type: .info)
       return []
     }
     
     // Download new episodes
-    NSLog("Downloading \(newEpisodes.count) new episodes")
+    os_log("Downloading %d new episodes", log: .helper, type: .info, newEpisodes.count)
     let downloader = EpisodeDownloader(downloadOptions: downloadOptions)
     let downloadedEpisodes = try newEpisodes.map(downloader.download(episode:))
-    NSLog("Done downloading new episodes")
+    os_log("Done downloading new episodes", log: .helper, type: .info)
     return downloadedEpisodes
   }
   
   static func download(episode: Episode, downloadOptions: DownloadOptions) throws -> DownloadedEpisode {
-    NSLog("Downloading single episode")
+    os_log("Downloading single episode", log: .helper, type: .info)
 
     let downloader = EpisodeDownloader(downloadOptions: downloadOptions)
     return try downloader.download(episode: episode)
