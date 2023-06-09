@@ -24,15 +24,25 @@
 - (void)awakeFromNib {
     self.scheduler = CTCScheduler.new;
     
-	// Create the NSStatusBar and set its length
-	self.menuBarItem = [NSStatusBar.systemStatusBar statusItemWithLength:NSSquareStatusItemLength];
-	
+    [self setupMenuItem];
+    
 	// Update status UI
 	[self setStatusActive:YES running:NO];
 	[self setLastUpdateStatus:YES time:nil];
+
+	// Enable Notifications
+    [NSUserNotificationCenter.defaultUserNotificationCenter setDelegate:self];
+	
+	// Select the first tab of the Preferences
+	[self showFeeds:self];
+}
+
+- (void)setupMenuItem {
+    // Create the NSStatusBar and set its length
+	self.menuBarItem = [NSStatusBar.systemStatusBar statusItemWithLength:NSSquareStatusItemLength];
     
     NSString *appNameAndVersion = [NSString stringWithFormat:@"%@ %@", CTCDefaults.appName, CTCDefaults.appVersion];
-
+    
 	// Tell the NSStatusItem what menu to load
 	[self.menuBarItem setMenu:self.menu];
 	// Set the tooptip for our item
@@ -41,14 +51,8 @@
 	[self.menuBarItem setHighlightMode:YES];
 	// Set current name and version
 	[self.menuVersion setTitle:appNameAndVersion];
-
-	// Enable Notifications
-    [NSUserNotificationCenter.defaultUserNotificationCenter setDelegate:self];
 	
-	// Select the first tab of the Preferences
-	[self showFeeds:self];
-	
-	// Disable the recent torrents menu unitl there's something to show
+	// Disable the recent torrents menu until there's something to show
 	[self.menuRecentTorrents setEnabled:NO];
 }
 
