@@ -49,7 +49,7 @@ NSString* const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info/
 	}
 	
 	NSLog(@"Catch: creating scheduler for feed checker");
-	scheduler = Scheduler.new;
+	scheduler = CTCScheduler.new;
 	
 	// Also check now
 	[scheduler forceCheck];

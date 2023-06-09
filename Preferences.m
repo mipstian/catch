@@ -102,12 +102,12 @@ int const FEED_UPDATE_INTERVAL = 60*10; // 10 minutes
 + (void)save {
 	NSLog(@"Preferences: Synchronizing");
 	// Write preferences to disk
-	[[NSUserDefaults standardUserDefaults] synchronize];
+	[NSUserDefaults.standardUserDefaults synchronize];
 }
 
 + (BOOL)validate {
 	// Validate torrent folder. This should never fail!
-	NSString* torrentFolder = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCE_KEY_SAVE_PATH];
+	NSString* torrentFolder = [NSUserDefaults.standardUserDefaults stringForKey:PREFERENCE_KEY_SAVE_PATH];
 	torrentFolder = [torrentFolder stringByStandardizingPath];
 	
 	if (!torrentFolder) return NO;
@@ -129,13 +129,13 @@ int const FEED_UPDATE_INTERVAL = 60*10; // 10 minutes
 	}
 	if (range.location != 0) {
 		// The URL should start with the prefix!
-		NSLog(@"1: %lu %lu", (unsigned long)range.location, (unsigned long)range.length);
+		NSLog(@"Feed URL does not start with expected prefix. Range of expected prefix: %lu %lu", (unsigned long)range.location, (unsigned long)range.length);
 		return NO;
 	}
 	range = [feedURL rangeOfString:@"namespaces"];
 	if (range.location == NSNotFound) {
 		// The URL should have the namespaces parameter set
-		NSLog(@"2");
+		NSLog(@"Feed URL does not have namespaces enabled");
 		return NO;
 	}
 	

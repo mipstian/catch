@@ -6,12 +6,12 @@
 //  Copyright 2010 n\a. All rights reserved.
 //
 
-#import "Scheduler.h"
+#import "CTCScheduler.h"
 #import "Catch.h"
 #import "CTCFeedChecker.h"
 
 
-@interface Scheduler ()
+@interface CTCScheduler ()
 
 @property (strong, nonatomic) NSTimer* repeatingTimer;
 @property (strong, nonatomic) NSXPCConnection *feedCheckerConnection;
@@ -21,7 +21,7 @@
 @end
 
 
-@implementation Scheduler
+@implementation CTCScheduler
 
 - (id)init {
     self = [super init];
