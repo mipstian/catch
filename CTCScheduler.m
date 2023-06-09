@@ -56,10 +56,7 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
     NSArray *history = CTCDefaults.downloadHistory;
     
     // Extract URLs from history
-    NSMutableArray *previouslyDownloadedURLs = NSMutableArray.array;
-    for (NSDictionary *historyEntry in history) {
-        [previouslyDownloadedURLs addObject:historyEntry[@"url"]];
-    }
+    NSArray *previouslyDownloadedURLs = [history valueForKey:@"url"];
     
     // Call feed checker service
     CTCFeedChecker *feedChecker = [self.feedCheckerConnection remoteObjectProxy];
