@@ -29,6 +29,7 @@
 		44717ADB1913AE2400580054 /* CTCFeedParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717AAC19131BC700580054 /* CTCFeedParser.m */; };
 		44717ADD1913AF3400580054 /* CTCFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717AA91913173600580054 /* CTCFileUtils.m */; };
 		448CC7E817FE1F840063D3FD /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 448CC7E617FE1F840063D3FD /* Sparkle.framework */; };
+		44EAD12E1916682D002C7443 /* CTCApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 44EAD12D1916682D002C7443 /* CTCApplication.m */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
@@ -119,6 +120,8 @@
 		448CECE019157B880075ADD9 /* nl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/UI.strings; sourceTree = "<group>"; };
 		448CECE119157BB10075ADD9 /* zh-Hans */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/UI.strings"; sourceTree = "<group>"; };
 		448CECE219157BDF0075ADD9 /* zh-Hant */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/UI.strings"; sourceTree = "<group>"; };
+		44EAD12C1916682D002C7443 /* CTCApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCApplication.h; sourceTree = "<group>"; };
+		44EAD12D1916682D002C7443 /* CTCApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCApplication.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Catch-Info.plist */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; path = "Catch-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Catch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -148,6 +151,8 @@
 		080E96DDFE201D6D7F000001 /* Catch */ = {
 			isa = PBXGroup;
 			children = (
+				44EAD12C1916682D002C7443 /* CTCApplication.h */,
+				44EAD12D1916682D002C7443 /* CTCApplication.m */,
 				3803C7AC11C3DA9300FC08DB /* CTCAppDelegate.h */,
 				3803C7AD11C3DA9300FC08DB /* CTCAppDelegate.m */,
 				38D39B5E11C3A6E100C17C80 /* CTCMenuController.h */,
@@ -377,6 +382,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
+				44EAD12E1916682D002C7443 /* CTCApplication.m in Sources */,
 				44717AA4191300B300580054 /* CTCDefaults.m in Sources */,
 				38D39B6011C3A6E100C17C80 /* CTCMenuController.m in Sources */,
 				3803C7AE11C3DA9300FC08DB /* CTCAppDelegate.m in Sources */,
