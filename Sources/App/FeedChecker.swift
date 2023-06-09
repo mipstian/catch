@@ -1,4 +1,5 @@
 import Foundation
+import AppKit
 
 
 enum FeedCheckerError: Error {
@@ -123,18 +124,12 @@ final class FeedChecker {
       if Defaults.shared.shouldOpenTorrentsAutomatically {
         if episode.url.isMagnetLink {
           // Open magnet link
-          Browser.openInBackground(url: episode.url)
+          NSWorkspace.shared.openInBackground(url: episode.url)
         } else if episode.url.absoluteString.isTorrentFilePath {
           // Open torrent file
-          Browser.openInBackground(file: downloadedEpisode.localURL!.path)
+          NSWorkspace.shared.openInBackground(file: downloadedEpisode.localURL!.path)
         } else {
-          // TODO: consolidate
-          if Defaults.shared.downloadScriptEnabled, let downloadScriptPath = Defaults.shared.downloadScriptPath {
-            Process.launchedProcess(
-              launchPath: downloadScriptPath.path,
-              arguments: [episode.url.absoluteString]
-            )
-          }
+          Process.runDownloadScript(url: episode.url)
         }
       }
       

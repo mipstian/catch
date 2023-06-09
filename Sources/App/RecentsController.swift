@@ -135,7 +135,7 @@ extension RecentsController {
     let clickedRow = table.row(for: senderButton)
     let recentEpisode = Defaults.shared.downloadHistory[clickedRow].episode
     if recentEpisode.url.isMagnetLink {
-      Browser.openInBackground(url: recentEpisode.url)
+      NSWorkspace.shared.openInBackground(url: recentEpisode.url)
     } else if recentEpisode.url.absoluteString.isTorrentFilePath {
       guard Defaults.shared.isConfigurationValid, let downloadOptions = Defaults.shared.downloadOptions else {
         NSLog("Cannot download torrent file with invalid preferences")
@@ -149,7 +149,7 @@ extension RecentsController {
           switch result {
           case .success(let downloadedEpisode):
             if Defaults.shared.shouldOpenTorrentsAutomatically {
-              Browser.openInBackground(file: downloadedEpisode.localURL!.path)
+              NSWorkspace.shared.openInBackground(file: downloadedEpisode.localURL!.path)
             }
           case .failure(let error):
             NSLog("Feed Helper error (downloading file): \(error)")
@@ -157,13 +157,7 @@ extension RecentsController {
         }
       )
     } else {
-      // TODO: consolidate
-      if Defaults.shared.downloadScriptEnabled, let downloadScriptPath = Defaults.shared.downloadScriptPath {
-        Process.launchedProcess(
-          launchPath: downloadScriptPath.path,
-          arguments: [recentEpisode.url.absoluteString]
-        )
-      }
+      Process.runDownloadScript(url: recentEpisode.url)
     }
   }
   
