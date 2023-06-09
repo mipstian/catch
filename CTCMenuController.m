@@ -185,7 +185,6 @@
         }
         newItem.enabled = NO;
         [self.menuRecentTorrents.submenu addItem:newItem];
-        
     }];
     
     // Put the Show in finder menu back
