@@ -17,11 +17,7 @@
                 <outlet property="delegate" destination="205" id="801"/>
             </connections>
         </customObject>
-        <customObject id="205" customClass="CTCAppDelegate">
-            <connections>
-                <outlet property="preferencesController" destination="vyd-92-YXh" id="Vzp-gF-Omq"/>
-            </connections>
-        </customObject>
+        <customObject id="205" customClass="CTCAppDelegate"/>
         <customObject id="528" customClass="CTCMenuController">
             <connections>
                 <outlet property="menu" destination="523" id="529"/>
@@ -274,7 +270,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="lfS-iv-ge7"/>
                                                         </constraints>
-                                                        <amVariablePopUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="794">
+                                                        <amVariablePopUpButtonCell key="cell" type="push" title="Desktop" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" tag="1004" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" id="794">
                                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                             <font key="font" metaFont="menu"/>
                                                             <menu key="menu" title="OtherViews" id="795"/>
