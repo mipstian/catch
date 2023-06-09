@@ -9,6 +9,8 @@ class PreferencesView: NSView {
   @IBOutlet weak var openAutomaticallyCheckbox: NSButton!
   @IBOutlet weak var downloadScriptCheckbox: NSButton!
   
+  @IBOutlet weak var openAtLoginButton: NSButton!
+  
   @IBOutlet weak var toolBar: NSToolbar!
   
   override func awakeFromNib() {
@@ -20,6 +22,8 @@ class PreferencesView: NSView {
     organizeCheckbox.title = NSLocalizedString("Organize in folders by show name", comment: "")
     openAutomaticallyCheckbox.title = NSLocalizedString("Open automatically", comment: "")
     downloadScriptCheckbox.title = NSLocalizedString("Download using script:", comment: "")
+    
+    openAtLoginButton.title = NSLocalizedString("Open at Login", comment: "")
     
     for item in toolBar.items {
       item.label = NSLocalizedString(item.itemIdentifier.rawValue, comment: "")

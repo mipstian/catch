@@ -7,4 +7,5 @@ extension URL {
   static let bugReportURL = URL(string: "https://github.com/mipstian/catch/issues/new?labels=bug")!
   static let featureRequestURL = URL(string: "https://github.com/mipstian/catch/issues/new?labels=enhancement")!
   static let helpURL = URL(string: "https://github.com/mipstian/catch/wiki/Configuration")!
+  static let openAtLoginHelpURL = URL(string: "https://github.com/mipstian/catch/wiki/Have-Catch-Automatically-Open-at-Login")!
 }

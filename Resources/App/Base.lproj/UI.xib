@@ -526,10 +526,10 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3el-4q-ruU">
-                                            <rect key="frame" x="0.0" y="197" width="660" height="40"/>
+                                            <rect key="frame" x="0.0" y="161" width="660" height="76"/>
                                             <subviews>
                                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="AN1-pr-EUN">
-                                                    <rect key="frame" x="-2" y="23" width="231" height="18"/>
+                                                    <rect key="frame" x="-2" y="59" width="231" height="18"/>
                                                     <buttonCell key="cell" type="check" title="Prevent system sleep when active" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="kuL-eb-cd0">
                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                         <font key="font" metaFont="system"/>
@@ -539,18 +539,38 @@
                                                     </connections>
                                                 </button>
                                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="806">
-                                                    <rect key="frame" x="-2" y="-1" width="221" height="18"/>
+                                                    <rect key="frame" x="-2" y="35" width="221" height="18"/>
                                                     <buttonCell key="cell" type="check" title="Automatically check for updates" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="807">
                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                         <font key="font" metaFont="system"/>
                                                     </buttonCell>
                                                 </button>
+                                                <customView translatesAutoresizingMaskIntoConstraints="NO" id="4Ft-Fu-CAY">
+                                                    <rect key="frame" x="0.0" y="28" width="163" height="0.0"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" id="Jmo-F3-BvH"/>
+                                                    </constraints>
+                                                </customView>
+                                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zcn-Kt-bTj">
+                                                    <rect key="frame" x="-7" y="-7" width="120" height="32"/>
+                                                    <buttonCell key="cell" type="push" title="Open at Login" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="r4V-EW-8yf">
+                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <connections>
+                                                        <action selector="browseOpenAtLoginHelp:" target="205" id="vPa-hj-X2R"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <visibilityPriorities>
                                                 <integer value="1000"/>
                                                 <integer value="1000"/>
+                                                <integer value="1000"/>
+                                                <integer value="1000"/>
                                             </visibilityPriorities>
                                             <customSpacing>
+                                                <real value="3.4028234663852886e+38"/>
+                                                <real value="3.4028234663852886e+38"/>
                                                 <real value="3.4028234663852886e+38"/>
                                                 <real value="3.4028234663852886e+38"/>
                                             </customSpacing>
@@ -620,6 +640,7 @@ DQ
                 <connections>
                     <outlet property="downloadScriptCheckbox" destination="GJR-jo-BJL" id="z5g-lf-uhF"/>
                     <outlet property="importFromOPMLButton" destination="SIo-Vm-tN9" id="lme-NT-tYN"/>
+                    <outlet property="openAtLoginButton" destination="zcn-Kt-bTj" id="UII-u5-8iI"/>
                     <outlet property="openAutomaticallyCheckbox" destination="shg-7R-wuU" id="wCo-7O-0Ts"/>
                     <outlet property="organizeCheckbox" destination="bJl-7q-4yr" id="jET-Ex-bVY"/>
                     <outlet property="saveToLabel" destination="5qh-sS-yih" id="Y9T-XU-dwg"/>
@@ -656,7 +677,7 @@ DQ
         <window title="Recent Episodes" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="aQN-n7-TBr" userLabel="Recent Episodes" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="120" y="64" width="431" height="435"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1055"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
             <value key="minSize" type="size" width="200" height="300"/>
             <view key="contentView" id="gSi-VU-gYd">
                 <rect key="frame" x="0.0" y="0.0" width="451" height="435"/>
@@ -779,7 +800,7 @@ DQ
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="213" width="572" height="151"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1055"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
             <view key="contentView" id="JVG-A7-ap0" customClass="AddFeedView" customModule="Catch" customModuleProvider="target">
                 <rect key="frame" x="0.0" y="0.0" width="572" height="132"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -858,7 +879,7 @@ DQ
         <window title="Feed Contents" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="6AF-Wa-kWE">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="689" y="399" width="600" height="600"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1055"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
             <view key="contentView" id="apF-ZH-7em">
                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                 <autoresizingMask key="autoresizingMask"/>
