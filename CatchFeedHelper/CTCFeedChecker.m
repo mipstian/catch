@@ -77,26 +77,26 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
 }
 
 - (NSXMLDocument*)downloadFeed:(NSURL*)feedURL {
-	NSLog(@"Downloading feed %@", feedURL);
+    NSLog(@"Downloading feed %@", feedURL);
     
     // Flush the cache, we want fresh results
     [NSURLCache.sharedURLCache removeAllCachedResponses];
-	
-	NSError *error = nil;
-	
-	// Create a NSXMLDocument by downloading feed
-	NSXMLDocument *document = [[NSXMLDocument alloc] initWithContentsOfURL:feedURL
+    
+    NSError *error = nil;
+    
+    // Create a NSXMLDocument by downloading feed
+    NSXMLDocument *document = [[NSXMLDocument alloc] initWithContentsOfURL:feedURL
                                                                    options:NSXMLNodeOptionsNone
                                                                      error:&error];
-	
+    
     if (!document) {
         NSLog(@"Feed download failed: %@", error);
         return nil;
     }
     
-	NSLog(@"Feed downloaded");
-	
-	return document;
+    NSLog(@"Feed downloaded");
+    
+    return document;
 }
 
 - (NSURL *)URLFromBookmark:(NSData *)bookmark {
@@ -121,30 +121,30 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
         organizingByFolder:(BOOL)shouldOrganizeByFolder
               skippingURLs:(NSArray *)previouslyDownloadedURLs
                      error:(NSError * __autoreleasing *)error {
-	NSLog(@"Downloading files (if needed)");
-	
+    NSLog(@"Downloading files (if needed)");
+    
     NSMutableArray *successfullyDownloadedFeedFiles = NSMutableArray.array;
     
-	for (NSDictionary *file in feedFiles) {
-		NSString *url = file[@"url"];
-		
+    for (NSDictionary *file in feedFiles) {
+        NSString *url = file[@"url"];
+        
         // Skip old files
         if ([previouslyDownloadedURLs containsObject:url]) continue;
         
         BOOL isMagnetLink = [url rangeOfString:@"magnet:"].location == 0;
-		
-		// The file is new, open magnet or download torrent
-		if (isMagnetLink) {
+        
+        // The file is new, open magnet or download torrent
+        if (isMagnetLink) {
             NSLog(@"Found magnet %@ at %@", file[@"title"], url);
             
             [successfullyDownloadedFeedFiles addObject:@{@"url": file[@"url"],
                                                          @"title": file[@"title"],
                                                          @"isMagnetLink": @YES}];
-		}
+        }
         else {
-			NSLog(@"Found file %@ at %@", file[@"title"], url);
+            NSLog(@"Found file %@ at %@", file[@"title"], url);
             
-			// First get the folder, if we want it and it's available
+            // First get the folder, if we want it and it's available
             NSString *showName = shouldOrganizeByFolder && ![file[@"showName"] isEqualTo:NSNull.null] ? file[@"showName"] : nil;
             
             NSString *downloadedTorrentFile = [self downloadFile:[NSURL URLWithString:url]
@@ -162,10 +162,10 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
                                              code:-3
                                          userInfo:nil];
             }
-		}
-	}
-	
-	return successfullyDownloadedFeedFiles.copy;
+        }
+    }
+    
+    return successfullyDownloadedFeedFiles.copy;
 }
 
 - (NSString *)downloadFile:(NSURL *)fileURL
@@ -173,69 +173,69 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
               withShowName:(NSString *)showName {
     NSString *folder = [CTCFileUtils folderNameForShowWithName:showName];
     
-	if (folder) NSLog(@"Downloading file %@ in folder %@",fileURL,folder);
-	else NSLog(@"Downloading file %@",fileURL);
-	
-	NSError *error = nil;
-	
-	// Download!
-	NSData *downloadedFile = nil;
-	NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:fileURL];
-	NSURLResponse *urlResponse = NSURLResponse.new;
-	NSError *downloadError = NSError.new;
-	downloadedFile = [NSURLConnection sendSynchronousRequest:urlRequest
+    if (folder) NSLog(@"Downloading file %@ in folder %@",fileURL,folder);
+    else NSLog(@"Downloading file %@",fileURL);
+    
+    NSError *error = nil;
+    
+    // Download!
+    NSData *downloadedFile = nil;
+    NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:fileURL];
+    NSURLResponse *urlResponse = NSURLResponse.new;
+    NSError *downloadError = NSError.new;
+    downloadedFile = [NSURLConnection sendSynchronousRequest:urlRequest
                                            returningResponse:&urlResponse
                                                        error:&downloadError];
-	
-	if (!downloadedFile) return nil;
     
-	NSLog(@"Download complete, filesize: %lu", (unsigned long)downloadedFile.length);
-	
-	// Get the suggested filename, append extension if needed
-	NSString *filename = [CTCFileUtils addTorrentExtensionTo:urlResponse.suggestedFilename];
+    if (!downloadedFile) return nil;
     
-	// Compute destination path
-	NSArray *pathComponents = downloadPath.pathComponents;
-	if (folder) pathComponents = [pathComponents arrayByAddingObject:folder];
-	NSString *pathAndFolder = [NSString pathWithComponents:pathComponents].stringByStandardizingPath;
-	pathComponents = [pathComponents arrayByAddingObject:filename];
-	NSString *pathAndFilename = [NSString pathWithComponents:pathComponents].stringByStandardizingPath;
-	
-	NSLog(@"Computed file destination %@", pathAndFilename);
-	
-	// Check if the destination dir exists, if it doesn't create it
-	BOOL pathAndFolderIsDirectory = NO;
-	if ([NSFileManager.defaultManager fileExistsAtPath:pathAndFolder
+    NSLog(@"Download complete, filesize: %lu", (unsigned long)downloadedFile.length);
+    
+    // Get the suggested filename, append extension if needed
+    NSString *filename = [CTCFileUtils addTorrentExtensionTo:urlResponse.suggestedFilename];
+    
+    // Compute destination path
+    NSArray *pathComponents = downloadPath.pathComponents;
+    if (folder) pathComponents = [pathComponents arrayByAddingObject:folder];
+    NSString *pathAndFolder = [NSString pathWithComponents:pathComponents].stringByStandardizingPath;
+    pathComponents = [pathComponents arrayByAddingObject:filename];
+    NSString *pathAndFilename = [NSString pathWithComponents:pathComponents].stringByStandardizingPath;
+    
+    NSLog(@"Computed file destination %@", pathAndFilename);
+    
+    // Check if the destination dir exists, if it doesn't create it
+    BOOL pathAndFolderIsDirectory = NO;
+    if ([NSFileManager.defaultManager fileExistsAtPath:pathAndFolder
                                            isDirectory:&pathAndFolderIsDirectory]) {
-		if (!pathAndFolderIsDirectory) {
-			// Exists but isn't a directory! Aaargh! Abort!
-			return nil;
-		}
-	}
+        if (!pathAndFolderIsDirectory) {
+            // Exists but isn't a directory! Aaargh! Abort!
+            return nil;
+        }
+    }
     else {
-		// Create folder
-		if (![NSFileManager.defaultManager createDirectoryAtPath:pathAndFolder
+        // Create folder
+        if (![NSFileManager.defaultManager createDirectoryAtPath:pathAndFolder
                                      withIntermediateDirectories:YES
                                                       attributes:nil
                                                            error:&error]) {
-			// Folder creation failed :( Abort
-			NSLog(@"Couldn't create folder %@", pathAndFolder);
-			return nil;
-		}
+            // Folder creation failed :( Abort
+            NSLog(@"Couldn't create folder %@", pathAndFolder);
+            return nil;
+        }
         else {
-			NSLog(@"Folder %@ created", pathAndFolder);
-		}
-	}
-	
-	// Write!
+            NSLog(@"Folder %@ created", pathAndFolder);
+        }
+    }
+    
+    // Write!
     BOOL wasWrittenSuccessfully = [downloadedFile writeToFile:pathAndFilename
                                                    atomically:YES];
-	if (!wasWrittenSuccessfully) {
-		NSLog(@"Couldn't save file %@ to disk", pathAndFilename);
-		return nil;
-	}
-	
-	return pathAndFilename;
+    if (!wasWrittenSuccessfully) {
+        NSLog(@"Couldn't save file %@ to disk", pathAndFilename);
+        return nil;
+    }
+    
+    return pathAndFilename;
 }
 
 @end

@@ -7,11 +7,11 @@ static NSString * const kCTCFileUtilsTorrentExtension = @".torrent";
 @implementation CTCFileUtils
 
 + (NSString *)computeFilenameFromURL:(NSURL*)fileURL {
-	// Compute destination filename
-	NSString *filename = fileURL.path.pathComponents.lastObject;
+    // Compute destination filename
+    NSString *filename = fileURL.path.pathComponents.lastObject;
     
     // Reverse urlencode
-	return [filename stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    return [filename stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
 + (NSString *)addTorrentExtensionTo:(NSString*)filename {

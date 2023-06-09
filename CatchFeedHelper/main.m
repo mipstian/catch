@@ -9,5 +9,5 @@ int main(int argc, const char *argv[]) {
     serviceListener.delegate = feedChecker;
     [serviceListener resume];
 
-	return 0;
+    return 0;
 }

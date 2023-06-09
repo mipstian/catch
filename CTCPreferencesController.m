@@ -49,8 +49,8 @@
 }
 
 - (IBAction)savePreferences:(id)sender {
-	[CTCDefaults save];
-	
+    [CTCDefaults save];
+    
     if (CTCDefaults.isConfigurationValid) {
         // Hide the Preferences window
         [self.window close];
@@ -71,13 +71,13 @@
 }
 
 - (IBAction)showFeeds:(id)sender {
-	// Select the Feeds tab
+    // Select the Feeds tab
     self.window.toolbar.selectedItemIdentifier = @"Feed";
 }
 
 - (IBAction)showTweaks:(id)sender {
-	// Select the Tweaks tab
-	self.window.toolbar.selectedItemIdentifier = @"Tweaks";
+    // Select the Tweaks tab
+    self.window.toolbar.selectedItemIdentifier = @"Tweaks";
 }
 
 - (void)dealloc {
