@@ -171,6 +171,7 @@ NSString * const kCTCSchedulerStatusChangedNotificationName = @"com.giorgiocalde
     [feedChecker checkShowRSSFeed:feedURL
             downloadingToBookmark:[self downloadFolderBookmark]
                organizingByFolder:CTCDefaults.shouldOrganizeTorrentsInFolders
+                savingMagnetLinks:!CTCDefaults.shouldOpenTorrentsAutomatically
                      skippingURLs:previouslyDownloadedURLs
                         withReply:^(NSArray *downloadedFeedFiles, NSError *error) {
                             if (error) {
@@ -215,6 +216,7 @@ NSString * const kCTCSchedulerStatusChangedNotificationName = @"com.giorgiocalde
     [feedChecker downloadFile:file
                    toBookmark:[self downloadFolderBookmark]
            organizingByFolder:CTCDefaults.shouldOrganizeTorrentsInFolders
+            savingMagnetLinks:!CTCDefaults.shouldOpenTorrentsAutomatically
                     withReply:^(NSDictionary *downloadedFile, NSError *error) {
                         if (error) {
                             NSLog(@"Feed Checker error (downloading file): %@", error);
