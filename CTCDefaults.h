@@ -5,14 +5,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 extern NSTimeInterval const kCTCDefaultsFeedUpdateInterval;
 
-// Constant, non-localized, non-UI-related strings
-extern NSString * const kCTCDefaultsApplicationWebsiteURL;
-extern NSString * const kCTCDefaultsApplicationBugReportURL;
-extern NSString * const kCTCDefaultsApplicationFeatureRequestURL;
-extern NSString * const kCTCDefaultsApplicationHelpURL;
-extern NSString * const kCTCDefaultsServiceURL;
-extern NSString * const kCTCDefaultsServiceFeedURLRegex;
-
 
 @interface CTCDefaults : NSObject
 
