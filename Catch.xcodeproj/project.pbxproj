@@ -66,6 +66,7 @@
 		A74F608D25B57C6100BA52A0 /* FeedContentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74F608C25B57C6100BA52A0 /* FeedContentsController.swift */; };
 		A74F609525B5C27100BA52A0 /* FeedCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74F609425B5C27100BA52A0 /* FeedCellView.swift */; };
 		A77DD09625B43CF400886D57 /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77DD09525B43CF400886D57 /* PreferencesView.swift */; };
+		A7FA8FE226072836002FC21E /* AddFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FA8FE126072836002FC21E /* AddFeedView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -186,6 +187,7 @@
 		A74F608C25B57C6100BA52A0 /* FeedContentsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FeedContentsController.swift; path = Sources/App/FeedContentsController.swift; sourceTree = "<group>"; };
 		A74F609425B5C27100BA52A0 /* FeedCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FeedCellView.swift; path = Sources/App/FeedCellView.swift; sourceTree = "<group>"; };
 		A77DD09525B43CF400886D57 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PreferencesView.swift; path = Sources/App/PreferencesView.swift; sourceTree = "<group>"; };
+		A7FA8FE126072836002FC21E /* AddFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -284,6 +286,7 @@
 		4439DFD719B5E45700408851 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A7FA8FE126072836002FC21E /* AddFeedView.swift */,
 				44BA5D151DAECF1A00A9CE9A /* RecentsCellView.swift */,
 				A74F609425B5C27100BA52A0 /* FeedCellView.swift */,
 				A77DD09525B43CF400886D57 /* PreferencesView.swift */,
@@ -581,6 +584,7 @@
 				4441F59624308C8D001AEC1E /* Scripts.swift in Sources */,
 				44B363461DC99D1900128259 /* FeedChecker.swift in Sources */,
 				44C8198B220D73DC00D9DAAD /* OPMLParser.swift in Sources */,
+				A7FA8FE226072836002FC21E /* AddFeedView.swift in Sources */,
 				44BA5D121DAEC0C400A9CE9A /* WindowShakeAnimation.swift in Sources */,
 				447E0F731DDAB24C001048AB /* FileUtils.swift in Sources */,
 				44B3634A1DC9BF1B00128259 /* Config.swift in Sources */,

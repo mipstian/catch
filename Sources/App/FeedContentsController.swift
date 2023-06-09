@@ -12,6 +12,8 @@ class FeedContentsController: NSWindowController {
   override func awakeFromNib() {
     super.awakeFromNib()
     
+    window?.title = NSLocalizedString("Feed Contents", comment: "")
+    
     if #available(OSX 10.15, *) {
       textView.font = .monospacedSystemFont(ofSize: 12, weight: .regular)
     }
