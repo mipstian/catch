@@ -23,7 +23,7 @@ extern NSString * const SERVICE_FEED_LEGACY_URL_PREFIX;
 
 - (void)schedulerStatusActive:(BOOL)isActive running:(BOOL)isRunning;
 
-- (void)lastUpdateStatus:(int)status time:(NSDate*)time;
+- (void)lastUpdateStatus:(BOOL)lastUpdateWasSuccessful time:(NSDate*)time;
 
 - (void)checkNow;
 

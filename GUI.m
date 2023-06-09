@@ -129,12 +129,12 @@
 	}
 }
 
-- (void)setLastUpdateStatus:(int)status time:(NSDate *)time {
+- (void)setLastUpdateStatus:(BOOL)lastUpdateWasSuccessful time:(NSDate *)time {
 	// Create something like "Last update: 3:45 AM" and place it in the menu
 	NSString *baseLastUpdateString = nil;
 	NSString *lastUpdateString = nil;
 	
-	if (status) {
+	if (lastUpdateWasSuccessful) {
 		baseLastUpdateString = NSLocalizedString(@"lastupdate", @"Title for the last update time");
 	} else {
 		baseLastUpdateString = NSLocalizedString(@"lastupdatefailed", @"Title for the last update time if it fails");

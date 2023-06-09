@@ -65,8 +65,8 @@ NSString * const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info
 	[self.gui setStatusActive:isActive running:isRunning];
 }
 
-- (void)lastUpdateStatus:(int)status time:(NSDate*)time {
-	[self.gui setLastUpdateStatus:status time:time];
+- (void)lastUpdateStatus:(BOOL)lastUpdateWasSuccessful time:(NSDate*)time {
+	[self.gui setLastUpdateStatus:lastUpdateWasSuccessful time:time];
 	
 	// Also refresh the list of recently downloaded torrents
 	// Get the full list
