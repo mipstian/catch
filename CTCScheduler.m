@@ -111,7 +111,7 @@
 - (void)forceCheck {
 	NSLog(@"Forcing feed check");
     
-	// Set the next timer fire date to be ASAP
+	// Check feed right now ignoring time restrictions and "paused" mode
 	[self checkFeed];
 }
 
@@ -124,8 +124,8 @@
 	}
 	
 	// Don't check if current time is outside user-defined range
-    BOOL restrictedCheckTimesEnabled = [NSUserDefaults.standardUserDefaults boolForKey:PREFERENCE_KEY_ONLY_UPDATE_BETWEEN];
-	if (restrictedCheckTimesEnabled && ![self checkTime]) {
+    BOOL timeRestrictionsEnabled = [NSUserDefaults.standardUserDefaults boolForKey:PREFERENCE_KEY_ONLY_UPDATE_BETWEEN];
+	if (timeRestrictionsEnabled && ![self checkTime]) {
         NSLog(@"Scheduler tick skipped (outside of user-defined time range)");
         return;
 	}
