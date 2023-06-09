@@ -1,4 +1,5 @@
 import Foundation
+import os
 
 
 private extension XMLNode {
@@ -13,18 +14,18 @@ private extension Feed {
   init?(itemNode: XMLNode) {
     // Get the item URL
     guard let urlString = itemNode["@xmlUrl"] else {
-      NSLog("Missing feed URL")
+      os_log("Missing feed URL", log: .main, type: .info)
       return nil
     }
     
     guard let url = URL(string: urlString) else {
-      NSLog("Invalid feed URL: \(urlString)")
+      os_log("Invalid feed URL: %{public}@", log: .main, type: .info, urlString)
       return nil
     }
     
     // Get the name
     guard let name = itemNode["@title"] ?? itemNode["@text"], name != "" else {
-      NSLog("Missing or empty feed title")
+      os_log("Missing or empty feed title", log: .main, type: .info)
       return nil
     }
     
@@ -63,7 +64,7 @@ private extension Feed {
 // Parses feeds out of an OPML file.
 struct OPMLParser {
   func parse(opml: Data) throws -> [Feed] {
-    NSLog("Parsing OPML file")
+    os_log("Parsing OPML file", log: .main, type: .info)
     
     // Parse xml
     let xml = try XMLDocument(data: opml)
@@ -74,7 +75,7 @@ struct OPMLParser {
     // Extract episodes from NSXMLNodes
     let feeds = outlineNodes.compactMap(Feed.init(itemNode:))
     
-    NSLog("Parsed \(feeds.count) feeds")
+    os_log("Parsed %d feeds", log: .main, type: .info, feeds.count)
     
     return feeds
   }
@@ -83,7 +84,7 @@ struct OPMLParser {
 // Creates an OPML file from feeds.
 struct OPMLSerializer {
   func serialize(feeds: [Feed]) throws -> Data {
-    NSLog("Serializing OPML file")
+    os_log("Serializing OPML file", log: .main, type: .info)
     
     let xml = XMLDocument()
     xml.characterEncoding = "utf-8"

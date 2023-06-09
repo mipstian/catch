@@ -1,4 +1,5 @@
 import Foundation
+import os
 
 
 extension URL {
@@ -24,12 +25,12 @@ extension URL {
     }
     
     guard ["http", "https"].contains(scheme) else {
-      NSLog("Bad scheme in feed URL: \(scheme)")
+      os_log("Bad scheme in feed URL: %{public}@", log: .main, type: .info, scheme)
       return false
     }
     
     if isShowRSSFeed && !hasShowRSSNamespacesFlag {
-      NSLog("Feed URL does not have namespaces enabled")
+      os_log("Feed URL does not have namespaces enabled", log: .main, type: .info)
       return false
     }
     
