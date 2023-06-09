@@ -38,7 +38,7 @@ final class FeedHelperProxy {
     urls: [URL],
     downloadOptions: DownloadOptions,
     previouslyDownloadedURLs: [URL],
-    completion: @escaping (Result<[DownloadedEpisode]>) -> Void) {
+    completion: @escaping (Result<[DownloadedEpisode], Error>) -> Void) {
     service.checkFeeds(
       urls: urls.map { $0.absoluteString },
       downloadingToBookmark: downloadOptions.containerDirectoryBookmark,
@@ -63,7 +63,7 @@ final class FeedHelperProxy {
   func download(
     episode: Episode,
     downloadOptions: DownloadOptions,
-    completion: @escaping (Result<DownloadedEpisode>) -> Void) {
+    completion: @escaping (Result<DownloadedEpisode, Error>) -> Void) {
     service.download(
       episode: episode.dictionaryRepresentation,
       toBookmark: downloadOptions.containerDirectoryBookmark,
