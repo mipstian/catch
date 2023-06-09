@@ -334,11 +334,11 @@
                             </tabViewItem>
                             <tabViewItem label="Tweaks" identifier="Tweaks" id="618">
                                 <view key="view" id="619">
-                                    <rect key="frame" x="0.0" y="0.0" width="660" height="247"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="660" height="235"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="652">
-                                            <rect key="frame" x="-2" y="231" width="243" height="18"/>
+                                            <rect key="frame" x="6" y="219" width="243" height="18"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <buttonCell key="cell" type="check" title="Show notifications for new torrents" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="653">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -349,7 +349,7 @@
                                             </connections>
                                         </button>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="806">
-                                            <rect key="frame" x="-2" y="211" width="225" height="18"/>
+                                            <rect key="frame" x="6" y="199" width="225" height="18"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <buttonCell key="cell" type="check" title="Automatically check for updates" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="807">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -360,7 +360,7 @@
                                             </connections>
                                         </button>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="980">
-                                            <rect key="frame" x="-2" y="191" width="108" height="18"/>
+                                            <rect key="frame" x="6" y="179" width="108" height="18"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <buttonCell key="cell" type="check" title="Open at login" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="981">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -373,15 +373,15 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="806" firstAttribute="leading" secondItem="652" secondAttribute="leading" id="3cg-2A-Zyo"/>
-                                        <constraint firstItem="652" firstAttribute="leading" secondItem="619" secondAttribute="leading" id="Mpi-Ay-TGx"/>
+                                        <constraint firstItem="652" firstAttribute="leading" secondItem="619" secondAttribute="leading" constant="8" id="Mpi-Ay-TGx"/>
                                         <constraint firstItem="980" firstAttribute="leading" secondItem="806" secondAttribute="leading" id="eOq-Pl-fQQ"/>
                                         <constraint firstItem="806" firstAttribute="top" secondItem="652" secondAttribute="bottom" constant="6" symbolic="YES" id="eRB-fJ-kcd"/>
-                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="652" secondAttribute="trailing" id="f23-sx-OE7"/>
-                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="980" secondAttribute="trailing" id="gBa-I7-Gio"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="652" secondAttribute="trailing" constant="8" id="f23-sx-OE7"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="980" secondAttribute="trailing" constant="8" id="gBa-I7-Gio"/>
                                         <constraint firstItem="980" firstAttribute="top" secondItem="806" secondAttribute="bottom" constant="6" symbolic="YES" id="iU6-Yv-JbL"/>
                                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="980" secondAttribute="bottom" id="m8q-dT-lw6"/>
                                         <constraint firstItem="652" firstAttribute="top" secondItem="619" secondAttribute="top" id="ogf-Q7-fVo"/>
-                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="806" secondAttribute="trailing" id="w78-yn-iee"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="806" secondAttribute="trailing" constant="8" id="w78-yn-iee"/>
                                     </constraints>
                                 </view>
                             </tabViewItem>
