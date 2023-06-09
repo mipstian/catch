@@ -24,4 +24,15 @@ static NSString * const kCTCFileUtilsTorrentExtension = @".torrent";
     return extensionMissing ? [filename stringByAppendingString:kCTCFileUtilsTorrentExtension] : filename;
 }
 
++ (NSString *)userDownloadsDirectory {
+    NSArray *searchPaths = NSSearchPathForDirectoriesInDomains(NSDownloadsDirectory, NSUserDomainMask, YES);
+    
+    // Might be nil!
+    return searchPaths.firstObject;
+}
+
++ (NSString *)userHomeDirectory {
+    return NSHomeDirectory();
+}
+
 @end

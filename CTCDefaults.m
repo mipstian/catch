@@ -39,24 +39,16 @@ NSString * const kCTCDefaultsOpenAtLoginKey = @"openAtLogin";
     comps.hour = 8;
 	NSDate *dateTo = [calendar dateFromComponents:comps];
 	
-	// Search for user's Downloads directory (by the book)
-	NSString *downloadsDirectory;
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDownloadsDirectory, NSUserDomainMask, YES);
-	if (paths.count > 0) {
-		downloadsDirectory = paths.firstObject;
-		NSLog(@"Default save path is %@", downloadsDirectory);
-	} else {
-		// Default to ~/Downloads/ (at this point it probably won't work though)
-		NSLog(@"Defaulting to ~/Downloads/ for save path");
-		downloadsDirectory = @"~/Downloads/";
-	}
+	// Use user's Downloads directory as a default, fallback on home
+	NSString *defaultDownloadsDirectory = CTCFileUtils.userDownloadsDirectory ?: CTCFileUtils.userHomeDirectory;
+    NSLog(@"Default downloads directory is %@", defaultDownloadsDirectory);
 	
 	// Set smart defaults for the preferences
 	NSDictionary *appDefaults = @{kCTCDefaultsFeedURLKey: @"",
                                   kCTCDefaultsOnlyUpdateBetweenKey: @NO,
                                   kCTCDefaultsUpdateFromKey: dateFrom,
                                   kCTCDefaultsUpdateToKey: dateTo,
-                                  kCTCDefaultsTorrentsSavePathKey: downloadsDirectory,
+                                  kCTCDefaultsTorrentsSavePathKey: defaultDownloadsDirectory,
                                   kCTCDefaultsShouldOrganizeTorrents: @NO,
                                   kCTCDefaultsShouldOpenTorrentsAutomatically: @YES,
                                   kCTCDefaultsShouldSendNotificationsKey: @YES,

@@ -3,8 +3,12 @@
 
 @interface CTCFileUtils : NSObject
 
-+ (NSString*)computeFilenameFromURL:(NSURL*)fileURL;
++ (NSString *)computeFilenameFromURL:(NSURL*)fileURL;
 
-+ (NSString*)addTorrentExtensionTo:(NSString*)filename;
++ (NSString *)addTorrentExtensionTo:(NSString*)filename;
+
++ (NSString *)userDownloadsDirectory;
+
++ (NSString *)userHomeDirectory;
 
 @end
