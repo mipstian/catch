@@ -59,7 +59,7 @@
         [CTCScheduler.sharedScheduler downloadFile:recentToDownload
                                         completion:^(NSDictionary *downloadedFile, NSError *error) {
                 if (downloadedFile && CTCDefaults.shouldOpenTorrentsAutomatically) {
-                    [NSWorkspace.sharedWorkspace openFile:downloadedFile[@"torrentFilePath"]];
+                    [CTCBrowser openInBackgroundFile:downloadedFile[@"torrentFilePath"]];
                 }
          }];
     }

@@ -5,4 +5,6 @@
 
 + (void)openInBackgroundURL:(NSURL *)url;
 
++ (void)openInBackgroundFile:(NSString *)file;
+
 @end

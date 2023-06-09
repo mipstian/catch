@@ -38,4 +38,11 @@
                         launchIdentifiers:nil];
 }
 
++ (void)openInBackgroundFile:(NSString *)file {
+    // Open a file without bringing app that handles it to the foreground
+    [NSWorkspace.sharedWorkspace openFile:file
+                          withApplication:nil
+                            andDeactivate:NO];
+}
+
 @end

@@ -247,7 +247,7 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
         
         // Open normal torrent in torrent client, if requested
         if (!isMagnetLink && shouldOpenTorrentsAutomatically) {
-            [NSWorkspace.sharedWorkspace openFile:feedFile[@"torrentFilePath"]];
+            [CTCBrowser openInBackgroundFile:feedFile[@"torrentFilePath"]];
         }
         
         // Post to Notification Center
