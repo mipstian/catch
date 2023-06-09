@@ -20,7 +20,17 @@ extension Process {
           }
         }
       }
-      script.launch()
+      
+      if #available(macOS 10.13, *) {
+        do {
+          try script.run()
+        } catch {
+          os_log("Couldn't run script: %{public}@", log: .main, type: .error, error.localizedDescription)
+          completion?(false)
+        }
+      } else {
+        script.launch()
+      }
     }
   }
 }
