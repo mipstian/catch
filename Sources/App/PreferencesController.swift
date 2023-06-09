@@ -21,6 +21,7 @@ private extension NSUserInterfaceItemIdentifier {
 class PreferencesController: NSWindowController {
   @IBOutlet private weak var feedsTableView: NSTableView!
   @IBOutlet private weak var removeFeedButton: NSButton!
+  @IBOutlet private weak var exportToOPMLButton: NSButton!
   @IBOutlet private weak var torrentsSavePathWarningImageView: NSImageView!
   @IBOutlet private weak var automaticallyCheckForUpdatesCheckbox: NSButton!
   @IBOutlet private weak var addFeedSheetController: AddFeedController!
@@ -122,6 +123,8 @@ class PreferencesController: NSWindowController {
     reloadFeedList()
     
     refreshRemoveButton()
+    
+    exportToOPMLButton.isEnabled = Defaults.shared.hasValidFeeds
   }
   
   private func reloadFeedList() {
@@ -173,10 +176,36 @@ extension PreferencesController {
       
       do {
         let data = try Data(contentsOf: url)
-        let parsedFeeds = try OPMLParser.parse(opml: data)
+        let parsedFeeds = try OPMLParser().parse(opml: data)
         Defaults.shared.feeds += parsedFeeds
       } catch {
         NSLog("Couldn't parse OPML: \(error)")
+      }
+    }
+  }
+  
+  @IBAction private func exportToOPMLFile(_: Any?) {
+    guard let window = self.window else { return }
+    
+    let data: Data
+    do {
+      data = try OPMLSerializer().serialize(feeds: Defaults.shared.feeds)
+    } catch {
+      NSLog("Couldn't serialize OPML: \(error)")
+      return
+    }
+    
+    let savePanel = NSSavePanel()
+    savePanel.nameFieldStringValue = "Catch.xml"
+
+    savePanel.beginSheetModal(for: window) { response in
+      guard response == .OK, let url = savePanel.url else { return }
+      
+      do {
+        try data.write(to: url)
+      }
+      catch {
+        NSLog("Couldn't write OPML: \(error)")
       }
     }
   }

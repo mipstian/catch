@@ -7,6 +7,7 @@ class PreferencesView: NSView {
   @IBOutlet weak var acceptButton: NSButton!
   
   @IBOutlet weak var importFromOPMLButton: NSButton!
+  @IBOutlet weak var exportToOPMLButton: NSButton!
   @IBOutlet weak var onlyCheckBetweenCheckbox: NSButton!
   @IBOutlet weak var andLabel: NSTextField!
   
@@ -29,6 +30,7 @@ class PreferencesView: NSView {
     acceptButton.title = NSLocalizedString("OK", comment: "")
     
     importFromOPMLButton.title = NSLocalizedString("Import From OPML File…", comment: "")
+    exportToOPMLButton.title = NSLocalizedString("Export to OPML File…", comment: "")
     onlyCheckBetweenCheckbox.title = NSLocalizedString("Only check feed between", comment: "")
     andLabel.stringValue = NSLocalizedString("and", comment: "")
     

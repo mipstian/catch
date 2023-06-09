@@ -51,6 +51,7 @@
                 <outlet property="addFeedSheetController" destination="cFd-Mt-3tR" id="Pw2-C9-f2M"/>
                 <outlet property="automaticallyCheckForUpdatesCheckbox" destination="806" id="HZV-bf-GPz"/>
                 <outlet property="downloadScriptCheckbox" destination="GJR-jo-BJL" id="yz5-UX-AF1"/>
+                <outlet property="exportToOPMLButton" destination="FK7-xt-fUo" id="shm-Gx-9ZA"/>
                 <outlet property="feedContentsController" destination="q07-cJ-rHw" id="exC-H7-tIX"/>
                 <outlet property="feedsTableView" destination="ZyI-YF-l8d" id="SiE-no-MEx"/>
                 <outlet property="removeFeedButton" destination="AnU-XT-Qai" id="Dk3-s6-LhI"/>
@@ -312,16 +313,39 @@
                                                         <constraint firstAttribute="height" constant="4" id="qAj-tV-K5o"/>
                                                     </constraints>
                                                 </customView>
-                                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SIo-Vm-tN9">
-                                                    <rect key="frame" x="-7" y="57" width="184" height="32"/>
-                                                    <buttonCell key="cell" type="push" title="Import From OPML File…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6pY-YU-cuQ">
-                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                        <font key="font" metaFont="system"/>
-                                                    </buttonCell>
-                                                    <connections>
-                                                        <action selector="importFromOPMLFile:" target="vyd-92-YXh" id="JrH-bO-49c"/>
-                                                    </connections>
-                                                </button>
+                                                <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3TO-Gy-mwS">
+                                                    <rect key="frame" x="0.0" y="64" width="330" height="20"/>
+                                                    <subviews>
+                                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SIo-Vm-tN9">
+                                                            <rect key="frame" x="-7" y="-7" width="184" height="32"/>
+                                                            <buttonCell key="cell" type="push" title="Import From OPML File…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6pY-YU-cuQ">
+                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                <font key="font" metaFont="system"/>
+                                                            </buttonCell>
+                                                            <connections>
+                                                                <action selector="importFromOPMLFile:" target="vyd-92-YXh" id="JrH-bO-49c"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FK7-xt-fUo">
+                                                            <rect key="frame" x="171" y="-7" width="166" height="32"/>
+                                                            <buttonCell key="cell" type="push" title="Export to OPML File…" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="uCv-tU-gSa">
+                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                <font key="font" metaFont="system"/>
+                                                            </buttonCell>
+                                                            <connections>
+                                                                <action selector="exportToOPMLFile:" target="vyd-92-YXh" id="awe-YL-ieR"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <visibilityPriorities>
+                                                        <integer value="1000"/>
+                                                        <integer value="1000"/>
+                                                    </visibilityPriorities>
+                                                    <customSpacing>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                    </customSpacing>
+                                                </stackView>
                                                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="dvj-ac-7iB" userLabel="Spacer">
                                                     <rect key="frame" x="0.0" y="52" width="163" height="4"/>
                                                     <constraints>
@@ -651,6 +675,7 @@ DQ
                     <outlet property="andLabel" destination="636" id="0mE-a5-Orr"/>
                     <outlet property="checkForUpdatesCheckbox" destination="806" id="a9t-HZ-aSN"/>
                     <outlet property="downloadScriptCheckbox" destination="GJR-jo-BJL" id="z5g-lf-uhF"/>
+                    <outlet property="exportToOPMLButton" destination="FK7-xt-fUo" id="XiN-RD-Af8"/>
                     <outlet property="helpButton" destination="555" id="7G6-RV-1PQ"/>
                     <outlet property="importFromOPMLButton" destination="SIo-Vm-tN9" id="lme-NT-tYN"/>
                     <outlet property="onlyCheckBetweenCheckbox" destination="638" id="Pvk-2b-YCo"/>
