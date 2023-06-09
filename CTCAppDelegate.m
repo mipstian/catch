@@ -23,9 +23,6 @@ NSString * const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 	// Create preferences and set default values
 	[Preferences setDefaultDefaults];
-    
-    // This ensures we have the latest values from the user
-	[Preferences save];
 	
 	// Show Preferences window if the config is not valid
 	if (!Preferences.isConfigurationValid) {

@@ -78,6 +78,9 @@ NSString * const PREFERENCE_KEY_OPEN_AT_LOGIN = @"openAtLogin";
         [NSUserDefaults.standardUserDefaults setObject:@[]
                                                 forKey:PREFERENCE_KEY_HISTORY];
     }
+    
+    // Register as a login item if needed
+    [CTCDefaults refreshLoginItemStatus];
 }
 
 + (NSString *)feedURL {
