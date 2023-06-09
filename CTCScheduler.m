@@ -74,29 +74,6 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
     }
 }
 
-- (void)callFeedCheckerWithReplyHandler:(CTCFeedCheckCompletionHandler)replyHandler {
-    // Read configuration
-    NSURL *feedURL = [NSURL URLWithString:CTCDefaults.feedURL];
-    NSString *downloadPath = CTCDefaults.torrentsSavePath;
-    BOOL organizeByFolder = CTCDefaults.shouldOrganizeTorrentsInFolders;
-    NSArray *history = CTCDefaults.downloadHistory;
-    
-    // Extract URLs from history
-    NSArray *previouslyDownloadedURLs = [history valueForKey:@"url"];
-    
-    // Call feed checker service
-    CTCFeedChecker *feedChecker = [self.feedCheckerConnection remoteObjectProxy];
-    [feedChecker checkShowRSSFeed:feedURL
-                downloadingToPath:downloadPath
-               organizingByFolder:organizeByFolder
-                     skippingURLs:previouslyDownloadedURLs
-                        withReply:^(NSArray *downloadedFeedFiles, NSError *error) {
-                            dispatch_async(dispatch_get_main_queue(), ^{
-                                replyHandler(downloadedFeedFiles, error);
-                            });
-                        }];
-}
-
 - (void)checkFeed {
     // Don't check twice simultaneously
     if (self.isChecking) return;
@@ -120,6 +97,29 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
         
         [weakSelf handleFeedCheckCompletion:error == nil];
     }];
+}
+
+- (void)callFeedCheckerWithReplyHandler:(CTCFeedCheckCompletionHandler)replyHandler {
+    // Read configuration
+    NSURL *feedURL = [NSURL URLWithString:CTCDefaults.feedURL];
+    NSString *downloadPath = CTCDefaults.torrentsSavePath;
+    BOOL organizeByFolder = CTCDefaults.shouldOrganizeTorrentsInFolders;
+    NSArray *history = CTCDefaults.downloadHistory;
+    
+    // Extract URLs from history
+    NSArray *previouslyDownloadedURLs = [history valueForKey:@"url"];
+    
+    // Call feed checker service
+    CTCFeedChecker *feedChecker = [self.feedCheckerConnection remoteObjectProxy];
+    [feedChecker checkShowRSSFeed:feedURL
+                downloadingToPath:downloadPath
+               organizingByFolder:organizeByFolder
+                     skippingURLs:previouslyDownloadedURLs
+                        withReply:^(NSArray *downloadedFeedFiles, NSError *error) {
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                replyHandler(downloadedFeedFiles, error);
+                            });
+                        }];
 }
 
 - (void)handleFeedCheckCompletion:(BOOL)wasSuccessful {
