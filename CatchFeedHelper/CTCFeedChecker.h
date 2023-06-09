@@ -15,7 +15,7 @@ typedef void (^CTCFeedCheckDownloadCompletionHandler)(NSError *error);
             skippingURLs:(NSArray *)previouslyDownloadedURLs
                withReply:(CTCFeedCheckCompletionHandler)reply;
 
-- (void)downloadFile:(NSDictionary *)fileURL
+- (void)downloadFile:(NSDictionary *)file
           toBookmark:(NSData *)downloadFolderBookmark
   organizingByFolder:(BOOL)shouldOrganizeByFolder
            withReply:(CTCFeedCheckDownloadCompletionHandler)reply;
