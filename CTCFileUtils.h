@@ -12,6 +12,7 @@
 + (NSString *)filenameFromURL:(NSURL*)fileURL;
 
 + (NSString *)torrentFilenameFromString:(NSString*)name;
++ (NSString *)magnetFilenameFromString:(NSString *)name;
 
 + (NSString *)userDownloadsDirectory;
 

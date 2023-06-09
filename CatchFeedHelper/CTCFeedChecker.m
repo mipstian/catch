@@ -230,7 +230,13 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
         return nil;
     }
     
-    NSString *pathAndFilename = [downloadPath stringByAppendingString:@"/test.webloc"];
+    // Try to get a nice filename
+    NSString *filename = [CTCFileUtils magnetFilenameFromString:file[@"title"]];
+    
+    // Compute destination path
+    NSString *pathAndFilename = [self fullPathWithContainerFolder:downloadPath
+                                               suggestedSubFolder:showName
+                                                         filename:filename];
     
     BOOL writtenSuccessfully = [self writeData:data
                                         toPath:pathAndFilename
@@ -242,6 +248,17 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
     }
     
     return pathAndFilename;
+}
+
+- (NSString *)fullPathWithContainerFolder:(NSString *)containerFolder
+                       suggestedSubFolder:(NSString *)suggestedSubFolder
+                                 filename:(NSString *)filename {
+    NSString *folder = [CTCFileUtils fileNameFromString:suggestedSubFolder];
+    NSArray<NSString *> *pathComponents = containerFolder.pathComponents;
+    if (folder) pathComponents = [pathComponents arrayByAddingObject:folder];
+    pathComponents = [pathComponents arrayByAddingObject:filename];
+    NSString *fullPath = [NSString pathWithComponents:pathComponents].stringByStandardizingPath;
+    return fullPath;
 }
 
 - (NSString *)downloadFile:(NSDictionary *)file
@@ -284,11 +301,9 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
     NSString *filename = [CTCFileUtils torrentFilenameFromString:file[@"title"] ?: urlResponse.suggestedFilename];
     
     // Compute destination path
-    NSString *folder = [CTCFileUtils fileNameFromString:showName];
-    NSArray<NSString *> *pathComponents = downloadPath.pathComponents;
-    if (folder) pathComponents = [pathComponents arrayByAddingObject:folder];
-    pathComponents = [pathComponents arrayByAddingObject:filename];
-    NSString *pathAndFilename = [NSString pathWithComponents:pathComponents].stringByStandardizingPath;
+    NSString *pathAndFilename = [self fullPathWithContainerFolder:downloadPath
+                                               suggestedSubFolder:showName
+                                                         filename:filename];
     
     BOOL writtenSuccessfully = [self writeData:downloadedFile
                                         toPath:pathAndFilename

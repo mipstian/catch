@@ -2,6 +2,7 @@
 
 
 static NSString * const kCTCFileUtilsTorrentExtension = @".torrent";
+static NSString * const kCTCFileUtilsWeblocExtension = @".webloc";
 
 
 @implementation CTCFileUtils
@@ -40,7 +41,7 @@ static NSString * const kCTCFileUtilsTorrentExtension = @".torrent";
     return URL;
 }
 
-+ (NSString *)filenameFromURL:(NSURL*)fileURL {
++ (NSString *)filenameFromURL:(NSURL *)fileURL {
     // Compute destination filename
     NSString *filename = fileURL.path.pathComponents.lastObject;
     
@@ -48,13 +49,21 @@ static NSString * const kCTCFileUtilsTorrentExtension = @".torrent";
     return [filename stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
-+ (NSString *)torrentFilenameFromString:(NSString*)name {
++ (NSString *)filenameFromString:(NSString *)name withExtension:(NSString *)extension {
     NSString *cleanName = [self fileNameFromString:name];
     
-    BOOL hasExtension = [cleanName hasSuffix:kCTCFileUtilsTorrentExtension];
+    BOOL hasExtension = [cleanName hasSuffix:extension];
     
-    // Add .torrent extension if needed
-    return hasExtension ? cleanName : [cleanName stringByAppendingString:kCTCFileUtilsTorrentExtension];
+    // Add extension if needed
+    return hasExtension ? cleanName : [cleanName stringByAppendingString:extension];
+}
+
++ (NSString *)torrentFilenameFromString:(NSString *)name {
+    return [self filenameFromString:name withExtension:kCTCFileUtilsTorrentExtension];
+}
+
++ (NSString *)magnetFilenameFromString:(NSString *)name {
+    return [self filenameFromString:name withExtension:kCTCFileUtilsWeblocExtension];
 }
 
 + (NSString *)userDownloadsDirectory {
