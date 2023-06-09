@@ -71,6 +71,7 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
     NSArray<NSDictionary *> *downloadedFeedFiles = [self downloadFiles:feedFiles
                                                 toPath:downloadFolderPath
                                     organizingByFolder:shouldOrganizeByFolder
+                                     savingMagnetLinks:shouldSaveMagnetLinks
                                           skippingURLs:previouslyDownloadedURLs
                                                  error:&error];
     
@@ -103,6 +104,7 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
     NSArray *downloadedFiles = [self downloadFiles:@[file]
                  toPath:downloadFolderPath
      organizingByFolder:shouldOrganizeByFolder
+      savingMagnetLinks:shouldSaveMagnetLinks
            skippingURLs:@[]
                   error:&error];
     
@@ -138,6 +140,7 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
 - (NSArray<NSDictionary *> *)downloadFiles:(NSArray<NSDictionary *> *)feedFiles
                     toPath:(NSString *)downloadPath
         organizingByFolder:(BOOL)shouldOrganizeByFolder
+         savingMagnetLinks:(BOOL)shouldSaveMagnetLinks
               skippingURLs:(NSArray<NSString *> *)previouslyDownloadedURLs
                      error:(NSError * __autoreleasing *)outError {
     NSError *error = nil;
@@ -157,16 +160,36 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
         
         BOOL isMagnetLink = [url.scheme isEqualToString:@"magnet"];
         
-        // The file is new, open magnet or download torrent
+        // First get the folder, if we want it and it's available
+        NSString *showName = shouldOrganizeByFolder && ![file[@"showName"] isEqualTo:NSNull.null] ? file[@"showName"] : nil;
+        
+        // The file is new, return/save magnet or download torrent
         if (isMagnetLink) {
-            [successfullyDownloadedFeedFiles addObject:@{@"url": file[@"url"],
-                                                         @"title": file[@"title"],
-                                                         @"isMagnetLink": @YES}];
+            NSDictionary *downloadedItemDescription = @{@"url": file[@"url"],
+                                                        @"title": file[@"title"],
+                                                        @"isMagnetLink": @YES};
+            
+            if (shouldSaveMagnetLinks) {
+                // Save the magnet link to a file
+                NSString *savedMagnetFile = [self saveMagnetFile:file
+                                                          toPath:downloadPath
+                                                    withShowName:showName
+                                                           error:&error];
+                
+                if (savedMagnetFile) {
+                    [successfullyDownloadedFeedFiles addObject:downloadedItemDescription];
+                }
+                else {
+                    NSLog(@"Could not save magnet link %@: %@", file[@"url"], error);
+                    *outError = error;
+                }
+            }
+            else {
+                // Just return the magnet link for the main app to open on the fly
+                [successfullyDownloadedFeedFiles addObject:downloadedItemDescription];
+            }
         }
         else {
-            // First get the folder, if we want it and it's available
-            NSString *showName = shouldOrganizeByFolder && ![file[@"showName"] isEqualTo:NSNull.null] ? file[@"showName"] : nil;
-            
             NSString *downloadedTorrentFile = [self downloadFile:file
                                                           toPath:downloadPath
                                                     withShowName:showName
@@ -185,6 +208,13 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
     }
     
     return successfullyDownloadedFeedFiles.copy;
+}
+
+- (NSString *)saveMagnetFile:(NSDictionary *)file
+                      toPath:(NSString *)downloadPath
+                withShowName:(NSString *)showName
+                       error:(NSError * __autoreleasing *)outError {
+    return nil;
 }
 
 - (NSString *)downloadFile:(NSDictionary *)file
@@ -231,9 +261,27 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
     // Compute destination path
     NSArray<NSString *> *pathComponents = downloadPath.pathComponents;
     if (folder) pathComponents = [pathComponents arrayByAddingObject:folder];
-    NSString *pathAndFolder = [NSString pathWithComponents:pathComponents].stringByStandardizingPath;
     pathComponents = [pathComponents arrayByAddingObject:filename];
     NSString *pathAndFilename = [NSString pathWithComponents:pathComponents].stringByStandardizingPath;
+    
+    BOOL writtenSuccessfully = [self saveData:downloadedFile
+                                       toPath:pathAndFilename
+                                        error:&error];
+    
+    if (!writtenSuccessfully) {
+        *outError = error;
+        return nil;
+    }
+    
+    return pathAndFilename;
+}
+
+- (BOOL)saveData:(NSData *)data
+          toPath:(NSString *)pathAndFilename
+           error:(NSError * __autoreleasing *)outError {
+    NSError *error = nil;
+    
+    NSString *pathAndFolder = pathAndFilename.stringByDeletingLastPathComponent;
     
     // Check if the destination dir exists, if it doesn't create it
     BOOL pathAndFolderIsDirectory = NO;
@@ -245,7 +293,7 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
             *outError = [NSError errorWithDomain:kCTCFeedCheckerErrorDomain
                                             code:-2
                                         userInfo:@{NSLocalizedDescriptionKey: errorDescription}];
-            return nil;
+            return NO;
         }
     }
     else {
@@ -260,7 +308,7 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
                                             code:-3
                                         userInfo:@{NSLocalizedDescriptionKey: errorDescription,
                                                    NSUnderlyingErrorKey: error}];
-            return nil;
+            return NO;
         }
         else {
             NSLog(@"Folder %@ created", pathAndFolder);
@@ -268,19 +316,19 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
     }
     
     // Write!
-    BOOL wasWrittenSuccessfully = [downloadedFile writeToFile:pathAndFilename
-                                                      options:NSDataWritingAtomic
-                                                        error:&error];
+    BOOL wasWrittenSuccessfully = [data writeToFile:pathAndFilename
+                                            options:NSDataWritingAtomic
+                                              error:&error];
     if (!wasWrittenSuccessfully) {
-        NSString *errorDescription = [NSString stringWithFormat:@"Couldn't save file to disk: %@", pathAndFolder];
+        NSString *errorDescription = [NSString stringWithFormat:@"Couldn't save file to disk: %@", pathAndFilename];
         *outError = [NSError errorWithDomain:kCTCFeedCheckerErrorDomain
                                         code:-4
                                     userInfo:@{NSLocalizedDescriptionKey: errorDescription,
                                                NSUnderlyingErrorKey: error}];
-        return nil;
+        return NO;
     }
     
-    return pathAndFilename;
+    return YES;
 }
 
 @end
