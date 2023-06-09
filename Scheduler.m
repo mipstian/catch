@@ -8,6 +8,7 @@
 
 #import "Scheduler.h"
 #import "Catch.h"
+#import "CTCFeedChecker.h"
 
 
 @interface Scheduler ()
@@ -30,8 +31,25 @@
 	
 	// run a runloop in another thread
 	[self performSelectorInBackground:@selector(loopRun) withObject:nil];
+    
+    [self callFeedChecker];
 	
 	return self;
+}
+
+- (void)callFeedChecker {
+    NSXPCConnection *connection = [[NSXPCConnection alloc] initWithServiceName:@"com.giorgiocalderolla.Catch.CatchFeedHelper"];
+    connection.remoteObjectInterface = [NSXPCInterface interfaceWithProtocol:@protocol(CTCFeedCheck)];
+    [connection resume];
+    
+    CTCFeedChecker *feedChecker = [connection remoteObjectProxy];
+    [feedChecker checkShowRSSFeed:nil
+                downloadingToPath:nil
+               organizingByFolder:NO
+                     skippingURLs:@[]
+                        withReply:^(NSError *error) {
+                            [connection invalidate];
+                        }];
 }
 
 - (void)loopRun {
