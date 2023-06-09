@@ -69,7 +69,7 @@
 	NSXMLDocument* document = [[NSXMLDocument alloc] initWithContentsOfURL:feedURL options:NSXMLNodeOptionsNone error:&error];
 	
 	if (document) {
-		NSLog(@"FeedChecker: feed downloaded, dump:\n%@", document);
+		NSLog(@"FeedChecker: feed downloaded");
 	} else {
 		NSLog(@"FeedChecker: feed download failed: %@", error);
 	}
