@@ -12,11 +12,9 @@
 		38F9B09111C98E9E0021C540 /* Automator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38F9B09011C98E9E0021C540 /* Automator.framework */; };
 		4403ACF41914041C002F286C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4403ACF31914041C002F286C /* Assets.xcassets */; };
 		441297D417FE285500E9E21E /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 448CC7E617FE1F840063D3FD /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		4456EE611916D20000B3FF1A /* NSDate+TimeOfDayMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 4456EE601916D20000B3FF1A /* NSDate+TimeOfDayMath.m */; };
 		445D97A6191579C7006CD77C /* UI.strings in Resources */ = {isa = PBXBuildFile; fileRef = 445D97A4191579C7006CD77C /* UI.strings */; };
 		446D8B581918D146007AB22D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 446D8B571918D146007AB22D /* XCTest.framework */; };
 		446D8B5E1918D146007AB22D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 446D8B5C1918D146007AB22D /* InfoPlist.strings */; };
-		446D8B601918D146007AB22D /* TimeOfDayMathTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 446D8B5F1918D146007AB22D /* TimeOfDayMathTests.m */; };
 		44717AA4191300B300580054 /* CTCDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717AA3191300B300580054 /* CTCDefaults.m */; };
 		44717AA71913072200580054 /* CTCLoginItems.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717AA61913072200580054 /* CTCLoginItems.m */; };
 		44717AAA1913173600580054 /* CTCFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 44717AA91913173600580054 /* CTCFileUtils.m */; };
@@ -30,6 +28,8 @@
 		44B363461DC99D1900128259 /* Scheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B363451DC99D1900128259 /* Scheduler.swift */; };
 		44B363481DC9B9FB00128259 /* Browser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B363471DC9B9FB00128259 /* Browser.swift */; };
 		44B3634A1DC9BF1B00128259 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B363491DC9BF1B00128259 /* Config.swift */; };
+		44B3634C1DCA6F7100128259 /* TimeOfDayMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B3634B1DCA6F7100128259 /* TimeOfDayMath.swift */; };
+		44B3634E1DCA744200128259 /* TimeOfDayMathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B3634D1DCA744200128259 /* TimeOfDayMathTests.swift */; };
 		44BA5D121DAEC0C400A9CE9A /* WindowShakeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BA5D111DAEC0C300A9CE9A /* WindowShakeAnimation.swift */; };
 		44BA5D141DAEC3B600A9CE9A /* RecentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BA5D131DAEC3B600A9CE9A /* RecentsController.swift */; };
 		44BA5D161DAECF1A00A9CE9A /* RecentsCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44BA5D151DAECF1A00A9CE9A /* RecentsCellView.swift */; };
@@ -101,8 +101,6 @@
 		4403ACF31914041C002F286C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4412E8161957F09200701124 /* com.giorgiocalderolla.Catch.CatchFeedHelper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = com.giorgiocalderolla.Catch.CatchFeedHelper.entitlements; sourceTree = "<group>"; };
 		4419CF37180627A900C77432 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
-		4456EE5F1916D20000B3FF1A /* NSDate+TimeOfDayMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeOfDayMath.h"; sourceTree = "<group>"; };
-		4456EE601916D20000B3FF1A /* NSDate+TimeOfDayMath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeOfDayMath.m"; sourceTree = "<group>"; };
 		445D97A319157955006CD77C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UI.xib; sourceTree = "<group>"; };
 		445D97A5191579C7006CD77C /* ca */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/UI.strings; sourceTree = "<group>"; };
 		445D97A719157A2C006CD77C /* de */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/UI.strings; sourceTree = "<group>"; };
@@ -110,7 +108,6 @@
 		446D8B571918D146007AB22D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		446D8B5B1918D146007AB22D /* Catch Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Catch Tests-Info.plist"; sourceTree = "<group>"; };
 		446D8B5D1918D146007AB22D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		446D8B5F1918D146007AB22D /* TimeOfDayMathTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimeOfDayMathTests.m; sourceTree = "<group>"; };
 		44717AA2191300B300580054 /* CTCDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCDefaults.h; sourceTree = "<group>"; };
 		44717AA3191300B300580054 /* CTCDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCDefaults.m; sourceTree = "<group>"; };
 		44717AA51913072200580054 /* CTCLoginItems.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCLoginItems.h; sourceTree = "<group>"; };
@@ -134,6 +131,8 @@
 		44B363451DC99D1900128259 /* Scheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Scheduler.swift; path = Sources/Scheduler.swift; sourceTree = "<group>"; };
 		44B363471DC9B9FB00128259 /* Browser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Browser.swift; path = Sources/Browser.swift; sourceTree = "<group>"; };
 		44B363491DC9BF1B00128259 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Config.swift; path = Sources/Config.swift; sourceTree = "<group>"; };
+		44B3634B1DCA6F7100128259 /* TimeOfDayMath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeOfDayMath.swift; path = Sources/TimeOfDayMath.swift; sourceTree = "<group>"; };
+		44B3634D1DCA744200128259 /* TimeOfDayMathTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeOfDayMathTests.swift; path = Sources/TimeOfDayMathTests.swift; sourceTree = SOURCE_ROOT; };
 		44BA5D111DAEC0C300A9CE9A /* WindowShakeAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WindowShakeAnimation.swift; path = Sources/WindowShakeAnimation.swift; sourceTree = "<group>"; };
 		44BA5D131DAEC3B600A9CE9A /* RecentsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecentsController.swift; path = Sources/RecentsController.swift; sourceTree = "<group>"; };
 		44BA5D151DAECF1A00A9CE9A /* RecentsCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecentsCellView.swift; path = Sources/RecentsCellView.swift; sourceTree = "<group>"; };
@@ -261,8 +260,7 @@
 		4456EE621916D2E700B3FF1A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				4456EE5F1916D20000B3FF1A /* NSDate+TimeOfDayMath.h */,
-				4456EE601916D20000B3FF1A /* NSDate+TimeOfDayMath.m */,
+				44B3634B1DCA6F7100128259 /* TimeOfDayMath.swift */,
 				44BA5D111DAEC0C300A9CE9A /* WindowShakeAnimation.swift */,
 			);
 			name = Extensions;
@@ -304,7 +302,7 @@
 		446D8B591918D146007AB22D /* Catch Tests */ = {
 			isa = PBXGroup;
 			children = (
-				446D8B5F1918D146007AB22D /* TimeOfDayMathTests.m */,
+				44B3634D1DCA744200128259 /* TimeOfDayMathTests.swift */,
 				446D8B5A1918D146007AB22D /* Supporting Files */,
 			);
 			path = "Catch Tests";
@@ -419,7 +417,7 @@
 				LastUpgradeCheck = 0800;
 				TargetAttributes = {
 					446D8B551918D146007AB22D = {
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0810;
 						TestTargetID = 8D1107260486CEB800E47090;
 					};
 					44717AC31913A08700580054 = {
@@ -507,7 +505,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				446D8B601918D146007AB22D /* TimeOfDayMathTests.m in Sources */,
+				44B3634E1DCA744200128259 /* TimeOfDayMathTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -526,7 +524,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4456EE611916D20000B3FF1A /* NSDate+TimeOfDayMath.m in Sources */,
 				44B363461DC99D1900128259 /* Scheduler.swift in Sources */,
 				44BA5D121DAEC0C400A9CE9A /* WindowShakeAnimation.swift in Sources */,
 				44B3634A1DC9BF1B00128259 /* Config.swift in Sources */,
@@ -535,6 +532,7 @@
 				44B363481DC9B9FB00128259 /* Browser.swift in Sources */,
 				44717AA4191300B300580054 /* CTCDefaults.m in Sources */,
 				44BA5D1A1DB81A8E00A9CE9A /* Application.swift in Sources */,
+				44B3634C1DCA6F7100128259 /* TimeOfDayMath.swift in Sources */,
 				44BA5D1C1DB8220100A9CE9A /* MenuController.swift in Sources */,
 				44BA5D141DAEC3B600A9CE9A /* RecentsController.swift in Sources */,
 				44717AA71913072200580054 /* CTCLoginItems.m in Sources */,
@@ -633,7 +631,6 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				INFOPLIST_FILE = "Catch-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				OTHER_LDFLAGS = "-Wl,-rpath,@loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.giorgiocalderolla.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = Catch;
@@ -651,7 +648,6 @@
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "Catch-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				OTHER_LDFLAGS = "-Wl,-rpath,@loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.giorgiocalderolla.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = Catch;
@@ -701,7 +697,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LLVM_LTO = NO;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
 					"-Wextra",
@@ -750,7 +746,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LLVM_LTO = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
@@ -776,9 +772,10 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "Catch Tests/Catch Tests-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.giorgiocalderolla.Catch.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -800,7 +797,7 @@
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "Catch Tests/Catch Tests-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.giorgiocalderolla.Catch.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
@@ -819,7 +816,6 @@
 				INFOPLIST_FILE = "CatchFeedHelper/CatchFeedHelper-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACH_O_TYPE = mh_execute;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_NAME}";
 				PRODUCT_NAME = "com.giorgiocalderolla.Catch.$(TARGET_NAME:rfc1034identifier)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -837,7 +833,6 @@
 				INFOPLIST_FILE = "CatchFeedHelper/CatchFeedHelper-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACH_O_TYPE = mh_execute;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_NAME}";
 				PRODUCT_NAME = "com.giorgiocalderolla.Catch.$(TARGET_NAME:rfc1034identifier)";
 				SWIFT_VERSION = 3.0;
