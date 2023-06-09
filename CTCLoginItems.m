@@ -25,7 +25,8 @@
 		if (item) {
 			CFRelease(item);
 		}
-	} else {
+	}
+    else {
 		// Remove Catch from the login items
 		UInt32 seedValue;
 		NSArray *loginItemsArray = (NSArray *)CFBridgingRelease(LSSharedFileListCopySnapshot(loginItems, &seedValue));

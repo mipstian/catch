@@ -123,10 +123,12 @@
 - (void)refreshSchedulerStatus {
     if (CTCScheduler.sharedScheduler.isRunning) {
         [self setRefreshing];
-	} else {
+	}
+    else {
 		if (CTCScheduler.sharedScheduler.isActive) {
             [self setIdle];
-		} else {
+		}
+        else {
             [self setDisabled];
 		}
 	}
@@ -139,7 +141,8 @@
 	
 	if (lastUpdateWasSuccessful) {
 		baseLastUpdateString = NSLocalizedString(@"lastupdate", @"Title for the last update time");
-	} else {
+	}
+    else {
 		baseLastUpdateString = NSLocalizedString(@"lastupdatefailed", @"Title for the last update time if it fails");
 	}
 
@@ -148,7 +151,8 @@
         dateFormatter.timeStyle = NSDateFormatterShortStyle;
 		NSString *lastUpdateTime = [dateFormatter stringFromDate:time];
 		lastUpdateString = [NSString stringWithFormat:baseLastUpdateString, lastUpdateTime];
-	} else {
+	}
+    else {
 		lastUpdateString = [NSString stringWithFormat:baseLastUpdateString, NSLocalizedString(@"never", @"Never happened")];
 	}
 	

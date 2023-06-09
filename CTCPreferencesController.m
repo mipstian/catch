@@ -27,7 +27,8 @@
         
         // Also force check
         [CTCScheduler.sharedScheduler forceCheck];
-	} else {
+	}
+    else {
 		// The feed URL is probably invalid, warn user
 		[self showBadURLSheet];
 	}
