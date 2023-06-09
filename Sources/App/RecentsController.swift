@@ -185,9 +185,8 @@ extension RecentsController {
     NSPasteboard.general.clearContents()
     if #available(OSX 10.13, *) {
       NSPasteboard.general.setString(recentEpisode.url.absoluteString, forType: .URL)
-    } else {
-      NSPasteboard.general.setString(recentEpisode.url.absoluteString, forType: .string)
     }
+    NSPasteboard.general.setString(recentEpisode.url.absoluteString, forType: .string)
   }
   
   @IBAction func deleteHistoryItem(_ sender: Any?) {
