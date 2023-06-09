@@ -8,6 +8,24 @@ enum FeedCheckerError: Error {
 }
 
 
+private extension Timer {
+  /// Invoke handler immediately, and reset the timer
+  /// (i.e. the next scheduled time will be after a full `interval`).
+  func fireNow() {
+    fireDate = .distantPast
+  }
+}
+
+
+private extension TimeInterval {
+  /// How often to check feeds.
+  static let feedUpdateInterval: TimeInterval = 60 * 10
+  
+  /// How much leeway to give to the os for scheduling.
+  static let feedUpdateIntervalTolerance: TimeInterval = 30
+}
+
+
 /// Singleton. Periodically invokes the Feed Helper service to check the feeds.
 final class FeedChecker {
   enum Status {
@@ -52,20 +70,22 @@ final class FeedChecker {
   }
   
   private let feedHelperProxy = FeedHelperProxy()
-  private let intervalTimer = IntervalTimer(
-    interval: Config.feedUpdateInterval,
-    tolerance: Config.feedUpdateIntervalTolerance
-  )
+  private var intervalTimer: Timer!
   
   private init() {
-    intervalTimer.handler = { [weak self] in
-      guard let self = self else { return }
-      
-      // Skip if paused or if current time is outside user-defined range
-      guard self.status == .polling, !Defaults.shared.restricts(date: Date()) else { return }
-      
-      self.checkFeeds()
-    }
+    intervalTimer = Timer.scheduledTimer(
+      withTimeInterval: .feedUpdateInterval,
+      repeats: true,
+      block: { [weak self] _ in
+        guard let self = self else { return }
+        
+        // Skip if paused or if current time is outside user-defined range
+        guard self.status == .polling, !Defaults.shared.restricts(date: Date()) else { return }
+        
+        self.checkFeeds()
+      }
+    )
+    intervalTimer.tolerance = .feedUpdateIntervalTolerance
     
     // Check now
     intervalTimer.fireNow()

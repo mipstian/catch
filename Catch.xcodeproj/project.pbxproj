@@ -38,13 +38,11 @@
 		44A6FA881DE0ADA5005303DF /* DownloadOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A6FA871DE0ADA5005303DF /* DownloadOptions.swift */; };
 		44A6FA891DE0ADA5005303DF /* DownloadOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A6FA871DE0ADA5005303DF /* DownloadOptions.swift */; };
 		44A6FA8B1DE0B85C005303DF /* FeedHelperProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A6FA8A1DE0B85C005303DF /* FeedHelperProxy.swift */; };
-		44A6FA8D1DE1A5F1005303DF /* IntervalTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A6FA8C1DE1A5F1005303DF /* IntervalTimer.swift */; };
 		44AB5B5E1DCE794A00AE6EB6 /* HistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AB5B5D1DCE794A00AE6EB6 /* HistoryItem.swift */; };
 		44AB5B601DCE823A00AE6EB6 /* UserNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AB5B5F1DCE823A00AE6EB6 /* UserNotifications.swift */; };
 		44AB5B821DD5532C00AE6EB6 /* BundleInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AB5B811DD5532C00AE6EB6 /* BundleInfo.swift */; };
 		44B363461DC99D1900128259 /* FeedChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B363451DC99D1900128259 /* FeedChecker.swift */; };
 		44B363481DC9B9FB00128259 /* WorkspaceExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B363471DC9B9FB00128259 /* WorkspaceExtensions.swift */; };
-		44B3634A1DC9BF1B00128259 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B363491DC9BF1B00128259 /* Config.swift */; };
 		44B3634C1DCA6F7100128259 /* TimeOfDayMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B3634B1DCA6F7100128259 /* TimeOfDayMath.swift */; };
 		44B3634E1DCA744200128259 /* TimeOfDayMathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B3634D1DCA744200128259 /* TimeOfDayMathTests.swift */; };
 		44B3634F1DCA793F00128259 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 448CC7E617FE1F840063D3FD /* Sparkle.framework */; };
@@ -150,13 +148,11 @@
 		44A6FA851DE0A785005303DF /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Service.swift; path = "Sources/Feed Helper/Service.swift"; sourceTree = "<group>"; };
 		44A6FA871DE0ADA5005303DF /* DownloadOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DownloadOptions.swift; path = Sources/Shared/DownloadOptions.swift; sourceTree = "<group>"; };
 		44A6FA8A1DE0B85C005303DF /* FeedHelperProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedHelperProxy.swift; path = Sources/App/FeedHelperProxy.swift; sourceTree = "<group>"; };
-		44A6FA8C1DE1A5F1005303DF /* IntervalTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IntervalTimer.swift; path = Sources/App/IntervalTimer.swift; sourceTree = "<group>"; };
 		44AB5B5D1DCE794A00AE6EB6 /* HistoryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HistoryItem.swift; path = Sources/App/HistoryItem.swift; sourceTree = "<group>"; };
 		44AB5B5F1DCE823A00AE6EB6 /* UserNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserNotifications.swift; path = Sources/App/UserNotifications.swift; sourceTree = "<group>"; };
 		44AB5B811DD5532C00AE6EB6 /* BundleInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BundleInfo.swift; path = Sources/App/BundleInfo.swift; sourceTree = "<group>"; };
 		44B363451DC99D1900128259 /* FeedChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedChecker.swift; path = Sources/App/FeedChecker.swift; sourceTree = "<group>"; };
 		44B363471DC9B9FB00128259 /* WorkspaceExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WorkspaceExtensions.swift; path = Sources/App/WorkspaceExtensions.swift; sourceTree = "<group>"; };
-		44B363491DC9BF1B00128259 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Config.swift; path = Sources/App/Config.swift; sourceTree = "<group>"; };
 		44B3634B1DCA6F7100128259 /* TimeOfDayMath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeOfDayMath.swift; path = Sources/App/TimeOfDayMath.swift; sourceTree = "<group>"; };
 		44B3634D1DCA744200128259 /* TimeOfDayMathTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimeOfDayMathTests.swift; path = Sources/Tests/TimeOfDayMathTests.swift; sourceTree = SOURCE_ROOT; };
 		44BA5D111DAEC0C300A9CE9A /* WindowShakeAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WindowShakeAnimation.swift; path = Sources/App/WindowShakeAnimation.swift; sourceTree = "<group>"; };
@@ -311,12 +307,10 @@
 		4456EE671916F1B100B3FF1A /* Library */ = {
 			isa = PBXGroup;
 			children = (
-				44B363491DC9BF1B00128259 /* Config.swift */,
 				44FFCE3E1DCB92F4006E6DF0 /* Defaults.swift */,
 				44B363451DC99D1900128259 /* FeedChecker.swift */,
 				44A6FA8A1DE0B85C005303DF /* FeedHelperProxy.swift */,
 				44AB5B5D1DCE794A00AE6EB6 /* HistoryItem.swift */,
-				44A6FA8C1DE1A5F1005303DF /* IntervalTimer.swift */,
 				44C8198A220D73DC00D9DAAD /* OPML.swift */,
 				4453A66D1DE60D6200383E40 /* PowerManager.swift */,
 				4441F59324308B77001AEC1E /* ServiceURLs.swift */,
@@ -575,7 +569,6 @@
 				A7FA8FE226072836002FC21E /* AddFeedView.swift in Sources */,
 				44BA5D121DAEC0C400A9CE9A /* WindowShakeAnimation.swift in Sources */,
 				447E0F731DDAB24C001048AB /* FileUtils.swift in Sources */,
-				44B3634A1DC9BF1B00128259 /* Config.swift in Sources */,
 				44A6FA881DE0ADA5005303DF /* DownloadOptions.swift in Sources */,
 				44C8926F1D1814A7008F8543 /* AppDelegate.swift in Sources */,
 				447E0F6D1DDAAD17001048AB /* FeedHelperService.swift in Sources */,
@@ -596,7 +589,6 @@
 				4453A6661DE5065F00383E40 /* Episode.swift in Sources */,
 				44BA5D1C1DB8220100A9CE9A /* MenuController.swift in Sources */,
 				44BA5D141DAEC3B600A9CE9A /* RecentsController.swift in Sources */,
-				44A6FA8D1DE1A5F1005303DF /* IntervalTimer.swift in Sources */,
 				44AB5B601DCE823A00AE6EB6 /* UserNotifications.swift in Sources */,
 				44FFCE3F1DCB92F4006E6DF0 /* Defaults.swift in Sources */,
 				44E2CEA31DBC0B8F00ED7A8D /* PreferencesController.swift in Sources */,
@@ -731,7 +723,7 @@
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 781;
+				CURRENT_PROJECT_VERSION = 783;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -796,7 +788,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 781;
+				CURRENT_PROJECT_VERSION = 783;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;

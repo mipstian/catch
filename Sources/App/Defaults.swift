@@ -2,6 +2,16 @@ import Foundation
 import os
 
 
+private extension Int {
+  /// Maximum number of episodes per feed to keep in the download history.
+  ///
+  /// - SeeAlso: `Defaults.downloadHistory`
+  /// - Note: this should be always higher than the number of episodes in a feed,
+  ///         otherwise we'd end up re-downloading episodes over and over.
+  static let historyLimit = 200
+}
+
+
 /// Singleton. Wrapper around UserDefaults.standard that provides a nice interface to the app's preferences
 /// and download history data.
 final class Defaults: NSObject {
@@ -106,7 +116,7 @@ final class Defaults: NSObject {
       }
       
       // Only keep the most recent items
-      let truncatedCount = min(uniqueItems.count, Config.historyLimit * feeds.count)
+      let truncatedCount = min(uniqueItems.count, .historyLimit * feeds.count)
       let truncatedHistory = uniqueItems.sorted().reversed().prefix(upTo: truncatedCount)
       
       downloadHistory = Array(truncatedHistory)
