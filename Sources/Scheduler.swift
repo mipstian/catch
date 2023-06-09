@@ -188,7 +188,7 @@ class Scheduler {
       
       let title = feedFile["title"] as! String
       
-      postNewEpisodeUserNotification(episodeTitle: title)
+      NSUserNotificationCenter.default.deliverNewEpisodeNotification(episodeTitle: title)
       
       let url = feedFile["url"] as! String
       
@@ -201,15 +201,6 @@ class Scheduler {
       )
       Defaults.shared.downloadHistory = [newHistoryItem] + Defaults.shared.downloadHistory
     }
-  }
-  
-  private func postNewEpisodeUserNotification(episodeTitle: String) {
-    // Post to Notification Center
-    let notification = NSUserNotification()
-    notification.title = NSLocalizedString("newtorrent", comment: "New torrent notification")
-    notification.informativeText = String(format: NSLocalizedString("newtorrentdesc", comment: "New torrent notification"), episodeTitle)
-    notification.soundName = NSUserNotificationDefaultSoundName
-    NSUserNotificationCenter.default.deliver(notification)
   }
 
   private func handleFeedCheckCompletion(wasSuccessful: Bool) {
