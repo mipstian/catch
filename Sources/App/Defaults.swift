@@ -92,9 +92,23 @@ final class Defaults: NSObject {
       return rawHistory.compactMap(HistoryItem.init(defaultsDictionary:))
     }
     set {
+      // Only keep one copy of each episode
+      var uniqueItems: [HistoryItem] = []
+      do {
+        var seenEpisodes: Set<Episode> = []
+        for newItem in newValue {
+          if !seenEpisodes.contains(newItem.episode) {
+            seenEpisodes.insert(newItem.episode)
+            uniqueItems.append(newItem)
+          } else {
+            NSLog("Discarding duplicate history item: \(newItem)")
+          }
+        }
+      }
+      
       // Only keep the most recent items
-      let truncatedCount = min(newValue.count, Config.historyLimit * feeds.count)
-      let truncatedHistory = newValue.sorted().reversed().prefix(upTo: truncatedCount)
+      let truncatedCount = min(uniqueItems.count, Config.historyLimit * feeds.count)
+      let truncatedHistory = uniqueItems.sorted().reversed().prefix(upTo: truncatedCount)
       
       let serializedHistory = truncatedHistory.map { $0.dictionaryRepresentation }
       UserDefaults.standard.set(serializedHistory, forKey: Keys.history)

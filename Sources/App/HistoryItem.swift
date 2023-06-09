@@ -2,7 +2,7 @@ import Foundation
 
 
 /// A previously downloaded episode. These are called "Recent episodes" in the UI.
-struct HistoryItem: Equatable {
+struct HistoryItem: Equatable, Hashable {
   var episode: Episode
   
   /// When this episode was downloaded.
