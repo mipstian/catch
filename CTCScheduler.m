@@ -1,5 +1,4 @@
 #import "CTCScheduler.h"
-#import "CTCAppDelegate.h"
 #import "CTCFeedChecker.h"
 #import "CTCDefaults.h"
 
