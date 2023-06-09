@@ -219,7 +219,7 @@ private extension HistoryItem {
       let title = defaultsDictionary["title"] as? String,
       let url = (defaultsDictionary["url"] as? String).flatMap(URL.init)
     else {
-        return nil
+      return nil
     }
     
     self.episode = Episode(
