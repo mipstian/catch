@@ -1,10 +1,27 @@
 <rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle"> 
   <channel> 
     <title>Catch Appcast</title> 
-    <link>https://catch.googlecode.com/svn/trunk/update/appcast.xml</link> 
+    <link>https://raw.github.com/showrss/catch/master/update/appcast.xml</link> 
     <description>Most recent version available.</description> 
     <language>en</language> 
     <pubDate>Sun, 08 Aug 2010 22:51:00 +0100</pubDate> 
+
+	 <item> 
+      <title>Catch 1.5</title>
+      <pubDate>Thu, 3 Oct 2013 18:00:00 +0200</pubDate> 
+<description><![CDATA[
+<h2>Changes:</h2>
+<ul>
+<li>Compatible with showRSS 3</li>
+</ul>
+]]></description>
+      <enclosure 
+	 url="" 
+	 sparkle:version="1.5"
+	 type="application/octet-stream"/> 
+      <sparkle:minimumSystemVersion>10.8.0</sparkle:minimumSystemVersion> 
+    </item>
+
  
 	 <item> 
       <title>Catch 1.4</title>
