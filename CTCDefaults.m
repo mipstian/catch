@@ -91,8 +91,9 @@ NSString * const kCTCDefaultsShouldRunHeadless = @"headless";
 
 + (BOOL)isFeedURLValid {
     NSString *feedURL = CTCDefaults.feedURL;
-    NSPredicate *feedURLTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", kCTCDefaultsServiceFeedURLRegex];
-    if (![feedURLTest evaluateWithObject:feedURL]) {
+    NSRegularExpression *feedURLRegex = [NSRegularExpression regularExpressionWithPattern:kCTCDefaultsServiceFeedURLRegex options:0 error:nil];
+    NSTextCheckingResult *feedURLMatches = [feedURLRegex firstMatchInString:feedURL options:0 range:NSMakeRange(0, [feedURL length])];
+    if (!feedURLMatches) {
         // The URL should match the prefix regex!
         NSLog(@"Feed URL (%@) does not match Regex (%@)", feedURL, kCTCDefaultsServiceFeedURLRegex);
         return NO;
