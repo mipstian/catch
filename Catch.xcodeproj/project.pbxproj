@@ -14,7 +14,6 @@
 		441297D417FE285500E9E21E /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 448CC7E617FE1F840063D3FD /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		445D97A6191579C7006CD77C /* UI.strings in Resources */ = {isa = PBXBuildFile; fileRef = 445D97A4191579C7006CD77C /* UI.strings */; };
 		446D8B581918D146007AB22D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 446D8B571918D146007AB22D /* XCTest.framework */; };
-		446D8B5E1918D146007AB22D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 446D8B5C1918D146007AB22D /* InfoPlist.strings */; };
 		44717AC51913A08700580054 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97325FDCFA39411CA2CEA /* Foundation.framework */; };
 		44717AD61913A16500580054 /* com.giorgiocalderolla.Catch.CatchFeedHelper.xpc in CopyFiles */ = {isa = PBXBuildFile; fileRef = 44717AC41913A08700580054 /* com.giorgiocalderolla.Catch.CatchFeedHelper.xpc */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		447E0F6C1DDAACE7001048AB /* FeedHelperService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 447E0F6B1DDAACE7001048AB /* FeedHelperService.swift */; };
@@ -111,7 +110,6 @@
 		446D8B561918D146007AB22D /* Catch Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Catch Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		446D8B571918D146007AB22D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		446D8B5B1918D146007AB22D /* Catch Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Catch Tests-Info.plist"; sourceTree = "<group>"; };
-		446D8B5D1918D146007AB22D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		44717AC41913A08700580054 /* com.giorgiocalderolla.Catch.CatchFeedHelper.xpc */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = com.giorgiocalderolla.Catch.CatchFeedHelper.xpc; sourceTree = BUILT_PRODUCTS_DIR; };
 		44717AC81913A08700580054 /* CatchFeedHelper-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CatchFeedHelper-Info.plist"; sourceTree = "<group>"; };
 		447E0F6B1DDAACE7001048AB /* FeedHelperService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedHelperService.swift; path = Sources/Shared/FeedHelperService.swift; sourceTree = SOURCE_ROOT; };
@@ -297,19 +295,18 @@
 			isa = PBXGroup;
 			children = (
 				44B3634D1DCA744200128259 /* TimeOfDayMathTests.swift */,
-				446D8B5A1918D146007AB22D /* Supporting Files */,
+				446D8B5A1918D146007AB22D /* Resources */,
 			);
 			name = Tests;
-			path = "Catch Tests";
 			sourceTree = "<group>";
 		};
-		446D8B5A1918D146007AB22D /* Supporting Files */ = {
+		446D8B5A1918D146007AB22D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				446D8B5B1918D146007AB22D /* Catch Tests-Info.plist */,
-				446D8B5C1918D146007AB22D /* InfoPlist.strings */,
 			);
-			name = "Supporting Files";
+			name = Resources;
+			path = Resources/Tests;
 			sourceTree = "<group>";
 		};
 		44717AC61913A08700580054 /* Feed Helper */ = {
@@ -469,7 +466,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				446D8B5E1918D146007AB22D /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -599,14 +595,6 @@
 			);
 			name = UI.strings;
 			path = Resources/App;
-			sourceTree = "<group>";
-		};
-		446D8B5C1918D146007AB22D /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				446D8B5D1918D146007AB22D /* en */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -767,7 +755,7 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "Catch Tests/Catch Tests-Info.plist";
+				INFOPLIST_FILE = "Resources/Tests/Catch Tests-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.giorgiocalderolla.Catch.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -792,7 +780,7 @@
 				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "Catch Tests/Catch Tests-Info.plist";
+				INFOPLIST_FILE = "Resources/Tests/Catch Tests-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.giorgiocalderolla.Catch.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
