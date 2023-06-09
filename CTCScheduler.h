@@ -16,6 +16,7 @@ extern NSString * const kCTCSchedulerLastUpdateStatusNotificationName;
 
 - (void)forceCheck;
 
-- (void)downloadFile:(NSDictionary *)file;
+- (void)downloadFile:(NSDictionary *)file
+          completion:(void (^)(NSDictionary *downloadedFile, NSError *error))completion;
 
 @end

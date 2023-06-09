@@ -3,7 +3,8 @@
 
 @implementation CTCFeedParser
 
-+ (NSArray*)parseFiles:(NSXMLDocument*)feed {
++ (NSArray*)parseFiles:(NSXMLDocument*)feed
+                 error:(NSError * __autoreleasing *)outError {
     NSLog(@"Parsing feed");
     
     NSError *error = nil;
@@ -12,7 +13,7 @@
     NSArray *fileNodes = [feed nodesForXPath:@"//rss/channel/item" error:&error];
     
     if (!fileNodes) {
-        NSLog(@"Parsing for URLs failed: %@", error);
+        *outError = error;
         return nil;
     }
     

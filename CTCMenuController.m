@@ -12,12 +12,18 @@
 
 @property (strong, nonatomic) NSStatusItem *menuBarItem;
 
+@property (strong, nonatomic) NSDateFormatter *lastUpdateDateFormatter;
+
 @end
 
 
 @implementation CTCMenuController
 
 - (void)awakeFromNib {
+    // Create a date formatter for "last update" dates
+    self.lastUpdateDateFormatter = NSDateFormatter.new;
+    self.lastUpdateDateFormatter.timeStyle = NSDateFormatterShortStyle;
+    
     [self setupMenuItem];
     
     // Update UI with initial values
@@ -95,27 +101,16 @@
 
 - (void)setLastUpdateStatus:(BOOL)lastUpdateWasSuccessful time:(NSDate *)time {
     // Create something like "Last update: 3:45 AM" and place it in the menu
-    NSString *baseLastUpdateString = nil;
-    NSString *lastUpdateString = nil;
+    NSString *lastUpdateStatusFormat = lastUpdateWasSuccessful ?
+        NSLocalizedString(@"lastupdate", @"Title for the last update time") :
+        NSLocalizedString(@"lastupdatefailed", @"Title for the last update time if it fails");
     
-    if (lastUpdateWasSuccessful) {
-        baseLastUpdateString = NSLocalizedString(@"lastupdate", @"Title for the last update time");
-    }
-    else {
-        baseLastUpdateString = NSLocalizedString(@"lastupdatefailed", @"Title for the last update time if it fails");
-    }
-
-    if (time) {
-        NSDateFormatter *dateFormatter = NSDateFormatter.new;
-        dateFormatter.timeStyle = NSDateFormatterShortStyle;
-        NSString *lastUpdateTime = [dateFormatter stringFromDate:time];
-        lastUpdateString = [NSString stringWithFormat:baseLastUpdateString, lastUpdateTime];
-    }
-    else {
-        lastUpdateString = [NSString stringWithFormat:baseLastUpdateString, NSLocalizedString(@"never", @"Never happened")];
-    }
+    NSString *lastUpdateStatus = time ?
+        [NSString stringWithFormat:lastUpdateStatusFormat,
+         [self.lastUpdateDateFormatter stringFromDate:time]] :
+        [NSString stringWithFormat:lastUpdateStatusFormat, NSLocalizedString(@"never", @"Never happened")];
     
-    [self.menuLastUpdate setTitle:lastUpdateString];
+    [self.menuLastUpdate setTitle:lastUpdateStatus];
 }
 
 - (void)setIdle {
