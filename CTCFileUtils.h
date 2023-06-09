@@ -11,4 +11,6 @@
 
 + (NSString *)userHomeDirectory;
 
++ (NSString *)folderNameForShowWithName:(NSString *)showName;
+
 @end

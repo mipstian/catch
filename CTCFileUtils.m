@@ -35,4 +35,8 @@ static NSString * const kCTCFileUtilsTorrentExtension = @".torrent";
     return NSHomeDirectory();
 }
 
++ (NSString *)folderNameForShowWithName:(NSString *)showName {
+    return [[showName stringByReplacingOccurrencesOfString:@"/" withString:@""] stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceCharacterSet];
+}
+
 @end
