@@ -87,17 +87,15 @@ final class Defaults: NSObject {
   /// Recently downloaded episodes. Remembered so they won't be downloaded again
   /// every time feeds are checked. They are presented in the UI as well.
   /// Automatically kept sorted chronologically, newest to oldest.
-  var downloadHistory: [HistoryItem] {
-    get {
-      let rawHistory = UserDefaults.standard.array(forKey: Keys.history) as! [[AnyHashable:Any]]
-      return rawHistory.compactMap(HistoryItem.init(defaultsDictionary:))
-    }
-    set {
+  /// This is really slow to deserialize from and serialize to defaults, so
+  /// keep it in memory while the app is running.
+  var downloadHistory: [HistoryItem] = [] {
+    didSet {
       // Only keep one copy of each episode
       var uniqueItems: [HistoryItem] = []
       do {
         var seenEpisodes: Set<Episode> = []
-        for newItem in newValue {
+        for newItem in downloadHistory {
           if !seenEpisodes.contains(newItem.episode) {
             seenEpisodes.insert(newItem.episode)
             uniqueItems.append(newItem)
@@ -111,8 +109,7 @@ final class Defaults: NSObject {
       let truncatedCount = min(uniqueItems.count, Config.historyLimit * feeds.count)
       let truncatedHistory = uniqueItems.sorted().reversed().prefix(upTo: truncatedCount)
       
-      let serializedHistory = truncatedHistory.map { $0.dictionaryRepresentation }
-      UserDefaults.standard.set(serializedHistory, forKey: Keys.history)
+      downloadHistory = Array(truncatedHistory)
       
       NotificationCenter.default.post(
         name: Defaults.downloadHistoryChangedNotification,
@@ -167,6 +164,10 @@ final class Defaults: NSObject {
   }
   
   func save() {
+    // Only save history to defaults when necessary
+    let serializedHistory = downloadHistory.map { $0.dictionaryRepresentation }
+    UserDefaults.standard.set(serializedHistory, forKey: Keys.history)
+    
     UserDefaults.standard.synchronize()
   }
   
@@ -224,6 +225,10 @@ final class Defaults: NSObject {
     
     // Register as a login item if needed
     refreshLoginItemStatus()
+    
+    // Load history from defaults at launch
+    let rawHistory = UserDefaults.standard.array(forKey: Keys.history) as! [[AnyHashable:Any]]
+    downloadHistory = rawHistory.compactMap(HistoryItem.init(defaultsDictionary:))
   }
   
   @objc private func defaultsChanged(_: Notification) {
