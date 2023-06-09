@@ -1,6 +1,4 @@
 #import <Cocoa/Cocoa.h>
-#import "Preferences.h"
-#import "CTCScheduler.h"
 
 
 extern NSString * const APPLICATION_WEBSITE_URL;
@@ -17,10 +15,6 @@ extern NSString * const SERVICE_FEED_LEGACY_URL_PREFIX;
 - (void)schedulerStatusActive:(BOOL)isActive running:(BOOL)isRunning;
 
 - (void)lastUpdateStatus:(BOOL)lastUpdateWasSuccessful time:(NSDate*)time;
-
-- (void)checkNow;
-
-- (void)togglePause;
 
 - (void)savePreferences;
 

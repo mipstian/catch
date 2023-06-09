@@ -1,5 +1,6 @@
 #import "CTCMainController.h"
 #import "CTCDefaults.h"
+#import "CTCScheduler.h"
 
 
 @interface CTCMainController ()
@@ -13,12 +14,16 @@
 @property (strong, nonatomic) IBOutlet NSTabView *preferencesTabs;
 
 @property (strong, nonatomic) NSStatusItem *menuBarItem;
+
+@property (strong, nonatomic) CTCScheduler *scheduler;
 @end
 
 
 @implementation CTCMainController
 
 - (void)awakeFromNib {
+    self.scheduler = CTCScheduler.new;
+    
 	// Create the NSStatusBar and set its length
 	self.menuBarItem = [NSStatusBar.systemStatusBar statusItemWithLength:NSSquareStatusItemLength];
 	
@@ -111,12 +116,19 @@
 	[self.preferencesTabs selectLastTabViewItem:self];
 }
 
+- (void)forceCheck {
+    [self.scheduler forceCheck];
+}
+
 - (IBAction)checkNow:(id)sender {
-	[[NSApp delegate] checkNow];
+	[self forceCheck];
 }
 
 - (IBAction)togglePause:(id)sender {
-	[[NSApp delegate] togglePause];
+	if ([self.scheduler pauseResume]) {
+		// If the scheduler is now active, also force a check right away
+		[self.scheduler forceCheck];
+	}
 }
 
 - (IBAction)quit:(id)sender {
