@@ -14,7 +14,6 @@ final class Defaults {
     static let torrentsSavePath = "savePath"
     static let shouldOrganizeTorrents = "organizeTorrents"
     static let shouldOpenTorrentsAutomatically = "openAutomatically"
-    static let downloadedFiles = "downloadedFiles" // Deprecated, for migration only
     static let history = "history"
     static let openAtLogin = "openAtLogin"
     static let shouldRunHeadless = "headless"
@@ -165,47 +164,20 @@ final class Defaults {
       FileManager.default.homeDirectory
     
     // Set smart default defaults
-    UserDefaults.standard.register(
-      defaults: [
-        Keys.feedURL: "",
-        Keys.onlyUpdateBetween: false,
-        Keys.updateFrom: defaultFromTime,
-        Keys.updateTo: defaultToTime,
-        Keys.torrentsSavePath: defaultDownloadsDirectory,
-        Keys.shouldOrganizeTorrents: false,
-        Keys.shouldOpenTorrentsAutomatically: true,
-        Keys.openAtLogin: true,
-        Keys.preventSystemSleep: true
-      ]
-    )
-    
-    // Migrate the downloads history format. Change old array of strings to new dictionary format
-    let downloadedFiles = UserDefaults.standard.array(forKey: Keys.downloadedFiles) as? [String]
-    let history = UserDefaults.standard.array(forKey: Keys.history)
-    if let downloadedFiles = downloadedFiles, history == nil {
-      NSLog("Migrating download history to new format.")
-      
-      downloadHistory = downloadedFiles.flatMap(URL.init(string:)).map { url in
-        // Old history didn't save titles. This is better than nothing.
-        let title = url.suggestedDownloadFileName!
-        
-        return HistoryItem(
-          episode: Episode(
-            title: title,
-            url: url,
-            showName: nil
-          ),
-          downloadDate: nil
-        )
-      }
-      
-      UserDefaults.standard.removeObject(forKey: Keys.downloadedFiles)
-    }
-    
-    // If history was never set or migrated, init it to empty array
-    if downloadedFiles == nil && history == nil {
-      downloadHistory = []
-    }
+    let defaultDefaults: [String:Any] = [
+      Keys.feedURL: "",
+      Keys.onlyUpdateBetween: false,
+      Keys.updateFrom: defaultFromTime,
+      Keys.updateTo: defaultToTime,
+      Keys.torrentsSavePath: defaultDownloadsDirectory,
+      Keys.shouldOrganizeTorrents: false,
+      Keys.shouldOpenTorrentsAutomatically: true,
+      Keys.history: [],
+      Keys.openAtLogin: true,
+      Keys.shouldRunHeadless: false,
+      Keys.preventSystemSleep: true
+    ]
+    UserDefaults.standard.register(defaults: defaultDefaults)
     
     // Register as a login item if needed
     refreshLoginItemStatus()
