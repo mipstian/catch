@@ -66,8 +66,4 @@ NSString * const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info
 	[self.mainController torrentNotificationWithDescription:description];
 }
 
-- (void)orderFrontStandardAboutPanel:(id)sender {
-	// Do nothing
-}
-
 @end
