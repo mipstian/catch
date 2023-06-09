@@ -2,6 +2,7 @@
 #import "CTCDefaults.h"
 #import "CTCScheduler.h"
 #import "CTCRecentsCellView.h"
+#import "CTCBrowser.h"
 
 
 @interface CTCRecentsController ()
@@ -52,10 +53,7 @@
     
     BOOL isMagnetLink = [recentToDownload[@"isMagnetLink"] boolValue];
     if (isMagnetLink) {
-        // Open magnet links without bring app that handles them to the foreground
-        NSArray* urls = [NSArray arrayWithObject:[NSURL URLWithString:recentToDownload[@"url"]]];
-        [[NSWorkspace sharedWorkspace] openURLs:urls withAppBundleIdentifier:nil 
-            options:NSWorkspaceLaunchWithoutActivation additionalEventParamDescriptor:nil launchIdentifiers:nil];
+        [CTCBrowser openInBackgroundURL:[NSURL URLWithString:recentToDownload[@"url"]]];
     }
     else {
         [CTCScheduler.sharedScheduler downloadFile:recentToDownload

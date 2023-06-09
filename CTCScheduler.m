@@ -2,6 +2,7 @@
 #import "CTCFeedChecker.h"
 #import "CTCDefaults.h"
 #import "CTCFileUtils.h"
+#import "CTCBrowser.h"
 #import "NSDate+TimeOfDayMath.h"
 
 
@@ -241,10 +242,7 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
         
         // Open magnet link
         if (isMagnetLink) {
-            // Open magnet links without bring app that handles them to the foreground
-            NSArray* urls = [NSArray arrayWithObject:[NSURL URLWithString:feedFile[@"url"]]];
-            [[NSWorkspace sharedWorkspace] openURLs:urls withAppBundleIdentifier:nil 
-                options:NSWorkspaceLaunchWithoutActivation additionalEventParamDescriptor:nil launchIdentifiers:nil];
+            [CTCBrowser openInBackgroundURL:[NSURL URLWithString:feedFile[@"url"]]];
         }
         
         // Open normal torrent in torrent client, if requested
