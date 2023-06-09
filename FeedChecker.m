@@ -12,12 +12,6 @@
 
 @implementation FeedChecker
 
-- (id) initWithPreferences:(Preferences*)thePreferences {
-	preferences = [thePreferences retain];
-	
-	return self;
-}
-
 - (BOOL) checkFeed {
 	NSLog(@"FeedChecker: checking");
 	
@@ -28,7 +22,7 @@
 	
 	// We don't want these preferences to change while we're working
 	BOOL organize = [[NSUserDefaults standardUserDefaults] boolForKey:PREFERENCE_KEY_ORGANIZE_TORRENTS];
-	NSURL* feedURL = [NSURL URLWithString:preferences.feedURL];
+	NSURL* feedURL = [NSURL URLWithString:Preferences.feedURL];
 	
 	// Flush the cache, we want fresh results
 	[[NSURLCache sharedURLCache] removeAllCachedResponses];

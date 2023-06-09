@@ -16,12 +16,11 @@
 	NSRunLoop* runLoop;
 	NSTimer* repeatingTimer;
 	FeedChecker* feedChecker;
-	Preferences* preferences;
 	int active;
 	int running;
 }
 
-- (id) initWithFeedChecker:(FeedChecker*)theFeedChecker preferences:(Preferences*)thePreferences;
+- (id) initWithFeedChecker:(FeedChecker*)theFeedChecker;
 
 - (BOOL) pauseResume;
 

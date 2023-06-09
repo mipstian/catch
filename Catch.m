@@ -24,18 +24,22 @@ NSString* const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info/
 @implementation Catch
 
 - (id) init {
+	self = [super init];
+	if (!self) {
+		return nil;
+	}
+
 	NSLog(@"Catch: init, loading preferences");
 	
 	// Create preferences and set default values
-	preferences = [[Preferences alloc] retain];
-	[preferences setDefaults];
-	[preferences save]; //This ensures we have the latest values from the user
+	[Preferences setDefaults];
+	[Preferences save]; //This ensures we have the latest values from the user
 	
 	// Register as a login item if needed
 	[self registerAsLoginItem:[[NSUserDefaults standardUserDefaults] boolForKey:PREFERENCE_KEY_OPEN_AT_LOGIN]];
 	
 	// Create a feed checker
-	feedChecker = [[[FeedChecker alloc] initWithPreferences:preferences] retain];
+	feedChecker = [[[FeedChecker alloc] init] retain];
 
 	return self;
 }
@@ -44,12 +48,12 @@ NSString* const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info/
 	NSLog(@"Catch: finished launching");
 	
 	// show Preferences folder if the config is not valid
-	if (![preferences validate]) {
+	if (![Preferences validate]) {
 		[gui showPreferences:self];
 	}
 	
 	NSLog(@"Catch: creating scheduler for feed checker");
-	scheduler = [[[Scheduler alloc] initWithFeedChecker:feedChecker preferences:preferences] retain];
+	scheduler = [[[Scheduler alloc] initWithFeedChecker:feedChecker] retain];
 	
 	// Also check now
 	[scheduler forceCheck];
@@ -95,7 +99,7 @@ NSString* const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info/
 }
 
 - (void) savePreferences {
-	[preferences save];
+	[Preferences save];
 	
 	// Register as a login item if needed
 	[self registerAsLoginItem:[[NSUserDefaults standardUserDefaults] boolForKey:PREFERENCE_KEY_OPEN_AT_LOGIN]];
@@ -105,7 +109,7 @@ NSString* const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info/
 }
 
 - (BOOL) isConfigurationValid {
-	return [preferences validate];
+	return [Preferences validate];
 }
 
 - (void) torrentNotificationWithDescription:(NSString *)description {
@@ -140,9 +144,9 @@ NSString* const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info/
 	} else {
 		// Remove Catch from the login items
 		UInt32 seedValue;
-		NSArray  *loginItemsArray = (NSArray *)LSSharedFileListCopySnapshot(loginItems, &seedValue);
+		NSArray *loginItemsArray = (NSArray *)LSSharedFileListCopySnapshot(loginItems, &seedValue);
 
-		for(NSUInteger i ; i < loginItemsArray.count; i++){
+		for(NSUInteger i = 0; i < loginItemsArray.count; i++){
 			LSSharedFileListItemRef itemRef = (LSSharedFileListItemRef)[loginItemsArray objectAtIndex:i];
 			// Resolve the item with URL
 			if (LSSharedFileListItemResolve(itemRef, 0, (CFURLRef*) &url, NULL) == noErr) {
@@ -166,7 +170,7 @@ NSString* const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info/
 - (void) quit {
 	NSLog(@"Catch: quitting");
 	// Save preferences
-	[preferences save];
+	[Preferences save];
 	
 	NSLog(@"Catch: all done, bye bye");
 	// Quit
