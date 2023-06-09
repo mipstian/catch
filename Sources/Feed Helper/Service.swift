@@ -10,8 +10,8 @@ final class Service: NSObject {
 
 
 extension Service: FeedHelperService {
-  func checkShowRSSFeed(
-    feedURL: URL,
+  func checkFeed(
+    url: URL,
     downloadingToBookmark downloadDirectoryBookmark: Data,
     organizingByShow shouldOrganizeByShow: Bool,
     savingMagnetLinks shouldSaveMagnetLinks: Bool,
@@ -26,8 +26,8 @@ extension Service: FeedHelperService {
         shouldSaveMagnetLinks: shouldSaveMagnetLinks
       )
       
-      downloadedFeedFiles = try FeedHelper.checkShowRSSFeed(
-        feedURL: feedURL,
+      downloadedFeedFiles = try FeedHelper.checkFeed(
+        url: url,
         downloadOptions: downloadOptions,
         skippingURLs: previouslyDownloadedURLs
       )
@@ -39,7 +39,7 @@ extension Service: FeedHelperService {
     reply(downloadedFeedFiles, nil)
   }
   
-  func downloadFile(
+  func download(
     file: [AnyHashable:Any],
     toBookmark downloadDirectoryBookmark: Data,
     organizingByShow shouldOrganizeByShow: Bool,
@@ -54,7 +54,7 @@ extension Service: FeedHelperService {
         shouldSaveMagnetLinks: shouldSaveMagnetLinks
       )
       
-      downloadedFile = try FeedHelper.downloadFile(file: file, downloadOptions: downloadOptions)
+      downloadedFile = try FeedHelper.download(file: file, downloadOptions: downloadOptions)
     } catch {
       reply(nil, error)
       return

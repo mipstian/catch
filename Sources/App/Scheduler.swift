@@ -19,7 +19,7 @@ final class Scheduler {
     repeatingTimer = Timer.scheduledTimer(
       timeInterval: interval,
       target: self,
-      selector: #selector(tick),
+      selector: #selector(timerFired),
       userInfo: nil,
       repeats: true
     )
@@ -35,7 +35,7 @@ final class Scheduler {
     repeatingTimer.fireDate = .distantPast
   }
   
-  @objc private func tick(_: Timer) {
+  @objc private func timerFired(_: Timer) {
     delegate?.schedulerFired()
   }
 }

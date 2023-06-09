@@ -15,14 +15,14 @@ final class FeedChecker {
       }
       
       refreshPowerManagement()
-      sendStatusChangedNotification()
+      postStatusChangedNotification()
     }
   }
   
   /// True iff a feed check is happening right now
   private(set) var isChecking = false {
     didSet {
-      sendStatusChangedNotification()
+      postStatusChangedNotification()
     }
   }
   
@@ -148,10 +148,10 @@ final class FeedChecker {
     lastUpdateWasSuccessful = wasSuccessful
     lastUpdateDate = Date()
     
-    sendStatusChangedNotification()
+    postStatusChangedNotification()
   }
   
-  private func sendStatusChangedNotification() {
+  private func postStatusChangedNotification() {
     NotificationCenter.default.post(
       name: FeedChecker.statusChangedNotification,
       object: self
@@ -171,6 +171,7 @@ extension FeedChecker: SchedulerDelegate {
     checkFeed()
   }
 }
+
 
 extension FeedChecker: FeedHelperProxyDelegate {
   func feedHelperConnectionWasInterrupted() {
