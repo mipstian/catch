@@ -114,7 +114,7 @@
 			NSLog(@"FeedChecker: download of %@ failed",url);
 		} else {
 			// Notify of addition
-			if ([[NSUserDefaults standardUserDefaults] boolForKey:PREFERENCE_KEY_GROWL_NOTIFICATIONS]) {
+			if ([[NSUserDefaults standardUserDefaults] boolForKey:PREFERENCE_KEY_SEND_NOTIFICATIONS]) {
 				[[NSApp delegate] torrentNotificationWithDescription:
 				 [NSString stringWithFormat:NSLocalizedString(@"newtorrentdesc", @"New torrent notification"), [file objectForKey:@"title"]]];
 			}

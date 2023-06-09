@@ -18,6 +18,6 @@
 // in preferences:
 "badurl"="The feed URL you entered is not valid. Use the help button below for details on how to configure Catch.";
 "badurlok"="OK";
-// for growl:
+// for notifications:
 "newtorrent"="New torrent downloaded";
 "newtorrentdesc"="Torrent file %@ has been downloaded!"; // %@ will be replaced by filename

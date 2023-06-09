@@ -19,6 +19,6 @@
 // in preferences:
 "badurl"="Dee ingevoerde feed URL is ongeldig. Gebruik de knop hieronder voor hulp bij het configureren van Catch.";
 "badurlok"="OK";
-// for growl:
+// for notifications:
 "newtorrent"="Nieuwe torrent gedownload";
 "newtorrentdesc"="Torrent bestand %@ is gedownload!"; // %@ will be replaced by filename

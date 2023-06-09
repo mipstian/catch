@@ -19,8 +19,7 @@ NSString* const PREFERENCE_KEY_UPDATE_TO = @"updateTo";
 NSString* const PREFERENCE_KEY_SAVE_PATH = @"savePath";
 NSString* const PREFERENCE_KEY_ORGANIZE_TORRENTS = @"organizeTorrents";
 NSString* const PREFERENCE_KEY_OPEN_AUTOMATICALLY = @"openAutomatically";
-NSString* const PREFERENCE_KEY_GROWL_NOTIFICATIONS = @"growlNotifications";
-NSString* const PREFERENCE_KEY_CHECK_FOR_UPDATES = @"checkForUpdates";
+NSString* const PREFERENCE_KEY_SEND_NOTIFICATIONS = @"growlNotifications";
 NSString* const PREFERENCE_KEY_DOWNLOADED_FILES = @"downloadedFiles";
 NSString* const PREFERENCE_KEY_HISTORY = @"history";
 NSString* const PREFERENCE_KEY_OPEN_AT_LOGIN = @"openAtLogin";
@@ -55,22 +54,19 @@ int const FEED_UPDATE_INTERVAL = 60*10; // 10 minutes
 	}
 	
 	// Set smart defaults for the preferences
-	NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-
 	NSDictionary* appDefaults = [NSDictionary dictionaryWithObjectsAndKeys:
 								 @"", PREFERENCE_KEY_FEED_URL,
-								 [NSNumber numberWithInt:0], PREFERENCE_KEY_ONLY_UPDATE_BETWEEN,
+								 @NO, PREFERENCE_KEY_ONLY_UPDATE_BETWEEN,
 								 dateFrom, PREFERENCE_KEY_UPDATE_FROM,
 								 dateTo, PREFERENCE_KEY_UPDATE_TO,
 								 downloadsDirectory, PREFERENCE_KEY_SAVE_PATH,
-								 [NSNumber numberWithInt:0], PREFERENCE_KEY_ORGANIZE_TORRENTS,
-								 [NSNumber numberWithInt:1], PREFERENCE_KEY_OPEN_AUTOMATICALLY,
-								 [NSNumber numberWithInt:1], PREFERENCE_KEY_GROWL_NOTIFICATIONS,
-								 [NSNumber numberWithInt:1], PREFERENCE_KEY_CHECK_FOR_UPDATES,
-								 [NSNumber numberWithInt:1], PREFERENCE_KEY_OPEN_AT_LOGIN,
+								 @NO, PREFERENCE_KEY_ORGANIZE_TORRENTS,
+								 @YES, PREFERENCE_KEY_OPEN_AUTOMATICALLY,
+								 @YES, PREFERENCE_KEY_SEND_NOTIFICATIONS,
+								 @YES, PREFERENCE_KEY_OPEN_AT_LOGIN,
 								 nil];
 
-	[defaults registerDefaults:appDefaults];
+	[NSUserDefaults.standardUserDefaults registerDefaults:appDefaults];
 }
 
 + (NSString *)feedURL {

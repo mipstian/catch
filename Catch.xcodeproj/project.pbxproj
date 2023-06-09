@@ -23,8 +23,6 @@
 		38D39B6C11C3A70000C17C80 /* menubar_refreshing.png in Resources */ = {isa = PBXBuildFile; fileRef = 38D39B6611C3A70000C17C80 /* menubar_refreshing.png */; };
 		38DB9D5A11C7FEC5000DA168 /* app-icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 38DB9D5911C7FEC5000DA168 /* app-icon.icns */; };
 		38F9B09111C98E9E0021C540 /* Automator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38F9B09011C98E9E0021C540 /* Automator.framework */; };
-		441297D217FE27D400E9E21E /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 448CC7E517FE1F840063D3FD /* Growl.framework */; };
-		441297D317FE285500E9E21E /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 448CC7E517FE1F840063D3FD /* Growl.framework */; };
 		441297D417FE285500E9E21E /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 448CC7E617FE1F840063D3FD /* Sparkle.framework */; };
 		44717A951912EEF800580054 /* menubar_idle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44717A941912EEF800580054 /* menubar_idle@2x.png */; };
 		44717A971912F24700580054 /* menubar_idle-inv@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44717A961912F24700580054 /* menubar_idle-inv@2x.png */; };
@@ -48,7 +46,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				441297D317FE285500E9E21E /* Growl.framework in CopyFiles */,
 				441297D417FE285500E9E21E /* Sparkle.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -116,7 +113,6 @@
 		44717AA91913173600580054 /* CTCFileUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCFileUtils.m; sourceTree = "<group>"; };
 		44717AAB19131BC700580054 /* CTCFeedParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTCFeedParser.h; sourceTree = "<group>"; };
 		44717AAC19131BC700580054 /* CTCFeedParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTCFeedParser.m; sourceTree = "<group>"; };
-		448CC7E517FE1F840063D3FD /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
 		448CC7E617FE1F840063D3FD /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Catch-Info.plist */ = {isa = PBXFileReference; explicitFileType = text.plist.xml; fileEncoding = 4; path = "Catch-Info.plist"; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Catch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catch.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,7 +126,6 @@
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				38F9B09111C98E9E0021C540 /* Automator.framework in Frameworks */,
 				448CC7E817FE1F840063D3FD /* Sparkle.framework in Frameworks */,
-				441297D217FE27D400E9E21E /* Growl.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,7 +217,6 @@
 				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
 				38F9B09011C98E9E0021C540 /* Automator.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
-				448CC7E517FE1F840063D3FD /* Growl.framework */,
 				448CC7E617FE1F840063D3FD /* Sparkle.framework */,
 			);
 			name = Frameworks;
@@ -396,6 +390,7 @@
 				GCC_PREFIX_HEADER = Catch_Prefix.pch;
 				INFOPLIST_FILE = "Catch-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = Catch;
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
@@ -418,6 +413,7 @@
 				GCC_PREFIX_HEADER = Catch_Prefix.pch;
 				INFOPLIST_FILE = "Catch-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = Catch;
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;

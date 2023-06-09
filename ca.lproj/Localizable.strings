@@ -19,6 +19,6 @@
 // in preferences:
 "badurl"="L'URL del feed que has introduït no és vàlida. Utilitza el botó d'ajuda de sota per detalls sobre com configurar Catch.";
 "badurlok"="OK";
-// for growl:
+// for notifications:
 "newtorrent"="Nou torrent descarregat";
 "newtorrentdesc"="S'ha descarregat l'arxiu torrent %@ !"; // %@ will be replaced by filename
