@@ -64,7 +64,9 @@ enum FeedHelper {
     // Download new episodes
     NSLog("Downloading \(newEpisodes.count) new episodes")
     let downloader = EpisodeDownloader(downloadOptions: downloadOptions)
-    return try newEpisodes.map(downloader.download(episode:))
+    let downloadedEpisodes = try newEpisodes.map(downloader.download(episode:))
+    NSLog("Done downloading new episodes")
+    return downloadedEpisodes
   }
   
   static func download(episode: Episode, downloadOptions: DownloadOptions) throws -> DownloadedEpisode {
