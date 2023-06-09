@@ -27,10 +27,6 @@ extern NSString* const SERVICE_FEED_LEGACY_URL_PREFIX;
 	FeedChecker* feedChecker;
 }
 
-- (id)init;
-
-- (void)applicationDidFinishLaunching:(NSNotification*)aNotification;
-
 - (void)schedulerStatus:(int)status running:(int)running;
 
 - (void)lastUpdateStatus:(int)status time:(NSDate*)time;
@@ -44,8 +40,6 @@ extern NSString* const SERVICE_FEED_LEGACY_URL_PREFIX;
 - (BOOL)isConfigurationValid;
 
 - (void)torrentNotificationWithDescription:(NSString*)description;
-
-- (void)orderFrontStandardAboutPanel:(id)sender;
 
 - (void)quit;
 

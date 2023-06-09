@@ -286,8 +286,7 @@ static NSString* const GROWL_NEW_TORRENT = @"New torrent";
 }
 
 - (BOOL)userNotificationCenter:(NSUserNotificationCenter *)center
-	 shouldPresentNotification:(NSUserNotification *)notification
-{
+	 shouldPresentNotification:(NSUserNotification *)notification {
 	return YES;
 }
 
