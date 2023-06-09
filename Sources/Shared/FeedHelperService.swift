@@ -11,7 +11,7 @@ let feedHelperErrorDomain = "com.giorgiocalderolla.Catch.CatchFeedHelper"
     organizingByShow shouldOrganizeByShow: Bool,
     savingMagnetLinks shouldSaveMagnetLinks: Bool,
     skippingURLs previouslyDownloadedURLs: [String],
-    withReply reply: (_ downloadedFeedFiles: [[AnyHashable:Any]]?, _ error: Error?) -> Void
+    withReply reply: @escaping (_ downloadedFeedFiles: [[AnyHashable:Any]]?, _ error: Error?) -> Void
   )
   
   func download(
@@ -19,6 +19,6 @@ let feedHelperErrorDomain = "com.giorgiocalderolla.Catch.CatchFeedHelper"
     toBookmark downloadDirectoryBookmark: Data,
     organizingByShow shouldOrganizeByShow: Bool,
     savingMagnetLinks shouldSaveMagnetLinks: Bool,
-    withReply reply: (_ downloadedFile: [AnyHashable:Any]?, _ error: Error?) -> Void
+    withReply reply: @escaping (_ downloadedFile: [AnyHashable:Any]?, _ error: Error?) -> Void
   )
 }

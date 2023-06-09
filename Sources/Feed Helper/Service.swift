@@ -12,7 +12,7 @@ extension Service: FeedHelperService {
     organizingByShow shouldOrganizeByShow: Bool,
     savingMagnetLinks shouldSaveMagnetLinks: Bool,
     skippingURLs previouslyDownloadedURLs: [String],
-    withReply reply: (_ downloadedFeedFiles: [[AnyHashable:Any]]?, _ error: Error?) -> Void) {
+    withReply reply: @escaping (_ downloadedFeedFiles: [[AnyHashable:Any]]?, _ error: Error?) -> Void) {
     let downloadedEpisodes: [DownloadedEpisode]
     
     do {
@@ -40,7 +40,7 @@ extension Service: FeedHelperService {
     toBookmark downloadDirectoryBookmark: Data,
     organizingByShow shouldOrganizeByShow: Bool,
     savingMagnetLinks shouldSaveMagnetLinks: Bool,
-    withReply reply: (_ downloadedFile: [AnyHashable:Any]?, _ error: Error?) -> Void) {
+    withReply reply: @escaping (_ downloadedFile: [AnyHashable:Any]?, _ error: Error?) -> Void) {
     let downloadedFile: DownloadedEpisode
     
     do {
