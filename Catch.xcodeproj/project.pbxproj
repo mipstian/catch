@@ -124,8 +124,8 @@
 		4403ACF31914041C002F286C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Resources/App/Assets.xcassets; sourceTree = "<group>"; };
 		4412E8161957F09200701124 /* com.giorgiocalderolla.Catch.CatchFeedHelper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = com.giorgiocalderolla.Catch.CatchFeedHelper.entitlements; sourceTree = "<group>"; };
 		4419CF37180627A900C77432 /* nl */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
-		4441F59324308B77001AEC1E /* ServiceURLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceURLs.swift; sourceTree = "<group>"; };
-		4441F59524308C8D001AEC1E /* Scripts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scripts.swift; sourceTree = "<group>"; };
+		4441F59324308B77001AEC1E /* ServiceURLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ServiceURLs.swift; path = Sources/App/ServiceURLs.swift; sourceTree = "<group>"; };
+		4441F59524308C8D001AEC1E /* Scripts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Scripts.swift; path = Sources/App/Scripts.swift; sourceTree = "<group>"; };
 		4453A6651DE5065F00383E40 /* Episode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Episode.swift; path = Sources/Shared/Episode.swift; sourceTree = "<group>"; };
 		4453A6681DE516B200383E40 /* SandboxBookmarks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SandboxBookmarks.swift; path = Sources/Shared/SandboxBookmarks.swift; sourceTree = "<group>"; };
 		4453A66B1DE5D4DF00383E40 /* EpisodeDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EpisodeDownloader.swift; path = "Sources/Feed Helper/EpisodeDownloader.swift"; sourceTree = "<group>"; };
@@ -171,8 +171,8 @@
 		44BA5D151DAECF1A00A9CE9A /* RecentsCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecentsCellView.swift; path = Sources/App/RecentsCellView.swift; sourceTree = "<group>"; };
 		44BA5D191DB81A8E00A9CE9A /* Application.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Application.swift; path = Sources/App/Application.swift; sourceTree = "<group>"; };
 		44BA5D1B1DB8220100A9CE9A /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; name = MenuController.swift; path = Sources/App/MenuController.swift; sourceTree = "<group>"; tabWidth = 2; };
-		44C81988220D6B7700D9DAAD /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
-		44C8198A220D73DC00D9DAAD /* OPMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OPMLParser.swift; sourceTree = "<group>"; };
+		44C81988220D6B7700D9DAAD /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Feed.swift; path = Sources/Shared/Feed.swift; sourceTree = "<group>"; };
+		44C8198A220D73DC00D9DAAD /* OPMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OPMLParser.swift; path = Sources/App/OPMLParser.swift; sourceTree = "<group>"; };
 		44C8926E1D1814A7008F8543 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Sources/App/AppDelegate.swift; sourceTree = "<group>"; };
 		44E2CEA21DBC0B8F00ED7A8D /* PreferencesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreferencesController.swift; path = Sources/App/PreferencesController.swift; sourceTree = "<group>"; };
 		44E2CEA41DBC134E00ED7A8D /* FeedParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedParser.swift; path = "Sources/Feed Helper/FeedParser.swift"; sourceTree = SOURCE_ROOT; };
@@ -696,7 +696,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 535;
+				DEVELOPMENT_TEAM = 4449XA862Y;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Vendor",
@@ -709,6 +712,7 @@
 				OTHER_LDFLAGS = "-Wl,-rpath,@loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.giorgiocalderolla.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = Catch;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				WRAPPER_EXTENSION = app;
 			};
@@ -917,6 +921,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Resources/Feed Helper/com.giorgiocalderolla.Catch.CatchFeedHelper.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4449XA862Y;
 				INFOPLIST_FILE = "Resources/Feed Helper/CatchFeedHelper-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -926,6 +933,7 @@
 				MACH_O_TYPE = mh_execute;
 				PRODUCT_BUNDLE_IDENTIFIER = "${PRODUCT_NAME}";
 				PRODUCT_NAME = "com.giorgiocalderolla.Catch.$(TARGET_NAME:rfc1034identifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				WRAPPER_EXTENSION = xpc;
 			};
