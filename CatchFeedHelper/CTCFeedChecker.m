@@ -3,6 +3,9 @@
 #import "CTCFileUtils.h"
 
 
+NSString * kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHelper";
+
+
 @implementation CTCFeedChecker
 
 + (instancetype)sharedChecker {
@@ -30,46 +33,50 @@
                withReply:(CTCFeedCheckCompletionHandler)reply {
     NSLog(@"Checking feed");
     
-    NSMutableArray *downloadedFeedFiles = NSMutableArray.array;
+    if (!previouslyDownloadedURLs) previouslyDownloadedURLs = @[];
     
     // Flush the cache, we want fresh results
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
     
     // Download the feed
     NSXMLDocument* feed = [self downloadFeed:feedURL];
-    
     if (!feed) {
-        reply(NO, downloadedFeedFiles);
+        reply(@[], [NSError errorWithDomain:kCTCFeedCheckerErrorDomain
+                                       code:-1
+                                   userInfo:nil]);
         return;
     }
     
     // Parse the feed for files
     NSArray* feedFiles = [CTCFeedParser parseURLs:feed];
     if (!feedFiles) {
-        reply(NO, downloadedFeedFiles);
+        reply(@[], [NSError errorWithDomain:kCTCFeedCheckerErrorDomain
+                                       code:-1
+                                   userInfo:nil]);
         return;
     }
     
     // Parse the feed for show folders
     NSArray* feedShowFolders = shouldOrganizeByFolder ? [CTCFeedParser parseFolders:feed] : nil;
-    if (!feedShowFolders || feedFiles.count != feedShowFolders.count) {
-        // Make sure we have good folders
-        feedShowFolders = nil;
+    if (!feedShowFolders) {
         NSLog(@"Error parsing show folders, folders will not be used");
+    }
+    else if (feedFiles.count != feedShowFolders.count) {
+        NSLog(@"Missing show folders for some feed files, folders will not be used");
+        feedShowFolders = nil;
     }
     
     // Download the files
-    if (![self downloadFiles:feedFiles
-                      toPath:downloadFolderPath
-                   inFolders:feedShowFolders
-                skippingURLs:previouslyDownloadedURLs]) {
-        reply(NO, downloadedFeedFiles);
-        return;
-    }
+    NSError *error;
+    NSArray *downloadedFeedFiles = [self downloadFiles:feedFiles
+                                                toPath:downloadFolderPath
+                                             inFolders:feedShowFolders
+                                          skippingURLs:previouslyDownloadedURLs
+                                                 error:&error];
     
     NSLog(@"All done");
     
-    reply(YES, downloadedFeedFiles);
+    reply(downloadedFeedFiles, error);
 }
 
 - (NSXMLDocument*)downloadFeed:(NSURL*)feedURL {
@@ -89,68 +96,57 @@
 	return document;
 }
 
-- (BOOL)downloadFiles:(NSArray *)files
-               toPath:(NSString *)downloadPath
-            inFolders:(NSArray *)fileFolders
-         skippingURLs:(NSArray *)previouslyDownloadedURLs {
+- (NSArray *)downloadFiles:(NSArray *)feedFiles
+                    toPath:(NSString *)downloadPath
+                 inFolders:(NSArray *)fileFolders
+              skippingURLs:(NSArray *)previouslyDownloadedURLs
+                     error:(NSError * __autoreleasing *)error {
 	NSLog(@"Downloading files (if needed)");
 	
-	BOOL downloadingFailed = NO;
-	
-	for (NSDictionary* file in files) {
-		// Skip old files
+    NSMutableArray *successfullyDownloadedFeedFiles = NSMutableArray.array;
+    
+	for (NSDictionary* file in feedFiles) {
 		NSString* url = file[@"url"];
 		
-		if (previouslyDownloadedURLs) {
-            if ([previouslyDownloadedURLs containsObject:url]) continue;
-		}
+        // Skip old files
+        if ([previouslyDownloadedURLs containsObject:url]) continue;
+        
+        BOOL isMagnetLink = [url rangeOfString:@"magnet:"].location == 0;
 		
 		// The file is new, open magnet or download torrent
-		if ([url rangeOfString:@"magnet:"].location == 0) {
+		if (isMagnetLink) {
             NSLog(@"Found magnet %@ at %@", file[@"title"], url);
-            downloadingFailed = ![NSWorkspace.sharedWorkspace openURL:[NSURL URLWithString:url]];
+            [successfullyDownloadedFeedFiles addObject:@{@"url": file[@"url"],
+                                                         @"title": file[@"title"],
+                                                         @"isMagnetLink": @YES}];
 		} else {
 			NSLog(@"Found file %@ at %@", file[@"title"], url);
 			// First get the folder, if available
-			NSString* folder = fileFolders[[files indexOfObject:file]];
-			downloadingFailed = (![self downloadFile:[NSURL URLWithString:url]
-                                              toPath:downloadPath
-                                        inShowFolder:folder]);
-		}
-        
-		if (downloadingFailed) {
-			NSLog(@"Could not download %@", url);
-		} else {
-			// Notify of addition
-			if ([[NSUserDefaults standardUserDefaults] boolForKey:PREFERENCE_KEY_SEND_NOTIFICATIONS]) {
-				[[NSApp delegate] torrentNotificationWithDescription:
-				 [NSString stringWithFormat:NSLocalizedString(@"newtorrentdesc", @"New torrent notification"), [file objectForKey:@"title"]]];
-			}
-			
-			// Add url to history
-			NSArray* newDownloadedFiles = nil;
-			
-			if (downloadedFiles) {
-				// Other old downloads are there. Add the new one
-				newDownloadedFiles = [downloadedFiles arrayByAddingObject:file];
-			} else {
-				// First download ever. Initialize the preference
-				newDownloadedFiles = [NSArray arrayWithObject:file];
-			}
-			[[NSUserDefaults standardUserDefaults]
-			 setObject:newDownloadedFiles
-			 forKey:PREFERENCE_KEY_HISTORY];
+			NSString *folder = fileFolders[[feedFiles indexOfObject:file]];
+            NSString *downloadedTorrentFile = [self downloadFile:[NSURL URLWithString:url]
+                                                          toPath:downloadPath
+                                                    inShowFolder:folder];
+            if (downloadedTorrentFile) {
+                [successfullyDownloadedFeedFiles addObject:@{@"url": file[@"url"],
+                                                             @"title": file[@"title"],
+                                                             @"isMagnetLink": @NO,
+                                                             @"torrentFilePath": downloadedTorrentFile}];
+            }
+            else {
+                NSLog(@"Could not download %@", url);
+                *error = [NSError errorWithDomain:kCTCFeedCheckerErrorDomain
+                                             code:-1
+                                         userInfo:nil];
+            }
 		}
 	}
 	
-	if (downloadingFailed) return NO;
-	
-	return YES;
+	return successfullyDownloadedFeedFiles.copy;
 }
 
-- (BOOL)downloadFile:(NSURL *)fileURL
-              toPath:(NSString *)downloadPath
-        inShowFolder:(NSString *)folder {
+- (NSString *)downloadFile:(NSURL *)fileURL
+                    toPath:(NSString *)downloadPath
+              inShowFolder:(NSString *)folder {
 	if (folder) NSLog(@"Downloading file %@ in folder %@",fileURL,folder);
 	else NSLog(@"Downloading file %@",fileURL);
 	
@@ -163,7 +159,7 @@
 	NSError* downloadError = [[NSError alloc] init];
 	downloadedFile = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&urlResponse error:&downloadError];
 	
-	if (!downloadedFile) return NO;
+	if (!downloadedFile) return nil;
     
 	NSLog(@"Download complete, filesize: %lu", (unsigned long)downloadedFile.length);
 	
@@ -185,7 +181,7 @@
 	if ([[NSFileManager defaultManager] fileExistsAtPath:pathAndFolder isDirectory:&pathAndFolderIsDirectory]) {
 		if (!pathAndFolderIsDirectory) {
 			// Exists but isn't a directory! Aaargh! Abort!
-			return NO;
+			return nil;
 		}
         
 	} else {
@@ -196,7 +192,7 @@
                                                              error:&error]) {
 			// Folder creation failed :( Abort
 			NSLog(@"Couldn't create folder %@", pathAndFolder);
-			return NO;
+			return nil;
 		} else {
 			NSLog(@"Folder %@ created", pathAndFolder);
 		}
@@ -205,15 +201,10 @@
 	// Write!
 	if (![downloadedFile writeToFile:pathAndFilename atomically:YES]) {
 		NSLog(@"Couldn't save file %@ to disk", pathAndFilename);
-		return NO;
+		return nil;
 	}
 	
-	// open in default torrent client if the preferences say so
-	if ([[NSUserDefaults standardUserDefaults] boolForKey:PREFERENCE_KEY_OPEN_AUTOMATICALLY]) {
-		[[NSWorkspace sharedWorkspace] openFile:pathAndFilename];
-	}
-	
-	return YES;
+	return pathAndFilename;
 }
 
 @end

@@ -66,6 +66,32 @@ int const FEED_UPDATE_INTERVAL = 60*10; // 10 minutes
 								 nil];
 
 	[NSUserDefaults.standardUserDefaults registerDefaults:appDefaults];
+    
+	// Migrate the downloads history format. Change old array of strings to new dictionary format
+	NSArray* downloadedFiles = [NSUserDefaults.standardUserDefaults arrayForKey:PREFERENCE_KEY_DOWNLOADED_FILES];
+	NSArray* history = [NSUserDefaults.standardUserDefaults arrayForKey:PREFERENCE_KEY_HISTORY];
+	if (downloadedFiles && !history) {
+		NSLog(@"Preferences: Migrating download history to new format.");
+		
+		NSMutableArray* newDownloadedFiles = NSMutableArray.array;
+		
+		for (NSString* url in downloadedFiles) {
+			[newDownloadedFiles addObject:[NSDictionary dictionaryWithObjectsAndKeys:
+                                           [CTCFileUtils computeFilenameFromURL:[NSURL URLWithString:url]], @"title",
+                                           url, @"url",
+                                           nil]];
+		}
+		
+		[NSUserDefaults.standardUserDefaults setObject:newDownloadedFiles
+                                                forKey:PREFERENCE_KEY_HISTORY];
+		[NSUserDefaults.standardUserDefaults removeObjectForKey:PREFERENCE_KEY_DOWNLOADED_FILES];
+	}
+    
+    // If history was never set or migrated, init it to empty array
+    if (!downloadedFiles && !history) {
+        [NSUserDefaults.standardUserDefaults setObject:@[]
+                                                forKey:PREFERENCE_KEY_HISTORY];
+    }
 }
 
 + (NSString *)feedURL {
@@ -73,13 +99,13 @@ int const FEED_UPDATE_INTERVAL = 60*10; // 10 minutes
 	return [rawFeedURL stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
 }
 
-+ (void) save {
++ (void)save {
 	NSLog(@"Preferences: Synchronizing");
 	// Write preferences to disk
 	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-+ (BOOL) validate {
++ (BOOL)validate {
 	// Validate torrent folder. This should never fail!
 	NSString* torrentFolder = [[NSUserDefaults standardUserDefaults] stringForKey:PREFERENCE_KEY_SAVE_PATH];
 	torrentFolder = [torrentFolder stringByStandardizingPath];
@@ -87,30 +113,11 @@ int const FEED_UPDATE_INTERVAL = 60*10; // 10 minutes
 	if (!torrentFolder) return NO;
 
 	BOOL isDirectory = NO;
-	if ([[NSFileManager defaultManager] fileExistsAtPath:torrentFolder isDirectory:&isDirectory]) {
+	if ([NSFileManager.defaultManager fileExistsAtPath:torrentFolder
+                                           isDirectory:&isDirectory]) {
 		if (!isDirectory) return NO;
 	} else {
 		return NO;
-	}
-	
-	// Migrate the downloads history format. Change old array of strings to new dictionary format
-	NSArray* downloadedFiles = [[NSUserDefaults standardUserDefaults] arrayForKey:PREFERENCE_KEY_DOWNLOADED_FILES];
-	NSArray* history = [[NSUserDefaults standardUserDefaults] arrayForKey:PREFERENCE_KEY_HISTORY];
-	
-	if (downloadedFiles && !history) {
-		NSLog(@"Preferences: Migrating download history to new format.");
-		
-		NSMutableArray* newDownloadedFiles = [[NSMutableArray alloc] init];
-		
-		for (NSString* url in downloadedFiles) {
-			[newDownloadedFiles addObject:[NSDictionary dictionaryWithObjectsAndKeys:
-				[CTCFileUtils computeFilenameFromURL:[NSURL URLWithString:url]], @"title",
-				url, @"url",
-				nil]];
-		}
-		
-		[[NSUserDefaults standardUserDefaults] setObject:newDownloadedFiles forKey:PREFERENCE_KEY_HISTORY];
-		[[NSUserDefaults standardUserDefaults] removeObjectForKey:PREFERENCE_KEY_DOWNLOADED_FILES];
 	}
 
 	// Most importantly, validate feed URL

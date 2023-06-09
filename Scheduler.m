@@ -48,7 +48,13 @@
     NSURL *feedURL = [NSURL URLWithString:Preferences.feedURL];
     NSString *downloadPath = [NSUserDefaults.standardUserDefaults stringForKey:PREFERENCE_KEY_SAVE_PATH];
     BOOL organizeByFolder = [NSUserDefaults.standardUserDefaults boolForKey:PREFERENCE_KEY_ORGANIZE_TORRENTS];
-    NSArray *previouslyDownloadedURLs = [NSUserDefaults.standardUserDefaults arrayForKey:PREFERENCE_KEY_HISTORY];
+    NSArray *history = [NSUserDefaults.standardUserDefaults arrayForKey:PREFERENCE_KEY_HISTORY];
+    
+    // Extract URLs from history
+    NSMutableArray *previouslyDownloadedURLs = NSMutableArray.array;
+    for (NSDictionary *historyEntry in history) {
+        [previouslyDownloadedURLs addObject:historyEntry[@"url"]];
+    }
     
     // Call feed checker service
     CTCFeedChecker *feedChecker = [self.feedCheckerConnection remoteObjectProxy];
@@ -107,15 +113,50 @@
 	
     [self reportStatus];
 	
-    [self callFeedCheckerWithReplyHandler:^(BOOL wasCheckSuccessful,
-                                            NSArray *downloadedFeedFiles){
+    [self callFeedCheckerWithReplyHandler:^(NSArray *downloadedFeedFiles,
+                                            NSError *error){
         self.running = NO;
         [self reportStatus];
-        [[NSApp delegate] lastUpdateStatus:wasCheckSuccessful
+        [[NSApp delegate] lastUpdateStatus:error == nil
                                       time:NSDate.date];
+        [self handleDownloadedFeedFiles:downloadedFeedFiles];
     }];
 }
-			
+
+- (void)handleDownloadedFeedFiles:(NSArray *)downloadedFeedFiles {
+    BOOL shouldOpenTorrentsAutomatically = [NSUserDefaults.standardUserDefaults
+                                            boolForKey:PREFERENCE_KEY_OPEN_AUTOMATICALLY];
+    BOOL shouldSendNotifications = [NSUserDefaults.standardUserDefaults boolForKey:PREFERENCE_KEY_SEND_NOTIFICATIONS];
+    
+    for (NSDictionary *feedFile in downloadedFeedFiles) {
+        BOOL isMagnetLink = [feedFile[@"isMagnetLink"] boolValue];
+        
+        // Open magnet link
+        if (isMagnetLink) {
+            [NSWorkspace.sharedWorkspace openURL:[NSURL URLWithString:feedFile[@"url"]]];
+        }
+        
+        // Open normal torrent in torrent client, if requested
+        if (!isMagnetLink && shouldOpenTorrentsAutomatically) {
+            [NSWorkspace.sharedWorkspace openFile:feedFile[@"torrentFilePath"]];
+        }
+        
+        // Post to Notification Center if requested
+        if (shouldSendNotifications) {
+            [[NSApp delegate] torrentNotificationWithDescription:
+             [NSString stringWithFormat:NSLocalizedString(@"newtorrentdesc", @"New torrent notification"), feedFile[@"title"]]];
+        }
+        
+        // Add url to history
+        NSArray *history = [NSUserDefaults.standardUserDefaults arrayForKey:PREFERENCE_KEY_HISTORY];
+        NSArray *newHistory = [history arrayByAddingObject:@{@"title": feedFile[@"title"],
+                                                             @"url": feedFile[@"url"]}];
+        [NSUserDefaults.standardUserDefaults setObject:newHistory
+                                                forKey:PREFERENCE_KEY_HISTORY];
+
+    }
+}
+
 - (BOOL)checkTime {
 	NSDate* now = NSDate.date;
 	NSDate* from = (NSDate *)[NSUserDefaults.standardUserDefaults objectForKey:PREFERENCE_KEY_UPDATE_FROM];

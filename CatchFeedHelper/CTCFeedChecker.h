@@ -1,8 +1,9 @@
 #import <Foundation/Foundation.h>
 
 
-typedef void (^CTCFeedCheckCompletionHandler)(BOOL error,
-                                              NSArray *downloadedFeedFiles);
+extern NSString * kCTCFeedCheckerErrorDomain;
+typedef void (^CTCFeedCheckCompletionHandler)(NSArray *downloadedFeedFiles,
+                                              NSError *error);
 
 
 @protocol CTCFeedCheck
