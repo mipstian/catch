@@ -111,7 +111,7 @@
                 <menuItem title="Preferences..." id="532">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
-                        <action selector="showPreferences:" target="vyd-92-YXh" id="Gem-Gn-vCm"/>
+                        <action selector="showWindow:" target="vyd-92-YXh" id="EYw-aq-GUA"/>
                     </connections>
                 </menuItem>
                 <menuItem title="Quit Catch" id="525">

@@ -9,13 +9,12 @@
     [self showFeeds:self];
     
     // If the configuration isn't valid, pop up immediately
-    if (!CTCDefaults.isConfigurationValid) [self showPreferences:self];
+    if (CTCDefaults.isConfigurationValid) [self showWindow:self];
 }
 
-- (IBAction)showPreferences:(id)sender {
-	// Show the Preferences window
-	[NSApp activateIgnoringOtherApps:YES];
-	[self.window makeKeyAndOrderFront:self];
+- (void)showWindow:(id)sender {
+    [NSApp activateIgnoringOtherApps:YES];
+    [super showWindow:sender];
 }
 
 - (IBAction)savePreferences:(id)sender {
