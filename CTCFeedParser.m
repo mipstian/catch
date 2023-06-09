@@ -3,7 +3,7 @@
 
 @implementation CTCFeedParser
 
-+ (NSArray*)parseFiles:(NSXMLDocument*)feed
++ (NSArray<NSDictionary *> *)parseFiles:(NSXMLDocument *)feed
                  error:(NSError * __autoreleasing *)outError {
     NSLog(@"Parsing feed");
     
@@ -18,7 +18,7 @@
     }
     
     // Extract files from NSXMLNodes
-    NSMutableArray *feedFiles = [NSMutableArray arrayWithCapacity:fileNodes.count];
+    NSMutableArray<NSDictionary *> *feedFiles = [NSMutableArray arrayWithCapacity:fileNodes.count];
     
     for(NSXMLNode *fileNode in fileNodes) {
         // Get the .torrent URL or magnet link

@@ -2,7 +2,7 @@
 
 
 extern NSString *kCTCFeedCheckerErrorDomain;
-typedef void (^CTCFeedCheckCompletionHandler)(NSArray *downloadedFeedFiles,
+typedef void (^CTCFeedCheckCompletionHandler)(NSArray<NSDictionary *> *downloadedFeedFiles,
                                               NSError *error);
 typedef void (^CTCFeedCheckDownloadCompletionHandler)(NSDictionary *downloadedFile,
                                                       NSError *error);
@@ -13,7 +13,7 @@ typedef void (^CTCFeedCheckDownloadCompletionHandler)(NSDictionary *downloadedFi
 - (void)checkShowRSSFeed:(NSURL *)feedURL
    downloadingToBookmark:(NSData *)downloadFolderBookmark
       organizingByFolder:(BOOL)shouldOrganizeByFolder
-            skippingURLs:(NSArray *)previouslyDownloadedURLs
+            skippingURLs:(NSArray<NSString *> *)previouslyDownloadedURLs
                withReply:(CTCFeedCheckCompletionHandler)reply;
 
 - (void)downloadFile:(NSDictionary *)file
