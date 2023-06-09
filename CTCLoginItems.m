@@ -12,8 +12,7 @@
 	
 	NSString * appPath = [[NSBundle mainBundle] bundlePath];
 	CFURLRef url = (CFURLRef)[NSURL fileURLWithPath:appPath];
-	LSSharedFileListRef loginItems = LSSharedFileListCreate(NULL,
-															kLSSharedFileListSessionLoginItems, NULL);
+	LSSharedFileListRef loginItems = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
 	
 	if (!loginItems) {
 		NSLog(@"Catch: couldn't add/remove myself to the login items :(");
