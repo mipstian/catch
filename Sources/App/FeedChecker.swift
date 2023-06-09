@@ -103,7 +103,7 @@ final class FeedChecker {
   }
   
   private func handleDownloadedEpisodes(_ downloadedEpisodes: [DownloadedEpisode]) {
-    for downloadedEpisode in downloadedEpisodes.reversed() {
+    for downloadedEpisode in downloadedEpisodes {
       let episode = downloadedEpisode.episode
       
       // Open torrents automatically if requested
@@ -120,8 +120,7 @@ final class FeedChecker {
       NSUserNotificationCenter.default.deliverNewEpisodeNotification(for: episode)
       
       // Add to history
-      let newHistoryItem = HistoryItem(episode: episode, downloadDate: Date())
-      Defaults.shared.downloadHistory = [newHistoryItem] + Defaults.shared.downloadHistory
+      Defaults.shared.downloadHistory.append(HistoryItem(episode: episode, downloadDate: Date()))
     }
   }
   

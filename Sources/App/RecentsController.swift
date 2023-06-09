@@ -42,7 +42,8 @@ extension RecentsController: NSTableViewDataSource {
 
 extension RecentsController: NSTableViewDelegate {
   func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-    let historyItem = Defaults.shared.downloadHistory[row]
+    // Get the item to display, in reverse cronological order
+    let historyItem = Defaults.shared.downloadHistory.sorted().reversed()[row]
     
     guard let cell = tableView.make(withIdentifier: "RecentCell", owner: self) as? RecentsCellView else {
       return nil
