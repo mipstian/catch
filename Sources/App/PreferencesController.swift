@@ -41,7 +41,7 @@ class PreferencesController: NSWindowController {
   
   private func refreshInvalidInputMarkers() {
     torrentsSavePathWarningImageView.image = Defaults.shared.isTorrentsSavePathValid ? #imageLiteral(resourceName: "success") : #imageLiteral(resourceName: "warning")
-    feedURLWarningImageView.image = Defaults.shared.isFeedURLValid ? #imageLiteral(resourceName: "success") : #imageLiteral(resourceName: "error")
+    feedURLWarningImageView.image = Defaults.shared.hasValidFeeds ? #imageLiteral(resourceName: "success") : #imageLiteral(resourceName: "error")
   }
   
   deinit {
