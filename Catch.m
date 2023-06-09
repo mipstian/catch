@@ -64,7 +64,7 @@ NSString* const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info/
 	
 	// Also refresh the list of recently downloaded torrents
 	// Get the full list
-	NSArray* downloaded = [[NSUserDefaults standardUserDefaults] arrayForKey:PREFERENCE_KEY_DOWNLOADED_FILES];
+	NSArray* downloaded = [[NSUserDefaults standardUserDefaults] arrayForKey:PREFERENCE_KEY_HISTORY];
 	// Get last 10 elements
 	NSRange recentRange;
 	recentRange.length = ([downloaded count] > 10) ? 10 : [downloaded count];
@@ -73,8 +73,9 @@ NSString* const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info/
 	NSArray* recent = [downloaded subarrayWithRange:recentRange];
 	NSArray* cleanRecent = [NSArray array];
 	int count = [recent count];
+    
 	for (int i = 1; i <= count; i++) {
-		NSString* clean = [FeedChecker computeFilenameFromURL:[NSURL URLWithString:[recent objectAtIndex:count-i]]];
+        NSString* clean = [[recent objectAtIndex:count-i] objectForKey:@"title"];
 		clean = [[NSString stringWithFormat:@"%d ",i] stringByAppendingString:clean];
 		cleanRecent = [cleanRecent arrayByAddingObject:clean];
 	}

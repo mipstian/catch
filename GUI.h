@@ -12,7 +12,7 @@
 #import "Preferences.h"
 
 
-@interface GUI : NSObject <GrowlApplicationBridgeDelegate> {
+@interface GUI : NSObject <GrowlApplicationBridgeDelegate,  NSUserNotificationCenterDelegate> {
 	// Outlets and UI components
 	IBOutlet NSMenu* menu;
 	IBOutlet NSMenuItem* menuVersion;
@@ -24,6 +24,7 @@
 	IBOutlet NSWindow* preferencesWindow;
 	IBOutlet NSTabView* preferencesTabs;
 	NSStatusItem* item;
+    BOOL notificationCenterIsAvailable;
 	
 	// Images
 	NSImage* iconIdle;
