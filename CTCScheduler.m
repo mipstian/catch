@@ -107,15 +107,8 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
     }];
 }
 
-- (void)callFeedCheckerWithReplyHandler:(CTCFeedCheckCompletionHandler)replyHandler {
-    // Read configuration
-    NSURL *feedURL = [NSURL URLWithString:CTCDefaults.feedURL];
+- (NSData *)downloadFolderBookmark {
     NSString *downloadPath = CTCDefaults.torrentsSavePath;
-    BOOL organizeByFolder = CTCDefaults.shouldOrganizeTorrentsInFolders;
-    NSArray *history = CTCDefaults.downloadHistory;
-    
-    // Extract URLs from history
-    NSArray *previouslyDownloadedURLs = [history valueForKey:@"url"];
     
     // Create a bookmark so we can transfer access to the downloads path
     // to the feed checker service
@@ -126,17 +119,28 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
                                                                   relativeToURL:nil
                                                                           error:&error];
     if (!downloadFolderBookmark || error) {
-        NSLog(@"Couldn't create bookmark for downloads folder: %@", error);
-        
         // Not really handling this error
-        return;
+        [NSException raise:@"Couldn't create bookmark for downloads folder"
+                    format:@"Error: %@", error];
     }
+    
+    return downloadFolderBookmark;
+}
+
+- (void)callFeedCheckerWithReplyHandler:(CTCFeedCheckCompletionHandler)replyHandler {
+    // Read configuration
+    NSURL *feedURL = [NSURL URLWithString:CTCDefaults.feedURL];
+    
+    NSArray *history = CTCDefaults.downloadHistory;
+    
+    // Extract URLs from history
+    NSArray *previouslyDownloadedURLs = [history valueForKey:@"url"];
     
     // Call feed checker service
     CTCFeedChecker *feedChecker = [self.feedCheckerConnection remoteObjectProxy];
     [feedChecker checkShowRSSFeed:feedURL
-            downloadingToBookmark:downloadFolderBookmark
-               organizingByFolder:organizeByFolder
+            downloadingToBookmark:[self downloadFolderBookmark]
+               organizingByFolder:CTCDefaults.shouldOrganizeTorrentsInFolders
                      skippingURLs:previouslyDownloadedURLs
                         withReply:^(NSArray *downloadedFeedFiles, NSError *error) {
                             dispatch_async(dispatch_get_main_queue(), ^{
@@ -175,6 +179,17 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
     
     // Check feed right now ignoring time restrictions and "paused" mode
     [self checkFeed];
+}
+
+- (void)downloadFile:(NSDictionary *)file {
+    // Call feed checker service
+    CTCFeedChecker *feedChecker = [self.feedCheckerConnection remoteObjectProxy];
+    [feedChecker downloadFile:file
+                   toBookmark:[self downloadFolderBookmark]
+           organizingByFolder:CTCDefaults.shouldOrganizeTorrentsInFolders
+                    withReply:^(NSError *error) {
+                        // TODO
+    }];
 }
 
 - (void)fireTimerNow {
@@ -225,6 +240,7 @@ NSString * const kCTCSchedulerLastUpdateStatusNotificationName = @"com.giorgioca
         NSArray *history = CTCDefaults.downloadHistory;
         NSDictionary *newHistoryEntry = @{@"title": feedFile[@"title"],
                                           @"url": feedFile[@"url"],
+                                          @"isMagnetLink": feedFile[@"isMagnetLink"],
                                           @"date": NSDate.date};
         NSArray *newHistory = [@[newHistoryEntry] arrayByAddingObjectsFromArray:history];
         CTCDefaults.downloadHistory = newHistory;
