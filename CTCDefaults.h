@@ -13,8 +13,6 @@ extern NSString * const kCTCDefaultsServiceFeedURLPrefix;
 extern NSString * const kCTCDefaultsLegacyServiceFeedURLPrefix;
 
 // NSUserDefaults keys
-extern NSString * const PREFERENCE_KEY_FEED_URL;
-extern NSString * const PREFERENCE_KEY_ONLY_UPDATE_BETWEEN;
 extern NSString * const PREFERENCE_KEY_UPDATE_FROM;
 extern NSString * const PREFERENCE_KEY_UPDATE_TO;
 extern NSString * const PREFERENCE_KEY_SAVE_PATH;
@@ -41,5 +39,7 @@ extern NSString * const PREFERENCE_KEY_OPEN_AT_LOGIN;
 + (NSString *)appVersion;
 
 + (NSString *)feedURL;
+
++ (BOOL)areTimeRestrictionsEnabled;
 
 @end
