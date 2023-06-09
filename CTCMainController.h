@@ -15,7 +15,4 @@
 - (void)setLastUpdateStatus:(BOOL)lastUpdateWasSuccessful time:(NSDate *)time;
 - (void)refreshRecent:(NSArray *)recentTorrentNames;
 
-/* Notifications */
-- (void)torrentNotificationWithDescription:(NSString *)description;
-
 @end

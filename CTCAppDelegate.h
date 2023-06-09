@@ -16,6 +16,4 @@ extern NSString * const SERVICE_FEED_LEGACY_URL_PREFIX;
 
 - (void)lastUpdateStatus:(BOOL)lastUpdateWasSuccessful time:(NSDate*)time;
 
-- (void)torrentNotificationWithDescription:(NSString*)description;
-
 @end
