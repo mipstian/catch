@@ -10,7 +10,7 @@ NSString * const kCTCDefaultsApplicationWebsiteURL = @"http://github.com/mipstia
 NSString * const kCTCDefaultsApplicationBugReportURL = @"https://github.com/mipstian/catch/issues/new?labels=bug";
 NSString * const kCTCDefaultsApplicationFeatureRequestURL = @"https://github.com/mipstian/catch/issues/new?labels=enhancement";
 NSString * const kCTCDefaultsApplicationHelpURL = @"https://github.com/mipstian/catch/wiki/Configuration";
-NSString * const kCTCDefaultsServiceURL = @"http://showrss.info/";
+NSString * const kCTCDefaultsServiceURL = @"https://showrss.info/";
 NSString * const kCTCDefaultsServiceFeedURLPrefixRegex = @"^https?://showrss.info/rss.php\\?(.*)$";
 
 // NSUserDefaults keys
