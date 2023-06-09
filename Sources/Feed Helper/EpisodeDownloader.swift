@@ -8,51 +8,47 @@ import Foundation
 struct EpisodeDownloader {
   let downloadOptions: DownloadOptions
   
-  func download(episodes: [Episode]) throws -> [[AnyHashable:Any]] {
-    NSLog("Downloading \(episodes.count) episodes")
-    
-    return try episodes.flatMap { episode in
-      // Return/save magnet or download torrent
-      if episode.isMagnetized {
-        let downloadedItemDescription: [AnyHashable:Any] = [
-          "url": episode.url,
-          "title": episode.title,
-          "isMagnetLink": true
-        ]
-        
-        if downloadOptions.shouldSaveMagnetLinks {
-          // Save the magnet link to a file
-          do {
-            _ = try saveMagnetLink(for: episode)
-          } catch {
-            NSLog("Could not save magnet link \(episode.url): \(error)")
-            throw error
-          }
-        }
-        
-        // Return the magnet link, if needed the main app will open it on the fly
-        return downloadedItemDescription
-      } else {
-        let downloadedTorrentFile: URL
+  func download(episode: Episode) throws -> [AnyHashable:Any] {
+    // Return/save magnet or download torrent
+    if episode.isMagnetized {
+      let downloadedItemDescription: [AnyHashable:Any] = [
+        "url": episode.url,
+        "title": episode.title,
+        "isMagnetLink": true
+      ]
+      
+      if downloadOptions.shouldSaveMagnetLinks {
+        // Save the magnet link to a file
         do {
-          downloadedTorrentFile = try downloadTorrentFile(for: episode)
+          _ = try saveMagnetLink(for: episode)
         } catch {
-          NSLog("Could not download \(episode.url): \(error)")
+          NSLog("Could not save magnet link \(episode.url): \(error)")
           throw error
         }
-        
-        return [
-          "url": episode.url,
-          "title": episode.title,
-          "isMagnetLink": false,
-          "torrentFilePath": downloadedTorrentFile.absoluteString
-        ]
       }
+      
+      // Return the magnet link, if needed the main app will open it on the fly
+      return downloadedItemDescription
+    } else {
+      let downloadedTorrentFile: URL
+      do {
+        downloadedTorrentFile = try downloadTorrentFile(for: episode)
+      } catch {
+        NSLog("Could not download \(episode.url): \(error)")
+        throw error
+      }
+      
+      return [
+        "url": episode.url,
+        "title": episode.title,
+        "isMagnetLink": false,
+        "torrentFilePath": downloadedTorrentFile.absoluteString
+      ]
     }
   }
   
   /// Create a .webloc file that can be double-clicked to open the magnet link
-  func saveMagnetLink(for episode: Episode) throws -> URL {
+  private func saveMagnetLink(for episode: Episode) throws -> URL {
     precondition(episode.isMagnetized)
     
     let data: Data
@@ -71,7 +67,7 @@ struct EpisodeDownloader {
     // Try to get a nice filename from the episode's title
     let fileName = episode.title.weblocFileName
     
-    // Compute destination path
+    // Build destination path
     let fullPath = URL(
       containerDirectory: downloadOptions.containerDirectory,
       subDirectory: downloadOptions.shouldOrganizeByShow ? episode.showName : nil,
@@ -83,7 +79,7 @@ struct EpisodeDownloader {
     return fullPath
   }
   
-  func downloadTorrentFile(for episode: Episode) throws -> URL {
+  private func downloadTorrentFile(for episode: Episode) throws -> URL {
     precondition(!episode.isMagnetized)
     
     NSLog("Downloading torrent file")
@@ -125,7 +121,7 @@ struct EpisodeDownloader {
     // Try to get a nice filename from the episode's title
     let fileName = episode.title.torrentFileName
     
-    // Compute destination path
+    // Build destination path
     let fullPath = URL(
       containerDirectory: downloadOptions.containerDirectory,
       subDirectory: downloadOptions.shouldOrganizeByShow ? episode.showName : nil,
