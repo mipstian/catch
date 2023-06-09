@@ -87,7 +87,6 @@
 	NSMutableArray* fileURLs = [NSMutableArray arrayWithCapacity:[fileNodes count]];
 	
 	for(NSXMLNode* file in fileNodes) {
-		NSLog(@"FeedChecker: got file:  %@", file);
         NSString* url = [[[file nodesForXPath:@"enclosure/@url" error:&error] lastObject] stringValue];
         NSString* title = [[[file nodesForXPath:@"title" error:&error] lastObject] stringValue];
 		NSLog(@"FeedChecker: got file: %@ at %@", title, url);
