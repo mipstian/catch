@@ -7,6 +7,24 @@
     <pubDate>Sun, 08 Aug 2010 22:51:00 +0100</pubDate>
     
     <item>
+      <title>Catch 2.2</title>
+      <pubDate>Sat, 23 Oct 2021 21:10:54 +0200</pubDate>
+      <description><![CDATA[
+        <h2>Catch 2.2</h2>
+        <ul>
+        <li>Improved logging</li>
+        <li>Bug fixes</li>
+        </ul>
+      ]]></description>
+      <enclosure
+      url="https://github.com/mipstian/catch/releases/download/2.2/Catch-2.2.zip"
+      sparkle:version="791"
+      sparkle:shortVersionString="2.2"
+      type="application/octet-stream"/>
+      <sparkle:minimumSystemVersion>10.12.0</sparkle:minimumSystemVersion>
+    </item>
+    
+    <item>
       <title>Catch 2.1</title>
       <pubDate>Thu, 27 May 2021 18:44:17 +0200</pubDate>
       <description><![CDATA[
