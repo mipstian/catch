@@ -1,0 +1,25 @@
+/* 
+   Localizable.strings
+   Catch
+
+   Created by Giorgio Calderolla on 6/17/10.
+   Copyright 2010 n\a. All rights reserved.
+ */
+
+/* Don't remove %@ signs or you'll break the application */
+/* See UI.strings for general instructions*/
+
+// in menu:
+"pause"="Pausar"; // this is a verb
+"resume"="Reanudar"; // this is a verb
+"lastupdate"="Última actualización: %@"; // %@ will be replaced by update time
+"lastupdatefailed"="Última actualización (fallida): %@"; // %@ will be replaced by update time
+"never"="Nunca"; // this is for the last update time, meaning "I still haven't made one"
+"updatingnow"="Actualizando...";
+// in preferences:
+"badurl"="La URL del feed que ha introducido no es válida. Utilice el botón de ayuda a continuación para obtener detalles sobre cómo configurar Catch.";
+"badurlok"="OK";
+// for growl:
+"newtorrent"="Nuevo torrent descargado";
+"newtorrentdesc"="¡El archivo torrent %@ se ha descargado!"; // %@ will be replaced by filename
+
