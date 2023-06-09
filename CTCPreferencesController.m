@@ -21,17 +21,17 @@
 	// Save preferences
 	[CTCDefaults save];
 	
-	if (CTCDefaults.isConfigurationValid) {
-		// Hide the Preferences window
-		[self.window close];
-        
-        // Also force check
-        [CTCScheduler.sharedScheduler forceCheck];
-	}
-    else {
-		// The feed URL is probably invalid, warn user
+    // If the feed URL is invalid, just warn user
+    if (!CTCDefaults.isConfigurationValid) {
 		[self showBadURLAlert];
-	}
+        return;
+    }
+    
+    // Hide the Preferences window
+    [self.window close];
+    
+    // Also force check
+    [CTCScheduler.sharedScheduler forceCheck];
 }
 
 - (IBAction)showFeeds:(id)sender {
