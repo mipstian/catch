@@ -25,6 +25,14 @@ class Scheduler {
     )
   }
   
+  private var downloadFolderBookmark: Data {
+    let url = URL(fileURLWithPath: CTCDefaults.torrentsSavePath())
+    
+    // Create a bookmark so we can transfer access to the downloads path
+    // to the feed checker service
+    return try! CTCFileUtils.bookmark(for: url)
+  }
+  
   private var repeatingTimer: Timer! = nil
   private let feedCheckerConnection = NSXPCConnection(serviceName: xpcServiceName)
   private var activityToken: NSObjectProtocol? = nil
@@ -99,7 +107,7 @@ class Scheduler {
     
     feedChecker.downloadFile(
       file,
-      toBookmark: downloadFolderBookmark(),
+      toBookmark: downloadFolderBookmark,
       organizingByFolder: CTCDefaults.shouldOrganizeTorrentsInFolders(),
       savingMagnetLinks: !CTCDefaults.shouldOpenTorrentsAutomatically(),
       withReply: { downloadedFile, error in
@@ -147,7 +155,7 @@ class Scheduler {
     
     feedChecker.checkShowRSSFeed(
       feedURL,
-      downloadingToBookmark: downloadFolderBookmark(),
+      downloadingToBookmark: downloadFolderBookmark,
       organizingByFolder: CTCDefaults.shouldOrganizeTorrentsInFolders(),
       savingMagnetLinks: !CTCDefaults.shouldOpenTorrentsAutomatically(),
       skippingURLs: previouslyDownloadedURLs,
@@ -160,14 +168,6 @@ class Scheduler {
         }
       }
     )
-  }
-  
-  private func downloadFolderBookmark() -> Data {
-    let url = URL(fileURLWithPath: CTCDefaults.torrentsSavePath())
-    
-    // Create a bookmark so we can transfer access to the downloads path
-    // to the feed checker service
-    return try! CTCFileUtils.bookmark(for: url)
   }
   
   private func handleDownloadedFeedFiles(_ downloadedFeedFiles: [[AnyHashable : Any]]) {
