@@ -297,8 +297,8 @@ NSString *kCTCFeedCheckerErrorDomain = @"com.giorgiocalderolla.Catch.CatchFeedHe
     
     NSLog(@"Download complete, filesize: %lu", (unsigned long)downloadedFile.length);
     
-    // Try to get a nice filename, fall back on the suggested one, append extension if needed
-    NSString *filename = [CTCFileUtils torrentFilenameFromString:file[@"title"] ?: urlResponse.suggestedFilename];
+    // Try to get a nice filename
+    NSString *filename = [CTCFileUtils torrentFilenameFromString:file[@"title"]];
     
     // Compute destination path
     NSString *pathAndFilename = [self fullPathWithContainerFolder:downloadPath
