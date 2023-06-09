@@ -140,26 +140,26 @@
             <rect key="contentRect" x="310" y="248" width="700" height="317"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
             <view key="contentView" id="553">
-                <rect key="frame" x="0.0" y="0.0" width="700" height="317"/>
+                <rect key="frame" x="0.0" y="0.0" width="700" height="321"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="616" userLabel="(Feed, Downloads, Tweaks)">
-                        <rect key="frame" x="20" y="61" width="660" height="236"/>
+                        <rect key="frame" x="20" y="61" width="660" height="240"/>
                         <font key="font" metaFont="system"/>
                         <tabViewItems>
                             <tabViewItem label="Feed" identifier="Feed" id="617">
                                 <view key="view" id="620">
-                                    <rect key="frame" x="0.0" y="0.0" width="660" height="236"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="660" height="240"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o0O-2K-GFb">
-                                            <rect key="frame" x="0.0" y="136" width="660" height="100"/>
+                                            <rect key="frame" x="0.0" y="90" width="660" height="150"/>
                                             <clipView key="contentView" id="LDJ-ov-g4E">
-                                                <rect key="frame" x="1" y="1" width="658" height="98"/>
+                                                <rect key="frame" x="1" y="1" width="658" height="148"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" usesAutomaticRowHeights="YES" viewBased="YES" id="RU6-h9-jS6">
-                                                        <rect key="frame" x="0.0" y="0.0" width="658" height="98"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="658" height="148"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -212,7 +212,7 @@
                                                 </subviews>
                                             </clipView>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="100" id="0fL-Pu-sHT"/>
+                                                <constraint firstAttribute="height" constant="150" id="0fL-Pu-sHT"/>
                                             </constraints>
                                             <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="lMf-AW-hb3">
                                                 <rect key="frame" x="1" y="83" width="658" height="16"/>
@@ -224,7 +224,7 @@
                                             </scroller>
                                         </scrollView>
                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WcX-Bq-UrM" userLabel="Add Feed">
-                                            <rect key="frame" x="0.0" y="108" width="19" height="21"/>
+                                            <rect key="frame" x="0.0" y="62" width="19" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="WcX-Bq-UrM" secondAttribute="height" multiplier="1:1" id="U0y-Dk-6BG"/>
                                             </constraints>
@@ -237,7 +237,7 @@
                                             </connections>
                                         </button>
                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AnU-XT-Qai" userLabel="Remove Feed">
-                                            <rect key="frame" x="19" y="108" width="19" height="21"/>
+                                            <rect key="frame" x="19" y="62" width="19" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="AnU-XT-Qai" secondAttribute="height" multiplier="1:1" id="Nh0-qo-jCD"/>
                                             </constraints>
@@ -250,7 +250,7 @@
                                             </connections>
                                         </button>
                                         <button translatesAutoresizingMaskIntoConstraints="NO" id="638">
-                                            <rect key="frame" x="-2" y="68" width="176" height="18"/>
+                                            <rect key="frame" x="-2" y="22" width="176" height="18"/>
                                             <buttonCell key="cell" type="check" title="Only check feed between" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="645">
                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                 <font key="font" metaFont="system"/>
@@ -260,7 +260,7 @@
                                             </connections>
                                         </button>
                                         <datePicker verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="637">
-                                            <rect key="frame" x="180" y="66" width="85" height="27"/>
+                                            <rect key="frame" x="180" y="20" width="85" height="27"/>
                                             <datePickerCell key="cell" borderStyle="bezel" alignment="left" id="646">
                                                 <font key="font" metaFont="system"/>
                                                 <date key="date" timeIntervalSinceReferenceDate="-595911600">
@@ -276,7 +276,7 @@
                                             </connections>
                                         </datePicker>
                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="636">
-                                            <rect key="frame" x="268" y="69" width="27" height="17"/>
+                                            <rect key="frame" x="268" y="23" width="27" height="17"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="and" id="647">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -284,7 +284,7 @@
                                             </textFieldCell>
                                         </textField>
                                         <datePicker verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="635">
-                                            <rect key="frame" x="301" y="66" width="85" height="27"/>
+                                            <rect key="frame" x="301" y="20" width="85" height="27"/>
                                             <datePickerCell key="cell" borderStyle="bezel" alignment="left" id="648">
                                                 <font key="font" metaFont="system"/>
                                                 <date key="date" timeIntervalSinceReferenceDate="-590868000">
@@ -308,6 +308,7 @@
                                         <constraint firstAttribute="trailing" secondItem="o0O-2K-GFb" secondAttribute="trailing" id="HSp-pI-yuF"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="AnU-XT-Qai" secondAttribute="trailing" id="IJk-vu-vUy"/>
                                         <constraint firstItem="637" firstAttribute="firstBaseline" secondItem="638" secondAttribute="baseline" id="LGT-q8-sCJ"/>
+                                        <constraint firstAttribute="bottom" secondItem="637" secondAttribute="bottom" constant="20" id="ME2-TE-IcU"/>
                                         <constraint firstItem="636" firstAttribute="leading" secondItem="637" secondAttribute="trailing" constant="8" symbolic="YES" id="RJw-iA-uhj"/>
                                         <constraint firstItem="635" firstAttribute="centerY" secondItem="637" secondAttribute="centerY" id="ZVZ-xC-o1W"/>
                                         <constraint firstItem="638" firstAttribute="leading" secondItem="620" secondAttribute="leading" id="cdP-WW-Z1b"/>
@@ -537,7 +538,7 @@ DQ
                         <rect key="frame" x="0.0" y="0.0" width="431" height="435"/>
                         <clipView key="contentView" drawsBackground="NO" id="KtZ-hY-aan">
                             <rect key="frame" x="0.0" y="0.0" width="431" height="435"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" alternatingRowBackgroundColors="YES" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="55" viewBased="YES" id="oof-vB-WHt">
                                     <rect key="frame" x="0.0" y="0.0" width="431" height="435"/>
@@ -652,8 +653,8 @@ DQ
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="196" y="213" width="572" height="151"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1080"/>
-            <view key="contentView" id="JVG-A7-ap0">
-                <rect key="frame" x="0.0" y="0.0" width="572" height="103"/>
+            <view key="contentView" misplaced="YES" id="JVG-A7-ap0">
+                <rect key="frame" x="0.0" y="0.0" width="572" height="151"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ygd-lr-Dgm">
