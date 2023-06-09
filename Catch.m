@@ -8,6 +8,7 @@
 
 #import "Catch.h"
 #import "GUI.h"
+#import "CTCLoginItems.h"
 
 // Constant, non-localized, non-UI-related strings
 NSString* const APPLICATION_WEBSITE_URL = @"http://github.com/mipstian/catch";
@@ -21,7 +22,7 @@ NSString* const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info/
 
 @implementation Catch
 
-- (id) init {
+- (id)init {
 	self = [super init];
 	if (!self) {
 		return nil;
@@ -34,7 +35,7 @@ NSString* const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info/
 	[Preferences save]; //This ensures we have the latest values from the user
 	
 	// Register as a login item if needed
-	[self registerAsLoginItem:[[NSUserDefaults standardUserDefaults] boolForKey:PREFERENCE_KEY_OPEN_AT_LOGIN]];
+	[self refreshLoginItemStatus];
 	
 	// Create a feed checker
 	feedChecker = [[[FeedChecker alloc] init] retain];
@@ -57,11 +58,11 @@ NSString* const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info/
 	[scheduler forceCheck];
 }
 
-- (void) schedulerStatus:(int)status running:(int)running {
+- (void)schedulerStatus:(int)status running:(int)running {
 	[gui setStatus:status running:running];
 }
 
-- (void) lastUpdateStatus:(int)status time:(NSDate*)time {
+- (void)lastUpdateStatus:(int)status time:(NSDate*)time {
 	[gui setLastUpdateStatus:status time:time];
 	
 	// Also refresh the list of recently downloaded torrents
@@ -85,88 +86,44 @@ NSString* const SERVICE_FEED_LEGACY_URL_PREFIX = @"http://showrss.karmorra.info/
 	[gui refreshRecent:cleanRecent];
 }
 
-- (void) checkNow {
+- (void)checkNow {
 	[scheduler forceCheck];
 }
 
-- (void) togglePause {
+- (void)togglePause {
 	if ([scheduler pauseResume]) {
 		// If the scheduler is now active, also force a check right away
 		[scheduler forceCheck];
 	}
 }
 
-- (void) savePreferences {
+- (void)savePreferences {
 	[Preferences save];
 	
 	// Register as a login item if needed
-	[self registerAsLoginItem:[[NSUserDefaults standardUserDefaults] boolForKey:PREFERENCE_KEY_OPEN_AT_LOGIN]];
+	[self refreshLoginItemStatus];
 	
 	// Also force check
 	[self checkNow];
 }
 
-- (BOOL) isConfigurationValid {
+- (BOOL)isConfigurationValid {
 	return [Preferences validate];
 }
 
-- (void) torrentNotificationWithDescription:(NSString *)description {
+- (void)torrentNotificationWithDescription:(NSString *)description {
 	[gui torrentNotificationWithDescription:description];
 }
 
-- (void) registerAsLoginItem:(BOOL)enable {
-	if (enable)	NSLog(@"Catch: adding myself to the login items");
-	else NSLog(@"Catch: removing myself from the login items");
-	
-	// Code totally ripped off from:
-	// http://cocoatutorial.grapewave.com/2010/02/creating-andor-removing-a-login-item/
-	
-	NSString * appPath = [[NSBundle mainBundle] bundlePath];
-	CFURLRef url = (CFURLRef)[NSURL fileURLWithPath:appPath]; 
-	LSSharedFileListRef loginItems = LSSharedFileListCreate(NULL,
-															kLSSharedFileListSessionLoginItems, NULL);
-	
-	if (!loginItems) {
-		NSLog(@"Catch: couldn't add/remove myself to the login items :(");
-		return;
-	}
-	
-	if (enable) {
-		// Add Catch to the login items
-		LSSharedFileListItemRef item = LSSharedFileListInsertItemURL(loginItems,
-																		kLSSharedFileListItemLast, NULL, NULL,
-																		url, NULL, NULL);
-		if (item){
-			CFRelease(item);
-		}
-	} else {
-		// Remove Catch from the login items
-		UInt32 seedValue;
-		NSArray *loginItemsArray = (NSArray *)LSSharedFileListCopySnapshot(loginItems, &seedValue);
-
-		for(NSUInteger i = 0; i < loginItemsArray.count; i++){
-			LSSharedFileListItemRef itemRef = (LSSharedFileListItemRef)[loginItemsArray objectAtIndex:i];
-			// Resolve the item with URL
-			if (LSSharedFileListItemResolve(itemRef, 0, (CFURLRef*) &url, NULL) == noErr) {
-				NSString * urlPath = [(NSURL*)url path];
-				if ([urlPath compare:appPath] == NSOrderedSame){
-					// Here I am. Remove me please.
-					LSSharedFileListItemRemove(loginItems,itemRef);
-				}
-                CFRelease(url);
-			}
-		}
-		[loginItemsArray release];
-	}
-
-	CFRelease(loginItems);
-}
-
-- (void) orderFrontStandardAboutPanel:(id)sender {
+- (void)orderFrontStandardAboutPanel:(id)sender {
 	// Do nothing
 }
 
-- (void) quit {
+- (void)refreshLoginItemStatus {
+    [CTCLoginItems toggleRegisteredAsLoginItem:[NSUserDefaults.standardUserDefaults boolForKey:PREFERENCE_KEY_OPEN_AT_LOGIN]];
+}
+
+- (void)quit {
 	NSLog(@"Catch: quitting");
 	// Save preferences
 	[Preferences save];

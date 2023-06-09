@@ -45,8 +45,6 @@ extern NSString* const SERVICE_FEED_LEGACY_URL_PREFIX;
 
 - (void) torrentNotificationWithDescription:(NSString*)description;
 
-- (void) registerAsLoginItem:(BOOL)enable;
-
 - (void) orderFrontStandardAboutPanel:(id)sender;
 
 - (void) quit;
