@@ -21,7 +21,21 @@ final class PowerManager {
       }
     )
     
-    // TODO: listen for relevant Defaults changes.
+    // Listen for relevant Defaults changes.
+    NotificationCenter.default.addObserver(
+      forName: Defaults.changedNotification,
+      object: Defaults.shared,
+      queue: nil,
+      using: { [weak self] notification in
+        guard
+          let changedKey = notification.userInfo?[Defaults.changedNotificationChangedKey] as? String,
+          changedKey == Defaults.Keys.preventSystemSleep
+        else {
+          return
+        }
+        self?.refreshPowerManagement()
+      }
+    )
     
     refreshPowerManagement()
   }
