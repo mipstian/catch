@@ -7,7 +7,7 @@
 //
 
 #import "CTCScheduler.h"
-#import "Catch.h"
+#import "CTCAppDelegate.h"
 #import "CTCFeedChecker.h"
 
 

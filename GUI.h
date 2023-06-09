@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Catch.h"
+#import "CTCAppDelegate.h"
 #import "Preferences.h"
 
 
