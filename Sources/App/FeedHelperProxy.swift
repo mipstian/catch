@@ -60,11 +60,11 @@ final class FeedHelperProxy {
   }
   
   func download(
-    historyItem: HistoryItem,
+    episode: Episode,
     downloadOptions: DownloadOptions,
     completion: @escaping (Result<[AnyHashable:Any]>) -> Void) {
     service.download(
-      episode: historyItem.dictionaryRepresentation,
+      episode: episode.dictionaryRepresentation,
       toBookmark: downloadOptions.containerDirectoryBookmark,
       organizingByShow: downloadOptions.shouldOrganizeByShow,
       savingMagnetLinks: downloadOptions.shouldSaveMagnetLinks,

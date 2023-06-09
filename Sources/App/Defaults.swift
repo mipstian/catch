@@ -183,10 +183,12 @@ final class Defaults {
       
       downloadHistory = downloadedFiles.flatMap(URL.init(string:)).map { url in
         return HistoryItem(
-          title: FileUtils.filename(from: url),
-          url: url,
-          downloadDate: nil,
-          isMagnetLink: false
+          episode: Episode(
+            title: FileUtils.filename(from: url),
+            url: url,
+            showName: nil
+          ),
+          downloadDate: nil
         )
       }
       
@@ -206,14 +208,18 @@ final class Defaults {
 
 private extension HistoryItem {
   init?(defaultsDictionary: [AnyHashable:Any]) {
-    guard let title = defaultsDictionary["title"] as? String,
-      let url = (defaultsDictionary["url"] as? String).flatMap(URL.init) else {
+    guard
+      let title = defaultsDictionary["title"] as? String,
+      let url = (defaultsDictionary["url"] as? String).flatMap(URL.init)
+    else {
         return nil
     }
     
-    self.title = title
-    self.url = url
+    self.episode = Episode(
+      title: title,
+      url: url,
+      showName: defaultsDictionary["showName"] as? String
+    )
     self.downloadDate = defaultsDictionary["date"] as? Date
-    self.isMagnetLink = (defaultsDictionary["isMagnetLink"] as? NSNumber)?.boolValue ?? false
   }
 }
