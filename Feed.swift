@@ -1,7 +1,7 @@
 import Foundation
 
 
-struct Feed {
+struct Feed: Equatable, Hashable {
   var name: String
   var url: URL
   
