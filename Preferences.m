@@ -11,17 +11,17 @@
 #import "CTCFileUtils.h"
 
 
-NSString* const PREFERENCE_KEY_FEED_URL = @"feedURL";
-NSString* const PREFERENCE_KEY_ONLY_UPDATE_BETWEEN = @"onlyUpdateBetween";
-NSString* const PREFERENCE_KEY_UPDATE_FROM = @"updateFrom";
-NSString* const PREFERENCE_KEY_UPDATE_TO = @"updateTo";
-NSString* const PREFERENCE_KEY_SAVE_PATH = @"savePath";
-NSString* const PREFERENCE_KEY_ORGANIZE_TORRENTS = @"organizeTorrents";
-NSString* const PREFERENCE_KEY_OPEN_AUTOMATICALLY = @"openAutomatically";
-NSString* const PREFERENCE_KEY_SEND_NOTIFICATIONS = @"growlNotifications";
-NSString* const PREFERENCE_KEY_DOWNLOADED_FILES = @"downloadedFiles";
-NSString* const PREFERENCE_KEY_HISTORY = @"history";
-NSString* const PREFERENCE_KEY_OPEN_AT_LOGIN = @"openAtLogin";
+NSString *const PREFERENCE_KEY_FEED_URL = @"feedURL";
+NSString *const PREFERENCE_KEY_ONLY_UPDATE_BETWEEN = @"onlyUpdateBetween";
+NSString *const PREFERENCE_KEY_UPDATE_FROM = @"updateFrom";
+NSString *const PREFERENCE_KEY_UPDATE_TO = @"updateTo";
+NSString *const PREFERENCE_KEY_SAVE_PATH = @"savePath";
+NSString *const PREFERENCE_KEY_ORGANIZE_TORRENTS = @"organizeTorrents";
+NSString *const PREFERENCE_KEY_OPEN_AUTOMATICALLY = @"openAutomatically";
+NSString *const PREFERENCE_KEY_SEND_NOTIFICATIONS = @"growlNotifications";
+NSString *const PREFERENCE_KEY_DOWNLOADED_FILES = @"downloadedFiles";
+NSString *const PREFERENCE_KEY_HISTORY = @"history";
+NSString *const PREFERENCE_KEY_OPEN_AT_LOGIN = @"openAtLogin";
 
 // Defaults
 int const FEED_UPDATE_INTERVAL = 60 * 10; // 10 minutes
@@ -32,18 +32,17 @@ int const FEED_UPDATE_INTERVAL = 60 * 10; // 10 minutes
 + (void)setDefaults {
 	NSLog(@"Preferences: Setting defaults");
 	// Create two dummy times (dates actually), just to have some value set
-	NSDateComponents* comps = NSDateComponents.new;
-	[comps setHour:24];
-	[comps setMinute:0];
-	NSCalendar* calendar = NSCalendar.currentCalendar;
-	NSDate* dateFrom = [calendar dateFromComponents:comps];
-	[comps setHour:8];
-	NSDate* dateTo = [calendar dateFromComponents:comps];
+	NSDateComponents *comps = NSDateComponents.new;
+    comps.hour = 8;
+    comps.minute = 0;
+	NSCalendar *calendar = NSCalendar.currentCalendar;
+	NSDate *dateFrom = [calendar dateFromComponents:comps];
+	NSDate *dateTo = [calendar dateFromComponents:comps];
 	
 	// Search for user's Downloads directory (by the book)
 	NSString *downloadsDirectory;
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDownloadsDirectory, NSUserDomainMask, YES);
-	if (paths.count > 0)	 {
+	if (paths.count > 0) {
 		downloadsDirectory = paths.firstObject;
 		NSLog(@"Preferences: Default save path is %@", downloadsDirectory);
 	} else {
@@ -53,7 +52,7 @@ int const FEED_UPDATE_INTERVAL = 60 * 10; // 10 minutes
 	}
 	
 	// Set smart defaults for the preferences
-	NSDictionary* appDefaults = [NSDictionary dictionaryWithObjectsAndKeys:
+	NSDictionary *appDefaults = [NSDictionary dictionaryWithObjectsAndKeys:
 								 @"", PREFERENCE_KEY_FEED_URL,
 								 @NO, PREFERENCE_KEY_ONLY_UPDATE_BETWEEN,
 								 dateFrom, PREFERENCE_KEY_UPDATE_FROM,
@@ -68,14 +67,14 @@ int const FEED_UPDATE_INTERVAL = 60 * 10; // 10 minutes
 	[NSUserDefaults.standardUserDefaults registerDefaults:appDefaults];
     
 	// Migrate the downloads history format. Change old array of strings to new dictionary format
-	NSArray* downloadedFiles = [NSUserDefaults.standardUserDefaults arrayForKey:PREFERENCE_KEY_DOWNLOADED_FILES];
-	NSArray* history = [NSUserDefaults.standardUserDefaults arrayForKey:PREFERENCE_KEY_HISTORY];
+	NSArray *downloadedFiles = [NSUserDefaults.standardUserDefaults arrayForKey:PREFERENCE_KEY_DOWNLOADED_FILES];
+	NSArray *history = [NSUserDefaults.standardUserDefaults arrayForKey:PREFERENCE_KEY_HISTORY];
 	if (downloadedFiles && !history) {
 		NSLog(@"Preferences: Migrating download history to new format.");
 		
-		NSMutableArray* newDownloadedFiles = NSMutableArray.array;
+		NSMutableArray *newDownloadedFiles = NSMutableArray.array;
 		
-		for (NSString* url in downloadedFiles) {
+		for (NSString *url in downloadedFiles) {
 			[newDownloadedFiles addObject:[NSDictionary dictionaryWithObjectsAndKeys:
                                            [CTCFileUtils computeFilenameFromURL:[NSURL URLWithString:url]], @"title",
                                            url, @"url",
@@ -95,7 +94,7 @@ int const FEED_UPDATE_INTERVAL = 60 * 10; // 10 minutes
 }
 
 + (NSString *)feedURL {
-	NSString* rawFeedURL = [NSUserDefaults.standardUserDefaults stringForKey:PREFERENCE_KEY_FEED_URL];
+	NSString *rawFeedURL = [NSUserDefaults.standardUserDefaults stringForKey:PREFERENCE_KEY_FEED_URL];
 	return [rawFeedURL stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
 }
 
@@ -107,7 +106,7 @@ int const FEED_UPDATE_INTERVAL = 60 * 10; // 10 minutes
 
 + (BOOL)validate {
 	// Validate torrent folder. This should never fail!
-	NSString* torrentFolder = [NSUserDefaults.standardUserDefaults stringForKey:PREFERENCE_KEY_SAVE_PATH];
+	NSString *torrentFolder = [NSUserDefaults.standardUserDefaults stringForKey:PREFERENCE_KEY_SAVE_PATH];
 	torrentFolder = [torrentFolder stringByStandardizingPath];
 	
 	if (!torrentFolder) return NO;
@@ -121,7 +120,7 @@ int const FEED_UPDATE_INTERVAL = 60 * 10; // 10 minutes
 	}
 
 	// Most importantly, validate feed URL
-	NSString* feedURL = self.feedURL;
+	NSString *feedURL = self.feedURL;
 	NSRange range = [feedURL rangeOfString:SERVICE_FEED_URL_PREFIX];
 	if (range.location != 0) {
 		// Try the legacy URL prefix and consider that valid

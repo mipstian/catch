@@ -13,7 +13,7 @@
 
 @interface CTCScheduler ()
 
-@property (strong, nonatomic) NSTimer* repeatingTimer;
+@property (strong, nonatomic) NSTimer *repeatingTimer;
 @property (strong, nonatomic) NSXPCConnection *feedCheckerConnection;
 @property (assign, nonatomic, getter = isActive) BOOL active;
 @property (assign, nonatomic, getter = isRunning) BOOL running;
@@ -165,18 +165,18 @@
 }
 
 - (BOOL)checkTime {
-	NSDate* now = NSDate.date;
-	NSDate* from = (NSDate *)[NSUserDefaults.standardUserDefaults objectForKey:PREFERENCE_KEY_UPDATE_FROM];
-	NSDate* to = (NSDate *)[NSUserDefaults.standardUserDefaults objectForKey:PREFERENCE_KEY_UPDATE_TO];
+	NSDate *now = NSDate.date;
+	NSDate *from = (NSDate *)[NSUserDefaults.standardUserDefaults objectForKey:PREFERENCE_KEY_UPDATE_FROM];
+	NSDate *to = (NSDate *)[NSUserDefaults.standardUserDefaults objectForKey:PREFERENCE_KEY_UPDATE_TO];
 	
-	NSCalendar* calendar = NSCalendar.currentCalendar;
+	NSCalendar *calendar = NSCalendar.currentCalendar;
 	
 	// Get minutes and hours from each date
-	NSDateComponents* nowComp = [calendar components:NSHourCalendarUnit|NSMinuteCalendarUnit
+	NSDateComponents *nowComp = [calendar components:NSHourCalendarUnit|NSMinuteCalendarUnit
 												   fromDate:now];
-	NSDateComponents* fromComp = [calendar components:NSHourCalendarUnit|NSMinuteCalendarUnit
+	NSDateComponents *fromComp = [calendar components:NSHourCalendarUnit|NSMinuteCalendarUnit
 													fromDate:from];
-	NSDateComponents* toComp = [calendar components:NSHourCalendarUnit|NSMinuteCalendarUnit
+	NSDateComponents *toComp = [calendar components:NSHourCalendarUnit|NSMinuteCalendarUnit
 												  fromDate:to];
 	
 	if (fromComp.hour > toComp.hour ||

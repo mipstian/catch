@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 
 
-extern NSString * kCTCFeedCheckerErrorDomain;
+extern NSString *kCTCFeedCheckerErrorDomain;
 typedef void (^CTCFeedCheckCompletionHandler)(NSArray *downloadedFeedFiles,
                                               NSError *error);
 
