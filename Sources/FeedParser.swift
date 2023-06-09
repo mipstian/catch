@@ -47,7 +47,7 @@ public class FeedParser: NSObject {
       return item
     }
     
-    NSLog("Parsed \(itemNodes.count) files")
+    NSLog("Parsed \(items.count) files")
     
     return items
   }
