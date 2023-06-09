@@ -1,5 +1,5 @@
 #import <Cocoa/Cocoa.h>
-#import "Preferences.h"
+
 
 extern NSString * const kCTCSchedulerStatusNotificationName;
 extern NSString * const kCTCSchedulerLastUpdateStatusNotificationName;

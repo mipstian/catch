@@ -1,7 +1,6 @@
 #import "CTCAppDelegate.h"
 #import "CTCMainController.h"
 #import "CTCDefaults.h"
-#import "Preferences.h"
 
 
 @interface CTCAppDelegate ()
@@ -16,7 +15,7 @@
 	[CTCDefaults setDefaultDefaults];
 	
 	// Valid config? Check feed, otherwise show Preferences
-	if (Preferences.isConfigurationValid) {
+	if (CTCDefaults.isConfigurationValid) {
         [self.mainController forceCheck];
 	}
     else {
