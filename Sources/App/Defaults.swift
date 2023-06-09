@@ -61,7 +61,7 @@ final class Defaults: NSObject {
   var downloadHistory: [HistoryItem] {
     get {
       let rawHistory = UserDefaults.standard.array(forKey: Keys.history) as! [[AnyHashable:Any]]
-      return rawHistory.flatMap(HistoryItem.init(defaultsDictionary:))
+      return rawHistory.compactMap(HistoryItem.init(defaultsDictionary:))
     }
     set {
       // Only keep the most recent items
