@@ -141,6 +141,9 @@ final class FeedChecker {
           os_log("Feed Helper error (checking feed): %{public}@", log: .main, type: .error, error.localizedDescription)
           self?.lastCheckStatus = .failed(Date(), error)
         }
+        
+        // Synchronize defaults here. If the app dies uncleanly, no data loss.
+        Defaults.shared.save()
       }
     )
   }
