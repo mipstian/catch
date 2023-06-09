@@ -649,6 +649,7 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_PREFIX_HEADER = Catch_Prefix.pch;
 				INFOPLIST_FILE = "Catch-Info.plist";
+				OTHER_LDFLAGS = "-Wl,-rpath,@loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.giorgiocalderolla.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = Catch;
 				WRAPPER_EXTENSION = app;
@@ -660,6 +661,7 @@
 			buildSettings = {
 				GCC_PREFIX_HEADER = Catch_Prefix.pch;
 				INFOPLIST_FILE = "Catch-Info.plist";
+				OTHER_LDFLAGS = "-Wl,-rpath,@loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.giorgiocalderolla.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = Catch;
 				WRAPPER_EXTENSION = app;
